@@ -52,11 +52,11 @@ docs: latex gitbook
 
 
 clean:
-	rm -f -r tmp-beamer tmp-gitbook tmp-latex  \
-	         out-beamer out-gitbook out-latex
+	rm -f -r tmp-gitbook tmp-latex  \
+	         out-gitbook out-latex
 purge:
-	rm -f -r tmp-beamer tmp-gitbook tmp-latex tmp-md \
-	         out-beamer out-gitbook out-latex
+	rm -f -r tmp-gitbook tmp-latex tmp-md \
+	         out-gitbook out-latex
 
 
 
