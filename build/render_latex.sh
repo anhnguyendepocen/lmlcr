@@ -21,7 +21,7 @@ cp -f ../build/preamble_latex.tex preamble.tex
 cat 00-introduction.Rmd >> index.Rmd
 rm -f 00-introduction.Rmd
 
-date="DRAFT v0.2 $(date '+%Y-%m-%d %H:%M') (`git rev-parse --short HEAD`)"
+date="DRAFT v0.3 $(date '+%Y-%m-%d %H:%M') (`git rev-parse --short HEAD`)"
 sed -i -e "s/@DATE@/${date}/g" index.Rmd
 
 Rscript -e 'bookdown::render_book("index.Rmd", "bookdown::pdf_book",
