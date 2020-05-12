@@ -24,6 +24,7 @@ fitting (`glm()`) function in R
 
 For multiclass logistic regression, we usually use the
 gradient descent or higher-order methods like the ones available in `optim()`.
+
 -->
 
 
@@ -36,6 +37,15 @@ gradient descent or higher-order methods like the ones available in `optim()`.
 
 ### Optimisation Problems
 
+<!-- TODO:
+
+Motivation: which ML problems we have expressed as optim tasks...
+
+now we will look at methods in a very general manner
+
+
+
+-->
 
 
 
@@ -56,6 +66,8 @@ An **optimisation task** deals with finding an element $\mathbf{x}\in \mathbb{D}
 amongst the set of possible candidate solutions,
 that minimises or maximises $f$:
 
+<!-- TODO : use \boldsymbol\beta for variables to optimise over -->
+
 \[
 \min_{\mathbf{x}\in \mathbb{D}} f(\mathbf{x})
 \quad\text{or}\quad\max_{\mathbf{x}\in \mathbb{D}} f(\mathbf{x}),
@@ -69,31 +81,16 @@ we'll be optimising over $p$ real-valued parameters.
 
 
 
-### Example Optimisation Problems in Machine Learning
-
-
-
-
-In **multiple linear regression** we were minimising
-the sum of squared residuals
-\[
-\min_{\boldsymbol\beta\in\mathbb{R}^p}
-\sum_{i=1}^n \left( \beta_0 + \beta_1 x_{i,1}+\dots+\beta_p x_{i,p} - y_i \right)^2.
-\]
-
-In **binary logistic regression** we were minimising the cross-entropy:
-\[
-\min_{\boldsymbol\beta\in\mathbb{R}^p}
--\frac{1}{n} \sum_{i=1}^n
-\left(\begin{array}{r}
-     y_i \log \left(\frac{1}{1+e^{-(\beta_0 + \beta_1 x_{i,1}+\dots+\beta_p x_{i,p}}}                                                        \right)\\
-+ (1-y_i)\log \left(\frac{e^{-(\beta_0 + \beta_1 x_{i,1}+\dots+\beta_p x_{i,p}}}{1+e^{-(\beta_0 + \beta_1 x_{i,1}+\dots+\beta_p x_{i,p})}}\right)
-\end{array}\right).
-\]
-
-
-
 ### Types of Minima and Maxima
+
+
+
+<!--
+maximise goodness-of-fit (fitness)
+
+minimise error
+
+-->
 
 
 Note that minimising $f$ is the same as maximising $\bar{f}=-f$.
@@ -142,6 +139,12 @@ Remark.
     * $(\min_{x\in \mathbb{R}} f(x))=-2$ (value of $f$ at the minimum is $-2$),
     * $(\mathrm{arg}\min_{x\in \mathbb{R}} f(x))=1$ (location of the minimum,
     i.e., *argument minimum*, is $1$).
+
+
+
+<!-- TODO introduce  SSR/cross-entropy 2d examples now
+as they are well behaving, show instances of nasty objectives
+later -->
 
 
 
@@ -377,6 +380,35 @@ Usually 1D or 2D projections can give us some neat intuitions though.
 
 
 
+
+
+
+### Example Optimisation Problems in Machine Learning
+
+
+<!-- TODO: note that these are dependent on X and y -->
+
+
+In **multiple linear regression** we were minimising
+the sum of squared residuals
+\[
+\min_{\boldsymbol\beta\in\mathbb{R}^p}
+\sum_{i=1}^n \left( \beta_0 + \beta_1 x_{i,1}+\dots+\beta_p x_{i,p} - y_i \right)^2.
+\]
+
+In **binary logistic regression** we were minimising the cross-entropy:
+\[
+\min_{\boldsymbol\beta\in\mathbb{R}^p}
+-\frac{1}{n} \sum_{i=1}^n
+\left(\begin{array}{r}
+     y_i \log \left(\frac{1}{1+e^{-(\beta_0 + \beta_1 x_{i,1}+\dots+\beta_p x_{i,p}}}                                                        \right)\\
++ (1-y_i)\log \left(\frac{e^{-(\beta_0 + \beta_1 x_{i,1}+\dots+\beta_p x_{i,p}}}{1+e^{-(\beta_0 + \beta_1 x_{i,1}+\dots+\beta_p x_{i,p})}}\right)
+\end{array}\right).
+\]
+
+
+
+<!-- TODO : plot objectives for p=1 simple models on some data!!!! -->
 
 
 
@@ -1718,6 +1750,24 @@ Also, if $f$ is convex, then $-f$ is concave and vice versa.
 
 
 
+<!-- TODO: Section: variable selection -- discrete optimisation -->
+
+
+
+
+
+<!-- TODO: exercise: lm() with BFGS -->
+
+
+<!-- TODO: exercise: lm() + ridge with BFGS -->
+
+
+<!-- TODO: exercise: glm() + ridge with BFGS -->
+
+
+
+
+
 ## Outro
 
 ### Remarks
@@ -1826,6 +1876,11 @@ problem can be:
 
     > (\*) supported in linear and quadratic programming
     solvers, where the objective function is from a very specific class
+
+
+
+
+
 
 -->
 

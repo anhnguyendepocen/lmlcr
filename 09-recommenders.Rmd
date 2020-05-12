@@ -567,16 +567,19 @@ s_{i,j}^I = S_C(\mathbf{r}_{\cdot,i},\mathbf{r}_{\cdot,j}) = \frac{\mathbf{r}_{\
 \]
 
 As $\mathbf{R}\in\mathbb{R}^{n\times p}$,
-we can "almost" compute all the $p\times p$ cosine similarities
+we can compute all the $p\times p$ cosine similarities
 at once by applying:
 
 \[
 \mathbf{S}^I = \frac{\mathbf{R}^T \mathbf{R}}{
-\dots
+\mathbf{l} \mathbf{l}^T
 }
 \]
 
-
+where $\mathbf{l}\in\mathbf{R}^{p\times 1}$ is a column vector
+such that with
+$l_i = \sqrt{{\mathbf{r}_{\cdot,i}^T\, \mathbf{r}_{\cdot,i}}}$
+and by $\frac{\cdot}{\cdot}$ we mean elementwise division.
 
 Cosine similarities for item-item comparisons:
 
