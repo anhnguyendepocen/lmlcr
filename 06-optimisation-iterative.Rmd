@@ -1694,7 +1694,7 @@ it holds $\theta \mathbf{x}_{1}+(1-\theta)\mathbf{x}_{2} \in C$ for
 all $\theta\in [0,1]$; see Figure {@fig:convex_set} for an illustration.
 
 
-![A convex and a non-convex set](figures/convex_set){#fig:convex_set width=75%}
+![A convex and a non-convex set](figures/convex_set){#fig:convex_set}
 
 
 <!--
