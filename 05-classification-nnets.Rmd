@@ -704,7 +704,7 @@ We have:
 * $\hat{y}_{i,k}$ -- the $i$-th observation, the $k$-th class probability;
 * $\beta_{j,k}$ -- the coefficient for the $j$-th feature when computing the $k$-th class.
 
-Note that by augmenting $\mathbf{\dot{X}}=[\boldsymbol{1}\ \mathbf{X}]\in\mathbb{R}^{n\times (p+1)}$ by adding a column of 1s, i.e.,
+Note that by augmenting $\dot{\mathbf{X}}=[\boldsymbol{1}\ \mathbf{X}]\in\mathbb{R}^{n\times (p+1)}$ by adding a column of 1s, i.e.,
 where $\dot{x}_{i,0}=1$ and $\dot{x}_{i,j}=x_{i,j}$ for all $j\ge 1$ and all $i$, we can write the above as:
 \[
 \begin{array}{lclcl}

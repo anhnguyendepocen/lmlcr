@@ -21,9 +21,10 @@ cp -f ../build/preamble_latex.tex preamble.tex
 cp -f ../build/before_body.tex before_body.tex
 cp -f ../build/after_body.tex after_body.tex
 
+#echo "\PassOptionsToPackage{bold-style=TeX}{unicode-math}" > krantz.cls
 echo "\RequirePackage{etex}" > krantz.cls
 echo "\RequirePackage{etoolbox}" > krantz.cls
-cat ../build/krantz.cls >>krantz.cls
+cat ../build/krantz.cls >> krantz.cls
 
 
 cp -f ../build/upquote.sty upquote.sty

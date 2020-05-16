@@ -2287,20 +2287,20 @@ f_{\boldsymbol\beta}(\mathbf{x})=\beta_0+\beta_1 x_1+\dots+\beta_p x_p
 can be rewritten as:
 \[
 f_{\boldsymbol\beta}(\mathbf{x})=\beta_0 1+\beta_1 x_1+\dots+\beta_p x_p
-=\mathbf{\dot{x}}\boldsymbol\beta,
+=\dot{\mathbf{x}}\boldsymbol\beta,
 \]
-where $\mathbf{\dot{x}}=[1\ x_1\ x_2\ \cdots\ x_p]$.
+where $\dot{\mathbf{x}}=[1\ x_1\ x_2\ \cdots\ x_p]$.
 
 
 
-Similarly, if we assume that $\mathbf{\dot{X}}=[\boldsymbol{1}\ \mathbf{X}]\in\mathbb{R}^{n\times (p+1)}$
+Similarly, if we assume that $\dot{\mathbf{X}}=[\boldsymbol{1}\ \mathbf{X}]\in\mathbb{R}^{n\times (p+1)}$
 is the input matrix with a prepended column of $1$s, i.e.,
 $\boldsymbol{1}=[1\ 1\ \cdots\ 1]^T$ and $\dot{x}_{i,0}=1$ (for brevity of notation
 the columns added will have index $0$),
 $\dot{x}_{i,j}=x_{i,j}$ for all $j\ge 1$ and all $i$,
 then:
 \[
-\mathbf{\hat{y}} = \mathbf{\dot{X}} \boldsymbol\beta
+\hat{\mathbf{y}} = \dot{\mathbf{X}} \boldsymbol\beta
 \]
 gives the vector of predicted outputs for every input point.
 
@@ -2314,13 +2314,13 @@ E(\beta_0, \beta_1, \dots, \beta_p)=
 \]
 can be rewritten as:
 \[
-E(\boldsymbol\beta)=\| \mathbf{\dot{X}} \boldsymbol\beta - \mathbf{y} \|^2,
+E(\boldsymbol\beta)=\| \dot{\mathbf{X}} \boldsymbol\beta - \mathbf{y} \|^2,
 \]
 where as usual $\|\cdot\|^2$ denotes the squared Euclidean norm.
 
 Recall that this can be re-expressed as:
 \[
-E(\boldsymbol\beta)= (\mathbf{\dot{X}} \boldsymbol\beta - \mathbf{y})^T (\mathbf{\dot{X}} \boldsymbol\beta - \mathbf{y}).
+E(\boldsymbol\beta)= (\dot{\mathbf{X}} \boldsymbol\beta - \mathbf{y})^T (\dot{\mathbf{X}} \boldsymbol\beta - \mathbf{y}).
 \]
 
 
@@ -2370,10 +2370,10 @@ can be  rewritten in matrix terms as:
 \[
 \left\{
 \begin{array}{rcl}
-\beta_0 \mathbf{\dot{x}}_{\cdot,0}^T \mathbf{\dot{x}}_{\cdot,0} + \beta_1 \mathbf{\dot{x}}_{\cdot,0}^T \mathbf{\dot{x}}_{\cdot,1}+\dots+\beta_p \mathbf{\dot{x}}_{\cdot,0}^T \mathbf{\dot{x}}_{\cdot,p} &=& \mathbf{\dot{x}}_{\cdot,0}^T \mathbf{y} \\
-\beta_0 \mathbf{\dot{x}}_{\cdot,1}^T \mathbf{\dot{x}}_{\cdot,0} + \beta_1 \mathbf{\dot{x}}_{\cdot,1}^T \mathbf{\dot{x}}_{\cdot,1}+\dots+\beta_p \mathbf{\dot{x}}_{\cdot,1}^T \mathbf{\dot{x}}_{\cdot,p} &=& \mathbf{\dot{x}}_{\cdot,1}^T \mathbf{y} \\
+\beta_0 \dot{\mathbf{x}}_{\cdot,0}^T \dot{\mathbf{x}}_{\cdot,0} + \beta_1 \dot{\mathbf{x}}_{\cdot,0}^T \dot{\mathbf{x}}_{\cdot,1}+\dots+\beta_p \dot{\mathbf{x}}_{\cdot,0}^T \dot{\mathbf{x}}_{\cdot,p} &=& \dot{\mathbf{x}}_{\cdot,0}^T \mathbf{y} \\
+\beta_0 \dot{\mathbf{x}}_{\cdot,1}^T \dot{\mathbf{x}}_{\cdot,0} + \beta_1 \dot{\mathbf{x}}_{\cdot,1}^T \dot{\mathbf{x}}_{\cdot,1}+\dots+\beta_p \dot{\mathbf{x}}_{\cdot,1}^T \dot{\mathbf{x}}_{\cdot,p} &=& \dot{\mathbf{x}}_{\cdot,1}^T \mathbf{y} \\
 \vdots\\
-\beta_0 \mathbf{\dot{x}}_{\cdot,p}^T \mathbf{\dot{x}}_{\cdot,0} + \beta_1 \mathbf{\dot{x}}_{\cdot,p}^T \mathbf{\dot{x}}_{\cdot,1}+\dots+\beta_p \mathbf{\dot{x}}_{\cdot,p}^T \mathbf{\dot{x}}_{\cdot,p} &=& \mathbf{\dot{x}}_{\cdot,p}^T \mathbf{y}\\
+\beta_0 \dot{\mathbf{x}}_{\cdot,p}^T \dot{\mathbf{x}}_{\cdot,0} + \beta_1 \dot{\mathbf{x}}_{\cdot,p}^T \dot{\mathbf{x}}_{\cdot,1}+\dots+\beta_p \dot{\mathbf{x}}_{\cdot,p}^T \dot{\mathbf{x}}_{\cdot,p} &=& \dot{\mathbf{x}}_{\cdot,p}^T \mathbf{y}\\
 \end{array}
 \right.
 \]
@@ -2385,16 +2385,16 @@ This can be restated as:
 \[
 \left\{
 \begin{array}{rcl}
-\left(\mathbf{\dot{x}}_{\cdot,0}^T \mathbf{\dot{X}}\right)\, \boldsymbol\beta &=& \mathbf{\dot{x}}_{\cdot,0}^T \mathbf{y} \\
-\left(\mathbf{\dot{x}}_{\cdot,1}^T \mathbf{\dot{X}}\right)\, \boldsymbol\beta  &=& \mathbf{\dot{x}}_{\cdot,1}^T \mathbf{y} \\
+\left(\dot{\mathbf{x}}_{\cdot,0}^T \dot{\mathbf{X}}\right)\, \boldsymbol\beta &=& \dot{\mathbf{x}}_{\cdot,0}^T \mathbf{y} \\
+\left(\dot{\mathbf{x}}_{\cdot,1}^T \dot{\mathbf{X}}\right)\, \boldsymbol\beta  &=& \dot{\mathbf{x}}_{\cdot,1}^T \mathbf{y} \\
 \vdots\\
-\left(\mathbf{\dot{x}}_{\cdot,p}^T \mathbf{\dot{X}}\right)\, \boldsymbol\beta  &=& \mathbf{\dot{x}}_{\cdot,p}^T \mathbf{y}\\
+\left(\dot{\mathbf{x}}_{\cdot,p}^T \dot{\mathbf{X}}\right)\, \boldsymbol\beta  &=& \dot{\mathbf{x}}_{\cdot,p}^T \mathbf{y}\\
 \end{array}
 \right.
 \]
 which in turn is equivalent to:
 \[
-\left(\mathbf{\dot{X}}^T\mathbf{X}\right)\,\boldsymbol\beta = \mathbf{\dot{X}}^T\mathbf{y}.
+\left(\dot{\mathbf{X}}^T\mathbf{X}\right)\,\boldsymbol\beta = \dot{\mathbf{X}}^T\mathbf{y}.
 \]
 
 Such a system of linear equations in matrix form can be solved numerically using,

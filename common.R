@@ -93,7 +93,7 @@ CairoFonts(
     bold="Alegreya Sans:style=Medium",
     italic="Alegreya Sans:style=Light Italic",
     bolditalic="Alegreya Sans:style=Medium Italic",
-    symbol="Ubuntu Condensed:style=Light"
+    symbol="TeX Gyre Pagella:style=Light"
 )
 
 setHook("before.plot.new", function() {

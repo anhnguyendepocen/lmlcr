@@ -49,12 +49,18 @@
 
 
 \setmainfont[
-    Mapping=tex-text,
     UprightFeatures={SmallCapsFont=AlegreyaSC-Regular}
 ]{Alegreya}
-\setsansfont[Mapping=tex-text]{Alegreya Sans}
+\setsansfont{Alegreya Sans}
 \setmonofont[Scale=0.9]{Ubuntu Mono} %
 
+%\setmainfont{XITS}
+% \setmathfont{XITS Math}
+% \setmathfont[range={\mathcal,\mathbfcal},StylisticSet=1]{XITS Math}
+% \setmathfont[range={\symbfup}]{XITS Math Bold}
+\setmathfont{texgyrepagella-math.otf}
+\renewcommand{\mathbf}[1]{\symbfup{#1}}
+\renewcommand{\boldsymbol}[1]{\symbfup{#1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Settings below are based on

@@ -1163,11 +1163,11 @@ Recall that the output of the logistic regression model
 in the matrix form as:
 \[
 \hat{\mathbf{Y}}=\mathrm{softmax}\left(
-\mathbf{\dot{X}}\,\mathbf{B}
+\dot{\mathbf{X}}\,\mathbf{B}
 \right),
 \]
 where
-$\mathbf{\dot{X}}\in\mathbb{R}^{n\times 785}$ is a matrix
+$\dot{\mathbf{X}}\in\mathbb{R}^{n\times 785}$ is a matrix
 representing $n$ images of size $28\times 28$, augmented with a column of $1$s,
 and
 $\mathbf{B}\in\mathbb{R}^{785\times 10}$ is the coefficients matrix
@@ -1229,7 +1229,7 @@ It may be shown (\*\*) that the gradient of cross-entropy
 can be expressed in the matrix form as:
 
 \[
-\frac{1}{n} \mathbf{\dot{X}}^T\, (\mathbf{\hat{Y}}-\mathbf{Y})
+\frac{1}{n} \dot{\mathbf{X}}^T\, (\hat{\mathbf{Y}}-\mathbf{Y})
 \]
 
 ```{r cache=TRUE,mnist_download6,dependson='mnist_download5'}
