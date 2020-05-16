@@ -1,10 +1,12 @@
-# \} END {.unnumbered}
+<!-- Start appendix now: -->
+
+# (APPENDIX) Appendix {-}
 
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 
+# Notation Convention
 
-
-#### Abbreviations  {.allowframebreaks .unnumbered}
+#### Abbreviations {.unnumbered}
 
 
 a.k.a. == also known as
@@ -41,7 +43,7 @@ IDE = integrated development environment
 
 
 
-#### Notation Convention -- Logic and Set Theory {.allowframebreaks .unnumbered}
+#### Notation Convention -- Logic and Set Theory {.unnumbered}
 
 
 
@@ -77,7 +79,7 @@ $A\times B = \{ (a,b): a\in A, b\in B \}$
 $A^p = A\times A \times \dots\times A$ ($p$ times) for any $p$
 
 
-#### Notation Convention -- Symbols  {.allowframebreaks .unnumbered}
+#### Notation Convention -- Symbols {.unnumbered}
 
 
 
@@ -131,7 +133,7 @@ $[a, b]$ -- a closed interval; $x\in[a,b]$ iff $a \le x \le b$ for some $a\le b$
 
 
 
-#### Notation Convention -- Vectors and Matrices  {.allowframebreaks .unnumbered}
+#### Notation Convention -- Vectors and Matrices {.unnumbered}
 
 
 $\boldsymbol{x}=(x_1,\dots,x_n)$ -- a sequence of $n$ elements ($n$-ary sequence/vector)
@@ -230,7 +232,7 @@ $\|\boldsymbol{x}\| = \|\boldsymbol{x}\|_2 = \sqrt{ \sum_{i=1}^n x_i^2 }$ -- the
 
 
 
-#### Notation Convention -- Functions  {.allowframebreaks .unnumbered}
+#### Notation Convention -- Functions {.unnumbered}
 
 
 
@@ -274,7 +276,7 @@ gradient
 -->
 
 
-#### Notation Convention -- Sums and Products  {.allowframebreaks .unnumbered}
+#### Notation Convention -- Sums and Products {.unnumbered}
 
 
 $\sum_{i=1}^n x_i=x_1+x_2+\dots+x_n$
@@ -295,7 +297,7 @@ $\prod_{i=1}^n x_i = x_1 x_2 \dots x_n$
 
 ### Other
 
-#### {.allowframebreaks .unnumbered}
+
 
 
 min vs argmin
@@ -311,6 +313,3 @@ $r(\boldsymbol{x},\boldsymbol{y})$ Pearson's $r$ -- linear correlation coefficie
 
 
 
-<!-- Start appendix now: -->
-
-# (APPENDIX) Appendix {-}

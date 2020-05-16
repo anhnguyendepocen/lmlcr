@@ -1,15 +1,14 @@
-# BEGIN \{  {.unnumbered}
+# Preface {.unnumbered}
 
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 
 
 > **This is a draft version (distributed in the hope that it will be useful)
 of the book *Lightweight Machine Learning Classics with R*
-by [Marek Gagolewski](https://www.gagolewski.com).**
+by Marek Gagolewski.**
 
 > **Please submit any feature requests, remarks and bug fixes
-via the project site at [github](https://github.com/gagolews/lmlcr/issues)
-or by [email](https://www.gagolewski.com). Thanks!**
+via the project site at [github](https://github.com/gagolews/lmlcr/issues). Thanks!**
 
 
 Copyright (C) 2020, [Marek Gagolewski](https://www.gagolewski.com).
@@ -110,10 +109,10 @@ to recommend you that ad or product
 
 
 
-#### About Me  {.unnumbered}
+#### About the Author  {.unnumbered}
 
 
-I'm currently a Senior Lecturer (equivalent to Associate Professor in the US)
+I, Marek Gagolewski, am currently a Senior Lecturer (equivalent to Associate Professor in the US)
 in Applied AI at Deakin University in Melbourne, VIC, Australia
 and an Associate Professor in Data Science at Warsaw University of Technology,
 Poland. My main passion is in research -- my primary interests include
@@ -163,3 +162,7 @@ The following R packages are used or referred to in the text:
 During the writing of this book, I've been listening to the music
 featuring John Coltrane, Krzysztof Komeda,
 Henry Threadgill, Albert Ayler, Paco de Lucia and Tomatito.
+
+
+
+{ LATEX \mainmatter }

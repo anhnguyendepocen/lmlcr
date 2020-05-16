@@ -1,7 +1,7 @@
 options(encoding="UTF-8")
 set.seed(666)
-options(width=64)
-options(digits=7)
+options(width=72)
+options(digits=5)
 
 
 reticulate::use_python("/opt/anaconda3/bin/python")
@@ -81,14 +81,20 @@ knit_hooks$set(plot=knitr:::hook_plot_md_pandoc)
 
 
 library("Cairo")
+# CairoFonts(
+#     regular="Ubuntu Condensed:style=Regular",
+#     bold="Ubuntu:style=Medium",
+#     italic="Ubuntu:style=Light Italic",
+#     bolditalic="Ubuntu:style=Medium Italic",
+#     symbol="Ubuntu Condensed"
+# )
 CairoFonts(
-    regular="Ubuntu Condensed:style=Regular",
-    bold="Ubuntu:style=Medium",
-    italic="Ubuntu:style=Light Italic",
-    bolditalic="Ubuntu:style=Medium Italic",
-    symbol="Ubuntu Condensed"
+    regular="Alegreya Sans:style=Light",
+    bold="Alegreya Sans:style=Medium",
+    italic="Alegreya Sans:style=Light Italic",
+    bolditalic="Alegreya Sans:style=Medium Italic",
+    symbol="Ubuntu Condensed:style=Light"
 )
-
 
 setHook("before.plot.new", function() {
     if (all(par("mar") == c(5.1, 4.1, 4.1, 2.1))) {

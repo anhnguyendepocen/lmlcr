@@ -18,7 +18,8 @@ tabu search???
 ### Recap
 
 
----
+
+
 
 Recall that an **optimisation task** deals with finding an element $\mathbf{x}$
 in a **search space** $\mathbb{D}$,
@@ -39,7 +40,8 @@ in linear regression
 or minimising cross-entropy in logistic regression.
 
 
----
+
+
 
 The class of general-purpose iterative algorithms we've previously studied
 fit into the following scheme:
@@ -60,7 +62,8 @@ where:
 * $\varepsilon$ = tolerance, e.g, $10^{-8}$
 * $\eta>0$ = learning rate
 
----
+
+
 
 The algorithms such as gradient descent and BFGS (see `optim()`)
 give satisfactory results in the case of **smooth and well-behaving objective functions**.
@@ -75,7 +78,8 @@ one -- it involves a nested search for the closest cluster, with the use of the 
 
 ### K-means Revisited
 
----
+
+
 
 
 In **K-means clustering** we are minimising the squared Euclidean distance
@@ -98,7 +102,8 @@ which is amongst a few procedures implemented in the `kmeans()` function.
 
 
 
----
+
+
 
 
 To recall, Lloyd's algorithm (1957) is sometimes referred to as "the" K-means algorithm:
@@ -126,7 +131,8 @@ kmeans(X, centers=k, nstart=10)
 
 ### optim() vs. kmeans()
 
----
+
+
 
 Let us compare how a general-purpose optimiser such as the BFGS algorithm
 implemented in `optim()` compares with a customised, problem-specific solver.
@@ -145,7 +151,8 @@ The above function generates $n$ points in $\mathbb{R}^p$
 from a distribution centred at $\mathbf{m}\in\mathbb{R}^p$,
 spread randomly in every possible direction with scale factor $s$.
 
----
+
+
 
 Two example clusters in $\mathbb{R}^2$:
 
@@ -158,7 +165,8 @@ plot(gen_cluster(500, 2, c(0, 0), 1), col="#00000022", pch=16,
 points(gen_cluster(250, 2, c(1.5, 1), 0.5), col="#ff000022", pch=16)
 ```
 
----
+
+
 
 Let's generate the benchmark dataset $\mathbf{X}$
 that consists of three clusters in a high-dimensional space.
@@ -273,7 +281,8 @@ get_fitness(km$centers, X)
 -->
 
 
----
+
+
 
 The objective function for the K-means clustering problem:
 
@@ -294,7 +303,8 @@ get_fitness <- function(mu, X) {
 
 
 
----
+
+
 
 Setting up the solvers:
 
@@ -316,7 +326,8 @@ min_optim <- function(mu0, X)
     )$val
 ```
 
----
+
+
 
 Running the simulation:
 
@@ -335,7 +346,8 @@ res <- replicate(nstart, {
 
 
 
----
+
+
 
 Notice a considerable variability of the
 objective function at the local minima found:
@@ -345,7 +357,8 @@ boxplot(as.data.frame(t(res)), horizontal=TRUE, col="white")
 ```
 
 
----
+
+
 
 
 ```{r,dependson='gendata5',gendata6,cache=TRUE}
@@ -363,7 +376,8 @@ print(apply(res, 1, min))
 ```
 
 
----
+
+
 
 The Hartigan-Wong algorithm (the default one in `kmeans()`)
 is the most reliable one of the three:
@@ -373,7 +387,8 @@ is the most reliable one of the three:
 * it is the fastest:
 
 
----
+
+
 
 ```{r,dependson='gendata3b',gendata4b,cache=TRUE}
 library("microbenchmark")
@@ -388,7 +403,8 @@ summary(microbenchmark(
 ```
 
 
----
+
+
 
 ```{r,dependson='gendata5',gendata6b,cache=TRUE}
 print(min(res))
@@ -423,7 +439,8 @@ Are you really looking for the global minimum?
 
 ### Introduction
 
----
+
+
 
 
 What if our optimisation problem cannot be solved reliably with
@@ -437,7 +454,8 @@ Most of them rely on clever randomised search.
 
 They are slow to run and don't guarantee anything, but yet they still might be useful -- some claim that **a** solution is better than no solution at all.
 
----
+
+
 
 There is a wide class of **nature-inspired** algorithms (that traditionally
 belong to the subfield of AI called *computational intelligence* or *soft computing*);
@@ -448,7 +466,8 @@ see, e.g, [@evolution]:
     > maintain a population of candidate solutions, let the "fittest" combine with each
     other to generate new "offspring" solutions.
 
----
+
+
 
 * swarm algorithms
 
@@ -475,7 +494,8 @@ All of these sound fancy, but the general ideas behind them are pretty simple.
 
 ### Overview of the Method
 
----
+
+
 
 Genetic algorithms (GAs) are amongst the most popular evolutionary approaches.
 
@@ -491,7 +511,8 @@ to minimise a given objective/fitness function $f$
 over a given domain $D$.
 
 
----
+
+
 
 1. Generate a random initial population of individuals -- $n_\text{pop}$ points in $D$,
 e.g., $n_\text{pop}=32$
@@ -511,7 +532,8 @@ e.g., $n_\text{pop}=32$
 
 <!-- TODO: check unbalance -->
 
----
+
+
 
 Initial setup:
 
@@ -534,7 +556,8 @@ best_fitness <- cur_best_fitness
 Each individual in the population is just the set of $K$
 candidate cluster centres represented as a matrix in $\mathbb{R}^{K\times p}$.
 
----
+
+
 
 
 Let's assume that the fitness of each individual should be a function of
@@ -556,7 +579,8 @@ selection <- function(cur_fitness) {
 ```
 
 
----
+
+
 
 
 
@@ -566,7 +590,8 @@ and the remaining ones from the "right" parent:
 
 ![](figures/crossover){#fig:crossover width=75%}
 
----
+
+
 
 
 ```{r,dependson='genetic2',genetic3,cache=TRUE}
@@ -585,7 +610,8 @@ crossover <- function(pop, pairs, K, p) {
 
 
 
----
+
+
 
 Mutation (occurring with a very small probability)
 substitutes some cluster centre with a random vector from the input dataset.
@@ -603,7 +629,8 @@ mutate <- function(pop, X, K) {
 }
 ```
 
----
+
+
 
 We also need a function that checks if
 the new cluster centres aren't too far away from the input points.
@@ -616,7 +643,8 @@ All "bad" cluster centres will be substituted with randomly chosen points from $
 Moreover, we will recompute the cluster centres as the componentwise arithmetic mean
 of the closest points, just like in Lloyd's algorithm, to speed up convergence.
 
----
+
+
 
 
 ```{r,dependson='genetic4',genetic4b,cache=TRUE}
@@ -642,7 +670,8 @@ recompute_mus <- function(pop, X, K) {
 }
 ```
 
----
+
+
 
 
 We are ready to build our genetic algorithm to solve the K-means clustering  problem:
@@ -665,7 +694,8 @@ for (i in 1:niter) {
 }
 ```
 
----
+
+
 
 ```{r,dependson='genetic5',genetic6,cache=TRUE,echo=FALSE}
 <<genetic5>>
@@ -710,7 +740,8 @@ of all the input points belonging to that cluster.
 
 ### Remarks
 
----
+
+
 
 
 For any $p\ge 1$, the search space type determines the problem class:
@@ -733,7 +764,8 @@ For any $p\ge 1$, the search space type determines the problem class:
         \right.
         \]
 
----
+
+
 
 However, there are other possibilities as well:
 
@@ -753,7 +785,8 @@ However, there are other possibilities as well:
 Genetic algorithms might come in handy in such cases.
 
 
----
+
+
 
 
 Specialised methods, customised to solve a specific problem (like Lloyd's algorithm)
@@ -768,7 +801,8 @@ Problems that you could try solving with GAs include variable selection
 in multiple regression -- finding the subset of features optimising the AIC
 (this is a hard problem to and forward selection was just a simple greed heuristic).
 
----
+
+
 
 Other interesting algorithms:
 
@@ -783,7 +817,6 @@ Other interesting algorithms:
 
 ### Further Reading
 
-#### {.allowframebreaks .unnumbered}
 
 Recommended further reading:
 

@@ -8,11 +8,26 @@ output:
         pandoc_args: ["--default-image-extension=.pdf",
             "--toc-depth=3",
             "--csl=bibstyle.csl",
+            "--top-level-division=chapter",
             "--filter=/usr/local/bin/pandoc-fignos"]
         includes:
             in_header: preamble.tex
-        fig_caption: false
-documentclass: book
+            before_body: before_body.tex
+            after_body: after_body.tex
+        toc_unnumbered: no
+        toc_appendix: yes
+        keep_tex: yes
+        template: null
+        latex_engine: xelatex
+        highlight_bw: yes
+        quote_footer: ["\\VA{", "}{}"]
+documentclass: krantz
+classoption:
+    - 10pt
+    - b5paper
+    - krantz1
+lot: yes
+lof: yes
 bibliography: [bibliography.bib]
 biblio-style: apalike
 link-citations: yes

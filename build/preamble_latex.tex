@@ -1,24 +1,111 @@
-\usepackage{xcolor}
-\definecolor{darkgray}{cmyk}{0.0,0.9,0.0,0.95}
+% Copyright (C) 2020, Marek Gagolewski, https://www.gagolewski.com
+
+\RequireXeTeX %Force XeTeX check
+
+%\usepackage{xcolor}
+%\definecolor{darkgray}{cmyk}{0.0,0.9,0.0,0.95}
 \usepackage{amsmath}%
+\usepackage{amssymb}
 \usepackage{wasysym}%
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{multicol}
+%\usepackage{fixltx2e}
+%\usepackage{fix-cm}
+%\usepackage{bookmark}
+%\usepackage{makeidx}
+
+\frenchspacing
+\tolerance=5000
+
+% \newenvironment{exercise}{%
+% \bigskip\noindent\textbf{Exercise. }%
+% \it\ignorespaces%
+% }{\ignorespaces%
+% \hfill$\square$%
+% }
 
 
+\newtheorem{theorem}{Theorem}
+\newtheorem{exercise}{Exercise}[chapter]
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+\newtheorem{proof}{Proof}
 
-\newenvironment{exercise}{%
-\bigskip\noindent\textbf{Exercise. }%
-\it\ignorespaces%
-}{\ignorespaces%
-\hfill$\square$%
-}
 
 
 \newenvironment{solution}{%
 \bigskip\noindent\textbf{Solution. }%
-\small\color{darkgray}\ignorespaces%
+\it\ignorespaces%
+\ignorespaces%
 }{\ignorespaces%
 \hfill$\blacksquare$%
 }
 
+\setlength\paperheight{9in}
+\setlength\paperwidth{6in}
+\setlength\voffset{-0.5in}
+\setlength\hoffset{-1.5in}
 
 
+\setmainfont[
+    Mapping=tex-text,
+    UprightFeatures={SmallCapsFont=AlegreyaSC-Regular}
+]{Alegreya}
+\setsansfont[Mapping=tex-text]{Alegreya Sans}
+\setmonofont[Scale=0.9]{Ubuntu Mono} %
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Settings below are based on
+% bookdown: Authoring Books and Technical Documents with R Markdown
+% By Yihui Xie
+% https://bookdown.org/yihui/bookdown/publishers.html
+% -- Thanks!
+\renewenvironment{quote}{\begin{VF}}{\end{VF}}
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\topfraction}{0.8}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\floatpagefraction}{0.75}
+
+\let\oldhref\href
+\renewcommand{\href}[2]{#2\footnote{\url{#1}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Workaround for \tableofcontents-related compilation errors:
+%
+% Author: Werner
+% https://tex.stackexchange.com/questions/129778/hyperref-links-entire-line-like-word
+\makeatletter
+\def\contentsline#1#2#3#4{%
+  \begingroup
+    \Hy@safe@activestrue
+  \edef\x{\endgroup
+    \def\noexpand\Hy@tocdestname{#4}%
+  }\x
+  \csname l@#1\endcsname{%
+    %\hyper@linkstart{link}{\Hy@tocdestname}{#2}\hyper@linkend
+    #2%
+  }{%
+    %\hyper@linkstart{link}{\Hy@tocdestname}{#3}\hyper@linkend
+    #3%
+  }%
+}
+% Update ToC hyperlinks for Chapters
+\patchcmd{\l@chapter}% <cmd>
+  {{\cftchapfont #1}}% <search>
+  {\hyper@linkstart{link}{\Hy@tocdestname}{}{\cftchapfont #1}}% <replace>
+  {}{}% <success><failure>
+\patchcmd{\cftchapfillnum}{\par}{\hyper@linkend\par}{}{}
+% Update ToC hyperlinks for Sections
+\patchcmd{\l@section}% <cmd>
+  {{\cftsecfont #1}}% <search>
+  {\hyper@linkstart{link}{\Hy@tocdestname}{}{\cftsecfont #1}}% <replace>
+  {}{}% <success><failure>
+\patchcmd{\cftsecfillnum}{\par}{\hyper@linkend\par}{}{}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\frontmatter

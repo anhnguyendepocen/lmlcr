@@ -238,7 +238,7 @@ to write programs that manipulate unevaluated R expressions.
 
 For instance, take a close look at the following plot:
 
-```{r plotz_metaprogramming,fig.cap="Metaprogramming in action: Just take a look at the Y axis label"}
+```{r plotz_metaprogramming,fig.cap="Metaprogramming in action: Take a look at the Y axis label"}
 z <- seq(-2*pi, 2*pi, length.out=101)
 plot(z, sin(z), type="l")
 ```
@@ -335,6 +335,8 @@ TODO: Add OnTrack exercises
 
 
 ## Further Reading
+
+
 
 Recommended further reading: [@Rintro]
 
