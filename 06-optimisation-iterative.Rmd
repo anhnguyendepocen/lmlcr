@@ -128,7 +128,7 @@ abline(v=1, lty=3)
 abline(h=-2, lty=3)
 text(1, -5, expression(x^"*"), pos=4)
 text(5, -2, expression(f(x^"*")), pos=1)
-legend("topleft", lty=1, legend=expression(f(x)*"="*(x-1)^2-2), bg="white")
+legend("topleft", lty=1, legend=expression(f(x)*"="*(x*"-"*1)^2*"-"*2), bg="white")
 ```
 
 
@@ -171,7 +171,8 @@ abline(h=0, lty=3)
 text(1-sqrt(2), -5, expression(x^"*"*" [left]"), pos=2)
 text(1+sqrt(2), -5, expression(x^"*"*" [right]"), pos=4)
 text(5, 0, expression(f(x^"*")), pos=1)
-legend("topleft", lty=1, legend=expression(f(x)*"="*"max(0,"*(x-1)^2-2*")"), bg="white")
+legend("topleft", lty=1, legend=
+    expression(f(x)*"="*"max(0,"*(x*"-"*1)^2*"-"*2*")"), bg="white")
 ```
 
 
@@ -199,7 +200,7 @@ text((-1-sqrt(17))/8, -5, expression(x^"*"), pos=4)
 text(1, -5, expression(x^"+"), pos=4)
 text(3, ff((-1-sqrt(17))/8), expression(f(x^"*")), pos=1)
 text(3, -2, expression(f(x^"+")), pos=3)
-legend("topleft", lty=1, legend=expression(f(x)*"="*x*(x+1)*(x-1)^2-2), bg="white")
+legend("topleft", lty=1, legend=expression(f(x)*"="*x*(x*"+"*1)*(x*"-"*1)^2*"-"*2), bg="white")
 ```
 
 
@@ -610,8 +611,12 @@ hist(res_value, col="white", breaks=100, main=NA); box()
 
 Figure {@fig:bfgs_multi_where} depicts all the random starting points and where
 do we converge from them.
+Note that by starting in the neighbourhood of $(0,-4)$ we can actually
+end up in any of the 4 local minima.
+Moreover, even starting close to the global minimum (ca. $(-2,2)$)
+does not guarantee that we will end up there.
 
-```{r bfgs_multi_where,echo=FALSE,cache=TRUE,fig.cap="Each line segment connect a starting point to the point of BFGS's convergence; note that by starting in the neighbourhood of $(0,-4)$ we can actually end up in any of the 4 local minima"}
+```{r bfgs_multi_where,echo=FALSE,cache=TRUE,fig.cap="Each line segment connects a starting point to the point of where the BFGS algorithm converged"}
 set.seed(123)
 res <- replicate(1000, {
     # this will be iterated 100 times
@@ -620,9 +625,10 @@ res <- replicate(1000, {
     c(x12_init, res$par, res$value)
 })
 contour(x1, x2, y, nlevels=25)
-cc <- cut(res[5,],c(-5, 0.5, 1.0, 1.5, 6))
+cc <- as.integer(cut(res[5,],c(-5, 0.5, 1.0, 1.5, 6)))
 arrows(res[1,], res[2,], res[3,], res[4,],
-col=c("#00000066", "#ff000066", "#00ff0066", "#0000ff66")[cc], length=0.1)
+col=c("#00000022", "#ff000022", "#00880022", "#0000ff22")[cc], length=0.1)
+points(res[1,], res[2,], pch=c(1, 2, 6, 5)[cc], col=c("#00000099", "#ff000099", "#00880099", "#0000ff99")[cc])
 ```
 
 
@@ -1547,7 +1553,7 @@ legend("top", ncol=2, bg="white", legend=c("train", "test"), lty=1:2, col=1:2)
 matplot(stat_freq*(1:(maxit%/%stat_freq)), cbind(acc_train, acc_test),
         type='l', ylab="accuracy", xlab="iteration",
         ylim=c(0.8, 0.93))
-legend("bottom", ncol=2, bg="white",
+legend("top", ncol=2, bg="white",
     legend=c(sprintf("eta=%g", eta), sprintf("batch_size=%d", batch_size)))
 ```
 
@@ -1616,7 +1622,7 @@ is not greater than that combination of the function values at these two points.
 See Figure {@fig:convex_function} for a graphical illustration of the above.
 
 
-![An illustration of the definition of a convex function](figures/convex_function){#fig:convex_function width=75%}
+![An illustration of the definition of a convex function](figures/convex_function){#fig:convex_function}
 
 
 
@@ -1743,7 +1749,7 @@ Moreover, linear functions are both convex and concave.
 Also, if $f$ is convex, then $-f$ is concave and vice versa.
 
 
-![(non-)convex vs. (non-)concave functions](figures/convex_concave){#fig:convex_concave width=75%}
+![(non-)convex vs. (non-)concave functions](figures/convex_concave){#fig:convex_concave}
 
 -->
 

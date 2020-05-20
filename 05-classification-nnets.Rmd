@@ -761,7 +761,7 @@ A neuron can be thought of as a mathematical function,
 see Figure {@fig:neuron}, which has its specific inputs
 and an output.
 
-![Neuron as a mathematical (black box) function; image based on: https://en.wikipedia.org/wiki/File:Neuron3.png by Egm4313.s12 at English Wikipedia, licensed under the Creative Commons Attribution-Share Alike 3.0 Unported license](figures/neuron){#fig:neuron width="50%"}
+![Neuron as a mathematical (black box) function; image based on: https://en.wikipedia.org/wiki/File:Neuron3.png by Egm4313.s12 at English Wikipedia, licensed under the Creative Commons Attribution-Share Alike 3.0 Unported license](figures/neuron){#fig:neuron}
 
 The Linear Threshold Unit (McCulloch and Pitts, 1940s),
 the Perceptron (Rosenblatt, 1958) and the Adaptive Linear Neuron
@@ -772,7 +772,7 @@ They can be thought of as processing units that compute
 a weighted sum of the inputs,
 which is then transformed by means of a nonlinear "activation" function.
 
-![A simple model of an artificial neuron](figures/perceptron){#fig:perceptron width="72%"}
+![A simple model of an artificial neuron](figures/perceptron){#fig:perceptron}
 
 
 
@@ -787,7 +787,7 @@ We can easily depict it in the Figure {@fig:neuron}-style,
 see Figure {@fig:logistic_regression_binary}.
 
 
-![Binary logistic regression](figures/logistic_regression_binary){#fig:logistic_regression_binary width="75%"}
+![Binary logistic regression](figures/logistic_regression_binary){#fig:logistic_regression_binary}
 
 
 
@@ -802,7 +802,7 @@ In fact, we can consider it as an instance of a:
 *artificial* **neural network**
 that uses the softmax as the activation function.
 
-![Multinomial logistic regression](figures/logistic_regression_multiclass){#fig:logistic_regression_multiclass width="75%"}
+![Multinomial logistic regression](figures/logistic_regression_multiclass){#fig:logistic_regression_multiclass}
 
 
 ### Example in R
@@ -945,7 +945,7 @@ In a brain, a neuron's output is an input a bunch of other neurons.
 We could try aligning neurons into many interconnected layers.
 This leads to a structure like the one in Figure {@fig:nnet}.
 
-![A multi-layer neural network](figures/nnet){#fig:nnet width="75%"}
+![A multi-layer neural network](figures/nnet){#fig:nnet}
 
 
 

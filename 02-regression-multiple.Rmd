@@ -1028,15 +1028,19 @@ Note that a polynomial of degree 1 is just a line.
 Let us depict the three models:
 
 ```{r poly2,fig.cap="Polynomials of different degrees fitted to the Credit dataset"}
-plot(X1, Y, col="#000000aa", ylim=c(0, 1100))
+plot(X1, Y, col="#00000066", ylim=c(0, 1100))
 x <- seq(min(X1), max(X1), length.out=101)
-lines(x, predict(f1_1, data.frame(X1=x)), col="red", lwd=3)
-lines(x, predict(f1_3, data.frame(X1=x)), col="blue", lwd=3)
-lines(x, predict(f1_10, data.frame(X1=x)), col="darkgreen", lwd=3)
+lines(x, predict(f1_1, data.frame(X1=x)), col="red", lwd=3,lty=1)
+lines(x, predict(f1_3, data.frame(X1=x)), col="blue", lwd=3,lty=2)
+lines(x, predict(f1_10, data.frame(X1=x)), col="darkgreen", lwd=3,lty=4)
+legend("topleft", c("degree 1", "degree 3", "degree 10"),
+lwd=3, col=c("red", "blue", "darkgreen"), lty=c(1,2,4), bg="white")
 ```
 
-From Figure {@fig:poly2} we see that there's clearly a problem
-with the degree-10 polynomial.
+From Figure {@fig:poly2} we see that the models tend to agree on\
+what the predictions should be for low and moderate balances $(X_1)$.
+However, there's clearly a problem
+with the behaviour of the degree-10 polynomial on the righthand side of the figure.
 
 
 

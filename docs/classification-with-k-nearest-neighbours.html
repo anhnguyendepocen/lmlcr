@@ -486,7 +486,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li style='font-size: smaller' ><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Licensed under CC BY-NC-ND 4.0</a></li>
-<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-05-16 21:49 (b3afcde)</a></li>
+<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-05-20 13:37 (42d2651)</a></li>
 
 </ul>
 
@@ -1347,10 +1347,10 @@ and sorting them.</p>
 <p>A comparison with <code>FNN:knn()</code>:</p>
 <div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb377-1" title="1"><span class="kw">system.time</span>(Ya &lt;-<span class="st"> </span><span class="kw">knn</span>(X_train, X_test, Y_train, <span class="dt">k=</span><span class="dv">5</span>))</a></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   0.176   0.000   0.175</code></pre>
+##    0.13    0.00    0.13</code></pre>
 <div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb379-1" title="1"><span class="kw">system.time</span>(Yb &lt;-<span class="st"> </span><span class="kw">our_knn</span>(X_train, X_test, Y_train, <span class="dt">k=</span><span class="dv">5</span>))</a></code></pre></div>
 <pre><code>##    user  system elapsed 
-##  20.472   0.000  20.467</code></pre>
+##  14.790   0.000  14.791</code></pre>
 <div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb381-1" title="1"><span class="kw">mean</span>(Ya <span class="op">==</span><span class="st"> </span>Yb) <span class="co"># 1.0 on perfect match</span></a></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <p>Both functions return identical results but our implementation is “slightly” slower.</p>
@@ -1371,10 +1371,10 @@ see the Rcpp package for seamless R and C++ integration.</p>
 <a class="sourceLine" id="cb383-4" title="4">}</a>
 <a class="sourceLine" id="cb383-5" title="5"><span class="kw">system.time</span>(Ya &lt;-<span class="st"> </span><span class="kw">knn</span>(X_train, X_test, Y_train, <span class="dt">k=</span><span class="dv">5</span>))</a></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   0.176   0.000   0.175</code></pre>
+##   0.129   0.000   0.129</code></pre>
 <div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb385-1" title="1"><span class="kw">system.time</span>(Yb &lt;-<span class="st"> </span><span class="kw">our_knn</span>(X_train, X_test, Y_train, <span class="dt">k=</span><span class="dv">5</span>))</a></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   0.058   0.000   0.058</code></pre>
+##   0.047   0.000   0.047</code></pre>
 <div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb387-1" title="1"><span class="kw">mean</span>(Ya <span class="op">==</span><span class="st"> </span>Yb) <span class="co"># 1.0 on perfect match</span></a></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <p>Note that our solution requires <span class="math inline">\(c\cdot n_\text{test}\cdot n_\text{train}\cdot p\)</span>
@@ -1410,16 +1410,16 @@ kd-trees.</p>
 <a class="sourceLine" id="cb389-11" title="11">}</a></code></pre></div>
 <div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb390-1" title="1"><span class="kw">test_speed</span>(<span class="dv">10000</span>, <span class="dv">2</span>, <span class="dv">5</span>)</a></code></pre></div>
 <pre><code>##    brute  kd_tree 
-## 0.383825 0.017505</code></pre>
+## 0.292200 0.012046</code></pre>
 <div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb392-1" title="1"><span class="kw">test_speed</span>(<span class="dv">10000</span>, <span class="dv">5</span>, <span class="dv">5</span>)</a></code></pre></div>
 <pre><code>##    brute  kd_tree 
-## 0.551996 0.083214</code></pre>
+## 0.416631 0.059105</code></pre>
 <div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb394-1" title="1"><span class="kw">test_speed</span>(<span class="dv">10000</span>, <span class="dv">10</span>, <span class="dv">5</span>)</a></code></pre></div>
 <pre><code>##   brute kd_tree 
-## 0.83981 0.85611</code></pre>
+## 0.66073 0.65757</code></pre>
 <div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb396-1" title="1"><span class="kw">test_speed</span>(<span class="dv">10000</span>, <span class="dv">20</span>, <span class="dv">5</span>)</a></code></pre></div>
 <pre><code>##   brute kd_tree 
-##  1.6258  7.2967</code></pre>
+##  1.2677  5.3947</code></pre>
 </div>
 <div id="different-metrics" class="section level3">
 <h3><span class="header-section-number">3.4.5</span> Different Metrics (*)</h3>

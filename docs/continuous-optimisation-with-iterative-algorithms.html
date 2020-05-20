@@ -486,7 +486,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li style='font-size: smaller' ><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Licensed under CC BY-NC-ND 4.0</a></li>
-<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-05-16 21:49 (b3afcde)</a></li>
+<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-05-20 13:37 (42d2651)</a></li>
 
 </ul>
 
@@ -926,10 +926,14 @@ compare Figure <a href="continuous-optimisation-with-iterative-algorithms.html#f
 <p class="caption">Figure 8: A histogram of the objective function’s value at the local minimum found when using a random initial guess</p>
 </div>
 <p>Figure <a href="continuous-optimisation-with-iterative-algorithms.html#fig:bfgs_multi_where">9</a> depicts all the random starting points and where
-do we converge from them.</p>
+do we converge from them.
+Note that by starting in the neighbourhood of <span class="math inline">\((0,-4)\)</span> we can actually
+end up in any of the 4 local minima.
+Moreover, even starting close to the global minimum (ca. <span class="math inline">\((-2,2)\)</span>)
+does not guarantee that we will end up there.</p>
 <div class="figure">
-<img src="06-optimisation-iterative-figures/bfgs_multi_where-1.svg" alt="Figure 9: Each line segment connect a starting point to the point of BFGS’s convergence; note that by starting in the neighbourhood of (0,-4) we can actually end up in any of the 4 local minima" id="fig:bfgs_multi_where" />
-<p class="caption">Figure 9: Each line segment connect a starting point to the point of BFGS’s convergence; note that by starting in the neighbourhood of <span class="math inline">\((0,-4)\)</span> we can actually end up in any of the 4 local minima</p>
+<img src="06-optimisation-iterative-figures/bfgs_multi_where-1.svg" alt="Figure 9: Each line segment connects a starting point to the point of where the BFGS algorithm converged" id="fig:bfgs_multi_where" />
+<p class="caption">Figure 9: Each line segment connects a starting point to the point of where the BFGS algorithm converged</p>
 </div>
 </div>
 <div id="random-restarts" class="section level3">
@@ -1464,7 +1468,7 @@ spent evaluating an expression <code>expr</code>.</p>
 <a class="sourceLine" id="cb644-11" title="11">    }</a>
 <a class="sourceLine" id="cb644-12" title="12">}) <span class="co"># `user` - processing time in seconds:</span></a></code></pre></div>
 <pre><code>##    user  system elapsed 
-## 140.570  44.231  75.933</code></pre>
+##  71.364  24.789  34.262</code></pre>
 <p>Unfortunately, the method’s convergence is really slow
 (we are optimising over <span class="math inline">\(7850\)</span> parameters…)
 and the results after 100 iterations are disappointing:</p>
@@ -1530,7 +1534,7 @@ only for batches of size 1.</p>
 <a class="sourceLine" id="cb650-13" title="13">    }</a>
 <a class="sourceLine" id="cb650-14" title="14">})</a></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   0.182   0.008   0.190</code></pre>
+##   0.085   0.022   0.090</code></pre>
 <div class="sourceCode" id="cb652"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb652-1" title="1"><span class="kw">accuracy</span>(Y_train2, <span class="kw">nn_predict</span>(B, X_train1))</a></code></pre></div>
 <pre><code>## [1] 0.46198</code></pre>
 <div class="sourceCode" id="cb654"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb654-1" title="1"><span class="kw">accuracy</span>(Y_test2,  <span class="kw">nn_predict</span>(B, X_test1))</a></code></pre></div>
@@ -1555,7 +1559,7 @@ the MNIST dataset for almost 2 minutes.</p>
 <a class="sourceLine" id="cb656-13" title="13">    }</a>
 <a class="sourceLine" id="cb656-14" title="14">})</a></code></pre></div>
 <pre><code>##    user  system elapsed 
-##  16.724   0.162  16.885</code></pre>
+##   7.715   0.165   7.851</code></pre>
 <div class="sourceCode" id="cb658"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb658-1" title="1"><span class="kw">accuracy</span>(Y_train2, <span class="kw">nn_predict</span>(B, X_train1))</a></code></pre></div>
 <pre><code>## [1] 0.89222</code></pre>
 <div class="sourceCode" id="cb660"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb660-1" title="1"><span class="kw">accuracy</span>(Y_test2,  <span class="kw">nn_predict</span>(B, X_test1))</a></code></pre></div>
@@ -1566,14 +1570,14 @@ Figures <a href="continuous-optimisation-with-iterative-algorithms.html#fig:mnis
 the cases of <code>batch_size</code> of 32 and 128, respectively.</p>
 <p>The time needed to go through 10000 iterations with batch size of 32 is:</p>
 <pre><code>##    user  system elapsed 
-## 120.859  20.356  72.073</code></pre>
+##  65.197  15.150  33.380</code></pre>
 <div class="figure">
 <img src="06-optimisation-iterative-figures/mnist_sgd-1.svg" alt="Figure 14: Cross-entropy and accuracy on the train and test set in each iteration of SGD; batch size of 32" id="fig:mnist_sgd" />
 <p class="caption">Figure 14: Cross-entropy and accuracy on the train and test set in each iteration of SGD; batch size of 32</p>
 </div>
 <p>What’s more, batch size of 128 takes:</p>
 <pre><code>##    user  system elapsed 
-##  467.50  198.25  189.89</code></pre>
+## 136.957  51.256  51.779</code></pre>
 <div class="figure">
 <img src="06-optimisation-iterative-figures/mnist_sgd2b-1.svg" alt="Figure 15: Cross-entropy and accuracy on the train and test set in each iteration of SGD; batch size of 128" id="fig:mnist_sgd2b" />
 <p class="caption">Figure 15: Cross-entropy and accuracy on the train and test set in each iteration of SGD; batch size of 128</p>
@@ -1675,7 +1679,7 @@ all <span class="math inline">\(\theta\in [0,1]\)</span>; see Figure <a href="co
 </dd>
 </dl>
 <div class="figure">
-<img src="figures/convex_set.svg" alt="Figure 17: A convex and a non-convex set" id="fig:convex_set" style="width:75.0%" />
+<img src="figures/convex_set.svg" alt="Figure 17: A convex and a non-convex set" id="fig:convex_set" />
 <p class="caption">Figure 17: A convex and a non-convex set</p>
 </div>
 <!--

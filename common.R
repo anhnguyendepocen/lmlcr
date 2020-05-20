@@ -89,11 +89,11 @@ library("Cairo")
 #     symbol="Ubuntu Condensed"
 # )
 CairoFonts(
-    regular="Alegreya Sans:style=Light",
+    regular="Alegreya Sans:style=Regular",
+    italic="Alegreya Sans:style=Italic",
     bold="Alegreya Sans:style=Medium",
-    italic="Alegreya Sans:style=Light Italic",
     bolditalic="Alegreya Sans:style=Medium Italic",
-    symbol="TeX Gyre Pagella:style=Light"
+    symbol="TeX Gyre Pagella:style=Regular"
 )
 
 setHook("before.plot.new", function() {

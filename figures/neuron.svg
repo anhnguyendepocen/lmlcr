@@ -5,8 +5,8 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   width="152mm"
-   height="200mm"
+   width="6in"
+   height="3in"
    id="neuron"
    version="1.1">
   <defs
@@ -56,7 +56,7 @@
     </rdf:RDF>
   </metadata>
   <g
-     transform="matrix(0.03547766,0.6448155,-0.99937047,0.02289096,581.09666,68.369553)"
+     transform="matrix(0.44608592,0.05508258,0.05485917,-0.44181201,59.759248,263.11652)"
      id="g861">
     <g
        id="Cell"
@@ -118,74 +118,87 @@
   </g>
   <text
      id="text4183"
-     y="730.38977"
-     x="131.03712"
-     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1;font-family:'Ubuntu Condensed';-inkscape-font-specification:'Ubuntu Condensed, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     y="272.50006"
+     x="319.90604"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.66666698px;line-height:1;font-family:'Alegreya Sans';-inkscape-font-specification:'Alegreya Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      xml:space="preserve"><tspan
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1;font-family:'Ubuntu Condensed';-inkscape-font-specification:'Ubuntu Condensed, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr;text-anchor:middle;"
-       y="730.38977"
-       x="131.03712"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.66666698px;line-height:1;font-family:'Alegreya Sans';-inkscape-font-specification:'Alegreya Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start"
+       y="272.50006"
+       x="319.90604"
        id="tspan4197">axon (output)</tspan></text>
   <text
+     transform="scale(1.1981182,0.83464219)"
      id="text4187"
-     y="236.98991"
-     x="866.62134"
-     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:IrisUPC;-inkscape-font-specification:IrisUPC;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     y="-103.5486"
+     x="723.31873"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.50399971px;line-height:0%;font-family:'Ubuntu Condensed';-inkscape-font-specification:'Ubuntu Condensed, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.83464217px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      xml:space="preserve"><tspan
-       style="font-size:30px;line-height:1.25"
-       y="236.98991"
-       x="873.19116"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.50399971px;line-height:1.25;font-family:'Ubuntu Condensed';-inkscape-font-specification:'Ubuntu Condensed, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.83464217px"
+       y="-103.5486"
+       x="723.31873"
        id="tspan4189"> </tspan><tspan
-       style="font-size:30px;line-height:1.25"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.50399971px;line-height:1.25;font-family:'Ubuntu Condensed';-inkscape-font-specification:'Ubuntu Condensed, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.83464217px"
        id="tspan4191"
-       y="274.48993"
-       x="873.19116"> </tspan></text>
+       y="-70.41861"
+       x="723.31873"> </tspan></text>
   <text
      id="text4199"
-     y="38.354496"
-     x="278.06418"
-     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1;font-family:'Ubuntu Condensed';-inkscape-font-specification:'Ubuntu Condensed, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+     y="19.012646"
+     x="210.8154"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.66666698px;line-height:1;font-family:'Alegreya Sans';-inkscape-font-specification:'Alegreya Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      xml:space="preserve"><tspan
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1;font-family:'Ubuntu Condensed';-inkscape-font-specification:'Ubuntu Condensed, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr;text-anchor:middle;"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.66666698px;line-height:1;font-family:'Alegreya Sans';-inkscape-font-specification:'Alegreya Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start"
        id="tspan4203"
-       y="38.354496"
-       x="278.06418">dendrites (inputs)</tspan></text>
+       y="19.012646"
+       x="210.8154">dendrites (inputs)</tspan></text>
   <path
      id="path4205"
-     d="M 368.97082,83.17578 353.10521,42.774049"
-     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+     d="M 202.65822,22.554874 170.68733,40.623298"
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.55690056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
   <path
      id="path4207"
-     d="M 101.51366,92.229259 164.23321,30.5587"
-     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+     d="m 200.42407,18.331023 -42.71286,7.358229"
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.55690056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
   <path
      id="path4209"
-     d="M 298.69895,88.834438 313.21568,43.745487"
-     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+     d="m 223.35204,24.728896 -8.94623,13.551055"
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.55690056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
   <path
      id="path4211"
-     d="M 180.64547,87.609473 235.86265,43.327601"
-     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+     d="M 258.00449,27.172746 222.80316,70.292157"
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.55690056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
   <path
      id="path1014"
-     d="M 218.26256,713.26778 271.34497,689.2659"
-     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+     d="m 435.4056,257.71379 -32.29056,9.47203"
+     style="fill:none;stroke:#000000;stroke-width:0.55690056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
   <text
      xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1;font-family:'Ubuntu Condensed';-inkscape-font-specification:'Ubuntu Condensed, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
-     x="388.34454"
-     y="429.90027"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.66666698px;line-height:1;font-family:'Alegreya Sans';-inkscape-font-specification:'Alegreya Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     x="312.5108"
+     y="162.31029"
      id="text945"><tspan
-       x="388.34454"
-       y="429.90027"
-       id="tspan943"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1;font-family:'Ubuntu Condensed';-inkscape-font-specification:'Ubuntu Condensed, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr;text-anchor:middle;">magic stuff happening</tspan></text>
+       id="tspan847"
+       x="313.72079"
+       y="162.31029"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.66666698px;line-height:1;font-family:'Alegreya Sans';-inkscape-font-specification:'Alegreya Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle">this is where </tspan><tspan
+       id="tspan851"
+       x="312.5108"
+       y="176.97696"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.66666698px;line-height:1;font-family:'Alegreya Sans';-inkscape-font-specification:'Alegreya Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle">all the magic</tspan><tspan
+       id="tspan853"
+       x="312.5108"
+       y="191.64362"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.66666698px;line-height:1;font-family:'Alegreya Sans';-inkscape-font-specification:'Alegreya Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle">happens</tspan></text>
   <path
-     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     d="M 253.81742,407.90025 207.07884,367.33436"
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.55690056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 295.97786,149.42248 281.81192,115.48784"
      id="path949" />
   <path
-     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     d="M 285.17793,549.08352 268.44817,433.43706"
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.55690056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 381.99774,135.45989 -29.5215,34.88692"
      id="path951" />
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.55690056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 339.30203,114.8431 -20.52429,35.23832"
+     id="path855" />
 </svg>

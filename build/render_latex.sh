@@ -37,5 +37,6 @@ sed -i -e "s/@DATE@/${date}/g" index.Rmd
 Rscript -e 'bookdown::render_book("index.Rmd", "bookdown::pdf_book",
     output_dir="../out-latex")'
 
-mv -f ../out-latex/_main.pdf ../out-latex/lmlcr.pdf
-mv -f ../out-latex/_main.tex ../out-latex/lmlcr.tex
+cp -f ../out-latex/_main.pdf ../out-latex/lmlcr.pdf
+mv -f ../out-latex/_main.tex .
+mv -f ../out-latex/_main.pdf .

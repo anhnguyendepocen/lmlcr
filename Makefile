@@ -20,17 +20,12 @@ FILES_RMD = \
 
 
 FILES_SVGZ = \
-    figures/combination1.svgz                     \
-    figures/combination2.svgz                     \
-    figures/combination3.svgz                     \
     figures/convex_concave.svgz                   \
     figures/convex_function.svgz                  \
     figures/convex_set.svgz                       \
-    figures/cover.svgz                            \
-    figures/crossover.svgz                        \
-    figures/neuron.svgz                           \
     figures/logistic_regression_binary.svgz       \
     figures/logistic_regression_multiclass.svgz   \
+    figures/neuron.svgz                           \
     figures/nnet.svgz                             \
     figures/perceptron.svgz
 
