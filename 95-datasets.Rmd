@@ -226,4 +226,8 @@ https://fueleconomy.gov/feg/download.shtml
 
 https://corgis-edu.github.io/corgis/csv/
 
+https://corgis-edu.github.io/corgis/csv/food/
 
+https://corgis-edu.github.io/corgis/csv/health/
+
+https://corgis-edu.github.io/corgis/csv/drugs/
