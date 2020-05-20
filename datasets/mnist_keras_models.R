@@ -1,8 +1,9 @@
-# Part of the LMLCR book by M.Gagolewski
+# Part of the LMLCR book by M. Gagolewski
 #
 # This is less reproducible than letting knitr execute the code,
 # but I was fed up with the long compilation times.
-# Plus caching of intermediate objects yields the cache director of size 300+MB.
+# Moreover, the caching of intermediate objects makes the cache directory of
+# size 300+MB.
 
 options(encoding="UTF-8")
 set.seed(666)

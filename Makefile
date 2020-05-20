@@ -16,6 +16,7 @@ FILES_RMD = \
     92-R-vectors.Rmd                             \
     93-R-matrices.Rmd                            \
     94-R-data-frames.Rmd                         \
+    95-datasets.Rmd                              \
     99-references.Rmd
 
 

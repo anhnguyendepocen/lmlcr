@@ -1,0 +1,70 @@
+# Datasets
+
+<!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
+
+"Good" datasets are actually hard to find!
+Many books analyse datasets that are "too easy" and give their readers
+the false impression that they can model anything.
+
+Below we briefly describe all the datasets considered in this book.
+They are available for download at
+https://github.com/gagolews/lmlcr/tree/master/datasets.
+Many of them are real-world data, and need some proper cleaning,
+outlier removal etc. Moreover, for some of them, the machine learning
+models studied will not be of the highest quality. That's life.
+
+
+
+
+
+TODO: update Yahoo Finance.....
+
+
+
+## `urban_forest`
+
+The `urban_forest` dataset gives location, species and lifespan of
+ca. 72,500 trees in Melbourne, VIC, Australia.
+
+
+`urban_forest` |
+---------------|------------------------------------------------------------------
+Last updated   | March 10, 2020
+Provider       | City of Melbourne
+License        | Creative Commons Attribution 4.0 International Public License
+Source         | https://data.melbourne.vic.gov.au/Environment/Trees-with-species-and-dimensions-Urban-Forest-/fp38-wiyy
+
+
+
+```{r}
+forest <- read.csv("datasets/urban_forest_20200310.csv.gz",
+    comment="#", stringsAsFactors=FALSE)
+head(forest, 3)
+```
+
+
+
+Column                       | Description
+-----------------------------|---------------------------------------------
+CoM ID                       | City of Melbourne's unique asset ID
+Common Name                  |
+Scientific Name              |
+Genus                        |
+Family                       |
+Diameter Breast Height       | Diameter at breast height, or DBH, is a standard method of expressing the diameter of the trunk or bole of a standing tree. City of Melbourne Measures this 1.4m from ground level. 0.00 = Not yet assessed
+Year Planted                 | This is generally accurate for trees planted from 2003 onward, prior to 2003 this indicate the date the trees are added to the inventory.
+Date Planted                 | See above.
+Age Description              | Based on Date planted / date of data entry therefore sometimes inaccurate; Null value = Not yet assessed
+Useful Life Expectancy       | The trees useful life expectancy. Last updated in 2009; Null value = Not yet assessed
+Useful Life Expectancy Value | Useful Life Expectancy Value, derived from the Useful Life Expectancy column, displayed as an integer
+Precinct                     | The neighbourhood boundary defined for tree planning purposes
+Located In                   | This describes whether a tree is located within a public park or along a street
+Upload Date                  |
+Coordinate Location          |
+Latitude                     |
+Longitude                    |
+Easting                      | Easting Coordinate, please use MGA94-55
+Northing                     | Northing Coordinate, please use MGA94-55
+
+
+

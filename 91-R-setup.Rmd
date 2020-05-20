@@ -56,7 +56,7 @@ advanced users.
 Once we get the above up and running, from within RStudio,
 we need to install a few packages which we're going to use during the course
 of this course. Execute the following commands in the R console
-(bottom-left Rstudio pane):
+(bottom-left RStudio pane):
 
 ```{r,results='asis',echo=FALSE}
 library("knitr")
@@ -158,3 +158,73 @@ code in an R script and executing it just as we did above.
 
 On a side note, you can execute (source) the whole script
 by pressing Ctrl+Shift+S (Cmd+Shift+S on MacOS).
+
+
+
+
+## Exercises
+
+### First Steps with Vectors
+
+{ BEGIN exercise }
+Print the contents of the `x` and `y` vectors that we have
+created above
+by issuing the `print(x)` and `print(y)` commands.
+Here, by a *vector* we mean a sequence of numbers.
+{ END exercise }
+
+
+{ BEGIN exercise }
+Check the length of the vectors by applying `length(x)`
+and `length(y)`. Read the results.
+{ END exercise }
+
+{ BEGIN exercise }
+Inspect a few elements in both `x` and `y`,
+for example `y[1]` gives the first element
+and `y[length(x)]` -- the last one.
+{ END exercise }
+
+
+### Basic Plotting
+
+{ BEGIN exercise }
+Read the manual page on the `seq()` function
+by executing the `?seq` command.
+{ END exercise }
+
+
+{ BEGIN exercise }
+Using the `seq()` function with appropriate parameters,
+create a vector `x2` with elements 0, 0.1, 0.2, ..., 1.0.
+{ END exercise }
+
+Remark.
+
+:  Note that in the example above, `<-` is the assignment operator.
+   By writing `x <- ...` we create a new named object (variable) called `x`.
+   Use a similar notation to create `x2`.
+
+{ BEGIN exercise }
+Then create a vector `y2` that gives the square root of each element in `x2`.
+Use the `sqrt()` function.
+{ END exercise }
+
+
+{ BEGIN exercise }
+Plot `y2` as a function of `x2`.
+{ END exercise }
+
+
+Remark.
+
+: You can access the list of graphical parameters that the `plot()`
+    function takes by executing `?plot.default` and `?plot`.
+    For example, `plot(..., col="red")` draws a red curve.
+    See `colours()` for the list of available colours.
+    Check out the meaning of the `lty` and `lwd` parameters.
+    Moreover, change `type="l"` to `type="p"`.
+    Check out the meaning of the `pch` and `cex` parameters.
+
+
+
