@@ -62,10 +62,10 @@ SVG_OUTPUTS=$(patsubst %.svgz,%.svg,$(FILES_SVGZ))
 figures: $(PDF_OUTPUTS) $(SVG_OUTPUTS)
 
 figures/%.svg: figures/%.svgz
-	inkscape -C "$<" --without-gui  --export-plain-svg="$@" --export-area-page
+	inkscape -C "$<" --export-type=svg --export-plain-svg  --export-area-page -o "$@"
 
 figures/%.pdf: figures/%.svgz
-	inkscape  -C  "$<" --without-gui --export-pdf="$@"  --export-area-page
+	inkscape  -C  "$<" --export-type=pdf   --export-area-page -o "$@"
 
 
 
