@@ -327,11 +327,226 @@ with a formula -- information on that can be found in `?lm`, `?boxplot`,
 
 
 
-<!--
+## Exercises
 
-TODO: Add OnTrack exercises
 
--->
+### Urban Forest
+
+In this task we will be working with the data on more than 70,000 trees
+in Melbourne, VIC, Australia. Before proceeding any further, read the
+dataset's description in Appendix F. <!-- TODO: -->
+
+
+```{r df_ex1a}
+forest <- read.csv("datasets/urban_forest.csv.gz",
+    comment.char="#", stringsAsFactors=FALSE)
+head(forest, 3)
+```
+
+{ BEGIN exercise }
+Write R code that answers the following questions:
+
+* How many trees  have been planted between 2010 and 2015
+    (inclusive)?
+* Are more trees located within a public park or along a street?
+* What is the average age (in years, the current one is 2020)
+    of the London Planes? (Give an approximate answer based
+    on the `Year.Planted` column).
+{ END exercise }
+
+
+
+{ BEGIN exercise }
+Fetch the IDs (`CoM.ID`), common names (`Common.Name`)
+and trunk diameters (`Diameter.Breast.Height`)
+of the 5 trees with the largest diameters at breast height.
+The output data frame must be sorted with respect to
+`Diameter.Breast.Height`, decreasingly.
+
+```{r df_ex1b,echo=-c(1,3)}
+.. <- FALSE
+widest_trees <- ..
+widest_trees <- head(forest[order(forest$Diameter.Breast.Height, decreasing=TRUE),
+c("CoM.ID", "Common.Name", "Diameter.Breast.Height")], 5)
+print(widest_trees)
+```
+{ END exercise }
+
+{ BEGIN exercise }
+Create a new data frame that gives the number of trees planted in each year.
+Recall (from the dataset's description) that pre-2003 data might be inaccurate.
+
+
+```{r df_ex1c,echo=-c(2,3)}
+yearly_trees <- ..
+yearly_trees <- as.data.frame(table(forest$Year.Planted))
+names(yearly_trees) <- c("Year.Planted", "Count")
+head(yearly_trees)
+```
+{ END exercise }
+
+
+
+{ BEGIN exercise }
+Depict the post-2003 tree count data on a plot
+similar to the one in Figure {@fig:df_ex1d}.
+Is there any tendency in the data?
+
+```{r df_ex1d,echo=FALSE,fig.cap="The number of trees planted in the City of Melbourne each year"}
+yearly_trees[[1]] <- as.numeric(as.character(yearly_trees[[1]]))
+plot(yearly_trees[[1]][yearly_trees[[1]]>=2003],
+     yearly_trees[[2]][yearly_trees[[1]]>=2003],
+     type="b", lty=3, xlab="Year.Planted", ylab="Count")
+```
+{ END exercise }
+
+
+
+{ BEGIN exercise }
+The City of Melbourne released the aforementioned dataset as part of
+the Open Data Platform, see https://data.melbourne.vic.gov.au.
+In your own words answer the following questions.
+
+* What are the benefits of sharing such data
+with the general public?
+* Are there any concerns?
+* What can a machine learning engineer do with them?
+{ END exercise }
+
+
+
+
+## Air Quality
+
+
+In this task, we will be working with the 2018 air quality data in the
+state of Victoria, Australia.
+Read the dataset's description in Appendix F. <!-- TODO: -->
+
+```{r df_ex2a}
+air <- read.csv("datasets/air_quality.csv.gz",
+    comment.char="#", stringsAsFactors=FALSE)
+head(air, 3)
+```
+
+
+{ BEGIN exercise }
+Create a new dataframe name `gee` that consists
+of air quality data for `Geelong South` only.
+Omit all columns but `sample_datetime`, `param_id` and `value`.
+
+```{r df_ex2b,echo=-c(1,3)}
+.. <- FALSE
+gee <- ..
+gee <- air[air$sp_name=="Geelong South",c("sample_datetime", "param_id", "value")]
+head(gee, 14)
+```
+
+```{r df_ex2c,echo=FALSE,results='hide'}
+params <- table(gee$param_id)
+colz <- c("BPM2.5", "NO2", "O3", "PM10")
+```
+{ END exercise }
+
+
+
+{ BEGIN exercise }
+There are `r length(params)` air quality parameters:
+`r paste(names(params), collapse=", ")`. However, currently the data frame
+is in the "long" format -- each measurement is represented in a separate row
+and there are many rows corresponding to the same dates.
+Convert the data frame
+to the "wide" format so as to obtain:
+
+```{r df_ex2d,echo=-(2:3)}
+gee_wide <- ..
+library("tidyr")
+gee_wide <- as.data.frame(pivot_wider(gee, names_from="param_id", values_from="value"))
+head(gee_wide, 3)
+```
+
+Missing measurements should be represented as `NA`s.
+By the way, conversion from "long" to "wide" format is also called
+"spreading" or "casting".
+{ END exercise }
+
+
+
+{ BEGIN exercise }
+Note that the `sample_datetime` column consists of ordinary strings.
+Using the `strptime()` function (see `?strptime`), convert it
+to proper date-time data:
+
+```{r df_ex2e,echo=-c(2,4)}
+class(gee_wide$sample_datetime) # before
+old <- gee_wide$sample_datetime
+gee_wide$sample_datetime <- ..
+gee_wide$sample_datetime <- strptime(old, "%d/%m/%Y %H:%M:%S")
+class(gee_wide$sample_datetime) # after
+head(gee_wide, 3)
+```
+
+{ END exercise }
+
+
+Technical note.
+
+: `POSIXlt` means "local time", a special format returned
+by `strptime()` to represent date-time information, see `?POSIXlt`.
+
+
+{ BEGIN exercise }
+Below we extract month numbers from each date and add them as a new column
+in `gee_wide` (see `?strftime`):
+
+```{r df_ex2f}
+gee_wide$month <- strftime(gee_wide$sample_datetime, "%m")
+```
+
+
+Compute the monthly averages
+of the `r length(params)` parameters.
+
+
+```{r df_ex2g,echo=-c(2,3)}
+gee_ave <- ..
+options(digits=3)
+gee_ave <- aggregate(gee_wide[2:8],
+    gee_wide[9], mean, na.rm=TRUE)
+gee_ave
+```
+{ END exercise }
+
+
+
+
+{ BEGIN exercise }
+Draw a plot of the monthly averages of
+`r paste(colz, collapse=', ')`. Add a legend by calling `legend()`,
+compare Figure {@fig:df_ex2h}.
+
+```{r df_ex2h,echo=FALSE,fig.cap="Monthly averages of the air quality parameters in Geelong, VIC, Australia"}
+matplot(gee_ave$month, as.matrix(gee_ave[c(colz)]), type="l",
+xlab="Month", ylab="Measurement", ylim=c(0,25))
+legend("bottom", ncol=4, lty=seq_along(colz), bg="white",
+    col=seq_along(colz), legend=colz)
+```
+{ END exercise }
+
+
+
+{ BEGIN exercise }
+In your own words answer the following questions.
+
+* What can be deduced from the above plot?
+* How machine learning algorithms could help different government
+bodies predict the air quality?
+* What can they do with this information?
+{ END exercise }
+
+
+
+
 
 
 ## Further Reading

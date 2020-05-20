@@ -918,7 +918,7 @@ library("gsl")
 
 
 
-## Exercises in R
+## Exercises
 
 
 

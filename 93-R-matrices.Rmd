@@ -717,12 +717,153 @@ This is exactly
 
 
 
+## Exercises
 
-<!--
 
-TODO: Add OnTrack exercises
+### Currency Exchange Rates
 
--->
+
+Let's load the dataset on historical daily AUD/NZD/GBP/PLN/... to EUR
+currency exchange rates:
+
+```{r matrix_ex1a}
+rates <- read.csv("datasets/currency_exchange_all.csv.gz",
+    comment.char="#")
+rates$Day <- as.numeric(as.Date(rates$Day)) # Convert Day to numeric
+rates <- as.matrix(rates)
+head(rates, 3)
+```
+
+The dataset originally has columns of mixed types, therefore, in order
+to represent it as a matrix, we converted `Day` to numeric.
+Here, `r as.character(min(rates[,"Day"]))` means
+`r strftime(structure(min(rates[,"Day"]), class="Date"), "%Y-%m-%d")`
+and
+`r as.character(max(rates[,"Day"]))` denotes
+`r strftime(structure(max(rates[,"Day"]), class="Date"), "%Y-%m-%d")` ---
+this is the so-called UNIX date, the number of days since 1970-01-01.
+
+
+Remark.
+
+: We will discuss how to deal with tabular data of possibly mixed column types
+in the next chapter.
+
+
+
+{ BEGIN exercise }
+Draw a plot (see `?plot`) of the AUD-to-EUR
+exchange rates between 2020-01-01 and 2020-05-10,
+i.e., between days `r as.integer(as.Date("2020-01-01"))`
+and `r as.integer(as.Date("2020-05-10"))`, respectively.
+Use the `Day` column on the x-axis.
+{ END exercise }
+
+
+Remark.
+
+: Note that the most recent exchange rate is listed in the first row of `rates`.
+
+
+{ BEGIN exercise }
+Draw a plot of the AUD-to-NZD exchange rates
+(by appropriately transforming AUD-to-EUR and NZD-to-EUD columns).
+{ END exercise }
+
+{ BEGIN exercise }
+Compute the minimal, average and maximal exchange rates
+for all the `r ncol(rates)-1` currencies in the dataset.
+{ END exercise }
+
+
+### Currency Exchange Rates Relative to 1999
+
+
+Let's get back to the dataset from the previous exercise:
+
+```{r matrix_ex2a}
+head(rates, 3)
+```
+
+{ BEGIN exercise }
+From now on, we will be only interested in the following currencies:
+AUD, CHF, GBP and USD. Remove the irrelevant columns from `rates`.
+Also, reverse the order of rows in the dataframe so that the oldest
+record is listed first.
+
+```{r matrix_ex2b,echo=-c(1,2)}
+X <- rates[, c("AUD", "CHF", "GBP", "USD")]
+X <- X[nrow(X):1,]
+```
+{ END exercise }
+
+{ BEGIN exercise }
+Create a matrix `Y` with exchange rates relative to 1999-01-04 (the first record).
+{ END exercise }
+
+Remark.
+
+:   This can be done as follows. For each currency separately, divide
+    every exchange rate by the rate found the first row.
+    For example, relative rate  of 1.25 on some day
+    means that you could buy, with the same amount of EUR,
+    25% more of the local currency on that day than on 1999-01-04.
+
+    After the transformation, first three rows in `Y` should look like:
+
+    ```{r matrix_ex2c,echo=-2}
+    # Y <- ... # to do
+    Y <- t(t(X[,])/X[1,])  # HIDDEN
+    head(round(Y, 4), 3) # rounded to 4 fractional digits
+    ```
+
+
+{ BEGIN exercise }
+If you are a foreign investor in, say, Australia,
+is it better to have the relative prices
+going up or down? What about when you are an Australian tourist
+in another country? What if you are a producer of goods
+made from imported as well as locally sourced parts/ingredients?
+Explain in your own words (consider different
+scenarios).
+{ END exercise }
+
+{ BEGIN exercise }
+Draw a single plot of the relative exchange rates, similar to the one
+in Figure {@fig:matrix_ex2d}.
+Use `legend()` to add a legend and `abline()` to draw a horizontal
+line at $y=1$.
+{ END exercise }
+
+Remark.
+
+: You can either call `plot()` and then `lines()` to add
+new curves to the existing figure
+or call `matplot()` to draw all curves all at once.
+Note that you can set the range of values on the y-axis
+by setting the `ylim` argument in `plot()` or `matplot()`.
+
+```{r matrix_ex2d,echo=FALSE,fig.height=5,fig.cap="Currency exchange rates relative to 1999-01-04 (w.r.t. EUR)"}
+matplot(rev(rates[,1]), Y, xlab="Day", ylab="Relative Exchange Rate",
+    type="l")
+legend("topleft", legend=dimnames(Y)[[2]], col=1:(ncol(Y)), lty=1:(ncol(Y)),
+bg="white")
+
+abline(h=1, col="black", lty=3)
+```
+
+{ BEGIN exercise }
+Imagine that you are asked to build a machine learning algorithm
+that predicts the exchange rate on the next day (which we in fact
+do in some other chapter).
+How would you use it to invest your money?
+
+What could happen if the algorithm was 100% accurate
+but everyone in the world had access to it?
+
+Do you think it is possible to predict the prices accurately
+based only on past exchange rates?
+{ END exercise }
 
 
 

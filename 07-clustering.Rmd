@@ -981,7 +981,7 @@ legend("topright", legend="average", bg="white")
 
 
 
-## Exercises in R
+## Exercises
 
 
 

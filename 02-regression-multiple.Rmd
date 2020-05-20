@@ -1167,7 +1167,7 @@ split will be necessary, e.g., 60-20-20\%.
 
 
 
-## Exercises in R
+## Exercises
 
 
 <!--

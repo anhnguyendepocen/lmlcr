@@ -14,14 +14,164 @@ outlier removal etc. Moreover, for some of them, the machine learning
 models studied will not be of the highest quality. That's life.
 
 
+## Air Quality
+
+Environment Protection Authority of the state of Victoria, Australia
+published the 2018 air quality data on its Open Data platform.
+Various parameters are probed at different spots on an hourly basis.
+
+`air_quality` |
+---------------------|---------------------------------------------------
+Last updated         | 22 May 2019
+Provider             | Environment Protection Authority Victoria
+License              | Creative Commons Attribution 4.0 International License
+Source               | https://discover.data.vic.gov.au/dataset/epa-air-watch-all-sites-air-quality-hourly-averages-yearly
+
+```{r datasets_air1}
+air <- read.csv("datasets/air_quality.csv.gz",
+    comment.char="#", stringsAsFactors=FALSE)
+head(air, 3)
+```
 
 
 
-TODO: update Yahoo Finance.....
+Column                       | Description
+-----------------------------|---------------------------------------------
+sample_point_id              | Integer identifier of the sample point
+sp_name                      | Sample point name (city, suburb etc.)
+latitude                     |
+longitude                    |
+sample_datetime              | Date and time of the measurement; DD/MM/YYYY HH:MM:SS local time
+time_basis_id                | Denotes whether a 1-hour or 24-hour average is provided (`r paste(unique(air$time_basis_id), collapse=", ")`)
+param_id                     | Identifier of the air quality parameter: `r paste(unique(air$param_id), collapse=", ")`
+param_name                   | Name of the parameter: `r paste(unique(air$param_name), collapse=", ")`
+value                        | Measured parameter value
+param_std_unit_of_measure    | Unit of measure
+param_short_name             | Short version of the parameter name:  `r paste(unique(air$param_short_name), collapse=", ")`
 
 
 
-## `urban_forest`
+
+
+
+
+
+## Currency Exchange Rates
+
+Statistical Data Warehouse of the European Central Bank System
+publishes currency exchange rates (relative to EUR)
+that are updated once per working day.
+
+
+`currency_exchange_all` |
+---------------------|---------------------------------------------------
+Last updated         | 19 May 2020
+Provider             | European Central Bank
+License              | Provided free of charge to enhance public access to information       about the activities of the European Central Bank System and the activities of the European System of Central Banks
+Source               | http://sdw.ecb.europa.eu/browse.do?node=9691296
+
+```{r datasets_rates}
+rates <- read.csv("datasets/currency_exchange_all.csv.gz",
+    comment.char="#", stringsAsFactors=FALSE)
+rates$Day <- as.Date(rates$Day) # convert to Date-type object
+head(rates, 2)
+range(rates$Day)
+```
+
+
+
+
+
+
+Column        | Description
+--------------|---------------------------------------------
+Day           |    YYYY-MM-DD format
+AUD           |    Australian dollar
+BGN           |    Bulgarian lev
+BRL           |    Brazilian real
+CAD           |    Canadian dollar
+CHF           |    Swiss franc
+CNY           |    Chinese yuan renminbi
+CZK           |    Czech koruna
+DKK           |    Danish krone
+GBP           |    UK pound sterling
+HKD           |    Hong Kong dollar
+HRK           |    Croatian kuna
+HUF           |    Hungarian forint
+IDR           |    Indonesian rupiah
+ILS           |    Israeli shekel
+INR           |    Indian rupee
+ISK           |    Iceland krona
+JPY           |    Japanese yen
+KRW           |    Korean won
+MXN           |    Mexican peso
+MYR           |    Malaysian ringgit
+NOK           |    Norwegian krone
+NZD           |    New Zealand dollar
+PHP           |    Philippine peso
+PLN           |    Polish zloty
+RON           |    Romanian leu
+RUB           |    Russian rouble
+SEK           |    Swedish krona
+SGD           |    Singapore dollar
+THB           |    Thai baht
+TRY           |    Turkish lira
+USD           |    US dollar
+ZAR           |    South African rand
+
+
+
+From this dataset we derive two more files:
+
+* `currency_exchange_single.csv`, which gives only the AUD/EUR rates
+    from the least to the most recent:
+
+
+    ```{r datasets_rates2,eval=FALSE}
+    write.table(rev(rates$AUD), "datasets/currency_exchange_single.csv",
+        col.names=FALSE, row.names=FALSE, quote=FALSE)
+    ```
+
+
+* `currency_exchange_diff.csv`, which gives relative daily changes
+    in the AUD/EUR rates (we use it for building example
+    exchange rates prediction algorithms):
+
+
+    ```{r datasets_rates3}
+    n <- nrow(rates)
+    pred <- rates[n:1, c("Day", "AUD")] # from oldest to newest
+    row.names(pred) <- NULL # reset the row.names attribute
+    pred$Change <- NA
+    pred$Change[2:n] <- diff(pred$AUD) # iterative difference:
+        # pred$Change[2] == pred$AUD[2]-pred$AUD[1], ...,
+        # pred$Change[n] == pred$AUD[n]-pred$AUD[n-1]
+    pred$Dir <- as.character(cut(pred$Change, c(-Inf, 0, Inf),
+        c("dec", "inc"))) # inc if Change is positive, dec otherwise
+    for (k in 1:10) {
+        name <- paste0("Lag", k)
+        pred[[name]] <- NA
+        pred[[name]][(k+1):n] <- pred$Change[1:(n-k)]
+    }
+    tail(pred)
+    ```
+
+
+    Note that `pred$Change[i]` gives by how much the exchange rate
+    changed as compared to the previous day, i.e., it is equal to
+    `pred$AUD[i]-pred$AUD[i-1]`. `Lag1` is the change from the preceding
+    working day, `Lag2` is the one from 2 working days ago, etc.
+
+
+    ```{r datasets_rates4,eval=FALSE}
+    write.csv(pred, "datasets/currency_exchange_diff.csv.gz",
+       row.names=FALSE)
+    ```
+
+
+
+
+## Urban Forest
 
 The `urban_forest` dataset gives location, species and lifespan of
 ca. 72,500 trees in Melbourne, VIC, Australia.
@@ -29,16 +179,16 @@ ca. 72,500 trees in Melbourne, VIC, Australia.
 
 `urban_forest` |
 ---------------|------------------------------------------------------------------
-Last updated   | March 10, 2020
+Last updated   | 10 March 2020
 Provider       | City of Melbourne
 License        | Creative Commons Attribution 4.0 International Public License
 Source         | https://data.melbourne.vic.gov.au/Environment/Trees-with-species-and-dimensions-Urban-Forest-/fp38-wiyy
 
 
 
-```{r}
-forest <- read.csv("datasets/urban_forest_20200310.csv.gz",
-    comment="#", stringsAsFactors=FALSE)
+```{r datasets_forest}
+forest <- read.csv("datasets/urban_forest.csv.gz",
+    comment.char="#", stringsAsFactors=FALSE)
 head(forest, 3)
 ```
 
@@ -66,5 +216,14 @@ Longitude                    |
 Easting                      | Easting Coordinate, please use MGA94-55
 Northing                     | Northing Coordinate, please use MGA94-55
 
+
+
+## Fuel Economy
+
+
+https://fueleconomy.gov/feg/download.shtml
+
+
+https://corgis-edu.github.io/corgis/csv/
 
 

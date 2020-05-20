@@ -1261,7 +1261,7 @@ $a$ and $b$ can also be rewritten as:
 
 
 
-## Exercises in R
+## Exercises
 
 ### The Anscombe Quartet
 

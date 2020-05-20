@@ -142,7 +142,7 @@ Let's open RStudio and perform the following steps:
     plot(x, y, las=1, type="l") # plots y as a function of x
     ```
 
-5.  Execute the 5 above commands, line by line,
+4.  Execute the 5 above commands, line by line,
     by positioning the keyboard cursor accordingly and
     pressing Ctrl+Enter (Cmd+Return on MacOS).
 
@@ -201,7 +201,7 @@ create a vector `x2` with elements 0, 0.1, 0.2, ..., 1.0.
 
 Remark.
 
-:  Note that in the example above, `<-` is the assignment operator.
+:  In one of the above examples, `<-` denotes the assignment operator.
    By writing `x <- ...` we create a new named object (variable) called `x`.
    Use a similar notation to create `x2`.
 

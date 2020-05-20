@@ -3,6 +3,18 @@
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 
 
+<!-- Not covered but mentioned:
+
+diff, cumsum
+
+cut
+
+
+for, while, repeat, if
+
+-->
+
+
 This chapter is a step-by-step guide to vector computations in R.
 It also explains the basic mathematical notation around vectors.
 
@@ -1368,17 +1380,80 @@ lapply(k, function(x) c(min(x), mean(x), max(x)))
 ```
 
 
-<!--
+## Exercises
 
-TODO: Add OnTrack exercises
+### AUD/EUR Exchange Rates
 
--->
+Let's load the dataset on historical daily currency exchange rates
+for Australian dollar vs. Euro between 4 January 1999 and 19 May 2020:
+
+```{r vectors_ex1a}
+x <- scan("datasets/currency_exchange_single.csv")
+head(x)
+```
+
+The dataset is described in more detail in Appendix F <!-- TODO: -->
+and is available for download from the book's homepage.
+
+{ BEGIN exercise }
+Plot the daily prices by calling
+`plot(x)`. Set the `xlab` and `ylab` arguments to `"day"`
+and `"USD to AUD"`, respectively.
+{ END exercise }
+
+{ BEGIN exercise }
+Load the `pracma` package by calling `library("pracma")`.
+If you haven't installed the package yet, call `install.packages("pracma")`
+from the R console.
+{ END exercise }
+
+{ BEGIN exercise }
+A call to `movavg(x, n)` returns the `n`-moving average of
+a numeric vector `x`. This transformation is frequently used to smoothen
+noisy data, especially time series such as the one we are dealing with here.
+Create a plot of the 5-moving average (`movavg(x, 5)`).
+{ END exercise }
+
+{ BEGIN exercise }
+Create a plot of the 5, 15 and 90-moving averages, all in a single figure.
+The `plot()` function can be used to draw the first curve,
+and then new ones can be added by calling `lines()`.
+{ END exercise }
+
+{ BEGIN exercise }
+The dataset contains missing values (`NAs`). Remove all missing
+observations before computing the moving averages and visually assess how
+this changes the corresponding figures.
+{ END exercise }
 
 
+
+{ BEGIN exercise }
+Compute the minimum, maximum, median and the arithmetic mean of `x`
+for (a) the whole series, (b) the last 30 days only,
+(c) the first 30 days only.
+{ END exercise }
+
+
+{ BEGIN exercise }
+A call to `d <- diff(x)` computes a vector of relative daily changes in exchange
+rates (`d[i] = x[i+1]-x[i]`).
+Draw the box and whisker plot and histogram
+by calling `boxplot(d)` and `hist(d)`, respectively.
+In your own words, explain what information
+can be read from these figures.
+{ END exercise }
+
+{ BEGIN exercise }
+Perform a similar data analysis for the EUR/AUD rates.
+{ END exercise }
 
 
 ## Further Reading
 
+
+Remember to read about all the functions mentioned in this chapter
+in their respective manual pages, e.g., `?seq`, `?c` etc.
 
 Recommended further reading: [@Rintro]
 
