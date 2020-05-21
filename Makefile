@@ -80,6 +80,9 @@ md: figures $(TMP_MD)
 latex: $(TMP_LATEX)
 	build/render_latex.sh
 
+latex-draft: $(TMP_LATEX)
+	LATEX_DRAFT=1 build/render_latex.sh
+
 gitbook: $(TMP_GITBOOK)
 	build/render_gitbook.sh
 

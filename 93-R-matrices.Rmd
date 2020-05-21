@@ -823,7 +823,6 @@ Remark.
     tail(round(Y, 4), 2)
     ```
 
-
 { BEGIN exercise }
 Explain in your own words (consider different scenarios):
 
