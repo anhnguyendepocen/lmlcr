@@ -507,7 +507,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li style='font-size: smaller' ><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Licensed under CC BY-NC-ND 4.0</a></li>
-<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-05-20 23:23 (2a8352d)</a></li>
+<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-05-21 11:01 (aa6b778)</a></li>
 
 </ul>
 
@@ -1212,7 +1212,7 @@ This allows for an easy access to
 <h2><span class="header-section-number">D.4</span> Exercises</h2>
 <div id="currency-exchange-rates" class="section level3">
 <h3><span class="header-section-number">D.4.1</span> Currency Exchange Rates</h3>
-<p>Let’s load the dataset on historical daily AUD/NZD/GBP/PLN/… to EUR
+<p>Let’s load the dataset on historical daily EUR to AUD/NZD/GBP/PLN/etc.
 currency exchange rates:</p>
 <div class="sourceCode" id="cb1364"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1364-1" title="1">rates &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/currency_exchange_all.csv.gz&quot;</span>,</a>
 <a class="sourceLine" id="cb1364-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
@@ -1250,7 +1250,7 @@ in the next chapter.</p>
 </dd>
 </dl>
 <div class="exercise"><strong>Exercise.</strong>
-<p>Draw a plot (see <code>?plot</code>) of the AUD-to-EUR
+<p>Draw a plot (see <code>?plot</code>) of EUR/AUD
 exchange rates between 2020-01-01 and 2020-05-10,
 i.e., between days 18262
 and 18392, respectively.
@@ -1262,8 +1262,8 @@ Use the <code>Day</code> column on the x-axis.</p>
 </dd>
 </dl>
 <div class="exercise"><strong>Exercise.</strong>
-<p>Draw a plot of the AUD-to-NZD exchange rates
-(by appropriately transforming AUD-to-EUR and NZD-to-EUD columns).</p>
+<p>Draw a plot of the NZD/AUD exchange rates
+(by appropriately transforming EUR/AUD and EUD/NZD columns).</p>
 </div>
 <div class="exercise"><strong>Exercise.</strong>
 <p>Compute the minimal, average and maximal exchange rates
@@ -1301,28 +1301,37 @@ record is listed first.</p>
 </div>
 <dl>
 <dt>Remark.</dt>
-<dd><p>This can be done as follows. For each currency separately, divide
+<dd><p>To do the above, for each currency separately, divide
 every exchange rate by the rate found the first row.
-For example, relative rate of 1.25 on some day
-means that you could buy, with the same amount of EUR,
-25% more of the local currency on that day than on 1999-01-04.</p>
-<p>After the transformation, first three rows in <code>Y</code> should look like:</p>
+For example, relative rate of EUR/GBP equal to
+ca. 1.26
+on the last day means that you could buy, with the same amount of EUR,
+26% more of pounds
+on 2020-05-19
+(where 1 EUR = 0.89535 GBP)
+than on 1999-01-04
+(where 1 EUR = 0.7111 GBP).</p>
+<p>After the transformation, the first and the last two rows in <code>Y</code> should look like:</p>
 <div class="sourceCode" id="cb1368"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1368-1" title="1"><span class="co"># Y &lt;- ... # to do</span></a>
-<a class="sourceLine" id="cb1368-2" title="2"><span class="kw">head</span>(<span class="kw">round</span>(Y, <span class="dv">4</span>), <span class="dv">3</span>) <span class="co"># rounded to 4 fractional digits</span></a></code></pre></div>
+<a class="sourceLine" id="cb1368-2" title="2"><span class="kw">head</span>(<span class="kw">round</span>(Y, <span class="dv">4</span>), <span class="dv">2</span>) <span class="co"># rounded to 4 fractional digits</span></a></code></pre></div>
 <pre><code>##         AUD    CHF    GBP    USD
 ## [1,] 1.0000 1.0000 1.0000 1.0000
-## [2,] 0.9918 0.9972 1.0015 1.0001
-## [3,] 0.9853 0.9968 0.9951 0.9961</code></pre>
+## [2,] 0.9918 0.9972 1.0015 1.0001</code></pre>
+<div class="sourceCode" id="cb1370"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1370-1" title="1"><span class="kw">tail</span>(<span class="kw">round</span>(Y, <span class="dv">4</span>), <span class="dv">2</span>)</a></code></pre></div>
+<pre><code>##            AUD    CHF    GBP    USD
+## [5532,] 0.8762 0.6507 1.2537 0.9188
+## [5533,] 0.8770 0.6577 1.2591 0.9288</code></pre>
 </dd>
 </dl>
 <div class="exercise"><strong>Exercise.</strong>
-<p>If you are a foreign investor in, say, Australia,
-is it better to have the relative prices
-going up or down? What about when you are an Australian tourist
-in another country? What if you are a producer of goods
-made from imported as well as locally sourced parts/ingredients?
-Explain in your own words (consider different
-scenarios).</p>
+<p>Explain in your own words (consider different scenarios):</p>
+<ul>
+<li>If you were a German investor in Scotland
+would it be better to have the relative EUR/GBP exchange rates going up or down?</li>
+<li>What if you were a Welsh tourist in Estonia?</li>
+<li>What if you were a producer of goods made from imported as well as
+locally sourced parts/ingredients?</li>
+</ul>
 </div>
 <div class="exercise"><strong>Exercise.</strong>
 <p>Draw a single plot of the relative exchange rates, similar to the one
@@ -1340,8 +1349,8 @@ by setting the <code>ylim</code> argument in <code>plot()</code> or <code>matplo
 </dd>
 </dl>
 <div class="figure">
-<img src="93-R-matrices-figures/matrix_ex2d-1.svg" alt="Figure 2: Currency exchange rates relative to 1999-01-04 (w.r.t. EUR)" id="fig:matrix_ex2d" />
-<p class="caption">Figure 2: Currency exchange rates relative to 1999-01-04 (w.r.t. EUR)</p>
+<img src="93-R-matrices-figures/matrix_ex2d-1.svg" alt="Figure 2: Currency exchange rates relative to 1999-01-04 (with EUR as the base currency)" id="fig:matrix_ex2d" />
+<p class="caption">Figure 2: Currency exchange rates relative to 1999-01-04 (with EUR as the base currency)</p>
 </div>
 <div class="exercise"><strong>Exercise.</strong>
 <p>Imagine that you are asked to build a machine learning algorithm

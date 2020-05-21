@@ -59,8 +59,18 @@ param_short_name             | Short version of the parameter name:  `r paste(un
 ## Currency Exchange Rates
 
 Statistical Data Warehouse of the European Central Bank System
-publishes currency exchange rates (relative to EUR)
+publishes currency exchange rates (quoted against EUR)
 that are updated once per working day.
+
+The column names give the traditional ISO 4217 currency designators
+(see Table below), for instance JPY stands for the Japanese (JP)
+yen.
+
+In each column like YYY, the quotation (EUR/YYY) is listed,
+giving the price of the Euro (here: the base currency)
+expressed in the YYY (counter/quote) currency,
+e.g., the value of 118.0 in JPY means that 1 euro = 118 yens.
+
 
 
 `currency_exchange_all` |
@@ -85,7 +95,7 @@ range(rates$Day)
 
 Column        | Description
 --------------|---------------------------------------------
-Day           |    YYYY-MM-DD format
+Day           |    Date in YYYY-MM-DD format, ordered decreasingly
 AUD           |    Australian dollar
 BGN           |    Bulgarian lev
 BRL           |    Brazilian real
@@ -123,7 +133,7 @@ ZAR           |    South African rand
 
 From this dataset we derive two more files:
 
-* `currency_exchange_single.csv`, which gives only the AUD/EUR rates
+* `currency_exchange_single.csv`, which gives only the EUR/AUD rates
     from the least to the most recent:
 
 
@@ -134,7 +144,7 @@ From this dataset we derive two more files:
 
 
 * `currency_exchange_diff.csv`, which gives relative daily changes
-    in the AUD/EUR rates (we use it for building example
+    in the EUR/AUD rates (we use it for building example
     exchange rates prediction algorithms):
 
 

@@ -507,7 +507,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li style='font-size: smaller' ><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Licensed under CC BY-NC-ND 4.0</a></li>
-<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-05-20 23:23 (2a8352d)</a></li>
+<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-05-21 11:01 (aa6b778)</a></li>
 
 </ul>
 
@@ -573,9 +573,9 @@ Various parameters are probed at different spots on an hourly basis.</p>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb1476"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1476-1" title="1">air &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/air_quality.csv.gz&quot;</span>,</a>
-<a class="sourceLine" id="cb1476-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb1476-3" title="3"><span class="kw">head</span>(air, <span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1478"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1478-1" title="1">air &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/air_quality.csv.gz&quot;</span>,</a>
+<a class="sourceLine" id="cb1478-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb1478-3" title="3"><span class="kw">head</span>(air, <span class="dv">3</span>)</a></code></pre></div>
 <pre><code>##   sample_point_id    sp_name latitude longitude     sample_datetime
 ## 1           10001 Alphington  -37.778    145.03 01/01/2018 00:00:00
 ## 2           10001 Alphington  -37.778    145.03 01/01/2018 00:00:00
@@ -650,8 +650,15 @@ Various parameters are probed at different spots on an hourly basis.</p>
 <div id="currency-exchange-rates-1" class="section level2">
 <h2><span class="header-section-number">F.2</span> Currency Exchange Rates</h2>
 <p>Statistical Data Warehouse of the European Central Bank System
-publishes currency exchange rates (relative to EUR)
+publishes currency exchange rates (quoted against EUR)
 that are updated once per working day.</p>
+<p>The column names give the traditional ISO 4217 currency designators
+(see Table below), for instance JPY stands for the Japanese (JP)
+yen.</p>
+<p>In each column like YYY, the quotation (EUR/YYY) is listed,
+giving the price of the Euro (here: the base currency)
+expressed in the YYY (counter/quote) currency,
+e.g., the value of 118.0 in JPY means that 1 euro = 118 yens.</p>
 <table>
 <colgroup>
 <col width="29%" />
@@ -682,10 +689,10 @@ that are updated once per working day.</p>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb1478"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1478-1" title="1">rates &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/currency_exchange_all.csv.gz&quot;</span>,</a>
-<a class="sourceLine" id="cb1478-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb1478-3" title="3">rates<span class="op">$</span>Day &lt;-<span class="st"> </span><span class="kw">as.Date</span>(rates<span class="op">$</span>Day) <span class="co"># convert to Date-type object</span></a>
-<a class="sourceLine" id="cb1478-4" title="4"><span class="kw">head</span>(rates, <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1480"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1480-1" title="1">rates &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/currency_exchange_all.csv.gz&quot;</span>,</a>
+<a class="sourceLine" id="cb1480-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb1480-3" title="3">rates<span class="op">$</span>Day &lt;-<span class="st"> </span><span class="kw">as.Date</span>(rates<span class="op">$</span>Day) <span class="co"># convert to Date-type object</span></a>
+<a class="sourceLine" id="cb1480-4" title="4"><span class="kw">head</span>(rates, <span class="dv">2</span>)</a></code></pre></div>
 <pre><code>##          Day    AUD    BGN    BRL    CAD    CHF    CNY   CZK    DKK
 ## 1 2020-05-19 1.6751 1.9558 6.2357 1.5251 1.0633 7.7816 27.49 7.4562
 ## 2 2020-05-18 1.6736 1.9558 6.2701 1.5202 1.0521 7.7068 27.61 7.4548
@@ -698,7 +705,7 @@ that are updated once per working day.</p>
 ##      THB    TRY    USD    ZAR
 ## 1 34.947 7.4448 1.0950 19.965
 ## 2 34.684 7.4276 1.0832 19.891</code></pre>
-<div class="sourceCode" id="cb1480"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1480-1" title="1"><span class="kw">range</span>(rates<span class="op">$</span>Day)</a></code></pre></div>
+<div class="sourceCode" id="cb1482"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1482-1" title="1"><span class="kw">range</span>(rates<span class="op">$</span>Day)</a></code></pre></div>
 <pre><code>## [1] &quot;1999-01-04&quot; &quot;2020-05-19&quot;</code></pre>
 <table>
 <thead>
@@ -710,7 +717,7 @@ that are updated once per working day.</p>
 <tbody>
 <tr class="odd">
 <td>Day</td>
-<td>YYYY-MM-DD format</td>
+<td>Date in YYYY-MM-DD format, ordered decreasingly</td>
 </tr>
 <tr class="even">
 <td>AUD</td>
@@ -844,28 +851,28 @@ that are updated once per working day.</p>
 </table>
 <p>From this dataset we derive two more files:</p>
 <ul>
-<li><p><code>currency_exchange_single.csv</code>, which gives only the AUD/EUR rates
+<li><p><code>currency_exchange_single.csv</code>, which gives only the EUR/AUD rates
 from the least to the most recent:</p>
-<div class="sourceCode" id="cb1482"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1482-1" title="1"><span class="kw">write.table</span>(<span class="kw">rev</span>(rates<span class="op">$</span>AUD), <span class="st">&quot;datasets/currency_exchange_single.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb1482-2" title="2">    <span class="dt">col.names=</span><span class="ot">FALSE</span>, <span class="dt">row.names=</span><span class="ot">FALSE</span>, <span class="dt">quote=</span><span class="ot">FALSE</span>)</a></code></pre></div></li>
+<div class="sourceCode" id="cb1484"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1484-1" title="1"><span class="kw">write.table</span>(<span class="kw">rev</span>(rates<span class="op">$</span>AUD), <span class="st">&quot;datasets/currency_exchange_single.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb1484-2" title="2">    <span class="dt">col.names=</span><span class="ot">FALSE</span>, <span class="dt">row.names=</span><span class="ot">FALSE</span>, <span class="dt">quote=</span><span class="ot">FALSE</span>)</a></code></pre></div></li>
 <li><p><code>currency_exchange_diff.csv</code>, which gives relative daily changes
-in the AUD/EUR rates (we use it for building example
+in the EUR/AUD rates (we use it for building example
 exchange rates prediction algorithms):</p>
-<div class="sourceCode" id="cb1483"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1483-1" title="1">n &lt;-<span class="st"> </span><span class="kw">nrow</span>(rates)</a>
-<a class="sourceLine" id="cb1483-2" title="2">pred &lt;-<span class="st"> </span>rates[n<span class="op">:</span><span class="dv">1</span>, <span class="kw">c</span>(<span class="st">&quot;Day&quot;</span>, <span class="st">&quot;AUD&quot;</span>)] <span class="co"># from oldest to newest</span></a>
-<a class="sourceLine" id="cb1483-3" title="3"><span class="kw">row.names</span>(pred) &lt;-<span class="st"> </span><span class="ot">NULL</span> <span class="co"># reset the row.names attribute</span></a>
-<a class="sourceLine" id="cb1483-4" title="4">pred<span class="op">$</span>Change &lt;-<span class="st"> </span><span class="ot">NA</span></a>
-<a class="sourceLine" id="cb1483-5" title="5">pred<span class="op">$</span>Change[<span class="dv">2</span><span class="op">:</span>n] &lt;-<span class="st"> </span><span class="kw">diff</span>(pred<span class="op">$</span>AUD) <span class="co"># iterative difference:</span></a>
-<a class="sourceLine" id="cb1483-6" title="6">    <span class="co"># pred$Change[2] == pred$AUD[2]-pred$AUD[1], ...,</span></a>
-<a class="sourceLine" id="cb1483-7" title="7">    <span class="co"># pred$Change[n] == pred$AUD[n]-pred$AUD[n-1]</span></a>
-<a class="sourceLine" id="cb1483-8" title="8">pred<span class="op">$</span>Dir &lt;-<span class="st"> </span><span class="kw">as.character</span>(<span class="kw">cut</span>(pred<span class="op">$</span>Change, <span class="kw">c</span>(<span class="op">-</span><span class="ot">Inf</span>, <span class="dv">0</span>, <span class="ot">Inf</span>),</a>
-<a class="sourceLine" id="cb1483-9" title="9">    <span class="kw">c</span>(<span class="st">&quot;dec&quot;</span>, <span class="st">&quot;inc&quot;</span>))) <span class="co"># inc if Change is positive, dec otherwise</span></a>
-<a class="sourceLine" id="cb1483-10" title="10"><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) {</a>
-<a class="sourceLine" id="cb1483-11" title="11">    name &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Lag&quot;</span>, k)</a>
-<a class="sourceLine" id="cb1483-12" title="12">    pred[[name]] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
-<a class="sourceLine" id="cb1483-13" title="13">    pred[[name]][(k<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span>n] &lt;-<span class="st"> </span>pred<span class="op">$</span>Change[<span class="dv">1</span><span class="op">:</span>(n<span class="op">-</span>k)]</a>
-<a class="sourceLine" id="cb1483-14" title="14">}</a>
-<a class="sourceLine" id="cb1483-15" title="15"><span class="kw">tail</span>(pred)</a></code></pre></div>
+<div class="sourceCode" id="cb1485"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1485-1" title="1">n &lt;-<span class="st"> </span><span class="kw">nrow</span>(rates)</a>
+<a class="sourceLine" id="cb1485-2" title="2">pred &lt;-<span class="st"> </span>rates[n<span class="op">:</span><span class="dv">1</span>, <span class="kw">c</span>(<span class="st">&quot;Day&quot;</span>, <span class="st">&quot;AUD&quot;</span>)] <span class="co"># from oldest to newest</span></a>
+<a class="sourceLine" id="cb1485-3" title="3"><span class="kw">row.names</span>(pred) &lt;-<span class="st"> </span><span class="ot">NULL</span> <span class="co"># reset the row.names attribute</span></a>
+<a class="sourceLine" id="cb1485-4" title="4">pred<span class="op">$</span>Change &lt;-<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb1485-5" title="5">pred<span class="op">$</span>Change[<span class="dv">2</span><span class="op">:</span>n] &lt;-<span class="st"> </span><span class="kw">diff</span>(pred<span class="op">$</span>AUD) <span class="co"># iterative difference:</span></a>
+<a class="sourceLine" id="cb1485-6" title="6">    <span class="co"># pred$Change[2] == pred$AUD[2]-pred$AUD[1], ...,</span></a>
+<a class="sourceLine" id="cb1485-7" title="7">    <span class="co"># pred$Change[n] == pred$AUD[n]-pred$AUD[n-1]</span></a>
+<a class="sourceLine" id="cb1485-8" title="8">pred<span class="op">$</span>Dir &lt;-<span class="st"> </span><span class="kw">as.character</span>(<span class="kw">cut</span>(pred<span class="op">$</span>Change, <span class="kw">c</span>(<span class="op">-</span><span class="ot">Inf</span>, <span class="dv">0</span>, <span class="ot">Inf</span>),</a>
+<a class="sourceLine" id="cb1485-9" title="9">    <span class="kw">c</span>(<span class="st">&quot;dec&quot;</span>, <span class="st">&quot;inc&quot;</span>))) <span class="co"># inc if Change is positive, dec otherwise</span></a>
+<a class="sourceLine" id="cb1485-10" title="10"><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) {</a>
+<a class="sourceLine" id="cb1485-11" title="11">    name &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Lag&quot;</span>, k)</a>
+<a class="sourceLine" id="cb1485-12" title="12">    pred[[name]] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb1485-13" title="13">    pred[[name]][(k<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span>n] &lt;-<span class="st"> </span>pred<span class="op">$</span>Change[<span class="dv">1</span><span class="op">:</span>(n<span class="op">-</span>k)]</a>
+<a class="sourceLine" id="cb1485-14" title="14">}</a>
+<a class="sourceLine" id="cb1485-15" title="15"><span class="kw">tail</span>(pred)</a></code></pre></div>
 <pre><code>##             Day    AUD  Change Dir    Lag1    Lag2    Lag3    Lag4
 ## 5528 2020-05-12 1.6625 -0.0084 dec  0.0096 -0.0091 -0.0342  0.0221
 ## 5529 2020-05-13 1.6687  0.0062 inc -0.0084  0.0096 -0.0091 -0.0342
@@ -884,8 +891,8 @@ exchange rates prediction algorithms):</p>
 changed as compared to the previous day, i.e., it is equal to
 <code>pred$AUD[i]-pred$AUD[i-1]</code>. <code>Lag1</code> is the change from the preceding
 working day, <code>Lag2</code> is the one from 2 working days ago, etc.</p>
-<div class="sourceCode" id="cb1485"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1485-1" title="1"><span class="kw">write.csv</span>(pred, <span class="st">&quot;datasets/currency_exchange_diff.csv.gz&quot;</span>,</a>
-<a class="sourceLine" id="cb1485-2" title="2">   <span class="dt">row.names=</span><span class="ot">FALSE</span>)</a></code></pre></div></li>
+<div class="sourceCode" id="cb1487"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1487-1" title="1"><span class="kw">write.csv</span>(pred, <span class="st">&quot;datasets/currency_exchange_diff.csv.gz&quot;</span>,</a>
+<a class="sourceLine" id="cb1487-2" title="2">   <span class="dt">row.names=</span><span class="ot">FALSE</span>)</a></code></pre></div></li>
 </ul>
 </div>
 <div id="urban-forest-1" class="section level2">
@@ -922,9 +929,9 @@ ca. 72,500 trees in Melbourne, VIC, Australia.</p>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb1486"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1486-1" title="1">forest &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/urban_forest.csv.gz&quot;</span>,</a>
-<a class="sourceLine" id="cb1486-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb1486-3" title="3"><span class="kw">head</span>(forest, <span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1488"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1488-1" title="1">forest &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/urban_forest.csv.gz&quot;</span>,</a>
+<a class="sourceLine" id="cb1488-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb1488-3" title="3"><span class="kw">head</span>(forest, <span class="dv">3</span>)</a></code></pre></div>
 <pre><code>##    CoM.ID   Common.Name          Scientific.Name      Genus    Family
 ## 1 1036574   English Elm            Ulmus procera      Ulmus  Ulmaceae
 ## 2 1052946       Red Box  Eucalyptus polyanthemos Eucalyptus Myrtaceae
@@ -1040,6 +1047,9 @@ ca. 72,500 trees in Melbourne, VIC, Australia.</p>
 <h2><span class="header-section-number">F.4</span> Fuel Economy</h2>
 <p><a href="https://fueleconomy.gov/feg/download.shtml" class="uri">https://fueleconomy.gov/feg/download.shtml</a></p>
 <p><a href="https://corgis-edu.github.io/corgis/csv/" class="uri">https://corgis-edu.github.io/corgis/csv/</a></p>
+<p><a href="https://corgis-edu.github.io/corgis/csv/food/" class="uri">https://corgis-edu.github.io/corgis/csv/food/</a></p>
+<p><a href="https://corgis-edu.github.io/corgis/csv/health/" class="uri">https://corgis-edu.github.io/corgis/csv/health/</a></p>
+<p><a href="https://corgis-edu.github.io/corgis/csv/drugs/" class="uri">https://corgis-edu.github.io/corgis/csv/drugs/</a></p>
 
 </div>
 </div>

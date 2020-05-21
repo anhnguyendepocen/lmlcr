@@ -723,7 +723,7 @@ This is exactly
 ### Currency Exchange Rates
 
 
-Let's load the dataset on historical daily AUD/NZD/GBP/PLN/... to EUR
+Let's load the dataset on historical daily EUR to AUD/NZD/GBP/PLN/etc.
 currency exchange rates:
 
 ```{r matrix_ex1a}
@@ -752,7 +752,7 @@ in the next chapter.
 
 
 { BEGIN exercise }
-Draw a plot (see `?plot`) of the AUD-to-EUR
+Draw a plot (see `?plot`) of EUR/AUD
 exchange rates between 2020-01-01 and 2020-05-10,
 i.e., between days `r as.integer(as.Date("2020-01-01"))`
 and `r as.integer(as.Date("2020-05-10"))`, respectively.
@@ -766,8 +766,8 @@ Remark.
 
 
 { BEGIN exercise }
-Draw a plot of the AUD-to-NZD exchange rates
-(by appropriately transforming AUD-to-EUR and NZD-to-EUD columns).
+Draw a plot of the NZD/AUD exchange rates
+(by appropriately transforming EUR/AUD and EUD/NZD columns).
 { END exercise }
 
 { BEGIN exercise }
@@ -803,29 +803,35 @@ Create a matrix `Y` with exchange rates relative to 1999-01-04 (the first record
 
 Remark.
 
-:   This can be done as follows. For each currency separately, divide
+:   To do the above, for each currency separately, divide
     every exchange rate by the rate found the first row.
-    For example, relative rate  of 1.25 on some day
-    means that you could buy, with the same amount of EUR,
-    25% more of the local currency on that day than on 1999-01-04.
+    For example, relative rate  of EUR/GBP equal to
+    ca. `r round(X[nrow(X),"GBP"]/X[1,"GBP"], 2)`
+    on the last day means that you could buy, with the same amount of EUR,
+    `r round(100*X[nrow(X),"GBP"]/X[1,"GBP"])-100`% more of pounds
+    on 2020-05-19
+    (where 1 EUR = `r X[nrow(X),"GBP"]` GBP)
+    than on 1999-01-04
+    (where 1 EUR = `r X[1,"GBP"]` GBP).
 
-    After the transformation, first three rows in `Y` should look like:
+    After the transformation, the first and the last two rows in `Y` should look like:
 
     ```{r matrix_ex2c,echo=-2}
     # Y <- ... # to do
     Y <- t(t(X[,])/X[1,])  # HIDDEN
-    head(round(Y, 4), 3) # rounded to 4 fractional digits
+    head(round(Y, 4), 2) # rounded to 4 fractional digits
+    tail(round(Y, 4), 2)
     ```
 
 
 { BEGIN exercise }
-If you are a foreign investor in, say, Australia,
-is it better to have the relative prices
-going up or down? What about when you are an Australian tourist
-in another country? What if you are a producer of goods
-made from imported as well as locally sourced parts/ingredients?
-Explain in your own words (consider different
-scenarios).
+Explain in your own words (consider different scenarios):
+
+* If you were a German investor in Scotland
+would it be better to have the relative EUR/GBP exchange rates going up or down?
+* What if  you were a Welsh tourist in Estonia?
+* What if you were a producer of goods made from imported as well as
+locally sourced parts/ingredients?
 { END exercise }
 
 { BEGIN exercise }
@@ -843,10 +849,10 @@ or call `matplot()` to draw all curves all at once.
 Note that you can set the range of values on the y-axis
 by setting the `ylim` argument in `plot()` or `matplot()`.
 
-```{r matrix_ex2d,echo=FALSE,fig.height=5,fig.cap="Currency exchange rates relative to 1999-01-04 (w.r.t. EUR)"}
+```{r matrix_ex2d,echo=FALSE,fig.height=5,fig.cap="Currency exchange rates relative to 1999-01-04 (with EUR as the base currency)"}
 matplot(rev(rates[,1]), Y, xlab="Day", ylab="Relative Exchange Rate",
     type="l")
-legend("topleft", legend=dimnames(Y)[[2]], col=1:(ncol(Y)), lty=1:(ncol(Y)),
+legend("topleft", legend=paste0("EUR/", dimnames(Y)[[2]]), col=1:(ncol(Y)), lty=1:(ncol(Y)),
 bg="white")
 
 abline(h=1, col="black", lty=3)
