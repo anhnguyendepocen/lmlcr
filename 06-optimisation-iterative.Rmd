@@ -25,8 +25,217 @@ fitting (`glm()`) function in R
 For multiclass logistic regression, we usually use the
 gradient descent or higher-order methods like the ones available in `optim()`.
 
--->
 
+
+
+linear regression / MSE + regularisation with keras???
+
+linear regression / MSE + regularisation with optim???
+
+keras --- this is hopeless!!!!!!
+
+edstats <- read.csv("edstats_2019_wide.csv", comment.char="#",
+    stringsAsFactors=FALSE)
+edstats$girls_rule_maths <-
+    factor(as.numeric(
+        edstats$LO.PISA.MAT.FE>edstats$LO.PISA.MAT.MA
+    ))
+edstats_subset <- edstats[!(names(edstats) %in%
+    c("CountryName", "LO.PISA.MAT.FE", "LO.PISA.MAT.MA"))]
+XY <- na.omit(edstats[c("girls_rule_maths",
+    "LO.PISA.REA", "LO.PISA.REA.FE", "LO.PISA.REA.MA",
+    "LO.PISA.SCI", "LO.PISA.SCI.FE", "LO.PISA.SCI.MA")])
+XY <- na.omit(edstats[c("girls_rule_maths",
+    "LO.PISA.REA.MA",    "LO.PISA.SCI")])
+Y <- as.numeric(as.character(XY[,1]))
+X <- structure(as.matrix(XY[,-1]), dimnames=NULL)
+reticulate::use_python("/opt/anaconda3/bin/python")
+library("keras")
+model <- keras_model_sequential()
+layer_dense(model, units=1, activation="sigmoid", kernel_regularizer=regularizer_l2(1))
+compile(model, optimizer="adam", loss="binary_crossentropy")
+fit(model, X, Y, epochs=10000, batch_size=nrow(X), shuffle=FALSE)
+Y_pred <- (predict(model, X)>0.5)
+get_metrics(Y_pred, Y)
+model$get_weights()
+
+
+
+cross-entropy for binary logistic regression:
+
+\[
+E(\boldsymbol\beta) =
+\frac{1}{n}
+\sum_{i=1}^n \left(
+(1-y_i)\left(\beta_0 \dot{x}_{i,0} +\dots+\beta_p \dot{x}_{i,p}\right)
++\log \left(1+e^{-(\beta_0\dot{x}_{i,0} +\dots+\beta_p \dot{x}_{i,p})}\right)
+\right).
+\]
+
+
+gradient:
+
+\[
+\frac{\partial E}{\partial \beta_a} (\boldsymbol\beta) =
+\frac{1}{n}
+\sum_{i=1}^n \dot{x}_{i,a} \left(
+1-y_i -
+\frac{ e^{-(\beta_0\dot{x}_{i,0} +\dots+\beta_p \dot{x}_{i,p})} }{ 1+e^{-(\beta_0\dot{x}_{i,0} +\dots+\beta_p \dot{x}_{i,p})} }
+\right)
+\]
+
+that's `fermi_dirac_m1` out there!
+
+
+
+
+
+
+
+regularised binomial logistic regression with optim()::
+
+
+standardise variables????
+
+
+
+edstats <- read.csv("edstats_2019_wide.csv", comment.char="#",
+    stringsAsFactors=FALSE)
+edstats$girls_rule_maths <-
+    factor(as.numeric(
+        edstats$LO.PISA.MAT.FE>edstats$LO.PISA.MAT.MA
+    ))
+edstats_subset <- edstats[!(names(edstats) %in%
+    c("CountryName", "LO.PISA.MAT.FE", "LO.PISA.MAT.MA"))]
+logi_pred <- function(B, X, Y) {
+    1/(1+exp(-(X%*%as.matrix(B))))
+}
+obj <- list(
+    function(B, X, Y, lambda=0.1) {
+        Y_pred <- logi_pred(B, X, Y)
+        log_prob <- numeric(length(Y_pred))
+        log_prob[Y == 1] <- log(  Y_pred[Y == 1])
+        log_prob[Y != 1] <- log(1-Y_pred[Y != 1])
+        -mean(log_prob)+lambda*sum(abs(B[-1])^2)/2
+    },
+    function(B, X, Y, lambda=0.1) {
+        lincomb <- X%*%as.matrix(B)
+        mean((1-Y)*lincomb+log1p(exp(-lincomb))) + lambda*sum(B[-1]^2)/2
+    },
+    function(B, X, Y, lambda=0.1) {
+        lincomb <- X%*%as.matrix(B)
+        mean((1-Y)*lincomb+gsl::fermi_dirac_0(-lincomb)) + lambda*sum(B[-1]^2)/2
+    }
+)[[3]]
+
+gobj <- function(B, X, Y, lambda=0.1) {
+    lincomb <- X%*%as.matrix(B)
+    errzero <- 1-Y-gsl::fermi_dirac_m1(-lincomb)
+    crossprod(X,errzero)/nrow(X) + 2*lambda*c(0, B[-1])/2
+}
+#u <- 1/colMeans(X)
+#l <- 0.01
+#numDeriv::grad(obj, x=u, X=X, Y=Y, lambda=l)-gobj(u, X=X, Y=Y, lambda=l)
+
+XY <- na.omit(edstats[c("girls_rule_maths",
+    "LO.PISA.REA.MA",    "LO.PISA.SCI")])
+Y <- as.numeric(as.character(XY[,1]))
+X <- cbind(1, structure(as.matrix(XY[,-1]), dimnames=NULL))
+obj(c(3.09273,-0.08816,0.07552), X, Y, lambda=0.0)
+
+XY <- na.omit(edstats[c("girls_rule_maths",
+    "LO.PISA.REA", "LO.PISA.REA.FE", "LO.PISA.REA.MA",
+    "LO.PISA.SCI", "LO.PISA.SCI.FE", "LO.PISA.SCI.MA")])
+Y <- as.numeric(as.character(XY[,1]))
+X <- cbind(1, structure(as.matrix(XY[,-1]), dimnames=NULL))
+obj(c( -2.2649, 1.2682, -0.5439, -0.7335,  1.2686, -0.1575, -1.1121), X, Y, lambda=0.0)
+
+means <- apply(X[,-1], 2, mean) # column means
+sds   <- apply(X[,-1], 2, sd)   # column standard deviations
+Xs <- X
+Xs[,-1] <- t(apply(X[,-1], 1, function(r) (r-means)/sds))
+
+lambda <- 0.00001
+
+par0 <- rnorm(ncol(Xs), 0, 0.1)
+res <- optim(par0, obj, gobj, X=Xs, Y=Y, lambda=lambda,
+    method="BFGS",
+    control=list(reltol=1e-12, maxit=10000, factr=1e-12))
+str(res)
+print(round(res$par, 5))
+obj(res$par, Xs, Y, lambda=lambda)
+obj(res$par, Xs, Y, lambda=0.0)
+
+
+library("glmnet")
+# alpha=0==ridge alpha=1==lasso
+f <- glmnet(Xs[,-1], Y, family="binomial", alpha=0, lambda=lambda)
+(pars <- structure(as.matrix(t(coefficients(f))), dimnames=NULL))
+apply(pars, 1, function(B) obj(B, Xs, Y, lambda=lambda))
+apply(pars, 1, function(B) obj(B, Xs, Y, lambda=0.0))
+
+
+library("glmnet")
+# alpha=0==ridge alpha=1==lasso
+f <- glmnet(Xs[,-c(1,3,6)], Y, family="binomial", alpha=1, lambda=0.001)
+(pars <- structure(as.matrix(t(coefficients(f))), dimnames=NULL))
+apply(pars, 1, function(B) obj(B, Xs[,-c(3,6)], Y, lambda=lambda))
+apply(pars, 1, function(B) obj(B, Xs[,-c(3,6)], Y, lambda=0.0))
+
+
+cor(X)
+
+
+
+
+
+
+edstats <- read.csv("edstats_2019_wide.csv", comment.char="#",
+    stringsAsFactors=FALSE)
+edstats$girls_rule_maths <-
+    factor(as.numeric(
+        edstats$LO.PISA.MAT.FE>edstats$LO.PISA.MAT.MA
+    ))
+edstats_subset <- edstats[!(names(edstats) %in%
+    c("CountryName", "LO.PISA.MAT.FE", "LO.PISA.MAT.MA"))]
+
+edstats_subset <- edstats_subset[!is.na(edstats_subset$girls_rule_maths),]
+edstats_subset <- edstats_subset[,colSums(sapply(edstats_subset, is.na))==0]
+
+# edstats2 <- edstats_subset[!is.na(edstats_subset$girls_rule_maths),]
+# edstats2 <- edstats2[,colMeans(sapply(edstats2, is.na))==0]
+#
+# vars_cur  <- which(names(edstats2) == "girls_rule_maths")
+# vars_todo <- which(names(edstats2) != "girls_rule_maths")
+#
+# f_best <- NULL
+# aic_best <- Inf
+# while (length(vars_todo) > 0) {
+#     var_best <- NA
+#     for (var in vars_todo) {
+#         f <- suppressWarnings(glm(girls_rule_maths~.,
+#                 data=edstats2[c(vars_cur, var)],
+#                 family=binomial("logit")))
+#         aic <- f$aic
+#         if (aic < aic_best) {
+#             aic_best <- aic
+#             var_best <- var
+#             f_best <- f
+#         }
+#     }
+#     if (is.na(var_best)) break
+#     vars_cur  <- c(vars_cur, var_best)
+#     vars_todo <- setdiff(vars_todo, var_best)
+#     cat(sprintf("%20s: %.4f\n", names(edstats2)[var_best], aic_best))
+# }
+#
+# Y_pred <- as.numeric(predict(f, edstats2, type="response")>0.5)
+# get_metrics(Y_pred, edstats2$girls_rule_maths)
+
+
+
+
+-->
 
 
 

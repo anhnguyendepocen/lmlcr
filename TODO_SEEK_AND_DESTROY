@@ -1,21 +1,33 @@
-\mathbf{\dot{ -> \dot{\mathbf{
-\mathbf{\hat{ -> \hat{\mathbf{
-
-data set -> dataset
-indexes -> indices
-
-cross entropy -> cross-entropy
-crossentropy -> cross-entropy
-
 Rstudio -> RStudio
 
-non-negative -> nonnegative
-non-decreasing
-non-increasing
-non-
 
-rowwise
-columnwise
+# data set -> dataset
+grep -rin -P -e 'data[ -]set' *.Rmd
 
-righthand
-lefthand
+# \mathbf{\dot{ -> \dot{\mathbf{
+# \mathbf{\hat{ -> \hat{\mathbf{
+grep -rin -P -e '\\mathbf{\\(dot|hat){' *.Rmd
+
+# indexes -> indices, matrixes -> matrices
+grep -rin -P -e 'indexes|matrixes' *.Rmd
+
+# cross entropy -> cross-entropy
+# crossentropy -> cross-entropy
+# cross-validation
+grep -rin -P -e 'cross ?(entropy|validation)' *.Rmd
+
+
+
+
+
+# non-negative -> nonnegative
+# non-decreasing
+# non-increasing
+# non-......................
+grep -rin -P -e 'non[ -].*' *.Rmd
+
+# rowwise, columnwise, but row-major
+# righthand, lefthand
+grep -rin -P -e '(right|left)[ -]hand' *.Rmd
+grep -rin -P -e '(column|row)[ -](wise)' *.Rmd
+grep -rin -P -e '(column|row) ?(major)' *.Rmd

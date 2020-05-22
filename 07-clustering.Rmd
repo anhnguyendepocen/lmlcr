@@ -1474,6 +1474,133 @@ clusters of cardinality 1.
 
 
 
+### Wine Quality -- `volatile.acidity` and `sulphates`
+
+Let's consider the Wine Quality dataset:
+
+```{r task_clustering1_1}
+wine_quality <- read.csv("datasets/wine_quality_all.csv",
+    comment.char="#", stringsAsFactors=FALSE)
+```
+
+{ BEGIN exercise }
+Apply the 2-means clustering algorithm (i.e., K-means with $K=2$)
+on a subset of `wine_quality` consisting only of
+the `volatile.acidity` and `sulphates` columns.
+{ END exercise }
+
+{ BEGIN exercise }
+Print the contingency table (see the `table()` function)
+for the discovered clusters vs. the wine colour (see the `color`
+column in `wine_quality`).
+{ END exercise }
+
+
+{ BEGIN exercise }
+Draw two scatter plots of `volatile.acidity` vs. `sulphates`:
+
+* one where points' colours correspond to the discovered cluster labels
+    (1st cluster = black symbols, 2nd cluster = red symbols),
+* the other one such that points' colours correspond to the true wine colours
+    (white wines = black symbols, red wines = red symbols).
+
+Is there are a good match between the discovered clusters
+and the true wine colours? Discuss.
+{ END exercise }
+
+<!--
+(n <- nrow(wines)) # number of samples
+for (i in 1:11)
+    wines[[i]] <- (wines[[i]]-mean(wines[[i]]))/sd(wines[[i]])
+names(wines)
+
+ari_best <- 0
+for (i in 1:10) {
+    for (j in (i+1):11) {
+        X <- as.matrix(wines[c(i,j)])
+        y_pred <- kmeans(X, 2, nstart=10)$cluster
+        y_true <- as.integer(factor(wines[["color"]]))
+        #plot(X, pch=y_pred, col=y_true, asp=1)
+        #
+        ari <- mclust::adjustedRandIndex(y_pred, y_true)
+        if (ari > ari_best[1])
+            ari_best <- c(ari, i, j)
+    }
+}
+
+print(ari_best)
+X <- as.matrix(wines[ari_best[-1]])
+y_pred <- kmeans(X, 2, nstart=10)$cluster
+par(mfrow=c(1,2))
+plot(X, pch=y_pred, col=y_true, asp=1)
+plot(X, col=y_pred, pch=y_true, asp=1)
+table(y_pred, y_true)
+-->
+
+
+
+
+### Wine Quality -- `chlorides` and `total.sulfur.dioxide`
+
+The Wine Quality dataset again:
+
+```{r task_clustering2_1}
+wine_quality <- read.csv("datasets/wine_quality_all.csv",
+    comment.char="#", stringsAsFactors=FALSE)
+```
+
+
+{ BEGIN exercise }
+Create a matrix `X` by extracting the `chlorides`
+and `total.sulfur.dioxide` columns from `wines`.
+{ END exercise }
+
+
+{ BEGIN exercise }
+Standardise both columns in `X` (i.e., from each column,
+subtract its mean and then divide by its standard deviation).
+{ END exercise }
+
+
+{ BEGIN exercise }
+Apply the 2-means clustering algorithm (i.e., K-means with $K=2$) on `X`.
+Store the obtained cluster labels in a vector named `y_kmeans`.
+{ END exercise }
+
+
+{ BEGIN exercise }
+Apply the average linkage hierarchical clustering method.
+Cut the obtained hierarchy (see the `cutree()` function)
+so as to obtain 2 clusters and store the results in a vector named `y_average`.
+{ END exercise }
+
+
+{ BEGIN exercise }
+Apply the single linkage hierarchical clustering method.
+Cut the obtained hierarchy into two groups and store the results in
+a vector named `y_single`.
+{ END exercise }
+
+
+{ BEGIN exercise }
+Apply the complete linkage hierarchical clustering method.
+Cut the obtained hierarchy (see the `cutree()` function)
+into two groups and store the results in a vector named `y_complete`.
+{ END exercise }
+
+
+{ BEGIN exercise }
+Print the 4 contingency tables (see the `table()` function)
+for each of the 4 discovered partitions (`y_kmeans`, ..., `y_complete`)
+vs. the wine colour (see the `color` column in `wines`).
+Is there are a good match between the discovered clusters
+and the true wine colours? Discuss.
+{ END exercise }
+
+
+
+
+
 
 ## Outro
 
@@ -1564,6 +1691,7 @@ notion of pairwise distances. These of course tend
 to behave weirdly in high-dimensional
 spaces ("the curse of dimensionality"). Moreover, some hardcore
 feature engineering might be needed to obtain meaningful results.
+
 
 
 

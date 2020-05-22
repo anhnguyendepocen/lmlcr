@@ -3,6 +3,13 @@
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 
 
+<!-- TODO:
+
+exercise -- density, not NN-based classification or
+regression - consider the epsilon-neighbourhood????
+
+-->
+
 
 ## Introduction
 
@@ -1481,6 +1488,110 @@ of numerous string metrics.
 <!-- Mahalanobis distance -->
 
 
+
+
+## Exercises
+
+
+
+### Wine Quality -- Best K-NN Parameters via Cross-Validation (\*)
+
+
+Consider the Wine Quality dataset (see Appendix F<!-- TODO --> for details):
+
+```{r task_classification_4_1}
+wine_quality <- read.csv("datasets/wine_quality_all.csv",
+    comment.char="#", stringsAsFactors=FALSE)
+head(wine_quality, 3)
+```
+
+
+{ BEGIN exercise }
+Add a new column named `quality`. A wine should get a `quality` of `1`
+if its rating is greater than or equal to 7 (a good wine)
+and a quality of `0` otherwise.
+{ END exercise }
+
+
+```{r task_classification_4_2,echo=FALSE}
+wine_quality$quality <- 0
+wine_quality$quality[wine_quality$response>=7] <- 1
+# table(wine_quality$quality)
+```
+
+{ BEGIN exercise }
+Perform a random train-test split of size 60-40%:
+create the matrices `X_train` and `X_test` containing
+the 11 physicochemical wine features and
+the corresponding label vectors `Y_train` and `Y_test`
+that inform on the wines' `quality`.
+{ END exercise }
+
+{ BEGIN exercise }
+Determine the *best*  parameter setting
+for the K-nearest neighbour classification of the `quality` variable
+based on the 11 physicochemical features. Perform the so-called
+grid (exhaustive) search over all the possible combinations of the following
+parameters:
+
+1. $K$: 1, 3, 5, 7 or 9,
+2. preprocessing: none (raw input data),
+standardised variables or robustly standardised variables,
+3. metric: $L_2$ (Euclidean) or $L_1$ (Manhattan).
+
+In other words, there are $5\cdot 3\cdot 2=30$ combinations of parameters in total,
+and hence -- $30$ different scenarios to consider.
+By *the best classifier* we mean the one that maximises the $F$-measure
+obtained by the so-called 5-fold cross-validation (see below).
+{ END exercise }
+
+
+
+
+Robust standardisation.
+
+: To perform a *robust standardisation*, for each column individually,
+    subtract its median and then divide it by its median absolute deviation
+    (MAD, i.e., `median(abs(x-median(x)))`). This data preprocessing scheme
+    is less sensitive to outliers than the classic standardisation.
+
+
+
+Remark.
+
+: Note that the $L_1$ metric-based K-nearest neighbour method
+    is not available     in the `FNN` package. You need to implement
+    it yourself.
+
+
+Cross-validation.
+
+:  We have discussed that it would not be fair to use the test
+    set for choosing of the optimal parameters (we would be overfitting to the
+    test set). We know that one possible
+    way to assure the transparent evaluation of a classifier
+    is to perform a train-validate-test split and use the validation set
+    for parameter tuning.
+
+    Here we will use a different technique -- one
+    that estimates the methods' "true" predictive
+    performance more accurately, yet at the cost of significantly increased
+    run-time. Namely, in *5-fold cross-validation*, we split the original
+    train set randomly into 5 disjoint parts: A, B, C, D, E
+    (more or less of the same number of observations). We use each
+    combination of 4 chunks as training sets and the remaining part
+    as the validation set, on which we compute the F-measure:
+
+
+    train set    | validation set | F-measure
+    -------------|----------------|----------
+    B, C, D, E   | A              | $F_A$
+    A, C, D, E   | B              | $F_B$
+    A, B, D, E   | C              | $F_C$
+    A, B, C, E   | D              | $F_D$
+    A, B, C, D   | E              | $F_E$
+
+    At the end we report the average $F$-measure, $(F_A+F_B+F_C+F_D+F_E)/5$.
 
 
 ## Outro

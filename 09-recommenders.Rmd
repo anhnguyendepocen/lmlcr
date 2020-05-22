@@ -3,6 +3,10 @@
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 
 
+
+<!-- TODO bag-of-words text representation and K-NN? -->
+
+
 ## Introduction
 
 *Recommender (recommendation) systems*

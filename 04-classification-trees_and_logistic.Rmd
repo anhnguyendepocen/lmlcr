@@ -1836,6 +1836,140 @@ constructed classifiers for making real money?
 
 
 
+
+
+### Wine Quality -- Random Forest and XGBoost (\*)
+
+Let's consider the Wine Quality dataset:
+
+```{r task_classification_3_1}
+wine_quality <- read.csv("datasets/wine_quality_all.csv",
+    comment.char="#", stringsAsFactors=FALSE)
+head(wine_quality, 3)
+```
+
+Recall that there are 11 physicochemical features of wines reported
+(columns 1-11).
+Moreover, there is a wine rating (variable `response`)
+on the scale 0 (bad) to 10 (excellent) given by wine experts.
+
+{ BEGIN exercise }
+Add a new column named `quality`. A wine should get a `quality` of `1`
+if its rating is greater than or equal to 7 (a good wine)
+and a quality of `0` otherwise.
+{ END exercise }
+
+
+```{r task_classification_3_2,echo=FALSE}
+wine_quality$quality <- 0
+wine_quality$quality[wine_quality$response>=7] <- 1
+# table(wine_quality$quality)
+```
+
+{ BEGIN exercise }
+Perform a random train-test split of size 60-40%:
+create the matrices `X_train` and `X_test` containing
+the 11 physicochemical wine features and
+the corresponding label vectors `Y_train` and `Y_test`
+that inform on the wines' `quality`.
+{ END exercise }
+
+{ BEGIN exercise }
+Construct (of course, on the train set)
+a decision tree that models wine quality  as a function
+the 11 physicochemical features.
+Assess the quality of the obtained model (of course, based on the test set)
+by computing the basic
+performance metrics for this classifier (accuracy, precision, recall,
+F-measure). Also, print the confusion matrix (see `table()`).
+Discuss the obtained results. Is this  a good model?
+{ END exercise }
+
+
+```{r task_classification_3_3,eval=FALSE,echo=FALSE}
+X <- cbind(wine_quality[1:11], wine_quality["quality"])
+set.seed(123)
+library("rpart")
+library("rpart.plot")
+tree <- rpart(quality~., data=X,
+    method="class", model=TRUE)
+get_metrics <- function(Y_pred, Y_test)
+{
+    C <- table(Y_pred, Y_test) # confusion matrix
+    stopifnot(dim(C) == c(2, 2))
+    c(Acc=(C[1,1]+C[2,2])/sum(C), # accuracy
+      Prec=C[2,2]/(C[2,2]+C[2,1]), # precision
+      Rec=C[2,2]/(C[2,2]+C[1,2]), # recall
+      F=C[2,2]/(C[2,2]+0.5*C[1,2]+0.5*C[2,1]), # F-measure
+      # Confusion matrix items:
+      TN=C[1,1], FN=C[1,2],
+      FP=C[2,1], TP=C[2,2]
+    ) # return a named vector
+}
+Y_pred <- predict(tree, X, type="class")
+get_metrics(Y_pred, X$quality)
+```
+
+
+Ensemble learning, bagging and random forest.
+
+:   *Ensemble learning*  is a rather simple yet appealing
+    idea that emphasises on the fact
+    that no single model will likely ever be omniscient. Instead,
+    we can construct numerous diverse models explaining a given dependent variable
+    and then properly aggregate the obtained classifier committee
+    to obtain a single answer.
+
+    *Bagging* (bootstrap aggregating)
+    is one of the most popular ensemble types:
+    here, we fit numerous models, each time to a different
+    randomly selected subset of observations in the input dataset.
+    In order to classify a new point, we ask each classifier
+    what it "thinks" the corresponding label should be and
+    report the mode (majority vote) of the candidate outputs.
+
+    The famous *random forest* algorithm is an example application
+    of the bagging technique that is based on decision trees
+    (with an extension that not only random subsets of observations,
+    but also random columns in the dataset are used to learn the
+    underlying models).
+
+{ BEGIN exercise }
+Ronstruct a random forest that models `quality` as a function
+of the 11 physicochemical features -- see R package `randomForest`.
+Assess and discuss the classifier's performance.
+{ END exercise }
+
+
+```{r task_classification_3_4,eval=FALSE,echo=FALSE}
+library("randomForest")
+```
+
+
+Boosting.
+
+: Another powerful ensemble technique is called *boosting*.
+Here, we construct a supervised learner in an iterative manner;
+in each step a simple ("weak") classifier is added to the ensemble
+by learning "something new" about the dataset, e.g., by uplifting
+its performance in the cases where frequent misclassifications occur.
+When determining the final outcome, each underlying model
+might be assigned a different weight.
+
+
+
+{ BEGIN exercise }
+The XGBoost algorithm is a modern implementation of
+the gradient boosting approach     based on decision trees.
+Fit a model with XGBoost (see package `xgboost`) that describes
+`quality` as a function of the 11 physicochemical features.
+Assess and discuss the classifier's performance.
+{ END exercise }
+
+```{r task_classification_3_5,eval=FALSE,echo=FALSE}
+library("xgboost")
+```
+
 ## Outro
 
 ### Remarks
