@@ -6,7 +6,8 @@
 Many books analyse datasets that are "too easy" and give their readers
 the false impression that they can model anything.
 
-Below we briefly describe all the datasets considered in this book.
+Below we briefly describe the most noteworthy
+datasets considered in this book.
 They are available for download at
 https://github.com/gagolews/lmlcr/tree/master/datasets.
 Many of them are real-world data, and need some proper cleaning,
@@ -225,6 +226,83 @@ Latitude                     |
 Longitude                    |
 Easting                      | Easting Coordinate, please use MGA94-55
 Northing                     | Northing Coordinate, please use MGA94-55
+
+
+
+## Wine Quality
+
+The Wine Quality dataset [@wines]
+describes 11 physicochemical features of Vinho Verde wine samples
+from the north of Portugal.
+Moreover, there are wine ratings given by wine experts and their colour.
+
+
+
+
+`winequality` |
+---------------|------------------------------------------------------------------
+Last updated   | 2009
+Provider       | Paulo Cortez (Univ. Minho), Antonio Cerdeira, Fernando Almeida, Telmo Matos and Jose Reis (CVRVV)
+License        | Public Domain
+Source         | http://archive.ics.uci.edu/ml/datasets/Wine+Quality
+
+
+```{r dataset_winequality}
+wines <- read.csv("datasets/winequality_all.csv",
+    comment.char="#", stringsAsFactors=FALSE)
+head(wines, 3)
+table(wines$color)
+
+```
+
+
+
+Column                       | Description
+-----------------------------|---------------------------------------------
+
+response                     | wine rating on the scale 0 (bad) to 10 (excellent) -- median of at least 3 expert evaluations
+color                        | `red` or `white`
+
+
+
+## Other
+
+
+Boston from MASS
+
+Iris
+
+
+
+
+Let us consider a few clustering benchmark datasets
+available at https://github.com/gagolews/clustering_benchmarks_v1
+and http://cs.joensuu.fi/sipu/datasets/.
+Here is a list of file names together with the
+corresponding numbers of clusters (as given by datasets' authors):
+
+wut_isolation
+wut_mk2
+wut_z3
+sipu_aggregation
+sipu_pathbased
+sipu_unbalance
+
+All the datasets are two-dimensional, hence we'll be able to visualise
+the obtained results and assess the sensibility of the obtained clusterings.
+
+
+MNIST digits
+
+MNIST fashion
+
+
+
+
+
+## Movie Lens
+
+
 
 
 

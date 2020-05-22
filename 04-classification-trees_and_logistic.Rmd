@@ -98,7 +98,7 @@ For illustration, we'll be considering the Wine Quality dataset
 
 
 ```{r load1,cache=TRUE}
-wines <- read.csv("datasets/winequality-all.csv",
+wines <- read.csv("datasets/winequality_all.csv",
     comment.char="#", stringsAsFactors=FALSE)
 wines <- wines[wines$color == "white",]
 (n <- nrow(wines)) # number of samples
@@ -489,47 +489,6 @@ Examples:
 (\*\*) Decision trees are most often constructed by a *greedy*, *top-down*
 *recursive partitioning*, see., e.g., [@rpart].
 
-
-
-
-
-
-<!--
-
-## TODO Random Forests and XGBoost
-
-## ...
-
-
-
-
-
-just show how to use it
-
-boosting
-
-bagging
-
-```{r}
-#library("randomForest")
-#rf <- randomForest(X_train, Y_train)
-#Y_pred <- predict(rf, X_test)
-#get_metrics(Y_pred, Y_test)
-```
-
-
-
-
-
-
-```{r}
-#library("xgboost")
-#xg <- xgboost(X_train, Y_train)
-#Y_pred <- predict(xg, X_test)
-#get_metrics(Y_pred, Y_test)
-```
-
--->
 
 
 
@@ -1810,11 +1769,69 @@ many variables.
 
 
 
+### Currency Exchange Rates Growth/Fall
 
 
 
 
+Let's consider a modified version of the Currency Exchange Rates
+dataset released by  the European Central Bank System:
 
+
+```{r ex_currency_exchange_diff_1}
+rates <- read.csv("datasets/currency_exchange_diff.csv.gz",
+    comment.char="#", stringsAsFactors=FALSE)
+head(rates[,1:8]) # few first rows and columns
+tail(rates[,1:8]) # a couple of last rows and a few columns
+```
+
+We have discussed this dataset in Appendix F. <!-- TODO: -->
+We will investigate how accurately we can predict if
+the EUR/AUD exchange rate increases (`Dir` equal to `inc`)
+or decreases (`Dir` equal to `dec`) based on the price changes
+in preceding days (`Lag1` -- yesterday, `Lag2` -- two days ago etc.).
+
+{ BEGIN exercise }
+Perform a train-test split. Create a
+data frame `rates_train` that consists of the *first* 80\% rows
+in `rates` and a data frame `rates_test` that includes the remaining 20\%.
+{ END exercise }
+
+Remark.
+
+: This is a time series prediction task;
+we are not assigning the observations to either of these two subsets in
+a random manner. Instead, we use the "past" data for training (models' construction)
+and the "future" values for testing (models' performance evaluation).
+This is exactly how we often proceed in real life.
+
+
+
+{ BEGIN exercise }
+Fit and plot a decision tree that models `Dir` as a function
+of `Lag1`, ..., `Lag5`. Compute the accuracy, precision, recall
+and F-measure of this classifier.
+{ END exercise }
+
+
+{ BEGIN exercise }
+Fit 5 binary logistic regression models for `Dir` as a function of
+the percentage return from: (i) the previous day, (ii) the last three days,
+(iii) five days, (iv) seven days, (v) all the previous 10 days.
+Print the estimated coefficients (parameters). Evaluate
+the performance of these 5 classifiers.
+{ END exercise }
+
+{ BEGIN exercise }
+Use the 5- and 15-nearest neighbours algorithm
+to predict `Dir` based on the percentage returns from the 5 previous days.
+Evaluate the performance of these 2 classifiers.
+{ END exercise }
+
+{ BEGIN exercise }
+Discuss the obtained results. Would you be keen to use any of the
+constructed classifiers for making real money?
+{ END exercise }
 
 
 

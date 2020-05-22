@@ -554,7 +554,8 @@ Examples -- the `wines` dataset:
 
 ```{r wines_load,echo=-1}
 set.seed(123)
-wines <- read.csv("datasets/winequality-all.csv", comment="#")
+wines <- read.csv("datasets/winequality_all.csv",
+    comment.char="#", stringsAsFactors=FALSE)
 wines[1,]
 ```
 
@@ -1477,6 +1478,62 @@ automatically, don't look at bare numbers only, visualise your data first!
 Read more about Anscombe's quartet at https://en.wikipedia.org/wiki/Anscombe%27s_quartet
 { END exercise }
 
+
+
+
+## Median House Value in Boston
+
+
+The famous `Boston` dataset from the `MASS` package
+records the historical (in the 1970s) median house value
+(`medv` column, in 1000s USD) for 506 suburbs around
+Boston, MA, USA.
+
+You can access the dataset by calling:
+
+```{r Boston_load1,message=FALSE}
+# call install.packages("MASS") first (only once)
+library("MASS")
+head(Boston, 3)
+```
+
+Read the description of each of the 14 columns in the dataset's manual,
+see `?Boston`.
+
+{ BEGIN exercise }
+Fit a simple linear model of $Y=$ `medv` as a function of $X=$  `lstat`.
+{ END exercise }
+
+{ BEGIN exercise }
+Fit a quadratic polynomial model $(aX^2+bX+c)$ for the same pair of variables.
+{ END exercise }
+
+{ BEGIN exercise }
+Fit a 5-degree polynomial model $(aX^5+bX^4+cX^3+dX^2+eX+f)$ for the same pair of variables.
+{ END exercise }
+
+{ BEGIN exercise }
+Draw the scatter plot of the two variables and add the fitted regression
+curves (all three on a single plot, use different colours).
+{ END exercise }
+
+
+{ BEGIN exercise }
+Compute RMSE, MAE and $R^2$ of each model. Provide the interpretations of the
+obtained values.
+{ END exercise }
+
+{ BEGIN exercise }
+For each model, draw the plot of the residuals ($\hat{y}_i-y_i$)
+as a function of the predicted outputs ($\hat{y}_i$).
+Describe these plots in your own words.
+{ END exercise }
+
+{ BEGIN exercise }
+Predict the `medv` values for `lstat` of 0, 25, 50 and 75
+using all the models. Compare and discuss the results.
+Which of the predictions seem trustworthy?
+{ END exercise }
 
 
 

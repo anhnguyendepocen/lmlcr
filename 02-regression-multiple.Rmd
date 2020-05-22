@@ -2070,6 +2070,65 @@ found by forward selection, i.e., `f2`.*
 { END solution }
 
 
+
+
+
+## Median House Value in Boston (Continued)
+
+
+Let's get back to the `Boston` dataset from the `MASS` package
+that we considered in the chapter on simple linear regression:
+
+```{r Boston_load2,message=FALSE}
+library("MASS")
+head(Boston, 3)
+```
+
+Read the description of each of the 14 columns in the dataset's manual,
+see `?Boston`.
+
+{ BEGIN exercise }
+Construct a multiple regression model for `medv` as a function
+of `lstat`, `rm` and `tax`.
+{ END exercise }
+
+{ BEGIN exercise }
+Use forward selection (with respect to the AIC criterion)
+to come up with a multiple regression model
+for `medv` as a function of other variables.
+{ END exercise }
+
+{ BEGIN exercise }
+Use backward elimination  (with respect to the AIC criterion) to
+construct a multiple regression model for `medv` as a function
+of other variables.
+{ END exercise }
+
+{ BEGIN exercise }
+Construct a multiple regression model for `medv` as a function
+of `lstat`, `rm` and `tax` transformed in various ways.
+Apply logarithms, squares, exponential (amongst others)
+functions on the variables
+and try to come up with the best model by trial and error
+(you can also use forward selection and/or backward elimination
+for this).
+{ END exercise }
+
+{ BEGIN exercise }
+For each model, draw the plot of the residuals ($\hat{y}_i-y_i$)
+as a function of the predicted outputs ($\hat{y}_i$).
+Describe these plots in your own words.
+{ END exercise }
+
+{ BEGIN exercise }
+Compare the four models in terms of  AIC, RMSE, MAE and adjusted $R^2$.
+Which model is the best with regards to each metric?
+Draw conclusions in your own words.
+{ END exercise }
+
+
+
+
 <!--
 
 

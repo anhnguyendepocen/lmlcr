@@ -728,7 +728,7 @@ currency exchange rates:
 
 ```{r matrix_ex1a}
 rates <- read.csv("datasets/currency_exchange_all.csv.gz",
-    comment.char="#")
+    comment.char="#", stringsAsFactors=FALSE)
 rates$Day <- as.numeric(as.Date(rates$Day)) # Convert Day to numeric
 rates <- as.matrix(rates)
 head(rates, 3)
