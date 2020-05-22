@@ -98,10 +98,10 @@ For illustration, we'll be considering the Wine Quality dataset
 
 
 ```{r load1,cache=TRUE}
-wines <- read.csv("datasets/winequality_all.csv",
+wine_quality <- read.csv("datasets/wine_quality_all.csv",
     comment.char="#", stringsAsFactors=FALSE)
-wines <- wines[wines$color == "white",]
-(n <- nrow(wines)) # number of samples
+white_wines <- wine_quality[wine_quality$color == "white",]
+(n <- nrow(white_wines)) # number of samples
 ```
 
 
@@ -111,7 +111,7 @@ The input matrix $\mathbf{X}\in\mathbb{R}^{n\times p}$
 consists of the first 10 numeric variables:
 
 ```{r load2,dependson='load1',cache=TRUE}
-X <- as.matrix(wines[,1:10])
+X <- as.matrix(white_wines[,1:10])
 dim(X)
 head(X, 2) # first two rows
 ```
@@ -126,12 +126,12 @@ The 11th variable measures the amount of alcohol (in %).
 
 We will convert this dependent variable to a binary one:
 
-- 0 == (`alcohol  < 12`) == lower-alcohol wines
+- 0 == (`alcohol  < 12`) == lower-alcohol wines,
 - 1 == (`alcohol >= 12`) == higher-alcohol wines
 
 ```{r load3,dependson='load2',cache=TRUE}
 # recall that TRUE == 1
-Y <- factor(as.character(as.numeric(wines$alcohol >= 12)))
+Y <- factor(as.character(as.numeric(white_wines$alcohol >= 12)))
 table(Y)
 ```
 
@@ -372,7 +372,7 @@ XY_test <- cbind(as.data.frame(X_test), Y=Y_test)
 
 Fit and plot a decision tree, see Figure {@fig:plot_rpart1}.
 
-```{r plot_rpart1,fig.height=5,echo=-(1:2),fig.cap="A decision tree for the `wines` dataset"}
+```{r plot_rpart1,fig.height=5,echo=-(1:2),fig.cap="A decision tree for the `white_wines` dataset"}
 par(mar=c(0,0,0,0))
 par(ann=FALSE)
 t1 <- rpart(Y~., data=XY_train, method="class")
@@ -384,7 +384,7 @@ We can build  less or more complex trees by playing
 with the `cp` parameter, see Figures {@fig:plot_rpart222}
 and {@fig:tree333}.
 
-```{r plot_rpart222,echo=-(1:2),fig.cap="A (simpler) decision tree for the `wines` dataset"}
+```{r plot_rpart222,echo=-(1:2),fig.cap="A (simpler) decision tree for the `white_wines` dataset"}
 par(mar=c(0,0,0,0))
 par(ann=FALSE)
 # cp = complexity parameter, smaller → more complex tree
@@ -393,7 +393,7 @@ rpart.plot(t2, tweak=1.1, fallen.leaves=FALSE, digits=3)
 ```
 
 
-```{r tree333,fig.height=8,echo=-(1:2),fig.cap="A (more complex) decision tree for the `wines` dataset"}
+```{r tree333,fig.height=8,echo=-(1:2),fig.cap="A (more complex) decision tree for the `white_wines` dataset"}
 par(mar=c(0,0,0,0))
 par(ann=FALSE)
 # cp = complexity parameter, smaller → more complex tree
@@ -1779,10 +1779,10 @@ dataset released by  the European Central Bank System:
 
 
 ```{r ex_currency_exchange_diff_1}
-rates <- read.csv("datasets/currency_exchange_diff.csv.gz",
+currency_exchange <- read.csv("datasets/currency_exchange_diff.csv.gz",
     comment.char="#", stringsAsFactors=FALSE)
-head(rates[,1:8]) # few first rows and columns
-tail(rates[,1:8]) # a couple of last rows and a few columns
+head(currency_exchange[,1:8]) # few first rows and columns
+tail(currency_exchange[,1:8]) # a couple of last rows and a few columns
 ```
 
 We have discussed this dataset in Appendix F. <!-- TODO: -->
@@ -1793,8 +1793,9 @@ in preceding days (`Lag1` -- yesterday, `Lag2` -- two days ago etc.).
 
 { BEGIN exercise }
 Perform a train-test split. Create a
-data frame `rates_train` that consists of the *first* 80\% rows
-in `rates` and a data frame `rates_test` that includes the remaining 20\%.
+data frame `currency_exchange_train` that consists of the *first* 80\% rows
+in `currency_exchange` and a data frame `currency_exchange_test`
+that includes the remaining 20\%.
 { END exercise }
 
 Remark.

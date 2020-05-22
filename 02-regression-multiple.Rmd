@@ -1294,12 +1294,9 @@ By the way, Pearson's coefficient now equals ```r cor(ans3b$x, ans3b$y)```.*
 ### Countries of the World -- Simple models involving the GDP per capita
 
 
-Let's consider the World Factbook 2020 dataset
-(see this book's `datasets` folder).
-It consists of country names, their population,
-area, GDP, mortality rates etc. We have scraped it from the CIA website
-at https://www.cia.gov/library/publications/the-world-factbook/docs/rankorderguide.html
-and compiled into a single file on 3 April 2020.
+Let's consider the World Factbook 2020 dataset (see Appendix F<!-- TODO -->),
+which lists country names, their population,
+area, GDP, mortality rates and so forth:
 
 
 ```{r factbookA1}
@@ -1333,37 +1330,9 @@ or `factbook[,gdp_per_capita_ppp]` instead.
 -->
 
 
-<!--
-
-> Convert `area` and `pop_density` from square miles to square kilometres.
-
-
-
-
-We can easily find an appropriate conversion formula on the internet.
-We will convert one column at a time using the well-known
-vectorised vector division and replace the old column with new data.
-
-```{r}
-#countries$area <- countries$area*0.3861
-#countries$pop_density <- countries$pop_density*0.3861
-#countries[countries$country == "Australia", ] # preview
-```
-
-By the way, did you know that only few countries are still reluctant
-to switch to the commonly-agreed-upon
-[metric system](https://en.wikipedia.org/wiki/Metric_system)?
-We are still (patiently...) waiting for the (inevitable)
-[metrication](https://en.wikipedia.org/wiki/Metrication)
-of North Korea, the UK, the US, Liberia and Myanmar.
-
-
-
--->
-
 
 <!--
- Omitting the aforementioned  columns can be done in a few ways. Here is one:
+ Omitting of the aforementioned  columns can be done in a few ways. Here is one:
 
 ```{r}
 #wines <- wines[, is.na(match(names(wines), c("color", "response")))]
@@ -1519,7 +1488,7 @@ https://www.cia.gov/library/publications/the-world-factbook/docs/rankorderguide.
 ### Countries of the World -- Most correlated variables (\*)
 
 
-Let's get back to the World Factbook 2020 dataset (`world_factbook_2020.csv`).
+Let's get back to the World Factbook 2020 dataset.
 
 ```{r factbookB1}
 factbook <- read.csv("datasets/world_factbook_2020.csv",
@@ -1743,7 +1712,7 @@ next time! (Which I of course won't). End of story.
 ### Countries of the World -- A non-linear model based on the GDP per capita
 
 
-Let's revisit the World Factbook 2020 dataset (`world_factbook_2020.csv`).
+Let's revisit the World Factbook 2020 dataset.
 
 ```{r factbookC1}
 factbook <- read.csv("datasets/world_factbook_2020.csv",
@@ -1943,8 +1912,7 @@ Do the cool staff, do something for the others. Life's not about money.*
 ### Countries of the World -- A multiple regression model for the per capita GDP
 
 
-Let's play with World Factbook 2020
- (`world_factbook_2020.csv`) once again.
+Let's play with World Factbook 2020 once again.
 World is an interesting place, so we're far from being bored with this dataset.
 
 ```{r factbookD1}

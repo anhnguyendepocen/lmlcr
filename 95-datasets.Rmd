@@ -21,34 +21,34 @@ Environment Protection Authority of the state of Victoria, Australia
 published the 2018 air quality data on its Open Data platform.
 Various parameters are probed at different spots on an hourly basis.
 
-`air_quality` |
----------------------|---------------------------------------------------
+`air_quality`        |
+---------------------|---------------------------------------------
 Last updated         | 22 May 2019
 Provider             | Environment Protection Authority Victoria
 License              | Creative Commons Attribution 4.0 International License
 Source               | https://discover.data.vic.gov.au/dataset/epa-air-watch-all-sites-air-quality-hourly-averages-yearly
 
 ```{r datasets_air1}
-air <- read.csv("datasets/air_quality.csv.gz",
+air_quality <- read.csv("datasets/air_quality.csv.gz",
     comment.char="#", stringsAsFactors=FALSE)
-head(air, 3)
+head(air_quality, 3)
 ```
 
 
 
-Column                       | Description
------------------------------|---------------------------------------------
-sample_point_id              | Integer identifier of the sample point
-sp_name                      | Sample point name (city, suburb etc.)
-latitude                     |
-longitude                    |
-sample_datetime              | Date and time of the measurement; DD/MM/YYYY HH:MM:SS local time
-time_basis_id                | Denotes whether a 1-hour or 24-hour average is provided (`r paste(unique(air$time_basis_id), collapse=", ")`)
-param_id                     | Identifier of the air quality parameter: `r paste(unique(air$param_id), collapse=", ")`
-param_name                   | Name of the parameter: `r paste(unique(air$param_name), collapse=", ")`
-value                        | Measured parameter value
-param_std_unit_of_measure    | Unit of measure
-param_short_name             | Short version of the parameter name:  `r paste(unique(air$param_short_name), collapse=", ")`
+Column                         | Description
+-------------------------------|---------------------------------------------
+`sample_point_id`              | Integer identifier of the sample point
+`sp_name`                      | Sample point name (city, suburb etc.)
+`latitude`                     |
+`longitude`                    |
+`sample_datetime`              | Date and time of the measurement; DD/MM/YYYY HH:MM:SS local time
+`time_basis_id`                | Denotes whether a 1-hour or 24-hour average is provided (`r paste(unique(air_quality$time_basis_id), collapse=", ")`)
+`param_id`                     | Identifier of the air quality parameter: `r paste(unique(air_quality$param_id), collapse=", ")`
+`param_name`                   | Name of the parameter: `r paste(unique(air_quality$param_name), collapse=", ")`
+`value`                        | Measured parameter value
+`param_std_unit_of_measure`    | Unit of measure
+`param_short_name`             | Short version of the parameter name:  `r paste(unique(air_quality$param_short_name), collapse=", ")`
 
 
 
@@ -67,26 +67,26 @@ The column names give the traditional ISO 4217 currency designators
 (see Table below), for instance JPY stands for the Japanese (JP)
 yen.
 
-In each column like YYY, the quotation (EUR/YYY) is listed,
+In each column like `YYY`, the quotation (EUR/YYY) is listed,
 giving the price of the Euro (here: the base currency)
-expressed in the YYY (counter/quote) currency,
+expressed in the  counter/quote currency YYY,
 e.g., the value of 118.0 in JPY means that 1 euro = 118 yens.
 
 
 
-`currency_exchange_all` |
+`currency_exchange`  |
 ---------------------|---------------------------------------------------
 Last updated         | 19 May 2020
 Provider             | European Central Bank
-License              | Provided free of charge to enhance public access to information       about the activities of the European Central Bank System and the activities of the European System of Central Banks
+License              | Provided free of charge to enhance public access to information  about the activities of the European Central Bank System and the activities of the European System of Central Banks
 Source               | http://sdw.ecb.europa.eu/browse.do?node=9691296
 
 ```{r datasets_rates}
-rates <- read.csv("datasets/currency_exchange_all.csv.gz",
+currency_exchange <- read.csv("datasets/currency_exchange_all.csv.gz",
     comment.char="#", stringsAsFactors=FALSE)
-rates$Day <- as.Date(rates$Day) # convert to Date-type object
-head(rates, 2)
-range(rates$Day)
+# convert Day to Date-type object:
+currency_exchange$Day <- as.Date(currency_exchange$Day)
+head(currency_exchange, 2)
 ```
 
 
@@ -94,64 +94,68 @@ range(rates$Day)
 
 
 
-Column        | Description
---------------|---------------------------------------------
-Day           |    Date in YYYY-MM-DD format, ordered decreasingly
-AUD           |    Australian dollar
-BGN           |    Bulgarian lev
-BRL           |    Brazilian real
-CAD           |    Canadian dollar
-CHF           |    Swiss franc
-CNY           |    Chinese yuan renminbi
-CZK           |    Czech koruna
-DKK           |    Danish krone
-GBP           |    UK pound sterling
-HKD           |    Hong Kong dollar
-HRK           |    Croatian kuna
-HUF           |    Hungarian forint
-IDR           |    Indonesian rupiah
-ILS           |    Israeli shekel
-INR           |    Indian rupee
-ISK           |    Iceland krona
-JPY           |    Japanese yen
-KRW           |    Korean won
-MXN           |    Mexican peso
-MYR           |    Malaysian ringgit
-NOK           |    Norwegian krone
-NZD           |    New Zealand dollar
-PHP           |    Philippine peso
-PLN           |    Polish zloty
-RON           |    Romanian leu
-RUB           |    Russian rouble
-SEK           |    Swedish krona
-SGD           |    Singapore dollar
-THB           |    Thai baht
-TRY           |    Turkish lira
-USD           |    US dollar
-ZAR           |    South African rand
+Column          | Description
+----------------|---------------------------------------------
+`Day`           |    Date in YYYY-MM-DD format, from `r min(currency_exchange$Day)` to `r max(currency_exchange$Day)`, ordered decreasingly
+`AUD`           |    Australian dollar
+`BGN`           |    Bulgarian lev
+`BRL`           |    Brazilian real
+`CAD`           |    Canadian dollar
+`CHF`           |    Swiss franc
+`CNY`           |    Chinese yuan renminbi
+`CZK`           |    Czech koruna
+`DKK`           |    Danish krone
+`GBP`           |    UK pound sterling
+`HKD`           |    Hong Kong dollar
+`HRK`           |    Croatian kuna
+`HUF`           |    Hungarian forint
+`IDR`           |    Indonesian rupiah
+`ILS`           |    Israeli shekel
+`INR`           |    Indian rupee
+`ISK`           |    Iceland krona
+`JPY`           |    Japanese yen
+`KRW`           |    Korean won
+`MXN`           |    Mexican peso
+`MYR`           |    Malaysian ringgit
+`NOK`           |    Norwegian krone
+`NZD`           |    New Zealand dollar
+`PHP`           |    Philippine peso
+`PLN`           |    Polish zloty
+`RON`           |    Romanian leu
+`RUB`           |    Russian rouble
+`SEK`           |    Swedish krona
+`SGD`           |    Singapore dollar
+`THB`           |    Thai baht
+`TRY`           |    Turkish lira
+`USD`           |    US dollar
+`ZAR`           |    South African rand
 
 
 
-From this dataset we derive two more files:
+From this dataset we derive two following ones.
 
-* `currency_exchange_single.csv`, which gives only the EUR/AUD rates
-    from the least to the most recent:
+`currency_exchange_single`.
+
+: The EUR/AUD rates only, from the least to the most recent:
 
 
     ```{r datasets_rates2,eval=FALSE}
-    write.table(rev(rates$AUD), "datasets/currency_exchange_single.csv",
+    write.table(rev(currency_exchange$AUD),
+        "datasets/currency_exchange_single.csv",
         col.names=FALSE, row.names=FALSE, quote=FALSE)
     ```
 
 
-* `currency_exchange_diff.csv`, which gives relative daily changes
+`currency_exchange_diff`.
+
+:   Relative daily changes
     in the EUR/AUD rates (we use it for building example
     exchange rates prediction algorithms):
 
 
     ```{r datasets_rates3}
-    n <- nrow(rates)
-    pred <- rates[n:1, c("Day", "AUD")] # from oldest to newest
+    n <- nrow(currency_exchange)
+    pred <- currency_exchange[n:1, c("Day", "AUD")] # from oldest to newest
     row.names(pred) <- NULL # reset the row.names attribute
     pred$Change <- NA
     pred$Change[2:n] <- diff(pred$AUD) # iterative difference:
@@ -184,7 +188,7 @@ From this dataset we derive two more files:
 
 ## Urban Forest
 
-The `urban_forest` dataset gives location, species and lifespan of
+The Urban Forest dataset gives location, species and lifespan of
 ca. 72,500 trees in Melbourne, VIC, Australia.
 
 
@@ -198,34 +202,34 @@ Source         | https://data.melbourne.vic.gov.au/Environment/Trees-with-specie
 
 
 ```{r datasets_forest}
-forest <- read.csv("datasets/urban_forest.csv.gz",
+urban_forest <- read.csv("datasets/urban_forest.csv.gz",
     comment.char="#", stringsAsFactors=FALSE)
-head(forest, 3)
+head(urban_forest, 3)
 ```
 
 
 
-Column                       | Description
------------------------------|---------------------------------------------
-CoM ID                       | City of Melbourne's unique asset ID
-Common Name                  |
-Scientific Name              |
-Genus                        |
-Family                       |
-Diameter Breast Height       | Diameter at breast height, or DBH, is a standard method of expressing the diameter of the trunk or bole of a standing tree. City of Melbourne Measures this 1.4m from ground level. 0.00 = Not yet assessed
-Year Planted                 | This is generally accurate for trees planted from 2003 onward, prior to 2003 this indicate the date the trees are added to the inventory.
-Date Planted                 | See above.
-Age Description              | Based on Date planted / date of data entry therefore sometimes inaccurate; Null value = Not yet assessed
-Useful Life Expectancy       | The trees useful life expectancy. Last updated in 2009; Null value = Not yet assessed
-Useful Life Expectancy Value | Useful Life Expectancy Value, derived from the Useful Life Expectancy column, displayed as an integer
-Precinct                     | The neighbourhood boundary defined for tree planning purposes
-Located In                   | This describes whether a tree is located within a public park or along a street
-Upload Date                  |
-Coordinate Location          |
-Latitude                     |
-Longitude                    |
-Easting                      | Easting Coordinate, please use MGA94-55
-Northing                     | Northing Coordinate, please use MGA94-55
+Column                         | Description
+-------------------------------|---------------------------------------------
+`CoM.ID`                       | City of Melbourne's unique asset ID
+`Common.Name`                  |
+`Scientific.Name`              |
+`Genus`                        |
+`Family`                       |
+`Diameter.Breast.Height`       | Diameter at breast height is a standard method of expressing the diameter of the trunk or bole of a standing tree. City of Melbourne Measures this 1.4m from ground level. 0.00 = Not yet assessed
+`Year.Planted`                 | This is generally accurate for trees planted from 2003 onward, prior to 2003 this indicate the date the trees are added to the inventory.
+`Date.Planted`                 | See above.
+`Age.Description`              | Based on date planted/data entry, therefore sometimes inaccurate; Null value = Not yet assessed
+`Useful.Life.Expectancy`       | The trees useful life expectancy. Last updated in 2009; Null value = Not yet assessed
+`Useful.Life.Expectancy.Value` | Useful Life Expectancy Value, derived from the Useful Life Expectancy column, displayed as an integer
+`Precinct`                     | The neighbourhood boundary defined for tree planning purposes
+`Located.In`                   | This describes whether a tree is located within a public park or along a street
+`Upload.Date`                  |
+`Coordinate.Location`          |
+`Latitude`                     |
+`Longitude`                    |
+`Easting`                      | Easting Coordinate, please use MGA94-55
+`Northing`                     | Northing Coordinate, please use MGA94-55
 
 
 
@@ -233,44 +237,227 @@ Northing                     | Northing Coordinate, please use MGA94-55
 
 The Wine Quality dataset [@wines]
 describes 11 physicochemical features of Vinho Verde wine samples
-from the north of Portugal.
+from the Minho region in northwest Portugal.
 Moreover, there are wine ratings given by wine experts and their colour.
 
 
 
 
-`winequality` |
----------------|------------------------------------------------------------------
-Last updated   | 2009
-Provider       | Paulo Cortez (Univ. Minho), Antonio Cerdeira, Fernando Almeida, Telmo Matos and Jose Reis (CVRVV)
-License        | Public Domain
-Source         | http://archive.ics.uci.edu/ml/datasets/Wine+Quality
+`wine_quality`  |
+----------------|------------------------------------------------------------------
+Last updated    | 2009
+Provider        | Paulo Cortez (Univ. Minho), Antonio Cerdeira, Fernando Almeida, Telmo Matos and Jose Reis (CVRVV)
+License         | Public Domain
+Source          | http://archive.ics.uci.edu/ml/datasets/Wine+Quality
 
 
-```{r dataset_winequality}
-wines <- read.csv("datasets/winequality_all.csv",
+```{r dataset_wine_quality}
+wine_quality <- read.csv("datasets/wine_quality_all.csv",
     comment.char="#", stringsAsFactors=FALSE)
-head(wines, 3)
-table(wines$color)
-
+head(wine_quality, 3)
 ```
 
 
 
-Column                       | Description
------------------------------|---------------------------------------------
+Column                         | Description
+-------------------------------|---------------------------------------------
+`fixed.acidity`                |  (g(tartaric acid)/dm³)
+`volatile.acidity`             |  (g(acetic acid)/dm³)
+`citric.acid`                  |  (g/dm³)
+`residual.sugar`               |  (g/dm³)
+`chlorides`                    |  (g(sodium chloride)/dm³)
+`free.sulfur.dioxide`          |  (mg/dm³)
+`total.sulfur.dioxide`         |  (mg/dm³)
+`density`                      |  (g/cm³)
+`pH`                           |
+`sulphates`                    |  (g(potassium sulphate)/dm³)
+`alcohol`                      |  (vol.%)
+`response`                     |  Wine rating on the scale 0 (bad) to 10 (excellent): median of at least 3 valuations by sensory assessors
+`color`                        |  Wine colour: `red` (1599) or `white` (4898)
 
-response                     | wine rating on the scale 0 (bad) to 10 (excellent) -- median of at least 3 expert evaluations
-color                        | `red` or `white`
 
 
+## The World Factbook (Countries of the World)
+
+
+The World Factbook 2020 dataset consists of country names, their population,
+area, GDP, mortality rates etc.
+
+
+`world_factbook`|
+----------------|------------------------------------------------------------------
+Last updated    | 3 April 2020
+Provider        | Central Intelligence Agency
+License         | Public Domain
+Source          | https://www.cia.gov/library/publications/the-world-factbook/docs/rankorderguide.html
+
+
+```{r factbookA1}
+factbook <- read.csv("datasets/world_factbook_2020.csv",
+    comment.char="#", stringsAsFactors=FALSE)
+```
+
+Column                                               | Description
+-----------------------------------------------------|---------------------------------------------
+`country`                                            | Country name
+`area`                                               | Area (km²) as the sum of all land and water areas delimited by international boundaries and/or coastlines.
+`population`                                         | Population
+`median_age`                                         | Median age of population in years.
+`population_growth_rate`                             | Compares the average annual % change in populations, resulting from a surplus (or deficit) of births over deaths and the balance of migrants entering and leaving a country.
+`birth_rate`                                         | Annual number of births/1,000 population
+`death_rate`                                         | Annual number of deaths/1,000 population
+`net_migration_rate`                                 | Difference between the annual number of persons entering and leaving a country/1,000 population
+`maternal_mortality_rate`                            | Annual number of female deaths/100,000 live births from any cause related to or aggravated by pregnancy or its management (excluding accidental or incidental causes)
+`infant_mortality_rate`                              | Annual number of deaths of infants under one year old/1,000 live births
+`life_expectancy_at_birth`                           | Average number of years to be lived by a group of people born in the same year
+`total_fertility_rate`                               | Average number of children per woman (if all women lived to the end of their childbearing years)
+`hiv_aids_adult_prevalence_rate`                     | % adults (aged 15-49) living with HIV/AIDS
+`hiv_aids_people_living_with`                        | Number of people living with HIV/AIDS
+`hiv_aids_deaths`                                    | The number of adults and children who died of AIDS during a calendar year
+`obesity_adult_prevalence_rate`                      | % population considered to be obese
+`children_under_age_5_underweight`                   | % children under 5 years considered to be underweight
+`education_expenditures`                             | Public expenditure on education as % GDP
+`unemployment_youth_ages_15_to_24`                   | % total labour force aged 15-24 that are unemployed
+`gdp_purchasing_power_parity`                        | Gross domestic product (GDP) on a purchasing power parity (PPP) basis, i.e., the sum value of all goods and services produced in the country valued at prices prevailing in the United States (USD)
+`gdp_real_growth_rate`                               | Annual % GDP growth adjusted for inflation
+`gdp_per_capita_ppp`                                 | GDP on PPP divided by population
+`gross_national_saving`                              | Gross national disposable income minus final consumption expenditure as % GDP
+`industrial_production_` `growth_rate`               | Annual % increase in industrial production (includes manufacturing, mining and construction)
+`labor_force`                                        | Total labour force
+`unemployment_rate`                                  | % labour force that is without jobs
+`taxes_and_other_revenues`                           | Total taxes and other revenues received by the national government as % GDP
+`budget_surplus_or_deficit`                          | Difference between national government revenues and expenditures as % GDP
+`public_debt`                                        | Cumulative total of all government borrowings minus spending as % GDP
+`inflation_rate_consumer_prices`                     | Annual % change in consumer prices
+`current_account_balance`                            | Net trade in goods and services plus net earnings and net transfer payments to/from the rest of the world (USD)
+`exports`                                            | Total amount of merchandise exports (USD)
+`imports`                                            | Total amount of merchandise imports (USD)
+`reserves_of_foreign_` `exchange_and_gold`           | Financial assets that are available to the central monetary authority (USD)
+`debt_external`                                      | Total public and private debt owed to nonresidents (USD)
+`electricity_production`, `_consumption`, `_exports`, `_imports` | Electricity produced, consumed, exported and imported (kWh)
+`electricity_installed_` `generating_capacity`       | Total capacity of currently installed generators to produce electricity (kW)
+`electricity_from_` `fossil_fuels`                   | Capacity of plants that generate electricity by burning fossil fuels (coal, petroleum products  and natural gas) as % total installed capacity
+`electricity_from_` `nuclear_fuels`                  | Capacity of plants that generate electricity through radioactive decay of nuclear fuel as % total installed capacity
+`electricity_from_` `hydroelectric_plants`           | Capacity of plants that generate electricity by water-driven turbines as % total installed capacity
+`electricity_from_` `other_renewable_sources`        | Capacity of plants that generate electricity by using renewable energy sources other than hydroelectric (wind, waves, solar, geothermal) as % total installed capacity
+`crude_oil_production`, `_exports`, `_imports`       | Crude oil produced, exported and imported (barrels per day)
+`crude_oil_proved_reserves`                          | Stock of proved reserves of crude oil (barrels)
+`refined_petroleum_products_` `production`, `_consumption`, `_exports`, `_imports` | Refined petroleum products produced, consumed, exported and imported (barrels per day)
+`natural_gas_production`, `_consumption`, `_exports`, `_imports` | Natural gas produced, consumed, exported and imported (m³)
+`natural_gas_proved_reserves`                        | Proved reserves of natural gas (m³)
+`carbon_dioxide_emissions_` `from_consumption_of_energy`| Total amount of carbon dioxide (in metric tons) released by burning fossil fuels in the process of producing and consuming energy
+`telephones_fixed_lines`                             | Total number of main telephone lines in use
+`telephones_mobile_cellular`                         | Total number of mobile cellular telephone subscribers
+`internet_users`                                     | Number of users that access the Internet
+`broadband_fixed_subscriptions`                      | Total number of broadband internet subscribers
+`military_expenditures`                              | Spending on defence programs as % GDP
+`airports`                                           | Total number of airports or airfields recognisable from the air
+`railways`                                           | Total route length of the railway network and of its component parts (km)
+`roadways`                                           | Total length of the road network (km)
+`waterways`                                          | Total length of navigable rivers, canals and other inland bodies of water (km)
+`merchant_marine`                                    | Number of ships engaged in the carriage of goods
+
+
+
+
+
+## EdStats (Country-Level Education Statistics)
+
+
+In this exercise, we will prepare the EdStats dataset
+for further analysis.
+The file `edstats_2019.csv` provides us with many
+country-level Education Statistics extracted from the World Bank's Databank,
+see https://databank.worldbank.org/.
+Databank aggregates information from such sources as
+the UNESCO Institute for Statistics,
+OECD Programme for International Student Assessment (PISA)
+etc. The official description reads:
+
+> "The World Bank EdStats Query holds around 2,500 internationally comparable
+education indicators for access, progression, completion, literacy, teachers,
+population, and expenditures. The indicators cover the education cycle from
+pre-primary to tertiary education. The query also holds learning outcome data
+from international learning assessments (PISA, TIMSS, etc.), equity data
+from household surveys, and projection data to 2050."
+
+`edstats_2019.csv` was compiled on 24 April 2020 and lists
+indicators reported between 2010 and 2019.
+First, let's load the dataset:
+
+`wine_quality`  |
+----------------|------------------------------------------------------------------
+Last updated    | 2009
+Provider        | Paulo Cortez (Univ. Minho), Antonio Cerdeira, Fernando Almeida, Telmo Matos and Jose Reis (CVRVV)
+License         | Public Domain
+Source          | http://archive.ics.uci.edu/ml/datasets/Wine+Quality
+
+
+```{r edstats_wide_1}
+edstats_2019 <- read.csv("datasets/edstats_2019.csv",
+    comment.char="#", stringsAsFactors=FALSE)
+head(edstats_2019)
+```
+
+This data frame is in a "long" format, where each indicator
+for each country is given in its own row. Note that some indicators
+are not surveyed/updated every year.
+
+
+
+edstats_2019_wide.csv
+
+Column                         | Description
+-------------------------------|---------------------------------------------
 
 ## Other
 
 
-Boston from MASS
+the famous Fisher's Iris flower dataset,
+see `?iris` in R
+and https://en.wikipedia.org/wiki/Iris_flower_data_set.
 
-Iris
+
+
+The famous `Boston` dataset from the `MASS` package
+records the historical (in the 1970s) median house value
+(`medv` column, in 1000s USD) for 506 suburbs around
+Boston, MA, USA.
+
+You can access the dataset by calling:
+
+```{r Boston_load1,message=FALSE}
+# call install.packages("MASS") first (only once)
+library("MASS")
+head(Boston, 3)
+```
+
+Read the description of each of the 14 columns in the dataset's manual,
+see `?Boston`.
+
+
+
+
+
+Here is a famous illustrative example proposed by
+the statistician Francis Anscombe in the early 1970s.
+
+```{r anscombe}
+print(anscombe) # `anscombe` is a built-in object
+```
+
+What we see above is a single data frame
+that encodes four separate datasets:
+`anscombe$x1` and `anscombe$y1` define the first pair of variables,
+`anscombe$x2` and `anscombe$y2` define the second pair and so forth.
+
+
+
+
+MNIST digits
+
+MNIST fashion
+
 
 
 
@@ -292,20 +479,15 @@ All the datasets are two-dimensional, hence we'll be able to visualise
 the obtained results and assess the sensibility of the obtained clusterings.
 
 
-MNIST digits
-
-MNIST fashion
 
 
 
+## Movie Lens (TODO: permission required)
 
 
-## Movie Lens
+<!-- TODO (permission required) - PENDING -->
 
-
-(permission required) - PENDING
-
-
+movies, ratings
 
 ## Fuel Economy
 

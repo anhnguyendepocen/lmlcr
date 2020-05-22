@@ -338,9 +338,9 @@ dataset's description in Appendix F. <!-- TODO: -->
 
 
 ```{r df_ex1a}
-forest <- read.csv("datasets/urban_forest.csv.gz",
+urban_forest <- read.csv("datasets/urban_forest.csv.gz",
     comment.char="#", stringsAsFactors=FALSE)
-head(forest, 3)
+head(urban_forest, 3)
 ```
 
 { BEGIN exercise }
@@ -364,10 +364,10 @@ The output data frame must be sorted with respect to
 `Diameter.Breast.Height`, decreasingly.
 
 ```{r df_ex1b,echo=-c(1,3)}
-.. <- FALSE
+.. <- FALSE ############ HIDDEN
 widest_trees <- ..
-widest_trees <- head(forest[order(forest$Diameter.Breast.Height, decreasing=TRUE),
-c("CoM.ID", "Common.Name", "Diameter.Breast.Height")], 5)
+widest_trees <- head(urban_forest[order(urban_forest$Diameter.Breast.Height, decreasing=TRUE),
+c("CoM.ID", "Common.Name", "Diameter.Breast.Height")], 5) ############ HIDDEN
 print(widest_trees)
 ```
 { END exercise }
@@ -379,8 +379,8 @@ Recall (from the dataset's description) that pre-2003 data might be inaccurate.
 
 ```{r df_ex1c,echo=-c(2,3)}
 yearly_trees <- ..
-yearly_trees <- as.data.frame(table(forest$Year.Planted))
-names(yearly_trees) <- c("Year.Planted", "Count")
+yearly_trees <- as.data.frame(table(urban_forest$Year.Planted)) ############ HIDDEN
+names(yearly_trees) <- c("Year.Planted", "Count") ############ HIDDEN
 head(yearly_trees)
 ```
 { END exercise }
@@ -424,9 +424,9 @@ state of Victoria, Australia.
 Read the dataset's description in Appendix F. <!-- TODO: -->
 
 ```{r df_ex2a}
-air <- read.csv("datasets/air_quality.csv.gz",
+air_quality <- read.csv("datasets/air_quality.csv.gz",
     comment.char="#", stringsAsFactors=FALSE)
-head(air, 3)
+head(air_quality, 3)
 ```
 
 
@@ -436,9 +436,9 @@ of air quality data for `Geelong South` only.
 Omit all columns but `sample_datetime`, `param_id` and `value`.
 
 ```{r df_ex2b,echo=-c(1,3)}
-.. <- FALSE
+.. <- FALSE ###### HIDDEN
 gee <- ..
-gee <- air[air$sp_name=="Geelong South",c("sample_datetime", "param_id", "value")]
+gee <- air_quality[air_quality$sp_name=="Geelong South", c("sample_datetime", "param_id", "value")]  ###### HIDDEN
 head(gee, 14)
 ```
 
@@ -460,8 +460,8 @@ to the "wide" format so as to obtain:
 
 ```{r df_ex2d,echo=-(2:3)}
 gee_wide <- ..
-library("tidyr")
-gee_wide <- as.data.frame(pivot_wider(gee, names_from="param_id", values_from="value"))
+library("tidyr") ###### HIDDEN
+gee_wide <- as.data.frame(pivot_wider(gee, names_from="param_id", values_from="value")) ###### HIDDEN
 head(gee_wide, 3)
 ```
 
@@ -479,9 +479,9 @@ to proper date-time data:
 
 ```{r df_ex2e,echo=-c(2,4)}
 class(gee_wide$sample_datetime) # before
-old <- gee_wide$sample_datetime
+old <- gee_wide$sample_datetime ###### HIDDEN
 gee_wide$sample_datetime <- ..
-gee_wide$sample_datetime <- strptime(old, "%d/%m/%Y %H:%M:%S")
+gee_wide$sample_datetime <- strptime(old, "%d/%m/%Y %H:%M:%S") ###### HIDDEN
 class(gee_wide$sample_datetime) # after
 head(gee_wide, 3)
 ```
@@ -510,9 +510,8 @@ of the `r length(params)` parameters.
 
 ```{r df_ex2g,echo=-c(2,3)}
 gee_ave <- ..
-options(digits=3)
-gee_ave <- aggregate(gee_wide[2:8],
-    gee_wide[9], mean, na.rm=TRUE)
+options(digits=3) ###### HIDDEN
+gee_ave <- aggregate(gee_wide[2:8], gee_wide[9], mean, na.rm=TRUE) ###### HIDDEN
 gee_ave
 ```
 { END exercise }

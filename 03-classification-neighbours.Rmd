@@ -106,10 +106,10 @@ white wines only.
 
 
 ```{r input1,cache=TRUE}
-wines <- read.csv("datasets/winequality_all.csv",
+wine_quality <- read.csv("datasets/wine_quality_all.csv",
     comment.char="#", stringsAsFactors=FALSE)
-wines <- wines[wines$color == "white",]
-(n <- nrow(wines)) # number of samples
+white_wines <- wine_quality[wine_quality$color == "white",]
+(n <- nrow(white_wines)) # number of samples
 ```
 
 These are Vinho Verde wine samples from the north of Portugal,
@@ -129,7 +129,7 @@ The input matrix $\mathbf{X}\in\mathbb{R}^{n\times p}$
 consists of the first 10 numeric variables:
 
 ```{r input2,dependson='input1',cache=TRUE}
-X <- as.matrix(wines[,1:10])
+X <- as.matrix(white_wines[,1:10])
 dim(X)
 head(X, 2) # first two rows
 ```
@@ -144,12 +144,12 @@ The 11th variable measures the amount of alcohol (in %).
 
 We will convert this dependent variable to a binary one:
 
-- 0 == (`alcohol  < 12`) == lower-alcohol wines1
+- 0 == (`alcohol  < 12`) == lower-alcohol wines,
 - 1 == (`alcohol >= 12`) == higher-alcohol wines
 
 ```{r input3,dependson='input2',cache=TRUE}
 # recall that TRUE == 1
-Y <- factor(as.character(as.numeric(wines$alcohol >= 12)))
+Y <- factor(as.character(as.numeric(white_wines$alcohol >= 12)))
 table(Y)
 ```
 
@@ -343,7 +343,7 @@ is at $X_1=0$. The 25-NN classifier did quite a good job, see  Figure {@fig:fig_
 
 We shall be calling the `knn()` function from package `FNN`
 to classify the points from the test sample
-extracted from the `wines` dataset:
+extracted from the `white_wines` dataset:
 
 ```{r libFNN,message=FALSE}
 library("FNN")
@@ -1029,11 +1029,11 @@ our_knn <- function(X_train, X_test, Y_train, k=1) {
 Load an example dataset on which we will test our algorithm:
 
 ```{r our_knn2}
-wines <- read.csv("datasets/winequality_all.csv",
+wine_quality <- read.csv("datasets/wine_quality_all.csv",
     comment.char="#", stringsAsFactors=FALSE)
-wines <- wines[wines$color == "white",]
-X <- as.matrix(wines[,1:10])
-Y <- factor(as.character(as.numeric(wines$alcohol >= 12)))
+white_wines <- wine_quality[wine_quality$color == "white",]
+X <- as.matrix(white_wines[,1:10])
+Y <- factor(as.character(as.numeric(white_wines$alcohol >= 12)))
 ```
 
 

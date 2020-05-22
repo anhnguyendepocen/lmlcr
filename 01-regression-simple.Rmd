@@ -550,13 +550,13 @@ What kind of data should you gather in order to tackle them?
 
 A single dataset can become an instance of many different ML problems.
 
-Examples -- the `wines` dataset:
+Examples -- the `wine_quality` dataset:
 
 ```{r wines_load,echo=-1}
 set.seed(123)
-wines <- read.csv("datasets/winequality_all.csv",
+wine_quality <- read.csv("datasets/wine_quality_all.csv",
     comment.char="#", stringsAsFactors=FALSE)
-wines[1,]
+wine_quality[1,]
 ```
 
 
@@ -564,8 +564,8 @@ wines[1,]
 
 
 ```{r wines_regression,fig.cap="Quantitative (numeric) outputs lead to regression problems"}
-summary(wines$alcohol) # continuous variable
-hist(wines$alcohol, main="", col="white"); box()
+summary(wine_quality$alcohol) # continuous variable
+hist(wine_quality$alcohol, main="", col="white"); box()
 ```
 
 `color` is a quantitative variable with two possible outcomes (see Figure {@fig:wines_binary} for a bar plot):
@@ -573,8 +573,8 @@ hist(wines$alcohol, main="", col="white"); box()
 
 
 ```{r wines_binary,fig.cap="Quantitative outputs lead to classification tasks"}
-table(wines$color) # binary variable
-barplot(table(wines$color), col="white", ylim=c(0, 6000))
+table(wine_quality$color) # binary variable
+barplot(table(wine_quality$color), col="white", ylim=c(0, 6000))
 ```
 
 
@@ -587,8 +587,8 @@ these ranks are something more than just labels -- they are linearly
 ordered, we know what's the smallest rank and whats the greatest one.
 
 ```{r wines_ordinal,fig.cap="Ordinal variables constitute ordinal regression tasks"}
-table(wines$response) # ordinal variable
-barplot(table(wines$response), col="white", ylim=c(0, 3000))
+table(wine_quality$response) # ordinal variable
+barplot(table(wine_quality$response), col="white", ylim=c(0, 3000))
 ```
 
 

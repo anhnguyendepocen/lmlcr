@@ -1,0 +1,5 @@
+MovieLens Latest Dataset - Small
+================================
+
+Please download the dataset manually from
+https://grouplens.org/datasets/movielens/latest/

@@ -727,10 +727,11 @@ Let's load the dataset on historical daily EUR to AUD/NZD/GBP/PLN/etc.
 currency exchange rates:
 
 ```{r matrix_ex1a}
-rates <- read.csv("datasets/currency_exchange_all.csv.gz",
+currency_exchange <- read.csv("datasets/currency_exchange_all.csv.gz",
     comment.char="#", stringsAsFactors=FALSE)
-rates$Day <- as.numeric(as.Date(rates$Day)) # Convert Day to numeric
-rates <- as.matrix(rates)
+# Convert Day to numeric:
+currency_exchange$Day <- as.numeric(as.Date(currency_exchange$Day))
+rates <- as.matrix(currency_exchange)
 head(rates, 3)
 ```
 

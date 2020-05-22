@@ -2,6 +2,7 @@
 \mathbf{\hat{ -> \hat{\mathbf{
 
 data set -> dataset
+indexes -> indices
 
 cross entropy -> cross-entropy
 crossentropy -> cross-entropy
@@ -9,3 +10,12 @@ crossentropy -> cross-entropy
 Rstudio -> RStudio
 
 non-negative -> nonnegative
+non-decreasing
+non-increasing
+non-
+
+rowwise
+columnwise
+
+righthand
+lefthand
