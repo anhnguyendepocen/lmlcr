@@ -3,10 +3,14 @@
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 
 
+<!-- TODO: citations
+
+
+-->
+
+
+
 <!-- TODO
-
-
-"Good" data sets are hard to find, most textbooks fool you
 
 
 

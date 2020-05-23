@@ -455,8 +455,7 @@ There are `r length(params)` air quality parameters:
 `r paste(names(params), collapse=", ")`. However, currently the data frame
 is in the "long" format -- each measurement is represented in a separate row
 and there are many rows corresponding to the same dates.
-Convert the data frame
-to the "wide" format so as to obtain:
+Convert the data frame to the "wide" format so as to obtain:
 
 ```{r df_ex2d,echo=-(2:3)}
 gee_wide <- ..

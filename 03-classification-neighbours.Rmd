@@ -3,7 +3,29 @@
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 
 
+
+<!-- TODO: citations
+
+
+
+
+ 10.1109/TIT.1967.1053964
+ 10.1109/TIT.1968.1054155
+
+
+ curse of dimensionality
+ https://minds.wisconsin.edu/bitstream/handle/1793/60174/TR1377.pdf?sequence=1
+ etc.
+
+ vp-trees, gnats, kd-trees, FANN
+-->
+
+
+
 <!-- TODO:
+
+
+2D illustration of NEAREST NEIGHBOURS!!!
 
 exercise -- density, not NN-based classification or
 regression - consider the epsilon-neighbourhood????
