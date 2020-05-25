@@ -372,6 +372,7 @@ The Factbook is in the public domain. Accordingly, it may be copied freely witho
 ```{r factbookA1}
 factbook <- read.csv("datasets/world_factbook_2020.csv",
     comment.char="#", stringsAsFactors=FALSE)
+factbook[1:6, 1:5] # preview
 ```
 
 Column                                               | Description
@@ -725,9 +726,150 @@ Column                          | Description
 
 
 
+## Food and Nutrient Database for Dietary Studies (FNDDS)
+
+
+The Food Surveys Research Group affiliated with the
+US Department of Agriculture has published the
+Food and Nutrient Database for Dietary Studies 2015-2016.
+The database list nutrients in 8690 foods and beverages.
+See https://www.ars.usda.gov/ARSUserFiles/80400530/pdf/fndds/2015_2016_FNDDS_Doc.pdf
+for detailed documentation.
+
+
+
+
+
+`fndds_nutrients`    |
+---------------------|---------------------------------------------
+Last updated         | 2016
+Provider             | US Department of Agriculture, Agricultural Research Service
+License              | Public Domain
+Source               | http://www.ars.usda.gov/nea/bhnrc/fsrg
+
+
+
+
+```{r datasets_fndds_nutrients,echo=-1}
+set.seed(421)
+fndds_nutrients <- read.csv("datasets/fndds_nutrients_2016.csv.gz",
+    comment.char="#", stringsAsFactors=FALSE)
+fndds_nutrients[1:6, c(1:7, 10)] # preview
+```
+
+
+
+
+All nutrient amounts are given as per 100 g edible portion.
+
+Column                              | Description
+------------------------------------|---------------------------------------------
+`Code`                              | Unique 8-digit identification code
+`Description`                       | Primary description for a food/beverage
+`WWEIA_Code`                        | Unique 4-digit identification code
+`WWEIA_Description`                 | Description for a WWEIA category
+`Energy`                            | Energy (kcal)
+`Protein`                           | Protein (g)
+`Carbohydrate`                      | Carbohydrate (g)
+`Sugars_total`                      | Sugars, total (g)
+`Fiber_total_dietary`               | Fiber, total dietary (g)
+`Fat_total`                         | Total Fat (g)
+`Fatty_acids_total_saturated`       | Fatty acids, total saturated (g)
+`Fatty_acids_total_monounsaturated` | Fatty acids, total monounsaturated (g)
+`Fatty_acids_total_polyunsaturated` | Fatty acids, total polyunsaturated (g)
+`Cholesterol`                       | Cholesterol (mg)
+`Retinol`                           | Retinol (mcg)
+`Vitamin_A_RAE`                     | Vitamin A, RAE (mcg_RAE)
+`Carotene_alpha`                    | Carotene, alpha (mcg)
+`Carotene_beta`                     | Carotene, beta (mcg)
+`Cryptoxanthin_beta`                | Cryptoxanthin, beta (mcg)
+`Lycopene`                          | Lycopene (mcg)
+`Lutein_zeaxanthin`                 | Lutein + zeaxanthin (mcg)
+`Thiamin`                           | Thiamin (mg)
+`Riboflavin`                        | Riboflavin (mg)
+`Niacin`                            | Niacin (mg)
+`Vitamin_B6`                        | Vitamin B-6 (mg)
+`Folic_acid`                        | Folic acid (mcg)
+`Folate_food`                       | Folate, food (mcg)
+`Folate_DFE`                        | Folate, DFE (mcg_DFE)
+`Folate_total`                      | Folate, total (mcg)
+`Choline_total`                     | Choline, total (mg)
+`Vitamin_B12`                       | Vitamin B-12 (mcg)
+`Vitamin_B12_added`                 | Vitamin B-12, added (mcg)
+`Vitamin_C`                         | Vitamin C (mg)
+`Vitamin_D`                         | Vitamin D (D2 + D3) (mcg)
+`Vitamin_E_alphatocopherol`         | Vitamin E (alpha-tocopherol) (mg)
+`Vitamin_E_added`                   | Vitamin E, added (mg)
+`Vitamin_K_phylloquinone`           | Vitamin K (phylloquinone) (mcg)
+`Calcium`                           | Calcium (mg)
+`Phosphorus`                        | Phosphorus (mg)
+`Magnesium`                         | Magnesium (mg)
+`Iron`                              | Iron (mg)
+`Zinc`                              | Zinc (mg)
+`Copper`                            | Copper (mg)
+`Selenium`                          | Selenium (mcg)
+`Potassium`                         | Potassium (mg)
+`Sodium`                            | Sodium (mg)
+`Caffeine`                          | Caffeine (mg)
+`Theobromine`                       | Theobromine (mg)
+`Alcohol`                           | Alcohol (g)
+`Fatty_acid_4_0`                    | 4:0    (g)
+`Fatty_acid_6_0`                    | 6:0    (g)
+`Fatty_acid_8_0`                    | 8:0    (g)
+`Fatty_acid_10_0`                   | 10:0    (g)
+`Fatty_acid_12_0`                   | 12:0    (g)
+`Fatty_acid_14_0`                   | 14:0    (g)
+`Fatty_acid_16_0`                   | 16:0    (g)
+`Fatty_acid_18_0`                   | 18:0    (g)
+`Fatty_acid_16_1`                   | 16:1        (g)
+`Fatty_acid_18_1`                   | 18:1    (g)
+`Fatty_acid_20_1`                   | 20:1    (g)
+`Fatty_acid_22_1`                   | 22:1    (g)
+`Fatty_acid_18_2`                   | 18:2    (g)
+`Fatty_acid_18_3`                   | 18:3    (g)
+`Fatty_acid_18_4`                   | 18:4    (g)
+`Fatty_acid_20_4`                   | 20:4    (g)
+`Fatty_acid_20_5_n3`                | 20:5 n-3 (g)
+`Fatty_acid_22_5_n3`                | 22:5 n-3 (g)
+`Fatty_acid_22_6_n3`                | 22:6 n-3 (g)
+`Water`                             | Water (g)
+
+
+
+<!--
+See also:
+
+https://fdc.nal.usda.gov/download-datasets.html
+
+-->
+
+
+<!-- Terms of use:
+
+https://www.usda.gov/policies-and-links
+
+USDA food composition data are in the public domain and they are not copyrighted.
+No permission is needed for their use.
+US Department of Agriculture, Agricultural Research Service.
+FoodData Central, 2020. fdc.nal.usda.gov.
+
+Most information presented on the USDA Web site is considered public domain
+information. Public domain information may be freely distributed or copied,
+but use of appropriate byline/photo/image credits is requested. Attribution
+may be cited as follows: "US Department of Agriculture."
+
+-->
+
+
+
+
+
+
+
 ## Clustering Benchmarks
 
-In Chapter 7<!-- TODO --> we study a few clustering benchmark datasets.
+In the Exercises section of
+Chapter 7<!-- TODO --> we study a few clustering benchmark datasets.
 They are two-dimensional, so that it's possible to visualise
 the obtained results and quality of the obtained clusterings.
 
@@ -761,39 +903,6 @@ Source               | http://cs.joensuu.fi/sipu/datasets/
 
 
 
-
-
-
-## Fuel Economy
-
-
-https://fueleconomy.gov/feg/download.shtml
-
-<!-- Terms of use:
-
-TODO:
-
--->
-
-
-
-## Food Composition
-
-https://fdc.nal.usda.gov/download-datasets.html
-USDA food composition data are in the public domain and they are not copyrighted. No permission is needed for their use.
-U.S. Department of Agriculture, Agricultural Research Service. FoodData Central, 2020. fdc.nal.usda.gov.
-
-
-<!-- Terms of use:
-
-TODO:
-
--->
-
-
-
-
-
 ## Movie Lens (TODO: permission required)
 
 
@@ -821,7 +930,7 @@ and https://en.wikipedia.org/wiki/Iris_flower_data_set.
 
 The famous `Boston` dataset from the `MASS` package
 records the historical (in the 1970s) median house value
-(`medv` column, in 1000s USD) for 506 suburbs around
+(`medv` column, in 1,000s USD) for 506 suburbs around
 Boston, MA, USA.
 
 You can access the dataset by calling:
@@ -858,4 +967,19 @@ MNIST digits
 
 MNIST fashion
 
+
+
+
+<!--
+
+## Fuel Economy
+
+
+https://fueleconomy.gov/feg/download.shtml
+
+Terms of use:
+
+TODO:
+
+-->
 
