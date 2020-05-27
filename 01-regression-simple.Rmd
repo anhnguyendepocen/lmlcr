@@ -1485,7 +1485,7 @@ Read more about Anscombe's quartet at https://en.wikipedia.org/wiki/Anscombe%27s
 
 
 
-## Median House Value in Boston
+### Median House Value in Boston
 
 
 The famous `Boston` dataset from the `MASS` package

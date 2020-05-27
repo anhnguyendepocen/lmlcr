@@ -2062,7 +2062,7 @@ found by forward selection, i.e., `f2`.*
 
 
 
-## Median House Value in Boston (Continued)
+### Median House Value in Boston (Continued)
 
 
 Let's get back to the `Boston` dataset from the `MASS` package
