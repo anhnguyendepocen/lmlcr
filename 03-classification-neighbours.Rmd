@@ -136,7 +136,7 @@ white wines only.
 
 ```{r input1,cache=TRUE}
 wine_quality <- read.csv("datasets/wine_quality_all.csv",
-    comment.char="#", stringsAsFactors=FALSE)
+    comment.char="#")
 white_wines <- wine_quality[wine_quality$color == "white",]
 (n <- nrow(white_wines)) # number of samples
 ```
@@ -1059,7 +1059,7 @@ Load an example dataset on which we will test our algorithm:
 
 ```{r our_knn2}
 wine_quality <- read.csv("datasets/wine_quality_all.csv",
-    comment.char="#", stringsAsFactors=FALSE)
+    comment.char="#")
 white_wines <- wine_quality[wine_quality$color == "white",]
 X <- as.matrix(white_wines[,1:10])
 Y <- factor(as.character(as.numeric(white_wines$alcohol >= 12)))
@@ -1523,7 +1523,7 @@ Consider the Wine Quality dataset (see Appendix F<!-- TODO --> for details):
 
 ```{r task_classification_4_1}
 wine_quality <- read.csv("datasets/wine_quality_all.csv",
-    comment.char="#", stringsAsFactors=FALSE)
+    comment.char="#")
 head(wine_quality, 3)
 ```
 

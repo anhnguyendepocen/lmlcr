@@ -188,8 +188,7 @@ X <- do.call(rbind, X) # rbind(X[[1]], X[[2]], X[[3]])
 
 <!--
 X <- as.matrix(read.csv("datasets/sipu_unbalance.csv",
-    header=FALSE, sep=" ", comment.char="#",
-    stringsAsFactors=FALSE))
+    header=FALSE, sep=" ", comment.char="#"))
 X <- X/10000-30 # a more user-friendly scale
 K <- 8
 p <- 2

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>F Datasets | Lightweight Machine Learning Classics with R</title>
   <meta name="description" content="Explore some of the most fundamental algorithms which have stood the test of time and provide the basis for innovative solutions in data-driven AI. Learn how to use the R language for implementing various stages of data processing and modelling activities. Appreciate mathematics as the universal language for formalising data-intense problems and communicating their solutions. The book is for you if you’re yet to be fluent with university-level linear algebra, calculus and probability theory or you’ve forgotten all the maths you’ve ever learned, and are seeking a gentle, yet thorough, introduction to the topic." />
-  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
   <meta property="og:title" content="F Datasets | Lightweight Machine Learning Classics with R" />
   <meta property="og:type" content="book" />
@@ -155,9 +155,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#desired-outputs"><i class="fa fa-check"></i><b>1.2.2</b> Desired Outputs</a></li>
 <li class="chapter" data-level="1.2.3" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#types-of-supervised-learning-problems"><i class="fa fa-check"></i><b>1.2.3</b> Types of Supervised Learning Problems</a></li>
 </ul></li>
+<li class="chapter" data-level="1.3" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#simple-regression"><i class="fa fa-check"></i><b>1.3</b> Simple Regression</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#introduction"><i class="fa fa-check"></i><b>1.3.1</b> Introduction</a></li>
+<li class="chapter" data-level="1.3.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#search-space-and-objective"><i class="fa fa-check"></i><b>1.3.2</b> Search Space and Objective</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#simple-linear-regression-1"><i class="fa fa-check"></i><b>1.4</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#introduction-1"><i class="fa fa-check"></i><b>1.4.1</b> Introduction</a></li>
+<li class="chapter" data-level="1.4.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#solution-in-r"><i class="fa fa-check"></i><b>1.4.2</b> Solution in R</a></li>
+<li class="chapter" data-level="1.4.3" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#analytic-solution"><i class="fa fa-check"></i><b>1.4.3</b> Analytic Solution</a></li>
+<li class="chapter" data-level="1.4.4" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#derivation-of-the-solution"><i class="fa fa-check"></i><b>1.4.4</b> Derivation of the Solution (**)</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#exercises"><i class="fa fa-check"></i><b>1.5</b> Exercises</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#the-anscombe-quartet"><i class="fa fa-check"></i><b>1.5.1</b> The Anscombe Quartet</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#median-house-value-in-boston"><i class="fa fa-check"></i><b>1.6</b> Median House Value in Boston</a></li>
+<li class="chapter" data-level="1.7" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#outro"><i class="fa fa-check"></i><b>1.7</b> Outro</a><ul>
+<li class="chapter" data-level="1.7.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#remarks"><i class="fa fa-check"></i><b>1.7.1</b> Remarks</a></li>
+<li class="chapter" data-level="1.7.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#further-reading"><i class="fa fa-check"></i><b>1.7.2</b> Further Reading</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="multiple-regression.html"><a href="multiple-regression.html"><i class="fa fa-check"></i><b>2</b> Multiple Regression</a><ul>
-<li class="chapter" data-level="2.1" data-path="multiple-regression.html"><a href="multiple-regression.html#introduction"><i class="fa fa-check"></i><b>2.1</b> Introduction</a><ul>
+<li class="chapter" data-level="2.1" data-path="multiple-regression.html"><a href="multiple-regression.html#introduction-2"><i class="fa fa-check"></i><b>2.1</b> Introduction</a><ul>
 <li class="chapter" data-level="2.1.1" data-path="multiple-regression.html"><a href="multiple-regression.html#formalism-1"><i class="fa fa-check"></i><b>2.1.1</b> Formalism</a></li>
 <li class="chapter" data-level="2.1.2" data-path="multiple-regression.html"><a href="multiple-regression.html#simple-linear-regression---recap"><i class="fa fa-check"></i><b>2.1.2</b> Simple Linear Regression - Recap</a></li>
 </ul></li>
@@ -171,7 +189,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3.3" data-path="multiple-regression.html"><a href="multiple-regression.html#variable-transformation"><i class="fa fa-check"></i><b>2.3.3</b> Variable Transformation</a></li>
 <li class="chapter" data-level="2.3.4" data-path="multiple-regression.html"><a href="multiple-regression.html#predictive-vs.-descriptive-power"><i class="fa fa-check"></i><b>2.3.4</b> Predictive vs. Descriptive Power</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="multiple-regression.html"><a href="multiple-regression.html#exercises"><i class="fa fa-check"></i><b>2.4</b> Exercises</a><ul>
+<li class="chapter" data-level="2.4" data-path="multiple-regression.html"><a href="multiple-regression.html#exercises-1"><i class="fa fa-check"></i><b>2.4</b> Exercises</a><ul>
 <li class="chapter" data-level="2.4.1" data-path="multiple-regression.html"><a href="multiple-regression.html#anscombes-quartet-revisited"><i class="fa fa-check"></i><b>2.4.1</b> Anscombe’s Quartet Revisited</a></li>
 <li class="chapter" data-level="2.4.2" data-path="multiple-regression.html"><a href="multiple-regression.html#countries-of-the-world-simple-models-involving-the-gdp-per-capita"><i class="fa fa-check"></i><b>2.4.2</b> Countries of the World – Simple models involving the GDP per capita</a></li>
 <li class="chapter" data-level="2.4.3" data-path="multiple-regression.html"><a href="multiple-regression.html#countries-of-the-world-most-correlated-variables"><i class="fa fa-check"></i><b>2.4.3</b> Countries of the World – Most correlated variables (*)</a></li>
@@ -179,24 +197,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4.5" data-path="multiple-regression.html"><a href="multiple-regression.html#countries-of-the-world-a-multiple-regression-model-for-the-per-capita-gdp"><i class="fa fa-check"></i><b>2.4.5</b> Countries of the World – A multiple regression model for the per capita GDP</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="multiple-regression.html"><a href="multiple-regression.html#median-house-value-in-boston-continued"><i class="fa fa-check"></i><b>2.5</b> Median House Value in Boston (Continued)</a></li>
-<li class="chapter" data-level="2.6" data-path="multiple-regression.html"><a href="multiple-regression.html#outro"><i class="fa fa-check"></i><b>2.6</b> Outro</a><ul>
-<li class="chapter" data-level="2.6.1" data-path="multiple-regression.html"><a href="multiple-regression.html#remarks"><i class="fa fa-check"></i><b>2.6.1</b> Remarks</a></li>
+<li class="chapter" data-level="2.6" data-path="multiple-regression.html"><a href="multiple-regression.html#outro-1"><i class="fa fa-check"></i><b>2.6</b> Outro</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="multiple-regression.html"><a href="multiple-regression.html#remarks-1"><i class="fa fa-check"></i><b>2.6.1</b> Remarks</a></li>
 <li class="chapter" data-level="2.6.2" data-path="multiple-regression.html"><a href="multiple-regression.html#other-methods-for-regression"><i class="fa fa-check"></i><b>2.6.2</b> Other Methods for Regression</a></li>
-<li class="chapter" data-level="2.6.3" data-path="multiple-regression.html"><a href="multiple-regression.html#derivation-of-the-solution"><i class="fa fa-check"></i><b>2.6.3</b> Derivation of the Solution (**)</a></li>
+<li class="chapter" data-level="2.6.3" data-path="multiple-regression.html"><a href="multiple-regression.html#derivation-of-the-solution-1"><i class="fa fa-check"></i><b>2.6.3</b> Derivation of the Solution (**)</a></li>
 <li class="chapter" data-level="2.6.4" data-path="multiple-regression.html"><a href="multiple-regression.html#solution-in-matrix-form"><i class="fa fa-check"></i><b>2.6.4</b> Solution in Matrix Form (***)</a></li>
 <li class="chapter" data-level="2.6.5" data-path="multiple-regression.html"><a href="multiple-regression.html#pearsons-r-in-matrix-form"><i class="fa fa-check"></i><b>2.6.5</b> Pearson’s r in Matrix Form (**)</a></li>
-<li class="chapter" data-level="2.6.6" data-path="multiple-regression.html"><a href="multiple-regression.html#further-reading"><i class="fa fa-check"></i><b>2.6.6</b> Further Reading</a></li>
+<li class="chapter" data-level="2.6.6" data-path="multiple-regression.html"><a href="multiple-regression.html#further-reading-1"><i class="fa fa-check"></i><b>2.6.6</b> Further Reading</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="classification-with-k-nearest-neighbours.html"><a href="classification-with-k-nearest-neighbours.html"><i class="fa fa-check"></i><b>3</b> Classification with K-Nearest Neighbours</a><ul>
-<li class="chapter" data-level="3.1" data-path="classification-with-k-nearest-neighbours.html"><a href="classification-with-k-nearest-neighbours.html#introduction-1"><i class="fa fa-check"></i><b>3.1</b> Introduction</a><ul>
+<li class="chapter" data-level="3.1" data-path="classification-with-k-nearest-neighbours.html"><a href="classification-with-k-nearest-neighbours.html#introduction-3"><i class="fa fa-check"></i><b>3.1</b> Introduction</a><ul>
 <li class="chapter" data-level="3.1.1" data-path="classification-with-k-nearest-neighbours.html"><a href="classification-with-k-nearest-neighbours.html#classification-task"><i class="fa fa-check"></i><b>3.1.1</b> Classification Task</a></li>
 <li class="chapter" data-level="3.1.2" data-path="classification-with-k-nearest-neighbours.html"><a href="classification-with-k-nearest-neighbours.html#data"><i class="fa fa-check"></i><b>3.1.2</b> Data</a></li>
 <li class="chapter" data-level="3.1.3" data-path="classification-with-k-nearest-neighbours.html"><a href="classification-with-k-nearest-neighbours.html#training-and-test-sets"><i class="fa fa-check"></i><b>3.1.3</b> Training and Test Sets</a></li>
 <li class="chapter" data-level="3.1.4" data-path="classification-with-k-nearest-neighbours.html"><a href="classification-with-k-nearest-neighbours.html#discussed-methods"><i class="fa fa-check"></i><b>3.1.4</b> Discussed Methods</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="classification-with-k-nearest-neighbours.html"><a href="classification-with-k-nearest-neighbours.html#k-nearest-neighbour-classifier"><i class="fa fa-check"></i><b>3.2</b> K-nearest Neighbour Classifier</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="classification-with-k-nearest-neighbours.html"><a href="classification-with-k-nearest-neighbours.html#introduction-2"><i class="fa fa-check"></i><b>3.2.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2.1" data-path="classification-with-k-nearest-neighbours.html"><a href="classification-with-k-nearest-neighbours.html#introduction-4"><i class="fa fa-check"></i><b>3.2.1</b> Introduction</a></li>
 <li class="chapter" data-level="3.2.2" data-path="classification-with-k-nearest-neighbours.html"><a href="classification-with-k-nearest-neighbours.html#example-in-r"><i class="fa fa-check"></i><b>3.2.2</b> Example in R</a></li>
 <li class="chapter" data-level="3.2.3" data-path="classification-with-k-nearest-neighbours.html"><a href="classification-with-k-nearest-neighbours.html#feature-engineering"><i class="fa fa-check"></i><b>3.2.3</b> Feature Engineering</a></li>
 </ul></li>
@@ -212,22 +230,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.4" data-path="classification-with-k-nearest-neighbours.html"><a href="classification-with-k-nearest-neighbours.html#nn-search-routines"><i class="fa fa-check"></i><b>3.4.4</b> NN Search Routines (*)</a></li>
 <li class="chapter" data-level="3.4.5" data-path="classification-with-k-nearest-neighbours.html"><a href="classification-with-k-nearest-neighbours.html#different-metrics"><i class="fa fa-check"></i><b>3.4.5</b> Different Metrics (*)</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="classification-with-k-nearest-neighbours.html"><a href="classification-with-k-nearest-neighbours.html#exercises-1"><i class="fa fa-check"></i><b>3.5</b> Exercises</a><ul>
+<li class="chapter" data-level="3.5" data-path="classification-with-k-nearest-neighbours.html"><a href="classification-with-k-nearest-neighbours.html#exercises-2"><i class="fa fa-check"></i><b>3.5</b> Exercises</a><ul>
 <li class="chapter" data-level="3.5.1" data-path="classification-with-k-nearest-neighbours.html"><a href="classification-with-k-nearest-neighbours.html#wine-quality-best-k-nn-parameters-via-cross-validation"><i class="fa fa-check"></i><b>3.5.1</b> Wine Quality – Best K-NN Parameters via Cross-Validation (*)</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="classification-with-k-nearest-neighbours.html"><a href="classification-with-k-nearest-neighbours.html#outro-1"><i class="fa fa-check"></i><b>3.6</b> Outro</a><ul>
-<li class="chapter" data-level="3.6.1" data-path="classification-with-k-nearest-neighbours.html"><a href="classification-with-k-nearest-neighbours.html#remarks-1"><i class="fa fa-check"></i><b>3.6.1</b> Remarks</a></li>
+<li class="chapter" data-level="3.6" data-path="classification-with-k-nearest-neighbours.html"><a href="classification-with-k-nearest-neighbours.html#outro-2"><i class="fa fa-check"></i><b>3.6</b> Outro</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="classification-with-k-nearest-neighbours.html"><a href="classification-with-k-nearest-neighbours.html#remarks-2"><i class="fa fa-check"></i><b>3.6.1</b> Remarks</a></li>
 <li class="chapter" data-level="3.6.2" data-path="classification-with-k-nearest-neighbours.html"><a href="classification-with-k-nearest-neighbours.html#side-note-k-nn-regression"><i class="fa fa-check"></i><b>3.6.2</b> Side Note: K-NN Regression</a></li>
-<li class="chapter" data-level="3.6.3" data-path="classification-with-k-nearest-neighbours.html"><a href="classification-with-k-nearest-neighbours.html#further-reading-1"><i class="fa fa-check"></i><b>3.6.3</b> Further Reading</a></li>
+<li class="chapter" data-level="3.6.3" data-path="classification-with-k-nearest-neighbours.html"><a href="classification-with-k-nearest-neighbours.html#further-reading-2"><i class="fa fa-check"></i><b>3.6.3</b> Further Reading</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html"><i class="fa fa-check"></i><b>4</b> Classification with Trees and Linear Models</a><ul>
-<li class="chapter" data-level="4.1" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#introduction-3"><i class="fa fa-check"></i><b>4.1</b> Introduction</a><ul>
+<li class="chapter" data-level="4.1" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#introduction-5"><i class="fa fa-check"></i><b>4.1</b> Introduction</a><ul>
 <li class="chapter" data-level="4.1.1" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#classification-task-1"><i class="fa fa-check"></i><b>4.1.1</b> Classification Task</a></li>
 <li class="chapter" data-level="4.1.2" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#data-1"><i class="fa fa-check"></i><b>4.1.2</b> Data</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#decision-trees"><i class="fa fa-check"></i><b>4.2</b> Decision Trees</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#introduction-4"><i class="fa fa-check"></i><b>4.2.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2.1" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#introduction-6"><i class="fa fa-check"></i><b>4.2.1</b> Introduction</a></li>
 <li class="chapter" data-level="4.2.2" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#example-in-r-1"><i class="fa fa-check"></i><b>4.2.2</b> Example in R</a></li>
 <li class="chapter" data-level="4.2.3" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#a-note-on-decision-tree-learning"><i class="fa fa-check"></i><b>4.2.3</b> A Note on Decision Tree Learning</a></li>
 </ul></li>
@@ -237,22 +255,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.3" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#example-in-r-2"><i class="fa fa-check"></i><b>4.3.3</b> Example in R</a></li>
 <li class="chapter" data-level="4.3.4" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#loss-function-cross-entropy"><i class="fa fa-check"></i><b>4.3.4</b> Loss Function: Cross-entropy</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#exercises-2"><i class="fa fa-check"></i><b>4.4</b> Exercises</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#edstats-preparing-data"><i class="fa fa-check"></i><b>4.4.1</b> EdStats – Preparing Data</a></li>
-<li class="chapter" data-level="4.4.2" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#edstats-where-girls-are-better-at-maths-than-boys"><i class="fa fa-check"></i><b>4.4.2</b> EdStats – Where Girls Are Better at Maths Than Boys?</a></li>
-<li class="chapter" data-level="4.4.3" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#edstats-and-world-factbook-joining-forces"><i class="fa fa-check"></i><b>4.4.3</b> EdStats and World Factbook – Joining Forces</a></li>
-<li class="chapter" data-level="4.4.4" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#edstats-fitting-of-binary-logistic-regression-models"><i class="fa fa-check"></i><b>4.4.4</b> EdStats – Fitting of Binary Logistic Regression Models</a></li>
-<li class="chapter" data-level="4.4.5" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#edstats-variable-selection-in-binary-logistic-regression"><i class="fa fa-check"></i><b>4.4.5</b> EdStats – Variable Selection in Binary Logistic Regression (*)</a></li>
-<li class="chapter" data-level="4.4.6" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#currency-exchange-rates-growthfall"><i class="fa fa-check"></i><b>4.4.6</b> Currency Exchange Rates Growth/Fall</a></li>
-<li class="chapter" data-level="4.4.7" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#wine-quality-random-forest-and-xgboost"><i class="fa fa-check"></i><b>4.4.7</b> Wine Quality – Random Forest and XGBoost (*)</a></li>
+<li class="chapter" data-level="4.4" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#exercises-3"><i class="fa fa-check"></i><b>4.4</b> Exercises</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#edstats-where-girls-are-better-at-maths-than-boys"><i class="fa fa-check"></i><b>4.4.1</b> EdStats – Where Girls Are Better at Maths Than Boys?</a></li>
+<li class="chapter" data-level="4.4.2" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#edstats-and-world-factbook-joining-forces"><i class="fa fa-check"></i><b>4.4.2</b> EdStats and World Factbook – Joining Forces</a></li>
+<li class="chapter" data-level="4.4.3" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#edstats-fitting-of-binary-logistic-regression-models"><i class="fa fa-check"></i><b>4.4.3</b> EdStats – Fitting of Binary Logistic Regression Models</a></li>
+<li class="chapter" data-level="4.4.4" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#edstats-variable-selection-in-binary-logistic-regression"><i class="fa fa-check"></i><b>4.4.4</b> EdStats – Variable Selection in Binary Logistic Regression (*)</a></li>
+<li class="chapter" data-level="4.4.5" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#currency-exchange-rates-growthfall"><i class="fa fa-check"></i><b>4.4.5</b> Currency Exchange Rates Growth/Fall</a></li>
+<li class="chapter" data-level="4.4.6" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#wine-quality-random-forest-and-xgboost"><i class="fa fa-check"></i><b>4.4.6</b> Wine Quality – Random Forest and XGBoost (*)</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#outro-2"><i class="fa fa-check"></i><b>4.5</b> Outro</a><ul>
-<li class="chapter" data-level="4.5.1" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#remarks-2"><i class="fa fa-check"></i><b>4.5.1</b> Remarks</a></li>
-<li class="chapter" data-level="4.5.2" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#further-reading-2"><i class="fa fa-check"></i><b>4.5.2</b> Further Reading</a></li>
+<li class="chapter" data-level="4.5" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#outro-3"><i class="fa fa-check"></i><b>4.5</b> Outro</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#remarks-3"><i class="fa fa-check"></i><b>4.5.1</b> Remarks</a></li>
+<li class="chapter" data-level="4.5.2" data-path="classification-with-trees-and-linear-models.html"><a href="classification-with-trees-and-linear-models.html#further-reading-3"><i class="fa fa-check"></i><b>4.5.2</b> Further Reading</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="shallow-and-deep-neural-networks.html"><a href="shallow-and-deep-neural-networks.html"><i class="fa fa-check"></i><b>5</b> Shallow and Deep Neural Networks</a><ul>
-<li class="chapter" data-level="5.1" data-path="shallow-and-deep-neural-networks.html"><a href="shallow-and-deep-neural-networks.html#introduction-5"><i class="fa fa-check"></i><b>5.1</b> Introduction</a><ul>
+<li class="chapter" data-level="5.1" data-path="shallow-and-deep-neural-networks.html"><a href="shallow-and-deep-neural-networks.html#introduction-7"><i class="fa fa-check"></i><b>5.1</b> Introduction</a><ul>
 <li class="chapter" data-level="5.1.1" data-path="shallow-and-deep-neural-networks.html"><a href="shallow-and-deep-neural-networks.html#binary-logistic-regression-recap"><i class="fa fa-check"></i><b>5.1.1</b> Binary Logistic Regression: Recap</a></li>
 <li class="chapter" data-level="5.1.2" data-path="shallow-and-deep-neural-networks.html"><a href="shallow-and-deep-neural-networks.html#data-2"><i class="fa fa-check"></i><b>5.1.2</b> Data</a></li>
 </ul></li>
@@ -270,31 +287,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3.3" data-path="shallow-and-deep-neural-networks.html"><a href="shallow-and-deep-neural-networks.html#example-in-r-3"><i class="fa fa-check"></i><b>5.3.3</b> Example in R</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="shallow-and-deep-neural-networks.html"><a href="shallow-and-deep-neural-networks.html#deep-neural-networks"><i class="fa fa-check"></i><b>5.4</b> Deep Neural Networks</a><ul>
-<li class="chapter" data-level="5.4.1" data-path="shallow-and-deep-neural-networks.html"><a href="shallow-and-deep-neural-networks.html#introduction-6"><i class="fa fa-check"></i><b>5.4.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.4.1" data-path="shallow-and-deep-neural-networks.html"><a href="shallow-and-deep-neural-networks.html#introduction-8"><i class="fa fa-check"></i><b>5.4.1</b> Introduction</a></li>
 <li class="chapter" data-level="5.4.2" data-path="shallow-and-deep-neural-networks.html"><a href="shallow-and-deep-neural-networks.html#activation-functions"><i class="fa fa-check"></i><b>5.4.2</b> Activation Functions</a></li>
 <li class="chapter" data-level="5.4.3" data-path="shallow-and-deep-neural-networks.html"><a href="shallow-and-deep-neural-networks.html#example-in-r---2-layers"><i class="fa fa-check"></i><b>5.4.3</b> Example in R - 2 Layers</a></li>
 <li class="chapter" data-level="5.4.4" data-path="shallow-and-deep-neural-networks.html"><a href="shallow-and-deep-neural-networks.html#example-in-r---6-layers"><i class="fa fa-check"></i><b>5.4.4</b> Example in R - 6 Layers</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="shallow-and-deep-neural-networks.html"><a href="shallow-and-deep-neural-networks.html#preprocessing-of-data"><i class="fa fa-check"></i><b>5.5</b> Preprocessing of Data</a><ul>
-<li class="chapter" data-level="5.5.1" data-path="shallow-and-deep-neural-networks.html"><a href="shallow-and-deep-neural-networks.html#introduction-7"><i class="fa fa-check"></i><b>5.5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.5.1" data-path="shallow-and-deep-neural-networks.html"><a href="shallow-and-deep-neural-networks.html#introduction-9"><i class="fa fa-check"></i><b>5.5.1</b> Introduction</a></li>
 <li class="chapter" data-level="5.5.2" data-path="shallow-and-deep-neural-networks.html"><a href="shallow-and-deep-neural-networks.html#image-deskewing"><i class="fa fa-check"></i><b>5.5.2</b> Image Deskewing</a></li>
 <li class="chapter" data-level="5.5.3" data-path="shallow-and-deep-neural-networks.html"><a href="shallow-and-deep-neural-networks.html#summary-of-all-the-models-considered"><i class="fa fa-check"></i><b>5.5.3</b> Summary of All the Models Considered</a></li>
 </ul></li>
-<li class="chapter" data-level="5.6" data-path="shallow-and-deep-neural-networks.html"><a href="shallow-and-deep-neural-networks.html#outro-3"><i class="fa fa-check"></i><b>5.6</b> Outro</a><ul>
-<li class="chapter" data-level="5.6.1" data-path="shallow-and-deep-neural-networks.html"><a href="shallow-and-deep-neural-networks.html#remarks-3"><i class="fa fa-check"></i><b>5.6.1</b> Remarks</a></li>
+<li class="chapter" data-level="5.6" data-path="shallow-and-deep-neural-networks.html"><a href="shallow-and-deep-neural-networks.html#outro-4"><i class="fa fa-check"></i><b>5.6</b> Outro</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="shallow-and-deep-neural-networks.html"><a href="shallow-and-deep-neural-networks.html#remarks-4"><i class="fa fa-check"></i><b>5.6.1</b> Remarks</a></li>
 <li class="chapter" data-level="5.6.2" data-path="shallow-and-deep-neural-networks.html"><a href="shallow-and-deep-neural-networks.html#beyond-mnist"><i class="fa fa-check"></i><b>5.6.2</b> Beyond MNIST</a></li>
-<li class="chapter" data-level="5.6.3" data-path="shallow-and-deep-neural-networks.html"><a href="shallow-and-deep-neural-networks.html#further-reading-3"><i class="fa fa-check"></i><b>5.6.3</b> Further Reading</a></li>
+<li class="chapter" data-level="5.6.3" data-path="shallow-and-deep-neural-networks.html"><a href="shallow-and-deep-neural-networks.html#further-reading-4"><i class="fa fa-check"></i><b>5.6.3</b> Further Reading</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="continuous-optimisation-with-iterative-algorithms.html"><a href="continuous-optimisation-with-iterative-algorithms.html"><i class="fa fa-check"></i><b>6</b> Continuous Optimisation with Iterative Algorithms</a><ul>
-<li class="chapter" data-level="6.1" data-path="continuous-optimisation-with-iterative-algorithms.html"><a href="continuous-optimisation-with-iterative-algorithms.html#introduction-8"><i class="fa fa-check"></i><b>6.1</b> Introduction</a><ul>
+<li class="chapter" data-level="6.1" data-path="continuous-optimisation-with-iterative-algorithms.html"><a href="continuous-optimisation-with-iterative-algorithms.html#introduction-10"><i class="fa fa-check"></i><b>6.1</b> Introduction</a><ul>
 <li class="chapter" data-level="6.1.1" data-path="continuous-optimisation-with-iterative-algorithms.html"><a href="continuous-optimisation-with-iterative-algorithms.html#optimisation-problems"><i class="fa fa-check"></i><b>6.1.1</b> Optimisation Problems</a></li>
 <li class="chapter" data-level="6.1.2" data-path="continuous-optimisation-with-iterative-algorithms.html"><a href="continuous-optimisation-with-iterative-algorithms.html#types-of-minima-and-maxima"><i class="fa fa-check"></i><b>6.1.2</b> Types of Minima and Maxima</a></li>
 <li class="chapter" data-level="6.1.3" data-path="continuous-optimisation-with-iterative-algorithms.html"><a href="continuous-optimisation-with-iterative-algorithms.html#example-objective-over-a-2d-domain"><i class="fa fa-check"></i><b>6.1.3</b> Example Objective over a 2D Domain</a></li>
 <li class="chapter" data-level="6.1.4" data-path="continuous-optimisation-with-iterative-algorithms.html"><a href="continuous-optimisation-with-iterative-algorithms.html#example-optimisation-problems-in-machine-learning"><i class="fa fa-check"></i><b>6.1.4</b> Example Optimisation Problems in Machine Learning</a></li>
 </ul></li>
 <li class="chapter" data-level="6.2" data-path="continuous-optimisation-with-iterative-algorithms.html"><a href="continuous-optimisation-with-iterative-algorithms.html#iterative-methods"><i class="fa fa-check"></i><b>6.2</b> Iterative Methods</a><ul>
-<li class="chapter" data-level="6.2.1" data-path="continuous-optimisation-with-iterative-algorithms.html"><a href="continuous-optimisation-with-iterative-algorithms.html#introduction-9"><i class="fa fa-check"></i><b>6.2.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2.1" data-path="continuous-optimisation-with-iterative-algorithms.html"><a href="continuous-optimisation-with-iterative-algorithms.html#introduction-11"><i class="fa fa-check"></i><b>6.2.1</b> Introduction</a></li>
 <li class="chapter" data-level="6.2.2" data-path="continuous-optimisation-with-iterative-algorithms.html"><a href="continuous-optimisation-with-iterative-algorithms.html#example-in-r-4"><i class="fa fa-check"></i><b>6.2.2</b> Example in R</a></li>
 <li class="chapter" data-level="6.2.3" data-path="continuous-optimisation-with-iterative-algorithms.html"><a href="continuous-optimisation-with-iterative-algorithms.html#convergence-to-local-optima"><i class="fa fa-check"></i><b>6.2.3</b> Convergence to Local Optima</a></li>
 <li class="chapter" data-level="6.2.4" data-path="continuous-optimisation-with-iterative-algorithms.html"><a href="continuous-optimisation-with-iterative-algorithms.html#random-restarts"><i class="fa fa-check"></i><b>6.2.4</b> Random Restarts</a></li>
@@ -307,14 +324,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3.5" data-path="continuous-optimisation-with-iterative-algorithms.html"><a href="continuous-optimisation-with-iterative-algorithms.html#stochastic-gradient-descent-sgd"><i class="fa fa-check"></i><b>6.3.5</b> Stochastic Gradient Descent (SGD) (*)</a></li>
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="continuous-optimisation-with-iterative-algorithms.html"><a href="continuous-optimisation-with-iterative-algorithms.html#a-note-on-convex-optimisation"><i class="fa fa-check"></i><b>6.4</b> A Note on Convex Optimisation (*)</a></li>
-<li class="chapter" data-level="6.5" data-path="continuous-optimisation-with-iterative-algorithms.html"><a href="continuous-optimisation-with-iterative-algorithms.html#outro-4"><i class="fa fa-check"></i><b>6.5</b> Outro</a><ul>
-<li class="chapter" data-level="6.5.1" data-path="continuous-optimisation-with-iterative-algorithms.html"><a href="continuous-optimisation-with-iterative-algorithms.html#remarks-4"><i class="fa fa-check"></i><b>6.5.1</b> Remarks</a></li>
-<li class="chapter" data-level="6.5.2" data-path="continuous-optimisation-with-iterative-algorithms.html"><a href="continuous-optimisation-with-iterative-algorithms.html#further-reading-4"><i class="fa fa-check"></i><b>6.5.2</b> Further Reading</a></li>
+<li class="chapter" data-level="6.5" data-path="continuous-optimisation-with-iterative-algorithms.html"><a href="continuous-optimisation-with-iterative-algorithms.html#outro-5"><i class="fa fa-check"></i><b>6.5</b> Outro</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="continuous-optimisation-with-iterative-algorithms.html"><a href="continuous-optimisation-with-iterative-algorithms.html#remarks-5"><i class="fa fa-check"></i><b>6.5.1</b> Remarks</a></li>
+<li class="chapter" data-level="6.5.2" data-path="continuous-optimisation-with-iterative-algorithms.html"><a href="continuous-optimisation-with-iterative-algorithms.html#further-reading-5"><i class="fa fa-check"></i><b>6.5.2</b> Further Reading</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>7</b> Clustering</a><ul>
 <li class="chapter" data-level="7.1" data-path="clustering.html"><a href="clustering.html#unsupervised-learning"><i class="fa fa-check"></i><b>7.1</b> Unsupervised Learning</a><ul>
-<li class="chapter" data-level="7.1.1" data-path="clustering.html"><a href="clustering.html#introduction-10"><i class="fa fa-check"></i><b>7.1.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.1.1" data-path="clustering.html"><a href="clustering.html#introduction-12"><i class="fa fa-check"></i><b>7.1.1</b> Introduction</a></li>
 <li class="chapter" data-level="7.1.2" data-path="clustering.html"><a href="clustering.html#main-types-of-unsupervised-learning-problems"><i class="fa fa-check"></i><b>7.1.2</b> Main Types of Unsupervised Learning Problems</a></li>
 <li class="chapter" data-level="7.1.3" data-path="clustering.html"><a href="clustering.html#definitions"><i class="fa fa-check"></i><b>7.1.3</b> Definitions</a></li>
 </ul></li>
@@ -324,41 +341,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2.3" data-path="clustering.html"><a href="clustering.html#algorithms-for-the-k-means-problem"><i class="fa fa-check"></i><b>7.2.3</b> Algorithms for the K-means Problem</a></li>
 </ul></li>
 <li class="chapter" data-level="7.3" data-path="clustering.html"><a href="clustering.html#agglomerative-hierarchical-clustering"><i class="fa fa-check"></i><b>7.3</b> Agglomerative Hierarchical Clustering</a><ul>
-<li class="chapter" data-level="7.3.1" data-path="clustering.html"><a href="clustering.html#introduction-11"><i class="fa fa-check"></i><b>7.3.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.3.1" data-path="clustering.html"><a href="clustering.html#introduction-13"><i class="fa fa-check"></i><b>7.3.1</b> Introduction</a></li>
 <li class="chapter" data-level="7.3.2" data-path="clustering.html"><a href="clustering.html#example-in-r-6"><i class="fa fa-check"></i><b>7.3.2</b> Example in R</a></li>
 <li class="chapter" data-level="7.3.3" data-path="clustering.html"><a href="clustering.html#linkage-functions"><i class="fa fa-check"></i><b>7.3.3</b> Linkage Functions</a></li>
 <li class="chapter" data-level="7.3.4" data-path="clustering.html"><a href="clustering.html#cluster-dendrograms"><i class="fa fa-check"></i><b>7.3.4</b> Cluster Dendrograms</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="clustering.html"><a href="clustering.html#exercises-3"><i class="fa fa-check"></i><b>7.4</b> Exercises</a><ul>
+<li class="chapter" data-level="7.4" data-path="clustering.html"><a href="clustering.html#exercises-4"><i class="fa fa-check"></i><b>7.4</b> Exercises</a><ul>
 <li class="chapter" data-level="7.4.1" data-path="clustering.html"><a href="clustering.html#clustering-of-the-world-factbook"><i class="fa fa-check"></i><b>7.4.1</b> Clustering of the World Factbook</a></li>
 <li class="chapter" data-level="7.4.2" data-path="clustering.html"><a href="clustering.html#unbalance-dataset-k-means-needs-multiple-starts"><i class="fa fa-check"></i><b>7.4.2</b> Unbalance Dataset – K-Means Needs Multiple Starts</a></li>
 <li class="chapter" data-level="7.4.3" data-path="clustering.html"><a href="clustering.html#clustering-of-typical-2d-benchmark-datasets"><i class="fa fa-check"></i><b>7.4.3</b> Clustering of Typical 2D Benchmark Datasets</a></li>
 <li class="chapter" data-level="7.4.4" data-path="clustering.html"><a href="clustering.html#wine-quality-volatile.acidity-and-sulphates"><i class="fa fa-check"></i><b>7.4.4</b> Wine Quality – <code>volatile.acidity</code> and <code>sulphates</code></a></li>
 <li class="chapter" data-level="7.4.5" data-path="clustering.html"><a href="clustering.html#wine-quality-chlorides-and-total.sulfur.dioxide"><i class="fa fa-check"></i><b>7.4.5</b> Wine Quality – <code>chlorides</code> and <code>total.sulfur.dioxide</code></a></li>
 </ul></li>
-<li class="chapter" data-level="7.5" data-path="clustering.html"><a href="clustering.html#outro-5"><i class="fa fa-check"></i><b>7.5</b> Outro</a><ul>
-<li class="chapter" data-level="7.5.1" data-path="clustering.html"><a href="clustering.html#remarks-5"><i class="fa fa-check"></i><b>7.5.1</b> Remarks</a></li>
-<li class="chapter" data-level="7.5.2" data-path="clustering.html"><a href="clustering.html#further-reading-5"><i class="fa fa-check"></i><b>7.5.2</b> Further Reading</a></li>
+<li class="chapter" data-level="7.5" data-path="clustering.html"><a href="clustering.html#outro-6"><i class="fa fa-check"></i><b>7.5</b> Outro</a><ul>
+<li class="chapter" data-level="7.5.1" data-path="clustering.html"><a href="clustering.html#remarks-6"><i class="fa fa-check"></i><b>7.5.1</b> Remarks</a></li>
+<li class="chapter" data-level="7.5.2" data-path="clustering.html"><a href="clustering.html#further-reading-6"><i class="fa fa-check"></i><b>7.5.2</b> Further Reading</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="optimisation-with-genetic-algorithms.html"><a href="optimisation-with-genetic-algorithms.html"><i class="fa fa-check"></i><b>8</b> Optimisation with Genetic Algorithms</a><ul>
-<li class="chapter" data-level="8.1" data-path="optimisation-with-genetic-algorithms.html"><a href="optimisation-with-genetic-algorithms.html#introduction-12"><i class="fa fa-check"></i><b>8.1</b> Introduction</a><ul>
+<li class="chapter" data-level="8.1" data-path="optimisation-with-genetic-algorithms.html"><a href="optimisation-with-genetic-algorithms.html#introduction-14"><i class="fa fa-check"></i><b>8.1</b> Introduction</a><ul>
 <li class="chapter" data-level="8.1.1" data-path="optimisation-with-genetic-algorithms.html"><a href="optimisation-with-genetic-algorithms.html#recap"><i class="fa fa-check"></i><b>8.1.1</b> Recap</a></li>
 <li class="chapter" data-level="8.1.2" data-path="optimisation-with-genetic-algorithms.html"><a href="optimisation-with-genetic-algorithms.html#k-means-revisited"><i class="fa fa-check"></i><b>8.1.2</b> K-means Revisited</a></li>
 <li class="chapter" data-level="8.1.3" data-path="optimisation-with-genetic-algorithms.html"><a href="optimisation-with-genetic-algorithms.html#optim-vs.-kmeans"><i class="fa fa-check"></i><b>8.1.3</b> optim() vs. kmeans()</a></li>
 </ul></li>
 <li class="chapter" data-level="8.2" data-path="optimisation-with-genetic-algorithms.html"><a href="optimisation-with-genetic-algorithms.html#genetic-algorithms"><i class="fa fa-check"></i><b>8.2</b> Genetic Algorithms</a><ul>
-<li class="chapter" data-level="8.2.1" data-path="optimisation-with-genetic-algorithms.html"><a href="optimisation-with-genetic-algorithms.html#introduction-13"><i class="fa fa-check"></i><b>8.2.1</b> Introduction</a></li>
+<li class="chapter" data-level="8.2.1" data-path="optimisation-with-genetic-algorithms.html"><a href="optimisation-with-genetic-algorithms.html#introduction-15"><i class="fa fa-check"></i><b>8.2.1</b> Introduction</a></li>
 <li class="chapter" data-level="8.2.2" data-path="optimisation-with-genetic-algorithms.html"><a href="optimisation-with-genetic-algorithms.html#overview-of-the-method"><i class="fa fa-check"></i><b>8.2.2</b> Overview of the Method</a></li>
 <li class="chapter" data-level="8.2.3" data-path="optimisation-with-genetic-algorithms.html"><a href="optimisation-with-genetic-algorithms.html#example-implementation---ga-for-k-means"><i class="fa fa-check"></i><b>8.2.3</b> Example Implementation - GA for K-means</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="optimisation-with-genetic-algorithms.html"><a href="optimisation-with-genetic-algorithms.html#outro-6"><i class="fa fa-check"></i><b>8.3</b> Outro</a><ul>
-<li class="chapter" data-level="8.3.1" data-path="optimisation-with-genetic-algorithms.html"><a href="optimisation-with-genetic-algorithms.html#remarks-6"><i class="fa fa-check"></i><b>8.3.1</b> Remarks</a></li>
-<li class="chapter" data-level="8.3.2" data-path="optimisation-with-genetic-algorithms.html"><a href="optimisation-with-genetic-algorithms.html#further-reading-6"><i class="fa fa-check"></i><b>8.3.2</b> Further Reading</a></li>
+<li class="chapter" data-level="8.3" data-path="optimisation-with-genetic-algorithms.html"><a href="optimisation-with-genetic-algorithms.html#outro-7"><i class="fa fa-check"></i><b>8.3</b> Outro</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="optimisation-with-genetic-algorithms.html"><a href="optimisation-with-genetic-algorithms.html#remarks-7"><i class="fa fa-check"></i><b>8.3.1</b> Remarks</a></li>
+<li class="chapter" data-level="8.3.2" data-path="optimisation-with-genetic-algorithms.html"><a href="optimisation-with-genetic-algorithms.html#further-reading-7"><i class="fa fa-check"></i><b>8.3.2</b> Further Reading</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="recommender-systems.html"><a href="recommender-systems.html"><i class="fa fa-check"></i><b>9</b> Recommender Systems</a><ul>
-<li class="chapter" data-level="9.1" data-path="recommender-systems.html"><a href="recommender-systems.html#introduction-14"><i class="fa fa-check"></i><b>9.1</b> Introduction</a><ul>
+<li class="chapter" data-level="9.1" data-path="recommender-systems.html"><a href="recommender-systems.html#introduction-16"><i class="fa fa-check"></i><b>9.1</b> Introduction</a><ul>
 <li class="chapter" data-level="9.1.1" data-path="recommender-systems.html"><a href="recommender-systems.html#the-netflix-prize"><i class="fa fa-check"></i><b>9.1.1</b> The Netflix Prize</a></li>
 <li class="chapter" data-level="9.1.2" data-path="recommender-systems.html"><a href="recommender-systems.html#main-approaches"><i class="fa fa-check"></i><b>9.1.2</b> Main Approaches</a></li>
 <li class="chapter" data-level="9.1.3" data-path="recommender-systems.html"><a href="recommender-systems.html#formalism-2"><i class="fa fa-check"></i><b>9.1.3</b> Formalism</a></li>
@@ -376,9 +393,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.3.4" data-path="recommender-systems.html"><a href="recommender-systems.html#example-recommendations"><i class="fa fa-check"></i><b>9.3.4</b> Example Recommendations</a></li>
 <li class="chapter" data-level="9.3.5" data-path="recommender-systems.html"><a href="recommender-systems.html#clustering-1"><i class="fa fa-check"></i><b>9.3.5</b> Clustering</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="recommender-systems.html"><a href="recommender-systems.html#outro-7"><i class="fa fa-check"></i><b>9.4</b> Outro</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="recommender-systems.html"><a href="recommender-systems.html#remarks-7"><i class="fa fa-check"></i><b>9.4.1</b> Remarks</a></li>
-<li class="chapter" data-level="9.4.2" data-path="recommender-systems.html"><a href="recommender-systems.html#further-reading-7"><i class="fa fa-check"></i><b>9.4.2</b> Further Reading</a></li>
+<li class="chapter" data-level="9.4" data-path="recommender-systems.html"><a href="recommender-systems.html#outro-8"><i class="fa fa-check"></i><b>9.4</b> Outro</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="recommender-systems.html"><a href="recommender-systems.html#remarks-8"><i class="fa fa-check"></i><b>9.4.1</b> Remarks</a></li>
+<li class="chapter" data-level="9.4.2" data-path="recommender-systems.html"><a href="recommender-systems.html#further-reading-8"><i class="fa fa-check"></i><b>9.4.2</b> Further Reading</a></li>
 </ul></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
@@ -388,7 +405,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="B.2" data-path="setting-up-the-r-environment.html"><a href="setting-up-the-r-environment.html#installing-an-ide"><i class="fa fa-check"></i><b>B.2</b> Installing an IDE</a></li>
 <li class="chapter" data-level="B.3" data-path="setting-up-the-r-environment.html"><a href="setting-up-the-r-environment.html#installing-recommended-packages"><i class="fa fa-check"></i><b>B.3</b> Installing Recommended Packages</a></li>
 <li class="chapter" data-level="B.4" data-path="setting-up-the-r-environment.html"><a href="setting-up-the-r-environment.html#first-r-script-in-rstudio"><i class="fa fa-check"></i><b>B.4</b> First R Script in RStudio</a></li>
-<li class="chapter" data-level="B.5" data-path="setting-up-the-r-environment.html"><a href="setting-up-the-r-environment.html#exercises-4"><i class="fa fa-check"></i><b>B.5</b> Exercises</a><ul>
+<li class="chapter" data-level="B.5" data-path="setting-up-the-r-environment.html"><a href="setting-up-the-r-environment.html#exercises-5"><i class="fa fa-check"></i><b>B.5</b> Exercises</a><ul>
 <li class="chapter" data-level="B.5.1" data-path="setting-up-the-r-environment.html"><a href="setting-up-the-r-environment.html#first-steps-with-vectors"><i class="fa fa-check"></i><b>B.5.1</b> First Steps with Vectors</a></li>
 <li class="chapter" data-level="B.5.2" data-path="setting-up-the-r-environment.html"><a href="setting-up-the-r-environment.html#basic-plotting"><i class="fa fa-check"></i><b>B.5.2</b> Basic Plotting</a></li>
 </ul></li>
@@ -438,10 +455,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="C.8.3" data-path="vector-algebra-in-r.html"><a href="vector-algebra-in-r.html#subsetting-and-extracting-from-lists"><i class="fa fa-check"></i><b>C.8.3</b> Subsetting and Extracting From Lists</a></li>
 <li class="chapter" data-level="C.8.4" data-path="vector-algebra-in-r.html"><a href="vector-algebra-in-r.html#common-operations"><i class="fa fa-check"></i><b>C.8.4</b> Common Operations</a></li>
 </ul></li>
-<li class="chapter" data-level="C.9" data-path="vector-algebra-in-r.html"><a href="vector-algebra-in-r.html#exercises-5"><i class="fa fa-check"></i><b>C.9</b> Exercises</a><ul>
+<li class="chapter" data-level="C.9" data-path="vector-algebra-in-r.html"><a href="vector-algebra-in-r.html#exercises-6"><i class="fa fa-check"></i><b>C.9</b> Exercises</a><ul>
 <li class="chapter" data-level="C.9.1" data-path="vector-algebra-in-r.html"><a href="vector-algebra-in-r.html#audeur-exchange-rates"><i class="fa fa-check"></i><b>C.9.1</b> AUD/EUR Exchange Rates</a></li>
 </ul></li>
-<li class="chapter" data-level="C.10" data-path="vector-algebra-in-r.html"><a href="vector-algebra-in-r.html#further-reading-8"><i class="fa fa-check"></i><b>C.10</b> Further Reading</a></li>
+<li class="chapter" data-level="C.10" data-path="vector-algebra-in-r.html"><a href="vector-algebra-in-r.html#further-reading-9"><i class="fa fa-check"></i><b>C.10</b> Further Reading</a></li>
 </ul></li>
 <li class="chapter" data-level="D" data-path="matrix-algebra-in-r.html"><a href="matrix-algebra-in-r.html"><i class="fa fa-check"></i><b>D</b> Matrix Algebra in R</a><ul>
 <li class="chapter" data-level="D.1" data-path="matrix-algebra-in-r.html"><a href="matrix-algebra-in-r.html#creating-matrices"><i class="fa fa-check"></i><b>D.1</b> Creating Matrices</a><ul>
@@ -468,11 +485,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="D.3.4" data-path="matrix-algebra-in-r.html"><a href="matrix-algebra-in-r.html#selecting-based-on-logical-vectors-and-matrices"><i class="fa fa-check"></i><b>D.3.4</b> Selecting Based on Logical Vectors and Matrices</a></li>
 <li class="chapter" data-level="D.3.5" data-path="matrix-algebra-in-r.html"><a href="matrix-algebra-in-r.html#selecting-based-on-two-column-matrices"><i class="fa fa-check"></i><b>D.3.5</b> Selecting Based on Two-Column Matrices</a></li>
 </ul></li>
-<li class="chapter" data-level="D.4" data-path="matrix-algebra-in-r.html"><a href="matrix-algebra-in-r.html#exercises-6"><i class="fa fa-check"></i><b>D.4</b> Exercises</a><ul>
+<li class="chapter" data-level="D.4" data-path="matrix-algebra-in-r.html"><a href="matrix-algebra-in-r.html#exercises-7"><i class="fa fa-check"></i><b>D.4</b> Exercises</a><ul>
 <li class="chapter" data-level="D.4.1" data-path="matrix-algebra-in-r.html"><a href="matrix-algebra-in-r.html#currency-exchange-rates"><i class="fa fa-check"></i><b>D.4.1</b> Currency Exchange Rates</a></li>
 <li class="chapter" data-level="D.4.2" data-path="matrix-algebra-in-r.html"><a href="matrix-algebra-in-r.html#currency-exchange-rates-relative-to-1999"><i class="fa fa-check"></i><b>D.4.2</b> Currency Exchange Rates Relative to 1999</a></li>
 </ul></li>
-<li class="chapter" data-level="D.5" data-path="matrix-algebra-in-r.html"><a href="matrix-algebra-in-r.html#further-reading-9"><i class="fa fa-check"></i><b>D.5</b> Further Reading</a></li>
+<li class="chapter" data-level="D.5" data-path="matrix-algebra-in-r.html"><a href="matrix-algebra-in-r.html#further-reading-10"><i class="fa fa-check"></i><b>D.5</b> Further Reading</a></li>
 </ul></li>
 <li class="chapter" data-level="E" data-path="data-frame-wrangling-in-r.html"><a href="data-frame-wrangling-in-r.html"><i class="fa fa-check"></i><b>E</b> Data Frame Wrangling in R</a><ul>
 <li class="chapter" data-level="E.1" data-path="data-frame-wrangling-in-r.html"><a href="data-frame-wrangling-in-r.html#creating-data-frames"><i class="fa fa-check"></i><b>E.1</b> Creating Data Frames</a></li>
@@ -483,11 +500,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="E.4" data-path="data-frame-wrangling-in-r.html"><a href="data-frame-wrangling-in-r.html#common-operations-2"><i class="fa fa-check"></i><b>E.4</b> Common Operations</a></li>
 <li class="chapter" data-level="E.5" data-path="data-frame-wrangling-in-r.html"><a href="data-frame-wrangling-in-r.html#metaprogramming-and-formulas"><i class="fa fa-check"></i><b>E.5</b> Metaprogramming and Formulas (*)</a></li>
-<li class="chapter" data-level="E.6" data-path="data-frame-wrangling-in-r.html"><a href="data-frame-wrangling-in-r.html#exercises-7"><i class="fa fa-check"></i><b>E.6</b> Exercises</a><ul>
+<li class="chapter" data-level="E.6" data-path="data-frame-wrangling-in-r.html"><a href="data-frame-wrangling-in-r.html#exercises-8"><i class="fa fa-check"></i><b>E.6</b> Exercises</a><ul>
 <li class="chapter" data-level="E.6.1" data-path="data-frame-wrangling-in-r.html"><a href="data-frame-wrangling-in-r.html#urban-forest"><i class="fa fa-check"></i><b>E.6.1</b> Urban Forest</a></li>
 </ul></li>
 <li class="chapter" data-level="E.7" data-path="data-frame-wrangling-in-r.html"><a href="data-frame-wrangling-in-r.html#air-quality"><i class="fa fa-check"></i><b>E.7</b> Air Quality</a></li>
-<li class="chapter" data-level="E.8" data-path="data-frame-wrangling-in-r.html"><a href="data-frame-wrangling-in-r.html#further-reading-10"><i class="fa fa-check"></i><b>E.8</b> Further Reading</a></li>
+<li class="chapter" data-level="E.8" data-path="data-frame-wrangling-in-r.html"><a href="data-frame-wrangling-in-r.html#further-reading-11"><i class="fa fa-check"></i><b>E.8</b> Further Reading</a></li>
 </ul></li>
 <li class="chapter" data-level="F" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i><b>F</b> Datasets</a><ul>
 <li class="chapter" data-level="F.1" data-path="datasets.html"><a href="datasets.html#air-quality-1"><i class="fa fa-check"></i><b>F.1</b> Air Quality</a></li>
@@ -496,14 +513,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="F.4" data-path="datasets.html"><a href="datasets.html#wine-quality"><i class="fa fa-check"></i><b>F.4</b> Wine Quality</a></li>
 <li class="chapter" data-level="F.5" data-path="datasets.html"><a href="datasets.html#the-world-factbook-countries-of-the-world"><i class="fa fa-check"></i><b>F.5</b> The World Factbook (Countries of the World)</a></li>
 <li class="chapter" data-level="F.6" data-path="datasets.html"><a href="datasets.html#edstats-country-level-education-statistics"><i class="fa fa-check"></i><b>F.6</b> EdStats (Country-Level Education Statistics)</a></li>
-<li class="chapter" data-level="F.7" data-path="datasets.html"><a href="datasets.html#other"><i class="fa fa-check"></i><b>F.7</b> Other</a></li>
-<li class="chapter" data-level="F.8" data-path="datasets.html"><a href="datasets.html#movie-lens-todo-permission-required"><i class="fa fa-check"></i><b>F.8</b> Movie Lens (TODO: permission required)</a></li>
-<li class="chapter" data-level="F.9" data-path="datasets.html"><a href="datasets.html#fuel-economy"><i class="fa fa-check"></i><b>F.9</b> Fuel Economy</a></li>
+<li class="chapter" data-level="F.7" data-path="datasets.html"><a href="datasets.html#food-and-nutrient-database-for-dietary-studies-fndds"><i class="fa fa-check"></i><b>F.7</b> Food and Nutrient Database for Dietary Studies (FNDDS)</a></li>
+<li class="chapter" data-level="F.8" data-path="datasets.html"><a href="datasets.html#clustering-benchmarks"><i class="fa fa-check"></i><b>F.8</b> Clustering Benchmarks</a></li>
+<li class="chapter" data-level="F.9" data-path="datasets.html"><a href="datasets.html#movie-lens-todo-permission-required"><i class="fa fa-check"></i><b>F.9</b> Movie Lens (TODO: permission required)</a></li>
+<li class="chapter" data-level="F.10" data-path="datasets.html"><a href="datasets.html#other"><i class="fa fa-check"></i><b>F.10</b> Other</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li style='font-size: smaller' ><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Licensed under CC BY-NC-ND 4.0</a></li>
-<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-05-22 21:15 (5fb2cb5)</a></li>
+<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-05-27 12:28 (d050822)</a></li>
 
 </ul>
 
@@ -527,7 +545,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 <p>“Good” datasets are actually hard to find!
 Many books analyse datasets that are “too easy” and give their readers
-the false impression that they can model anything.</p>
+the false impression that anything can be modelled well with machine learning
+algorithms.</p>
 <p>Below we briefly describe the most noteworthy
 datasets considered in this book.
 They are available for download at
@@ -535,6 +554,20 @@ They are available for download at
 Many of them are real-world data, and need some proper cleaning,
 outlier removal etc. Moreover, for some of them, the machine learning
 models studied will not be of the highest quality. That’s life.</p>
+<dl>
+<dt>Remark.</dt>
+<dd><p>The files with the <code>.csv.gz</code> extension are CSVs compressed with
+<code>gzip</code> (a widespread, open source format).
+R is able to decompress them on-the-fly when we use, e.g., <code>read.csv()</code>.</p>
+</dd>
+<dt>Compatibility note.</dt>
+<dd><p>We recommend that you use R version 4.0 or later. If this is not the case,
+please issue <code>options(stringsAsFactors=FALSE)</code> at the beginning
+of each R session or add the <code>stringsAsFactors=FALSE</code> argument
+to each call to <code>read.csv()</code>, <code>data.frame()</code> etc.
+Otherwise,</p>
+</dd>
+</dl>
 <div id="air-quality-1" class="section level2">
 <h2><span class="header-section-number">F.1</span> Air Quality</h2>
 <p>Environment Protection Authority of the state of Victoria, Australia
@@ -570,9 +603,18 @@ Various parameters are probed at different spots on an hourly basis.</p>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb1424"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1424-1" title="1">air_quality &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/air_quality.csv.gz&quot;</span>,</a>
-<a class="sourceLine" id="cb1424-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb1424-3" title="3"><span class="kw">head</span>(air_quality, <span class="dv">3</span>)</a></code></pre></div>
+<!-- Terms of use:
+
+https://www.data.vic.gov.au/about-datavic
+
+https://discover.data.vic.gov.au/dataset/epa-air-watch-all-sites-air-quality-hourly-averages-yearly
+-- Creative Commons Attribution 4.0 International
+
+
+-->
+<div class="sourceCode" id="cb1450"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1450-1" title="1">air_quality &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/air_quality.csv.gz&quot;</span>,</a>
+<a class="sourceLine" id="cb1450-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
+<a class="sourceLine" id="cb1450-3" title="3"><span class="kw">head</span>(air_quality, <span class="dv">3</span>)</a></code></pre></div>
 <pre><code>##   sample_point_id    sp_name latitude longitude     sample_datetime
 ## 1           10001 Alphington  -37.778    145.03 01/01/2018 00:00:00
 ## 2           10001 Alphington  -37.778    145.03 01/01/2018 00:00:00
@@ -686,11 +728,28 @@ e.g., the value of 118.0 in JPY means that 1 euro = 118 yens.</p>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb1426"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1426-1" title="1">currency_exchange &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/currency_exchange_all.csv.gz&quot;</span>,</a>
-<a class="sourceLine" id="cb1426-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb1426-3" title="3"><span class="co"># convert Day to Date-type object:</span></a>
-<a class="sourceLine" id="cb1426-4" title="4">currency_exchange<span class="op">$</span>Day &lt;-<span class="st"> </span><span class="kw">as.Date</span>(currency_exchange<span class="op">$</span>Day)</a>
-<a class="sourceLine" id="cb1426-5" title="5"><span class="kw">head</span>(currency_exchange, <span class="dv">2</span>)</a></code></pre></div>
+<!-- Terms of use:
+
+https://www.ecb.europa.eu/home/disclaimer/html/index.en.html
+
+Copyright © for the entire content of this website: European Central Bank, Frankfurt am Main, Germany.
+
+Subject to the exception below, users of this website may make free use of the information obtained directly from it subject to the following conditions:
+
+    When such information is distributed or reproduced, it must appear accurately and the ECB must be cited as the source.
+    Where the information is incorporated in documents that are sold (regardless of the medium), the natural or legal person publishing the information must inform buyers, both before they pay any subscription or fee and each time they access the information taken from this website, that the information may be obtained free of charge through this website.
+    If the information is modified by the user (e.g. by seasonal adjustment of statistical data or calculation of growth rates) this must be stated explicitly.
+    When linking to this website from business sites or for promotional purposes, this website must load into the browser's entire window (i.e. it must not appear within another website's frame).
+
+
+
+
+-->
+<div class="sourceCode" id="cb1452"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1452-1" title="1">currency_exchange &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/currency_exchange_all.csv.gz&quot;</span>,</a>
+<a class="sourceLine" id="cb1452-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
+<a class="sourceLine" id="cb1452-3" title="3"><span class="co"># convert Day to Date-type object:</span></a>
+<a class="sourceLine" id="cb1452-4" title="4">currency_exchange<span class="op">$</span>Day &lt;-<span class="st"> </span><span class="kw">as.Date</span>(currency_exchange<span class="op">$</span>Day)</a>
+<a class="sourceLine" id="cb1452-5" title="5"><span class="kw">head</span>(currency_exchange, <span class="dv">2</span>)</a></code></pre></div>
 <pre><code>##          Day    AUD    BGN    BRL    CAD    CHF    CNY   CZK    DKK
 ## 1 2020-05-19 1.6751 1.9558 6.2357 1.5251 1.0633 7.7816 27.49 7.4562
 ## 2 2020-05-18 1.6736 1.9558 6.2701 1.5202 1.0521 7.7068 27.61 7.4548
@@ -853,29 +912,29 @@ e.g., the value of 118.0 in JPY means that 1 euro = 118 yens.</p>
 <dl>
 <dt><code>currency_exchange_single</code>.</dt>
 <dd><p>The EUR/AUD rates only, from the least to the most recent:</p>
-<div class="sourceCode" id="cb1428"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1428-1" title="1"><span class="kw">write.table</span>(<span class="kw">rev</span>(currency_exchange<span class="op">$</span>AUD),</a>
-<a class="sourceLine" id="cb1428-2" title="2">    <span class="st">&quot;datasets/currency_exchange_single.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb1428-3" title="3">    <span class="dt">col.names=</span><span class="ot">FALSE</span>, <span class="dt">row.names=</span><span class="ot">FALSE</span>, <span class="dt">quote=</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1454"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1454-1" title="1"><span class="kw">write.table</span>(<span class="kw">rev</span>(currency_exchange<span class="op">$</span>AUD),</a>
+<a class="sourceLine" id="cb1454-2" title="2">    <span class="st">&quot;datasets/currency_exchange_single.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb1454-3" title="3">    <span class="dt">col.names=</span><span class="ot">FALSE</span>, <span class="dt">row.names=</span><span class="ot">FALSE</span>, <span class="dt">quote=</span><span class="ot">FALSE</span>)</a></code></pre></div>
 </dd>
 <dt><code>currency_exchange_diff</code>.</dt>
 <dd><p>Relative daily changes
 in the EUR/AUD rates (we use it for building example
 exchange rates prediction algorithms):</p>
-<div class="sourceCode" id="cb1429"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1429-1" title="1">n &lt;-<span class="st"> </span><span class="kw">nrow</span>(currency_exchange)</a>
-<a class="sourceLine" id="cb1429-2" title="2">pred &lt;-<span class="st"> </span>currency_exchange[n<span class="op">:</span><span class="dv">1</span>, <span class="kw">c</span>(<span class="st">&quot;Day&quot;</span>, <span class="st">&quot;AUD&quot;</span>)] <span class="co"># from oldest to newest</span></a>
-<a class="sourceLine" id="cb1429-3" title="3"><span class="kw">row.names</span>(pred) &lt;-<span class="st"> </span><span class="ot">NULL</span> <span class="co"># reset the row.names attribute</span></a>
-<a class="sourceLine" id="cb1429-4" title="4">pred<span class="op">$</span>Change &lt;-<span class="st"> </span><span class="ot">NA</span></a>
-<a class="sourceLine" id="cb1429-5" title="5">pred<span class="op">$</span>Change[<span class="dv">2</span><span class="op">:</span>n] &lt;-<span class="st"> </span><span class="kw">diff</span>(pred<span class="op">$</span>AUD) <span class="co"># iterative difference:</span></a>
-<a class="sourceLine" id="cb1429-6" title="6">    <span class="co"># pred$Change[2] == pred$AUD[2]-pred$AUD[1], ...,</span></a>
-<a class="sourceLine" id="cb1429-7" title="7">    <span class="co"># pred$Change[n] == pred$AUD[n]-pred$AUD[n-1]</span></a>
-<a class="sourceLine" id="cb1429-8" title="8">pred<span class="op">$</span>Dir &lt;-<span class="st"> </span><span class="kw">as.character</span>(<span class="kw">cut</span>(pred<span class="op">$</span>Change, <span class="kw">c</span>(<span class="op">-</span><span class="ot">Inf</span>, <span class="dv">0</span>, <span class="ot">Inf</span>),</a>
-<a class="sourceLine" id="cb1429-9" title="9">    <span class="kw">c</span>(<span class="st">&quot;dec&quot;</span>, <span class="st">&quot;inc&quot;</span>))) <span class="co"># inc if Change is positive, dec otherwise</span></a>
-<a class="sourceLine" id="cb1429-10" title="10"><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) {</a>
-<a class="sourceLine" id="cb1429-11" title="11">    name &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Lag&quot;</span>, k)</a>
-<a class="sourceLine" id="cb1429-12" title="12">    pred[[name]] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
-<a class="sourceLine" id="cb1429-13" title="13">    pred[[name]][(k<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span>n] &lt;-<span class="st"> </span>pred<span class="op">$</span>Change[<span class="dv">1</span><span class="op">:</span>(n<span class="op">-</span>k)]</a>
-<a class="sourceLine" id="cb1429-14" title="14">}</a>
-<a class="sourceLine" id="cb1429-15" title="15"><span class="kw">tail</span>(pred)</a></code></pre></div>
+<div class="sourceCode" id="cb1455"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1455-1" title="1">n &lt;-<span class="st"> </span><span class="kw">nrow</span>(currency_exchange)</a>
+<a class="sourceLine" id="cb1455-2" title="2">pred &lt;-<span class="st"> </span>currency_exchange[n<span class="op">:</span><span class="dv">1</span>, <span class="kw">c</span>(<span class="st">&quot;Day&quot;</span>, <span class="st">&quot;AUD&quot;</span>)] <span class="co"># from oldest to newest</span></a>
+<a class="sourceLine" id="cb1455-3" title="3"><span class="kw">row.names</span>(pred) &lt;-<span class="st"> </span><span class="ot">NULL</span> <span class="co"># reset the row.names attribute</span></a>
+<a class="sourceLine" id="cb1455-4" title="4">pred<span class="op">$</span>Change &lt;-<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb1455-5" title="5">pred<span class="op">$</span>Change[<span class="dv">2</span><span class="op">:</span>n] &lt;-<span class="st"> </span><span class="kw">diff</span>(pred<span class="op">$</span>AUD) <span class="co"># iterative difference:</span></a>
+<a class="sourceLine" id="cb1455-6" title="6">    <span class="co"># pred$Change[2] == pred$AUD[2]-pred$AUD[1], ...,</span></a>
+<a class="sourceLine" id="cb1455-7" title="7">    <span class="co"># pred$Change[n] == pred$AUD[n]-pred$AUD[n-1]</span></a>
+<a class="sourceLine" id="cb1455-8" title="8">pred<span class="op">$</span>Dir &lt;-<span class="st"> </span><span class="kw">as.character</span>(<span class="kw">cut</span>(pred<span class="op">$</span>Change, <span class="kw">c</span>(<span class="op">-</span><span class="ot">Inf</span>, <span class="dv">0</span>, <span class="ot">Inf</span>),</a>
+<a class="sourceLine" id="cb1455-9" title="9">    <span class="kw">c</span>(<span class="st">&quot;dec&quot;</span>, <span class="st">&quot;inc&quot;</span>))) <span class="co"># inc if Change is positive, dec otherwise</span></a>
+<a class="sourceLine" id="cb1455-10" title="10"><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) {</a>
+<a class="sourceLine" id="cb1455-11" title="11">    name &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Lag&quot;</span>, k)</a>
+<a class="sourceLine" id="cb1455-12" title="12">    pred[[name]] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb1455-13" title="13">    pred[[name]][(k<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span>n] &lt;-<span class="st"> </span>pred<span class="op">$</span>Change[<span class="dv">1</span><span class="op">:</span>(n<span class="op">-</span>k)]</a>
+<a class="sourceLine" id="cb1455-14" title="14">}</a>
+<a class="sourceLine" id="cb1455-15" title="15"><span class="kw">tail</span>(pred)</a></code></pre></div>
 <pre><code>##             Day    AUD  Change Dir    Lag1    Lag2    Lag3    Lag4
 ## 5528 2020-05-12 1.6625 -0.0084 dec  0.0096 -0.0091 -0.0342  0.0221
 ## 5529 2020-05-13 1.6687  0.0062 inc -0.0084  0.0096 -0.0091 -0.0342
@@ -894,8 +953,8 @@ exchange rates prediction algorithms):</p>
 changed as compared to the previous day, i.e., it is equal to
 <code>pred$AUD[i]-pred$AUD[i-1]</code>. <code>Lag1</code> is the change from the preceding
 working day, <code>Lag2</code> is the one from 2 working days ago, etc.</p>
-<div class="sourceCode" id="cb1431"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1431-1" title="1"><span class="kw">write.csv</span>(pred, <span class="st">&quot;datasets/currency_exchange_diff.csv.gz&quot;</span>,</a>
-<a class="sourceLine" id="cb1431-2" title="2">   <span class="dt">row.names=</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1457"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1457-1" title="1"><span class="kw">write.csv</span>(pred, <span class="st">&quot;datasets/currency_exchange_diff.csv.gz&quot;</span>,</a>
+<a class="sourceLine" id="cb1457-2" title="2">   <span class="dt">row.names=</span><span class="ot">FALSE</span>)</a></code></pre></div>
 </dd>
 </dl>
 </div>
@@ -933,9 +992,17 @@ ca. 72,500 trees in Melbourne, VIC, Australia.</p>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb1432"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1432-1" title="1">urban_forest &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/urban_forest.csv.gz&quot;</span>,</a>
-<a class="sourceLine" id="cb1432-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb1432-3" title="3"><span class="kw">head</span>(urban_forest, <span class="dv">3</span>)</a></code></pre></div>
+<!-- Terms of use:
+
+https://data.melbourne.vic.gov.au/stories/s/data-principles/9f8u-v2fn
+
+https://data.melbourne.vic.gov.au/Environment/Trees-with-species-and-dimensions-Urban-Forest-/fp38-wiyy
+-- CC Attribution 4.0
+
+-->
+<div class="sourceCode" id="cb1458"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1458-1" title="1">urban_forest &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/urban_forest.csv.gz&quot;</span>,</a>
+<a class="sourceLine" id="cb1458-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
+<a class="sourceLine" id="cb1458-3" title="3"><span class="kw">head</span>(urban_forest, <span class="dv">3</span>)</a></code></pre></div>
 <pre><code>##    CoM.ID   Common.Name          Scientific.Name      Genus    Family
 ## 1 1036574   English Elm            Ulmus procera      Ulmus  Ulmaceae
 ## 2 1052946       Red Box  Eucalyptus polyanthemos Eucalyptus Myrtaceae
@@ -1071,7 +1138,7 @@ Moreover, there are wine ratings given by wine experts and their colour.</p>
 </tr>
 <tr class="even">
 <td>Provider</td>
-<td>Paulo Cortez (Univ. Minho), Antonio Cerdeira, Fernando Almeida, Telmo Matos and Jose Reis (CVRVV)</td>
+<td>Paulo Cortez, Antonio Cerdeira, Fernando Almeida, Telmo Matos and Jose Reis via UCI <span class="citation">(Dua et al. <a href="references.html#ref-uci">2020</a>)</span></td>
 </tr>
 <tr class="odd">
 <td>License</td>
@@ -1083,9 +1150,14 @@ Moreover, there are wine ratings given by wine experts and their colour.</p>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb1434"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1434-1" title="1">wine_quality &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/wine_quality_all.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb1434-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb1434-3" title="3"><span class="kw">head</span>(wine_quality, <span class="dv">3</span>)</a></code></pre></div>
+<!-- Terms of use:
+
+Donated by Paulo Cortez to UCI, public domain
+
+-->
+<div class="sourceCode" id="cb1460"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1460-1" title="1">wine_quality &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/wine_quality_all.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb1460-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
+<a class="sourceLine" id="cb1460-3" title="3"><span class="kw">head</span>(wine_quality, <span class="dv">3</span>)</a></code></pre></div>
 <pre><code>##   fixed.acidity volatile.acidity citric.acid residual.sugar chlorides
 ## 1           7.4             0.70        0.00            1.9     0.076
 ## 2           7.8             0.88        0.00            2.6     0.098
@@ -1195,12 +1267,37 @@ area, GDP, mortality rates etc.</p>
 </tr>
 <tr class="even">
 <td>Source</td>
-<td><a href="https://www.cia.gov/library/publications/the-world-factbook/docs/rankorderguide.html" class="uri">https://www.cia.gov/library/publications/the-world-factbook/docs/rankorderguide.html</a></td>
+<td><a href="https://www.cia.gov/library/publications/resources/the-world-factbook/index.html" class="uri">https://www.cia.gov/library/publications/resources/the-world-factbook/index.html</a></td>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb1436"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1436-1" title="1">factbook &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/world_factbook_2020.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb1436-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<!-- Terms of use:
+
+https://www.cia.gov/library/publications/the-world-factbook/docs/faqs.html:
+The World Factbook is in the public domain and may be used freely by anyone
+at anytime without seeking permission. However, US Code (Section 403m)
+prohibits use of the CIA seal in a manner which implies that the CIA
+approved, endorsed, or authorized such use. For any questions about
+your intended use, you should consult with legal counsel. Further
+information on use of The World Factbook is described on the Contributors
+and Copyright Information page. As a courtesy, please cite The World
+Factbook when used.
+
+Terms of Use: https://www.cia.gov/library/publications/the-world-factbook/docs/contributor_copyright.html
+
+The Factbook is in the public domain. Accordingly, it may be copied freely without permission of the Central Intelligence Agency (CIA).
+
+-->
+<div class="sourceCode" id="cb1462"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1462-1" title="1">factbook &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/world_factbook_2020.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb1462-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
+<a class="sourceLine" id="cb1462-3" title="3">factbook[<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>] <span class="co"># preview</span></a></code></pre></div>
+<pre><code>##          country    area population median_age population_growth_rate
+## 1    Afghanistan  652230   36643815       19.5                   2.38
+## 2       Akrotiri     123         NA         NA                     NA
+## 3        Albania   28748    3074579       34.3                   0.28
+## 4        Algeria 2381740   42972878       28.9                   1.52
+## 5 American Samoa     224      49437       27.2                  -1.40
+## 6        Andorra     468      77000       46.2                  -0.06</code></pre>
 <table>
 <colgroup>
 <col width="54%" />
@@ -1446,11 +1543,8 @@ area, GDP, mortality rates etc.</p>
 </div>
 <div id="edstats-country-level-education-statistics" class="section level2">
 <h2><span class="header-section-number">F.6</span> EdStats (Country-Level Education Statistics)</h2>
-<p>In this exercise, we will prepare the EdStats dataset
-for further analysis.
-The file <code>edstats_2019.csv</code> provides us with many
-country-level Education Statistics extracted from the World Bank’s Databank,
-see <a href="https://databank.worldbank.org/" class="uri">https://databank.worldbank.org/</a>.
+<p>The file <code>edstats_2019.csv.gz</code> provides us with many
+country-level Education Statistics extracted from the World Bank’s Databank.
 Databank aggregates information from such sources as
 the UNESCO Institute for Statistics,
 OECD Programme for International Student Assessment (PISA)
@@ -1463,9 +1557,6 @@ pre-primary to tertiary education. The query also holds learning outcome data
 from international learning assessments (PISA, TIMSS, etc.), equity data
 from household surveys, and projection data to 2050.”</p>
 </blockquote>
-<p><code>edstats_2019.csv</code> was compiled on 24 April 2020 and lists
-indicators reported between 2010 and 2019.
-First, let’s load the dataset:</p>
 <table>
 <colgroup>
 <col width="19%" />
@@ -1473,32 +1564,41 @@ First, let’s load the dataset:</p>
 </colgroup>
 <thead>
 <tr class="header">
-<th><code>wine_quality</code></th>
+<th><code>edstats</code></th>
 <th></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Last updated</td>
-<td>2009</td>
+<td>24 April 2020</td>
 </tr>
 <tr class="even">
 <td>Provider</td>
-<td>Paulo Cortez (Univ. Minho), Antonio Cerdeira, Fernando Almeida, Telmo Matos and Jose Reis (CVRVV)</td>
+<td>The World Bank’s Databank</td>
 </tr>
 <tr class="odd">
 <td>License</td>
-<td>Public Domain</td>
+<td>Creative Commons Attribution 4.0 International License (CC BY 4.0)</td>
 </tr>
 <tr class="even">
 <td>Source</td>
-<td><a href="http://archive.ics.uci.edu/ml/datasets/Wine+Quality" class="uri">http://archive.ics.uci.edu/ml/datasets/Wine+Quality</a></td>
+<td><a href="https://databank.worldbank.org/" class="uri">https://databank.worldbank.org/</a></td>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb1437"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1437-1" title="1">edstats_<span class="dv">2019</span> &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/edstats_2019.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb1437-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb1437-3" title="3"><span class="kw">head</span>(edstats_<span class="dv">2019</span>)</a></code></pre></div>
+<!-- Terms of use:
+
+https://www.worldbank.org/en/about/legal/terms-of-use-for-datasets
+
+You are encouraged to use the Datasets to benefit yourself and others in creative ways. You may extract, download, and make copies of the data contained in the Datasets, and you may share that data with third parties according to these terms of use.
+
+Unless specifically labeled otherwise, these Datasets are provided to you under a Creative Commons Attribution 4.0 International License (CC BY 4.0),
+
+-->
+<div class="sourceCode" id="cb1464"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1464-1" title="1">edstats_<span class="dv">2019</span> &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/edstats_2019.csv.gz&quot;</span>,</a>
+<a class="sourceLine" id="cb1464-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
+<a class="sourceLine" id="cb1464-3" title="3"><span class="kw">head</span>(edstats_<span class="dv">2019</span>)</a></code></pre></div>
 <pre><code>##   CountryName CountryCode
 ## 1 Afghanistan         AFG
 ## 2 Afghanistan         AFG
@@ -1528,9 +1628,544 @@ First, let’s load the dataset:</p>
 ## 5      NA      NA     NA    NA
 ## 6      NA      NA     NA    NA</code></pre>
 <p>This data frame is in a “long” format, where each indicator
-for each country is given in its own row. Note that some indicators
+for each country is given in its own row. Note that we extracted
+the indicators reported between 2010 and 2019 and that some of them
 are not surveyed/updated every year.</p>
-<p>edstats_2019_wide.csv</p>
+<dl>
+<dt><code>edstats_2019_wide</code>.</dt>
+<dd><p>Let’s convert this dataset to the “wide” format (one row per country,
+each indicator in its own column) based on the most recent indicators.</p>
+</dd>
+</dl>
+<p>First we need a function that returns the last non-missing value in a
+given numeric vector.
+To recall, <code>na.omit()</code>, removes all missing values and <code>tail()</code> can be
+used to access the last observation easily. Unfortunately, if the vector
+is consists of missing values only, the removal of <code>NA</code>s leads
+to an empty sequence. However, the trick we can use is that
+by extracting the first element from an empty vector by using
+<code>[...]</code>, we get a <code>NA</code>.</p>
+<div class="sourceCode" id="cb1466"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1466-1" title="1">last_non_na &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">tail</span>(<span class="kw">na.omit</span>(x), <span class="dv">1</span>)[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb1466-2" title="2"><span class="kw">last_non_na</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">NA</span>, <span class="dv">3</span>,<span class="ot">NA</span>,<span class="ot">NA</span>)) <span class="co"># example 1</span></a></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode" id="cb1468"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1468-1" title="1"><span class="kw">last_non_na</span>(<span class="kw">c</span>(<span class="ot">NA</span>,<span class="ot">NA</span>,<span class="ot">NA</span>,<span class="ot">NA</span>,<span class="ot">NA</span>,<span class="ot">NA</span>)) <span class="co"># example 2</span></a></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<p>Let’s extract the most recent indicator from each row in <code>edstats_2019</code>.</p>
+<div class="sourceCode" id="cb1470"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1470-1" title="1">values &lt;-<span class="st"> </span><span class="kw">apply</span>(edstats_<span class="dv">2019</span>[<span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)], <span class="dv">1</span>, last_non_na)</a>
+<a class="sourceLine" id="cb1470-2" title="2"><span class="kw">head</span>(values)</a></code></pre></div>
+<pre><code>## [1]  4.0589 82.8503      NA 85.6253      NA      NA</code></pre>
+<p>Now, we shall create a data frame with 3 columns:
+name of the country, indicator code, indicator value.
+Let’s order it with respect to the first two columns.</p>
+<div class="sourceCode" id="cb1472"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1472-1" title="1">edstats_<span class="dv">2019</span> &lt;-<span class="st"> </span>edstats_<span class="dv">2019</span>[<span class="kw">c</span>(<span class="st">&quot;CountryName&quot;</span>, <span class="st">&quot;Code&quot;</span>)]</a>
+<a class="sourceLine" id="cb1472-2" title="2"><span class="co"># add a new column at the righthand end:</span></a>
+<a class="sourceLine" id="cb1472-3" title="3">edstats_<span class="dv">2019</span>[<span class="st">&quot;Value&quot;</span>] &lt;-<span class="st"> </span>values</a>
+<a class="sourceLine" id="cb1472-4" title="4">edstats_<span class="dv">2019</span> &lt;-<span class="st"> </span>edstats_<span class="dv">2019</span>[</a>
+<a class="sourceLine" id="cb1472-5" title="5">    <span class="kw">order</span>(edstats_<span class="dv">2019</span><span class="op">$</span>CountryName, edstats_<span class="dv">2019</span><span class="op">$</span>Code), ]</a>
+<a class="sourceLine" id="cb1472-6" title="6"><span class="kw">head</span>(edstats_<span class="dv">2019</span>)</a></code></pre></div>
+<pre><code>##    CountryName           Code  Value
+## 59 Afghanistan    HD.HCI.AMRT 0.7797
+## 57 Afghanistan HD.HCI.AMRT.FE 0.8018
+## 58 Afghanistan HD.HCI.AMRT.MA 0.7597
+## 53 Afghanistan    HD.HCI.EYRS 8.5800
+## 51 Afghanistan HD.HCI.EYRS.FE 6.7300
+## 52 Afghanistan HD.HCI.EYRS.MA 9.2100</code></pre>
+<p>To convert the data frame to a “wide” format, many readers would choose
+the <code>pivot_wider()</code> function from the <code>tidyr</code> package
+(amongst others).</p>
+<div class="sourceCode" id="cb1474"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1474-1" title="1"><span class="kw">library</span>(<span class="st">&quot;tidyr&quot;</span>)</a>
+<a class="sourceLine" id="cb1474-2" title="2">edstats &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(</a>
+<a class="sourceLine" id="cb1474-3" title="3">    <span class="kw">pivot_wider</span>(edstats_<span class="dv">2019</span>, <span class="dt">names_from=</span><span class="st">&quot;Code&quot;</span>, <span class="dt">values_from=</span><span class="st">&quot;Value&quot;</span>)</a>
+<a class="sourceLine" id="cb1474-4" title="4">)</a>
+<a class="sourceLine" id="cb1474-5" title="5">edstats[<span class="dv">1</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>]</a></code></pre></div>
+<pre><code>##   CountryName HD.HCI.AMRT HD.HCI.AMRT.FE HD.HCI.AMRT.MA HD.HCI.EYRS
+## 1 Afghanistan      0.7797         0.8018         0.7597        8.58
+##   HD.HCI.EYRS.FE HD.HCI.EYRS.MA
+## 1           6.73           9.21</code></pre>
+<dl>
+<dt>Side note (*).</dt>
+<dd><p>The above solution is of course perfectly fine
+and we can now live long and prosper.
+Nevertheless, we are here to learn new skills, so let’s note
+that it has the drawback that it required
+us to search for the answer on the internet (and go through many “answers”
+that actually don’t work). If we are not converting between the long and the
+wide formats on a daily basis, this might not be worth the hassle
+(moreover, there’s no guarantee that this function will work the same
+way in the future, that the package we relied on will provide the same API etc.).</p>
+<p>Instead, by relaying on a bit deeper knowledge of R programming
+(which we already have, see Appendices A-D<!-- TODO -->),
+we could implement the relevant procedure manually. The downside is that
+this requires us to get out of our comfort zone and… think.</p>
+<p>First, let’s generate the list of all countries and indicators:</p>
+<div class="sourceCode" id="cb1476"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1476-1" title="1">countries  &lt;-<span class="st"> </span><span class="kw">unique</span>(edstats_<span class="dv">2019</span><span class="op">$</span>CountryName)</a>
+<a class="sourceLine" id="cb1476-2" title="2"><span class="kw">head</span>(countries)</a></code></pre></div>
+<pre><code>## [1] &quot;Afghanistan&quot;    &quot;Albania&quot;        &quot;Algeria&quot;        &quot;American Samoa&quot;
+## [5] &quot;Andorra&quot;        &quot;Angola&quot;</code></pre>
+<div class="sourceCode" id="cb1478"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1478-1" title="1">indicators &lt;-<span class="st"> </span><span class="kw">unique</span>(edstats_<span class="dv">2019</span><span class="op">$</span>Code)</a>
+<a class="sourceLine" id="cb1478-2" title="2"><span class="kw">head</span>(indicators)</a></code></pre></div>
+<pre><code>## [1] &quot;HD.HCI.AMRT&quot;    &quot;HD.HCI.AMRT.FE&quot; &quot;HD.HCI.AMRT.MA&quot; &quot;HD.HCI.EYRS&quot;   
+## [5] &quot;HD.HCI.EYRS.FE&quot; &quot;HD.HCI.EYRS.MA&quot;</code></pre>
+<p>Second, note that <code>edstats_2019</code> gives all the possible combinations (pairs)
+of the indexes and countries:</p>
+<div class="sourceCode" id="cb1480"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1480-1" title="1"><span class="kw">nrow</span>(edstats_<span class="dv">2019</span>) <span class="co"># number of rows in edstats_2019</span></a></code></pre></div>
+<pre><code>## [1] 23852</code></pre>
+<div class="sourceCode" id="cb1482"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1482-1" title="1"><span class="kw">length</span>(countries)<span class="op">*</span><span class="kw">length</span>(indicators) <span class="co"># number of pairs</span></a></code></pre></div>
+<pre><code>## [1] 23852</code></pre>
+<p>Looking at the numbers in the <code>Value</code> column of <code>edstats_2019</code>,
+this will exactly provide us with our desired “wide” data matrix,
+if we read it in a rowwise manner. Hence, we can use
+<code>matrix(..., byrow=TRUE)</code> to generate it:</p>
+<div class="sourceCode" id="cb1484"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1484-1" title="1"><span class="co"># edstats_2019 is already sorted w.r.t. CountryName and Code</span></a>
+<a class="sourceLine" id="cb1484-2" title="2">edstats2 &lt;-<span class="st"> </span><span class="kw">cbind</span>(</a>
+<a class="sourceLine" id="cb1484-3" title="3">    <span class="dt">CountryName=</span>countries, <span class="co"># first column</span></a>
+<a class="sourceLine" id="cb1484-4" title="4">    <span class="kw">as.data.frame</span>(</a>
+<a class="sourceLine" id="cb1484-5" title="5">        <span class="kw">matrix</span>(edstats_<span class="dv">2019</span><span class="op">$</span>Value,</a>
+<a class="sourceLine" id="cb1484-6" title="6">            <span class="dt">byrow=</span><span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb1484-7" title="7">            <span class="dt">ncol=</span><span class="kw">length</span>(indicators),</a>
+<a class="sourceLine" id="cb1484-8" title="8">            <span class="dt">dimnames=</span><span class="kw">list</span>(<span class="ot">NULL</span>, indicators)</a>
+<a class="sourceLine" id="cb1484-9" title="9">    )))</a>
+<a class="sourceLine" id="cb1484-10" title="10"><span class="kw">identical</span>(edstats, edstats2)</a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+</dd>
+</dl>
+<p>Now we can export <code>edstats</code> to a CSV file.</p>
+<div class="sourceCode" id="cb1486"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1486-1" title="1"><span class="kw">write.csv</span>(edstats, <span class="st">&quot;datasets/edstats_2019_wide.csv&quot;</span>, <span class="dt">row.names=</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<p>We didn’t export the row names, because they’re useless in our case.</p>
+<div style="margin-top: 1em">
+
+</div>
+<p>The table below lists the indicators included in <code>edstats_2019_wide.csv</code>
+based on their description included in
+<code>Series</code> column of the accompanying <code>edstats_meta.csv</code> file.
+For more details, refer to the <code>Definition</code>, <code>Source</code>, <code>Topic</code> columns therein.</p>
+<table>
+<colgroup>
+<col width="41%" />
+<col width="58%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>CountryName</code></td>
+<td>Country</td>
+</tr>
+<tr class="even">
+<td><code>HD.HCI.AMRT</code></td>
+<td>Human Capital Index (HCI): Survival Rate from Age 15-60, Total</td>
+</tr>
+<tr class="odd">
+<td><code>HD.HCI.AMRT.FE</code></td>
+<td>Human Capital Index (HCI): Survival Rate from Age 15-60, Female</td>
+</tr>
+<tr class="even">
+<td><code>HD.HCI.AMRT.MA</code></td>
+<td>Human Capital Index (HCI): Survival Rate from Age 15-60, Male</td>
+</tr>
+<tr class="odd">
+<td><code>HD.HCI.EYRS</code></td>
+<td>Human Capital Index (HCI): Expected Years of School, Total</td>
+</tr>
+<tr class="even">
+<td><code>HD.HCI.EYRS.FE</code></td>
+<td>Human Capital Index (HCI): Expected Years of School, Female</td>
+</tr>
+<tr class="odd">
+<td><code>HD.HCI.EYRS.MA</code></td>
+<td>Human Capital Index (HCI): Expected Years of School, Male</td>
+</tr>
+<tr class="even">
+<td><code>HD.HCI.HLOS</code></td>
+<td>Harmonised Test Scores, Total</td>
+</tr>
+<tr class="odd">
+<td><code>HD.HCI.HLOS.FE</code></td>
+<td>Harmonised Test Scores, Female</td>
+</tr>
+<tr class="even">
+<td><code>HD.HCI.HLOS.MA</code></td>
+<td>Harmonised Test Scores, Male</td>
+</tr>
+<tr class="odd">
+<td><code>HD.HCI.MORT</code></td>
+<td>Human Capital Index (HCI): Probability of Survival to Age 5, Total</td>
+</tr>
+<tr class="even">
+<td><code>HD.HCI.MORT.FE</code></td>
+<td>Human Capital Index (HCI): Probability of Survival to Age 5, Female</td>
+</tr>
+<tr class="odd">
+<td><code>HD.HCI.MORT.MA</code></td>
+<td>Human Capital Index (HCI): Probability of Survival to Age 5, Male</td>
+</tr>
+<tr class="even">
+<td><code>HD.HCI.OVRL</code></td>
+<td>Human Capital Index (HCI) Score: Total (Scale 0-1)</td>
+</tr>
+<tr class="odd">
+<td><code>HD.HCI.OVRL.FE</code></td>
+<td>Human Capital Index (HCI) Score: Female (Scale 0-1)</td>
+</tr>
+<tr class="even">
+<td><code>HD.HCI.OVRL.MA</code></td>
+<td>Human Capital Index (HCI) Score: Male (Scale 0-1)</td>
+</tr>
+<tr class="odd">
+<td><code>IT.CMP.PCMP.P2</code></td>
+<td>Personal computers/100 people</td>
+</tr>
+<tr class="even">
+<td><code>IT.NET.USER.P2</code></td>
+<td>Internet users/100 people</td>
+</tr>
+<tr class="odd">
+<td><code>LO.PISA.MAT</code></td>
+<td>PISA: Mean performance on the mathematics scale</td>
+</tr>
+<tr class="even">
+<td><code>LO.PISA.MAT.FE</code></td>
+<td>PISA: Mean performance on the mathematics scale. Female</td>
+</tr>
+<tr class="odd">
+<td><code>LO.PISA.MAT.MA</code></td>
+<td>PISA: Mean performance on the mathematics scale. Male</td>
+</tr>
+<tr class="even">
+<td><code>LO.PISA.REA</code></td>
+<td>PISA: Mean performance on the reading scale</td>
+</tr>
+<tr class="odd">
+<td><code>LO.PISA.REA.FE</code></td>
+<td>PISA: Mean performance on the reading scale. Female</td>
+</tr>
+<tr class="even">
+<td><code>LO.PISA.REA.MA</code></td>
+<td>PISA: Mean performance on the reading scale. Male</td>
+</tr>
+<tr class="odd">
+<td><code>LO.PISA.SCI</code></td>
+<td>PISA: Mean performance on the science scale</td>
+</tr>
+<tr class="even">
+<td><code>LO.PISA.SCI.FE</code></td>
+<td>PISA: Mean performance on the science scale. Female</td>
+</tr>
+<tr class="odd">
+<td><code>LO.PISA.SCI.MA</code></td>
+<td>PISA: Mean performance on the science scale. Male</td>
+</tr>
+<tr class="even">
+<td><code>NY.GDP.MKTP.CD</code></td>
+<td>GDP (current USD)</td>
+</tr>
+<tr class="odd">
+<td><code>NY.GDP.PCAP.CD</code></td>
+<td>GDP per capita (current USD)</td>
+</tr>
+<tr class="even">
+<td><code>NY.GDP.PCAP.PP.CD</code></td>
+<td>GDP per capita, PPP (current international dollars)</td>
+</tr>
+<tr class="odd">
+<td><code>NY.GNP.PCAP.CD</code></td>
+<td>GNI per capita, Atlas method (current USD)</td>
+</tr>
+<tr class="even">
+<td><code>NY.GNP.PCAP.PP.CD</code></td>
+<td>GNI per capita, PPP (current international dollars)</td>
+</tr>
+<tr class="odd">
+<td><code>SE.COM.DURS</code></td>
+<td>Duration of compulsory education (years)</td>
+</tr>
+<tr class="even">
+<td><code>SE.PRM.CMPT.ZS</code></td>
+<td>Primary completion rate, both sexes (%)</td>
+</tr>
+<tr class="odd">
+<td><code>SE.PRM.CMPT.FE.ZS</code></td>
+<td>Primary completion rate, female (%)</td>
+</tr>
+<tr class="even">
+<td><code>SE.PRM.CMPT.MA.ZS</code></td>
+<td>Primary completion rate, male (%)</td>
+</tr>
+<tr class="odd">
+<td><code>SE.PRM.ENRL.TC.ZS</code></td>
+<td>Pupil-teacher ratio in primary education (headcount basis)</td>
+</tr>
+<tr class="even">
+<td><code>SE.PRM.ENRR</code></td>
+<td>Gross enrolment ratio, primary, both sexes (%)</td>
+</tr>
+<tr class="odd">
+<td><code>SE.PRM.ENRR.FE</code></td>
+<td>Gross enrolment ratio, primary, female (%)</td>
+</tr>
+<tr class="even">
+<td><code>SE.PRM.ENRR.MA</code></td>
+<td>Gross enrolment ratio, primary, male (%)</td>
+</tr>
+<tr class="odd">
+<td><code>SE.PRM.NENR</code></td>
+<td>Net enrolment rate, primary, both sexes (%)</td>
+</tr>
+<tr class="even">
+<td><code>SE.PRM.NENR.FE</code></td>
+<td>Net enrolment rate, primary, female (%)</td>
+</tr>
+<tr class="odd">
+<td><code>SE.PRM.NENR.MA</code></td>
+<td>Net enrolment rate, primary, male (%)</td>
+</tr>
+<tr class="even">
+<td><code>SE.PRM.PRIV.ZS</code></td>
+<td>Percentage of enrolment in primary education in private institutions (%)</td>
+</tr>
+<tr class="odd">
+<td><code>SE.SEC.ENRL.TC.ZS</code></td>
+<td>Pupil-teacher ratio in secondary education (headcount basis)</td>
+</tr>
+<tr class="even">
+<td><code>SE.SEC.ENRR</code></td>
+<td>Gross enrolment ratio, secondary, both sexes (%)</td>
+</tr>
+<tr class="odd">
+<td><code>SE.SEC.ENRR.FE</code></td>
+<td>Gross enrolment ratio, secondary, female (%)</td>
+</tr>
+<tr class="even">
+<td><code>SE.SEC.ENRR.MA</code></td>
+<td>Gross enrolment ratio, secondary, male (%)</td>
+</tr>
+<tr class="odd">
+<td><code>SE.SEC.NENR</code></td>
+<td>Net enrolment rate, secondary, both sexes (%)</td>
+</tr>
+<tr class="even">
+<td><code>SE.SEC.NENR.MA</code></td>
+<td>Net enrolment rate, secondary, male (%)</td>
+</tr>
+<tr class="odd">
+<td><code>SE.SEC.PRIV.ZS</code></td>
+<td>Percentage of enrolment in secondary education in private institutions (%)</td>
+</tr>
+<tr class="even">
+<td><code>SE.TER.ENRR</code></td>
+<td>Gross enrolment ratio, tertiary, both sexes (%)</td>
+</tr>
+<tr class="odd">
+<td><code>SE.TER.ENRR.FE</code></td>
+<td>Gross enrolment ratio, tertiary, female (%)</td>
+</tr>
+<tr class="even">
+<td><code>SE.TER.ENRR.MA</code></td>
+<td>Gross enrolment ratio, tertiary, male (%)</td>
+</tr>
+<tr class="odd">
+<td><code>SE.TER.PRIV.ZS</code></td>
+<td>Percentage of enrolment in tertiary education in private institutions (%)</td>
+</tr>
+<tr class="even">
+<td><code>SE.XPD.TOTL.GD.ZS</code></td>
+<td>Government expenditure on education as % GDP</td>
+</tr>
+<tr class="odd">
+<td><code>SL.TLF.ADVN.ZS</code></td>
+<td>Labor force with advanced education (% total working-age population with advanced education)</td>
+</tr>
+<tr class="even">
+<td><code>SL.TLF.ADVN.FE.ZS</code></td>
+<td>Labor force with advanced education, female (% female working-age population with advanced education)</td>
+</tr>
+<tr class="odd">
+<td><code>SL.TLF.ADVN.MA.ZS</code></td>
+<td>Labor force with advanced education, male (% male working-age population with advanced education)</td>
+</tr>
+<tr class="even">
+<td><code>SP.POP.TOTL</code></td>
+<td>Population, total</td>
+</tr>
+<tr class="odd">
+<td><code>SP.POP.TOTL.FE.IN</code></td>
+<td>Population, female</td>
+</tr>
+<tr class="even">
+<td><code>SP.POP.TOTL.MA.IN</code></td>
+<td>Population, male</td>
+</tr>
+<tr class="odd">
+<td><code>SP.PRM.TOTL.IN</code></td>
+<td>School age population, primary education, both sexes</td>
+</tr>
+<tr class="even">
+<td><code>SP.PRM.TOTL.FE.IN</code></td>
+<td>School age population, primary education, female</td>
+</tr>
+<tr class="odd">
+<td><code>SP.PRM.TOTL.MA.IN</code></td>
+<td>School age population, primary education, male</td>
+</tr>
+<tr class="even">
+<td><code>SP.SEC.TOTL.IN</code></td>
+<td>School age population, secondary education, both sexes</td>
+</tr>
+<tr class="odd">
+<td><code>SP.SEC.TOTL.FE.IN</code></td>
+<td>School age population, secondary education, female</td>
+</tr>
+<tr class="even">
+<td><code>SP.SEC.TOTL.MA.IN</code></td>
+<td>School age population, secondary education, male</td>
+</tr>
+<tr class="odd">
+<td><code>UIS.PTRHC.56</code></td>
+<td>Pupil-teacher ratio in tertiary education (headcount basis)</td>
+</tr>
+<tr class="even">
+<td><code>UIS.SAP.CE</code></td>
+<td>Population of compulsory school age, both sexes</td>
+</tr>
+<tr class="odd">
+<td><code>UIS.SAP.CE.F</code></td>
+<td>Population of compulsory school age, female</td>
+</tr>
+<tr class="even">
+<td><code>UIS.SAP.CE.M</code></td>
+<td>Population of compulsory school age, male</td>
+</tr>
+<tr class="odd">
+<td><code>UIS.XGDP.1.FSGOV</code></td>
+<td>Government expenditure on primary education as % GDP</td>
+</tr>
+<tr class="even">
+<td><code>UIS.XGDP.23.FSGOV</code></td>
+<td>Government expenditure on secondary education as % GDP</td>
+</tr>
+<tr class="odd">
+<td><code>UIS.XGDP.56.FSGOV</code></td>
+<td>Government expenditure on tertiary education as % GDP</td>
+</tr>
+<tr class="even">
+<td><code>UIS.X.PPP.1.FSGOV</code></td>
+<td>Government expenditure on primary education, millions PPP USD</td>
+</tr>
+<tr class="odd">
+<td><code>UIS.X.PPP.2T3.FSGOV</code></td>
+<td>Government expenditure on secondary education, millions PPP USD</td>
+</tr>
+<tr class="even">
+<td><code>UIS.X.PPP.5T8.FSGOV</code></td>
+<td>Government expenditure on tertiary education, millions PPP USD</td>
+</tr>
+<tr class="odd">
+<td><code>UIS.XUNIT.GDPCAP.1.FSGOV</code></td>
+<td>Initial government funding per primary student as % GDP per capita</td>
+</tr>
+<tr class="even">
+<td><code>UIS.XUNIT.GDPCAP.23.FSGOV</code></td>
+<td>Initial government funding per secondary student as % GDP per capita</td>
+</tr>
+<tr class="odd">
+<td><code>UIS.XUNIT.GDPCAP.5T8.FSGOV</code></td>
+<td>Initial government funding per tertiary student as % GDP per capita</td>
+</tr>
+<tr class="even">
+<td><code>UIS.XUNIT.PPP.1.FSGOV.FFNTR</code></td>
+<td>Initial government funding per primary student, PPP USD</td>
+</tr>
+<tr class="odd">
+<td><code>UIS.XUNIT.PPP.2T3.FSGOV.FFNTR</code></td>
+<td>Initial government funding per secondary student, PPP USD</td>
+</tr>
+<tr class="even">
+<td><code>UIS.XUNIT.PPP.5T8.FSGOV.FFNTR</code></td>
+<td>Initial government funding per tertiary student, PPP USD</td>
+</tr>
+<tr class="odd">
+<td><code>UIS.XUNIT.US.1.FSGOV.FFNTR</code></td>
+<td>Initial government funding per primary student, USD</td>
+</tr>
+<tr class="even">
+<td><code>UIS.XUNIT.US.23.FSGOV.FFNTR</code></td>
+<td>Initial government funding per secondary student, USD</td>
+</tr>
+<tr class="odd">
+<td><code>UIS.XUNIT.US.5T8.FSGOV.FFNTR</code></td>
+<td>Initial government funding per tertiary student, USD</td>
+</tr>
+<tr class="even">
+<td><code>UIS.X.US.1.FSGOV</code></td>
+<td>Government expenditure on primary education, millions USD</td>
+</tr>
+<tr class="odd">
+<td><code>UIS.X.US.2T3.FSGOV</code></td>
+<td>Government expenditure on secondary education, millions USD</td>
+</tr>
+<tr class="even">
+<td><code>UIS.X.US.5T8.FSGOV</code></td>
+<td>Government expenditure on tertiary education, millions USD</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="food-and-nutrient-database-for-dietary-studies-fndds" class="section level2">
+<h2><span class="header-section-number">F.7</span> Food and Nutrient Database for Dietary Studies (FNDDS)</h2>
+<p>The Food Surveys Research Group affiliated with the
+US Department of Agriculture has published the
+Food and Nutrient Database for Dietary Studies 2015-2016.
+The database list nutrients in 8690 foods and beverages.
+See <a href="https://www.ars.usda.gov/ARSUserFiles/80400530/pdf/fndds/2015_2016_FNDDS_Doc.pdf" class="uri">https://www.ars.usda.gov/ARSUserFiles/80400530/pdf/fndds/2015_2016_FNDDS_Doc.pdf</a>
+for detailed documentation.</p>
+<table>
+<thead>
+<tr class="header">
+<th><code>fndds_nutrients</code></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Last updated</td>
+<td>2016</td>
+</tr>
+<tr class="even">
+<td>Provider</td>
+<td>US Department of Agriculture, Agricultural Research Service</td>
+</tr>
+<tr class="odd">
+<td>License</td>
+<td>Public Domain</td>
+</tr>
+<tr class="even">
+<td>Source</td>
+<td><a href="http://www.ars.usda.gov/nea/bhnrc/fsrg" class="uri">http://www.ars.usda.gov/nea/bhnrc/fsrg</a></td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb1487"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1487-1" title="1">fndds_nutrients &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/fndds_nutrients_2016.csv.gz&quot;</span>,</a>
+<a class="sourceLine" id="cb1487-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
+<a class="sourceLine" id="cb1487-3" title="3">fndds_nutrients[<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>, <span class="dv">10</span>)] <span class="co"># preview</span></a></code></pre></div>
+<pre><code>##       Code                           Description WWEIA_Code
+## 1 11000000                           Milk, human       9602
+## 2 11100000                             Milk, NFS       1004
+## 3 11111000                           Milk, whole       1002
+## 4 11111100               Milk, low sodium, whole       1002
+## 5 11111150        Milk, calcium fortified, whole       1002
+## 6 11111160 Milk, calcium fortified, low fat (1%)       1006
+##   WWEIA_Description Energy Protein Carbohydrate Fat_total
+## 1        Human milk     70    1.03         6.89      4.38
+## 2 Milk, reduced fat     51    3.27         4.85      2.04
+## 3       Milk, whole     61    3.15         4.80      3.25
+## 4       Milk, whole     61    3.10         4.46      3.46
+## 5       Milk, whole     61    3.15         4.80      3.25
+## 6      Milk, lowfat     42    3.37         4.99      0.97</code></pre>
+<p>All nutrient amounts are given as per 100 g edible portion.</p>
 <table>
 <thead>
 <tr class="header">
@@ -1539,22 +2174,426 @@ are not surveyed/updated every year.</p>
 </tr>
 </thead>
 <tbody>
+<tr class="odd">
+<td><code>Code</code></td>
+<td>Unique 8-digit identification code</td>
+</tr>
+<tr class="even">
+<td><code>Description</code></td>
+<td>Primary description for a food/beverage</td>
+</tr>
+<tr class="odd">
+<td><code>WWEIA_Code</code></td>
+<td>Unique 4-digit identification code</td>
+</tr>
+<tr class="even">
+<td><code>WWEIA_Description</code></td>
+<td>Description for a WWEIA category</td>
+</tr>
+<tr class="odd">
+<td><code>Energy</code></td>
+<td>Energy (kcal)</td>
+</tr>
+<tr class="even">
+<td><code>Protein</code></td>
+<td>Protein (g)</td>
+</tr>
+<tr class="odd">
+<td><code>Carbohydrate</code></td>
+<td>Carbohydrate (g)</td>
+</tr>
+<tr class="even">
+<td><code>Sugars_total</code></td>
+<td>Sugars, total (g)</td>
+</tr>
+<tr class="odd">
+<td><code>Fiber_total_dietary</code></td>
+<td>Fiber, total dietary (g)</td>
+</tr>
+<tr class="even">
+<td><code>Fat_total</code></td>
+<td>Total Fat (g)</td>
+</tr>
+<tr class="odd">
+<td><code>Fatty_acids_total_saturated</code></td>
+<td>Fatty acids, total saturated (g)</td>
+</tr>
+<tr class="even">
+<td><code>Fatty_acids_total_monounsaturated</code></td>
+<td>Fatty acids, total monounsaturated (g)</td>
+</tr>
+<tr class="odd">
+<td><code>Fatty_acids_total_polyunsaturated</code></td>
+<td>Fatty acids, total polyunsaturated (g)</td>
+</tr>
+<tr class="even">
+<td><code>Cholesterol</code></td>
+<td>Cholesterol (mg)</td>
+</tr>
+<tr class="odd">
+<td><code>Retinol</code></td>
+<td>Retinol (mcg)</td>
+</tr>
+<tr class="even">
+<td><code>Vitamin_A_RAE</code></td>
+<td>Vitamin A, RAE (mcg_RAE)</td>
+</tr>
+<tr class="odd">
+<td><code>Carotene_alpha</code></td>
+<td>Carotene, alpha (mcg)</td>
+</tr>
+<tr class="even">
+<td><code>Carotene_beta</code></td>
+<td>Carotene, beta (mcg)</td>
+</tr>
+<tr class="odd">
+<td><code>Cryptoxanthin_beta</code></td>
+<td>Cryptoxanthin, beta (mcg)</td>
+</tr>
+<tr class="even">
+<td><code>Lycopene</code></td>
+<td>Lycopene (mcg)</td>
+</tr>
+<tr class="odd">
+<td><code>Lutein_zeaxanthin</code></td>
+<td>Lutein + zeaxanthin (mcg)</td>
+</tr>
+<tr class="even">
+<td><code>Thiamin</code></td>
+<td>Thiamin (mg)</td>
+</tr>
+<tr class="odd">
+<td><code>Riboflavin</code></td>
+<td>Riboflavin (mg)</td>
+</tr>
+<tr class="even">
+<td><code>Niacin</code></td>
+<td>Niacin (mg)</td>
+</tr>
+<tr class="odd">
+<td><code>Vitamin_B6</code></td>
+<td>Vitamin B-6 (mg)</td>
+</tr>
+<tr class="even">
+<td><code>Folic_acid</code></td>
+<td>Folic acid (mcg)</td>
+</tr>
+<tr class="odd">
+<td><code>Folate_food</code></td>
+<td>Folate, food (mcg)</td>
+</tr>
+<tr class="even">
+<td><code>Folate_DFE</code></td>
+<td>Folate, DFE (mcg_DFE)</td>
+</tr>
+<tr class="odd">
+<td><code>Folate_total</code></td>
+<td>Folate, total (mcg)</td>
+</tr>
+<tr class="even">
+<td><code>Choline_total</code></td>
+<td>Choline, total (mg)</td>
+</tr>
+<tr class="odd">
+<td><code>Vitamin_B12</code></td>
+<td>Vitamin B-12 (mcg)</td>
+</tr>
+<tr class="even">
+<td><code>Vitamin_B12_added</code></td>
+<td>Vitamin B-12, added (mcg)</td>
+</tr>
+<tr class="odd">
+<td><code>Vitamin_C</code></td>
+<td>Vitamin C (mg)</td>
+</tr>
+<tr class="even">
+<td><code>Vitamin_D</code></td>
+<td>Vitamin D (D2 + D3) (mcg)</td>
+</tr>
+<tr class="odd">
+<td><code>Vitamin_E_alphatocopherol</code></td>
+<td>Vitamin E (alpha-tocopherol) (mg)</td>
+</tr>
+<tr class="even">
+<td><code>Vitamin_E_added</code></td>
+<td>Vitamin E, added (mg)</td>
+</tr>
+<tr class="odd">
+<td><code>Vitamin_K_phylloquinone</code></td>
+<td>Vitamin K (phylloquinone) (mcg)</td>
+</tr>
+<tr class="even">
+<td><code>Calcium</code></td>
+<td>Calcium (mg)</td>
+</tr>
+<tr class="odd">
+<td><code>Phosphorus</code></td>
+<td>Phosphorus (mg)</td>
+</tr>
+<tr class="even">
+<td><code>Magnesium</code></td>
+<td>Magnesium (mg)</td>
+</tr>
+<tr class="odd">
+<td><code>Iron</code></td>
+<td>Iron (mg)</td>
+</tr>
+<tr class="even">
+<td><code>Zinc</code></td>
+<td>Zinc (mg)</td>
+</tr>
+<tr class="odd">
+<td><code>Copper</code></td>
+<td>Copper (mg)</td>
+</tr>
+<tr class="even">
+<td><code>Selenium</code></td>
+<td>Selenium (mcg)</td>
+</tr>
+<tr class="odd">
+<td><code>Potassium</code></td>
+<td>Potassium (mg)</td>
+</tr>
+<tr class="even">
+<td><code>Sodium</code></td>
+<td>Sodium (mg)</td>
+</tr>
+<tr class="odd">
+<td><code>Caffeine</code></td>
+<td>Caffeine (mg)</td>
+</tr>
+<tr class="even">
+<td><code>Theobromine</code></td>
+<td>Theobromine (mg)</td>
+</tr>
+<tr class="odd">
+<td><code>Alcohol</code></td>
+<td>Alcohol (g)</td>
+</tr>
+<tr class="even">
+<td><code>Fatty_acid_4_0</code></td>
+<td>4:0 (g)</td>
+</tr>
+<tr class="odd">
+<td><code>Fatty_acid_6_0</code></td>
+<td>6:0 (g)</td>
+</tr>
+<tr class="even">
+<td><code>Fatty_acid_8_0</code></td>
+<td>8:0 (g)</td>
+</tr>
+<tr class="odd">
+<td><code>Fatty_acid_10_0</code></td>
+<td>10:0 (g)</td>
+</tr>
+<tr class="even">
+<td><code>Fatty_acid_12_0</code></td>
+<td>12:0 (g)</td>
+</tr>
+<tr class="odd">
+<td><code>Fatty_acid_14_0</code></td>
+<td>14:0 (g)</td>
+</tr>
+<tr class="even">
+<td><code>Fatty_acid_16_0</code></td>
+<td>16:0 (g)</td>
+</tr>
+<tr class="odd">
+<td><code>Fatty_acid_18_0</code></td>
+<td>18:0 (g)</td>
+</tr>
+<tr class="even">
+<td><code>Fatty_acid_16_1</code></td>
+<td>16:1 (g)</td>
+</tr>
+<tr class="odd">
+<td><code>Fatty_acid_18_1</code></td>
+<td>18:1 (g)</td>
+</tr>
+<tr class="even">
+<td><code>Fatty_acid_20_1</code></td>
+<td>20:1 (g)</td>
+</tr>
+<tr class="odd">
+<td><code>Fatty_acid_22_1</code></td>
+<td>22:1 (g)</td>
+</tr>
+<tr class="even">
+<td><code>Fatty_acid_18_2</code></td>
+<td>18:2 (g)</td>
+</tr>
+<tr class="odd">
+<td><code>Fatty_acid_18_3</code></td>
+<td>18:3 (g)</td>
+</tr>
+<tr class="even">
+<td><code>Fatty_acid_18_4</code></td>
+<td>18:4 (g)</td>
+</tr>
+<tr class="odd">
+<td><code>Fatty_acid_20_4</code></td>
+<td>20:4 (g)</td>
+</tr>
+<tr class="even">
+<td><code>Fatty_acid_20_5_n3</code></td>
+<td>20:5 n-3 (g)</td>
+</tr>
+<tr class="odd">
+<td><code>Fatty_acid_22_5_n3</code></td>
+<td>22:5 n-3 (g)</td>
+</tr>
+<tr class="even">
+<td><code>Fatty_acid_22_6_n3</code></td>
+<td>22:6 n-3 (g)</td>
+</tr>
+<tr class="odd">
+<td><code>Water</code></td>
+<td>Water (g)</td>
+</tr>
+</tbody>
+</table>
+<!--
+See also:
+
+https://fdc.nal.usda.gov/download-datasets.html
+
+-->
+<!-- Terms of use:
+
+https://www.usda.gov/policies-and-links
+
+USDA food composition data are in the public domain and they are not copyrighted.
+No permission is needed for their use.
+US Department of Agriculture, Agricultural Research Service.
+FoodData Central, 2020. fdc.nal.usda.gov.
+
+Most information presented on the USDA Web site is considered public domain
+information. Public domain information may be freely distributed or copied,
+but use of appropriate byline/photo/image credits is requested. Attribution
+may be cited as follows: "US Department of Agriculture."
+
+-->
+</div>
+<div id="clustering-benchmarks" class="section level2">
+<h2><span class="header-section-number">F.8</span> Clustering Benchmarks</h2>
+<p>In the Exercises section of
+Chapter 7<!-- TODO --> we study a few clustering benchmark datasets.
+They are two-dimensional, so that it’s possible to visualise
+the obtained results and quality of the obtained clusterings.</p>
+<p>The <code>wut_isolation</code>, <code>wut_mk2</code> and <code>wut_z3</code> datasets
+were created by the author’s fantastic students at Warsaw University of Technology
+and are part of the <em>Benchmark Suite for Clustering Algorithms - Version 1</em> .</p>
+<table>
+<thead>
+<tr class="header">
+<th><code>wut_*</code></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Last updated</td>
+<td>23 April 2020</td>
+</tr>
+<tr class="even">
+<td>Authors</td>
+<td>Anna Gierlak, Mateusz Kobyłka, Aleksander Truszczyński</td>
+</tr>
+<tr class="odd">
+<td>License</td>
+<td>Creative Commons Attribution 4.0 International License</td>
+</tr>
+<tr class="even">
+<td>Source</td>
+<td><a href="https://github.com/gagolews/clustering_benchmarks_v1" class="uri">https://github.com/gagolews/clustering_benchmarks_v1</a></td>
+</tr>
+</tbody>
+</table>
+<p>The <code>sipu_aggregation</code> <span class="citation">(Gionis et al. <a href="references.html#ref-clustering_aggregation">2007</a>)</span>,
+<code>sipu_pathbased</code> <span class="citation">(Chang &amp; Yeung <a href="references.html#ref-pathbased">2008</a>)</span> and
+<code>sipu_unbalance</code> <span class="citation">(Rezaei &amp; Fränti <a href="references.html#ref-external_cluster_validity">2016</a>)</span>
+datasets are available at the SIPU
+(Speech and Image Processing Unit, School of Computing, University of Eastern Finland)
+website.</p>
+<table>
+<thead>
+<tr class="header">
+<th><code>sipu_*</code></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Last updated</td>
+<td>2018</td>
+</tr>
+<tr class="even">
+<td>Provider</td>
+<td>Pasi Fränti and Sami Sieranoja <span class="citation">(Fränti &amp; Sieranoja <a href="references.html#ref-ClusteringDatasets">2018</a>)</span></td>
+</tr>
+<tr class="odd">
+<td>License</td>
+<td>Public Domain</td>
+</tr>
+<tr class="even">
+<td>Source</td>
+<td><a href="http://cs.joensuu.fi/sipu/datasets/" class="uri">http://cs.joensuu.fi/sipu/datasets/</a></td>
+</tr>
 </tbody>
 </table>
 </div>
+<div id="movie-lens-todo-permission-required" class="section level2">
+<h2><span class="header-section-number">F.9</span> Movie Lens (TODO: permission required)</h2>
+<!-- (permission required)
+
+From:   GroupLens Admin <gladmin@umn.edu>
+To: gladmin GroupLens Administrative Assistant <gladmin@umn.edu>
+Subject:    Movielens Dataset usage
+Date:   Tue, 26 May 2020 08:46:21 -0500 (2020-05-26 23:46)
+
+Hello!
+
+Thank you for completing the form to request dataset usage.
+You have been approved to use the datasets as you have described
+in this form. Please notify us of any publications that result
+from this usage, and follow the guidelines laid out for usage
+in the associated readme file.
+
+Have a great week, and happy researching!
+
+~Laura
+
+------
+Assistant to Professors Joe Konstan, Loren Terveen, & Lana Yarosh
+University of Minnesota, Department of Computer Science & Engineering
+200 Union Street SE, 4-192 Keller Hall
+Minneapolis, MN  55455
+(612)626-2057
+http://grouplens.org/
+https://twitter.com/grouplens
+
+-->
+<p>movies, ratings</p>
+<!-- Terms of use:
+
+TODO:
+
+-->
+</div>
 <div id="other" class="section level2">
-<h2><span class="header-section-number">F.7</span> Other</h2>
+<h2><span class="header-section-number">F.10</span> Other</h2>
 <p>the famous Fisher’s Iris flower dataset,
 see <code>?iris</code> in R
 and <a href="https://en.wikipedia.org/wiki/Iris_flower_data_set" class="uri">https://en.wikipedia.org/wiki/Iris_flower_data_set</a>.</p>
+<p>titanic::</p>
 <p>The famous <code>Boston</code> dataset from the <code>MASS</code> package
 records the historical (in the 1970s) median house value
-(<code>medv</code> column, in 1000s USD) for 506 suburbs around
+(<code>medv</code> column, in 1,000s USD) for 506 suburbs around
 Boston, MA, USA.</p>
 <p>You can access the dataset by calling:</p>
-<div class="sourceCode" id="cb1439"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1439-1" title="1"><span class="co"># call install.packages(&quot;MASS&quot;) first (only once)</span></a>
-<a class="sourceLine" id="cb1439-2" title="2"><span class="kw">library</span>(<span class="st">&quot;MASS&quot;</span>)</a>
-<a class="sourceLine" id="cb1439-3" title="3"><span class="kw">head</span>(Boston, <span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1489"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1489-1" title="1"><span class="co"># call install.packages(&quot;MASS&quot;) first (only once)</span></a>
+<a class="sourceLine" id="cb1489-2" title="2"><span class="kw">library</span>(<span class="st">&quot;MASS&quot;</span>)</a>
+<a class="sourceLine" id="cb1489-3" title="3"><span class="kw">head</span>(Boston, <span class="dv">3</span>)</a></code></pre></div>
 <pre><code>##      crim zn indus chas   nox    rm  age    dis rad tax ptratio  black
 ## 1 0.00632 18  2.31    0 0.538 6.575 65.2 4.0900   1 296    15.3 396.90
 ## 2 0.02731  0  7.07    0 0.469 6.421 78.9 4.9671   2 242    17.8 396.90
@@ -1567,7 +2606,7 @@ Boston, MA, USA.</p>
 see <code>?Boston</code>.</p>
 <p>Here is a famous illustrative example proposed by
 the statistician Francis Anscombe in the early 1970s.</p>
-<div class="sourceCode" id="cb1441"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1441-1" title="1"><span class="kw">print</span>(anscombe) <span class="co"># `anscombe` is a built-in object</span></a></code></pre></div>
+<div class="sourceCode" id="cb1491"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1491-1" title="1"><span class="kw">print</span>(anscombe) <span class="co"># `anscombe` is a built-in object</span></a></code></pre></div>
 <pre><code>##    x1 x2 x3 x4    y1   y2    y3    y4
 ## 1  10 10 10  8  8.04 9.14  7.46  6.58
 ## 2   8  8  8  8  6.95 8.14  6.77  5.76
@@ -1586,32 +2625,18 @@ that encodes four separate datasets:
 <code>anscombe$x2</code> and <code>anscombe$y2</code> define the second pair and so forth.</p>
 <p>MNIST digits</p>
 <p>MNIST fashion</p>
-<p>Let us consider a few clustering benchmark datasets
-available at <a href="https://github.com/gagolews/clustering_benchmarks_v1" class="uri">https://github.com/gagolews/clustering_benchmarks_v1</a>
-and <a href="http://cs.joensuu.fi/sipu/datasets/" class="uri">http://cs.joensuu.fi/sipu/datasets/</a>.
-Here is a list of file names together with the
-corresponding numbers of clusters (as given by datasets’ authors):</p>
-<p>wut_isolation
-wut_mk2
-wut_z3
-sipu_aggregation
-sipu_pathbased
-sipu_unbalance</p>
-<p>All the datasets are two-dimensional, hence we’ll be able to visualise
-the obtained results and assess the sensibility of the obtained clusterings.</p>
-</div>
-<div id="movie-lens-todo-permission-required" class="section level2">
-<h2><span class="header-section-number">F.8</span> Movie Lens (TODO: permission required)</h2>
-<!-- TODO (permission required) - PENDING -->
-<p>movies, ratings</p>
-</div>
-<div id="fuel-economy" class="section level2">
-<h2><span class="header-section-number">F.9</span> Fuel Economy</h2>
-<p><a href="https://fueleconomy.gov/feg/download.shtml" class="uri">https://fueleconomy.gov/feg/download.shtml</a></p>
-<p><a href="https://corgis-edu.github.io/corgis/csv/" class="uri">https://corgis-edu.github.io/corgis/csv/</a></p>
-<p><a href="https://corgis-edu.github.io/corgis/csv/food/" class="uri">https://corgis-edu.github.io/corgis/csv/food/</a></p>
-<p><a href="https://corgis-edu.github.io/corgis/csv/health/" class="uri">https://corgis-edu.github.io/corgis/csv/health/</a></p>
-<p><a href="https://corgis-edu.github.io/corgis/csv/drugs/" class="uri">https://corgis-edu.github.io/corgis/csv/drugs/</a></p>
+<!--
+
+## Fuel Economy
+
+
+https://fueleconomy.gov/feg/download.shtml
+
+Terms of use:
+
+TODO:
+
+-->
 
 </div>
 </div>

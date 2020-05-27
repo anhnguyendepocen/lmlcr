@@ -559,7 +559,7 @@ Examples -- the `wine_quality` dataset:
 ```{r wines_load,echo=-1}
 set.seed(123)
 wine_quality <- read.csv("datasets/wine_quality_all.csv",
-    comment.char="#", stringsAsFactors=FALSE)
+    comment.char="#")
 wine_quality[1,]
 ```
 

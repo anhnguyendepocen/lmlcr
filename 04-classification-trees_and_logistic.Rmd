@@ -109,7 +109,7 @@ For illustration, we'll be considering the Wine Quality dataset
 
 ```{r load1,cache=TRUE}
 wine_quality <- read.csv("datasets/wine_quality_all.csv",
-    comment.char="#", stringsAsFactors=FALSE)
+    comment.char="#")
 white_wines <- wine_quality[wine_quality$color == "white",]
 (n <- nrow(white_wines)) # number of samples
 ```
@@ -900,10 +900,10 @@ dataset:
 
 ```{r girlsboys1}
 edstats <- read.csv("datasets/edstats_2019_wide.csv",
-    comment.char="#", stringsAsFactors=FALSE)
+    comment.char="#")
 edstats[1, 1:6]
 meta <- read.csv("datasets/edstats_meta.csv",
-    stringsAsFactors=FALSE)
+    comment.char="#")
 ```
 
 
@@ -1102,9 +1102,9 @@ World Bank's EdStats.
 
 ```{r joinedstats1}
 factbook <- read.csv("datasets/world_factbook_2020.csv",
-    comment.char="#", stringsAsFactors=FALSE)
+    comment.char="#")
 edstats <- read.csv("datasets/edstats_2019_wide.csv",
-    comment.char="#", stringsAsFactors=FALSE)
+    comment.char="#")
 ```
 
 Let's combine the information they provide
@@ -1280,7 +1280,7 @@ dataset again:
 
 ```{r edstatslogi1}
 edstats <- read.csv("datasets/edstats_2019_wide.csv",
-    comment.char="#", stringsAsFactors=FALSE)
+    comment.char="#")
 ```
 
 Let's re-add the `girls_rule_maths` column
@@ -1443,7 +1443,7 @@ Back to our `girls_rule_maths` example, we still  have so much to learn!
 
 ```{r edstatsvarsel1}
 edstats <- read.csv("datasets/edstats_2019_wide.csv",
-    comment.char="#", stringsAsFactors=FALSE)
+    comment.char="#")
 edstats$girls_rule_maths <-
     factor(as.numeric(
         edstats$LO.PISA.MAT.FE>edstats$LO.PISA.MAT.MA
@@ -1587,7 +1587,7 @@ dataset released by  the European Central Bank System:
 
 ```{r ex_currency_exchange_diff_1}
 currency_exchange <- read.csv("datasets/currency_exchange_diff.csv.gz",
-    comment.char="#", stringsAsFactors=FALSE)
+    comment.char="#")
 head(currency_exchange[,1:8]) # few first rows and columns
 tail(currency_exchange[,1:8]) # a couple of last rows and a few columns
 ```
@@ -1651,7 +1651,7 @@ Let's consider the Wine Quality dataset:
 
 ```{r task_classification_3_1}
 wine_quality <- read.csv("datasets/wine_quality_all.csv",
-    comment.char="#", stringsAsFactors=FALSE)
+    comment.char="#")
 head(wine_quality, 3)
 ```
 

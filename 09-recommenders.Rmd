@@ -466,7 +466,7 @@ we mark them with (\*).
 
 ```{r read_movies,cache=TRUE}
 movies <- read.csv("datasets/ml-9-2018-small/movies.csv",
-    comment.char="#", stringsAsFactors=FALSE)
+    comment.char="#")
 head(movies, 4)
 nrow(movies)
 ```
@@ -476,7 +476,7 @@ nrow(movies)
 
 ```{r read_ratings,cache=TRUE,dependson='read_movies'}
 ratings <- read.csv("datasets/ml-9-2018-small/ratings.csv",
-    comment.char="#", stringsAsFactors=FALSE)
+    comment.char="#")
 head(ratings, 4)
 nrow(ratings)
 table(ratings$rating)
@@ -617,8 +617,7 @@ recommend <- function(i, K, SI, movies) {
     ms <- order(SI[i,], decreasing=TRUE)
     data.frame(
         Title=movies$title[ms[1:K]],
-        SIC=SI[i,ms[1:K]],
-        stringsAsFactors=FALSE
+        SIC=SI[i,ms[1:K]]
     )
 }
 ```

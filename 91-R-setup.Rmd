@@ -29,7 +29,8 @@ repositories).
 
 Remark.
 
-: From now on we assume that you have installed the R environment.
+: From now on we assume that you have installed the newest version of the
+R environment.
 
 
 
@@ -58,7 +59,7 @@ we need to install a few packages which we're going to use during the course
 of this course. Execute the following commands in the R console
 (bottom-left RStudio pane):
 
-```{r,results='asis',echo=FALSE}
+```{r recommended_packages,results='asis',echo=FALSE}
 library("knitr")
 library("bookdown")
 library("stringi")

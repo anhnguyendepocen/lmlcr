@@ -645,7 +645,7 @@ homoskedastic
 
 Okay, up to now we've been considering the problem of modelling
 the `Rating` variable as a function of `Balance` and/or `Income`.
-However, it the `Credit` data  set there are other variables
+However, in the `Credit` data  set there are other variables
 possibly worth inspecting.
 
 Consider all quantitative (numeric-continuous) variables in the `Credit` data set.
@@ -1310,7 +1310,7 @@ area, GDP, mortality rates and so forth:
 
 ```{r factbookA1}
 factbook <- read.csv("datasets/world_factbook_2020.csv",
-    comment.char="#", stringsAsFactors=FALSE)
+    comment.char="#")
 ```
 
 Here is a preview of a few features for 3 selected countries (see `help("%in%")`):
@@ -1501,7 +1501,7 @@ Let's get back to the World Factbook 2020 dataset.
 
 ```{r factbookB1}
 factbook <- read.csv("datasets/world_factbook_2020.csv",
-    comment.char="#", stringsAsFactors=FALSE)
+    comment.char="#")
 ```
 
 
@@ -1625,7 +1625,8 @@ concatenating (joining) appropriate strings
 we need to proceed in with a backslash), and then
 calling the `formula()` function.
 
-```{r factbookB9,fig.cap="Most correlated pair of variables and the invisible regression line"}
+
+```{r factbookB15, fig.cap="Most correlated pair of variables and the fitted regression line"}
 form <- formula(paste(C_top[1,2], "~", C_top[1,1]))
 f <- lm(form, data=factbook)
 print(f)
@@ -1634,16 +1635,32 @@ plot(factbook[,C_top[1,1]], factbook[,C_top[1,2]],
 abline(f, col="red")
 ```
 
+See Figure {@fig:factbookB15} for the result.
+
+
+
+{ END solution }
+
+
+<!--
+
+R 4.0 upgrade!!
+
+```{r factbookB9,fig.cap="Most correlated pair of variables and the invisible regression line"}
+#form <- formula(paste(C_top[1,2], "~", C_top[1,1]))
+#f <- lm(form, data=factbook)
+#print(f)
+#plot(factbook[,C_top[1,1]], factbook[,C_top[1,2]],
+#    xlab=C_top[1,1], ylab=C_top[1,2])
+#abline(f, col="red")
+```
+
 Figure {@fig:factbookB9} is just great.
 
 Wait, hold on a second! The fitted line is not present on the plot!
 
-{ BEGIN exercise }
 There is a serious, extremely hard-to-detect bug in the above code.
 The reader is kindly asked to try to identify it.
-{ END exercise }
-
-{ BEGIN solution }
 
 The author wishes to apologise, but this where he will get slightly...
 emotional. We are all programmers here. So let's speak like a programmer
@@ -1661,8 +1678,8 @@ The problem is where we create the `C` matrix using the `data.frame()`
 function -- `C$col1` and `C$col2` are objects of type:
 
 ```{r factbookB10}
-class(C$col1)
-class(C$col2)
+#class(C$col1)
+#class(C$col2)
 ```
 
 
@@ -1673,31 +1690,31 @@ indexing an object `x` with a factor `f`,
 Therefore, `factbook[,C_top[1,1]]` refers to:
 
 ```{r factbookB11}
-names(factbook)[C_top[1,1]]
+#names(factbook)[C_top[1,1]]
 ```
 
 and not:
 
 ```{r factbookB12}
-as.character(C_top[1,1])
+#as.character(C_top[1,1])
 ```
 
 Here is a corrected version, see {@fig:factbookB13}.
 
 ```{r factbookB13, fig.cap="A bugfixed version of Figure {@fig:factbookB9}"}
-C <- data.frame(
-    col1=rrr[lower.tri(rrr)],
-    col2=ccc[lower.tri(ccc)],
-    r=R[lower.tri(R)],
-    stringsAsFactors=FALSE ######## !!!!!!!!!!!!!!!!!!!!!!!!
-)
-C_top <- head(C[order(abs(C$r), decreasing=TRUE),], 5)
-form <- formula(paste(C_top[1,2], "~", C_top[1,1]))
-f <- lm(form, data=factbook)
-print(f)
-plot(factbook[,C_top[1,1]], factbook[,C_top[1,2]],
-    xlab=C_top[1,1], ylab=C_top[1,2])
-abline(f, col="red")
+#C <- data.frame(
+#    col1=rrr[lower.tri(rrr)],
+#    col2=ccc[lower.tri(ccc)],
+#    r=R[lower.tri(R)],
+#    stringsAsFactors=FALSE ######## !!!!!!!!!!!!!!!!!!!!!!!!
+#)
+#C_top <- head(C[order(abs(C$r), decreasing=TRUE),], 5)
+#form <- formula(paste(C_top[1,2], "~", C_top[1,1]))
+#f <- lm(form, data=factbook)
+#print(f)
+#plot(factbook[,C_top[1,1]], factbook[,C_top[1,2]],
+#    xlab=C_top[1,1], ylab=C_top[1,2])
+#abline(f, col="red")
 ```
 
 Seriously, I really like the R language, but this `stringsAsFactors`
@@ -1705,13 +1722,8 @@ thing is it's weakest spot. Just fire up `options(stringsAsFactors=FALSE)`
 next time! (Which I of course won't). End of story.
 
 
+-->
 
-
-{ END solution }
-
-
-
-{ END solution }
 
 
 
@@ -1725,7 +1737,7 @@ Let's revisit the World Factbook 2020 dataset.
 
 ```{r factbookC1}
 factbook <- read.csv("datasets/world_factbook_2020.csv",
-    comment.char="#", stringsAsFactors=FALSE)
+    comment.char="#")
 ```
 
 
@@ -1926,7 +1938,7 @@ World is an interesting place, so we're far from being bored with this dataset.
 
 ```{r factbookD1}
 factbook <- read.csv("datasets/world_factbook_2020.csv",
-    comment.char="#", stringsAsFactors=FALSE)
+    comment.char="#")
 ```
 
 Let's restrict ourselves to the following columns, mostly

@@ -140,7 +140,8 @@ This book was also influenced by my teaching experience at
 
 #### Acknowledgements  {.unnumbered}
 
-This book has been prepared with pandoc, Markdown and GitBook.
+This book has been prepared with `r R.Version()$version.string`
+as well as pandoc, Markdown and GitBook.
 R code chunks have been processed with knitr.
 A little help of bookdown, good ol' Makefiles and shell scripts
 did the trick.

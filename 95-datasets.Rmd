@@ -4,7 +4,8 @@
 
 "Good" datasets are actually hard to find!
 Many books analyse datasets that are "too easy" and give their readers
-the false impression that they can model anything.
+the false impression that anything can be modelled well with machine learning
+algorithms.
 
 Below we briefly describe the most noteworthy
 datasets considered in this book.
@@ -20,6 +21,18 @@ Remark.
 : The files with the `.csv.gz` extension are CSVs compressed with
 `gzip` (a widespread, open source format).
 R is able to decompress them on-the-fly when we use, e.g., `read.csv()`.
+
+
+
+
+Compatibility note.
+
+: We recommend that you use R version 4.0 or later. If this is not the case,
+please issue `options(stringsAsFactors=FALSE)` at the beginning
+of each R session or add the `stringsAsFactors=FALSE` argument
+to each call to `read.csv()`, `data.frame()` etc.
+Otherwise,
+
 
 
 
@@ -52,7 +65,7 @@ https://discover.data.vic.gov.au/dataset/epa-air-watch-all-sites-air-quality-hou
 
 ```{r datasets_air1}
 air_quality <- read.csv("datasets/air_quality.csv.gz",
-    comment.char="#", stringsAsFactors=FALSE)
+    comment.char="#")
 head(air_quality, 3)
 ```
 
@@ -125,7 +138,7 @@ Subject to the exception below, users of this website may make free use of the i
 
 ```{r datasets_rates}
 currency_exchange <- read.csv("datasets/currency_exchange_all.csv.gz",
-    comment.char="#", stringsAsFactors=FALSE)
+    comment.char="#")
 # convert Day to Date-type object:
 currency_exchange$Day <- as.Date(currency_exchange$Day)
 head(currency_exchange, 2)
@@ -254,7 +267,7 @@ https://data.melbourne.vic.gov.au/Environment/Trees-with-species-and-dimensions-
 
 ```{r datasets_forest}
 urban_forest <- read.csv("datasets/urban_forest.csv.gz",
-    comment.char="#", stringsAsFactors=FALSE)
+    comment.char="#")
 head(urban_forest, 3)
 ```
 
@@ -311,7 +324,7 @@ Donated by Paulo Cortez to UCI, public domain
 
 ```{r dataset_wine_quality}
 wine_quality <- read.csv("datasets/wine_quality_all.csv",
-    comment.char="#", stringsAsFactors=FALSE)
+    comment.char="#")
 head(wine_quality, 3)
 ```
 
@@ -371,7 +384,7 @@ The Factbook is in the public domain. Accordingly, it may be copied freely witho
 
 ```{r factbookA1}
 factbook <- read.csv("datasets/world_factbook_2020.csv",
-    comment.char="#", stringsAsFactors=FALSE)
+    comment.char="#")
 factbook[1:6, 1:5] # preview
 ```
 
@@ -477,7 +490,7 @@ Unless specifically labeled otherwise, these Datasets are provided to you under 
 
 ```{r edstats_wide_1}
 edstats_2019 <- read.csv("datasets/edstats_2019.csv.gz",
-    comment.char="#", stringsAsFactors=FALSE)
+    comment.char="#")
 head(edstats_2019)
 ```
 
@@ -539,8 +552,7 @@ the `pivot_wider()` function from the `tidyr` package
 ```{r edstats_wide_5}
 library("tidyr")
 edstats <- as.data.frame(
-    pivot_wider(edstats_2019, names_from="Code", values_from="Value"),
-    stringsAsFactors=FALSE
+    pivot_wider(edstats_2019, names_from="Code", values_from="Value")
 )
 edstats[1, 1:7]
 ```
@@ -594,7 +606,7 @@ Side note (\*).
                 byrow=TRUE,
                 ncol=length(indicators),
                 dimnames=list(NULL, indicators)
-        )), stringsAsFactors=FALSE)
+        )))
     identical(edstats, edstats2)
     ```
 
@@ -621,7 +633,7 @@ For more details, refer to the `Definition`, `Source`, `Topic` columns therein.
 
 
 ```{r  edstats_wide_99,echo=FALSE,results="asis",eval=FALSE}
-meta <- read.csv("datasets/edstats_meta.csv", stringsAsFactors=FALSE)
+meta <- read.csv("datasets/edstats_meta.csv")
 for (i in 1:nrow(meta))
     cat(sprintf("%-50s | %s\n", meta$Code[i], meta$Series[i]))
 ```
@@ -753,7 +765,7 @@ Source               | http://www.ars.usda.gov/nea/bhnrc/fsrg
 ```{r datasets_fndds_nutrients,echo=-1}
 set.seed(421)
 fndds_nutrients <- read.csv("datasets/fndds_nutrients_2016.csv.gz",
-    comment.char="#", stringsAsFactors=FALSE)
+    comment.char="#")
 fndds_nutrients[1:6, c(1:7, 10)] # preview
 ```
 
@@ -906,7 +918,35 @@ Source               | http://cs.joensuu.fi/sipu/datasets/
 ## Movie Lens (TODO: permission required)
 
 
-<!-- TODO (permission required) - PENDING -->
+<!-- (permission required)
+
+From:	GroupLens Admin <gladmin@umn.edu>
+To:	gladmin GroupLens Administrative Assistant <gladmin@umn.edu>
+Subject:	Movielens Dataset usage
+Date:	Tue, 26 May 2020 08:46:21 -0500 (2020-05-26 23:46)
+
+Hello!
+
+Thank you for completing the form to request dataset usage.
+You have been approved to use the datasets as you have described
+in this form. Please notify us of any publications that result
+from this usage, and follow the guidelines laid out for usage
+in the associated readme file.
+
+Have a great week, and happy researching!
+
+~Laura
+
+------
+Assistant to Professors Joe Konstan, Loren Terveen, & Lana Yarosh
+University of Minnesota, Department of Computer Science & Engineering
+200 Union Street SE, 4-192 Keller Hall
+Minneapolis, MN  55455
+(612)626-2057
+http://grouplens.org/
+https://twitter.com/grouplens
+
+-->
 
 movies, ratings
 
@@ -926,7 +966,7 @@ the famous Fisher's Iris flower dataset,
 see `?iris` in R
 and https://en.wikipedia.org/wiki/Iris_flower_data_set.
 
-
+titanic::
 
 The famous `Boston` dataset from the `MASS` package
 records the historical (in the 1970s) median house value

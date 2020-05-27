@@ -42,8 +42,7 @@ linear regression / MSE + regularisation with optim???
 
 keras --- this is hopeless!!!!!!
 
-edstats <- read.csv("edstats_2019_wide.csv", comment.char="#",
-    stringsAsFactors=FALSE)
+edstats <- read.csv("edstats_2019_wide.csv", comment.char="#")
 edstats$girls_rule_maths <-
     factor(as.numeric(
         edstats$LO.PISA.MAT.FE>edstats$LO.PISA.MAT.MA
@@ -107,8 +106,7 @@ standardise variables????
 
 
 
-edstats <- read.csv("edstats_2019_wide.csv", comment.char="#",
-    stringsAsFactors=FALSE)
+edstats <- read.csv("edstats_2019_wide.csv", comment.char="#")
 edstats$girls_rule_maths <-
     factor(as.numeric(
         edstats$LO.PISA.MAT.FE>edstats$LO.PISA.MAT.MA
@@ -198,8 +196,7 @@ cor(X)
 
 
 
-edstats <- read.csv("edstats_2019_wide.csv", comment.char="#",
-    stringsAsFactors=FALSE)
+edstats <- read.csv("edstats_2019_wide.csv", comment.char="#")
 edstats$girls_rule_maths <-
     factor(as.numeric(
         edstats$LO.PISA.MAT.FE>edstats$LO.PISA.MAT.MA

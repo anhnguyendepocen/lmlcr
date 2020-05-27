@@ -66,7 +66,7 @@ space (think: many variables/columns).
 
 ```{r princomp,echo=FALSE,fig.cap="Principal component analysis (a dimensionality reduction technique) applied on three features of red wines (`wine_quality`) dataset",fig.height=6}
 wine_quality <- read.csv("datasets/wine_quality_all.csv",
-    comment.char="#", stringsAsFactors=FALSE)
+    comment.char="#")
 red_wines <- wine_quality[wine_quality$color=='red',]
 p <- princomp(red_wines[,c(11, 4, 12)])
 biplot(p, col=c("#ff000033",1), pch=1, xlim=c(-0.05, 0.23), main=NA)
@@ -1003,7 +1003,7 @@ based on the information contained in the World Factbook dataset:
 
 ```{r clustering_factbook1}
 factbook <- read.csv("datasets/world_factbook_2020.csv",
-    comment.char="#", stringsAsFactors=FALSE)
+    comment.char="#")
 ```
 
 
@@ -1195,8 +1195,7 @@ see Figure {@fig:clustering_factbook12}.
 par(ann=FALSE)
 library("rworldmap")
 library("RColorBrewer")
-mapdata <- data.frame(country=factbook$country, cluster=y,
-    stringsAsFactors=FALSE)
+mapdata <- data.frame(country=factbook$country, cluster=y)
 # 3 country names must be adjusted to get a match
 mapdata$country[mapdata$country == "Czechia"] <- "Czech Republic"
 mapdata$country[mapdata$country == "Eswatini"] <- "Swaziland"
@@ -1242,8 +1241,7 @@ proposed in [@external_cluster_validity]:
 
 ```{r sipu_unbalance1}
 unbalance <- as.matrix(read.csv("datasets/sipu_unbalance.csv",
-    header=FALSE, sep=" ", comment.char="#",
-    stringsAsFactors=FALSE))
+    header=FALSE, sep=" ", comment.char="#"))
 unbalance <- unbalance/10000-30 # a more user-friendly scale
 ```
 
@@ -1408,8 +1406,7 @@ and will draw all the figures for a single dataset:
 ```{r clustering_benchmarks2,dependson="clustering_benchmarks1",cache=TRUE}
 clusterise <- function(file, K) {
     X <- read.csv(file,
-        header=FALSE, sep=" ", comment.char="#",
-        stringsAsFactors=FALSE)
+        header=FALSE, sep=" ", comment.char="#")
     d <- dist(X)
     par(mfrow=c(2, 3))
     par(mar=c(0.5, 0.5, 2, 0.5))
@@ -1487,7 +1484,7 @@ Let's consider the Wine Quality dataset:
 
 ```{r task_clustering1_1}
 wine_quality <- read.csv("datasets/wine_quality_all.csv",
-    comment.char="#", stringsAsFactors=FALSE)
+    comment.char="#")
 ```
 
 { BEGIN exercise }
@@ -1553,7 +1550,7 @@ The Wine Quality dataset again:
 
 ```{r task_clustering2_1}
 wine_quality <- read.csv("datasets/wine_quality_all.csv",
-    comment.char="#", stringsAsFactors=FALSE)
+    comment.char="#")
 ```
 
 

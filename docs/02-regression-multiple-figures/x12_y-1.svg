@@ -631,7 +631,7 @@
   <use xlink:href="#glyph3-10" x="15.179688" y="98.47175"/>
 </g>
 <g clip-path="url(#clip13)" clip-rule="nonzero">
-<path style="fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(100%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 33 193.441406 L 209.398438 65.851562 "/>
+<path style="fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(87.45098%,32.54902%,41.960784%);stroke-opacity:1;stroke-miterlimit:10;" d="M 33 193.441406 L 209.398438 65.851562 "/>
 </g>
 <g clip-path="url(#clip14)" clip-rule="nonzero">
 <path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:0.0627451;" d="M 249 13.199219 L 425.398438 13.199219 L 425.398438 219 L 249 219 Z M 249 13.199219 "/>
@@ -1049,7 +1049,7 @@
   <use xlink:href="#glyph3-10" x="231.179688" y="98.47175"/>
 </g>
 <g clip-path="url(#clip24)" clip-rule="nonzero">
-<path style="fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(100%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 249 180.691406 L 425.398438 52.476562 "/>
+<path style="fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(87.45098%,32.54902%,41.960784%);stroke-opacity:1;stroke-miterlimit:10;" d="M 249 180.691406 L 425.398438 52.476562 "/>
 </g>
 </g>
 </svg>
