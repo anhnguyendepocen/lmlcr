@@ -521,7 +521,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li style='font-size: smaller' ><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Licensed under CC BY-NC-ND 4.0</a></li>
-<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-05-27 22:03 (1c7e311)</a></li>
+<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-05-29 14:50 (a462741)</a></li>
 
 </ul>
 
@@ -1714,7 +1714,7 @@ spent evaluating an expression <code>expr</code>.</p>
 <a class="sourceLine" id="cb617-11" title="11">    }</a>
 <a class="sourceLine" id="cb617-12" title="12">}) <span class="co"># `user` - processing time in seconds:</span></a></code></pre></div>
 <pre><code>##    user  system elapsed 
-##  71.364  24.789  34.262</code></pre>
+##  74.219  25.896  36.637</code></pre>
 <p>Unfortunately, the method’s convergence is really slow
 (we are optimising over <span class="math inline">\(7850\)</span> parameters…)
 and the results after 100 iterations are disappointing:</p>
@@ -1780,7 +1780,7 @@ only for batches of size 1.</p>
 <a class="sourceLine" id="cb623-13" title="13">    }</a>
 <a class="sourceLine" id="cb623-14" title="14">})</a></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   0.085   0.022   0.090</code></pre>
+##   0.082   0.007   0.090</code></pre>
 <div class="sourceCode" id="cb625"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb625-1" title="1"><span class="kw">accuracy</span>(Y_train2, <span class="kw">nn_predict</span>(B, X_train1))</a></code></pre></div>
 <pre><code>## [1] 0.46198</code></pre>
 <div class="sourceCode" id="cb627"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb627-1" title="1"><span class="kw">accuracy</span>(Y_test2,  <span class="kw">nn_predict</span>(B, X_test1))</a></code></pre></div>
@@ -1805,7 +1805,7 @@ the MNIST dataset for almost 2 minutes.</p>
 <a class="sourceLine" id="cb629-13" title="13">    }</a>
 <a class="sourceLine" id="cb629-14" title="14">})</a></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   7.715   0.165   7.851</code></pre>
+##   7.978   0.094   8.060</code></pre>
 <div class="sourceCode" id="cb631"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb631-1" title="1"><span class="kw">accuracy</span>(Y_train2, <span class="kw">nn_predict</span>(B, X_train1))</a></code></pre></div>
 <pre><code>## [1] 0.89222</code></pre>
 <div class="sourceCode" id="cb633"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb633-1" title="1"><span class="kw">accuracy</span>(Y_test2,  <span class="kw">nn_predict</span>(B, X_test1))</a></code></pre></div>
@@ -1816,14 +1816,14 @@ Figures <a href="continuous-optimisation-with-iterative-algorithms.html#fig:mnis
 the cases of <code>batch_size</code> of 32 and 128, respectively.</p>
 <p>The time needed to go through 10000 iterations with batch size of 32 is:</p>
 <pre><code>##    user  system elapsed 
-##  65.197  15.150  33.380</code></pre>
+##  70.563  14.263  37.222</code></pre>
 <div class="figure">
 <img src="06-optimisation-iterative-figures/mnist_sgd-1.svg" alt="Figure 14: Cross-entropy and accuracy on the train and test set in each iteration of SGD; batch size of 32" id="fig:mnist_sgd" />
 <p class="caption">Figure 14: Cross-entropy and accuracy on the train and test set in each iteration of SGD; batch size of 32</p>
 </div>
 <p>What’s more, batch size of 128 takes:</p>
 <pre><code>##    user  system elapsed 
-## 136.957  51.256  51.779</code></pre>
+## 149.739  55.230  60.081</code></pre>
 <div class="figure">
 <img src="06-optimisation-iterative-figures/mnist_sgd2b-1.svg" alt="Figure 15: Cross-entropy and accuracy on the train and test set in each iteration of SGD; batch size of 128" id="fig:mnist_sgd2b" />
 <p class="caption">Figure 15: Cross-entropy and accuracy on the train and test set in each iteration of SGD; batch size of 128</p>

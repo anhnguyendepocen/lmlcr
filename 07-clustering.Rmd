@@ -1194,7 +1194,6 @@ see Figure {@fig:clustering_factbook12}.
 ```{r clustering_factbook12,fig.cap="3 clusters discovered by the Genie algorithm",cache=TRUE,message=FALSE,warnings=FALSE,echo=-1}
 par(ann=FALSE)
 library("rworldmap")
-library("RColorBrewer")
 mapdata <- data.frame(country=factbook$country, cluster=y)
 # 3 country names must be adjusted to get a match
 mapdata$country[mapdata$country == "Czechia"] <- "Czech Republic"
@@ -1205,7 +1204,7 @@ mapdata <- joinCountryData2Map(mapdata, joinCode="NAME",
 par(mar=c(0,0,0,0))
 mapCountryData(mapdata, nameColumnToPlot="cluster",
     catMethod="categorical", missingCountryCol="gray",
-    colourPalette=brewer.pal(3, "Set1"),
+    colourPalette=palette()[2:4],
     mapTitle="", addLegend=TRUE)
 ```
 

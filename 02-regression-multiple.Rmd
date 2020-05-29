@@ -252,6 +252,8 @@ Moreover, Figure {@fig:x12_ycolmap} depicts
 encoded with a colour (low ratings are green, high ratings are red;
 some rating values are explicitly printed out within the plot).
 
+<!-- TODO: colours!! -->
+
 ```{r  x12_ycolmap,echo=FALSE,fig.cap="A heatmap for Rating as a function of Balance and Income; greens represent low credit ratings, whereas reds -- high ones"}
 library("RColorBrewer")
 pal <- paste0(rev(brewer.pal(11, "RdYlGn")), "77")

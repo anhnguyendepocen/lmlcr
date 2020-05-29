@@ -521,7 +521,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li style='font-size: smaller' ><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Licensed under CC BY-NC-ND 4.0</a></li>
-<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-05-27 22:03 (1c7e311)</a></li>
+<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-05-29 14:50 (a462741)</a></li>
 
 </ul>
 
@@ -1379,21 +1379,20 @@ reveals 3 evident clusters.</p>
 on a map by using the <code>rworldmap</code> package (see its documentation for more details),
 see Figure <a href="clustering.html#fig:clustering_factbook12">17</a>.</p>
 <div class="sourceCode" id="cb694"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb694-1" title="1"><span class="kw">library</span>(<span class="st">&quot;rworldmap&quot;</span>)</a>
-<a class="sourceLine" id="cb694-2" title="2"><span class="kw">library</span>(<span class="st">&quot;RColorBrewer&quot;</span>)</a>
-<a class="sourceLine" id="cb694-3" title="3">mapdata &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">country=</span>factbook<span class="op">$</span>country, <span class="dt">cluster=</span>y)</a>
-<a class="sourceLine" id="cb694-4" title="4"><span class="co"># 3 country names must be adjusted to get a match</span></a>
-<a class="sourceLine" id="cb694-5" title="5">mapdata<span class="op">$</span>country[mapdata<span class="op">$</span>country <span class="op">==</span><span class="st"> &quot;Czechia&quot;</span>] &lt;-<span class="st"> &quot;Czech Republic&quot;</span></a>
-<a class="sourceLine" id="cb694-6" title="6">mapdata<span class="op">$</span>country[mapdata<span class="op">$</span>country <span class="op">==</span><span class="st"> &quot;Eswatini&quot;</span>] &lt;-<span class="st"> &quot;Swaziland&quot;</span></a>
-<a class="sourceLine" id="cb694-7" title="7">mapdata<span class="op">$</span>country[mapdata<span class="op">$</span>country <span class="op">==</span><span class="st"> &quot;Cabo Verde&quot;</span>] &lt;-<span class="st"> &quot;Cape Verde&quot;</span></a>
-<a class="sourceLine" id="cb694-8" title="8">mapdata &lt;-<span class="st"> </span><span class="kw">joinCountryData2Map</span>(mapdata, <span class="dt">joinCode=</span><span class="st">&quot;NAME&quot;</span>,</a>
-<a class="sourceLine" id="cb694-9" title="9">  <span class="dt">nameJoinColumn=</span><span class="st">&quot;country&quot;</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb694-2" title="2">mapdata &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">country=</span>factbook<span class="op">$</span>country, <span class="dt">cluster=</span>y)</a>
+<a class="sourceLine" id="cb694-3" title="3"><span class="co"># 3 country names must be adjusted to get a match</span></a>
+<a class="sourceLine" id="cb694-4" title="4">mapdata<span class="op">$</span>country[mapdata<span class="op">$</span>country <span class="op">==</span><span class="st"> &quot;Czechia&quot;</span>] &lt;-<span class="st"> &quot;Czech Republic&quot;</span></a>
+<a class="sourceLine" id="cb694-5" title="5">mapdata<span class="op">$</span>country[mapdata<span class="op">$</span>country <span class="op">==</span><span class="st"> &quot;Eswatini&quot;</span>] &lt;-<span class="st"> &quot;Swaziland&quot;</span></a>
+<a class="sourceLine" id="cb694-6" title="6">mapdata<span class="op">$</span>country[mapdata<span class="op">$</span>country <span class="op">==</span><span class="st"> &quot;Cabo Verde&quot;</span>] &lt;-<span class="st"> &quot;Cape Verde&quot;</span></a>
+<a class="sourceLine" id="cb694-7" title="7">mapdata &lt;-<span class="st"> </span><span class="kw">joinCountryData2Map</span>(mapdata, <span class="dt">joinCode=</span><span class="st">&quot;NAME&quot;</span>,</a>
+<a class="sourceLine" id="cb694-8" title="8">  <span class="dt">nameJoinColumn=</span><span class="st">&quot;country&quot;</span>)</a></code></pre></div>
 <pre><code>## 203 codes from your data successfully matched countries in the map
 ## 0 codes from your data failed to match with a country code in the map
 ## 40 codes from the map weren&#39;t represented in your data</code></pre>
 <div class="sourceCode" id="cb696"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb696-1" title="1"><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>))</a>
 <a class="sourceLine" id="cb696-2" title="2"><span class="kw">mapCountryData</span>(mapdata, <span class="dt">nameColumnToPlot=</span><span class="st">&quot;cluster&quot;</span>,</a>
 <a class="sourceLine" id="cb696-3" title="3">    <span class="dt">catMethod=</span><span class="st">&quot;categorical&quot;</span>, <span class="dt">missingCountryCol=</span><span class="st">&quot;gray&quot;</span>,</a>
-<a class="sourceLine" id="cb696-4" title="4">    <span class="dt">colourPalette=</span><span class="kw">brewer.pal</span>(<span class="dv">3</span>, <span class="st">&quot;Set1&quot;</span>),</a>
+<a class="sourceLine" id="cb696-4" title="4">    <span class="dt">colourPalette=</span><span class="kw">palette</span>()[<span class="dv">2</span><span class="op">:</span><span class="dv">4</span>],</a>
 <a class="sourceLine" id="cb696-5" title="5">    <span class="dt">mapTitle=</span><span class="st">&quot;&quot;</span>, <span class="dt">addLegend=</span><span class="ot">TRUE</span>)</a></code></pre></div>
 <div class="figure">
 <img src="07-clustering-figures/clustering_factbook12-1.svg" alt="Figure 17: 3 clusters discovered by the Genie algorithm" id="fig:clustering_factbook12" />

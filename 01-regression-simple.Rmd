@@ -739,9 +739,6 @@ different aspects, such as fit quality, simplicity etc.).
 
 
 ```{r credit_different_models, echo=FALSE, message=FALSE,fig.cap="Different polynomial models fitted to data"}
-library("RColorBrewer")
-library("Cairo")
-pal <- RColorBrewer::brewer.pal(6, "Dark2")
 plot(X, Y, col="#000000ff")
 
 #library("mda")
@@ -753,16 +750,16 @@ plot(X, Y, col="#000000ff")
 f <- lm(Y~poly(X, 2))
 x <- seq(min(X), max(X), length.out=101)
 y <- predict(f, data.frame(X=x))
-lines(x,y,col=pal[1],lty=1,lwd=3)
+lines(x,y,col=2,lty=1,lwd=3)
 
 f <- lm(Y~poly(X, 15))
 x <- seq(min(X), max(X), length.out=101)
 y <- predict(f, data.frame(X=x))
-lines(x,y,col=pal[2],lty=2,lwd=3)
+lines(x,y,col=3,lty=2,lwd=3)
 
-lines(X[order(X)], Y[order(Y)],col=pal[3],lty=3,lwd=3)
+lines(X[order(X)], Y[order(Y)],col=4,lty=3,lwd=3)
 
-abline(lm(Y~X), col=pal[4],lwd=3,lty=4)
+abline(lm(Y~X), col=5, lwd=3, lty=4)
 ```
 
 Thus, we need a formal **model selection criterion**
@@ -787,8 +784,7 @@ plot(X, Y, col=1, xlim=c(1500,2000), ylim=c(400, 1000))
 f <- lm(Y~poly(X, 2))
 x <- seq(min(X), max(X), length.out=101)
 y <- predict(f, data.frame(X=x))
-pal <- RColorBrewer::brewer.pal(6, "Pastel1")
-lines(x,y,col=pal[1],lty=1,lwd=2)
+lines(x,y,col=2,lty=1,lwd=2)
 
 Y2 <- predict(f, data.frame(X=X))
 
@@ -799,7 +795,7 @@ points(X, Y2, pch=7, col="red")
 legend("bottomright",
     legend=c("observed output", "predicted output", "fitted model"),
     pch=c(1,7, NA), lty=c(NA, NA, 1), lwd=c(NA, NA, 2),
-    col=c(1, "red", pal[1]), bg="white")
+    col=c(1, "red", 2), bg="white")
 ```
 
 
@@ -942,13 +938,13 @@ is just $\mathbb{R}^2$ -- easy to handle both analytically and numerically.
 ```{r credit_different_lines_ssr,echo=FALSE,fig.height=4,fig.cap="Three simple linear models together with the corresponding SSRs"}
 plot(X, Y, col="#00000044")
 m1 <- lm(Y~X)
-abline(m1, col=2,lwd=3)
+abline(m1, col=2,lwd=3, lty=1)
 m2 <- lm(Y~X+0)
-abline(m2, col=3,lwd=3)
+abline(m2, col=3,lwd=3, lty=2)
 m3 <- L1pack::lad(Y~X)
-abline(m3, col=4,lwd=3)
+abline(m3, col=4,lwd=3, lty=4)
 legend("topleft",
-    lty=1,
+    lty=c(1,2,4),
     col=c(2,3,4),
     legend=c(
         sprintf("y=%03.0f+%.3fx; SSR=%.0f",m1$coefficients[1],m1$coefficients[2], sum(m1$residuals^2)),

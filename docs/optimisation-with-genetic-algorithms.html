@@ -521,7 +521,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li style='font-size: smaller' ><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Licensed under CC BY-NC-ND 4.0</a></li>
-<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-05-27 22:03 (1c7e311)</a></li>
+<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-05-29 14:50 (a462741)</a></li>
 
 </ul>
 
@@ -829,14 +829,14 @@ is the most reliable one of the three:</p>
 <a class="sourceLine" id="cb727-7" title="7">    <span class="dt">optim=</span><span class="kw">min_optim</span>(mu0, X),</a>
 <a class="sourceLine" id="cb727-8" title="8">    <span class="dt">times=</span><span class="dv">10</span></a>
 <a class="sourceLine" id="cb727-9" title="9">), <span class="dt">unit=</span><span class="st">&quot;relative&quot;</span>)</a></code></pre></div>
-<pre><code>##           expr       min      lq      mean    median        uq
-## 1 HartiganWong    1.1168    1.13    1.1868    1.2526    1.1599
-## 2        Lloyd    1.0000    1.00    1.0000    1.0000    1.0000
-## 3        optim 1650.1998 1646.85 1580.9153 1636.6942 1508.8519
+<pre><code>##           expr       min        lq      mean    median       uq
+## 1 HartiganWong    1.1181    1.1157    1.2096    1.1985    1.226
+## 2        Lloyd    1.0000    1.0000    1.0000    1.0000    1.000
+## 3        optim 1668.5900 1657.5666 1601.2166 1628.1136 1568.795
 ##         max neval
-## 1    1.3346    10
+## 1    1.5264    10
 ## 2    1.0000    10
-## 3 1419.9005    10</code></pre>
+## 3 1522.1234    10</code></pre>
 <div class="sourceCode" id="cb729"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb729-1" title="1"><span class="kw">print</span>(<span class="kw">min</span>(res))</a></code></pre></div>
 <pre><code>## [1] 421889</code></pre>
 <p>Is it the global minimum?</p>
