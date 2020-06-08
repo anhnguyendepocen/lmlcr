@@ -1,0 +1,579 @@
+# Introduction
+
+<!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
+
+
+<!-- TODO: citations
+
+
+-->
+
+
+
+<!-- TODO
+
+
+
+We need more than just ML:
+
+Mathematical modelling, differential equations, discrete maths
+
+Statistics for small samples but not needed for big data
+
+
+
+
+It's not all in the data, real life processes are not static
+
+Machine learning models are inherently static, they describe today. Tomorrow may be different, especially if people start to trick the system. Think spam detection , spammers will change their behaviour as new detection algorithms arise
+
+People are smarter than your think, they will challenge the system, by choosing a quality metric you change the direction, but can you really predict what other factors gonna be like when we get there?
+
+
+Examples : covid prediction not taking into account country policies and other things going on
+
+Garmin vo2max estimation and the risk of going mad/overtraining
+
+
+-->
+
+
+<!-- TODO
+
+
+# What is AI?
+
+**Artificial Intelligence** (AI) aims to construct algorithms and devices
+to *make decisions that maximise their chance of successfully achieving
+their goals*.
+
+
+
+We build AI systems to **solve various problems** under
+the assumption of **availability of data**.
+
+
+
+Crucial features of AI systems include the ability to:
+
+* perceive the environment
+
+    * input data can come from various sources, e.g., physical sensors,
+    files, databases, (pseudo)random number generators
+    * data can be of different forms, e.g., vectors, matrices
+    and other tensors, graphs, audio/video streams, text
+
+* learn from past experience
+
+    * information on how to correctly behave (what is expected of the system)
+    in certain situations might be available
+    * sometimes feedback can be given after making a decision ("that was nice!
+    well done! look at you go!")
+    * some systems can adapt based on current experience as well
+    (learn to modify its behaviour *on-line*)
+
+* make decisions, predictions, explanations
+
+    * outputs can be interpreted by a human being and used (critically) for whatever  purpose
+    (e.g., a GP for diagnosing illnesses)
+    * outputs can be provided to other algorithms to take immediate actions
+    (e.g., buy those market shares immediately!)
+
+
+
+# Common Applications
+
+
+Application domains of AI include, but are not limited to:
+
+
+* Life science and medical data analysis
+* Financial services (banking, insurance, investment funds)
+* Oil and gas and other energy (solar, mining)
+* Real estate
+* Pharmaceuticals
+* Scientific simulations
+* Genomics
+* Advertising
+* Transportation
+* Retail
+* Healthcare
+* Food production
+
+> Discussion (exercise):
+Think of different ways in which
+these sectors could benefit from AI solutions.
+
+Basically, wherever we have data and there is a need to improve
+things, there is a place for AI solutions.
+
+In the course of this book,
+we're going to take a deep dive into what AI really is, what
+are its limitations but also how we can use it for improving different processes.
+
+ *AI is a tool*.
+Yes, AI is really useful, but it's not a remedy for all our problems.
+
+
+Behind every success story related to  AI, there are always people involved. Sometimes large
+teams of:
+
+* those who deal with hardware, data storage, high performance computing
+* those who wrangle data, fit models to data and develop prototypes
+* those who are responsible for making the algorithms
+work well in production environments
+* those who are responsible for providing you
+with software/algorithms/models that enable everyone to perform the above,
+e.g., languages such as R and Python, libraries, packages
+
+You can call them data engineers, data analysts, machine learning engineers,
+data scientists, whatever.
+
+We would like to appreciate the role of open source software.
+Most started as non-for-profit and it's beautiful that some of them
+continue this way.
+Not everything is for sale. Not everything has its price.
+Let's not forget it.
+
+We can do a lot of great work for greater good,
+with the increased availability of open data,
+everyone can be a reporter, an engaged citizen that seeks for truth.
+There are NGOs.
+Finally, there are researchers (remember that in many countries
+still the university's main role is to spread knowledge and not make money!)
+that need these methods to make new discoveries, e.g., in psychology,
+sociology, agriculture, engineering, biotechnology, pharmacy, medicine, you name it.
+-->
+
+## What is Machine Learning?
+
+
+
+
+An **algorithm** is a well-defined sequence of instructions that,
+for a given sequence of input arguments,
+yields some desired output.
+
+In other words, it is a specific recipe for a **function**.
+
+Developing algorithms is a tedious task.
+
+
+
+
+
+In **machine learning**, we build and study computer algorithms
+that make *predictions* or *decisions* but which are not
+manually programmed.
+
+**Learning** needs some material based upon which new knowledge is to be acquired.
+
+In other words, we need **data**.
+
+
+
+### Main Types of Machine Learning Problems
+
+
+
+
+Machine Learning Problems include, but are not limited to:
+
+- **Supervised learning** -- for every input point (e.g., a photo)
+there is an associated desired output (e.g., whether it depicts a crosswalk
+or how many cars can be seen on it)
+
+- **Unsupervised learning** -- inputs are unlabelled, the aim is to discover
+the underlying structure in the data (e.g., automatically group customers
+w.r.t. common behavioural patterns)
+
+- **Semi-supervised learning** -- some inputs are labelled, the others
+are not (definitely a cheaper scenario)
+
+
+- **Reinforcement learning** -- learn to act based on a
+feedback given after the actual decision was made
+(e.g., learn to play The Witcher 7 by testing different hypotheses
+what to do to survive as long as possible)
+
+
+
+
+## Supervised Learning
+
+### Formalism
+
+
+
+
+Let $\mathbf{X}=\{\mathfrak{X}_1,\dots,\mathfrak{X}_n\}$
+be an input sample ("a database")
+that consists of $n$ objects.
+
+
+
+Most often we assume that each object $\mathfrak{X}_i$
+is represented using $p$ numbers for some $p$.
+
+We denote this fact as $\mathfrak{X}_i\in \mathbb{R}^p$
+(it is *a $p$-dimensional real vector* or
+*a sequence of $p$ numbers* or
+*a point in a $p$-dimensional real space*
+or *an element of a real $p$-space* etc.).
+
+If we have "complex" objects on input,
+we can always try representing them as **feature vectors** (e.g.,
+come up with numeric attributes that best describe them in a task at hand).
+
+{ BEGIN exercise }
+Consider the following problems:
+
+1. How would you represent a patient in a clinic?
+
+2. How would you represent a car in an insurance company's database?
+
+3. How would you represent a student in an university?
+{ END exercise }
+
+
+
+
+
+Of course, our setting is *abstract* in the sense that
+there might be different realities *hidden* behind these symbols.
+
+This is what maths is for -- creating *abstractions* or *models*
+of complex entities/phenomena so that they can be much more easily manipulated
+or understood.
+This is very powerful -- spend a moment
+contemplating how many real-world situations fit into our framework.
+
+
+
+This also includes image/video data, e.g., a 1920×1080 pixel image
+can be "unwound" to a "flat" vector of length 2,073,600.
+
+(\*) There are some algorithms such as Multidimensional Scaling,
+Locally Linear Embedding, IsoMap etc.
+that can do that automagically.
+
+. . .
+
+
+
+In cases such as this we say that we deal with *structured (tabular) data*\
+-- $\mathbf{X}$ can be written as an ($n\times p$)-matrix:
+\[
+\mathbf{X}=
+\left[
+\begin{array}{cccc}
+x_{1,1} & x_{1,2} & \cdots & x_{1,p} \\
+x_{2,1} & x_{2,2} & \cdots & x_{2,p} \\
+\vdots & \vdots & \ddots & \vdots \\
+x_{n,1} & x_{n,2} & \cdots & x_{n,p} \\
+\end{array}
+\right]
+\]
+Mathematically, we denote this as $\mathbf{X}\in\mathbb{R}^{n\times d}$.
+
+
+
+
+
+Remark.
+
+: Structured data == think: Excel/Calc spreadsheets, SQL tables etc.
+
+
+
+
+
+
+
+
+For an example, consider the famous Fisher's Iris flower dataset,
+see `?iris` in R
+and https://en.wikipedia.org/wiki/Iris_flower_data_set.
+
+```{r show_iris}
+X <- iris[1:6, 1:4] # first 6 rows and 4 columns
+X         # or: print(X)
+dim(X)    # gives n and p
+dim(iris) # for the full dataset
+```
+
+
+
+
+$x_{i,j}\in\mathbb{R}$
+represents the $j$-th feature of the $i$-th observation,
+$j=1,\dots,p$, $i=1,\dots,n$.
+
+For instance:
+
+```{r show_iris_elem}
+X[3, 2] # 3rd row, 2nd column
+```
+
+
+
+
+
+The third observation (data point, row in $\mathbf{X}$)
+consists of items $(x_{3,1}, \dots, x_{3,p})$ that can be extracted by calling:
+
+```{r show_iris_row}
+X[3,]
+as.numeric(X[3,]) # drops names
+```
+
+```{r show_iris_row_length}
+length(X[3,])
+```
+
+
+
+
+Moreover, the second feature/variable/column
+is comprised of
+$(x_{1,2}, x_{2,2}, \dots, x_{n,2})$:
+
+```{r show_iris_col}
+X[,2]
+length(X[,2])
+```
+
+
+
+
+
+We will sometimes use the following notation to emphasise that
+the $\mathbf{X}$ matrix  consists of $n$ rows
+or $p$ columns:
+
+\[
+\mathbf{X}=\left[
+\begin{array}{c}
+\mathbf{x}_{1,\cdot} \\
+\mathbf{x}_{2,\cdot} \\
+\vdots\\
+\mathbf{x}_{n,\cdot} \\
+\end{array}
+\right]
+=
+\left[
+\begin{array}{cccc}
+\mathbf{x}_{\cdot,1} &
+\mathbf{x}_{\cdot,2} &
+\cdots &
+\mathbf{x}_{\cdot,p} \\
+\end{array}
+\right].
+\]
+
+
+
+
+Here, $\mathbf{x}_{i,\cdot}$ is a *row vector* of length $p$,
+i.e., a $(1\times p)$-matrix:
+
+\[
+\mathbf{x}_{i,\cdot} = \left[
+\begin{array}{cccc}
+x_{i,1} &
+x_{i,2} &
+\cdots &
+x_{i,p} \\
+\end{array}
+\right].
+\]
+
+Moreover, $\mathbf{x}_{\cdot,j}$ is a *column vector* of length $n$,
+i.e., an $(n\times 1)$-matrix:
+
+\[
+\mathbf{x}_{\cdot,j} = \left[
+\begin{array}{cccc}
+x_{1,j} &
+x_{2,j} &
+\cdots &
+x_{n,j} \\
+\end{array}
+\right]^T=\left[
+\begin{array}{c}
+{x}_{1,j} \\
+{x}_{2,j} \\
+\vdots\\
+{x}_{n,j} \\
+\end{array}
+\right],
+\]
+
+where $\cdot^T$ denotes the *transpose* of a given matrix --
+think of this as a kind of rotation; it allows us to introduce a set of
+"vertically stacked" objects using a single inline formula.
+
+
+
+### Desired Outputs
+
+
+
+
+In supervised learning,
+apart from the inputs we are also given the corresponding
+reference/desired outputs.
+
+The aim of supervised learning is to try to create an "algorithm" that,
+given an input point, generates an output that is as *close* as possible
+to the desired one. The given data sample will be used to "train" this "model".
+
+Usually the reference outputs are encoded as individual  numbers (scalars)
+or textual labels.
+
+In other words, with each input $\mathbf{x}_{i,\cdot}$ we associate
+the desired output $y_i$:
+
+```{r show_iris_sample,echo=-1}
+set.seed(123)
+# in iris, iris[, 5] gives the Ys
+iris[sample(nrow(iris), 3), ]  # three random rows
+```
+
+
+
+
+
+Hence, our dataset is $[\mathbf{X}\ \mathbf{y}]$ --
+each object is represented as a row vector
+$[\mathbf{x}_{i,\cdot}\ y_i]$, $i=1,\dots,n$:
+
+\[
+[\mathbf{X}\ \mathbf{y}]=
+\left[
+\begin{array}{ccccc}
+x_{1,1} & x_{1,2} & \cdots & x_{1,p} & y_1\\
+x_{2,1} & x_{2,2} & \cdots & x_{2,p} & y_2\\
+\vdots & \vdots & \ddots & \vdots    & \vdots\\
+x_{n,1} & x_{n,2} & \cdots & x_{n,p} & y_n\\
+\end{array}
+\right],
+\]
+
+where:
+
+\[
+\mathbf{y} = \left[
+\begin{array}{cccc}
+y_{1} &
+y_{2} &
+\cdots &
+y_{n} \\
+\end{array}
+\right]^T=\left[
+\begin{array}{c}
+{y}_{1} \\
+{y}_{2} \\
+\vdots\\
+{y}_{n} \\
+\end{array}
+\right].
+\]
+
+
+
+### Types of Supervised Learning Problems
+
+
+
+
+Depending on the type of the elements in $\mathbf{y}$
+(the domain of $\mathbf{y}$),
+supervised learning problems are usually
+classified as:
+
+- **regression** -- each $y_i$ is a real number
+
+    e.g., $y_i=$ future market stock price
+    with $\mathbf{x}_{i,\cdot}=$ prices from $p$ previous days
+
+- **classification** -- each $y_i$ is a discrete label
+
+    e.g., $y_i=$ healthy (0) or ill (1)
+    with $\mathbf{x}_{i,\cdot}=$ a patient's health record
+
+
+- **ordinal regression** (a.k.a. ordinal classification) -- each $y_i$ is a rank
+
+    e.g., $y_i=$ rating of a product on the scale 1--5
+    with $\mathbf{x}_{i,\cdot}=$ ratings of $p$ most similar products
+
+
+
+
+
+{ BEGIN exercise }
+Example Problems -- Discussion:
+
+Which of the following are instances of classification problems? Which of them are regression tasks?
+
+What kind of data should you gather in order to tackle them?
+
+- Detect email spam
+- Predict a market stock price
+- Predict the likeability of a new ad
+- Assess credit risk
+- Detect tumour tissues in medical images
+- Predict time-to-recovery of cancer patients
+- Recognise smiling faces on photographs
+- Detect unattended luggage in airport security camera footage
+- Turn on emergency braking to avoid a collision with pedestrians
+{ END exercise }
+
+
+
+
+A single dataset can become an instance of many different ML problems.
+
+Examples -- the `wine_quality` dataset:
+
+```{r wines_load,echo=-1}
+set.seed(123)
+wine_quality <- read.csv("datasets/wine_quality_all.csv",
+    comment.char="#")
+wine_quality[1,]
+```
+
+
+`alcohol` is a numeric (quantitative) variable (see Figure {@fig:wines_regression} for a histogram depicting its empirical distribution):
+
+
+```{r wines_regression,fig.cap="Quantitative (numeric) outputs lead to regression problems"}
+summary(wine_quality$alcohol) # continuous variable
+hist(wine_quality$alcohol, main="", col="white"); box()
+```
+
+`color` is a quantitative variable with two possible outcomes (see Figure {@fig:wines_binary} for a bar plot):
+
+
+
+```{r wines_binary,fig.cap="Quantitative outputs lead to classification tasks"}
+table(wine_quality$color) # binary variable
+barplot(table(wine_quality$color), col="white", ylim=c(0, 6000))
+```
+
+
+Moreover, `response` is an ordinal variable, representing
+a wine's rating as assigned by a wine expert
+(see  Figure {@fig:wines_ordinal} for a barplot).
+Note that although the ranks are represented with numbers,
+we they are not continuous variables. Moreover,
+these ranks are something more than just labels -- they are linearly
+ordered, we know what's the smallest rank and whats the greatest one.
+
+```{r wines_ordinal,fig.cap="Ordinal variables constitute ordinal regression tasks"}
+table(wine_quality$response) # ordinal variable
+barplot(table(wine_quality$response), col="white", ylim=c(0, 3000))
+```
+
+

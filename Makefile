@@ -1,34 +1,38 @@
 # (C) 2020 Marek Gagolewski, https://www.gagolewski.com
 
 FILES_RMD = \
-    00-introduction.Rmd                          \
-    01-regression-simple.Rmd                     \
-    02-regression-multiple.Rmd                   \
-    03-classification-neighbours.Rmd             \
-    04-classification-trees_and_logistic.Rmd     \
-    05-classification-nnets.Rmd                  \
-    06-optimisation-iterative.Rmd                \
-    07-clustering.Rmd                            \
-    08-optimisation-genetic.Rmd                  \
-    09-recommenders.Rmd                          \
-    90-convention.Rmd                            \
-    91-R-setup.Rmd                               \
-    92-R-vectors.Rmd                             \
-    93-R-matrices.Rmd                            \
-    94-R-data-frames.Rmd                         \
-    95-datasets.Rmd                              \
-    99-references.Rmd
+	00-preface.Rmd                     \
+	01-introduction.Rmd                \
+	02-neighbours.Rmd                  \
+	03-trees.Rmd                       \
+	04-regression-simple.Rmd           \
+	05-regression-multiple.Rmd         \
+	06-logistic.Rmd                    \
+	07-optimisation-continuous.Rmd     \
+	08-optimisation-discrete.Rmd       \
+	09-clustering.Rmd                  \
+	10-images.Rmd                      \
+	11-recommenders.Rmd                \
+	12-text.Rmd                        \
+	90-convention.Rmd                  \
+	91-R-setup.Rmd                     \
+	92-R-vectors.Rmd                   \
+	93-R-matrices.Rmd                  \
+	94-R-data-frames.Rmd               \
+	95-datasets.Rmd                    \
+	99-references.Rmd
+
 
 
 FILES_SVGZ = \
-    figures/convex_concave.svgz                   \
-    figures/convex_function.svgz                  \
-    figures/convex_set.svgz                       \
-    figures/logistic_regression_binary.svgz       \
-    figures/logistic_regression_multiclass.svgz   \
-    figures/neuron.svgz                           \
-    figures/nnet.svgz                             \
-    figures/perceptron.svgz
+	figures/convex_concave.svgz                   \
+	figures/convex_function.svgz                  \
+	figures/convex_set.svgz                       \
+	figures/logistic_regression_binary.svgz       \
+	figures/logistic_regression_multiclass.svgz   \
+	figures/neuron.svgz                           \
+	figures/nnet.svgz                             \
+	figures/perceptron.svgz
 
 
 VPATH=.

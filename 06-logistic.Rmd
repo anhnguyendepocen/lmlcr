@@ -1,0 +1,1023 @@
+# Classification with Linear Models
+
+<!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
+
+
+<!-- TODO: citations
+
+*Random Forests* and *XGBoost* (see also: *AdaBoost*)
+SVMs
+-->
+
+
+
+
+
+## Introduction
+
+
+
+
+### Classification Task
+
+
+Let $\mathbf{X}\in\mathbb{R}^{n\times p}$ be an input matrix
+that consists of $n$ points in a $p$-dimensional space (each of the $n$ objects
+is described by means of $p$ numerical features)
+
+Recall that in supervised learning, with each
+$\mathbf{x}_{i,\cdot}$ we associate the desired output $y_i$.
+
+Hence, our dataset is $[\mathbf{X}\ \mathbf{y}]$ --
+where each object is represented as a row vector
+$[\mathbf{x}_{i,\cdot}\ y_i]$, $i=1,\dots,n$:
+
+\[
+[\mathbf{X}\ \mathbf{y}]=
+\left[
+\begin{array}{ccccc}
+x_{1,1} & x_{1,2} & \cdots & x_{1,p} & y_1\\
+x_{2,1} & x_{2,2} & \cdots & x_{2,p} & y_2\\
+\vdots & \vdots & \ddots & \vdots    & \vdots\\
+x_{n,1} & x_{n,2} & \cdots & x_{n,p} & y_n\\
+\end{array}
+\right].
+\]
+
+
+. . .
+
+
+
+In this chapter we are still  interested in  **classification** tasks;
+we assume that each $y_i$ is a descriptive label.
+
+
+
+
+
+Let's assume that we are faced with **binary classification** tasks.
+
+Hence, there are only two possible labels that we traditionally denote with $0$s and $1$s.
+
+For example:
+
+0       | 1
+--------|------------
+no      | yes
+false   | true
+failure | success
+healthy | ill
+
+
+
+
+
+
+
+Let's recall the synthetic 2D dataset from the previous chapter
+(true decision boundary is at $X_1=0$), see Figure {@fig:synthetic2}.
+
+
+```{r synthetic2,echo=FALSE,fig.cap="A synthetic 2D dataset with the true decision boundary at $X_1=0$"}
+set.seed(123)
+n0 <- 50 # n0 points in class 0
+n1 <- 50 # n0 points in class 0
+Xs <- rbind(
+    cbind(rnorm(n0, -1, 1), rnorm(n0, 0, 1)), # N( (-1, 0), (1, 1) )
+    cbind(rnorm(n1, +1, 1), rnorm(n1, 0, 1))  # N( (+1, 0), (1, 1) )
+)
+Ys <- factor(rep(c("0", "1"), c(n0, n1)))
+
+plot(Xs[,1], Xs[,2], col=Ys, pch=c(1,2)[Ys], xlab="X1", ylab="X2", asp=1)
+legend("topleft", col=c(1,2), pch=c(1,2), legend=c("Class 0", "Class 1"), bg="white")
+abline(v=0, lty=3, col="blue")
+```
+
+
+
+
+
+### Data
+
+
+
+
+For illustration, we'll be considering the Wine Quality dataset
+(white wines only):
+
+
+```{r load1,cache=TRUE}
+wine_quality <- read.csv("datasets/wine_quality_all.csv",
+    comment.char="#")
+white_wines <- wine_quality[wine_quality$color == "white",]
+(n <- nrow(white_wines)) # number of samples
+```
+
+
+
+
+The input matrix $\mathbf{X}\in\mathbb{R}^{n\times p}$
+consists of the first 10 numeric variables:
+
+```{r load2,dependson='load1',cache=TRUE}
+X <- as.matrix(white_wines[,1:10])
+dim(X)
+head(X, 2) # first two rows
+```
+
+
+
+
+
+
+
+The 11th variable measures the amount of alcohol (in %).
+
+We will convert this dependent variable to a binary one:
+
+- 0 == (`alcohol  < 12`) == lower-alcohol wines,
+- 1 == (`alcohol >= 12`) == higher-alcohol wines
+
+```{r load3,dependson='load2',cache=TRUE}
+# recall that TRUE == 1
+Y <- factor(as.character(as.numeric(white_wines$alcohol >= 12)))
+table(Y)
+```
+
+
+
+
+
+
+60/40% train-test split:
+
+```{r load4,dependson='load3',cache=TRUE}
+set.seed(123) # reproducibility matters
+random_indices <- sample(n)
+head(random_indices) # preview
+# first 60% of the indices (they are arranged randomly)
+# will constitute the train sample:
+train_indices <- random_indices[1:floor(n*0.6)]
+X_train <- X[train_indices,]
+Y_train <- Y[train_indices]
+# the remaining indices (40%) go to the test sample:
+X_test  <- X[-train_indices,]
+Y_test  <- Y[-train_indices]
+```
+
+
+
+
+```{r xy_data}
+XY_train <- cbind(as.data.frame(X_train), Y=Y_train)
+XY_test <- cbind(as.data.frame(X_test), Y=Y_test)
+```
+
+
+
+
+
+
+Let's also compute `Z_train` and `Z_test`, being the standardised versions of `X_train`
+and `X_test`, respectively.
+
+```{r load5,dependson='load4',cache=TRUE}
+means <- apply(X_train, 2, mean) # column means
+sds   <- apply(X_train, 2, sd)   # column standard deviations
+Z_train <- t(apply(X_train, 1, function(r) (r-means)/sds))
+Z_test  <- t(apply(X_test,  1, function(r) (r-means)/sds))
+```
+
+
+
+
+
+
+
+```{r loaded,dependson='load5',cache=TRUE}
+get_metrics <- function(Y_pred, Y_test)
+{
+    C <- table(Y_pred, Y_test) # confusion matrix
+    stopifnot(dim(C) == c(2, 2))
+    c(Acc=(C[1,1]+C[2,2])/sum(C), # accuracy
+      Prec=C[2,2]/(C[2,2]+C[2,1]), # precision
+      Rec=C[2,2]/(C[2,2]+C[1,2]), # recall
+      F=C[2,2]/(C[2,2]+0.5*C[1,2]+0.5*C[2,1]), # F-measure
+      # Confusion matrix items:
+      TN=C[1,1], FN=C[1,2],
+      FP=C[2,1], TP=C[2,2]
+    ) # return a named vector
+}
+```
+
+
+
+
+## Binary Logistic Regression
+
+### Motivation
+
+
+
+
+
+Recall that for a regression task, we fitted a very simple family of models
+-- the linear ones -- by minimising the sum of squared residuals.
+
+This approach was pretty effective.
+
+(Very) theoretically, we could treat the class labels as numeric $0$s and $1$s
+and apply regression models in a binary classification task.
+
+
+
+```{r lm1,dependson='loaded',echo=-1,cache=TRUE}
+set.seed(123)
+XY_train_r <- cbind(as.data.frame(X_train),
+    Y=as.numeric(Y_train)-1 # 0.0 or 1.0
+)
+XY_test_r <- cbind(as.data.frame(X_test),
+    Y=as.numeric(Y_test)-1 # 0.0 or 1.0
+)
+f_r <- lm(Y~density+residual.sugar+pH, data=XY_train_r)
+```
+
+
+
+
+
+```{r lm2,dependson='lm1',cache=TRUE}
+Y_pred_r <- predict(f_r, XY_test_r)
+summary(Y_pred_r)
+```
+
+The predicted outputs, $\hat{Y}$, are arbitrary real numbers,
+but we can convert them to binary ones by checking if, e.g., $\hat{Y}>0.5$.
+
+```{r lm3,dependson='lm2',cache=TRUE}
+Y_pred <- as.numeric(Y_pred_r>0.5)
+round(get_metrics(Y_pred, XY_test_r$Y), 3)
+```
+
+
+
+Remark.
+
+: (\*) The threshold $T=0.5$  could even be treated as a free parameter
+we optimise for (w.r.t. different metrics over the validation sample),
+see Figure {@fig:lm3b}.
+
+```{r lm3b,echo=FALSE,cache=TRUE,dependson='lm3',cache=TRUE,fig.cap="Quality metrics for a binary classifier \"Classify X as 1 if $f(X)>T$ and as 0 if $f(X)\\le T$\""}
+set.seed(123)
+f_r <- lm(Y~density+residual.sugar+pH, data=XY_train_r)
+Y_pred_r <- predict(f_r, XY_test_r)
+Ts <- seq(0.1, 0.85, by=0.05)
+Ps <- as.data.frame(t(sapply(Ts, function(t) {
+  Y_pred <- as.numeric(Y_pred_r>t)
+  get_metrics(factor(Y_pred, levels=c("0", "1")), factor(XY_test_r$Y, levels=c("0", "1")))
+})))
+
+matplot(Ts, Ps[,1:4], xlab="T", ylab="Metric", type="l", ylim=c(0,1))
+legend("bottomleft", legend=names(Ps[,1:4]), col=1:4, lty=1:4, ncol=2, bg="white")
+```
+
+
+Despite we can, we shouldn't use linear regression for classification.
+Treating class labels  "0" and "1" as ordinary real numbers just doesn't
+cut it -- we intuitively feel that we are doing something *ugly*.
+Luckily, there is a better, more meaningful approach that
+still relies on a linear model, but has the *right* semantics.
+
+
+
+
+
+
+### Logistic Model
+
+
+
+
+Inspired by this idea, we could try modelling
+the ***probability* that a given point belongs to class $1$**.
+
+This could also provide us with the *confidence* in our prediction.
+
+Probability is a number in $[0,1]$, but the outputs of a linear model are arbitrary real numbers.
+
+However, we could transform those real-valued outputs by means
+of some function $\phi:\mathbb{R}\to[0,1]$ (preferably S-shaped == sigmoid),
+so as to get:
+
+\[
+\Pr(Y=1|\mathbf{X},\boldsymbol\beta)=\phi(\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p).
+\]
+
+
+Remark.
+
+: The above reads as "Probability that $Y$ is from class 1 given $\mathbf{X}$
+and $\boldsymbol\beta$".
+
+
+
+
+A popular choice is the **logistic sigmoid function**,
+see Figure {@fig:sigmoid}:
+
+\[
+\phi(t) = \frac{1}{1+e^{-t}} = \frac{e^t}{1+e^t}.
+\]
+
+```{r sigmoid,echo=FALSE,cache=TRUE,fig.cap="The logistic sigmoid function, $\\varphi$"}
+xxx <- seq(-3, 3, length.out=101)
+yyy <- 1/(1+exp(-xxx))
+plot(xxx, yyy, type='l', xlab='y', ylab=expression(phi(y)), ylim=c(0,1))
+abline(v=0, lty=3)
+abline(h=c(0, 0.5, 1), lty=3)
+```
+
+
+
+
+
+Hence our model becomes:
+
+\[
+Y=\frac{1}{1+e^{-(\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p)}}
+\]
+
+It is an instance of a **generalised linear model** (glm)
+(there are of course many other possible generalisations).
+
+
+### Example in R
+
+
+
+
+Let us first fit a simple  (i.e., $p=1$) logistic regression model
+using the `density` variable. The goodness-of-fit measure used in this
+problem will be discussed a bit later.
+
+
+
+```{r glm1}
+(f <- glm(Y~density, data=XY_train, family=binomial("logit")))
+```
+
+"logit" above denotes the inverse of the logistic sigmoid function.
+The fitted coefficients are equal to:
+
+
+```{r glm1b}
+f$coefficients
+```
+
+Figure {@fig:glm2} depicts the obtained model, which can be written
+as:
+\[
+\Pr(Y=1|x)=\displaystyle\frac{1}{1+e^{-\left(
+`r sprintf("%g%+gx", f$coef[1], f$coef[2])`
+\right)}
+}
+\]
+with $x=\text{density}$.
+
+
+```{r glm2,echo=FALSE,cache=TRUE,eval=TRUE,fig.cap="The probability that a given wine is a high-alcohol one given its density; black and red points denote the actual observed data points from the class 0 and 1, respectively"}
+xxx <- seq(min(XY_train$density), max(XY_train$density), length.out=101)
+yyy <- 1/(1+exp(-(f$coef[1]+f$coef[2]*xxx)))
+plot(xxx, yyy, type='l', xlab='density', ylab="P(Y=1|density)", ylim=c(0,1))
+points(XY_train$density, jitter(as.numeric(XY_train$Y)-1, 0.1), col=
+    c("#00000011", "#ff000011")[as.numeric(XY_train$Y)], pch=16)
+abline(h=c(0, 0.5, 1), lty=3)
+legend(8, 0.95, legend=sprintf("1/(1+exp(-(%+g%+g*density))", f$coef[1], f$coef[2]), lty=1, bg="white")
+```
+
+
+
+
+Some predicted probabilities:
+
+
+```{r}
+round(head(predict(f, XY_test, type="response"), 12), 2)
+```
+
+We classify $Y$ as 1 if the corresponding membership probability
+is greater than $0.5$.
+
+```{r}
+Y_pred <- as.numeric(predict(f, XY_test, type="response")>0.5)
+get_metrics(Y_pred, Y_test)
+```
+
+
+
+
+And now a fit based on some other input variables:
+
+```{r}
+(f <- glm(Y~density+residual.sugar+total.sulfur.dioxide,
+    data=XY_train, family=binomial("logit")))
+Y_pred <- as.numeric(predict(f, XY_test, type="response")>0.5)
+get_metrics(Y_pred, Y_test)
+```
+
+
+{ BEGIN exercise }
+Try fitting different models based on other sets of features.
+{ END exercise }
+
+
+
+
+
+### Loss Function: Cross-entropy
+
+
+
+
+The fitting of the model can be written as an optimisation task:
+
+\[
+\min_{\beta_0, \beta_1,\dots, \beta_p\in\mathbb{R}}
+\frac{1}{n} \sum_{i=1}^n
+\epsilon\left(\hat{y}_i, y_i \right)
+\]
+
+where $\epsilon(\hat{y}_i, y_i)$ denotes the penalty that measures the
+"difference" between the true $y_i$ and its predicted version
+$\hat{y}_i=\Pr(Y=1|\mathbf{x}_{i,\cdot},\boldsymbol\beta)$.
+
+In the ordinary regression, we used the squared residual
+$\epsilon(\hat{y}_i, y_i) = (\hat{y}_i-y_i)^2$.
+In **logistic regression** (the kind of a classifier we are
+interested in right now), we use
+the **cross-entropy** (a.k.a. **log-loss**, binary cross-entropy),
+
+\[
+\epsilon(\hat{y}_i,y_i) = - \left(y_i \log \hat{y}_i + (1-y_i) \log(1-\hat{y}_i)\right)
+\]
+
+The corresponding loss function has not only
+many nice statistical properties (\*\* related to maximum likelihood
+estimation etc.)
+but also an intuitive interpretation.
+
+
+
+
+Note that the predicted $\hat{y}_i$ is in $(0,1)$ and the true $y_i$
+equals to either 0 or 1.
+Recall also that $\log t\in(-\infty, 0)$ for $t\in (0,1)$.
+Therefore, the formula for $\epsilon(\hat{y}_i,y_i)$
+has a very intuitive behaviour:
+
+- if true $y_i=1$, then the penalty becomes $\epsilon(\hat{y}_i, 1) = -\log(\hat{y}_i)$
+
+    - $\hat{y}_i$ is the probability that the classified input is indeed from class $1$
+    - we'd be happy if the classifier outputted $\hat{y}_i\simeq 1$ in this case;
+    this is not  penalised as $-\log(t)\to 0$ as $t\to 1$
+    - however, if the classifier is totally wrong, i.e., it thinks that
+    $\hat{y}_i\simeq 0$, then the penalty will be very high, as $-\log(t)\to+\infty$
+    as $t\to 0$
+
+
+- if true $y_i=0$, then the penalty becomes $\epsilon(\hat{y}_i, 0) = -\log(1-\hat{y}_i)$
+
+    - $1-\hat{y}_i$ is the predicted probability that the input is from class $0$
+    - we penalise heavily the case where $1-\hat{y}_i$ is small (we'd be happy
+    if the classifier was sure that $1-\hat{y}_i\simeq 1$, because this is the ground-truth)
+
+
+. . .
+
+(\*) Having said that, let's expand the above formulae.
+The task of minimising cross-entropy in the binary logistic regression
+can be written as $\min_{\boldsymbol\beta\in\mathbb{R}^{p+1}} E(\boldsymbol\beta)$
+with:
+
+\[
+E(\boldsymbol\beta)=
+-\frac{1}{n} \sum_{i=1}^n
+y_i \log \Pr(Y=1|\mathbf{x}_{i,\cdot},\boldsymbol\beta)
++ (1-y_i) \log(1-\Pr(Y=1|\mathbf{x}_{i,\cdot},\boldsymbol\beta))
+\]
+
+Taking into account that:
+
+\[
+\Pr(Y=1|\mathbf{x}_{i,\cdot},\boldsymbol\beta)=
+\frac{1}{1+e^{-(\beta_0 + \beta_1 x_{i,1}+\dots+\beta_p x_{i,p})}},
+\]
+
+we get:
+
+\[
+E(\boldsymbol\beta)=
+-\frac{1}{n}
+\sum_{i=1}^n \left(
+\begin{array}{r}
+y_i \log \displaystyle\frac{1}{1+e^{-(\beta_0 + \beta_1 x_{i,1}+\dots+\beta_p x_{i,p})}}\\
++
+(1-y_i) \log \displaystyle\frac{e^{-(\beta_0 + \beta_1 x_{i,1}+\dots+\beta_p x_{i,p})}}{1+e^{-(\beta_0 + \beta_1 x_{i,1}+\dots+\beta_p x_{i,p})}}
+\end{array}
+\right).
+\]
+
+Logarithms are really practitioner-friendly functions,
+it holds:
+
+* $\log 1=0$,
+* $\log e=1$ (where $e \simeq 2.71828$ is the Euler constant;
+note that by writing $\log$ we mean the natural a.k.a. base-$e$ logarithm),
+* $\log xy = \log x + \log y$,
+* $\log x^p = p\log x$ (this is $\log (x^p)$, not $(\log x)^p$).
+
+These facts imply, amongst others that:
+
+* $\log e^x = x \log e = x$,
+* $\log \frac{x}{y} = \log x y^{-1} = \log x+\log y^{-1} = \log x - \log y$
+(of course for $y\neq 0$),
+* $\log \frac{1}{y} = -\log y$
+
+and so forth. Therefore,
+based on the fact that
+$1/(1+e^{-x})=e^x/(1+e^x)$,
+the above optimisation problem can be rewritten as:
+
+\[
+E(\boldsymbol\beta)=
+\frac{1}{n}
+\sum_{i=1}^n \left(
+\begin{array}{r}
+y_i \log \left(1+e^{-(\beta_0 + \beta_1 x_{i,1}+\dots+\beta_p x_{i,p})}\right)\\
++
+(1-y_i) \log \left(1+e^{+(\beta_0 + \beta_1 x_{i,1}+\dots+\beta_p x_{i,p})}\right)
+\end{array}
+\right)
+\]
+
+or, if someone prefers:
+
+\[
+E(\boldsymbol\beta)=
+\frac{1}{n}
+\sum_{i=1}^n \left(
+(1-y_i)\left(\beta_0 + \beta_1 x_{i,1}+\dots+\beta_p x_{i,p}\right)
++\log \left(1+e^{-(\beta_0 + \beta_1 x_{i,1}+\dots+\beta_p x_{i,p})}\right)
+\right).
+\]
+
+It turns out that there is no analytical formula
+for the optimal set of parameters ($\beta_0,\beta_1,\dots,\beta_p$
+minimising the log-loss).
+In the chapter on optimisation, we shall see that
+the solution to the logistic regression can be solved numerically
+by means of quite simple iterative algorithms.
+The two expanded formulae have lost the appealing interpretation
+of the original one, however, it's more numerically well-behaving,
+see, e.g., the `log1p()` function in base R or, even better,
+`fermi_dirac_0()` in the `gsl` package.
+
+```{r gsl,echo=FALSE,eval=FALSE}
+library("gsl")
+```
+
+<!-- TODO: cite Goldberg's paper -->
+
+
+
+
+
+
+
+
+## Exercises
+
+
+
+
+### EdStats -- Fitting of Binary Logistic Regression Models
+
+
+In this task we're going to
+consider the "wide" version of the EdStats
+dataset again:
+
+```{r edstatslogi1}
+edstats <- read.csv("datasets/edstats_2019_wide.csv",
+    comment.char="#")
+```
+
+Let's re-add the `girls_rule_maths` column
+just as in the previous exercise.
+Then, let's create a subset of `edstats` that doesn't include
+the country names as well as the boys' and girls' math scores.
+
+
+```{r edstatslogi2}
+edstats$girls_rule_maths <-
+    factor(as.numeric(
+        edstats$LO.PISA.MAT.FE>edstats$LO.PISA.MAT.MA
+    ))
+edstats_subset <- edstats[!(names(edstats) %in%
+    c("CountryName", "LO.PISA.MAT.FE", "LO.PISA.MAT.MA"))]
+```
+
+{ BEGIN exercise }
+Fit and assess a logistic regression model for `girls_rule_maths` as a function
+of `LO.PISA.REA.MA`+`LO.PISA.SCI`.
+{ END exercise }
+
+
+{ BEGIN solution }
+
+Fitting of the model:
+
+```{r edstatslogi3}
+(f1 <- glm(girls_rule_maths~LO.PISA.REA.MA+LO.PISA.SCI,
+    data=edstats_subset, family=binomial("logit")))
+```
+
+Performance metrics:
+
+```{r edstatslogi4}
+Y_pred <- as.numeric(predict(f1, edstats_subset, type="response")>0.5)
+get_metrics(Y_pred, edstats_subset$girls_rule_maths)
+```
+
+Relate the above numbers to those reported for the fitted decision trees.
+
+Note that the fitted model is nicely interpretable:
+the lower the boys' average result on the Reading Scale
+or the higher the country's result on the Science Scale,
+the higher the probability for `girls_rule_maths`:
+
+```{r edstatslogi5}
+example_X <- data.frame(
+    LO.PISA.REA.MA=c(475, 450, 475, 500),
+    LO.PISA.SCI=   c(525, 525, 550, 500)
+)
+cbind(example_X,
+    `Pr(Y=1)`=predict(f1, example_X, type="response"))
+```
+
+{ END solution }
+
+
+
+
+
+
+
+
+{ BEGIN exercise }
+(\*) Fit and assess a logistic regression model for `girls_rule_maths`
+featuring all `LO.PISA.REA*` and `LO.PISA.SCI*` as independent variables.
+{ END exercise }
+
+{ BEGIN solution }
+
+
+Model fitting:
+
+```{r edstatslogi6}
+(f2 <- glm(girls_rule_maths~LO.PISA.REA+LO.PISA.REA.FE+LO.PISA.REA.MA+
+                            LO.PISA.SCI+LO.PISA.SCI.FE+LO.PISA.SCI.MA,
+    data=edstats_subset, family=binomial("logit")))
+```
+
+The mysterious `fitted probabilities numerically 0 or 1 occurred` warning
+denotes convergence problems of the underlying optimisation (fitting) procedure:
+at least one of the model coefficients has had a fairly large order
+of magnitude and hence the fitted probabilities has come very close to 0 or 1.
+Recall that the probabilities are modelled by means of the logistic sigmoid
+function applied on the output of a linear combination of the dependent variables.
+Moreover, cross-entropy features a logarithm, and $\log 0 = -\infty$.
+
+This can be due to the fact that all the variables in the model are very
+correlated with each other (multicollinearity; an ill-conditioned problem).
+The obtained solution might be unstable -- there might be many local optima
+and hence, different parameter vectors might be equally good.
+Moreover, it is likely that a small change in one of the inputs might
+lead to large change in the estimated  model
+(\* normally, we would attack this problem by employing
+some regularisation techniques).
+
+<!--
+#(f2 <- glm(girls_rule_maths~LO.PISA.REA+LO.PISA.REA.FE+LO.PISA.REA.MA+
+#                            LO.PISA.SCI+LO.PISA.SCI.FE+LO.PISA.SCI.MA,
+#    data=edstats_subset, family=binomial("logit"), start=runif(7,-0.1,0.1)))
+-->
+
+Of course, the model's performance metrics can still be computed,
+but then it's better if we treat it as a black box. Or, even better,
+reduce the number of independent variables and come up with a simpler
+model that serves its purpose better than this one.
+
+```{r edstatslogi7}
+Y_pred <- as.numeric(predict(f2, edstats_subset, type="response")>0.5)
+get_metrics(Y_pred, edstats_subset$girls_rule_maths)
+```
+
+{ END solution }
+
+
+<!--
+
+standardise variables:  [too little benefit for the reader? omit]
+
+```{r edstatslogis1}
+#standardise <- function(x) {
+#    (x-mean(x, na.rm=TRUE))/sd(x, na.rm=TRUE)
+#}
+```
+
+```{r edstatslogis2}
+#sedstats_subset <- edstats_subset # copy
+#for (i in 1:(ncol(sedstats_subset)-1)) {
+#    # standardise every column of sedstats_subset but
+#    # the girls_rule_maths one (it must remain a binary==0/1 variable)
+#    sedstats_subset[[i]] <- standardise(sedstats_subset[[i]])
+#}
+```
+
+```{r edstatslogis3}
+#(f1s <- glm(girls_rule_maths~LO.PISA.REA.MA+LO.PISA.SCI,
+#    data=sedstats_subset, family=binomial("logit")))
+#Y_pred <- as.numeric(predict(f1s, sedstats_subset, type="response")>0.5)
+#get_metrics(Y_pred, sedstats_subset$girls_rule_maths)
+```
+
+```{r edstatslogis4}
+#(f2s <- glm(girls_rule_maths~LO.PISA.REA+LO.PISA.REA.FE+LO.PISA.REA.MA+
+#                            LO.PISA.SCI+LO.PISA.SCI.FE+LO.PISA.SCI.MA,
+#    data=sedstats_subset, family=binomial("logit")))
+#Y_pred <- as.numeric(predict(f2s, sedstats_subset, type="response")>0.5)
+#get_metrics(Y_pred, sedstats_subset$girls_rule_maths)
+```
+
+-->
+
+
+
+
+### EdStats -- Variable Selection in Binary Logistic Regression (\*)
+
+
+Back to our `girls_rule_maths` example, we still  have so much to learn!
+
+```{r edstatsvarsel1}
+edstats <- read.csv("datasets/edstats_2019_wide.csv",
+    comment.char="#")
+edstats$girls_rule_maths <-
+    factor(as.numeric(
+        edstats$LO.PISA.MAT.FE>edstats$LO.PISA.MAT.MA
+    ))
+edstats_subset <- edstats[!(names(edstats) %in%
+    c("CountryName", "LO.PISA.MAT.FE", "LO.PISA.MAT.MA"))]
+```
+
+
+{ BEGIN exercise }
+Construct a binary logistic regression model via forward selection
+of variables.
+{ END exercise }
+
+{ BEGIN solution }
+Just as in the linear regression case, we can rely on the `step()` function.
+
+```{r edstatsvarsel5,error=TRUE}
+model_empty <- girls_rule_maths~1
+(model_full <- formula(model.frame(girls_rule_maths~.,
+    data=edstats_subset)))
+f <- step(glm(model_empty, data=edstats_subset, family=binomial("logit")),
+    scope=model_full, direction="forward")
+```
+
+Melbourne, we have a problem!
+Our dataset has too many missing values, and those cannot be present
+in a logistic regression model (it's based on a linear combination of variables,
+and sums/products involving `NA`s yield `NA`s...).
+
+Looking at the manual of `?step`, we see that the default
+`NA` handling is via `na.omit()`, and that, when applied on a data frame,
+results in the removal of all the *rows*, where there is at least one `NA`.
+Sadly, it's too invasive.
+
+We should get rid of the data blanks manually.
+First, definitely, we should remove all the rows where
+`girls_rule_maths` is unknown:
+
+```{r edstatsvarsel2}
+edstats_subset <-
+    edstats_subset[!is.na(edstats_subset$girls_rule_maths),]
+```
+
+We are about to apply the forward selection process, whose purpose is
+to choose variables for a model. Therefore, instead of removing any more
+rows, we should remove the... columns with missing data:
+
+```{r edstatsvarsel3}
+edstats_subset <-
+    edstats_subset[,colSums(sapply(edstats_subset, is.na))==0]
+```
+
+(\*) Alternatively, we could apply some techniques of missing data imputation;
+this is beyond the scope of this book. For instance, `NA`s could be
+replaced by the averages of their respective columns.
+
+
+We are ready now to make use of `step()`.
+
+
+```{r edstatsvarsel6}
+model_empty <- girls_rule_maths~1
+(model_full <- formula(model.frame(girls_rule_maths~.,
+    data=edstats_subset)))
+f <- step(glm(model_empty, data=edstats_subset, family=binomial("logit")),
+    scope=model_full, direction="forward")
+print(f)
+Y_pred <- as.numeric(predict(f, edstats_subset, type="response")>0.5)
+get_metrics(Y_pred, edstats_subset$girls_rule_maths)
+```
+
+
+
+{ END solution }
+
+
+
+
+
+
+
+{ BEGIN exercise }
+Choose a model via backward elimination.
+{ END exercise }
+
+{ BEGIN solution }
+Having a dataset with missing values removed, this is easy now:
+
+
+<!--
+makes no difference:
+
+# standardise <- function(x) {
+#     (x-mean(x, na.rm=TRUE))/sd(x, na.rm=TRUE)
+# }
+# for (i in 1:(ncol(edstats_subset)-1)) {
+#    # standardise every column of sedstats_subset but
+#    # the girls_rule_maths one (it must remain a binary==0/1 variable)
+#    edstats_subset[[i]] <- standardise(edstats_subset[[i]])
+# }
+-->
+
+```{r edstatsvarsel8}
+f <- suppressWarnings( # yeah, yeah, yeah...
+        # fitted probabilities numerically 0 or 1 occurred
+    step(glm(model_full, data=edstats_subset, family=binomial("logit")),
+        scope=model_empty, direction="backward")
+)
+```
+
+The obtained model and its quality metrics:
+
+```{r edstatsvarsel9}
+print(f)
+Y_pred <- as.numeric(predict(f, edstats_subset, type="response")>0.5)
+get_metrics(Y_pred, edstats_subset$girls_rule_maths)
+```
+
+Note that we got a better (lower) AIC than in the forward selection
+case, which means that backward elimination was better this time.
+On the other hand, we needed to suppress the
+`fitted probabilities numerically 0 or 1 occurred` warnings.
+The returned model is perhaps *unstable* as well and consists of too
+many variables.
+
+{ END solution }
+
+
+
+
+
+### Currency Exchange Rates Growth/Fall
+
+
+
+
+Let's consider a modified version of the Currency Exchange Rates
+dataset released by  the European Central Bank System:
+
+
+```{r ex_currency_exchange_diff_1}
+currency_exchange <- read.csv("datasets/currency_exchange_diff.csv.gz",
+    comment.char="#")
+head(currency_exchange[,1:8]) # few first rows and columns
+tail(currency_exchange[,1:8]) # a couple of last rows and a few columns
+```
+
+We have discussed this dataset in Appendix F. <!-- TODO: -->
+We will investigate how accurately we can predict if
+the EUR/AUD exchange rate increases (`Dir` equal to `inc`)
+or decreases (`Dir` equal to `dec`) based on the price changes
+in preceding days (`Lag1` -- yesterday, `Lag2` -- two days ago etc.).
+
+{ BEGIN exercise }
+Perform a train-test split. Create a
+data frame `currency_exchange_train` that consists of the *first* 80\% rows
+in `currency_exchange` and a data frame `currency_exchange_test`
+that includes the remaining 20\%.
+{ END exercise }
+
+Remark.
+
+: This is a time series prediction task;
+we are not assigning the observations to either of these two subsets in
+a random manner. Instead, we use the "past" data for training (models' construction)
+and the "future" values for testing (models' performance evaluation).
+This is exactly how we often proceed in real life.
+
+
+
+{ BEGIN exercise }
+Fit and plot a decision tree that models `Dir` as a function
+of `Lag1`, ..., `Lag5`. Compute the accuracy, precision, recall
+and F-measure of this classifier.
+{ END exercise }
+
+
+{ BEGIN exercise }
+Fit 5 binary logistic regression models for `Dir` as a function of
+the percentage return from: (i) the previous day, (ii) the last three days,
+(iii) five days, (iv) seven days, (v) all the previous 10 days.
+Print the estimated coefficients (parameters). Evaluate
+the performance of these 5 classifiers.
+{ END exercise }
+
+{ BEGIN exercise }
+Use the 5- and 15-nearest neighbours algorithm
+to predict `Dir` based on the percentage returns from the 5 previous days.
+Evaluate the performance of these 2 classifiers.
+{ END exercise }
+
+{ BEGIN exercise }
+Discuss the obtained results. Would you be keen to use any of the
+constructed classifiers for making real money?
+{ END exercise }
+
+
+
+
+
+
+
+
+
+## Outro
+
+### Remarks
+
+
+
+
+Other prominent classification algorithms:
+
+- Naive Bayes and other probabilistic approaches,
+- Support Vector Machines (SVMs) and other kernel methods,
+- (Artificial) (Deep) Neural Networks.
+
+
+
+
+
+Interestingly, in the next chapter we will  note that the logistic regression model
+is a special case of a *feed-forward single layer neural network*.
+
+We will also generalise the binary logistic regression to the case of
+a multiclass classification.
+
+
+The state-of-the art classifiers called
+*Random Forests* and *XGBoost* (see also: *AdaBoost*) are based on decision trees.
+They tend to be more accurate but -- at the same time -- they fail to
+exhibit the decision trees' important feature: interpretability.
+
+Trees can also be used for regression tasks, see R package `rpart`.
+
+
+
+### Further Reading
+
+Recommended further reading: [@islr: Chapters 4 and 8] <!-- TODO: update -->
+
+Other: [@esl: Chapters 4 and 7 as well as (\*) Chapters 9,  10,  13, 15]
+
+<!-- TODO: update -->
+
+

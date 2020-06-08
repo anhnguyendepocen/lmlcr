@@ -1,0 +1,1005 @@
+# Simple Linear Regression
+
+<!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
+
+
+<!-- TODO: citations
+
+
+-->
+
+
+
+<!-- TODO
+
+
+
+move some quality metrics from Ch.2 to Ch.1
+
+what is high correlation? 0.6 is not! time to stop tolerating weak
+associations in the social sciences, you can do better, get
+more data or don't do what you do... :/
+
+Social sciences is built on  sand
+
+If your data is crap or your models are weak, admit it and give up.
+
+
+
+
+different coefficients of correlation (Spearman, Kendall) → Chapter 2
+
+
+
+-->
+
+
+
+## Simple Regression
+
+### Introduction
+
+
+
+
+**Simple regression** is the easiest setting to start with -- let's assume
+$p=1$, i.e., all inputs are 1-dimensional.
+Denote $x_i=x_{i,1}$.
+
+We will use it to build many intuitions, for example, it'll be easy
+to illustrate all the concepts graphically.
+
+```{r credit_scatter,fig.cap="A scatter plot of  Rating vs. Balance"}
+library("ISLR") # Credit dataset
+plot(Credit$Balance, Credit$Rating) # scatter plot
+```
+
+
+In what follows we will be modelling the Credit Rating ($Y$)
+as a function of the average Credit Card Balance ($X$) in USD
+for customers *with positive Balance only*.
+It is because it is evident from Figure {@fig:credit_scatter}
+that some customers with zero balance obtained a credit rating
+based on some external data source that we don't have access to in
+our very setting.
+
+```{r credit_XY}
+X <- as.matrix(as.numeric(Credit$Balance[Credit$Balance>0]))
+Y <- as.matrix(as.numeric(Credit$Rating[Credit$Balance>0]))
+```
+
+Figure {@fig:credit_XY_plot} gives the updated scatter plot
+with the zero-balance clients "taken care of".
+
+```{r credit_XY_plot,fig.cap="A scatter plot of  Rating vs. Balance with clients of Balance=0 removed"}
+plot(X, Y, xlab="X (Balance)", ylab="Y (Rating)")
+```
+
+Our aim is to construct a function $f$ that
+**models** Rating as a function of Balance,
+$f(X)=Y$.
+
+We are equipped with $n=`r length(X)`$ reference (observed) Ratings
+$\mathbf{y}=[y_1\ \cdots\ y_n]^T$
+for particular Balances $\mathbf{x}=[x_1\ \cdots\ x_n]^T$.
+
+
+
+
+
+Note the following naming conventions:
+
+* Variable types:
+
+    - $X$ -- independent/explanatory/predictor variable
+
+    - $Y$ -- dependent/response/predicted variable
+
+* Also note that:
+
+    - $Y$ -- idealisation (any possible Rating)
+
+    - $\mathbf{y}=[y_1\ \cdots\ y_n]^T$ -- values actually observed
+
+
+
+
+
+
+
+The model will not be ideal, but it might be usable:
+
+- We will be able to **predict** the rating of any new client.
+
+
+    What should be the rating of a client with Balance of \$1500?
+
+    What should be the rating of a client with Balance of \$2500?
+
+- We will be able to **describe** (understand) this reality using a single mathematical formula
+so as to infer that there is an association between $X$ and $Y$
+
+    Think of "data compression" and laws of physics, e.g., $E=mc^2$.
+
+
+
+
+
+
+
+
+(\*) Mathematically, we will assume that there is some "true" function that models the data
+(true relationship between $Y$ and $X$),
+but the observed outputs are subject to **additive error**:
+\[Y=f(X)+\varepsilon.\]
+
+
+$\varepsilon$ is a random term, classically we assume that
+errors are independent of each other,
+have expected value of $0$ (there is no systematic error = unbiased)
+and that they follow a normal distribution.
+
+
+
+
+(\*) We denote this as $\varepsilon\sim\mathcal{N}(0, \sigma)$
+(read: random variable $\varepsilon$ follows a normal distribution
+with expected value of $0$ and standard deviation of $\sigma$ for some $\sigma\ge 0$).
+
+$\sigma$ controls the amount of noise (and hence, uncertainty).
+Figure {@fig:normal_distribs} gives the plot of the probability
+distribution function (PDFs, densities)
+of $\mathcal{N}(0, \sigma)$ for different $\sigma$s:
+
+
+
+```{r normal_distribs, echo=FALSE, message=FALSE, fig.cap="Probability density functions of normal distributions with different standard deviations $\\sigma$."}
+y <- seq(-3,3,length.out=101)
+plot(y, dnorm(y, mean=0), type='l', ann=FALSE, ylim=c(0,dnorm(0,0,0.5)))
+lines(y, dnorm(y, mean=0, sd=0.5), type='l', col=2, lty=2)
+legend("topleft", lty=c(1,2), col=c(1,2), legend=expression(sigma*"="*1, sigma*"="*0.5), bg="white")
+abline(v=0, lty=3, col="gray")
+```
+
+
+
+### Search Space and Objective
+
+
+
+
+There are many different functions that can be **fitted** into
+the observed $(\mathbf{x},\mathbf{y})$,
+compare Figure {@fig:credit_different_models}.
+Some of them are better than the other (with respect to
+different aspects, such as fit quality, simplicity etc.).
+
+
+```{r credit_different_models, echo=FALSE, message=FALSE,fig.cap="Different polynomial models fitted to data"}
+plot(X, Y, col="#000000ff")
+
+#library("mda")
+#f <- mars(as.matrix(X), Y, degree=5)
+#x <- seq(min(X), max(X), length.out=101)
+#y <- predict(f, x)
+#lines(x,y,col=4,lty=4,lwd=2)
+
+f <- lm(Y~poly(X, 2))
+x <- seq(min(X), max(X), length.out=101)
+y <- predict(f, data.frame(X=x))
+lines(x,y,col=2,lty=1,lwd=3)
+
+f <- lm(Y~poly(X, 15))
+x <- seq(min(X), max(X), length.out=101)
+y <- predict(f, data.frame(X=x))
+lines(x,y,col=3,lty=2,lwd=3)
+
+lines(X[order(X)], Y[order(Y)],col=4,lty=3,lwd=3)
+
+abline(lm(Y~X), col=5, lwd=3, lty=4)
+```
+
+Thus, we need a formal **model selection criterion**
+that could enable as to tackle the model fitting
+task on a computer.
+
+
+
+
+
+
+
+Usually, we will be interested in a model
+that minimises appropriately aggregated **residuals**
+$f(x_i)-y_i$, i.e.,
+**predicted outputs minus observed outputs**,
+often denoted with $\hat{y}_i-y_i$,
+for $i=1,\dots,n$.
+
+```{r credit_residuals, echo=FALSE, message=FALSE,fig.cap="Residuals are defined as the differences between the predicted and observed outputs $\\hat{y}_i-y_i$"}
+plot(X, Y, col=1, xlim=c(1500,2000), ylim=c(400, 1000))
+f <- lm(Y~poly(X, 2))
+x <- seq(min(X), max(X), length.out=101)
+y <- predict(f, data.frame(X=x))
+lines(x,y,col=2,lty=1,lwd=2)
+
+Y2 <- predict(f, data.frame(X=X))
+
+segments(X, Y, X, Y2, lty=2)
+points(X, Y2, pch=7, col="red")
+
+
+legend("bottomright",
+    legend=c("observed output", "predicted output", "fitted model"),
+    pch=c(1,7, NA), lty=c(NA, NA, 1), lwd=c(NA, NA, 2),
+    col=c(1, "red", 2), bg="white")
+```
+
+
+In Figure {@fig:credit_residuals}, the residuals correspond to the
+lengths of the dashed line segments -- they measure the discrepancy between
+the outputs generated by the model (what we get)
+and the true outputs (what we want).
+
+
+
+
+
+
+Top choice: sum of squared residuals:
+\[
+\begin{array}{rl}
+\mathrm{SSR}(f|\mathbf{x},\mathbf{y})
+& = \left( f(x_1)-y_1 \right)^2 + \dots + \left( f(x_n)-y_n \right)^2 \\
+& =
+\displaystyle\sum_{i=1}^n \left( f(x_i)-y_i \right)^2
+\end{array}
+\]
+
+
+Remark.
+
+: Read "$\sum_{i=1}^n z_i$" as "the sum of $z_i$ for $i$ from $1$ to $n$";
+this is just a shorthand for $z_1+z_2+\dots+z_n$.
+
+
+
+Remark.
+
+: The notation $\mathrm{SSR}(f|\mathbf{x},\mathbf{y})$ means that
+it is the error measure
+corresponding to the model $(f)$ *given* our data.\
+We could've  denoted it  with $\mathrm{SSR}_{\mathbf{x},\mathbf{y}}(f)$
+or even $\mathrm{SSR}(f)$ to emphasise that $\mathbf{x},\mathbf{y}$
+are just fixed  values and we are not  interested
+in changing them at all (they are "global variables").
+
+
+
+
+
+
+We enjoy SSR because (amongst others):
+
+- larger errors are penalised much more than smaller ones
+
+    > (this can be considered a drawback as well)
+
+
+
+- (\*\*) statistically speaking, this has a clear underlying interpretation
+
+    > (assuming errors are normally distributed,
+    finding a model minimising the SSR is equivalent
+    to maximum likelihood estimation)
+
+- the models minimising the SSR can often be found easily
+
+    > (corresponding optimisation tasks have an analytic solution --
+    studied already by Gauss in the late 18th century)
+
+
+(\*\*) Other choices:
+
+- regularised SSR, e.g., lasso or ridge regression (in the case of multiple input variables)
+- sum or median of absolute values (robust regression)
+
+
+
+
+
+
+
+
+Fitting a model to data can be written as an optimisation problem:
+
+\[
+\min_{f\in\mathcal{F}} \mathrm{SSR}(f|\mathbf{x},\mathbf{y}),
+\]
+
+i.e., find $f$ minimising the SSR **(seek "best" $f$)**\
+amongst the set of admissible models $\mathcal{F}$.
+
+
+
+Example $\mathcal{F}$s:
+
+- $\mathcal{F}=\{\text{All possible functions of one variable}\}$  --  if there are no repeated
+$x_i$'s, this corresponds to data *interpolation*; note that there
+are many functions that give SSR of $0$.
+
+- $\mathcal{F}=\{ x\mapsto x^2, x\mapsto \cos(x), x\mapsto \exp(2x+7)-9 \}$ -- obviously
+an ad-hoc choice but you can easily choose the best amongst the 3 by computing 3 sums of squares.
+
+- $\mathcal{F}=\{ x\mapsto a+bx\}$ -- the space of linear functions of one variable
+
+- etc.
+
+
+(e.g., $x\mapsto x^2$ is read "$x$ maps to $x^2$" and is
+an elegant way to define an inline function $f$ such that $f(x)=x^2$)
+
+
+
+
+## Simple Linear Regression
+
+### Introduction
+
+
+
+
+If the family of admissible models $\mathcal{F}$ consists only of all linear functions of one variable,
+we deal with a **simple linear regression**.
+
+Our problem becomes:
+
+
+\[
+\min_{a,b\in\mathbb{R}} \sum_{i=1}^n \left(
+a+bx_i-y_i
+\right)^2
+\]
+
+
+In other words, we seek best fitting line in terms of the squared residuals.
+
+This is the **method of least squares**.
+
+This is particularly nice, because our search space
+is just $\mathbb{R}^2$ -- easy to handle both analytically and numerically.
+
+
+
+
+```{r credit_different_lines_ssr,echo=FALSE,fig.height=4,fig.cap="Three simple linear models together with the corresponding SSRs"}
+plot(X, Y, col="#00000044")
+m1 <- lm(Y~X)
+abline(m1, col=2,lwd=3, lty=1)
+m2 <- lm(Y~X+0)
+abline(m2, col=3,lwd=3, lty=2)
+m3 <- L1pack::lad(Y~X)
+abline(m3, col=4,lwd=3, lty=4)
+legend("topleft",
+    lty=c(1,2,4),
+    col=c(2,3,4),
+    legend=c(
+        sprintf("y=%03.0f+%.3fx; SSR=%.0f",m1$coefficients[1],m1$coefficients[2], sum(m1$residuals^2)),
+        sprintf("y=%03.0f+%.3fx; SSR=%.0f",0,                 m2$coefficients[1], sum(m2$residuals^2)),
+        sprintf("y=%03.0f+%.3fx; SSR=%.0f",m3$coefficients[1],m3$coefficients[2], sum(m3$residuals^2))
+    ), bg="white")
+```
+
+
+{ BEGIN exercise }
+Which of lines in Figure {@fig:credit_different_lines_ssr} is the least squares solution?
+{ END exercise }
+
+
+<!-- TODO:
+heatmap of SSR(a,b) for a = [0,1], b=[0,300]
+-->
+
+
+
+
+
+### Solution in R
+
+
+
+
+Let's fit the linear model minimising the SSR in R.
+The `lm()` function (`l`inear `m`odels) has a convenient *formula*-based interface.
+
+
+```{r credit_fit_lm}
+f <- lm(Y~X)
+```
+
+In R, the expression "`Y~X`" denotes a formula, which we read as:
+variable `Y` is a function of `X`.
+Note that the dependent variable is on the left side of the formula.
+Here, `X` and `Y` are two R numeric vectors of identical lengths.
+
+
+Let's print the fitted model:
+
+```{r credit_print_lm}
+print(f)
+```
+
+Hence, the fitted model is:
+\[
+Y = f(X) = `r f$coefficient[1]`+`r f$coefficient[2]` X
+\qquad (+ \varepsilon)
+\]
+
+
+Coefficient $a$ (intercept):
+
+```{r credit_print_lm_2}
+f$coefficient[1]
+```
+
+Coefficient $b$ (slope):
+
+```{r credit_print_lm_1}
+f$coefficient[2]
+```
+
+Plotting, see Figure {@fig:credit_plot_lm}:
+
+```{r credit_plot_lm, fig.cap="Fitted regression line"}
+plot(X, Y, col="#000000aa")
+abline(f, col=2, lwd=3)
+```
+
+
+SSR:
+
+```{r credit_ssr_lm}
+sum(f$residuals^2)
+sum((f$coefficient[1]+f$coefficient[2]*X-Y)^2) # equivalent
+```
+
+We can predict the model's output for yet-unobserved inputs by
+writing:
+
+```{r credit_predict_lm}
+X_new <- c(1500, 2000, 2500) # example inputs
+f$coefficient[1] + f$coefficient[2]*X_new
+```
+
+
+Note that linear models can also be fitted based on formulas that refer
+to a data frame's columns. For example, let us wrap
+both $\mathbf{x}$ and $\mathbf{y}$ inside a data frame:
+
+```{r credit_XY_df}
+XY <- data.frame(Balance=X, Rating=Y)
+head(XY, 3)
+```
+
+By writing:
+
+```{r credit_XY_df_lm}
+f <- lm(Rating~Balance, data=XY)
+```
+
+now `Balance` and `Rating` refer to column names in the `XY` data frame,
+and not the objects in R's "workspace".
+
+Based on the above, we can make a prediction
+using the `predict()` function"
+
+```{r credit_XY_predict}
+X_new <- data.frame(Balance=c(1500, 2000, 2500))
+predict(f, X_new)
+```
+
+Interestingly:
+
+```{r credit_XY_predict_extrapolate}
+predict(f, data.frame(Balance=c(5000)))
+```
+
+This is more than the highest possible rating -- we have extrapolated
+way beyond the observable data range.
+
+
+
+
+Note that our $Y=a+bX$ model is **interpretable**
+and **well-behaving**
+(not all machine learning models will have this feature,
+think: deep neural networks,
+which we rather conceive as *black boxes*):
+
+* we know that by increasing $X$ by a small amount,
+$Y$ will also increase (positive correlation),
+
+* the model is continuous -- small change in $X$
+doesn't yield any drastic change in $Y$,
+
+* we know what will happen if we increase or decrease $X$ by, say, $100$,
+
+* the function is invertible -- if we want Rating of $500$,
+we can compute the associated preferred Balance that should yield it
+(provided that the model is valid).
+
+
+### Analytic Solution
+
+
+It may be shown (which we actually do below)
+that the solution is:
+
+\[
+\left\{
+\begin{array}{rl}
+b  = & \dfrac{
+n \displaystyle\sum_{i=1}^n x_i y_i - \displaystyle\sum_{i=1}^n  y_i \displaystyle\sum_{i=1}^n x_i
+}{
+n \displaystyle\sum_{i=1}^n x_i x_i -   \displaystyle\sum_{i=1}^n x_i\displaystyle\sum_{i=1}^n x_i
+}\\
+a = & \dfrac{1}{n}\displaystyle\sum_{i=1}^n  y_i - b  \dfrac{1}{n} \displaystyle\sum_{i=1}^n x_i  \\
+\end{array}
+\right.
+\]
+
+Which can be implemented in R as follows:
+
+```{r lm_estimate_manual}
+n <- length(X)
+b <- (n*sum(X*Y)-sum(X)*sum(Y))/(n*sum(X*X)-sum(X)^2)
+a <- mean(Y)-b*mean(X)
+c(a, b) # the same as f$coefficients
+```
+
+### Derivation of the Solution (\*\*)
+
+
+
+
+Remark.
+
+: You can safely skip this part if you are yet to know
+how to search for a minimum of a function of many variables
+and what are partial derivatives.
+
+
+
+Denote with:
+
+\[
+E(a,b)=\mathrm{SSR}(x\mapsto a+bx|\mathbf{x},\mathbf{y})
+=\sum_{i=1}^n \left( a+bx_i - y_i \right) ^2.
+\]
+
+We seek the minimum of $E$ w.r.t. both $a,b$.
+
+
+
+Theorem.
+
+: If $E$ has a (local) minimum at $(a^*,b^*)$,
+then its partial derivatives vanish therein,
+i.e., $\partial E/\partial a(a^*, b^*) = 0$ and $\partial E/\partial b(a^*, b^*)=0$.
+
+
+
+
+
+We have:
+
+\[
+E(a,b)   = \displaystyle\sum_{i=1}^n \left( a+bx_i - y_i \right) ^2.
+\]
+
+We need to compute the partial derivatives $\partial E/\partial a$ (derivative of $E$
+w.r.t. variable $a$ -- all other terms treated as constants)
+and $\partial E/\partial b$ (w.r.t. $b$).
+
+
+
+Useful rules -- derivatives w.r.t. $a$ (denote $f'(a)=(f(a))'$):
+
+- $(f(a)+g(a))'=f'(a)+g'(a)$ (derivative of sum is sum of derivatives)
+- $(f(a) g(a))' = f'(a)g(a) + f(a)g'(a)$ (derivative of product)
+- $(f(g(a)))' = f'(g(a)) g'(a)$ (chain rule)
+- $(c)' = 0$ for any constant $c$ (expression not involving $a$)
+- $(a^p)' = pa^{p-1}$ for any $p$
+- in particular: $(c a^2+d)'=2ca$, $(ca)'=c$, $((ca+d)^2)'=2(ca+d)c$ (application of the above rules)
+
+
+<!--\[
+\begin{array}{rl}
+E_a'(a,b)=&2\displaystyle\sum_{i=1}^n \left( a+bx_i - y_i \right) x_i \\
+E_b'(a,b)=&2\displaystyle\sum_{i=1}^n \left( a+bx_i - y_i \right) \\
+\end{array}
+\]-->
+
+We seek $a,b$ such that $\frac{\partial E}{\partial a}(a,b) = 0$
+and $\frac{\partial E}{\partial b}(a,b)=0$.
+
+
+
+
+\[
+\left\{
+\begin{array}{rl}
+\frac{\partial E}{\partial a}(a,b)=&2\displaystyle\sum_{i=1}^n \left( a+bx_i - y_i \right) = 0\\
+\frac{\partial E}{\partial b}(a,b)=&2\displaystyle\sum_{i=1}^n \left( a+bx_i - y_i \right) x_i = 0 \\
+\end{array}
+\right.
+\]
+
+This is a system of 2 linear equations. Easy.
+
+Rearranging like back in the school days:
+
+\[
+\left\{
+\begin{array}{rl}
+b \displaystyle\sum_{i=1}^n x_i+ a n = & \displaystyle\sum_{i=1}^n  y_i  \\
+b \displaystyle\sum_{i=1}^n x_i x_i + a \displaystyle\sum_{i=1}^n x_i = & \displaystyle\sum_{i=1}^n x_i y_i \\
+\end{array}
+\right.
+\]
+
+
+
+
+It is left as an exercise to show that the solution is:
+
+\[
+\left\{
+\begin{array}{rl}
+b^*  = & \dfrac{
+n \displaystyle\sum_{i=1}^n x_i y_i - \displaystyle\sum_{i=1}^n  y_i \displaystyle\sum_{i=1}^n x_i
+}{
+n \displaystyle\sum_{i=1}^n x_i x_i -   \displaystyle\sum_{i=1}^n x_i\displaystyle\sum_{i=1}^n x_i
+}\\
+a^* = & \dfrac{1}{n}\displaystyle\sum_{i=1}^n  y_i - b^*  \dfrac{1}{n} \displaystyle\sum_{i=1}^n x_i  \\
+\end{array}
+\right.
+\]
+
+
+
+(we should additionally perform the second derivative test
+to assure that this is the minimum of $E$ -- which is exactly the case though)
+
+<!-- TODO rewrite nicely with means and correlation coefficients etc.
+
+Pearson's r introduced in the next chapter though
+
+(a <- cor(x,y)*sd(y)/sd(x))
+(b <- mean(y)-a*mean(x))
+-->
+
+
+
+
+
+
+
+
+(\*\*) In the next chapter, we will introduce the notion of Pearson's
+linear coefficient, $r$ (see `cor()` in R). It might be shown that
+$a$ and $b$ can also be rewritten as:
+
+```{r ab_coef_cor}
+(b <- cor(X,Y)*sd(Y)/sd(X))
+(a <- mean(Y)-b*mean(X))
+```
+
+<!-- TODO show optim() -->
+
+
+
+## Exercises
+
+### The Anscombe Quartet
+
+Here is a famous illustrative example proposed by
+the statistician Francis Anscombe in the early 1970s.
+
+```{r anscombe}
+print(anscombe) # `anscombe` is a built-in object
+```
+
+What we see above is a single data frame
+that encodes four separate datasets:
+`anscombe$x1` and `anscombe$y1` define the first pair of variables,
+`anscombe$x2` and `anscombe$y2` define the second pair and so forth.
+
+
+
+
+
+{ BEGIN exercise }
+Split the above data (manually) into four data frames
+`ans1`, ..., `ans4` with columns `x` and `y`.
+
+For example, `ans1` should look like:
+
+```{r anscombe1,echo=-(1:4)}
+ans1 <- data.frame(x=anscombe$x1, y=anscombe$y1)
+ans2 <- data.frame(x=anscombe$x2, y=anscombe$y2)
+ans3 <- data.frame(x=anscombe$x3, y=anscombe$y3)
+ans4 <- data.frame(x=anscombe$x4, y=anscombe$y4)
+print(ans1)
+```
+{ END exercise }
+
+
+
+
+
+{ BEGIN solution }
+
+```{r anscombe1apply, eval=FALSE}
+<<anscombe1>>
+```
+
+{ END solution }
+
+
+
+{ BEGIN exercise }
+Compute the mean of each `x` and `y` variable.
+{ END exercise }
+
+{ BEGIN solution }
+
+```{r anscombe_mean}
+mean(ans1$x) # individual column
+mean(ans1$y) # individual column
+sapply(ans2, mean) # all columns in ans2
+sapply(anscombe, mean) # all columns in the full anscombe dataset
+```
+
+
+*Comment: This is really interesting, all the means of `x` columns
+as well as the means of `y`s are almost identical.*
+{ END solution }
+
+
+
+
+{ BEGIN exercise }
+Compute the standard deviation of each `x` and `y` variable.
+{ END exercise }
+
+{ BEGIN solution }
+
+The solution is similar to the previous one, just replace `mean` with `sd`.
+Here, to learn something new, we will use the `knitr::kable()` function
+that pretty-prints a given matrix or data frame:
+
+```{r anscombe_sd}
+results <- sapply(anscombe, sd)
+knitr::kable(results, col.names="standard deviation")
+```
+
+
+*Comment: This is even more interesting, because the numbers agree up to 2 decimal digits.*
+
+{ END solution }
+
+<!--
+TODO: cor() covered later
+Compute the Pearson linear correlation coefficient
+for each of the four pairs of `x` and `y`.
+
+To recall, this can be done with the `cor()` function.
+What is the Pearson $r$ coefficient is explained in Lecture 3.
+
+```{r}
+cor(ans1$x, ans1$y)
+cor(ans2$x, ans2$y)
+cor(ans3$x, ans3$y)
+cor(ans4$x, ans4$y)
+```
+
+
+*Comment: We get a feeling that we're being tricked by Anscombe...
+All the variables are highly correlated, and the correlation
+coefficients are more or less the same.*
+-->
+
+
+
+{ BEGIN exercise }
+Fit a simple linear regression model for each data set.
+Draw the scatter plots again (`plot()`)
+and add the regression lines (`lines()` or `abline()`).
+{ END exercise }
+
+{ BEGIN solution }
+
+To recall, this can be done with the `lm()` function
+explained in Lecture 2.
+
+At this point we should already have become lazy -- the tasks are very
+repetitious. Let's automate them by writing a single function
+that does all the above for any data set:
+
+```{r anscombe_fit}
+fit_models <- function(ans) {
+    # ans is a data frame with columns x and y
+    f <- lm(y~x, data=ans) # fit linear model
+    print(f$coefficients) # estimated coefficients
+    plot(ans$x, ans$y) # scatter plot
+    abline(f, col="red") # regression line
+    return(f)
+}
+```
+
+Now we can apply it on the four particular examples.
+
+```{r anscombe_fit_apply,fig.height=6,fig.cap="Fitted regression lines for the Anscombe quartet"}
+par(mfrow=c(2, 2)) # four plots on 1 figure (2x2 grid)
+f1 <- fit_models(ans1)
+f2 <- fit_models(ans2)
+f3 <- fit_models(ans3)
+f4 <- fit_models(ans4)
+```
+
+*Comment: All the estimated models are virtually the same,
+the regression lines are
+$y=0.5x+3$, compare Figure {@fig:anscombe_fit_apply}.*
+
+{ END solution }
+
+
+
+
+
+{ BEGIN exercise }
+Create scatter plots of the residuals (predicted $\hat{y}_i$ minus
+true $y_i$) as a function of the predicted $\hat{y}_i=f(x_i)$ for every
+$i=1,\dots,11$.
+{ END exercise }
+
+{ BEGIN solution }
+
+To recall, the model predictions can be generated by (amongst others)
+calling the `predict()` function.
+
+
+```{r anscombe_resid}
+y_pred1 <- f1$fitted.values # predict(f1, ans1)
+y_pred2 <- f2$fitted.values # predict(f2, ans2)
+y_pred3 <- f3$fitted.values # predict(f3, ans3)
+y_pred4 <- f4$fitted.values # predict(f4, ans4)
+```
+
+Plots of residuals as a function of the predicted (fitted) values
+are given in Figure {@fig:anscombe_resid_plot}.
+
+```{r anscombe_resid_plot,fig.height=6,fig.cap="Residuals vs. fitted values for the regression lines fitted to the Anscombe quartet"}
+par(mfrow=c(2, 2)) # four plots on 1 figure (2x2 grid)
+plot(y_pred1, y_pred1-ans1$y)
+plot(y_pred2, y_pred2-ans2$y)
+plot(y_pred3, y_pred3-ans3$y)
+plot(y_pred4, y_pred4-ans4$y)
+```
+
+*Comment: Ideally, the residuals shouldn't be correlated
+with the predicted values -- they should "oscillate" randomly
+around 0.     This is only the case of the first dataset.
+All the other cases are "alarming" in the sense that
+they suggest that the obtained models are "suspicious"
+(perhaps data cleansing is needed or a linear model is not at all appropriate).*
+
+{ END solution }
+
+
+
+{ BEGIN exercise }
+Draw conclusions (in your own words).
+{ END exercise }
+
+{ BEGIN solution }
+We're being taught a lesson here: don't perform data analysis tasks
+automatically, don't look at bare numbers only, visualise your data first!
+{ END solution }
+
+
+
+
+{ BEGIN exercise }
+Read more about Anscombe's quartet at https://en.wikipedia.org/wiki/Anscombe%27s_quartet
+{ END exercise }
+
+
+
+
+### Median House Value in Boston
+
+
+The famous `Boston` dataset from the `MASS` package
+records the historical (in the 1970s) median house value
+(`medv` column, in 1000s USD) for 506 suburbs around
+Boston, MA, USA.
+
+You can access the dataset by calling:
+
+```{r Boston_load1,message=FALSE}
+# call install.packages("MASS") first (only once)
+library("MASS")
+head(Boston, 3)
+```
+
+Read the description of each of the 14 columns in the dataset's manual,
+see `?Boston`.
+
+{ BEGIN exercise }
+Fit a simple linear model of $Y=$ `medv` as a function of $X=$  `lstat`.
+{ END exercise }
+
+{ BEGIN exercise }
+Fit a quadratic polynomial model $(aX^2+bX+c)$ for the same pair of variables.
+{ END exercise }
+
+{ BEGIN exercise }
+Fit a 5-degree polynomial model $(aX^5+bX^4+cX^3+dX^2+eX+f)$ for the same pair of variables.
+{ END exercise }
+
+{ BEGIN exercise }
+Draw the scatter plot of the two variables and add the fitted regression
+curves (all three on a single plot, use different colours).
+{ END exercise }
+
+
+{ BEGIN exercise }
+Compute RMSE, MAE and $R^2$ of each model. Provide the interpretations of the
+obtained values.
+{ END exercise }
+
+{ BEGIN exercise }
+For each model, draw the plot of the residuals ($\hat{y}_i-y_i$)
+as a function of the predicted outputs ($\hat{y}_i$).
+Describe these plots in your own words.
+{ END exercise }
+
+{ BEGIN exercise }
+Predict the `medv` values for `lstat` of 0, 25, 50 and 75
+using all the models. Compare and discuss the results.
+Which of the predictions seem trustworthy?
+{ END exercise }
+
+
+
+
+## Outro
+
+### Remarks
+
+
+In supervised learning, with each input point,
+there's an associated reference output value.
+
+Learning a model = constructing a function that approximates
+(minimising some error measure) the given data.
+
+Regression = the output variable $Y$ is continuous.
+
+We studied linear models with a single independent variable based on
+the least squares (SSR) fit.
+
+In the next part we will extend this setting to the case
+of many variables, i.e., $p>1$, called multiple regression.
+
+
+
+
+### Further Reading
+
+
+Recommended further reading:  [@islr: Chapters 1, 2 and 3]
+
+Other: [@esl: Chapter 1, Sections 3.2 and 3.3]

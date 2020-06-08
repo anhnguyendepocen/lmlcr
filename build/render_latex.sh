@@ -28,8 +28,8 @@ echo "\RequirePackage{etex}" >> krantz.cls
 echo "\RequirePackage{etoolbox}" >> krantz.cls
 cat ../build/krantz.cls >> krantz.cls
 
-cat 00-introduction.Rmd >> index.Rmd
-rm -f 00-introduction.Rmd
+cat 00-preface.Rmd >> index.Rmd
+rm -f 00-preface.Rmd
 
 date="DRAFT v0.3 $(date '+%Y-%m-%d %H:%M') (`git rev-parse --short HEAD`)"
 sed -i -e "s/@DATE@/${date}/g" index.Rmd

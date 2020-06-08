@@ -915,7 +915,7 @@ Source               | http://cs.joensuu.fi/sipu/datasets/
 
 
 
-## Movie Lens (TODO: permission required)
+## Movie Lens (TODO)
 
 
 <!-- (permission required)
@@ -959,7 +959,7 @@ TODO:
 
 
 
-## Other
+## Other (TODO)
 
 
 the famous Fisher's Iris flower dataset,
@@ -1008,7 +1008,12 @@ MNIST digits
 MNIST fashion
 
 
+Wisconsin Diagnostic Breast Cancer (WDBC)
 
+```{r dataset_wdbc}
+wdbc <- read.csv("datasets/wdbc.csv", comment.char="#")
+head(wdbc, 2)
+```
 
 <!--
 
@@ -1020,6 +1025,11 @@ https://fueleconomy.gov/feg/download.shtml
 Terms of use:
 
 TODO:
+
+
+https://data.europa.eu/euodp/en/data/
+
+https://openpsychometrics.org/_rawdata/
 
 -->
 
