@@ -192,9 +192,9 @@ get_metrics <- function(Y_pred, Y_test)
 {
     C <- table(Y_pred, Y_test) # confusion matrix
     stopifnot(dim(C) == c(2, 2))
-    c(Acc=(C[1,1]+C[2,2])/sum(C), # accuracy
+    c(Acc=(C[1,1]+C[2,2])/sum(C),  # accuracy
       Prec=C[2,2]/(C[2,2]+C[2,1]), # precision
-      Rec=C[2,2]/(C[2,2]+C[1,2]), # recall
+      Rec=C[2,2]/(C[2,2]+C[1,2]),  # recall
       F=C[2,2]/(C[2,2]+0.5*C[1,2]+0.5*C[2,1]), # F-measure
       # Confusion matrix items:
       TN=C[1,1], FN=C[1,2],

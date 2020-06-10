@@ -104,6 +104,68 @@ or use the methods in your research
 greedy companies store a lot of data about their customers --
 you might want to understand the principles behind the methods they use
 to recommend you that ad or product
+
+
+We would like to appreciate the role of open source software.
+Most started as non-for-profit and it's beautiful that some of them
+continue this way.
+Not everything is for sale. Not everything has its price.
+Let's not forget it.
+
+
+
+
+We need more than just ML:
+
+Mathematical modelling, differential equations, discrete maths
+
+Statistics for small samples but not needed for big data
+
+
+
+
+It's not all in the data, real life processes are not static
+
+Machine learning models are inherently static, they describe today. Tomorrow may be different, especially if people start to trick the system. Think spam detection , spammers will change their behaviour as new detection algorithms arise
+
+People are smarter than your think, they will challenge the system, by choosing a quality metric you change the direction, but can you really predict what other factors gonna be like when we get there?
+
+
+Examples : covid prediction not taking into account country policies and other things going on
+
+Garmin vo2max estimation and the risk of going mad/overtraining
+
+
+
+ *AI is a tool*.
+Yes, AI is really useful, but it's not a remedy for all our problems.
+
+
+Behind every success story related to  AI, there are always people involved. Sometimes large
+teams of:
+
+* those who deal with hardware, data storage, high performance computing
+* those who wrangle data, fit models to data and develop prototypes
+* those who are responsible for making the algorithms
+work well in production environments
+* those who are responsible for providing you
+with software/algorithms/models that enable everyone to perform the above,
+e.g., languages such as R and Python, libraries, packages
+
+You can call them data engineers, data analysts, machine learning engineers,
+data scientists, whatever.
+
+Oftentimes, especially in introductory courses such as this one,
+a "static" view on the problem domain must be assumed (for the so much
+required simplicity) -- that there is something to learn about a dataset
+and the reality it comes from never changes.
+However, the truth is that "all things are flowing" (Heraclitus' *panta rhei*),
+and some systems are already outdated at the time when they go into production.
+Also, people themselves might change their behaviours when interacting
+with an ML system.
+Notably, some systems have an inherent ability to adapt based on forthcoming
+observations as well
+(learn to modify its behaviour *on-line*)
 -->
 
 

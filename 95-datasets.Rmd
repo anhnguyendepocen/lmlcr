@@ -2,10 +2,7 @@
 
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 
-"Good" datasets are actually hard to find!
-Many books analyse datasets that are "too easy" and give their readers
-the false impression that anything can be modelled well with machine learning
-algorithms.
+
 
 Below we briefly describe the most noteworthy
 datasets considered in this book.
@@ -14,6 +11,23 @@ https://github.com/gagolews/lmlcr/tree/master/datasets.
 Many of them are real-world data, and need some proper cleaning,
 outlier removal etc. Moreover, for some of them, the machine learning
 models studied will not be of the highest quality. That's life.
+
+
+"Good" datasets are actually hard to find!
+Many books analyse datasets that are "too easy"; they give their readers
+the false impression that anything can be modelled well with machine learning
+algorithms. Most often, you will be dealing with datasets that are incapable
+of telling any interesting story. Fear not, this is not personal,
+you are not stupid if you cannot find any useful pattern in your data!
+You might be forced
+(by your thesis supervisor, manager, client,
+you-the-utterly-ambitious-yourself that wants to prove your point, get
+that paper published, show off your superb data science skills in front
+of your workmates etc.) to squeeze something out of it anyway.
+If but few tear drops are really there,
+communicating this openly should be part of your work ethics.
+
+
 
 
 Remark.
@@ -346,6 +360,51 @@ Column                         | Description
 `response`                     |  Wine rating on the scale 0 (bad) to 10 (excellent): median of at least 3 valuations by sensory assessors
 `color`                        |  Wine colour: `red` (1599) or `white` (4898)
 
+
+
+`wine_train`, `wine_test`.
+
+:   In the first chapters we want to set up a working classifier as
+    fast as possible, without going into details on why and how to perform
+    a train-test split etc. Therefore, let's prepare a tailored subset
+    of the wine quality database.
+
+    First, we select 500 white wines at random:
+
+    ```{r wine_train_test_split1}
+    set.seed(1234) # reproducibility matters
+    wine_subset <- wine_quality[wine_quality$color=="white",]
+    wine_subset <- wine_subset[sample(nrow(wine_subset), 500),]
+    ```
+
+    Next we create a new column that tells us whether
+    a given wine is bad (class 1, quality is not greater than 5)
+    or not-bad:
+
+    ```{r wine_train_test_split2}
+    wine_subset$bad <- as.numeric(wine_subset$response <= 5)
+    ```
+
+    For simplicity, we are  only interested in 5 following physicochemical
+    features:
+
+    ```{r wine_train_test_split3}
+    wine_subset <- wine_subset[, c(
+        "alcohol", "volatile.acidity", "chlorides",
+        "free.sulfur.dioxide", "total.sulfur.dioxide", "bad"
+    )]
+    ```
+
+    Then we perform a 60/40% split. The rows in the data frame
+    are already randomised, therefore the first 300 can constitute
+    the training sample and the remaining 200  can define the test sample.
+
+    ```{r wine_train_test_split4,eval=FALSE}
+    write.csv(wine_subset[1:300, ],
+        "datasets/wine_train.csv", row.names=FALSE)
+    write.csv(wine_subset[-(1:300), ],
+        "datasets/wine_test.csv", row.names=FALSE)
+    ```
 
 
 ## The World Factbook (Countries of the World)
