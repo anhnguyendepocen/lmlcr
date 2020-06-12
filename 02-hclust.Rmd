@@ -1,0 +1,459 @@
+# Agglomerative Hierarchical Clustering
+
+<!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
+
+
+
+
+
+
+
+
+
+
+## Agglomerative Hierarchical Clustering
+
+
+
+Formally, given $K\ge 2$, **clustering** aims is to find a *special kind*
+of a **$K$-partition** of the input data set $\mathbf{X}$.
+
+Definition.
+
+:   We say that $\mathcal{C}=\{C_1,\dots,C_K\}$ is a **$K$-partition**
+    of  $\mathbf{X}$ of size $n$,
+    whenever:
+
+    - $C_k\neq\emptyset$ for all $k$ (each set is nonempty),
+    - $C_k\cap C_l=\emptyset$ for all $k\neq l$ (sets are pairwise disjoint),
+    - $\bigcup_{k=1}^K C_k=\mathbf{X}$ (no point is neglected).
+
+
+This can also be thought of as assigning each point a unique label $\{1,\dots,K\}$
+(think: colouring of the points, where each number has a colour).
+We will consider the point $\mathbf{x}_{i,\cdot}$ as labelled $j$
+if and only if it belongs to cluster $C_j$, i.e., $\mathbf{x}_{i,\cdot}\in C_j$.
+
+
+
+
+
+
+Example applications of clustering:
+
+
+- *taxonomisation*: e.g.,
+ partition the consumers to more "uniform"
+ groups to better understand who they are and what do they need,
+- *image processing*:
+ e.g., object detection, like tumour tissues on medical images,
+- *complex networks analysis*:
+ e.g., detecting communities in friendship,
+ retweets and other networks,
+- *fine-tuning supervised learning algorithms*:
+  e.g., recommender systems indicating content
+  that was rated highly by users from the same group
+  or learning multiple manifolds in a dimension reduction task.
+
+
+
+
+
+
+
+
+The number of possible $K$-partitions of a set with $n$ elements is given by
+*the Stirling number of the second kind*:
+
+\[
+\left\{{n \atop K}\right\}={\frac  {1}{K!}}\sum _{{j=0}}^{{K}}(-1)^{{K-j}}{\binom  {K}{j}}j^{n};
+\]
+
+e.g., already $\left\{{n \atop 2}\right\}=2^{n-1}-1$
+and $\left\{{n \atop 3}\right\}=O(3^n)$ -- that is a lot.
+Certainly, we are not just interested in "any" partition -- some of them
+will be more meaningful or valuable than others.
+However, even one of the most famous ML textbooks provides us with only
+a vague hint of what we might be looking for:
+
+
+
+"Definition".
+
+: Clustering concerns "segmenting a collection of objects into subsets
+so that those within each cluster are more **closely related**
+to one another than objects assigned to different clusters" [@esl].
+
+It is not uncommon <!-- TODO: cite -->
+to equate the general definition of data clustering problems with... the
+particular outputs yield by specific clustering algorithms. It some sense,
+that sounds fair. From this perspective, we might be interested in
+identifying the two main types of clustering algorithms:
+
+
+- **parametric** (model-based):
+    - find clusters of specific shapes or following specific multidimensional
+    probability distributions,
+    - e.g., $K$-means, expectation-maximisation for Gaussian mixtures (EM),
+    average linkage agglomerative clustering;
+- **nonparametric** (model-free):
+    - identify high-density or well-separable regions,
+    perhaps in the presence of noise points,
+    - e.g., single linkage agglomerative clustering, Genie, (H)DBSCAN, BIRCH.
+
+
+
+In this chapter we'll take a look at two classical approaches to clustering:
+
+- *K-means clustering* that looks for a specific number of clusters,
+- *(agglomerative) hierarchical clustering* that outputs a whole hierarchy
+of nested data partitions.
+
+
+
+
+
+
+
+
+### Introduction
+
+
+In K-means, we need to specify the number of clusters, $K$, in advance.
+What if we don't have any idea how to choose this parameter (which is often
+the case)?
+
+Also, the problem with K-means is that there is no guarantee that a
+$K$-partition is any "similar" to the $K'$-one for $K\neq K'$,
+see Figure {@fig:kmeans_different_K}.
+
+
+
+```{r kmeans1,echo=-1}
+set.seed(123)
+X <- as.matrix(iris[,c(3,2)])
+# never forget to set nstart>>1!
+km <- kmeans(X, centers=3, nstart=10)
+km$cluster # labels assigned to each of 150 points:
+```
+
+
+
+```{r kmeans_different_K,fig.cap="3-means (colours) vs. 4-means (symbols) on example data; the \"circle\" cluster cannot decide if it likes the green or the black one more"}
+km1 <- kmeans(X, 3, nstart=10)
+km2 <- kmeans(X, 4, nstart=10)
+plot(X, col=km1$cluster, pch=km2$cluster, asp=1)
+```
+
+
+
+Hierarchical methods, on the other hand, output a whole hierarchy
+of mutually *nested* partitions, which increase the interpretability
+of the results.
+A $K$-partition for any $K$ can be extracted later at any time.
+
+
+In this book we will be interested in *agglomerative* hierarchical algorithms:
+
+* at the lowest level of the hierarchy, each point belongs to its own
+cluster (there are $n$ singletons);
+
+* at the highest level of the hierarchy,
+there is one cluster that embraces all the points;
+
+* moving from the $i$-th to the $(i+1)$-th level,
+we select (somehow; see below) a pair of clusters to be merged.
+
+
+
+### Example in R
+
+
+The most basic implementation of a few
+agglomerative hierarchical clustering algorithms
+is provided by the `hclust()` function, which works on a pairwise
+distance matrix.
+
+
+```{r dist_hclust_complete}
+# Euclidean distances between all pairs of points:
+D <- dist(X)
+# Apply Complete Linkage (the default, details below):
+h <- hclust(D) # method="complete"
+print(h)
+```
+
+
+Remark.
+
+: There are $n(n-1)/2$ unique pairwise distances between $n$ points.
+Don't try calling `dist()` on large data matrices.
+Already $n=100{,}000$ points consumes 40 GB of available memory
+(assuming that each distance is stored as an 8-byte double-precision floating
+point number); packages `fastcluster` and `genie`, among other,
+aim to solve this problem.
+
+<!--
+#n <- 100000
+#8*n*(n-1)/2/1e9
+-->
+
+
+The obtained hierarchy (*tree*) can be *cut* at an arbitrary level
+by applying the `cutree()` function.
+
+```{r cutree}
+cutree(h, k=3) # extract the 3-partition
+```
+
+
+The cuts of the hierarchy at different levels
+are depicted in Figure {@fig:complete_linkage_hier5_intro}.
+The obtained 3-partition also matches the true Iris species quite well.
+However, now it makes total sense to "zoom" our partitioning in or out
+and investigate how are the subgroups decomposed or aggregated when we change
+$K$.
+
+
+
+```{r complete_linkage_hier5_intro,fig.height=6,fig.cap="Complete linkage -- 4 different cuts"}
+par(mfrow=c(2,2))
+plot(X, col=cutree(h, k=5), ann=FALSE)
+legend("top", legend="k=5", bg="white")
+plot(X, col=cutree(h, k=4), ann=FALSE)
+legend("top", legend="k=4", bg="white")
+plot(X, col=cutree(h, k=3), ann=FALSE)
+legend("top", legend="k=3", bg="white")
+plot(X, col=cutree(h, k=2), ann=FALSE)
+legend("top", legend="k=2", bg="white")
+```
+
+
+
+
+### Linkage Functions
+
+Let's formalise the clustering process.
+Initially,  $\mathcal{C}^{(0)}=\{\{\mathbf{x}_{1,\cdot}\},\dots,\{\mathbf{x}_{n,\cdot}\}\}$,
+i.e., each point is a member of its own cluster.
+
+While an agglomerative  hierarchical clustering algorithm is being computed,
+there are $n-k$ clusters at the $k$-th step of the procedure,
+$\mathcal{C}^{(k)}=\{C_1^{(k)},\dots,C_{n-k}^{(k)}\}$.
+
+When proceeding from step $k$ to $k+1$,
+we determine the two groups $C_u^{(k)}$ and $C_v^{(k)}$, $u<v$,
+to be *merged* together so that the clustering at the higher level
+is of the form:
+\[
+\mathcal{C}^{(k+1)} = \left\{
+C_1^{(k)},\dots,C_{u-1}^{(k)},
+C_u^{(k)}{\cup C_v^{(k)}},
+C_{u+1}^{(k)},\dots,C_{v-1}^{(k)},
+C_{v+1}^{(k)},\dots,C_{n-k}^{(k)}
+\right\}.
+\]
+
+
+Thus, $(\mathcal{C}^{(0)}, \mathcal{C}^{(1)}, \dots, \mathcal{C}^{(n-1)})$
+form a sequence of *nested* partitions of
+the input dataset
+with the last level being just one big cluster,
+$\mathcal{C}^{(n-1)}=\left\{ \{\mathbf{x}_{1,\cdot},\mathbf{x}_{2,\cdot},\dots,\mathbf{x}_{n,\cdot}\} \right\}$.
+
+
+. . .
+
+There is one component missing -- how to determine the pair
+of clusters $C_u^{(k)}$ and $C_v^{(k)}$ to be merged with each other
+at the $k$-th iteration?
+Of course this will be expressed as some optimisation problem (although this time,
+a simple one)!  The decision will be based on:
+\[
+\mathrm{arg}\min_{u < v} d^*(C_u^{(k)}, C_v^{(k)}),
+\]
+where $d^*(C_u^{(k)}, C_v^{(k)})$ is the *distance* between two clusters
+$C_u^{(k)}$ and $C_v^{(k)}$.
+
+Note that we usually only consider the distances between *individual points*,
+not sets of points. Hence, $d^*$ must be a suitable extension
+of a pointwise distance $d$ (usually the Euclidean metric)
+to whole sets.
+
+We will assume that $d^*(\{\mathbf{x}_{i,\cdot}\},\{\mathbf{x}_{j,\cdot}\})=
+d(\mathbf{x}_{i,\cdot},\mathbf{x}_{j,\cdot})$, i.e., the distance between
+singleton clusters is the same as the distance between the points themselves.
+As far as more populous point groups are concerned, there are many popular
+choices of $d^*$ (which in the context of hierarchical clustering we call
+*linkage functions*):
+
+- single linkage:
+
+    \[
+    d_\text{S}^*(C_u^{(k)}, C_v^{(k)}) =
+    \min_{\mathbf{x}_{i,\cdot}\in C_u^{(k)}, \mathbf{x}_{j,\cdot}\in C_v^{(k)}} d(\mathbf{x}_{i,\cdot},\mathbf{x}_{j,\cdot}),
+    \]
+
+- complete linkage:
+
+    \[
+    d_\text{C}^*(C_u^{(k)}, C_v^{(k)}) =
+    \max_{\mathbf{x}_{i,\cdot}\in C_u^{(k)}, \mathbf{x}_{j,\cdot}\in C_v^{(k)}} d(\mathbf{x}_{i,\cdot},\mathbf{x}_{j,\cdot}),
+    \]
+
+- average linkage:
+
+    \[
+    d_\text{A}^*(C_u^{(k)}, C_v^{(k)}) =
+    \frac{1}{|C_u^{(k)}| |C_v^{(k)}|} \sum_{\mathbf{x}_{i,\cdot}\in C_u^{(k)}}\sum_{\mathbf{x}_{j,\cdot}\in C_v^{(k)}} d(\mathbf{x}_{i,\cdot},\mathbf{x}_{j,\cdot}).
+    \]
+
+
+An illustration of the way different linkages are computed
+is given in Figure {@fig:linkages}.
+
+```{r linkages,echo=FALSE,fig.cap="In single linkage, we find the closest pair of points; in complete linkage, we seek the pair furthest away from each other; in average linkage, we determine the arithmetic mean of all pairwise distances"}
+set.seed(123)
+par(mar=rep(0.5,4))
+XXX <- jitter(t(as.matrix(iris[,2:3])))
+y <- as.numeric(iris[,5])
+XXX[,y==3] <- c(2, 1)*XXX[,y==3]+c(-0.5,-0.5)
+y[y==3] <- 4
+
+d <- as.matrix(dist(t(XXX)))
+d12 <- d[1:50, 51:100]
+d23 <- d[51:100, 101:150]
+d13 <- d[1:50, 101:150]
+
+kol1 <- rgb(0,0.2,0,0.2)
+kol2 <- rgb(0,0.5,0.0,0.5)
+kol3 <- rgb(0,0.9,0.0,0.9)
+
+par(mfrow=c(1,3))
+# single
+plot(XXX[1,], XXX[2,], col=y, pch='.', asp=1, axes=FALSE, xlab=NA, ylab=NA)
+box()
+# stopifnot(min(d23) < min(d13) && min(d23) < min(d12))
+IDXXX_single <- which(min(d23) == d, arr.ind=TRUE)[1,]
+lines(XXX[1,IDXXX_single], XXX[2,IDXXX_single], col=kol3, lwd=3)
+IDXXX_single <- which(min(d13) == d, arr.ind=TRUE)[1,]
+lines(XXX[1,IDXXX_single], XXX[2,IDXXX_single], col=kol1, lwd=3)
+IDXXX_single <- which(min(d12) == d, arr.ind=TRUE)[1,]
+lines(XXX[1,IDXXX_single], XXX[2,IDXXX_single], col=kol2, lwd=3)
+legend("bottomright", legend="single linkage", bg="white")
+points(XXX[1,], XXX[2,], col=y, pch=y)
+
+# complete
+plot(XXX[1,], XXX[2,], col=y, pch='.', asp=1, axes=FALSE, xlab=NA, ylab=NA)
+box()
+IDXXX_single <- which(max(d23) == d, arr.ind=TRUE)[1,]
+lines(XXX[1,IDXXX_single], XXX[2,IDXXX_single], col=kol2, lwd=3)
+IDXXX_single <- which(max(d13) == d, arr.ind=TRUE)[1,]
+lines(XXX[1,IDXXX_single], XXX[2,IDXXX_single], col=kol1, lwd=3)
+IDXXX_single <- which(max(d12) == d, arr.ind=TRUE)[1,]
+lines(XXX[1,IDXXX_single], XXX[2,IDXXX_single], col=kol3, lwd=3)
+legend("bottomright", legend="complete linkage", bg="white")
+points(XXX[1,], XXX[2,], col=y, pch=y)
+
+# average
+plot(XXX[1,], XXX[2,], col=y, pch='.', asp=1, axes=FALSE, xlab=NA, ylab=NA)
+box()
+#c(mean(d12), mean(d13), mean(d23))
+for (i in sample(1:50)) {
+    segments(XXX[1,0+i], XXX[2,0+i], XXX[1,51:100], XXX[2, 51:100], col=kol1)
+    segments(XXX[1,0+i], XXX[2,0+i], XXX[1,101:150], XXX[2, 101:150], col=kol2)
+    segments(XXX[1,50+i], XXX[2, 50+i], XXX[1,101:150], XXX[2, 101:150], col=kol3)
+}
+legend("bottomright", legend="average linkage", bg="white")
+points(XXX[1,], XXX[2,], col=y, pch=y)
+```
+
+. . .
+
+Assuming $d_\text{S}^*$, $d_\text{C}^*$ or $d_\text{A}^*$
+in the aforementioned procedure leads to single, complete or average
+linkage-based agglomerative hierarchical clustering algorithms,
+respectively
+(referred to as single linkage etc. for brevity).
+
+
+
+```{r linkages_hier527658932}
+hs <- hclust(D, method="single")
+hc <- hclust(D, method="complete")
+ha <- hclust(D, method="average")
+```
+
+Figure {@fig:linkages_hier52} compares the 5-, 4- and 3-partitions
+obtained by applying the 3 above linkages. Note that it's in very nature of
+the single linkage algorithm that it's highly sensitive to outliers.
+
+```{r linkages_hier52,fig.height=6,fig.cap="3 cuts of 3 different hierarchies",echo=FALSE}
+#par(c(1,1,0.5,0.5))
+par(mfrow=c(3,3))
+for (k in 5:3) {
+    ccc <- cutree(hs, k=k)
+    plot(X, col=ccc, pch=ccc, ann=FALSE)
+    legend("top", legend=sprintf("k=%d, single", k), bg="white")
+    ccc <- cutree(hc, k=k)
+    plot(X, col=ccc, pch=ccc, ann=FALSE)
+    legend("top", legend=sprintf("k=%d, complete", k), bg="white")
+    ccc <- cutree(ha, k=k)
+    plot(X, col=ccc, pch=ccc, ann=FALSE)
+    legend("top", legend=sprintf("k=%d, average", k), bg="white")
+}
+```
+
+
+
+### Cluster Dendrograms
+
+
+A *dendrogram*  (which we can plot by calling `plot(h)`, where `h` is
+the result returned by `hclust()`) depicts the distances
+(as defined by the linkage function) between the clusters merged at every stage
+of the agglomerative procedure.
+This can provide us with some insight into the underlying data structure
+as well as with hits about at which level the tree could be cut.
+
+Figure {@fig:dendrograms} depicts the three dendrograms
+that correspond to the clusterings  obtained by applying different linkages.
+Each tree has 150 leaves (at the bottom) that represent the 150 points
+in our example dataset. Each "edge" (joint) represents a group of points
+being merged. For instance, the very top joint in the middle subfigure
+is located at height of $\simeq 6$, which is exactly the
+maximal pairwise distance (complete linkage) between the points
+in the last two last clusters.
+
+
+```{r dendrograms,fig.height=6,fig.cap="Cluster dendrograms for the single, complete and average linkages",echo=FALSE}
+par(mfrow=c(3,1))
+h <- hclust(D, method="single")
+plot(h, labels=FALSE, ann=FALSE); box()
+legend("topright", legend="single", bg="white")
+h <- hclust(D, method="complete")
+plot(h, labels=FALSE, ann=FALSE); box()
+legend("topright", legend="complete", bg="white")
+h <- hclust(D, method="average")
+plot(h, labels=FALSE, ann=FALSE); box()
+legend("topright", legend="average", bg="white")
+```
+
+
+
+## Exercises
+
+
+TODO: reuse from the K-means chapter
+
+
+
+## Outro
+
+### Remarks
+
+....
+
+### Further Reading
+
+...

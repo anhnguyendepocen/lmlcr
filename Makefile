@@ -3,17 +3,18 @@
 FILES_RMD = \
 	00-preface.Rmd                     \
 	01-introduction.Rmd                \
-	02-neighbours.Rmd                  \
-	03-trees.Rmd                       \
-	04-regression-simple.Rmd           \
-	05-regression-multiple.Rmd         \
-	06-logistic.Rmd                    \
-	07-optimisation-continuous.Rmd     \
-	08-optimisation-discrete.Rmd       \
-	09-clustering.Rmd                  \
-	10-images.Rmd                      \
-	11-recommenders.Rmd                \
-	12-text.Rmd                        \
+	02-hclust.Rmd                      \
+	03-knn.Rmd                         \
+	04-trees.Rmd                       \
+	05-regression-simple.Rmd           \
+	06-regression-multiple.Rmd         \
+	07-logistic.Rmd                    \
+	08-optimisation-continuous.Rmd     \
+	09-kmeans.Rmd                      \
+	10-optimisation-discrete.Rmd       \
+	11-images.Rmd                      \
+	12-recommenders.Rmd                \
+	13-text.Rmd                        \
 	90-convention.Rmd                  \
 	91-R-setup.Rmd                     \
 	92-R-vectors.Rmd                   \

@@ -50,6 +50,119 @@ Otherwise,
 
 
 
+## Sustainable Society Indices
+
+
+Van de Kerk and Manuel in [@ssi], by extending
+the famous definition from the "Brundtland Report"
+[@brundtland_report], proclaim that:
+
+> *A sustainable society is a society that:*
+>
+> * *meets the needs of the present generation,*
+> * *does not compromise the ability of future generations to meet their own needs,*
+> * *in which each human being has the opportunity to develop itself in freedom,
+>   within a well-balanced society and in harmony with its surroundings.*
+
+In 2006 they have established the Sustainable Society Foundation,
+headquartered in the Netherlands,
+with the objective to develop the Sustainable Society Indices whose
+aim is to aid in answering the question of "How sustainable is your country?".
+
+
+`ssi_2016_* `           |
+------------------------|---------------------------------------------
+Last updated            | December 2016
+Provider                | Sustainable Society Foundation
+License                 | Public Domain
+Source                  | http://www.ssfindex.com/
+
+
+
+The most recent, 2016, edition of SSI includes 21 indicators that are based
+on publicly available data (UNESCO, FAO etc.).
+Raw scores (such as CO2 emissions per capita, life expectancy at birth
+or the ratio of income of the richest 10% to the poorest 10% citizens)
+have been transformed onto the 0-10 scale by means of the formulas explained in detail
+in http://www.ssfindex.com/ssi2016/wp-content/uploads/pdf/calculation-formulas-2016.pdf
+
+The 21 fine-grained indicators can be aggregated (by means of the geometric mean)
+into 7 categories, which in turn form 3 dimensions:
+
+
+* Human Wellbeing
+
+    a. Basic Needs
+        1. Sufficient Food
+        2. Sufficient to Drink
+        3. Safe Sanitation
+
+    b. Personal Development and Health
+
+        4. Education
+        5. Healthy Life
+        6. Gender Equality
+
+    c. Well-balanced Society
+
+        7. Income Distribution
+        8. Population Growth
+        9. Good Governance
+
+* Environmental Wellbeing
+
+    d. Natural Resources
+
+        10. Biodiversity
+        11. Renewable Water Resources
+        12. Consumption
+
+    e. Climate and Energy
+
+        13. Energy Use
+        14. Energy Savings
+        15. Greenhouse Gases
+        16. Renewable Energy
+
+* Economic Wellbeing
+
+    f. Transition
+
+        17. Organic Farming
+        18. Genuine Savings
+
+    g. Economy
+
+        19. GDP
+        20. Employment
+        21. Public Debt
+
+All the indices are explained in very detail in the whitepapers
+and reports available at http://www.ssfindex.com/ssi/calculation-methodology/.
+
+
+
+```{r ssi_indicators}
+ssi_indicators <- read.csv("datasets/ssi_2016_indicators.csv",
+    comment.char="#")
+head(ssi_indicators, 3)
+```
+
+```{r ssi_categories}
+ssi_categories <- read.csv("datasets/ssi_2016_categories.csv",
+    comment.char="#")
+head(ssi_categories, 3)
+```
+
+```{r ssi_dimensions}
+ssi_dimensions <- read.csv("datasets/ssi_2016_dimensions.csv",
+    comment.char="#")
+head(ssi_dimensions, 3)
+```
+
+
+
+
 ## Air Quality
 
 Environment Protection Authority of the state of Victoria, Australia
