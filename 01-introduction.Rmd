@@ -12,9 +12,6 @@
 
 ## What is Machine Learning?
 
-
-
-
 An *algorithm* is a well-defined sequence of instructions that,
 for a given sequence of input arguments,
 yields some desired output.
@@ -31,8 +28,9 @@ manually programmed. Moreover, some algorithms might also be able
 to *discover* new interesting facts about a problem instance at hand.
 
 *Learning*, however, needs some material based upon which
-new knowledge is to be acquired.
+new knowledge is to be developed.
 In other words, we need *data*.
+
 
 
 ### Data Sources
@@ -80,8 +78,8 @@ We can do a lot of great work for greater good;
 with the increased availability of open data,
 everyone can be a reporter, an engaged citizen that seeks for truth.
 There are NGOs.
-Finally, there are researchers (remember that in many countries
-still the  main role of a university is to spread knowledge and not make money!)
+Finally, there are researchers (remember that the  main role of most
+universities is still to spread the advancement of knowledge and not to make money!)
 that need these methods to make new discoveries, e.g., in psychology,
 sociology, agriculture, engineering, biotechnology, pharmacy, medicine, genetics,
 you name it.
@@ -100,46 +98,56 @@ Machine Learning problems include, but are not limited to:
 there is an associated desired output (e.g., whether it depicts a crosswalk
 or how many cars can be seen on it);
 in other words, there is a "teacher" ready to instruct us
-about what is expected the expected outcome in a given context
+about what is  the expected behaviour in a given context.
 
 
 - *Semi-supervised learning* -- some inputs are labelled, other ones
-are not (definitely a cheaper scenario)
+are not (definitely a less laborious/cheaper scenario).
 
 
 
-- *Unsupervised learning* -- inputs are unlabelled, the aim is to discover
+- *Unsupervised learning* -- inputs are unlabelled; the aim is to discover
 the underlying structure in the data (e.g., automatically group customers
 w.r.t. common behavioural patterns);
 think about how much you learnt by just interacting with your
-environment in a random fashion
+environment by wandering here and there.
 
 
 
 - *Reinforcement learning* -- learn to act based on a
 feedback given after the actual decision was made
 such as "that was nice! well done! look at you go!"
-(e.g., learn to play The Witcher 7 by testing different hypotheses
-what to do to survive as long as possible)
+(e.g., learn to play some video game by testing different hypotheses
+what to do in order to prosper/survive as long as possible).
+
+
+
+In the course of this book, we're going to take a deep dive into
+the machine learning algorithms that stood the test of time
+and that still are used -- with modifications -- by researchers
+and practitioners.
+We will learn about how we can use them for improving different processes.
+Importantly, we will also get to know their limitations.
+
+Arranging the material so as to maximise its usefulness
+(we'd like to empower ourselves with a set of tools that can get some work done),
+lay solid groundwork for further studies and
+develop the adjoining skills (the practice of data analysis certainly
+requires us to learn programming and be able to read and understand mathematical
+notation) is a multi-objective optimisation problem.
+A problem involving many constraints though;
+as this is an introductory course, we obviously cannot cover everything,
+not yet. In particular, we will be learning maths and programming "from scratch",
+our space-time is limited etc. We also want to enjoy our journey -- to have
+some fun knowing that big projects never come into being in a day or seven.
+
+Therefore, this time we will limit ourselves "just" to supervised and unsupervised
+learning, as these are the most common  instances.
 
 
 
 
-
-In the course of this book,
-we're going to take a deep dive into what AI really is, what
-are its limitations but also how we can use it for improving different processes.
-
-
-outputs can be interpreted by a human being and used (critically) for whatever  purpose
-(e.g., a GP for diagnosing illnesses)
-* outputs can be provided to other algorithms to take immediate actions
-(e.g., buy those market shares immediately!)
-
-
-## Supervised Learning
-
-### Formalism
+## Input Data -- Formalism
 
 
 
@@ -226,7 +234,11 @@ Remark.
 
 
 
-
+```{r wines_begin}
+wine_quality <- read.csv("datasets/wine_quality_all.csv",
+    comment.char="#")
+pairs(wine_quality[,1:11])
+```
 
 
 For an example, consider the famous Fisher's Iris flower dataset,
@@ -353,6 +365,124 @@ think of this as a kind of rotation; it allows us to introduce a set of
 
 
 
+
+## Unsupervised Learning
+
+
+<!--
+TODO: If this is the first chapter where you use `iris`, tell about it
+
+Definitely some cooler datasets are needed for the Exercises sec.
+
+
+Exercise: dimensionality reduction with auto-encoders?
+
+Exercise: apply genieclust
+
+Exercise: implement MDS with optim?
+
+-->
+
+
+In **unsupervised learning** (learning without a teacher),
+the input data points $\mathbf{x}_{1,\cdot},\dots,\mathbf{x}_{n,\cdot}$
+are not assigned any reference labels (compare Figure {@fig:unsupervised}).
+
+
+
+
+```{r unsupervised,echo=FALSE,fig.cap="Unsupervised learning: \"But what it is exactly that I have to do here?\""}
+plot(iris[,3], iris[,2], ann=FALSE)
+```
+
+Our aim now is to discover the **underlying structure in the data**,
+whatever that means.
+
+
+
+
+
+
+### Main Types of Unsupervised Learning Problems
+
+
+It turns out, however, that certain classes of unsupervised learning
+problems are not only intellectually stimulating,
+but practically useful at the same time.
+
+
+
+
+In particular, in **dimensionality reduction** we seek a meaningful
+*projection* of a high dimensional
+space (think: many variables/columns).
+
+```{r princomp,echo=FALSE,fig.cap="Principal component analysis (a dimensionality reduction technique) applied on three features of red wines (`wine_quality`) dataset",fig.height=6}
+wine_quality <- read.csv("datasets/wine_quality_all.csv",
+    comment.char="#")
+red_wines <- wine_quality[wine_quality$color=='red',]
+p <- princomp(red_wines[,c(11, 4, 12)])
+biplot(p, col=c("#ff000033",1), pch=1, xlim=c(-0.05, 0.23), main=NA)
+```
+
+For instance, Figure {@fig:princomp} reveals that the
+"alcohol", "response" and "residual.sugar" dimensions of the Wine Quality
+dataset that we have studied earlier on can actually be nicely depicted (with
+no much loss of information) on a two-dimensional plot.
+It turns out that the wine experts' opinion on a wine's quality is highly
+correlated with the amount of... alcohol in a bottle.
+On the other hand, sugar is orthogonal (unrelated) to these two.
+
+Amongst example dimensionality reduction methods we find:
+
+- Multidimensional scaling (MDS)
+- Principal component analysis (PCA)
+- Kernel PCA
+- t-SNE
+- Autoencoders (deep learning)
+
+See, for example, [@esl] for more details.
+
+. . .
+
+
+
+Furthermore, in **anomaly detection**, our task is to identify rare, suspicious, ab-normal
+or out-standing items.
+For example, these can be cars on walkways in a park's security camera footage.
+
+
+```{r anomaly_detection,echo=FALSE,fig.cap="Outliers can be thought of anomalies of some sort"}
+plot(iris[,3], iris[,2], ann=FALSE)
+idx <- c(61, 42, 16, 118, 132)
+points(iris[idx,3], iris[idx,2], cex=3, pch=4, col=2)
+```
+
+
+. . .
+
+Finally, the aim of **clustering** is to automatically discover some *naturally occurring*
+subgroups in the data set, compare Figure {@fig:clustering_illustration}.
+For example, these may be customers having different shopping patterns
+(such as "young parents", "students", "boomers").
+
+
+
+```{r clustering_illustration,echo=FALSE,cache=TRUE,fig.cap="NEWS FLASH! SCIENTISTS SHOWED (by writing about it) THAT SOME VERY IMPORTANT THING (Iris dataset) COMES IN THREE DIFFERENT FLAVOURS (by applying the 3-means clustering algorithm)!"}
+km <- kmeans(iris[,c(3,2)], centers=3, nstart=10)
+plot(iris[,3], iris[,2], ann=FALSE,
+    col=km$cluster, pch=km$cluster)
+```
+
+
+
+
+
+
+
+## Supervised Learning
+
+
 ### Desired Outputs
 
 
@@ -417,6 +547,17 @@ y_{n} \\
 \end{array}
 \right].
 \]
+
+
+mechanical Turk etc..
+
+
+
+
+outputs can be interpreted by a human being and used (critically) for whatever  purpose
+(e.g., a GP for diagnosing illnesses)
+* outputs can be provided to other algorithms to take immediate actions
+(e.g., buy those market shares immediately!)
 
 
 
