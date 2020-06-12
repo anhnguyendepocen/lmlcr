@@ -540,7 +540,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li style='font-size: smaller' ><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Licensed under CC BY-NC-ND 4.0</a></li>
-<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-06-12 22:42 (9030b06)</a></li>
+<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-06-12 22:49 (9a1ce97)</a></li>
 
 </ul>
 
@@ -731,18 +731,11 @@ Mathematically, we denote this as <span class="math inline">\(\mathbf{X}\in\math
 <dd><p>Structured data == think: Excel/Calc spreadsheets, SQL tables etc.</p>
 </dd>
 </dl>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">wine_quality &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/wine_quality_all.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb1-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="kw">pairs</span>(wine_quality[,<span class="dv">1</span><span class="op">:</span><span class="dv">11</span>])</a></code></pre></div>
-<div class="figure">
-<img src="01-introduction-figures/wines_begin-1.svg" alt="Figure 1: plot of chunk wines_begin" id="fig:wines_begin" />
-<p class="caption">Figure 1: plot of chunk wines_begin</p>
-</div>
 <p>For an example, consider the famous Fisher’s Iris flower dataset,
 see <code>?iris</code> in R
 and <a href="https://en.wikipedia.org/wiki/Iris_flower_data_set" class="uri">https://en.wikipedia.org/wiki/Iris_flower_data_set</a>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">X &lt;-<span class="st"> </span>iris[<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>] <span class="co"># first 6 rows and 4 columns</span></a>
-<a class="sourceLine" id="cb2-2" title="2">X         <span class="co"># or: print(X)</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">X &lt;-<span class="st"> </span>iris[<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>] <span class="co"># first 6 rows and 4 columns</span></a>
+<a class="sourceLine" id="cb1-2" title="2">X         <span class="co"># or: print(X)</span></a></code></pre></div>
 <pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width
 ## 1          5.1         3.5          1.4         0.2
 ## 2          4.9         3.0          1.4         0.2
@@ -750,31 +743,31 @@ and <a href="https://en.wikipedia.org/wiki/Iris_flower_data_set" class="uri">htt
 ## 4          4.6         3.1          1.5         0.2
 ## 5          5.0         3.6          1.4         0.2
 ## 6          5.4         3.9          1.7         0.4</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">dim</span>(X)    <span class="co"># gives n and p</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">dim</span>(X)    <span class="co"># gives n and p</span></a></code></pre></div>
 <pre><code>## [1] 6 4</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">dim</span>(iris) <span class="co"># for the full dataset</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">dim</span>(iris) <span class="co"># for the full dataset</span></a></code></pre></div>
 <pre><code>## [1] 150   5</code></pre>
 <p><span class="math inline">\(x_{i,j}\in\mathbb{R}\)</span>
 represents the <span class="math inline">\(j\)</span>-th feature of the <span class="math inline">\(i\)</span>-th observation,
 <span class="math inline">\(j=1,\dots,p\)</span>, <span class="math inline">\(i=1,\dots,n\)</span>.</p>
 <p>For instance:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">X[<span class="dv">3</span>, <span class="dv">2</span>] <span class="co"># 3rd row, 2nd column</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">X[<span class="dv">3</span>, <span class="dv">2</span>] <span class="co"># 3rd row, 2nd column</span></a></code></pre></div>
 <pre><code>## [1] 3.2</code></pre>
 <p>The third observation (data point, row in <span class="math inline">\(\mathbf{X}\)</span>)
 consists of items <span class="math inline">\((x_{3,1}, \dots, x_{3,p})\)</span> that can be extracted by calling:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">X[<span class="dv">3</span>,]</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">X[<span class="dv">3</span>,]</a></code></pre></div>
 <pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width
 ## 3          4.7         3.2          1.3         0.2</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">as.numeric</span>(X[<span class="dv">3</span>,]) <span class="co"># drops names</span></a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">as.numeric</span>(X[<span class="dv">3</span>,]) <span class="co"># drops names</span></a></code></pre></div>
 <pre><code>## [1] 4.7 3.2 1.3 0.2</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">length</span>(X[<span class="dv">3</span>,])</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">length</span>(X[<span class="dv">3</span>,])</a></code></pre></div>
 <pre><code>## [1] 4</code></pre>
 <p>Moreover, the second feature/variable/column
 is comprised of
 <span class="math inline">\((x_{1,2}, x_{2,2}, \dots, x_{n,2})\)</span>:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">X[,<span class="dv">2</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">X[,<span class="dv">2</span>]</a></code></pre></div>
 <pre><code>## [1] 3.5 3.0 3.2 3.1 3.6 3.9</code></pre>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">length</span>(X[,<span class="dv">2</span>])</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">length</span>(X[,<span class="dv">2</span>])</a></code></pre></div>
 <pre><code>## [1] 6</code></pre>
 <p>We will sometimes use the following notation to emphasise that
 the <span class="math inline">\(\mathbf{X}\)</span> matrix consists of <span class="math inline">\(n\)</span> rows
@@ -850,10 +843,10 @@ Exercise: implement MDS with optim?
 -->
 <p>In <strong>unsupervised learning</strong> (learning without a teacher),
 the input data points <span class="math inline">\(\mathbf{x}_{1,\cdot},\dots,\mathbf{x}_{n,\cdot}\)</span>
-are not assigned any reference labels (compare Figure <a href="introduction.html#fig:unsupervised">2</a>).</p>
+are not assigned any reference labels (compare Figure <a href="introduction.html#fig:unsupervised">1</a>).</p>
 <div class="figure">
-<img src="01-introduction-figures/unsupervised-1.svg" alt="Figure 2: Unsupervised learning: “But what it is exactly that I have to do here?”" id="fig:unsupervised" />
-<p class="caption">Figure 2: Unsupervised learning: “But what it is exactly that I have to do here?”</p>
+<img src="01-introduction-figures/unsupervised-1.svg" alt="Figure 1: Unsupervised learning: “But what it is exactly that I have to do here?”" id="fig:unsupervised" />
+<p class="caption">Figure 1: Unsupervised learning: “But what it is exactly that I have to do here?”</p>
 </div>
 <p>Our aim now is to discover the <strong>underlying structure in the data</strong>,
 whatever that means.</p>
@@ -866,10 +859,10 @@ but practically useful at the same time.</p>
 <em>projection</em> of a high dimensional
 space (think: many variables/columns).</p>
 <div class="figure">
-<img src="01-introduction-figures/princomp-1.svg" alt="Figure 3: Principal component analysis (a dimensionality reduction technique) applied on three features of red wines (wine_quality) dataset" id="fig:princomp" />
-<p class="caption">Figure 3: Principal component analysis (a dimensionality reduction technique) applied on three features of red wines (<code>wine_quality</code>) dataset</p>
+<img src="01-introduction-figures/princomp-1.svg" alt="Figure 2: Principal component analysis (a dimensionality reduction technique) applied on three features of red wines (wine_quality) dataset" id="fig:princomp" />
+<p class="caption">Figure 2: Principal component analysis (a dimensionality reduction technique) applied on three features of red wines (<code>wine_quality</code>) dataset</p>
 </div>
-<p>For instance, Figure <a href="introduction.html#fig:princomp">3</a> reveals that the
+<p>For instance, Figure <a href="introduction.html#fig:princomp">2</a> reveals that the
 “alcohol”, “response” and “residual.sugar” dimensions of the Wine Quality
 dataset that we have studied earlier on can actually be nicely depicted (with
 no much loss of information) on a two-dimensional plot.
@@ -892,19 +885,19 @@ On the other hand, sugar is orthogonal (unrelated) to these two.</p>
 or out-standing items.
 For example, these can be cars on walkways in a park’s security camera footage.</p>
 <div class="figure">
-<img src="01-introduction-figures/anomaly_detection-1.svg" alt="Figure 4: Outliers can be thought of anomalies of some sort" id="fig:anomaly_detection" />
-<p class="caption">Figure 4: Outliers can be thought of anomalies of some sort</p>
+<img src="01-introduction-figures/anomaly_detection-1.svg" alt="Figure 3: Outliers can be thought of anomalies of some sort" id="fig:anomaly_detection" />
+<p class="caption">Figure 3: Outliers can be thought of anomalies of some sort</p>
 </div>
 <div style="margin-top: 1em">
 
 </div>
 <p>Finally, the aim of <strong>clustering</strong> is to automatically discover some <em>naturally occurring</em>
-subgroups in the data set, compare Figure <a href="introduction.html#fig:clustering_illustration">5</a>.
+subgroups in the data set, compare Figure <a href="introduction.html#fig:clustering_illustration">4</a>.
 For example, these may be customers having different shopping patterns
 (such as “young parents”, “students”, “boomers”).</p>
 <div class="figure">
-<img src="01-introduction-figures/clustering_illustration-1.svg" alt="Figure 5: NEWS FLASH! SCIENTISTS SHOWED (by writing about it) THAT SOME VERY IMPORTANT THING (Iris dataset) COMES IN THREE DIFFERENT FLAVOURS (by applying the 3-means clustering algorithm)!" id="fig:clustering_illustration" />
-<p class="caption">Figure 5: NEWS FLASH! SCIENTISTS SHOWED (by writing about it) THAT SOME VERY IMPORTANT THING (Iris dataset) COMES IN THREE DIFFERENT FLAVOURS (by applying the 3-means clustering algorithm)!</p>
+<img src="01-introduction-figures/clustering_illustration-1.svg" alt="Figure 4: NEWS FLASH! SCIENTISTS SHOWED (by writing about it) THAT SOME VERY IMPORTANT THING (Iris dataset) COMES IN THREE DIFFERENT FLAVOURS (by applying the 3-means clustering algorithm)!" id="fig:clustering_illustration" />
+<p class="caption">Figure 4: NEWS FLASH! SCIENTISTS SHOWED (by writing about it) THAT SOME VERY IMPORTANT THING (Iris dataset) COMES IN THREE DIFFERENT FLAVOURS (by applying the 3-means clustering algorithm)!</p>
 </div>
 </div>
 </div>
@@ -922,8 +915,8 @@ to the desired one. The given data sample will be used to “train” this “mo
 or textual labels.</p>
 <p>In other words, with each input <span class="math inline">\(\mathbf{x}_{i,\cdot}\)</span> we associate
 the desired output <span class="math inline">\(y_i\)</span>:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="co"># in iris, iris[, 5] gives the Ys</span></a>
-<a class="sourceLine" id="cb20-2" title="2">iris[<span class="kw">sample</span>(<span class="kw">nrow</span>(iris), <span class="dv">3</span>), ]  <span class="co"># three random rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="co"># in iris, iris[, 5] gives the Ys</span></a>
+<a class="sourceLine" id="cb19-2" title="2">iris[<span class="kw">sample</span>(<span class="kw">nrow</span>(iris), <span class="dv">3</span>), ]  <span class="co"># three random rows</span></a></code></pre></div>
 <pre><code>##     Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
 ## 14           4.3         3.0          1.1         0.1    setosa
 ## 50           5.0         3.3          1.4         0.2    setosa
@@ -1001,49 +994,49 @@ with <span class="math inline">\(\mathbf{x}_{i,\cdot}=\)</span> ratings of <span
 </div>
 <p>A single dataset can become an instance of many different ML problems.</p>
 <p>Examples – the <code>wine_quality</code> dataset:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1">wine_quality &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/wine_quality_all.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb22-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
-<a class="sourceLine" id="cb22-3" title="3">wine_quality[<span class="dv">1</span>,]</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">wine_quality &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/wine_quality_all.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb21-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
+<a class="sourceLine" id="cb21-3" title="3">wine_quality[<span class="dv">1</span>,]</a></code></pre></div>
 <pre><code>##   fixed.acidity volatile.acidity citric.acid residual.sugar chlorides
 ## 1           7.4              0.7           0            1.9     0.076
 ##   free.sulfur.dioxide total.sulfur.dioxide density   pH sulphates
 ## 1                  11                   34  0.9978 3.51      0.56
 ##   alcohol response color
 ## 1     9.4        5   red</code></pre>
-<p><code>alcohol</code> is a numeric (quantitative) variable (see Figure <a href="introduction.html#fig:wines_regression">6</a> for a histogram depicting its empirical distribution):</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">summary</span>(wine_quality<span class="op">$</span>alcohol) <span class="co"># continuous variable</span></a></code></pre></div>
+<p><code>alcohol</code> is a numeric (quantitative) variable (see Figure <a href="introduction.html#fig:wines_regression">5</a> for a histogram depicting its empirical distribution):</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">summary</span>(wine_quality<span class="op">$</span>alcohol) <span class="co"># continuous variable</span></a></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##     8.0     9.5    10.3    10.5    11.3    14.9</code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="kw">hist</span>(wine_quality<span class="op">$</span>alcohol, <span class="dt">main=</span><span class="st">&quot;&quot;</span>, <span class="dt">col=</span><span class="st">&quot;white&quot;</span>); <span class="kw">box</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">hist</span>(wine_quality<span class="op">$</span>alcohol, <span class="dt">main=</span><span class="st">&quot;&quot;</span>, <span class="dt">col=</span><span class="st">&quot;white&quot;</span>); <span class="kw">box</span>()</a></code></pre></div>
 <div class="figure">
-<img src="01-introduction-figures/wines_regression-1.svg" alt="Figure 6: Quantitative (numeric) outputs lead to regression problems" id="fig:wines_regression" />
-<p class="caption">Figure 6: Quantitative (numeric) outputs lead to regression problems</p>
+<img src="01-introduction-figures/wines_regression-1.svg" alt="Figure 5: Quantitative (numeric) outputs lead to regression problems" id="fig:wines_regression" />
+<p class="caption">Figure 5: Quantitative (numeric) outputs lead to regression problems</p>
 </div>
-<p><code>color</code> is a quantitative variable with two possible outcomes (see Figure <a href="introduction.html#fig:wines_binary">7</a> for a bar plot):</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="kw">table</span>(wine_quality<span class="op">$</span>color) <span class="co"># binary variable</span></a></code></pre></div>
+<p><code>color</code> is a quantitative variable with two possible outcomes (see Figure <a href="introduction.html#fig:wines_binary">6</a> for a bar plot):</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="kw">table</span>(wine_quality<span class="op">$</span>color) <span class="co"># binary variable</span></a></code></pre></div>
 <pre><code>## 
 ##   red white 
 ##  1599  4898</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">barplot</span>(<span class="kw">table</span>(wine_quality<span class="op">$</span>color), <span class="dt">col=</span><span class="st">&quot;white&quot;</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">6000</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="kw">barplot</span>(<span class="kw">table</span>(wine_quality<span class="op">$</span>color), <span class="dt">col=</span><span class="st">&quot;white&quot;</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">6000</span>))</a></code></pre></div>
 <div class="figure">
-<img src="01-introduction-figures/wines_binary-1.svg" alt="Figure 7: Quantitative outputs lead to classification tasks" id="fig:wines_binary" />
-<p class="caption">Figure 7: Quantitative outputs lead to classification tasks</p>
+<img src="01-introduction-figures/wines_binary-1.svg" alt="Figure 6: Quantitative outputs lead to classification tasks" id="fig:wines_binary" />
+<p class="caption">Figure 6: Quantitative outputs lead to classification tasks</p>
 </div>
 <p>Moreover, <code>response</code> is an ordinal variable, representing
 a wine’s rating as assigned by a wine expert
-(see Figure <a href="introduction.html#fig:wines_ordinal">8</a> for a barplot).
+(see Figure <a href="introduction.html#fig:wines_ordinal">7</a> for a barplot).
 Note that although the ranks are represented with numbers,
 we they are not continuous variables. Moreover,
 these ranks are something more than just labels – they are linearly
 ordered, we know what’s the smallest rank and whats the greatest one.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="kw">table</span>(wine_quality<span class="op">$</span>response) <span class="co"># ordinal variable</span></a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">table</span>(wine_quality<span class="op">$</span>response) <span class="co"># ordinal variable</span></a></code></pre></div>
 <pre><code>## 
 ##    3    4    5    6    7    8    9 
 ##   30  216 2138 2836 1079  193    5</code></pre>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="kw">barplot</span>(<span class="kw">table</span>(wine_quality<span class="op">$</span>response), <span class="dt">col=</span><span class="st">&quot;white&quot;</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3000</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="kw">barplot</span>(<span class="kw">table</span>(wine_quality<span class="op">$</span>response), <span class="dt">col=</span><span class="st">&quot;white&quot;</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3000</span>))</a></code></pre></div>
 <div class="figure">
-<img src="01-introduction-figures/wines_ordinal-1.svg" alt="Figure 8: Ordinal variables constitute ordinal regression tasks" id="fig:wines_ordinal" />
-<p class="caption">Figure 8: Ordinal variables constitute ordinal regression tasks</p>
+<img src="01-introduction-figures/wines_ordinal-1.svg" alt="Figure 7: Ordinal variables constitute ordinal regression tasks" id="fig:wines_ordinal" />
+<p class="caption">Figure 7: Ordinal variables constitute ordinal regression tasks</p>
 </div>
 
 </div>

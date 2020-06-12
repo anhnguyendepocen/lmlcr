@@ -540,7 +540,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li style='font-size: smaller' ><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Licensed under CC BY-NC-ND 4.0</a></li>
-<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-06-12 22:42 (9030b06)</a></li>
+<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-06-12 22:49 (9a1ce97)</a></li>
 
 </ul>
 
@@ -703,9 +703,9 @@ into 7 categories, which in turn form 3 dimensions:</p>
 </ul>
 <p>All the indices are explained in very detail in the whitepapers
 and reports available at <a href="http://www.ssfindex.com/ssi/calculation-methodology/" class="uri">http://www.ssfindex.com/ssi/calculation-methodology/</a>.</p>
-<div class="sourceCode" id="cb1453"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1453-1" title="1">ssi_indicators &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/ssi_2016_indicators.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb1453-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
-<a class="sourceLine" id="cb1453-3" title="3"><span class="kw">head</span>(ssi_indicators, <span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1452"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1452-1" title="1">ssi_indicators &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/ssi_2016_indicators.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb1452-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
+<a class="sourceLine" id="cb1452-3" title="3"><span class="kw">head</span>(ssi_indicators, <span class="dv">3</span>)</a></code></pre></div>
 <pre><code>##   Country SufficientFood SufficientWater SafeSanitation Education
 ## 1 Albania          10.00            9.51           9.32    8.8448
 ## 2 Algeria          10.00            8.40           8.74    8.0969
@@ -726,9 +726,9 @@ and reports available at <a href="http://www.ssfindex.com/ssi/calculation-method
 ## 1         1.0957         4.0346 5.4625     1.9989     2.6151
 ## 2         1.0038         9.4145 6.2929     3.8674     9.5776
 ## 3         1.0096         3.5712 3.9106     5.0662     2.6692</code></pre>
-<div class="sourceCode" id="cb1455"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1455-1" title="1">ssi_categories &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/ssi_2016_categories.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb1455-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
-<a class="sourceLine" id="cb1455-3" title="3"><span class="kw">head</span>(ssi_categories, <span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1454"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1454-1" title="1">ssi_categories &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/ssi_2016_categories.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb1454-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
+<a class="sourceLine" id="cb1454-3" title="3"><span class="kw">head</span>(ssi_categories, <span class="dv">3</span>)</a></code></pre></div>
 <pre><code>##   Country BasicNeeds PersonalDevelopmentAndHealth WellBalancedSociety
 ## 1 Albania     9.6058                       7.9596              6.9926
 ## 2 Algeria     9.0212                       7.3365              4.2039
@@ -737,9 +737,9 @@ and reports available at <a href="http://www.ssfindex.com/ssi/calculation-method
 ## 1           6.6343           4.6217     2.1025  3.0565
 ## 2           5.2772           2.6627     3.0741  6.1543
 ## 3           6.7594           6.2122     1.8988  3.7535</code></pre>
-<div class="sourceCode" id="cb1457"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1457-1" title="1">ssi_dimensions &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/ssi_2016_dimensions.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb1457-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
-<a class="sourceLine" id="cb1457-3" title="3"><span class="kw">head</span>(ssi_dimensions, <span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1456"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1456-1" title="1">ssi_dimensions &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/ssi_2016_dimensions.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb1456-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
+<a class="sourceLine" id="cb1456-3" title="3"><span class="kw">head</span>(ssi_dimensions, <span class="dv">3</span>)</a></code></pre></div>
 <pre><code>##   Country HumanWellbeing EnvironmentalWellbeing EconomicWellbeing
 ## 1 Albania         8.1162                 5.3961            2.6317
 ## 2 Algeria         6.5283                 3.5698            4.6622
@@ -789,9 +789,9 @@ https://discover.data.vic.gov.au/dataset/epa-air-watch-all-sites-air-quality-hou
 
 
 -->
-<div class="sourceCode" id="cb1459"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1459-1" title="1">air_quality &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/air_quality.csv.gz&quot;</span>,</a>
-<a class="sourceLine" id="cb1459-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
-<a class="sourceLine" id="cb1459-3" title="3"><span class="kw">head</span>(air_quality, <span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1458"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1458-1" title="1">air_quality &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/air_quality.csv.gz&quot;</span>,</a>
+<a class="sourceLine" id="cb1458-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
+<a class="sourceLine" id="cb1458-3" title="3"><span class="kw">head</span>(air_quality, <span class="dv">3</span>)</a></code></pre></div>
 <pre><code>##   sample_point_id    sp_name latitude longitude     sample_datetime
 ## 1           10001 Alphington  -37.778    145.03 01/01/2018 00:00:00
 ## 2           10001 Alphington  -37.778    145.03 01/01/2018 00:00:00
@@ -922,11 +922,11 @@ Subject to the exception below, users of this website may make free use of the i
 
 
 -->
-<div class="sourceCode" id="cb1461"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1461-1" title="1">currency_exchange &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/currency_exchange_all.csv.gz&quot;</span>,</a>
-<a class="sourceLine" id="cb1461-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
-<a class="sourceLine" id="cb1461-3" title="3"><span class="co"># convert Day to Date-type object:</span></a>
-<a class="sourceLine" id="cb1461-4" title="4">currency_exchange<span class="op">$</span>Day &lt;-<span class="st"> </span><span class="kw">as.Date</span>(currency_exchange<span class="op">$</span>Day)</a>
-<a class="sourceLine" id="cb1461-5" title="5"><span class="kw">head</span>(currency_exchange, <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1460"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1460-1" title="1">currency_exchange &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/currency_exchange_all.csv.gz&quot;</span>,</a>
+<a class="sourceLine" id="cb1460-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
+<a class="sourceLine" id="cb1460-3" title="3"><span class="co"># convert Day to Date-type object:</span></a>
+<a class="sourceLine" id="cb1460-4" title="4">currency_exchange<span class="op">$</span>Day &lt;-<span class="st"> </span><span class="kw">as.Date</span>(currency_exchange<span class="op">$</span>Day)</a>
+<a class="sourceLine" id="cb1460-5" title="5"><span class="kw">head</span>(currency_exchange, <span class="dv">2</span>)</a></code></pre></div>
 <pre><code>##          Day    AUD    BGN    BRL    CAD    CHF    CNY   CZK    DKK
 ## 1 2020-05-19 1.6751 1.9558 6.2357 1.5251 1.0633 7.7816 27.49 7.4562
 ## 2 2020-05-18 1.6736 1.9558 6.2701 1.5202 1.0521 7.7068 27.61 7.4548
@@ -1089,29 +1089,29 @@ Subject to the exception below, users of this website may make free use of the i
 <dl>
 <dt><code>currency_exchange_single</code>.</dt>
 <dd><p>The EUR/AUD rates only, from the least to the most recent:</p>
-<div class="sourceCode" id="cb1463"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1463-1" title="1"><span class="kw">write.table</span>(<span class="kw">rev</span>(currency_exchange<span class="op">$</span>AUD),</a>
-<a class="sourceLine" id="cb1463-2" title="2">    <span class="st">&quot;datasets/currency_exchange_single.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb1463-3" title="3">    <span class="dt">col.names=</span><span class="ot">FALSE</span>, <span class="dt">row.names=</span><span class="ot">FALSE</span>, <span class="dt">quote=</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1462"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1462-1" title="1"><span class="kw">write.table</span>(<span class="kw">rev</span>(currency_exchange<span class="op">$</span>AUD),</a>
+<a class="sourceLine" id="cb1462-2" title="2">    <span class="st">&quot;datasets/currency_exchange_single.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb1462-3" title="3">    <span class="dt">col.names=</span><span class="ot">FALSE</span>, <span class="dt">row.names=</span><span class="ot">FALSE</span>, <span class="dt">quote=</span><span class="ot">FALSE</span>)</a></code></pre></div>
 </dd>
 <dt><code>currency_exchange_diff</code>.</dt>
 <dd><p>Relative daily changes
 in the EUR/AUD rates (we use it for building example
 exchange rates prediction algorithms):</p>
-<div class="sourceCode" id="cb1464"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1464-1" title="1">n &lt;-<span class="st"> </span><span class="kw">nrow</span>(currency_exchange)</a>
-<a class="sourceLine" id="cb1464-2" title="2">pred &lt;-<span class="st"> </span>currency_exchange[n<span class="op">:</span><span class="dv">1</span>, <span class="kw">c</span>(<span class="st">&quot;Day&quot;</span>, <span class="st">&quot;AUD&quot;</span>)] <span class="co"># from oldest to newest</span></a>
-<a class="sourceLine" id="cb1464-3" title="3"><span class="kw">row.names</span>(pred) &lt;-<span class="st"> </span><span class="ot">NULL</span> <span class="co"># reset the row.names attribute</span></a>
-<a class="sourceLine" id="cb1464-4" title="4">pred<span class="op">$</span>Change &lt;-<span class="st"> </span><span class="ot">NA</span></a>
-<a class="sourceLine" id="cb1464-5" title="5">pred<span class="op">$</span>Change[<span class="dv">2</span><span class="op">:</span>n] &lt;-<span class="st"> </span><span class="kw">diff</span>(pred<span class="op">$</span>AUD) <span class="co"># iterative difference:</span></a>
-<a class="sourceLine" id="cb1464-6" title="6">    <span class="co"># pred$Change[2] == pred$AUD[2]-pred$AUD[1], ...,</span></a>
-<a class="sourceLine" id="cb1464-7" title="7">    <span class="co"># pred$Change[n] == pred$AUD[n]-pred$AUD[n-1]</span></a>
-<a class="sourceLine" id="cb1464-8" title="8">pred<span class="op">$</span>Dir &lt;-<span class="st"> </span><span class="kw">as.character</span>(<span class="kw">cut</span>(pred<span class="op">$</span>Change, <span class="kw">c</span>(<span class="op">-</span><span class="ot">Inf</span>, <span class="dv">0</span>, <span class="ot">Inf</span>),</a>
-<a class="sourceLine" id="cb1464-9" title="9">    <span class="kw">c</span>(<span class="st">&quot;dec&quot;</span>, <span class="st">&quot;inc&quot;</span>))) <span class="co"># inc if Change is positive, dec otherwise</span></a>
-<a class="sourceLine" id="cb1464-10" title="10"><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) {</a>
-<a class="sourceLine" id="cb1464-11" title="11">    name &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Lag&quot;</span>, k)</a>
-<a class="sourceLine" id="cb1464-12" title="12">    pred[[name]] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
-<a class="sourceLine" id="cb1464-13" title="13">    pred[[name]][(k<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span>n] &lt;-<span class="st"> </span>pred<span class="op">$</span>Change[<span class="dv">1</span><span class="op">:</span>(n<span class="op">-</span>k)]</a>
-<a class="sourceLine" id="cb1464-14" title="14">}</a>
-<a class="sourceLine" id="cb1464-15" title="15"><span class="kw">tail</span>(pred)</a></code></pre></div>
+<div class="sourceCode" id="cb1463"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1463-1" title="1">n &lt;-<span class="st"> </span><span class="kw">nrow</span>(currency_exchange)</a>
+<a class="sourceLine" id="cb1463-2" title="2">pred &lt;-<span class="st"> </span>currency_exchange[n<span class="op">:</span><span class="dv">1</span>, <span class="kw">c</span>(<span class="st">&quot;Day&quot;</span>, <span class="st">&quot;AUD&quot;</span>)] <span class="co"># from oldest to newest</span></a>
+<a class="sourceLine" id="cb1463-3" title="3"><span class="kw">row.names</span>(pred) &lt;-<span class="st"> </span><span class="ot">NULL</span> <span class="co"># reset the row.names attribute</span></a>
+<a class="sourceLine" id="cb1463-4" title="4">pred<span class="op">$</span>Change &lt;-<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb1463-5" title="5">pred<span class="op">$</span>Change[<span class="dv">2</span><span class="op">:</span>n] &lt;-<span class="st"> </span><span class="kw">diff</span>(pred<span class="op">$</span>AUD) <span class="co"># iterative difference:</span></a>
+<a class="sourceLine" id="cb1463-6" title="6">    <span class="co"># pred$Change[2] == pred$AUD[2]-pred$AUD[1], ...,</span></a>
+<a class="sourceLine" id="cb1463-7" title="7">    <span class="co"># pred$Change[n] == pred$AUD[n]-pred$AUD[n-1]</span></a>
+<a class="sourceLine" id="cb1463-8" title="8">pred<span class="op">$</span>Dir &lt;-<span class="st"> </span><span class="kw">as.character</span>(<span class="kw">cut</span>(pred<span class="op">$</span>Change, <span class="kw">c</span>(<span class="op">-</span><span class="ot">Inf</span>, <span class="dv">0</span>, <span class="ot">Inf</span>),</a>
+<a class="sourceLine" id="cb1463-9" title="9">    <span class="kw">c</span>(<span class="st">&quot;dec&quot;</span>, <span class="st">&quot;inc&quot;</span>))) <span class="co"># inc if Change is positive, dec otherwise</span></a>
+<a class="sourceLine" id="cb1463-10" title="10"><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) {</a>
+<a class="sourceLine" id="cb1463-11" title="11">    name &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Lag&quot;</span>, k)</a>
+<a class="sourceLine" id="cb1463-12" title="12">    pred[[name]] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb1463-13" title="13">    pred[[name]][(k<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span>n] &lt;-<span class="st"> </span>pred<span class="op">$</span>Change[<span class="dv">1</span><span class="op">:</span>(n<span class="op">-</span>k)]</a>
+<a class="sourceLine" id="cb1463-14" title="14">}</a>
+<a class="sourceLine" id="cb1463-15" title="15"><span class="kw">tail</span>(pred)</a></code></pre></div>
 <pre><code>##             Day    AUD  Change Dir    Lag1    Lag2    Lag3    Lag4
 ## 5528 2020-05-12 1.6625 -0.0084 dec  0.0096 -0.0091 -0.0342  0.0221
 ## 5529 2020-05-13 1.6687  0.0062 inc -0.0084  0.0096 -0.0091 -0.0342
@@ -1130,8 +1130,8 @@ exchange rates prediction algorithms):</p>
 changed as compared to the previous day, i.e., it is equal to
 <code>pred$AUD[i]-pred$AUD[i-1]</code>. <code>Lag1</code> is the change from the preceding
 working day, <code>Lag2</code> is the one from 2 working days ago, etc.</p>
-<div class="sourceCode" id="cb1466"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1466-1" title="1"><span class="kw">write.csv</span>(pred, <span class="st">&quot;datasets/currency_exchange_diff.csv.gz&quot;</span>,</a>
-<a class="sourceLine" id="cb1466-2" title="2">   <span class="dt">row.names=</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1465"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1465-1" title="1"><span class="kw">write.csv</span>(pred, <span class="st">&quot;datasets/currency_exchange_diff.csv.gz&quot;</span>,</a>
+<a class="sourceLine" id="cb1465-2" title="2">   <span class="dt">row.names=</span><span class="ot">FALSE</span>)</a></code></pre></div>
 </dd>
 </dl>
 </div>
@@ -1177,9 +1177,9 @@ https://data.melbourne.vic.gov.au/Environment/Trees-with-species-and-dimensions-
 -- CC Attribution 4.0
 
 -->
-<div class="sourceCode" id="cb1467"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1467-1" title="1">urban_forest &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/urban_forest.csv.gz&quot;</span>,</a>
-<a class="sourceLine" id="cb1467-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
-<a class="sourceLine" id="cb1467-3" title="3"><span class="kw">head</span>(urban_forest, <span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1466"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1466-1" title="1">urban_forest &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/urban_forest.csv.gz&quot;</span>,</a>
+<a class="sourceLine" id="cb1466-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
+<a class="sourceLine" id="cb1466-3" title="3"><span class="kw">head</span>(urban_forest, <span class="dv">3</span>)</a></code></pre></div>
 <pre><code>##    CoM.ID   Common.Name          Scientific.Name      Genus    Family
 ## 1 1036574   English Elm            Ulmus procera      Ulmus  Ulmaceae
 ## 2 1052946       Red Box  Eucalyptus polyanthemos Eucalyptus Myrtaceae
@@ -1332,9 +1332,9 @@ Moreover, there are wine ratings given by wine experts and their colour.</p>
 Donated by Paulo Cortez to UCI, public domain
 
 -->
-<div class="sourceCode" id="cb1469"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1469-1" title="1">wine_quality &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/wine_quality_all.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb1469-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
-<a class="sourceLine" id="cb1469-3" title="3"><span class="kw">head</span>(wine_quality, <span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1468"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1468-1" title="1">wine_quality &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/wine_quality_all.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb1468-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
+<a class="sourceLine" id="cb1468-3" title="3"><span class="kw">head</span>(wine_quality, <span class="dv">3</span>)</a></code></pre></div>
 <pre><code>##   fixed.acidity volatile.acidity citric.acid residual.sugar chlorides
 ## 1           7.4             0.70        0.00            1.9     0.076
 ## 2           7.8             0.88        0.00            2.6     0.098
@@ -1420,26 +1420,26 @@ fast as possible, without going into details on why and how to perform
 a train-test split etc. Therefore, let’s prepare a tailored subset
 of the wine quality database.</p>
 <p>First, we select 500 white wines at random:</p>
-<div class="sourceCode" id="cb1471"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1471-1" title="1"><span class="kw">set.seed</span>(<span class="dv">1234</span>) <span class="co"># reproducibility matters</span></a>
-<a class="sourceLine" id="cb1471-2" title="2">wine_subset &lt;-<span class="st"> </span>wine_quality[wine_quality<span class="op">$</span>color<span class="op">==</span><span class="st">&quot;white&quot;</span>,]</a>
-<a class="sourceLine" id="cb1471-3" title="3">wine_subset &lt;-<span class="st"> </span>wine_subset[<span class="kw">sample</span>(<span class="kw">nrow</span>(wine_subset), <span class="dv">500</span>),]</a></code></pre></div>
+<div class="sourceCode" id="cb1470"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1470-1" title="1"><span class="kw">set.seed</span>(<span class="dv">1234</span>) <span class="co"># reproducibility matters</span></a>
+<a class="sourceLine" id="cb1470-2" title="2">wine_subset &lt;-<span class="st"> </span>wine_quality[wine_quality<span class="op">$</span>color<span class="op">==</span><span class="st">&quot;white&quot;</span>,]</a>
+<a class="sourceLine" id="cb1470-3" title="3">wine_subset &lt;-<span class="st"> </span>wine_subset[<span class="kw">sample</span>(<span class="kw">nrow</span>(wine_subset), <span class="dv">500</span>),]</a></code></pre></div>
 <p>Next we create a new column that tells us whether
 a given wine is bad (class 1, quality is not greater than 5)
 or not-bad:</p>
-<div class="sourceCode" id="cb1472"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1472-1" title="1">wine_subset<span class="op">$</span>bad &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(wine_subset<span class="op">$</span>response <span class="op">&lt;=</span><span class="st"> </span><span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1471"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1471-1" title="1">wine_subset<span class="op">$</span>bad &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(wine_subset<span class="op">$</span>response <span class="op">&lt;=</span><span class="st"> </span><span class="dv">5</span>)</a></code></pre></div>
 <p>For simplicity, we are only interested in 5 following physicochemical
 features:</p>
-<div class="sourceCode" id="cb1473"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1473-1" title="1">wine_subset &lt;-<span class="st"> </span>wine_subset[, <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb1473-2" title="2">    <span class="st">&quot;alcohol&quot;</span>, <span class="st">&quot;volatile.acidity&quot;</span>, <span class="st">&quot;chlorides&quot;</span>,</a>
-<a class="sourceLine" id="cb1473-3" title="3">    <span class="st">&quot;free.sulfur.dioxide&quot;</span>, <span class="st">&quot;total.sulfur.dioxide&quot;</span>, <span class="st">&quot;bad&quot;</span></a>
-<a class="sourceLine" id="cb1473-4" title="4">)]</a></code></pre></div>
+<div class="sourceCode" id="cb1472"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1472-1" title="1">wine_subset &lt;-<span class="st"> </span>wine_subset[, <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb1472-2" title="2">    <span class="st">&quot;alcohol&quot;</span>, <span class="st">&quot;volatile.acidity&quot;</span>, <span class="st">&quot;chlorides&quot;</span>,</a>
+<a class="sourceLine" id="cb1472-3" title="3">    <span class="st">&quot;free.sulfur.dioxide&quot;</span>, <span class="st">&quot;total.sulfur.dioxide&quot;</span>, <span class="st">&quot;bad&quot;</span></a>
+<a class="sourceLine" id="cb1472-4" title="4">)]</a></code></pre></div>
 <p>Then we perform a 60/40% split. The rows in the data frame
 are already randomised, therefore the first 300 can constitute
 the training sample and the remaining 200 can define the test sample.</p>
-<div class="sourceCode" id="cb1474"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1474-1" title="1"><span class="kw">write.csv</span>(wine_subset[<span class="dv">1</span><span class="op">:</span><span class="dv">300</span>, ],</a>
-<a class="sourceLine" id="cb1474-2" title="2">    <span class="st">&quot;datasets/wine_train.csv&quot;</span>, <span class="dt">row.names=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb1474-3" title="3"><span class="kw">write.csv</span>(wine_subset[<span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">300</span>), ],</a>
-<a class="sourceLine" id="cb1474-4" title="4">    <span class="st">&quot;datasets/wine_test.csv&quot;</span>, <span class="dt">row.names=</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1473"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1473-1" title="1"><span class="kw">write.csv</span>(wine_subset[<span class="dv">1</span><span class="op">:</span><span class="dv">300</span>, ],</a>
+<a class="sourceLine" id="cb1473-2" title="2">    <span class="st">&quot;datasets/wine_train.csv&quot;</span>, <span class="dt">row.names=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb1473-3" title="3"><span class="kw">write.csv</span>(wine_subset[<span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">300</span>), ],</a>
+<a class="sourceLine" id="cb1473-4" title="4">    <span class="st">&quot;datasets/wine_test.csv&quot;</span>, <span class="dt">row.names=</span><span class="ot">FALSE</span>)</a></code></pre></div>
 </dd>
 </dl>
 </div>
@@ -1494,9 +1494,9 @@ Terms of Use: https://www.cia.gov/library/publications/the-world-factbook/docs/c
 The Factbook is in the public domain. Accordingly, it may be copied freely without permission of the Central Intelligence Agency (CIA).
 
 -->
-<div class="sourceCode" id="cb1475"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1475-1" title="1">factbook &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/world_factbook_2020.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb1475-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
-<a class="sourceLine" id="cb1475-3" title="3">factbook[<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>] <span class="co"># preview</span></a></code></pre></div>
+<div class="sourceCode" id="cb1474"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1474-1" title="1">factbook &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/world_factbook_2020.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb1474-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
+<a class="sourceLine" id="cb1474-3" title="3">factbook[<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>] <span class="co"># preview</span></a></code></pre></div>
 <pre><code>##          country    area population median_age population_growth_rate
 ## 1    Afghanistan  652230   36643815       19.5                   2.38
 ## 2       Akrotiri     123         NA         NA                     NA
@@ -1802,9 +1802,9 @@ You are encouraged to use the Datasets to benefit yourself and others in creativ
 Unless specifically labeled otherwise, these Datasets are provided to you under a Creative Commons Attribution 4.0 International License (CC BY 4.0),
 
 -->
-<div class="sourceCode" id="cb1477"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1477-1" title="1">edstats_<span class="dv">2019</span> &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/edstats_2019.csv.gz&quot;</span>,</a>
-<a class="sourceLine" id="cb1477-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
-<a class="sourceLine" id="cb1477-3" title="3"><span class="kw">head</span>(edstats_<span class="dv">2019</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1476"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1476-1" title="1">edstats_<span class="dv">2019</span> &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/edstats_2019.csv.gz&quot;</span>,</a>
+<a class="sourceLine" id="cb1476-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
+<a class="sourceLine" id="cb1476-3" title="3"><span class="kw">head</span>(edstats_<span class="dv">2019</span>)</a></code></pre></div>
 <pre><code>##   CountryName CountryCode
 ## 1 Afghanistan         AFG
 ## 2 Afghanistan         AFG
@@ -1851,24 +1851,24 @@ is consists of missing values only, the removal of <code>NA</code>s leads
 to an empty sequence. However, the trick we can use is that
 by extracting the first element from an empty vector by using
 <code>[...]</code>, we get a <code>NA</code>.</p>
-<div class="sourceCode" id="cb1479"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1479-1" title="1">last_non_na &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">tail</span>(<span class="kw">na.omit</span>(x), <span class="dv">1</span>)[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb1479-2" title="2"><span class="kw">last_non_na</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">NA</span>, <span class="dv">3</span>,<span class="ot">NA</span>,<span class="ot">NA</span>)) <span class="co"># example 1</span></a></code></pre></div>
+<div class="sourceCode" id="cb1478"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1478-1" title="1">last_non_na &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">tail</span>(<span class="kw">na.omit</span>(x), <span class="dv">1</span>)[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb1478-2" title="2"><span class="kw">last_non_na</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">NA</span>, <span class="dv">3</span>,<span class="ot">NA</span>,<span class="ot">NA</span>)) <span class="co"># example 1</span></a></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb1481"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1481-1" title="1"><span class="kw">last_non_na</span>(<span class="kw">c</span>(<span class="ot">NA</span>,<span class="ot">NA</span>,<span class="ot">NA</span>,<span class="ot">NA</span>,<span class="ot">NA</span>,<span class="ot">NA</span>)) <span class="co"># example 2</span></a></code></pre></div>
+<div class="sourceCode" id="cb1480"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1480-1" title="1"><span class="kw">last_non_na</span>(<span class="kw">c</span>(<span class="ot">NA</span>,<span class="ot">NA</span>,<span class="ot">NA</span>,<span class="ot">NA</span>,<span class="ot">NA</span>,<span class="ot">NA</span>)) <span class="co"># example 2</span></a></code></pre></div>
 <pre><code>## [1] NA</code></pre>
 <p>Let’s extract the most recent indicator from each row in <code>edstats_2019</code>.</p>
-<div class="sourceCode" id="cb1483"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1483-1" title="1">values &lt;-<span class="st"> </span><span class="kw">apply</span>(edstats_<span class="dv">2019</span>[<span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)], <span class="dv">1</span>, last_non_na)</a>
-<a class="sourceLine" id="cb1483-2" title="2"><span class="kw">head</span>(values)</a></code></pre></div>
+<div class="sourceCode" id="cb1482"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1482-1" title="1">values &lt;-<span class="st"> </span><span class="kw">apply</span>(edstats_<span class="dv">2019</span>[<span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)], <span class="dv">1</span>, last_non_na)</a>
+<a class="sourceLine" id="cb1482-2" title="2"><span class="kw">head</span>(values)</a></code></pre></div>
 <pre><code>## [1]  4.0589 82.8503      NA 85.6253      NA      NA</code></pre>
 <p>Now, we shall create a data frame with 3 columns:
 name of the country, indicator code, indicator value.
 Let’s order it with respect to the first two columns.</p>
-<div class="sourceCode" id="cb1485"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1485-1" title="1">edstats_<span class="dv">2019</span> &lt;-<span class="st"> </span>edstats_<span class="dv">2019</span>[<span class="kw">c</span>(<span class="st">&quot;CountryName&quot;</span>, <span class="st">&quot;Code&quot;</span>)]</a>
-<a class="sourceLine" id="cb1485-2" title="2"><span class="co"># add a new column at the righthand end:</span></a>
-<a class="sourceLine" id="cb1485-3" title="3">edstats_<span class="dv">2019</span>[<span class="st">&quot;Value&quot;</span>] &lt;-<span class="st"> </span>values</a>
-<a class="sourceLine" id="cb1485-4" title="4">edstats_<span class="dv">2019</span> &lt;-<span class="st"> </span>edstats_<span class="dv">2019</span>[</a>
-<a class="sourceLine" id="cb1485-5" title="5">    <span class="kw">order</span>(edstats_<span class="dv">2019</span><span class="op">$</span>CountryName, edstats_<span class="dv">2019</span><span class="op">$</span>Code), ]</a>
-<a class="sourceLine" id="cb1485-6" title="6"><span class="kw">head</span>(edstats_<span class="dv">2019</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1484"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1484-1" title="1">edstats_<span class="dv">2019</span> &lt;-<span class="st"> </span>edstats_<span class="dv">2019</span>[<span class="kw">c</span>(<span class="st">&quot;CountryName&quot;</span>, <span class="st">&quot;Code&quot;</span>)]</a>
+<a class="sourceLine" id="cb1484-2" title="2"><span class="co"># add a new column at the righthand end:</span></a>
+<a class="sourceLine" id="cb1484-3" title="3">edstats_<span class="dv">2019</span>[<span class="st">&quot;Value&quot;</span>] &lt;-<span class="st"> </span>values</a>
+<a class="sourceLine" id="cb1484-4" title="4">edstats_<span class="dv">2019</span> &lt;-<span class="st"> </span>edstats_<span class="dv">2019</span>[</a>
+<a class="sourceLine" id="cb1484-5" title="5">    <span class="kw">order</span>(edstats_<span class="dv">2019</span><span class="op">$</span>CountryName, edstats_<span class="dv">2019</span><span class="op">$</span>Code), ]</a>
+<a class="sourceLine" id="cb1484-6" title="6"><span class="kw">head</span>(edstats_<span class="dv">2019</span>)</a></code></pre></div>
 <pre><code>##    CountryName           Code  Value
 ## 59 Afghanistan    HD.HCI.AMRT 0.7797
 ## 57 Afghanistan HD.HCI.AMRT.FE 0.8018
@@ -1879,11 +1879,11 @@ Let’s order it with respect to the first two columns.</p>
 <p>To convert the data frame to a “wide” format, many readers would choose
 the <code>pivot_wider()</code> function from the <code>tidyr</code> package
 (amongst others).</p>
-<div class="sourceCode" id="cb1487"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1487-1" title="1"><span class="kw">library</span>(<span class="st">&quot;tidyr&quot;</span>)</a>
-<a class="sourceLine" id="cb1487-2" title="2">edstats &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(</a>
-<a class="sourceLine" id="cb1487-3" title="3">    <span class="kw">pivot_wider</span>(edstats_<span class="dv">2019</span>, <span class="dt">names_from=</span><span class="st">&quot;Code&quot;</span>, <span class="dt">values_from=</span><span class="st">&quot;Value&quot;</span>)</a>
-<a class="sourceLine" id="cb1487-4" title="4">)</a>
-<a class="sourceLine" id="cb1487-5" title="5">edstats[<span class="dv">1</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb1486"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1486-1" title="1"><span class="kw">library</span>(<span class="st">&quot;tidyr&quot;</span>)</a>
+<a class="sourceLine" id="cb1486-2" title="2">edstats &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(</a>
+<a class="sourceLine" id="cb1486-3" title="3">    <span class="kw">pivot_wider</span>(edstats_<span class="dv">2019</span>, <span class="dt">names_from=</span><span class="st">&quot;Code&quot;</span>, <span class="dt">values_from=</span><span class="st">&quot;Value&quot;</span>)</a>
+<a class="sourceLine" id="cb1486-4" title="4">)</a>
+<a class="sourceLine" id="cb1486-5" title="5">edstats[<span class="dv">1</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>]</a></code></pre></div>
 <pre><code>##   CountryName HD.HCI.AMRT HD.HCI.AMRT.FE HD.HCI.AMRT.MA HD.HCI.EYRS
 ## 1 Afghanistan      0.7797         0.8018         0.7597        8.58
 ##   HD.HCI.EYRS.FE HD.HCI.EYRS.MA
@@ -1904,39 +1904,39 @@ way in the future, that the package we relied on will provide the same API etc.)
 we could implement the relevant procedure manually. The downside is that
 this requires us to get out of our comfort zone and… think.</p>
 <p>First, let’s generate the list of all countries and indicators:</p>
-<div class="sourceCode" id="cb1489"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1489-1" title="1">countries  &lt;-<span class="st"> </span><span class="kw">unique</span>(edstats_<span class="dv">2019</span><span class="op">$</span>CountryName)</a>
-<a class="sourceLine" id="cb1489-2" title="2"><span class="kw">head</span>(countries)</a></code></pre></div>
+<div class="sourceCode" id="cb1488"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1488-1" title="1">countries  &lt;-<span class="st"> </span><span class="kw">unique</span>(edstats_<span class="dv">2019</span><span class="op">$</span>CountryName)</a>
+<a class="sourceLine" id="cb1488-2" title="2"><span class="kw">head</span>(countries)</a></code></pre></div>
 <pre><code>## [1] &quot;Afghanistan&quot;    &quot;Albania&quot;        &quot;Algeria&quot;        &quot;American Samoa&quot;
 ## [5] &quot;Andorra&quot;        &quot;Angola&quot;</code></pre>
-<div class="sourceCode" id="cb1491"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1491-1" title="1">indicators &lt;-<span class="st"> </span><span class="kw">unique</span>(edstats_<span class="dv">2019</span><span class="op">$</span>Code)</a>
-<a class="sourceLine" id="cb1491-2" title="2"><span class="kw">head</span>(indicators)</a></code></pre></div>
+<div class="sourceCode" id="cb1490"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1490-1" title="1">indicators &lt;-<span class="st"> </span><span class="kw">unique</span>(edstats_<span class="dv">2019</span><span class="op">$</span>Code)</a>
+<a class="sourceLine" id="cb1490-2" title="2"><span class="kw">head</span>(indicators)</a></code></pre></div>
 <pre><code>## [1] &quot;HD.HCI.AMRT&quot;    &quot;HD.HCI.AMRT.FE&quot; &quot;HD.HCI.AMRT.MA&quot; &quot;HD.HCI.EYRS&quot;   
 ## [5] &quot;HD.HCI.EYRS.FE&quot; &quot;HD.HCI.EYRS.MA&quot;</code></pre>
 <p>Second, note that <code>edstats_2019</code> gives all the possible combinations (pairs)
 of the indexes and countries:</p>
-<div class="sourceCode" id="cb1493"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1493-1" title="1"><span class="kw">nrow</span>(edstats_<span class="dv">2019</span>) <span class="co"># number of rows in edstats_2019</span></a></code></pre></div>
+<div class="sourceCode" id="cb1492"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1492-1" title="1"><span class="kw">nrow</span>(edstats_<span class="dv">2019</span>) <span class="co"># number of rows in edstats_2019</span></a></code></pre></div>
 <pre><code>## [1] 23852</code></pre>
-<div class="sourceCode" id="cb1495"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1495-1" title="1"><span class="kw">length</span>(countries)<span class="op">*</span><span class="kw">length</span>(indicators) <span class="co"># number of pairs</span></a></code></pre></div>
+<div class="sourceCode" id="cb1494"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1494-1" title="1"><span class="kw">length</span>(countries)<span class="op">*</span><span class="kw">length</span>(indicators) <span class="co"># number of pairs</span></a></code></pre></div>
 <pre><code>## [1] 23852</code></pre>
 <p>Looking at the numbers in the <code>Value</code> column of <code>edstats_2019</code>,
 this will exactly provide us with our desired “wide” data matrix,
 if we read it in a rowwise manner. Hence, we can use
 <code>matrix(..., byrow=TRUE)</code> to generate it:</p>
-<div class="sourceCode" id="cb1497"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1497-1" title="1"><span class="co"># edstats_2019 is already sorted w.r.t. CountryName and Code</span></a>
-<a class="sourceLine" id="cb1497-2" title="2">edstats2 &lt;-<span class="st"> </span><span class="kw">cbind</span>(</a>
-<a class="sourceLine" id="cb1497-3" title="3">    <span class="dt">CountryName=</span>countries, <span class="co"># first column</span></a>
-<a class="sourceLine" id="cb1497-4" title="4">    <span class="kw">as.data.frame</span>(</a>
-<a class="sourceLine" id="cb1497-5" title="5">        <span class="kw">matrix</span>(edstats_<span class="dv">2019</span><span class="op">$</span>Value,</a>
-<a class="sourceLine" id="cb1497-6" title="6">            <span class="dt">byrow=</span><span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb1497-7" title="7">            <span class="dt">ncol=</span><span class="kw">length</span>(indicators),</a>
-<a class="sourceLine" id="cb1497-8" title="8">            <span class="dt">dimnames=</span><span class="kw">list</span>(<span class="ot">NULL</span>, indicators)</a>
-<a class="sourceLine" id="cb1497-9" title="9">    )))</a>
-<a class="sourceLine" id="cb1497-10" title="10"><span class="kw">identical</span>(edstats, edstats2)</a></code></pre></div>
+<div class="sourceCode" id="cb1496"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1496-1" title="1"><span class="co"># edstats_2019 is already sorted w.r.t. CountryName and Code</span></a>
+<a class="sourceLine" id="cb1496-2" title="2">edstats2 &lt;-<span class="st"> </span><span class="kw">cbind</span>(</a>
+<a class="sourceLine" id="cb1496-3" title="3">    <span class="dt">CountryName=</span>countries, <span class="co"># first column</span></a>
+<a class="sourceLine" id="cb1496-4" title="4">    <span class="kw">as.data.frame</span>(</a>
+<a class="sourceLine" id="cb1496-5" title="5">        <span class="kw">matrix</span>(edstats_<span class="dv">2019</span><span class="op">$</span>Value,</a>
+<a class="sourceLine" id="cb1496-6" title="6">            <span class="dt">byrow=</span><span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb1496-7" title="7">            <span class="dt">ncol=</span><span class="kw">length</span>(indicators),</a>
+<a class="sourceLine" id="cb1496-8" title="8">            <span class="dt">dimnames=</span><span class="kw">list</span>(<span class="ot">NULL</span>, indicators)</a>
+<a class="sourceLine" id="cb1496-9" title="9">    )))</a>
+<a class="sourceLine" id="cb1496-10" title="10"><span class="kw">identical</span>(edstats, edstats2)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 </dd>
 </dl>
 <p>Now we can export <code>edstats</code> to a CSV file.</p>
-<div class="sourceCode" id="cb1499"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1499-1" title="1"><span class="kw">write.csv</span>(edstats, <span class="st">&quot;datasets/edstats_2019_wide.csv&quot;</span>, <span class="dt">row.names=</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1498"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1498-1" title="1"><span class="kw">write.csv</span>(edstats, <span class="st">&quot;datasets/edstats_2019_wide.csv&quot;</span>, <span class="dt">row.names=</span><span class="ot">FALSE</span>)</a></code></pre></div>
 <p>We didn’t export the row names, because they’re useless in our case.</p>
 <div style="margin-top: 1em">
 
@@ -2354,9 +2354,9 @@ for detailed documentation.</p>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb1500"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1500-1" title="1">fndds_nutrients &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/fndds_nutrients_2016.csv.gz&quot;</span>,</a>
-<a class="sourceLine" id="cb1500-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
-<a class="sourceLine" id="cb1500-3" title="3">fndds_nutrients[<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>, <span class="dv">10</span>)] <span class="co"># preview</span></a></code></pre></div>
+<div class="sourceCode" id="cb1499"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1499-1" title="1">fndds_nutrients &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/fndds_nutrients_2016.csv.gz&quot;</span>,</a>
+<a class="sourceLine" id="cb1499-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
+<a class="sourceLine" id="cb1499-3" title="3">fndds_nutrients[<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>, <span class="dv">10</span>)] <span class="co"># preview</span></a></code></pre></div>
 <pre><code>##       Code                           Description WWEIA_Code
 ## 1 11000000                           Milk, human       9602
 ## 2 11100000                             Milk, NFS       1004
@@ -2797,9 +2797,9 @@ records the historical (in the 1970s) median house value
 (<code>medv</code> column, in 1,000s USD) for 506 suburbs around
 Boston, MA, USA.</p>
 <p>You can access the dataset by calling:</p>
-<div class="sourceCode" id="cb1502"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1502-1" title="1"><span class="co"># call install.packages(&quot;MASS&quot;) first (only once)</span></a>
-<a class="sourceLine" id="cb1502-2" title="2"><span class="kw">library</span>(<span class="st">&quot;MASS&quot;</span>)</a>
-<a class="sourceLine" id="cb1502-3" title="3"><span class="kw">head</span>(Boston, <span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1501"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1501-1" title="1"><span class="co"># call install.packages(&quot;MASS&quot;) first (only once)</span></a>
+<a class="sourceLine" id="cb1501-2" title="2"><span class="kw">library</span>(<span class="st">&quot;MASS&quot;</span>)</a>
+<a class="sourceLine" id="cb1501-3" title="3"><span class="kw">head</span>(Boston, <span class="dv">3</span>)</a></code></pre></div>
 <pre><code>##      crim zn indus chas   nox    rm  age    dis rad tax ptratio  black
 ## 1 0.00632 18  2.31    0 0.538 6.575 65.2 4.0900   1 296    15.3 396.90
 ## 2 0.02731  0  7.07    0 0.469 6.421 78.9 4.9671   2 242    17.8 396.90
@@ -2812,7 +2812,7 @@ Boston, MA, USA.</p>
 see <code>?Boston</code>.</p>
 <p>Here is a famous illustrative example proposed by
 the statistician Francis Anscombe in the early 1970s.</p>
-<div class="sourceCode" id="cb1504"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1504-1" title="1"><span class="kw">print</span>(anscombe) <span class="co"># `anscombe` is a built-in object</span></a></code></pre></div>
+<div class="sourceCode" id="cb1503"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1503-1" title="1"><span class="kw">print</span>(anscombe) <span class="co"># `anscombe` is a built-in object</span></a></code></pre></div>
 <pre><code>##    x1 x2 x3 x4    y1   y2    y3    y4
 ## 1  10 10 10  8  8.04 9.14  7.46  6.58
 ## 2   8  8  8  8  6.95 8.14  6.77  5.76
@@ -2832,8 +2832,8 @@ that encodes four separate datasets:
 <p>MNIST digits</p>
 <p>MNIST fashion</p>
 <p>Wisconsin Diagnostic Breast Cancer (WDBC)</p>
-<div class="sourceCode" id="cb1506"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1506-1" title="1">wdbc &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/wdbc.csv&quot;</span>, <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
-<a class="sourceLine" id="cb1506-2" title="2"><span class="kw">head</span>(wdbc, <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1505"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1505-1" title="1">wdbc &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/wdbc.csv&quot;</span>, <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
+<a class="sourceLine" id="cb1505-2" title="2"><span class="kw">head</span>(wdbc, <span class="dv">2</span>)</a></code></pre></div>
 <pre><code>##       id diagnosis mean_radius mean_texture mean_perimeter mean_area
 ## 1 842302         M       17.99        10.38          122.8      1001
 ## 2 842517         M       20.57        17.77          132.9      1326

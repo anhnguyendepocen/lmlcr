@@ -540,7 +540,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li style='font-size: smaller' ><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Licensed under CC BY-NC-ND 4.0</a></li>
-<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-06-12 22:42 (9030b06)</a></li>
+<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-06-12 22:49 (9a1ce97)</a></li>
 
 </ul>
 
@@ -649,18 +649,18 @@ the case)?</p>
 <p>Also, the problem with K-means is that there is no guarantee that a
 <span class="math inline">\(K\)</span>-partition is any “similar” to the <span class="math inline">\(K&#39;\)</span>-one for <span class="math inline">\(K\neq K&#39;\)</span>,
 see Figure <a href="agglomerative-hierarchical-clustering.html#fig:kmeans_different_K">1</a>.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1">X &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(iris[,<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>)])</a>
-<a class="sourceLine" id="cb33-2" title="2"><span class="co"># never forget to set nstart&gt;&gt;1!</span></a>
-<a class="sourceLine" id="cb33-3" title="3">km &lt;-<span class="st"> </span><span class="kw">kmeans</span>(X, <span class="dt">centers=</span><span class="dv">3</span>, <span class="dt">nstart=</span><span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb33-4" title="4">km<span class="op">$</span>cluster <span class="co"># labels assigned to each of 150 points:</span></a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1">X &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(iris[,<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>)])</a>
+<a class="sourceLine" id="cb32-2" title="2"><span class="co"># never forget to set nstart&gt;&gt;1!</span></a>
+<a class="sourceLine" id="cb32-3" title="3">km &lt;-<span class="st"> </span><span class="kw">kmeans</span>(X, <span class="dt">centers=</span><span class="dv">3</span>, <span class="dt">nstart=</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb32-4" title="4">km<span class="op">$</span>cluster <span class="co"># labels assigned to each of 150 points:</span></a></code></pre></div>
 <pre><code>##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 ##  [34] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
 ##  [67] 3 3 3 3 3 3 3 3 3 3 3 2 3 3 3 3 3 2 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
 ## [100] 3 2 2 2 2 2 2 3 2 2 2 2 2 2 3 2 2 2 2 2 3 2 3 2 3 2 2 3 3 2 2 2 2
 ## [133] 2 2 2 2 2 2 3 2 2 2 2 2 2 2 3 2 2 2</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1">km1 &lt;-<span class="st"> </span><span class="kw">kmeans</span>(X, <span class="dv">3</span>, <span class="dt">nstart=</span><span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb35-2" title="2">km2 &lt;-<span class="st"> </span><span class="kw">kmeans</span>(X, <span class="dv">4</span>, <span class="dt">nstart=</span><span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb35-3" title="3"><span class="kw">plot</span>(X, <span class="dt">col=</span>km1<span class="op">$</span>cluster, <span class="dt">pch=</span>km2<span class="op">$</span>cluster, <span class="dt">asp=</span><span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1">km1 &lt;-<span class="st"> </span><span class="kw">kmeans</span>(X, <span class="dv">3</span>, <span class="dt">nstart=</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb34-2" title="2">km2 &lt;-<span class="st"> </span><span class="kw">kmeans</span>(X, <span class="dv">4</span>, <span class="dt">nstart=</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb34-3" title="3"><span class="kw">plot</span>(X, <span class="dt">col=</span>km1<span class="op">$</span>cluster, <span class="dt">pch=</span>km2<span class="op">$</span>cluster, <span class="dt">asp=</span><span class="dv">1</span>)</a></code></pre></div>
 <div class="figure">
 <img src="02-hclust-figures/kmeans_different_K-1.svg" alt="Figure 1: 3-means (colours) vs. 4-means (symbols) on example data; the “circle” cluster cannot decide if it likes the green or the black one more" id="fig:kmeans_different_K" />
 <p class="caption">Figure 1: 3-means (colours) vs. 4-means (symbols) on example data; the “circle” cluster cannot decide if it likes the green or the black one more</p>
@@ -685,11 +685,11 @@ we select (somehow; see below) a pair of clusters to be merged.</p></li>
 agglomerative hierarchical clustering algorithms
 is provided by the <code>hclust()</code> function, which works on a pairwise
 distance matrix.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="co"># Euclidean distances between all pairs of points:</span></a>
-<a class="sourceLine" id="cb36-2" title="2">D &lt;-<span class="st"> </span><span class="kw">dist</span>(X)</a>
-<a class="sourceLine" id="cb36-3" title="3"><span class="co"># Apply Complete Linkage (the default, details below):</span></a>
-<a class="sourceLine" id="cb36-4" title="4">h &lt;-<span class="st"> </span><span class="kw">hclust</span>(D) <span class="co"># method=&quot;complete&quot;</span></a>
-<a class="sourceLine" id="cb36-5" title="5"><span class="kw">print</span>(h)</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="co"># Euclidean distances between all pairs of points:</span></a>
+<a class="sourceLine" id="cb35-2" title="2">D &lt;-<span class="st"> </span><span class="kw">dist</span>(X)</a>
+<a class="sourceLine" id="cb35-3" title="3"><span class="co"># Apply Complete Linkage (the default, details below):</span></a>
+<a class="sourceLine" id="cb35-4" title="4">h &lt;-<span class="st"> </span><span class="kw">hclust</span>(D) <span class="co"># method=&quot;complete&quot;</span></a>
+<a class="sourceLine" id="cb35-5" title="5"><span class="kw">print</span>(h)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## hclust(d = D)
@@ -713,7 +713,7 @@ aim to solve this problem.</p>
 -->
 <p>The obtained hierarchy (<em>tree</em>) can be <em>cut</em> at an arbitrary level
 by applying the <code>cutree()</code> function.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="kw">cutree</span>(h, <span class="dt">k=</span><span class="dv">3</span>) <span class="co"># extract the 3-partition</span></a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">cutree</span>(h, <span class="dt">k=</span><span class="dv">3</span>) <span class="co"># extract the 3-partition</span></a></code></pre></div>
 <pre><code>##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 ##  [34] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
 ##  [67] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
@@ -725,15 +725,15 @@ The obtained 3-partition also matches the true Iris species quite well.
 However, now it makes total sense to “zoom” our partitioning in or out
 and investigate how are the subgroups decomposed or aggregated when we change
 <span class="math inline">\(K\)</span>.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb40-2" title="2"><span class="kw">plot</span>(X, <span class="dt">col=</span><span class="kw">cutree</span>(h, <span class="dt">k=</span><span class="dv">5</span>), <span class="dt">ann=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb40-3" title="3"><span class="kw">legend</span>(<span class="st">&quot;top&quot;</span>, <span class="dt">legend=</span><span class="st">&quot;k=5&quot;</span>, <span class="dt">bg=</span><span class="st">&quot;white&quot;</span>)</a>
-<a class="sourceLine" id="cb40-4" title="4"><span class="kw">plot</span>(X, <span class="dt">col=</span><span class="kw">cutree</span>(h, <span class="dt">k=</span><span class="dv">4</span>), <span class="dt">ann=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb40-5" title="5"><span class="kw">legend</span>(<span class="st">&quot;top&quot;</span>, <span class="dt">legend=</span><span class="st">&quot;k=4&quot;</span>, <span class="dt">bg=</span><span class="st">&quot;white&quot;</span>)</a>
-<a class="sourceLine" id="cb40-6" title="6"><span class="kw">plot</span>(X, <span class="dt">col=</span><span class="kw">cutree</span>(h, <span class="dt">k=</span><span class="dv">3</span>), <span class="dt">ann=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb40-7" title="7"><span class="kw">legend</span>(<span class="st">&quot;top&quot;</span>, <span class="dt">legend=</span><span class="st">&quot;k=3&quot;</span>, <span class="dt">bg=</span><span class="st">&quot;white&quot;</span>)</a>
-<a class="sourceLine" id="cb40-8" title="8"><span class="kw">plot</span>(X, <span class="dt">col=</span><span class="kw">cutree</span>(h, <span class="dt">k=</span><span class="dv">2</span>), <span class="dt">ann=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb40-9" title="9"><span class="kw">legend</span>(<span class="st">&quot;top&quot;</span>, <span class="dt">legend=</span><span class="st">&quot;k=2&quot;</span>, <span class="dt">bg=</span><span class="st">&quot;white&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb39-2" title="2"><span class="kw">plot</span>(X, <span class="dt">col=</span><span class="kw">cutree</span>(h, <span class="dt">k=</span><span class="dv">5</span>), <span class="dt">ann=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb39-3" title="3"><span class="kw">legend</span>(<span class="st">&quot;top&quot;</span>, <span class="dt">legend=</span><span class="st">&quot;k=5&quot;</span>, <span class="dt">bg=</span><span class="st">&quot;white&quot;</span>)</a>
+<a class="sourceLine" id="cb39-4" title="4"><span class="kw">plot</span>(X, <span class="dt">col=</span><span class="kw">cutree</span>(h, <span class="dt">k=</span><span class="dv">4</span>), <span class="dt">ann=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb39-5" title="5"><span class="kw">legend</span>(<span class="st">&quot;top&quot;</span>, <span class="dt">legend=</span><span class="st">&quot;k=4&quot;</span>, <span class="dt">bg=</span><span class="st">&quot;white&quot;</span>)</a>
+<a class="sourceLine" id="cb39-6" title="6"><span class="kw">plot</span>(X, <span class="dt">col=</span><span class="kw">cutree</span>(h, <span class="dt">k=</span><span class="dv">3</span>), <span class="dt">ann=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb39-7" title="7"><span class="kw">legend</span>(<span class="st">&quot;top&quot;</span>, <span class="dt">legend=</span><span class="st">&quot;k=3&quot;</span>, <span class="dt">bg=</span><span class="st">&quot;white&quot;</span>)</a>
+<a class="sourceLine" id="cb39-8" title="8"><span class="kw">plot</span>(X, <span class="dt">col=</span><span class="kw">cutree</span>(h, <span class="dt">k=</span><span class="dv">2</span>), <span class="dt">ann=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb39-9" title="9"><span class="kw">legend</span>(<span class="st">&quot;top&quot;</span>, <span class="dt">legend=</span><span class="st">&quot;k=2&quot;</span>, <span class="dt">bg=</span><span class="st">&quot;white&quot;</span>)</a></code></pre></div>
 <div class="figure">
 <img src="02-hclust-figures/complete_linkage_hier5_intro-1.svg" alt="Figure 2: Complete linkage – 4 different cuts" id="fig:complete_linkage_hier5_intro" />
 <p class="caption">Figure 2: Complete linkage – 4 different cuts</p>
@@ -817,9 +817,9 @@ in the aforementioned procedure leads to single, complete or average
 linkage-based agglomerative hierarchical clustering algorithms,
 respectively
 (referred to as single linkage etc. for brevity).</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1">hs &lt;-<span class="st"> </span><span class="kw">hclust</span>(D, <span class="dt">method=</span><span class="st">&quot;single&quot;</span>)</a>
-<a class="sourceLine" id="cb41-2" title="2">hc &lt;-<span class="st"> </span><span class="kw">hclust</span>(D, <span class="dt">method=</span><span class="st">&quot;complete&quot;</span>)</a>
-<a class="sourceLine" id="cb41-3" title="3">ha &lt;-<span class="st"> </span><span class="kw">hclust</span>(D, <span class="dt">method=</span><span class="st">&quot;average&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1">hs &lt;-<span class="st"> </span><span class="kw">hclust</span>(D, <span class="dt">method=</span><span class="st">&quot;single&quot;</span>)</a>
+<a class="sourceLine" id="cb40-2" title="2">hc &lt;-<span class="st"> </span><span class="kw">hclust</span>(D, <span class="dt">method=</span><span class="st">&quot;complete&quot;</span>)</a>
+<a class="sourceLine" id="cb40-3" title="3">ha &lt;-<span class="st"> </span><span class="kw">hclust</span>(D, <span class="dt">method=</span><span class="st">&quot;average&quot;</span>)</a></code></pre></div>
 <p>Figure <a href="agglomerative-hierarchical-clustering.html#fig:linkages_hier52">4</a> compares the 5-, 4- and 3-partitions
 obtained by applying the 3 above linkages. Note that it’s in very nature of
 the single linkage algorithm that it’s highly sensitive to outliers.</p>

@@ -540,7 +540,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li style='font-size: smaller' ><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Licensed under CC BY-NC-ND 4.0</a></li>
-<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-06-12 22:42 (9030b06)</a></li>
+<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-06-12 22:49 (9a1ce97)</a></li>
 
 </ul>
 
@@ -635,17 +635,17 @@ we assume that each <span class="math inline">\(y_i\)</span> is a descriptive la
 <h3><span class="header-section-number">4.1.2</span> Data</h3>
 <p>For illustration, we’ll be considering the Wine Quality dataset
 (white wines only):</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" title="1">wine_quality &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/wine_quality_all.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb162-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
-<a class="sourceLine" id="cb162-3" title="3">white_wines &lt;-<span class="st"> </span>wine_quality[wine_quality<span class="op">$</span>color <span class="op">==</span><span class="st"> &quot;white&quot;</span>,]</a>
-<a class="sourceLine" id="cb162-4" title="4">(n &lt;-<span class="st"> </span><span class="kw">nrow</span>(white_wines)) <span class="co"># number of samples</span></a></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" title="1">wine_quality &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/wine_quality_all.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb161-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
+<a class="sourceLine" id="cb161-3" title="3">white_wines &lt;-<span class="st"> </span>wine_quality[wine_quality<span class="op">$</span>color <span class="op">==</span><span class="st"> &quot;white&quot;</span>,]</a>
+<a class="sourceLine" id="cb161-4" title="4">(n &lt;-<span class="st"> </span><span class="kw">nrow</span>(white_wines)) <span class="co"># number of samples</span></a></code></pre></div>
 <pre><code>## [1] 4898</code></pre>
 <p>The input matrix <span class="math inline">\(\mathbf{X}\in\mathbb{R}^{n\times p}\)</span>
 consists of the first 10 numeric variables:</p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" title="1">X &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(white_wines[,<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])</a>
-<a class="sourceLine" id="cb164-2" title="2"><span class="kw">dim</span>(X)</a></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" title="1">X &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(white_wines[,<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])</a>
+<a class="sourceLine" id="cb163-2" title="2"><span class="kw">dim</span>(X)</a></code></pre></div>
 <pre><code>## [1] 4898   10</code></pre>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" title="1"><span class="kw">head</span>(X, <span class="dv">2</span>) <span class="co"># first two rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" title="1"><span class="kw">head</span>(X, <span class="dv">2</span>) <span class="co"># first two rows</span></a></code></pre></div>
 <pre><code>##      fixed.acidity volatile.acidity citric.acid residual.sugar
 ## 1600           7.0             0.27        0.36           20.7
 ## 1601           6.3             0.30        0.34            1.6
@@ -661,44 +661,44 @@ consists of the first 10 numeric variables:</p>
 <li>0 == (<code>alcohol  &lt; 12</code>) == lower-alcohol wines,</li>
 <li>1 == (<code>alcohol &gt;= 12</code>) == higher-alcohol wines</li>
 </ul>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" title="1"><span class="co"># recall that TRUE == 1</span></a>
-<a class="sourceLine" id="cb168-2" title="2">Y &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">as.character</span>(<span class="kw">as.numeric</span>(white_wines<span class="op">$</span>alcohol <span class="op">&gt;=</span><span class="st"> </span><span class="dv">12</span>)))</a>
-<a class="sourceLine" id="cb168-3" title="3"><span class="kw">table</span>(Y)</a></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" title="1"><span class="co"># recall that TRUE == 1</span></a>
+<a class="sourceLine" id="cb167-2" title="2">Y &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">as.character</span>(<span class="kw">as.numeric</span>(white_wines<span class="op">$</span>alcohol <span class="op">&gt;=</span><span class="st"> </span><span class="dv">12</span>)))</a>
+<a class="sourceLine" id="cb167-3" title="3"><span class="kw">table</span>(Y)</a></code></pre></div>
 <pre><code>## Y
 ##    0    1 
 ## 4085  813</code></pre>
 <p>60/40% train-test split:</p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" title="1"><span class="kw">set.seed</span>(<span class="dv">123</span>) <span class="co"># reproducibility matters</span></a>
-<a class="sourceLine" id="cb170-2" title="2">random_indices &lt;-<span class="st"> </span><span class="kw">sample</span>(n)</a>
-<a class="sourceLine" id="cb170-3" title="3"><span class="kw">head</span>(random_indices) <span class="co"># preview</span></a></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" title="1"><span class="kw">set.seed</span>(<span class="dv">123</span>) <span class="co"># reproducibility matters</span></a>
+<a class="sourceLine" id="cb169-2" title="2">random_indices &lt;-<span class="st"> </span><span class="kw">sample</span>(n)</a>
+<a class="sourceLine" id="cb169-3" title="3"><span class="kw">head</span>(random_indices) <span class="co"># preview</span></a></code></pre></div>
 <pre><code>## [1] 2463 2511 2227  526 4291 2986</code></pre>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" title="1"><span class="co"># first 60% of the indices (they are arranged randomly)</span></a>
-<a class="sourceLine" id="cb172-2" title="2"><span class="co"># will constitute the train sample:</span></a>
-<a class="sourceLine" id="cb172-3" title="3">train_indices &lt;-<span class="st"> </span>random_indices[<span class="dv">1</span><span class="op">:</span><span class="kw">floor</span>(n<span class="op">*</span><span class="fl">0.6</span>)]</a>
-<a class="sourceLine" id="cb172-4" title="4">X_train &lt;-<span class="st"> </span>X[train_indices,]</a>
-<a class="sourceLine" id="cb172-5" title="5">Y_train &lt;-<span class="st"> </span>Y[train_indices]</a>
-<a class="sourceLine" id="cb172-6" title="6"><span class="co"># the remaining indices (40%) go to the test sample:</span></a>
-<a class="sourceLine" id="cb172-7" title="7">X_test  &lt;-<span class="st"> </span>X[<span class="op">-</span>train_indices,]</a>
-<a class="sourceLine" id="cb172-8" title="8">Y_test  &lt;-<span class="st"> </span>Y[<span class="op">-</span>train_indices]</a></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" title="1"><span class="co"># first 60% of the indices (they are arranged randomly)</span></a>
+<a class="sourceLine" id="cb171-2" title="2"><span class="co"># will constitute the train sample:</span></a>
+<a class="sourceLine" id="cb171-3" title="3">train_indices &lt;-<span class="st"> </span>random_indices[<span class="dv">1</span><span class="op">:</span><span class="kw">floor</span>(n<span class="op">*</span><span class="fl">0.6</span>)]</a>
+<a class="sourceLine" id="cb171-4" title="4">X_train &lt;-<span class="st"> </span>X[train_indices,]</a>
+<a class="sourceLine" id="cb171-5" title="5">Y_train &lt;-<span class="st"> </span>Y[train_indices]</a>
+<a class="sourceLine" id="cb171-6" title="6"><span class="co"># the remaining indices (40%) go to the test sample:</span></a>
+<a class="sourceLine" id="cb171-7" title="7">X_test  &lt;-<span class="st"> </span>X[<span class="op">-</span>train_indices,]</a>
+<a class="sourceLine" id="cb171-8" title="8">Y_test  &lt;-<span class="st"> </span>Y[<span class="op">-</span>train_indices]</a></code></pre></div>
 <p>Let’s also compute <code>Z_train</code> and <code>Z_test</code>, being the standardised versions of <code>X_train</code>
 and <code>X_test</code>, respectively.</p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" title="1">means &lt;-<span class="st"> </span><span class="kw">apply</span>(X_train, <span class="dv">2</span>, mean) <span class="co"># column means</span></a>
-<a class="sourceLine" id="cb173-2" title="2">sds   &lt;-<span class="st"> </span><span class="kw">apply</span>(X_train, <span class="dv">2</span>, sd)   <span class="co"># column standard deviations</span></a>
-<a class="sourceLine" id="cb173-3" title="3">Z_train &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">apply</span>(X_train, <span class="dv">1</span>, <span class="cf">function</span>(r) (r<span class="op">-</span>means)<span class="op">/</span>sds))</a>
-<a class="sourceLine" id="cb173-4" title="4">Z_test  &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">apply</span>(X_test,  <span class="dv">1</span>, <span class="cf">function</span>(r) (r<span class="op">-</span>means)<span class="op">/</span>sds))</a></code></pre></div>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" title="1">get_metrics &lt;-<span class="st"> </span><span class="cf">function</span>(Y_pred, Y_test)</a>
-<a class="sourceLine" id="cb174-2" title="2">{</a>
-<a class="sourceLine" id="cb174-3" title="3">    C &lt;-<span class="st"> </span><span class="kw">table</span>(Y_pred, Y_test) <span class="co"># confusion matrix</span></a>
-<a class="sourceLine" id="cb174-4" title="4">    <span class="kw">stopifnot</span>(<span class="kw">dim</span>(C) <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb174-5" title="5">    <span class="kw">c</span>(<span class="dt">Acc=</span>(C[<span class="dv">1</span>,<span class="dv">1</span>]<span class="op">+</span>C[<span class="dv">2</span>,<span class="dv">2</span>])<span class="op">/</span><span class="kw">sum</span>(C),  <span class="co"># accuracy</span></a>
-<a class="sourceLine" id="cb174-6" title="6">      <span class="dt">Prec=</span>C[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">/</span>(C[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">+</span>C[<span class="dv">2</span>,<span class="dv">1</span>]), <span class="co"># precision</span></a>
-<a class="sourceLine" id="cb174-7" title="7">      <span class="dt">Rec=</span>C[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">/</span>(C[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">+</span>C[<span class="dv">1</span>,<span class="dv">2</span>]),  <span class="co"># recall</span></a>
-<a class="sourceLine" id="cb174-8" title="8">      <span class="dt">F=</span>C[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">/</span>(C[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">+</span><span class="fl">0.5</span><span class="op">*</span>C[<span class="dv">1</span>,<span class="dv">2</span>]<span class="op">+</span><span class="fl">0.5</span><span class="op">*</span>C[<span class="dv">2</span>,<span class="dv">1</span>]), <span class="co"># F-measure</span></a>
-<a class="sourceLine" id="cb174-9" title="9">      <span class="co"># Confusion matrix items:</span></a>
-<a class="sourceLine" id="cb174-10" title="10">      <span class="dt">TN=</span>C[<span class="dv">1</span>,<span class="dv">1</span>], <span class="dt">FN=</span>C[<span class="dv">1</span>,<span class="dv">2</span>],</a>
-<a class="sourceLine" id="cb174-11" title="11">      <span class="dt">FP=</span>C[<span class="dv">2</span>,<span class="dv">1</span>], <span class="dt">TP=</span>C[<span class="dv">2</span>,<span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb174-12" title="12">    ) <span class="co"># return a named vector</span></a>
-<a class="sourceLine" id="cb174-13" title="13">}</a></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" title="1">means &lt;-<span class="st"> </span><span class="kw">apply</span>(X_train, <span class="dv">2</span>, mean) <span class="co"># column means</span></a>
+<a class="sourceLine" id="cb172-2" title="2">sds   &lt;-<span class="st"> </span><span class="kw">apply</span>(X_train, <span class="dv">2</span>, sd)   <span class="co"># column standard deviations</span></a>
+<a class="sourceLine" id="cb172-3" title="3">Z_train &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">apply</span>(X_train, <span class="dv">1</span>, <span class="cf">function</span>(r) (r<span class="op">-</span>means)<span class="op">/</span>sds))</a>
+<a class="sourceLine" id="cb172-4" title="4">Z_test  &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">apply</span>(X_test,  <span class="dv">1</span>, <span class="cf">function</span>(r) (r<span class="op">-</span>means)<span class="op">/</span>sds))</a></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" title="1">get_metrics &lt;-<span class="st"> </span><span class="cf">function</span>(Y_pred, Y_test)</a>
+<a class="sourceLine" id="cb173-2" title="2">{</a>
+<a class="sourceLine" id="cb173-3" title="3">    C &lt;-<span class="st"> </span><span class="kw">table</span>(Y_pred, Y_test) <span class="co"># confusion matrix</span></a>
+<a class="sourceLine" id="cb173-4" title="4">    <span class="kw">stopifnot</span>(<span class="kw">dim</span>(C) <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb173-5" title="5">    <span class="kw">c</span>(<span class="dt">Acc=</span>(C[<span class="dv">1</span>,<span class="dv">1</span>]<span class="op">+</span>C[<span class="dv">2</span>,<span class="dv">2</span>])<span class="op">/</span><span class="kw">sum</span>(C),  <span class="co"># accuracy</span></a>
+<a class="sourceLine" id="cb173-6" title="6">      <span class="dt">Prec=</span>C[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">/</span>(C[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">+</span>C[<span class="dv">2</span>,<span class="dv">1</span>]), <span class="co"># precision</span></a>
+<a class="sourceLine" id="cb173-7" title="7">      <span class="dt">Rec=</span>C[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">/</span>(C[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">+</span>C[<span class="dv">1</span>,<span class="dv">2</span>]),  <span class="co"># recall</span></a>
+<a class="sourceLine" id="cb173-8" title="8">      <span class="dt">F=</span>C[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">/</span>(C[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">+</span><span class="fl">0.5</span><span class="op">*</span>C[<span class="dv">1</span>,<span class="dv">2</span>]<span class="op">+</span><span class="fl">0.5</span><span class="op">*</span>C[<span class="dv">2</span>,<span class="dv">1</span>]), <span class="co"># F-measure</span></a>
+<a class="sourceLine" id="cb173-9" title="9">      <span class="co"># Confusion matrix items:</span></a>
+<a class="sourceLine" id="cb173-10" title="10">      <span class="dt">TN=</span>C[<span class="dv">1</span>,<span class="dv">1</span>], <span class="dt">FN=</span>C[<span class="dv">1</span>,<span class="dv">2</span>],</a>
+<a class="sourceLine" id="cb173-11" title="11">      <span class="dt">FP=</span>C[<span class="dv">2</span>,<span class="dv">1</span>], <span class="dt">TP=</span>C[<span class="dv">2</span>,<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb173-12" title="12">    ) <span class="co"># return a named vector</span></a>
+<a class="sourceLine" id="cb173-13" title="13">}</a></code></pre></div>
 </div>
 </div>
 <div id="decision-trees" class="section level2">
@@ -746,16 +746,16 @@ changed with the introduction of new decision rules.</p>
 <h3><span class="header-section-number">4.2.2</span> Example in R</h3>
 <p>We will use the <code>rpart()</code> function from the <code>rpart</code> package
 to build a classification tree.</p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" title="1"><span class="kw">library</span>(<span class="st">&quot;rpart&quot;</span>)</a>
-<a class="sourceLine" id="cb175-2" title="2"><span class="kw">library</span>(<span class="st">&quot;rpart.plot&quot;</span>)</a>
-<a class="sourceLine" id="cb175-3" title="3"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" title="1"><span class="kw">library</span>(<span class="st">&quot;rpart&quot;</span>)</a>
+<a class="sourceLine" id="cb174-2" title="2"><span class="kw">library</span>(<span class="st">&quot;rpart.plot&quot;</span>)</a>
+<a class="sourceLine" id="cb174-3" title="3"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a></code></pre></div>
 <p><code>rpart()</code> uses a formula (<code>~</code>) interface, hence it will be easier
 to feed it with data in a data.frame form.</p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" title="1">XY_train &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">as.data.frame</span>(X_train), <span class="dt">Y=</span>Y_train)</a>
-<a class="sourceLine" id="cb176-2" title="2">XY_test &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">as.data.frame</span>(X_test), <span class="dt">Y=</span>Y_test)</a></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" title="1">XY_train &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">as.data.frame</span>(X_train), <span class="dt">Y=</span>Y_train)</a>
+<a class="sourceLine" id="cb175-2" title="2">XY_test &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">as.data.frame</span>(X_test), <span class="dt">Y=</span>Y_test)</a></code></pre></div>
 <p>Fit and plot a decision tree, see Figure <a href="decision-and-regression-trees.html#fig:plot_rpart1">5</a>.</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" title="1">t1 &lt;-<span class="st"> </span><span class="kw">rpart</span>(Y<span class="op">~</span>., <span class="dt">data=</span>XY_train, <span class="dt">method=</span><span class="st">&quot;class&quot;</span>)</a>
-<a class="sourceLine" id="cb177-2" title="2"><span class="kw">rpart.plot</span>(t1, <span class="dt">tweak=</span><span class="fl">1.1</span>, <span class="dt">fallen.leaves=</span><span class="ot">FALSE</span>, <span class="dt">digits=</span><span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" title="1">t1 &lt;-<span class="st"> </span><span class="kw">rpart</span>(Y<span class="op">~</span>., <span class="dt">data=</span>XY_train, <span class="dt">method=</span><span class="st">&quot;class&quot;</span>)</a>
+<a class="sourceLine" id="cb176-2" title="2"><span class="kw">rpart.plot</span>(t1, <span class="dt">tweak=</span><span class="fl">1.1</span>, <span class="dt">fallen.leaves=</span><span class="ot">FALSE</span>, <span class="dt">digits=</span><span class="dv">3</span>)</a></code></pre></div>
 <div class="figure">
 <img src="04-trees-figures/plot_rpart1-1.svg" alt="Figure 5: A decision tree for the white_wines dataset" id="fig:plot_rpart1" />
 <p class="caption">Figure 5: A decision tree for the <code>white_wines</code> dataset</p>
@@ -763,16 +763,16 @@ to feed it with data in a data.frame form.</p>
 <p>We can build less or more complex trees by playing
 with the <code>cp</code> parameter, see Figures <a href="decision-and-regression-trees.html#fig:plot_rpart222">6</a>
 and <a href="decision-and-regression-trees.html#fig:tree333">7</a>.</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" title="1"><span class="co"># cp = complexity parameter, smaller → more complex tree</span></a>
-<a class="sourceLine" id="cb178-2" title="2">t2 &lt;-<span class="st"> </span><span class="kw">rpart</span>(Y<span class="op">~</span>., <span class="dt">data=</span>XY_train, <span class="dt">method=</span><span class="st">&quot;class&quot;</span>, <span class="dt">cp=</span><span class="fl">0.1</span>)</a>
-<a class="sourceLine" id="cb178-3" title="3"><span class="kw">rpart.plot</span>(t2, <span class="dt">tweak=</span><span class="fl">1.1</span>, <span class="dt">fallen.leaves=</span><span class="ot">FALSE</span>, <span class="dt">digits=</span><span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" title="1"><span class="co"># cp = complexity parameter, smaller → more complex tree</span></a>
+<a class="sourceLine" id="cb177-2" title="2">t2 &lt;-<span class="st"> </span><span class="kw">rpart</span>(Y<span class="op">~</span>., <span class="dt">data=</span>XY_train, <span class="dt">method=</span><span class="st">&quot;class&quot;</span>, <span class="dt">cp=</span><span class="fl">0.1</span>)</a>
+<a class="sourceLine" id="cb177-3" title="3"><span class="kw">rpart.plot</span>(t2, <span class="dt">tweak=</span><span class="fl">1.1</span>, <span class="dt">fallen.leaves=</span><span class="ot">FALSE</span>, <span class="dt">digits=</span><span class="dv">3</span>)</a></code></pre></div>
 <div class="figure">
 <img src="04-trees-figures/plot_rpart222-1.svg" alt="Figure 6: A (simpler) decision tree for the white_wines dataset" id="fig:plot_rpart222" />
 <p class="caption">Figure 6: A (simpler) decision tree for the <code>white_wines</code> dataset</p>
 </div>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" title="1"><span class="co"># cp = complexity parameter, smaller → more complex tree</span></a>
-<a class="sourceLine" id="cb179-2" title="2">t3 &lt;-<span class="st"> </span><span class="kw">rpart</span>(Y<span class="op">~</span>., <span class="dt">data=</span>XY_train, <span class="dt">method=</span><span class="st">&quot;class&quot;</span>, <span class="dt">cp=</span><span class="fl">0.00001</span>)</a>
-<a class="sourceLine" id="cb179-3" title="3"><span class="kw">rpart.plot</span>(t3, <span class="dt">tweak=</span><span class="fl">1.1</span>, <span class="dt">fallen.leaves=</span><span class="ot">FALSE</span>, <span class="dt">digits=</span><span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" title="1"><span class="co"># cp = complexity parameter, smaller → more complex tree</span></a>
+<a class="sourceLine" id="cb178-2" title="2">t3 &lt;-<span class="st"> </span><span class="kw">rpart</span>(Y<span class="op">~</span>., <span class="dt">data=</span>XY_train, <span class="dt">method=</span><span class="st">&quot;class&quot;</span>, <span class="dt">cp=</span><span class="fl">0.00001</span>)</a>
+<a class="sourceLine" id="cb178-3" title="3"><span class="kw">rpart.plot</span>(t3, <span class="dt">tweak=</span><span class="fl">1.1</span>, <span class="dt">fallen.leaves=</span><span class="ot">FALSE</span>, <span class="dt">digits=</span><span class="dv">3</span>)</a></code></pre></div>
 <div class="figure">
 <img src="04-trees-figures/tree333-1.svg" alt="Figure 7: A (more complex) decision tree for the white_wines dataset" id="fig:tree333" />
 <p class="caption">Figure 7: A (more complex) decision tree for the <code>white_wines</code> dataset</p>
@@ -799,20 +799,20 @@ Well note how these two distributions are shifted:
 
 -->
 <p>Let’s make some predictions:</p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" title="1">Y_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(t1, XY_test, <span class="dt">type=</span><span class="st">&quot;class&quot;</span>)</a>
-<a class="sourceLine" id="cb180-2" title="2"><span class="kw">get_metrics</span>(Y_pred, Y_test)</a></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" title="1">Y_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(t1, XY_test, <span class="dt">type=</span><span class="st">&quot;class&quot;</span>)</a>
+<a class="sourceLine" id="cb179-2" title="2"><span class="kw">get_metrics</span>(Y_pred, Y_test)</a></code></pre></div>
 <pre><code>##        Acc       Prec        Rec          F         TN         FN 
 ##    0.92857    0.80623    0.73502    0.76898 1587.00000   84.00000 
 ##         FP         TP 
 ##   56.00000  233.00000</code></pre>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" title="1">Y_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(t2, XY_test, <span class="dt">type=</span><span class="st">&quot;class&quot;</span>)</a>
-<a class="sourceLine" id="cb182-2" title="2"><span class="kw">get_metrics</span>(Y_pred, Y_test)</a></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" title="1">Y_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(t2, XY_test, <span class="dt">type=</span><span class="st">&quot;class&quot;</span>)</a>
+<a class="sourceLine" id="cb181-2" title="2"><span class="kw">get_metrics</span>(Y_pred, Y_test)</a></code></pre></div>
 <pre><code>##        Acc       Prec        Rec          F         TN         FN 
 ##    0.90255    0.83871    0.49211    0.62028 1613.00000  161.00000 
 ##         FP         TP 
 ##   30.00000  156.00000</code></pre>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" title="1">Y_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(t3, XY_test, <span class="dt">type=</span><span class="st">&quot;class&quot;</span>)</a>
-<a class="sourceLine" id="cb184-2" title="2"><span class="kw">get_metrics</span>(Y_pred, Y_test)</a></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" title="1">Y_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(t3, XY_test, <span class="dt">type=</span><span class="st">&quot;class&quot;</span>)</a>
+<a class="sourceLine" id="cb183-2" title="2"><span class="kw">get_metrics</span>(Y_pred, Y_test)</a></code></pre></div>
 <pre><code>##        Acc       Prec        Rec          F         TN         FN 
 ##    0.91837    0.73433    0.77603    0.75460 1554.00000   71.00000 
 ##         FP         TP 
@@ -823,7 +823,7 @@ Well note how these two distributions are shifted:
 about the importance degrees of each independent variable.</p>
 </dd>
 </dl>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" title="1">t1<span class="op">$</span>variable.importance<span class="op">/</span><span class="kw">sum</span>(t1<span class="op">$</span>variable.importance)</a></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" title="1">t1<span class="op">$</span>variable.importance<span class="op">/</span><span class="kw">sum</span>(t1<span class="op">$</span>variable.importance)</a></code></pre></div>
 <pre><code>##              density       residual.sugar        fixed.acidity 
 ##            0.6562490            0.1984221            0.0305167 
 ##            chlorides                   pH     volatile.acidity 
@@ -853,15 +853,15 @@ about the importance degrees of each independent variable.</p>
 <h3><span class="header-section-number">4.3.1</span> EdStats – Where Girls Are Better at Maths Than Boys?</h3>
 <p>In this task we will consider the “wide” version of the EdStats
 dataset:</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb188-1" title="1">edstats &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/edstats_2019_wide.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb188-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
-<a class="sourceLine" id="cb188-3" title="3">edstats[<span class="dv">1</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" title="1">edstats &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/edstats_2019_wide.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb187-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
+<a class="sourceLine" id="cb187-3" title="3">edstats[<span class="dv">1</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>]</a></code></pre></div>
 <pre><code>##   CountryName HD.HCI.AMRT HD.HCI.AMRT.FE HD.HCI.AMRT.MA HD.HCI.EYRS
 ## 1 Afghanistan      0.7797         0.8018         0.7597        8.58
 ##   HD.HCI.EYRS.FE
 ## 1           6.73</code></pre>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" title="1">meta &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/edstats_meta.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb190-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" title="1">meta &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/edstats_meta.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb189-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a></code></pre></div>
 <p>This dataset is small, moreover, we’ll be more interested in the description
 (understanding) of data, not prediction of the response variable
 to unobserved samples. Note that we have the <em>population</em> of the World
@@ -881,29 +881,29 @@ mathematics scale is greater than the corresponding indicator for the male ones.
 <details class="solution"><summary style="color: blue">Click here for a solution.</summary>
 <p>Recall that a conversion of a logical value to a number
 yields 1 for <code>TRUE</code> and <code>0</code> for <code>FALSE</code>. Hence:</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" title="1">edstats<span class="op">$</span>girls_rule_maths &lt;-</a>
-<a class="sourceLine" id="cb191-2" title="2"><span class="st">    </span><span class="kw">factor</span>(<span class="kw">as.numeric</span>(</a>
-<a class="sourceLine" id="cb191-3" title="3">        edstats<span class="op">$</span>LO.PISA.MAT.FE<span class="op">&gt;</span>edstats<span class="op">$</span>LO.PISA.MAT.MA</a>
-<a class="sourceLine" id="cb191-4" title="4">    ))</a>
-<a class="sourceLine" id="cb191-5" title="5"><span class="kw">head</span>(edstats<span class="op">$</span>girls_rule_maths, <span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" title="1">edstats<span class="op">$</span>girls_rule_maths &lt;-</a>
+<a class="sourceLine" id="cb190-2" title="2"><span class="st">    </span><span class="kw">factor</span>(<span class="kw">as.numeric</span>(</a>
+<a class="sourceLine" id="cb190-3" title="3">        edstats<span class="op">$</span>LO.PISA.MAT.FE<span class="op">&gt;</span>edstats<span class="op">$</span>LO.PISA.MAT.MA</a>
+<a class="sourceLine" id="cb190-4" title="4">    ))</a>
+<a class="sourceLine" id="cb190-5" title="5"><span class="kw">head</span>(edstats<span class="op">$</span>girls_rule_maths, <span class="dv">10</span>)</a></code></pre></div>
 <pre><code>##  [1] &lt;NA&gt; 1    1    &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; 0    &lt;NA&gt;
 ## Levels: 0 1</code></pre>
 <p>Unfortunately, there are many missing values in the dataset.
 More precisely:</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" title="1"><span class="kw">sum</span>(<span class="kw">is.na</span>(edstats<span class="op">$</span>girls_rule_maths)) <span class="co"># count</span></a></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" title="1"><span class="kw">sum</span>(<span class="kw">is.na</span>(edstats<span class="op">$</span>girls_rule_maths)) <span class="co"># count</span></a></code></pre></div>
 <pre><code>## [1] 187</code></pre>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" title="1"><span class="kw">mean</span>(<span class="kw">is.na</span>(edstats<span class="op">$</span>girls_rule_maths)) <span class="co"># proportion</span></a></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" title="1"><span class="kw">mean</span>(<span class="kw">is.na</span>(edstats<span class="op">$</span>girls_rule_maths)) <span class="co"># proportion</span></a></code></pre></div>
 <pre><code>## [1] 0.69776</code></pre>
 <p>Countries such as Egypt, India, Iran or Venezuela
 are not amongst the 79 members of the Programme for International
 Student Assessment. Thus, we’ll have to deal with the data we have.</p>
 <p>The percentage of counties where “girls rule” is equal to:</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" title="1"><span class="kw">mean</span>(edstats<span class="op">$</span>girls_rule_maths<span class="op">==</span><span class="dv">1</span>, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" title="1"><span class="kw">mean</span>(edstats<span class="op">$</span>girls_rule_maths<span class="op">==</span><span class="dv">1</span>, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## [1] 0.33333</code></pre>
 <p>Here is the list of those counties:</p>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" title="1"><span class="kw">as.character</span>(<span class="kw">na.omit</span>(</a>
-<a class="sourceLine" id="cb199-2" title="2">    edstats[edstats<span class="op">$</span>girls_rule_maths<span class="op">==</span><span class="dv">1</span>, <span class="st">&quot;CountryName&quot;</span>]</a>
-<a class="sourceLine" id="cb199-3" title="3">))</a></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" title="1"><span class="kw">as.character</span>(<span class="kw">na.omit</span>(</a>
+<a class="sourceLine" id="cb198-2" title="2">    edstats[edstats<span class="op">$</span>girls_rule_maths<span class="op">==</span><span class="dv">1</span>, <span class="st">&quot;CountryName&quot;</span>]</a>
+<a class="sourceLine" id="cb198-3" title="3">))</a></code></pre></div>
 <pre><code>##  [1] &quot;Albania&quot;              &quot;Algeria&quot;             
 ##  [3] &quot;Brunei Darussalam&quot;    &quot;Bulgaria&quot;            
 ##  [5] &quot;Cyprus&quot;               &quot;Dominican Republic&quot;  
@@ -926,15 +926,15 @@ girls are better at maths than boys and assess the quality of this classifier.</
 <details class="solution"><summary style="color: blue">Click here for a solution.</summary>
 <p>Let’s first create a subset of <code>edstats</code> that doesn’t include
 the country names as well as the boys’ and girls’ math scores.</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" title="1">edstats_subset &lt;-<span class="st"> </span>edstats[<span class="op">!</span>(<span class="kw">names</span>(edstats) <span class="op">%in%</span></a>
-<a class="sourceLine" id="cb201-2" title="2"><span class="st">    </span><span class="kw">c</span>(<span class="st">&quot;CountryName&quot;</span>, <span class="st">&quot;LO.PISA.MAT.FE&quot;</span>, <span class="st">&quot;LO.PISA.MAT.MA&quot;</span>))]</a></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" title="1">edstats_subset &lt;-<span class="st"> </span>edstats[<span class="op">!</span>(<span class="kw">names</span>(edstats) <span class="op">%in%</span></a>
+<a class="sourceLine" id="cb200-2" title="2"><span class="st">    </span><span class="kw">c</span>(<span class="st">&quot;CountryName&quot;</span>, <span class="st">&quot;LO.PISA.MAT.FE&quot;</span>, <span class="st">&quot;LO.PISA.MAT.MA&quot;</span>))]</a></code></pre></div>
 <p>Fitting and plotting (see Figure <a href="decision-and-regression-trees.html#fig:girlsboys7tree">8</a>)
 of the tree can be performed as follows:</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" title="1"><span class="kw">library</span>(<span class="st">&quot;rpart&quot;</span>)</a>
-<a class="sourceLine" id="cb202-2" title="2"><span class="kw">library</span>(<span class="st">&quot;rpart.plot&quot;</span>)</a>
-<a class="sourceLine" id="cb202-3" title="3">tree &lt;-<span class="st"> </span><span class="kw">rpart</span>(girls_rule_maths<span class="op">~</span>., <span class="dt">data=</span>edstats_subset,</a>
-<a class="sourceLine" id="cb202-4" title="4">    <span class="dt">method=</span><span class="st">&quot;class&quot;</span>, <span class="dt">model=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb202-5" title="5"><span class="kw">rpart.plot</span>(tree)</a></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" title="1"><span class="kw">library</span>(<span class="st">&quot;rpart&quot;</span>)</a>
+<a class="sourceLine" id="cb201-2" title="2"><span class="kw">library</span>(<span class="st">&quot;rpart.plot&quot;</span>)</a>
+<a class="sourceLine" id="cb201-3" title="3">tree &lt;-<span class="st"> </span><span class="kw">rpart</span>(girls_rule_maths<span class="op">~</span>., <span class="dt">data=</span>edstats_subset,</a>
+<a class="sourceLine" id="cb201-4" title="4">    <span class="dt">method=</span><span class="st">&quot;class&quot;</span>, <span class="dt">model=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb201-5" title="5"><span class="kw">rpart.plot</span>(tree)</a></code></pre></div>
 <div class="figure">
 <img src="04-trees-figures/girlsboys7tree-1.svg" alt="Figure 8: A decision tree explaining the girls_rule_maths variable" id="fig:girlsboys7tree" />
 <p class="caption">Figure 8: A decision tree explaining the <code>girls_rule_maths</code> variable</p>
@@ -944,22 +944,22 @@ of the tree can be performed as follows:</p>
 story around it. Whether or not it is actually true – is a different… story.</p>
 <p>To compute the basic classifier performance scores,
 let’s recall the <code>get_metrics()</code> function:</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" title="1">get_metrics &lt;-<span class="st"> </span><span class="cf">function</span>(Y_pred, Y_test)</a>
-<a class="sourceLine" id="cb203-2" title="2">{</a>
-<a class="sourceLine" id="cb203-3" title="3">    C &lt;-<span class="st"> </span><span class="kw">table</span>(Y_pred, Y_test) <span class="co"># confusion matrix</span></a>
-<a class="sourceLine" id="cb203-4" title="4">    <span class="kw">stopifnot</span>(<span class="kw">dim</span>(C) <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb203-5" title="5">    <span class="kw">c</span>(<span class="dt">Acc=</span>(C[<span class="dv">1</span>,<span class="dv">1</span>]<span class="op">+</span>C[<span class="dv">2</span>,<span class="dv">2</span>])<span class="op">/</span><span class="kw">sum</span>(C), <span class="co"># accuracy</span></a>
-<a class="sourceLine" id="cb203-6" title="6">      <span class="dt">Prec=</span>C[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">/</span>(C[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">+</span>C[<span class="dv">2</span>,<span class="dv">1</span>]), <span class="co"># precision</span></a>
-<a class="sourceLine" id="cb203-7" title="7">      <span class="dt">Rec=</span>C[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">/</span>(C[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">+</span>C[<span class="dv">1</span>,<span class="dv">2</span>]), <span class="co"># recall</span></a>
-<a class="sourceLine" id="cb203-8" title="8">      <span class="dt">F=</span>C[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">/</span>(C[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">+</span><span class="fl">0.5</span><span class="op">*</span>C[<span class="dv">1</span>,<span class="dv">2</span>]<span class="op">+</span><span class="fl">0.5</span><span class="op">*</span>C[<span class="dv">2</span>,<span class="dv">1</span>]), <span class="co"># F-measure</span></a>
-<a class="sourceLine" id="cb203-9" title="9">      <span class="co"># Confusion matrix items:</span></a>
-<a class="sourceLine" id="cb203-10" title="10">      <span class="dt">TN=</span>C[<span class="dv">1</span>,<span class="dv">1</span>], <span class="dt">FN=</span>C[<span class="dv">1</span>,<span class="dv">2</span>],</a>
-<a class="sourceLine" id="cb203-11" title="11">      <span class="dt">FP=</span>C[<span class="dv">2</span>,<span class="dv">1</span>], <span class="dt">TP=</span>C[<span class="dv">2</span>,<span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb203-12" title="12">    ) <span class="co"># return a named vector</span></a>
-<a class="sourceLine" id="cb203-13" title="13">}</a></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" title="1">get_metrics &lt;-<span class="st"> </span><span class="cf">function</span>(Y_pred, Y_test)</a>
+<a class="sourceLine" id="cb202-2" title="2">{</a>
+<a class="sourceLine" id="cb202-3" title="3">    C &lt;-<span class="st"> </span><span class="kw">table</span>(Y_pred, Y_test) <span class="co"># confusion matrix</span></a>
+<a class="sourceLine" id="cb202-4" title="4">    <span class="kw">stopifnot</span>(<span class="kw">dim</span>(C) <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb202-5" title="5">    <span class="kw">c</span>(<span class="dt">Acc=</span>(C[<span class="dv">1</span>,<span class="dv">1</span>]<span class="op">+</span>C[<span class="dv">2</span>,<span class="dv">2</span>])<span class="op">/</span><span class="kw">sum</span>(C), <span class="co"># accuracy</span></a>
+<a class="sourceLine" id="cb202-6" title="6">      <span class="dt">Prec=</span>C[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">/</span>(C[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">+</span>C[<span class="dv">2</span>,<span class="dv">1</span>]), <span class="co"># precision</span></a>
+<a class="sourceLine" id="cb202-7" title="7">      <span class="dt">Rec=</span>C[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">/</span>(C[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">+</span>C[<span class="dv">1</span>,<span class="dv">2</span>]), <span class="co"># recall</span></a>
+<a class="sourceLine" id="cb202-8" title="8">      <span class="dt">F=</span>C[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">/</span>(C[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">+</span><span class="fl">0.5</span><span class="op">*</span>C[<span class="dv">1</span>,<span class="dv">2</span>]<span class="op">+</span><span class="fl">0.5</span><span class="op">*</span>C[<span class="dv">2</span>,<span class="dv">1</span>]), <span class="co"># F-measure</span></a>
+<a class="sourceLine" id="cb202-9" title="9">      <span class="co"># Confusion matrix items:</span></a>
+<a class="sourceLine" id="cb202-10" title="10">      <span class="dt">TN=</span>C[<span class="dv">1</span>,<span class="dv">1</span>], <span class="dt">FN=</span>C[<span class="dv">1</span>,<span class="dv">2</span>],</a>
+<a class="sourceLine" id="cb202-11" title="11">      <span class="dt">FP=</span>C[<span class="dv">2</span>,<span class="dv">1</span>], <span class="dt">TP=</span>C[<span class="dv">2</span>,<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb202-12" title="12">    ) <span class="co"># return a named vector</span></a>
+<a class="sourceLine" id="cb202-13" title="13">}</a></code></pre></div>
 <p>Now we can judge the tree’s character:</p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" title="1">Y_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(tree, edstats_subset, <span class="dt">type=</span><span class="st">&quot;class&quot;</span>)</a>
-<a class="sourceLine" id="cb204-2" title="2"><span class="kw">get_metrics</span>(Y_pred, edstats_subset<span class="op">$</span>girls_rule_maths)</a></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" title="1">Y_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(tree, edstats_subset, <span class="dt">type=</span><span class="st">&quot;class&quot;</span>)</a>
+<a class="sourceLine" id="cb203-2" title="2"><span class="kw">get_metrics</span>(Y_pred, edstats_subset<span class="op">$</span>girls_rule_maths)</a></code></pre></div>
 <pre><code>##      Acc     Prec      Rec        F       TN       FN       FP       TP 
 ##  0.81481  1.00000  0.44444  0.61538 54.00000 15.00000  0.00000 12.00000</code></pre>
 </details>
@@ -968,24 +968,24 @@ let’s recall the <code>get_metrics()</code> function:</p>
 </div>
 <details class="solution"><summary style="color: blue">Click here for a solution.</summary>
 <p>Let’s remove the unwanted variables:</p>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" title="1">edstats_subset &lt;-<span class="st"> </span>edstats[<span class="op">!</span>(<span class="kw">names</span>(edstats) <span class="op">%in%</span></a>
-<a class="sourceLine" id="cb206-2" title="2"><span class="st">    </span><span class="kw">c</span>(<span class="st">&quot;LO.PISA.MAT&quot;</span>, <span class="st">&quot;LO.PISA.MAT.FE&quot;</span>, <span class="st">&quot;LO.PISA.MAT.MA&quot;</span>,</a>
-<a class="sourceLine" id="cb206-3" title="3">      <span class="st">&quot;LO.PISA.REA&quot;</span>, <span class="st">&quot;LO.PISA.REA.FE&quot;</span>, <span class="st">&quot;LO.PISA.REA.MA&quot;</span>,</a>
-<a class="sourceLine" id="cb206-4" title="4">      <span class="st">&quot;LO.PISA.SCI&quot;</span>, <span class="st">&quot;LO.PISA.SCI.FE&quot;</span>, <span class="st">&quot;LO.PISA.SCI.MA&quot;</span>,</a>
-<a class="sourceLine" id="cb206-5" title="5">      <span class="st">&quot;CountryName&quot;</span>))]</a></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" title="1">edstats_subset &lt;-<span class="st"> </span>edstats[<span class="op">!</span>(<span class="kw">names</span>(edstats) <span class="op">%in%</span></a>
+<a class="sourceLine" id="cb205-2" title="2"><span class="st">    </span><span class="kw">c</span>(<span class="st">&quot;LO.PISA.MAT&quot;</span>, <span class="st">&quot;LO.PISA.MAT.FE&quot;</span>, <span class="st">&quot;LO.PISA.MAT.MA&quot;</span>,</a>
+<a class="sourceLine" id="cb205-3" title="3">      <span class="st">&quot;LO.PISA.REA&quot;</span>, <span class="st">&quot;LO.PISA.REA.FE&quot;</span>, <span class="st">&quot;LO.PISA.REA.MA&quot;</span>,</a>
+<a class="sourceLine" id="cb205-4" title="4">      <span class="st">&quot;LO.PISA.SCI&quot;</span>, <span class="st">&quot;LO.PISA.SCI.FE&quot;</span>, <span class="st">&quot;LO.PISA.SCI.MA&quot;</span>,</a>
+<a class="sourceLine" id="cb205-5" title="5">      <span class="st">&quot;CountryName&quot;</span>))]</a></code></pre></div>
 <p>On a side note, this could be done more easily by calling, e.g.,
 <code>stri_startswith_fixed(names(edstats), "LO.PISA")</code> from the <code>stringi</code> package.</p>
 <p>Fitting and plotting (see Figure <a href="decision-and-regression-trees.html#fig:girlsboys11tree">9</a>) of the tree:</p>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" title="1">tree &lt;-<span class="st"> </span><span class="kw">rpart</span>(girls_rule_maths<span class="op">~</span>., <span class="dt">data=</span>edstats_subset,</a>
-<a class="sourceLine" id="cb207-2" title="2">    <span class="dt">method=</span><span class="st">&quot;class&quot;</span>, <span class="dt">model=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb207-3" title="3"><span class="kw">rpart.plot</span>(tree)</a></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" title="1">tree &lt;-<span class="st"> </span><span class="kw">rpart</span>(girls_rule_maths<span class="op">~</span>., <span class="dt">data=</span>edstats_subset,</a>
+<a class="sourceLine" id="cb206-2" title="2">    <span class="dt">method=</span><span class="st">&quot;class&quot;</span>, <span class="dt">model=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb206-3" title="3"><span class="kw">rpart.plot</span>(tree)</a></code></pre></div>
 <div class="figure">
 <img src="04-trees-figures/girlsboys11tree-1.svg" alt="Figure 9: Another decision tree explaining the girls_rule_maths variable" id="fig:girlsboys11tree" />
 <p class="caption">Figure 9: Another decision tree explaining the <code>girls_rule_maths</code> variable</p>
 </div>
 <p>Performance metrics:</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" title="1">Y_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(tree, edstats, <span class="dt">type=</span><span class="st">&quot;class&quot;</span>)</a>
-<a class="sourceLine" id="cb208-2" title="2"><span class="kw">get_metrics</span>(Y_pred, edstats_subset<span class="op">$</span>girls_rule_maths)</a></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" title="1">Y_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(tree, edstats, <span class="dt">type=</span><span class="st">&quot;class&quot;</span>)</a>
+<a class="sourceLine" id="cb207-2" title="2"><span class="kw">get_metrics</span>(Y_pred, edstats_subset<span class="op">$</span>girls_rule_maths)</a></code></pre></div>
 <pre><code>##      Acc     Prec      Rec        F       TN       FN       FP       TP 
 ##  0.79012  0.69231  0.66667  0.67925 46.00000  9.00000  8.00000 18.00000</code></pre>
 <p>It’s interesting to note that some of the
@@ -998,10 +998,10 @@ goodness-of-fit measures are actually higher now.</p>
 <p>In the course of our data science journey, we have considered two datasets
 dealing with country-level indicators: the World Factbook and
 World Bank’s EdStats.</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" title="1">factbook &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/world_factbook_2020.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb210-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
-<a class="sourceLine" id="cb210-3" title="3">edstats &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/edstats_2019_wide.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb210-4" title="4">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" title="1">factbook &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/world_factbook_2020.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb209-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
+<a class="sourceLine" id="cb209-3" title="3">edstats &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/edstats_2019_wide.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb209-4" title="4">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a></code></pre></div>
 <p>Let’s combine the information they provide
 and see if we come up with a better model of where
 girls’ math scores are higher.</p>
@@ -1016,58 +1016,58 @@ Myanmar vs. Burma, etc. Resolve these conflicts as best you can.</p>
 </div>
 <details class="solution"><summary style="color: blue">Click here for a solution.</summary>
 <p>To get a list of the mismatched country names, we can call either:</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" title="1">factbook<span class="op">$</span>country[<span class="op">!</span>(factbook<span class="op">$</span>country <span class="op">%in%</span><span class="st"> </span>edstats<span class="op">$</span>CountryName)]</a></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" title="1">factbook<span class="op">$</span>country[<span class="op">!</span>(factbook<span class="op">$</span>country <span class="op">%in%</span><span class="st"> </span>edstats<span class="op">$</span>CountryName)]</a></code></pre></div>
 <p>or:</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" title="1">edstats<span class="op">$</span>CountryName[<span class="op">!</span>(edstats<span class="op">$</span>CountryName <span class="op">%in%</span><span class="st"> </span>factbook<span class="op">$</span>country)]</a></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" title="1">edstats<span class="op">$</span>CountryName[<span class="op">!</span>(edstats<span class="op">$</span>CountryName <span class="op">%in%</span><span class="st"> </span>factbook<span class="op">$</span>country)]</a></code></pre></div>
 <p>Unfortunately, the data need to be cleaned manually – it’s a tedious task.
 The following consists of what we hope are the best matches
 between the two datasets (yet, the list is not perfect;
 in particular, the Republic of North Macedonia
 is completely missing in one of the datasets):</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" title="1">from_to &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">ncol=</span><span class="dv">2</span>, <span class="dt">byrow=</span><span class="ot">TRUE</span>, <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb213-2" title="2"><span class="co"># FROM (edstats)                  # TO (factbook)</span></a>
-<a class="sourceLine" id="cb213-3" title="3"><span class="st">&quot;Brunei Darussalam&quot;</span>             , <span class="st">&quot;Brunei&quot;</span>                            ,</a>
-<a class="sourceLine" id="cb213-4" title="4"><span class="st">&quot;Congo, Dem. Rep.&quot;</span>              , <span class="st">&quot;Congo, Democratic Republic of the&quot;</span> ,</a>
-<a class="sourceLine" id="cb213-5" title="5"><span class="st">&quot;Congo, Rep.&quot;</span>                   , <span class="st">&quot;Congo, Republic of the&quot;</span>            ,</a>
-<a class="sourceLine" id="cb213-6" title="6"><span class="st">&quot;Czech Republic&quot;</span>                , <span class="st">&quot;Czechia&quot;</span>                           ,</a>
-<a class="sourceLine" id="cb213-7" title="7"><span class="st">&quot;Egypt, Arab Rep.&quot;</span>              , <span class="st">&quot;Egypt&quot;</span>                             ,</a>
-<a class="sourceLine" id="cb213-8" title="8"><span class="st">&quot;Hong Kong SAR, China&quot;</span>          , <span class="st">&quot;Hong Kong&quot;</span>                         ,</a>
-<a class="sourceLine" id="cb213-9" title="9"><span class="st">&quot;Iran, Islamic Rep.&quot;</span>            , <span class="st">&quot;Iran&quot;</span>                              ,</a>
-<a class="sourceLine" id="cb213-10" title="10"><span class="st">&quot;Korea, Dem. People’s Rep.&quot;</span>     , <span class="st">&quot;Korea, North&quot;</span>                      ,</a>
-<a class="sourceLine" id="cb213-11" title="11"><span class="st">&quot;Korea, Rep.&quot;</span>                   , <span class="st">&quot;Korea, South&quot;</span>                      ,</a>
-<a class="sourceLine" id="cb213-12" title="12"><span class="st">&quot;Kyrgyz Republic&quot;</span>               , <span class="st">&quot;Kyrgyzstan&quot;</span>                        ,</a>
-<a class="sourceLine" id="cb213-13" title="13"><span class="st">&quot;Lao PDR&quot;</span>                       , <span class="st">&quot;Laos&quot;</span>                              ,</a>
-<a class="sourceLine" id="cb213-14" title="14"><span class="st">&quot;Macao SAR, China&quot;</span>              , <span class="st">&quot;Macau&quot;</span>                             ,</a>
-<a class="sourceLine" id="cb213-15" title="15"><span class="st">&quot;Micronesia, Fed. Sts.&quot;</span>         , <span class="st">&quot;Micronesia, Federated States of&quot;</span>   ,</a>
-<a class="sourceLine" id="cb213-16" title="16"><span class="st">&quot;Myanmar&quot;</span>                       , <span class="st">&quot;Burma&quot;</span>                             ,</a>
-<a class="sourceLine" id="cb213-17" title="17"><span class="st">&quot;Russian Federation&quot;</span>            , <span class="st">&quot;Russia&quot;</span>                            ,</a>
-<a class="sourceLine" id="cb213-18" title="18"><span class="st">&quot;Slovak Republic&quot;</span>               , <span class="st">&quot;Slovakia&quot;</span>                          ,</a>
-<a class="sourceLine" id="cb213-19" title="19"><span class="st">&quot;St. Kitts and Nevis&quot;</span>           , <span class="st">&quot;Saint Kitts and Nevis&quot;</span>             ,</a>
-<a class="sourceLine" id="cb213-20" title="20"><span class="st">&quot;St. Lucia&quot;</span>                     , <span class="st">&quot;Saint Lucia&quot;</span>                       ,</a>
-<a class="sourceLine" id="cb213-21" title="21"><span class="st">&quot;St. Martin (French part)&quot;</span>      , <span class="st">&quot;Saint Martin&quot;</span>                      ,</a>
-<a class="sourceLine" id="cb213-22" title="22"><span class="st">&quot;St. Vincent and the Grenadines&quot;</span>, <span class="st">&quot;Saint Vincent and the Grenadines&quot;</span>  ,</a>
-<a class="sourceLine" id="cb213-23" title="23"><span class="st">&quot;Syrian Arab Republic&quot;</span>          , <span class="st">&quot;Syria&quot;</span>                             ,</a>
-<a class="sourceLine" id="cb213-24" title="24"><span class="st">&quot;Venezuela, RB&quot;</span>                 , <span class="st">&quot;Venezuela&quot;</span>                         ,</a>
-<a class="sourceLine" id="cb213-25" title="25"><span class="st">&quot;Virgin Islands (U.S.)&quot;</span>         , <span class="st">&quot;Virgin Islands&quot;</span>                    ,</a>
-<a class="sourceLine" id="cb213-26" title="26"><span class="st">&quot;Yemen, Rep.&quot;</span>                   , <span class="st">&quot;Yemen&quot;</span></a>
-<a class="sourceLine" id="cb213-27" title="27">))</a></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb212-1" title="1">from_to &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">ncol=</span><span class="dv">2</span>, <span class="dt">byrow=</span><span class="ot">TRUE</span>, <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb212-2" title="2"><span class="co"># FROM (edstats)                  # TO (factbook)</span></a>
+<a class="sourceLine" id="cb212-3" title="3"><span class="st">&quot;Brunei Darussalam&quot;</span>             , <span class="st">&quot;Brunei&quot;</span>                            ,</a>
+<a class="sourceLine" id="cb212-4" title="4"><span class="st">&quot;Congo, Dem. Rep.&quot;</span>              , <span class="st">&quot;Congo, Democratic Republic of the&quot;</span> ,</a>
+<a class="sourceLine" id="cb212-5" title="5"><span class="st">&quot;Congo, Rep.&quot;</span>                   , <span class="st">&quot;Congo, Republic of the&quot;</span>            ,</a>
+<a class="sourceLine" id="cb212-6" title="6"><span class="st">&quot;Czech Republic&quot;</span>                , <span class="st">&quot;Czechia&quot;</span>                           ,</a>
+<a class="sourceLine" id="cb212-7" title="7"><span class="st">&quot;Egypt, Arab Rep.&quot;</span>              , <span class="st">&quot;Egypt&quot;</span>                             ,</a>
+<a class="sourceLine" id="cb212-8" title="8"><span class="st">&quot;Hong Kong SAR, China&quot;</span>          , <span class="st">&quot;Hong Kong&quot;</span>                         ,</a>
+<a class="sourceLine" id="cb212-9" title="9"><span class="st">&quot;Iran, Islamic Rep.&quot;</span>            , <span class="st">&quot;Iran&quot;</span>                              ,</a>
+<a class="sourceLine" id="cb212-10" title="10"><span class="st">&quot;Korea, Dem. People’s Rep.&quot;</span>     , <span class="st">&quot;Korea, North&quot;</span>                      ,</a>
+<a class="sourceLine" id="cb212-11" title="11"><span class="st">&quot;Korea, Rep.&quot;</span>                   , <span class="st">&quot;Korea, South&quot;</span>                      ,</a>
+<a class="sourceLine" id="cb212-12" title="12"><span class="st">&quot;Kyrgyz Republic&quot;</span>               , <span class="st">&quot;Kyrgyzstan&quot;</span>                        ,</a>
+<a class="sourceLine" id="cb212-13" title="13"><span class="st">&quot;Lao PDR&quot;</span>                       , <span class="st">&quot;Laos&quot;</span>                              ,</a>
+<a class="sourceLine" id="cb212-14" title="14"><span class="st">&quot;Macao SAR, China&quot;</span>              , <span class="st">&quot;Macau&quot;</span>                             ,</a>
+<a class="sourceLine" id="cb212-15" title="15"><span class="st">&quot;Micronesia, Fed. Sts.&quot;</span>         , <span class="st">&quot;Micronesia, Federated States of&quot;</span>   ,</a>
+<a class="sourceLine" id="cb212-16" title="16"><span class="st">&quot;Myanmar&quot;</span>                       , <span class="st">&quot;Burma&quot;</span>                             ,</a>
+<a class="sourceLine" id="cb212-17" title="17"><span class="st">&quot;Russian Federation&quot;</span>            , <span class="st">&quot;Russia&quot;</span>                            ,</a>
+<a class="sourceLine" id="cb212-18" title="18"><span class="st">&quot;Slovak Republic&quot;</span>               , <span class="st">&quot;Slovakia&quot;</span>                          ,</a>
+<a class="sourceLine" id="cb212-19" title="19"><span class="st">&quot;St. Kitts and Nevis&quot;</span>           , <span class="st">&quot;Saint Kitts and Nevis&quot;</span>             ,</a>
+<a class="sourceLine" id="cb212-20" title="20"><span class="st">&quot;St. Lucia&quot;</span>                     , <span class="st">&quot;Saint Lucia&quot;</span>                       ,</a>
+<a class="sourceLine" id="cb212-21" title="21"><span class="st">&quot;St. Martin (French part)&quot;</span>      , <span class="st">&quot;Saint Martin&quot;</span>                      ,</a>
+<a class="sourceLine" id="cb212-22" title="22"><span class="st">&quot;St. Vincent and the Grenadines&quot;</span>, <span class="st">&quot;Saint Vincent and the Grenadines&quot;</span>  ,</a>
+<a class="sourceLine" id="cb212-23" title="23"><span class="st">&quot;Syrian Arab Republic&quot;</span>          , <span class="st">&quot;Syria&quot;</span>                             ,</a>
+<a class="sourceLine" id="cb212-24" title="24"><span class="st">&quot;Venezuela, RB&quot;</span>                 , <span class="st">&quot;Venezuela&quot;</span>                         ,</a>
+<a class="sourceLine" id="cb212-25" title="25"><span class="st">&quot;Virgin Islands (U.S.)&quot;</span>         , <span class="st">&quot;Virgin Islands&quot;</span>                    ,</a>
+<a class="sourceLine" id="cb212-26" title="26"><span class="st">&quot;Yemen, Rep.&quot;</span>                   , <span class="st">&quot;Yemen&quot;</span></a>
+<a class="sourceLine" id="cb212-27" title="27">))</a></code></pre></div>
 <p>Conversion of the names:</p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" title="1"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(from_to)) {</a>
-<a class="sourceLine" id="cb214-2" title="2">    edstats<span class="op">$</span>CountryName[edstats<span class="op">$</span>CountryName<span class="op">==</span>from_to[i,<span class="dv">1</span>]] &lt;-<span class="st"> </span>from_to[i,<span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb214-3" title="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" title="1"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(from_to)) {</a>
+<a class="sourceLine" id="cb213-2" title="2">    edstats<span class="op">$</span>CountryName[edstats<span class="op">$</span>CountryName<span class="op">==</span>from_to[i,<span class="dv">1</span>]] &lt;-<span class="st"> </span>from_to[i,<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb213-3" title="3">}</a></code></pre></div>
 <p>On a side note (*), this could be done with a single call to
 a function in the <code>stringi</code> package:</p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" title="1"><span class="kw">library</span>(<span class="st">&quot;stringi&quot;</span>)</a>
-<a class="sourceLine" id="cb215-2" title="2">edstats<span class="op">$</span>CountryName &lt;-<span class="st"> </span><span class="kw">stri_replace_all_fixed</span>(edstats<span class="op">$</span>CountryName,</a>
-<a class="sourceLine" id="cb215-3" title="3">    from_to[,<span class="dv">1</span>], from_to[,<span class="dv">2</span>], <span class="dt">vectorize_all=</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" title="1"><span class="kw">library</span>(<span class="st">&quot;stringi&quot;</span>)</a>
+<a class="sourceLine" id="cb214-2" title="2">edstats<span class="op">$</span>CountryName &lt;-<span class="st"> </span><span class="kw">stri_replace_all_fixed</span>(edstats<span class="op">$</span>CountryName,</a>
+<a class="sourceLine" id="cb214-3" title="3">    from_to[,<span class="dv">1</span>], from_to[,<span class="dv">2</span>], <span class="dt">vectorize_all=</span><span class="ot">FALSE</span>)</a></code></pre></div>
 </details>
 <div class="exercise"><strong>Exercise.</strong>
 <p>Merge (join) the two datasets based on the country names.</p>
 </div>
 <details class="solution"><summary style="color: blue">Click here for a solution.</summary>
 <p>This can be done by means of the <code>merge()</code> function.</p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" title="1">edbook &lt;-<span class="st"> </span><span class="kw">merge</span>(edstats, factbook, <span class="dt">by.x=</span><span class="st">&quot;CountryName&quot;</span>, <span class="dt">by.y=</span><span class="st">&quot;country&quot;</span>)</a>
-<a class="sourceLine" id="cb216-2" title="2"><span class="kw">ncol</span>(edbook) <span class="co"># how many columns we have now</span></a></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" title="1">edbook &lt;-<span class="st"> </span><span class="kw">merge</span>(edstats, factbook, <span class="dt">by.x=</span><span class="st">&quot;CountryName&quot;</span>, <span class="dt">by.y=</span><span class="st">&quot;country&quot;</span>)</a>
+<a class="sourceLine" id="cb215-2" title="2"><span class="kw">ncol</span>(edbook) <span class="co"># how many columns we have now</span></a></code></pre></div>
 <pre><code>## [1] 157</code></pre>
 </details>
 <div class="exercise"><strong>Exercise.</strong>
@@ -1076,25 +1076,25 @@ girls are better at maths than boys and assess the quality of this classifier.</
 </div>
 <details class="solution"><summary style="color: blue">Click here for a solution.</summary>
 <p>We proceed as in one of the previous exercises:</p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" title="1">edbook<span class="op">$</span>girls_rule_maths &lt;-</a>
-<a class="sourceLine" id="cb218-2" title="2"><span class="st">    </span><span class="kw">factor</span>(<span class="kw">as.numeric</span>(</a>
-<a class="sourceLine" id="cb218-3" title="3">        edbook<span class="op">$</span>LO.PISA.MAT.FE<span class="op">&gt;</span>edbook<span class="op">$</span>LO.PISA.MAT.MA</a>
-<a class="sourceLine" id="cb218-4" title="4">    ))</a>
-<a class="sourceLine" id="cb218-5" title="5">edbook_subset &lt;-<span class="st"> </span>edbook[<span class="op">!</span>(<span class="kw">names</span>(edbook) <span class="op">%in%</span></a>
-<a class="sourceLine" id="cb218-6" title="6"><span class="st">    </span><span class="kw">c</span>(<span class="st">&quot;CountryName&quot;</span>, <span class="st">&quot;LO.PISA.MAT.FE&quot;</span>, <span class="st">&quot;LO.PISA.MAT.MA&quot;</span>))]</a></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" title="1">edbook<span class="op">$</span>girls_rule_maths &lt;-</a>
+<a class="sourceLine" id="cb217-2" title="2"><span class="st">    </span><span class="kw">factor</span>(<span class="kw">as.numeric</span>(</a>
+<a class="sourceLine" id="cb217-3" title="3">        edbook<span class="op">$</span>LO.PISA.MAT.FE<span class="op">&gt;</span>edbook<span class="op">$</span>LO.PISA.MAT.MA</a>
+<a class="sourceLine" id="cb217-4" title="4">    ))</a>
+<a class="sourceLine" id="cb217-5" title="5">edbook_subset &lt;-<span class="st"> </span>edbook[<span class="op">!</span>(<span class="kw">names</span>(edbook) <span class="op">%in%</span></a>
+<a class="sourceLine" id="cb217-6" title="6"><span class="st">    </span><span class="kw">c</span>(<span class="st">&quot;CountryName&quot;</span>, <span class="st">&quot;LO.PISA.MAT.FE&quot;</span>, <span class="st">&quot;LO.PISA.MAT.MA&quot;</span>))]</a></code></pre></div>
 <p>Fitting and plotting (see Figure <a href="decision-and-regression-trees.html#fig:joinedstats9">10</a>):</p>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" title="1"><span class="kw">library</span>(<span class="st">&quot;rpart&quot;</span>)</a>
-<a class="sourceLine" id="cb219-2" title="2"><span class="kw">library</span>(<span class="st">&quot;rpart.plot&quot;</span>)</a>
-<a class="sourceLine" id="cb219-3" title="3">tree &lt;-<span class="st"> </span><span class="kw">rpart</span>(girls_rule_maths<span class="op">~</span>., <span class="dt">data=</span>edbook_subset,</a>
-<a class="sourceLine" id="cb219-4" title="4">    <span class="dt">method=</span><span class="st">&quot;class&quot;</span>, <span class="dt">model=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb219-5" title="5"><span class="kw">rpart.plot</span>(tree)</a></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" title="1"><span class="kw">library</span>(<span class="st">&quot;rpart&quot;</span>)</a>
+<a class="sourceLine" id="cb218-2" title="2"><span class="kw">library</span>(<span class="st">&quot;rpart.plot&quot;</span>)</a>
+<a class="sourceLine" id="cb218-3" title="3">tree &lt;-<span class="st"> </span><span class="kw">rpart</span>(girls_rule_maths<span class="op">~</span>., <span class="dt">data=</span>edbook_subset,</a>
+<a class="sourceLine" id="cb218-4" title="4">    <span class="dt">method=</span><span class="st">&quot;class&quot;</span>, <span class="dt">model=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb218-5" title="5"><span class="kw">rpart.plot</span>(tree)</a></code></pre></div>
 <div class="figure">
 <img src="04-trees-figures/joinedstats9-1.svg" alt="Figure 10: Yet another decision tree explaining the girls_rule_maths variable" id="fig:joinedstats9" />
 <p class="caption">Figure 10: Yet another decision tree explaining the <code>girls_rule_maths</code> variable</p>
 </div>
 <p>Performance metrics:</p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" title="1">Y_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(tree, edbook_subset, <span class="dt">type=</span><span class="st">&quot;class&quot;</span>)</a>
-<a class="sourceLine" id="cb220-2" title="2"><span class="kw">get_metrics</span>(Y_pred, edbook_subset<span class="op">$</span>girls_rule_maths)</a></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" title="1">Y_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(tree, edbook_subset, <span class="dt">type=</span><span class="st">&quot;class&quot;</span>)</a>
+<a class="sourceLine" id="cb219-2" title="2"><span class="kw">get_metrics</span>(Y_pred, edbook_subset<span class="op">$</span>girls_rule_maths)</a></code></pre></div>
 <pre><code>##      Acc     Prec      Rec        F       TN       FN       FP       TP 
 ##  0.82716  0.78261  0.66667  0.72000 49.00000  9.00000  5.00000 18.00000</code></pre>
 <p>The variables included in the model are:</p>
@@ -1112,9 +1112,9 @@ explorations are of course left as an exercise to the kind reader.</p>
 <div id="wine-quality-random-forest-and-xgboost" class="section level3">
 <h3><span class="header-section-number">4.3.3</span> Wine Quality – Random Forest and XGBoost (*)</h3>
 <p>Let’s consider the Wine Quality dataset:</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb222-1" title="1">wine_quality &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/wine_quality_all.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb222-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
-<a class="sourceLine" id="cb222-3" title="3"><span class="kw">head</span>(wine_quality, <span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" title="1">wine_quality &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/wine_quality_all.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb221-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
+<a class="sourceLine" id="cb221-3" title="3"><span class="kw">head</span>(wine_quality, <span class="dv">3</span>)</a></code></pre></div>
 <pre><code>##   fixed.acidity volatile.acidity citric.acid residual.sugar chlorides
 ## 1           7.4             0.70        0.00            1.9     0.076
 ## 2           7.8             0.88        0.00            2.6     0.098

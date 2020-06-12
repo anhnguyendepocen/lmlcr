@@ -234,11 +234,6 @@ Remark.
 
 
 
-```{r wines_begin}
-wine_quality <- read.csv("datasets/wine_quality_all.csv",
-    comment.char="#")
-pairs(wine_quality[,1:11])
-```
 
 
 For an example, consider the famous Fisher's Iris flower dataset,
