@@ -4,7 +4,7 @@
 
 
 > **This is a draft version (distributed in the hope that it will be useful)
-of the book *Lightweight Machine Learning Classics with R*
+of the book *Machine Learning Classics with R*
 by Marek Gagolewski.**
 
 > **Please submit any feature requests, remarks and bug fixes

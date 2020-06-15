@@ -1,11 +1,11 @@
-# Lightweight Machine Learning Classics with R
+# Machine Learning Classics with R
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3820167.svg)](https://doi.org/10.5281/zenodo.3820167)
 
 Explore some of the most fundamental algorithms which have stood the test of time and provide the basis for innovative solutions in data-driven AI. Learn how to use the R language for implementing various stages of data processing and modelling activities. Appreciate mathematics as the universal language for formalising data-intense problems and communicating their solutions. The book is for you if you're yet to be fluent with university-level linear algebra, calculus and probability theory or you've forgotten all the maths you've ever learned, and are seeking a gentle, yet thorough, introduction to the topic.
 
 > **This is a draft version of the forthcoming book
-*Lightweight Machine Learning Classics with R*
+*Machine Learning Classics with R*
 by [Marek Gagolewski](https://www.gagolewski.com).**
 
 > **Please submit any feature requests, remarks and bug fixes

@@ -1,5 +1,5 @@
 ---
-title: "Lightweight Machine Learning Classics with R"
+title: "Machine Learning Classics with R"
 author: "Marek Gagolewski"
 date: "@DATE@"
 site: bookdown::bookdown_site
