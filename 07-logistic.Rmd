@@ -1,4 +1,4 @@
-# Classification with Linear Models
+# Classification with Linear Models {#chap:logistic}
 
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 

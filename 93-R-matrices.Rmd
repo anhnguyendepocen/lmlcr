@@ -1,4 +1,4 @@
-# Matrix Algebra in R
+# Matrix Algebra in R   {#appendix:rmatrix}
 
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 

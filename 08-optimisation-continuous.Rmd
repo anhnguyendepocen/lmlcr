@@ -1,4 +1,4 @@
-# Continuous Optimisation with Iterative Algorithms
+# Continuous Optimisation with Iterative Algorithms {#chap:optimisation-continuous}
 
 
 

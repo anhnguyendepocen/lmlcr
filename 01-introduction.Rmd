@@ -1,4 +1,4 @@
-# Introduction
+# Introduction {#chap:introduction}
 
 <!-- I have no idea why setting this in the preamble is ignored: -->
 
@@ -158,7 +158,7 @@ learning, as these are the most common  instances.
 
 
 
-## Input Data, $\mathbf{X}$ -- Formalism
+## Input Data, **X** -- Formalism
 
 
 
@@ -198,6 +198,11 @@ Remark.
     *a $p$-dimensional real vector*,
     *a point in a $p$-dimensional real space*,
     or *an element of a real $p$-space* etc.
+
+    Note that we explain the basics of notation convention
+    in Appendix \@ref(appendix:convention).
+
+
 
 At a first glance, such a representation might seem overly simplistic,
 especially if we'd wish to store information on  "very complex" objects.
@@ -243,7 +248,7 @@ or understood.
 This is very powerful -- spend a moment
 contemplating how many real-world situations fit into our framework.
 In particular the last chapters are devoted to the less-obvious data domains,
-for instance for test or image/video data, e.g., a 1920×1080 pixel image
+for instance text or image/video data, e.g., a 1920×1080 pixel image
 can be "unwound" to a "flat" sequence of length 2,073,600.
 
 
@@ -277,7 +282,8 @@ In cases such as this we say that we deal with *structured (tabular) data*
 
 
 For example, let's consider the Wine Quality dataset
-(see Appendix F<!-- TODO -->), that stores information on
+(see Appendix \@ref(appendix:datasets) for more details),
+that stores information on
 11 physicochemical features (amongst others -- see below)
 of ca. 6500 Portuguese wines
 from different wineries.
@@ -442,28 +448,20 @@ think of this as a kind of rotation; it allows us to introduce a set of
 
 Remark.
 
-: A comprehensive introduction to vector and matrix algebra in R
-as well as basic data frame wrangling is provided
-in the Appendices. From now on, we assume that the reader is familiar
-with this material.
+: Details on how to get started with the R environment are provided
+in Appendix \@ref(appendix:rintro).
+A comprehensive introduction to vector and matrix algebra in R
+as well as basic data frame wrangling is given
+in Appendices \@ref(appendix:rvector), \@ref(appendix:rmatrix)
+and \@ref(appendix:rdf).
+From now on, we assume that we are all familiar with this material.
+
+
+
 
 
 ## Unsupervised Learning
 
-
-<!--
-TODO: If this is the first chapter where you use `iris`, tell about it
-
-Definitely some cooler datasets are needed for the Exercises sec.
-
-
-Exercise: dimensionality reduction with auto-encoders?
-
-Exercise: apply genieclust
-
-Exercise: implement MDS with optim?
-
--->
 
 
 In **unsupervised learning** (learning without a teacher),
@@ -566,7 +564,7 @@ plot(iris[,3], iris[,2], ann=FALSE,
 ## Supervised Learning
 
 
-### Desired Outputs, $\mathbf{y}$
+### Desired Outputs, **y**
 
 
 

@@ -1,4 +1,4 @@
-# Vector Algebra in R
+# Vector Algebra in R   {#appendix:rvector}
 
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 

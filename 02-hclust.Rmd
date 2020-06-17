@@ -1,10 +1,20 @@
-# Agglomerative Hierarchical Clustering
+# Agglomerative Hierarchical Clustering {#chap:hclust}
 
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 
 
 
 
+
+<!--
+
+Exercise: dimensionality reduction with auto-encoders?
+
+Exercise: apply genieclust
+
+Exercise: implement MDS with optim?
+
+-->
 
 
 

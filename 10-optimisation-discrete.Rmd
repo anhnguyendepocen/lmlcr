@@ -1,4 +1,4 @@
-# Discrete Optimisation
+# Discrete Optimisation {#chap:optimisation-discrete}
 
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 

@@ -4,7 +4,7 @@
 
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 
-# Notation Convention
+# Notation Convention  {#appendix:convention}
 
 #### Abbreviations {.unnumbered}
 
@@ -45,13 +45,7 @@ IDE = integrated development environment
 
 #### Notation Convention -- Logic and Set Theory {.unnumbered}
 
-
-
-$\forall$ -- for all
-
-$\exists$ -- exists
-
-
+$\in$ -- "is in"
 
 By writing $x \in \{a, b, c\}$  we mean that
 "$x$ is in a set that consists of $a$, $b$ and $c$"
@@ -60,6 +54,12 @@ or "$x$ is either $a$, $b$ or $c$"
 $A\subseteq B$ -- set $A$ is a subset of set $B$
 (every element in $A$ belongs to $B$,
 $x\in A$ implies that $x\in B$)
+
+
+
+$\forall$ -- for all
+
+$\exists$ -- exists
 
 
 

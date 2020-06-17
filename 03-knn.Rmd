@@ -1,4 +1,4 @@
-# Classification and Regression with K-Nearest Neighbours
+# Classification and Regression with K-Nearest Neighbours {#chap:knn}
 
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 

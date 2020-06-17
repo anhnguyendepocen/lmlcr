@@ -1,4 +1,4 @@
-# Simple Linear Regression
+# Simple Linear Regression  {#chap:regression-simple}
 
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 

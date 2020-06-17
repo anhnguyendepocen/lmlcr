@@ -1,4 +1,4 @@
-# Datasets
+# Datasets {#appendix:datasets}
 
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 
@@ -743,7 +743,8 @@ Side note (\*).
     way in the future, that the package we relied on will provide the same API etc.).
 
     Instead, by relaying on a bit deeper knowledge of R programming
-    (which we already have, see Appendices A-D<!-- TODO -->),
+    (which we already have gained, see Appendices \@ref(appendix:rvector),
+     \@ref(appendix:rmatrix) and  \@ref(appendix:rdf)),
     we could implement the relevant procedure manually. The downside is that
     this requires us to get out of our comfort zone and... think.
 
@@ -1053,7 +1054,7 @@ may be cited as follows: "US Department of Agriculture."
 ## Clustering Benchmarks
 
 In the Exercises section of
-Chapter 7<!-- TODO --> we study a few clustering benchmark datasets.
+Chapter XXX<!-- TODO --> we study a few clustering benchmark datasets.
 They are two-dimensional, so that it's possible to visualise
 the obtained results and quality of the obtained clusterings.
 

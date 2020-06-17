@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1 Introduction | Lightweight Machine Learning Classics with R</title>
+  <title>1 Introduction | Machine Learning Classics with R</title>
   <meta name="description" content="Explore some of the most fundamental algorithms which have stood the test of time and provide the basis for innovative solutions in data-driven AI. Learn how to use the R language for implementing various stages of data processing and modelling activities. Appreciate mathematics as the universal language for formalising data-intense problems and communicating their solutions. The book is for you if you’re yet to be fluent with university-level linear algebra, calculus and probability theory or you’ve forgotten all the maths you’ve ever learned, and are seeking a gentle, yet thorough, introduction to the topic." />
   <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1 Introduction | Lightweight Machine Learning Classics with R" />
+  <meta property="og:title" content="1 Introduction | Machine Learning Classics with R" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://lmlcr.gagolewski.com" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="gagolews/lmlcr" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1 Introduction | Lightweight Machine Learning Classics with R" />
+  <meta name="twitter:title" content="1 Introduction | Machine Learning Classics with R" />
   
   <meta name="twitter:description" content="Explore some of the most fundamental algorithms which have stood the test of time and provide the basis for innovative solutions in data-driven AI. Learn how to use the R language for implementing various stages of data processing and modelling activities. Appreciate mathematics as the universal language for formalising data-intense problems and communicating their solutions. The book is for you if you’re yet to be fluent with university-level linear algebra, calculus and probability theory or you’ve forgotten all the maths you’ve ever learned, and are seeking a gentle, yet thorough, introduction to the topic." />
   
@@ -150,12 +150,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.1.1" data-path="introduction.html"><a href="introduction.html#data-sources"><i class="fa fa-check"></i><b>1.1.1</b> Data Sources</a></li>
 <li class="chapter" data-level="1.1.2" data-path="introduction.html"><a href="introduction.html#main-types-of-machine-learning-problems"><i class="fa fa-check"></i><b>1.1.2</b> Main Types of Machine Learning Problems</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#input-data-formalism"><i class="fa fa-check"></i><b>1.2</b> Input Data – Formalism</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#input-data-mathbfx-formalism"><i class="fa fa-check"></i><b>1.2</b> Input Data, <span class="math inline">\(\mathbf{X}\)</span> – Formalism</a></li>
 <li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#unsupervised-learning"><i class="fa fa-check"></i><b>1.3</b> Unsupervised Learning</a><ul>
 <li class="chapter" data-level="1.3.1" data-path="introduction.html"><a href="introduction.html#main-types-of-unsupervised-learning-problems"><i class="fa fa-check"></i><b>1.3.1</b> Main Types of Unsupervised Learning Problems</a></li>
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#supervised-learning"><i class="fa fa-check"></i><b>1.4</b> Supervised Learning</a><ul>
-<li class="chapter" data-level="1.4.1" data-path="introduction.html"><a href="introduction.html#desired-outputs"><i class="fa fa-check"></i><b>1.4.1</b> Desired Outputs</a></li>
+<li class="chapter" data-level="1.4.1" data-path="introduction.html"><a href="introduction.html#desired-outputs-mathbfy"><i class="fa fa-check"></i><b>1.4.1</b> Desired Outputs, <span class="math inline">\(\mathbf{y}\)</span></a></li>
 <li class="chapter" data-level="1.4.2" data-path="introduction.html"><a href="introduction.html#types-of-supervised-learning-problems"><i class="fa fa-check"></i><b>1.4.2</b> Types of Supervised Learning Problems</a></li>
 </ul></li>
 </ul></li>
@@ -524,23 +524,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="E.7" data-path="data-frame-wrangling-in-r.html"><a href="data-frame-wrangling-in-r.html#air-quality"><i class="fa fa-check"></i><b>E.7</b> Air Quality</a></li>
 <li class="chapter" data-level="E.8" data-path="data-frame-wrangling-in-r.html"><a href="data-frame-wrangling-in-r.html#further-reading-14"><i class="fa fa-check"></i><b>E.8</b> Further Reading</a></li>
 </ul></li>
-<li class="chapter" data-level="F" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i><b>F</b> Datasets</a><ul>
-<li class="chapter" data-level="F.1" data-path="datasets.html"><a href="datasets.html#sustainable-society-indices"><i class="fa fa-check"></i><b>F.1</b> Sustainable Society Indices</a></li>
-<li class="chapter" data-level="F.2" data-path="datasets.html"><a href="datasets.html#air-quality-1"><i class="fa fa-check"></i><b>F.2</b> Air Quality</a></li>
-<li class="chapter" data-level="F.3" data-path="datasets.html"><a href="datasets.html#currency-exchange-rates-1"><i class="fa fa-check"></i><b>F.3</b> Currency Exchange Rates</a></li>
-<li class="chapter" data-level="F.4" data-path="datasets.html"><a href="datasets.html#urban-forest-1"><i class="fa fa-check"></i><b>F.4</b> Urban Forest</a></li>
-<li class="chapter" data-level="F.5" data-path="datasets.html"><a href="datasets.html#wine-quality"><i class="fa fa-check"></i><b>F.5</b> Wine Quality</a></li>
-<li class="chapter" data-level="F.6" data-path="datasets.html"><a href="datasets.html#the-world-factbook-countries-of-the-world"><i class="fa fa-check"></i><b>F.6</b> The World Factbook (Countries of the World)</a></li>
-<li class="chapter" data-level="F.7" data-path="datasets.html"><a href="datasets.html#edstats-country-level-education-statistics"><i class="fa fa-check"></i><b>F.7</b> EdStats (Country-Level Education Statistics)</a></li>
-<li class="chapter" data-level="F.8" data-path="datasets.html"><a href="datasets.html#food-and-nutrient-database-for-dietary-studies-fndds"><i class="fa fa-check"></i><b>F.8</b> Food and Nutrient Database for Dietary Studies (FNDDS)</a></li>
-<li class="chapter" data-level="F.9" data-path="datasets.html"><a href="datasets.html#clustering-benchmarks"><i class="fa fa-check"></i><b>F.9</b> Clustering Benchmarks</a></li>
-<li class="chapter" data-level="F.10" data-path="datasets.html"><a href="datasets.html#movie-lens-todo"><i class="fa fa-check"></i><b>F.10</b> Movie Lens (TODO)</a></li>
-<li class="chapter" data-level="F.11" data-path="datasets.html"><a href="datasets.html#other-todo"><i class="fa fa-check"></i><b>F.11</b> Other (TODO)</a></li>
+<li class="chapter" data-level="F" data-path="appendix-datasets.html"><a href="appendix-datasets.html"><i class="fa fa-check"></i><b>F</b> Datasets</a><ul>
+<li class="chapter" data-level="F.1" data-path="appendix-datasets.html"><a href="appendix-datasets.html#sustainable-society-indices"><i class="fa fa-check"></i><b>F.1</b> Sustainable Society Indices</a></li>
+<li class="chapter" data-level="F.2" data-path="appendix-datasets.html"><a href="appendix-datasets.html#air-quality-1"><i class="fa fa-check"></i><b>F.2</b> Air Quality</a></li>
+<li class="chapter" data-level="F.3" data-path="appendix-datasets.html"><a href="appendix-datasets.html#currency-exchange-rates-1"><i class="fa fa-check"></i><b>F.3</b> Currency Exchange Rates</a></li>
+<li class="chapter" data-level="F.4" data-path="appendix-datasets.html"><a href="appendix-datasets.html#urban-forest-1"><i class="fa fa-check"></i><b>F.4</b> Urban Forest</a></li>
+<li class="chapter" data-level="F.5" data-path="appendix-datasets.html"><a href="appendix-datasets.html#wine-quality"><i class="fa fa-check"></i><b>F.5</b> Wine Quality</a></li>
+<li class="chapter" data-level="F.6" data-path="appendix-datasets.html"><a href="appendix-datasets.html#the-world-factbook-countries-of-the-world"><i class="fa fa-check"></i><b>F.6</b> The World Factbook (Countries of the World)</a></li>
+<li class="chapter" data-level="F.7" data-path="appendix-datasets.html"><a href="appendix-datasets.html#edstats-country-level-education-statistics"><i class="fa fa-check"></i><b>F.7</b> EdStats (Country-Level Education Statistics)</a></li>
+<li class="chapter" data-level="F.8" data-path="appendix-datasets.html"><a href="appendix-datasets.html#food-and-nutrient-database-for-dietary-studies-fndds"><i class="fa fa-check"></i><b>F.8</b> Food and Nutrient Database for Dietary Studies (FNDDS)</a></li>
+<li class="chapter" data-level="F.9" data-path="appendix-datasets.html"><a href="appendix-datasets.html#clustering-benchmarks"><i class="fa fa-check"></i><b>F.9</b> Clustering Benchmarks</a></li>
+<li class="chapter" data-level="F.10" data-path="appendix-datasets.html"><a href="appendix-datasets.html#movie-lens-todo"><i class="fa fa-check"></i><b>F.10</b> Movie Lens (TODO)</a></li>
+<li class="chapter" data-level="F.11" data-path="appendix-datasets.html"><a href="appendix-datasets.html#other-todo"><i class="fa fa-check"></i><b>F.11</b> Other (TODO)</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li style='font-size: smaller' ><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Licensed under CC BY-NC-ND 4.0</a></li>
-<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-06-12 22:49 (9a1ce97)</a></li>
+<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-06-17 13:23 (431f4a2)</a></li>
 
 </ul>
 
@@ -551,7 +551,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Lightweight Machine Learning Classics with R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Machine Learning Classics with R</a>
           </h1>
         </div>
 
@@ -561,6 +561,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="introduction" class="section level1">
 <h1><span class="header-section-number">1</span> Introduction</h1>
+<!-- I have no idea why setting this in the preamble is ignored: -->
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 <!-- TODO: citations
 
@@ -575,7 +576,13 @@ In other words, it is a specific recipe for what we call
 a <em>function</em> in mathematics.
 Unfortunately, algorithm development is a tedious task. We need to be
 super-precise about covering all the possible scenarios and modelling them
-accurately.</p>
+accurately. When we are to build a self-driving vehicle, we need to be
+ready for an infinite
+number of situations that can arise on the road.
+When we are to build a system for diagnosing tumour on medical images,
+there are so many decisions
+to make of whether should we consider a particular area suspicious,
+how does it relate to the neighbouring cells, etc.</p>
 <p>In <em>machine learning</em> (ML), we build and study computer algorithms
 that make <em>predictions</em> or <em>decisions</em> but which are not
 manually programmed. Moreover, some algorithms might also be able
@@ -674,46 +681,81 @@ some fun knowing that big projects never come into being in a day or seven.</p>
 learning, as these are the most common instances.</p>
 </div>
 </div>
-<div id="input-data-formalism" class="section level2">
-<h2><span class="header-section-number">1.2</span> Input Data – Formalism</h2>
-<p>Let <span class="math inline">\(\mathbf{X}=\{\mathfrak{X}_1,\dots,\mathfrak{X}_n\}\)</span>
+<div id="input-data-mathbfx-formalism" class="section level2">
+<h2><span class="header-section-number">1.2</span> Input Data, <span class="math inline">\(\mathbf{X}\)</span> – Formalism</h2>
+<p>Let <span class="math inline">\(\mathcal{X}=\{\boldsymbol{x}^{(1)},\dots,\boldsymbol{x}^{(n)}\}\)</span>
 be an input sample (“a database”)
-that consists of <span class="math inline">\(n\)</span> objects.</p>
-<p>Most often we assume that each object <span class="math inline">\(\mathfrak{X}_i\)</span>
-is represented using <span class="math inline">\(p\)</span> numbers for some <span class="math inline">\(p\)</span>.</p>
-<p>We denote this fact as <span class="math inline">\(\mathfrak{X}_i\in \mathbb{R}^p\)</span>
-(it is <em>a <span class="math inline">\(p\)</span>-dimensional real vector</em> or
-<em>a sequence of <span class="math inline">\(p\)</span> numbers</em> or
-<em>a point in a <span class="math inline">\(p\)</span>-dimensional real space</em>
-or <em>an element of a real <span class="math inline">\(p\)</span>-space</em> etc.).</p>
-<p>If we have “complex” objects on input,
-we can always try representing them as <strong>feature vectors</strong> (e.g.,
-come up with numeric attributes that best describe them in a task at hand).</p>
+that contains information on <span class="math inline">\(n\)</span> entities or phenomena (in their entirety
+or at different points in time or space).
+Most often we assume that each object in <span class="math inline">\(\mathcal{X}\)</span>, say <span class="math inline">\(\boldsymbol{x}^{(i)}\)</span>,
+is represented by means of a sequence of <span class="math inline">\(p\)</span> real numbers (for some <span class="math inline">\(p\)</span>).
+We denote this fact as <span class="math inline">\(\boldsymbol{x}^{(i)}\in \mathbb{R}^p\)</span>.</p>
+<dl>
+<dt>Remark.</dt>
+<dd><p>Here, the “<span class="math inline">\(\in\)</span>” symbol stand for “<em>is in</em>” or “<em>is a member of</em>”,
+<span class="math inline">\(\mathbb{R}\)</span> denotes the set of real numbers (the one that features,
+<span class="math inline">\(0\)</span>, <span class="math inline">\(-358745.2394\)</span>, <span class="math inline">\(42\)</span> and <span class="math inline">\(\pi\)</span>, amongst uncountably many others)
+and <span class="math inline">\(\mathbb{R}^p\)</span> is the set of real-valued sequences of length <span class="math inline">\(p\)</span>
+(i.e., <span class="math inline">\(p\)</span> such numbers considered at a time).
+For instance, <span class="math inline">\(\mathbb{R}^2\)</span> includes pairs such as
+<span class="math inline">\((1, 2)\)</span>, <span class="math inline">\((-6.4,0)\)</span> and <span class="math inline">\((1/3, 10^{3})\)</span>.
+More generally, we write <span class="math inline">\((x_1,\dots,x_p)\in\mathbb{R}^p\)</span>,
+where <span class="math inline">\(x_j\in\mathbb{R}\)</span> is the <span class="math inline">\(j\)</span>-th component of the sequence,
+for any <span class="math inline">\(j=1,\dots,p\)</span>.</p>
+<p>To emphasise on the fact that <span class="math inline">\((x_1,\dots,x_p)\)</span> is not an “atomic”
+entity, but a one that is comprised of many components,
+we will use bold fonts for denoting whole sequences, e.g.,
+write <span class="math inline">\(\boldsymbol{x}=(x_1,\dots,x_p)\)</span>.</p>
+<p>If <span class="math inline">\(\mathbf{x}\in \mathbb{R}^p\)</span>, then we often say
+that <span class="math inline">\(\mathbf{x}\)</span> is
+<em>a sequence of <span class="math inline">\(p\)</span> numbers</em>,
+<em>a (numeric) <span class="math inline">\(p\)</span>-tuple</em>,
+<em>a <span class="math inline">\(p\)</span>-dimensional real vector</em>,
+<em>a point in a <span class="math inline">\(p\)</span>-dimensional real space</em>,
+or <em>an element of a real <span class="math inline">\(p\)</span>-space</em> etc.</p>
+</dd>
+</dl>
+<p>At a first glance, such a representation might seem overly simplistic,
+especially if we’d wish to store information on “very complex” objects.
+However, it turns out that in most cases expressing them as
+<em>feature vectors</em> (i.e., establishing a set of numeric attributes
+that best describe them in a task at hand) is not only natural
+but also perfectly sufficient for achieving whatever we aim at.</p>
+<!--(\*) There are some algorithms such as Multidimensional Scaling,
+Locally Linear Embedding, IsoMap etc.
+that can do that automagically.-->
 <div class="exercise"><strong>Exercise.</strong>
 <p>Consider the following problems:</p>
 <ol style="list-style-type: decimal">
-<li><p>How would you represent a patient in a clinic?</p></li>
-<li><p>How would you represent a car in an insurance company’s database?</p></li>
-<li>How would you represent a student in an university?</li>
+<li><p>How would you represent a patient in a clinic
+(for the purpose of conducting research in cardiology)?</p></li>
+<li><p>How would you represent a car in an insurance company’s database
+(for the purpose of determining how much a driver should pay annually
+for the mandatory policy)?</p></li>
+<li><p>How would you represent a student in an university (for the purpose
+of granting them scholarships)?</p></li>
 </ol>
+<p>In each case, list a few numeric features that best describe the reality
+of concern. Note that descriptive labels can always be <em>encoded</em> as numbers,
+e.g., female = 1, male = 2.</p>
 </div>
-<p>Of course, our setting is <em>abstract</em> in the sense that
-there might be different realities <em>hidden</em> behind these symbols.</p>
-<p>This is what maths is for – creating <em>abstractions</em> or <em>models</em>
+<p>The setting we’ve established is <em>abstract</em> in the sense that
+there might be different realities <em>hidden</em> behind the symbols we use.
+This is exactly what maths is for – creating <em>abstractions</em> or <em>models</em>
 of complex entities/phenomena so that they can be much more easily manipulated
-or understood.
-This is very powerful – spend a moment
-contemplating how many real-world situations fit into our framework.</p>
-<p>This also includes image/video data, e.g., a 1920×1080 pixel image
-can be “unwound” to a “flat” vector of length 2,073,600.</p>
-<p>(*) There are some algorithms such as Multidimensional Scaling,
-Locally Linear Embedding, IsoMap etc.
-that can do that automagically.</p>
+or understood.</p>
+<!--  -->
+<p>This is very powerful – spend a moment
+contemplating how many real-world situations fit into our framework.
+In particular the last chapters are devoted to the less-obvious data domains,
+for instance for test or image/video data, e.g., a 1920×1080 pixel image
+can be “unwound” to a “flat” sequence of length 2,073,600.</p>
 <div style="margin-top: 1em">
 
 </div>
-<p>In cases such as this we say that we deal with <em>structured (tabular) data</em><br />
-– <span class="math inline">\(\mathbf{X}\)</span> can be written as an (<span class="math inline">\(n\times p\)</span>)-matrix:
+<p>The whole dataset consisting of <span class="math inline">\(n\)</span> <em>observations</em> (samples, cases, records)
+and <span class="math inline">\(p\)</span> <em>features</em> (variables, attributes, characteristics)
+can be written as an (<span class="math inline">\(n\times p\)</span>)-matrix:
 <span class="math display">\[
 \mathbf{X}=
 \left[
@@ -725,50 +767,100 @@ x_{n,1} &amp; x_{n,2} &amp; \cdots &amp; x_{n,p} \\
 \end{array}
 \right]
 \]</span>
-Mathematically, we denote this as <span class="math inline">\(\mathbf{X}\in\mathbb{R}^{n\times d}\)</span>.</p>
+Mathematically, we denote this as <span class="math inline">\(\mathbf{X}\in\mathbb{R}^{n\times p}\)</span>
+(read “<span class="math inline">\(\mathbf{X}\)</span> is a real-valued matrix with <span class="math inline">\(n\)</span> rows and <span class="math inline">\(p\)</span> columns”).</p>
 <dl>
 <dt>Remark.</dt>
-<dd><p>Structured data == think: Excel/Calc spreadsheets, SQL tables etc.</p>
+<dd><p>A <em>matrix</em> is an array of rectangular shape, with items
+arranged in rows and columns.
+In cases such as this we say that we deal with <em>structured (tabular) data</em>
+(think: Excel/Calc spreadsheets, SQL tables etc.).</p>
 </dd>
 </dl>
-<p>For an example, consider the famous Fisher’s Iris flower dataset,
-see <code>?iris</code> in R
-and <a href="https://en.wikipedia.org/wiki/Iris_flower_data_set" class="uri">https://en.wikipedia.org/wiki/Iris_flower_data_set</a>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">X &lt;-<span class="st"> </span>iris[<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>] <span class="co"># first 6 rows and 4 columns</span></a>
-<a class="sourceLine" id="cb1-2" title="2">X         <span class="co"># or: print(X)</span></a></code></pre></div>
-<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width
-## 1          5.1         3.5          1.4         0.2
-## 2          4.9         3.0          1.4         0.2
-## 3          4.7         3.2          1.3         0.2
-## 4          4.6         3.1          1.5         0.2
-## 5          5.0         3.6          1.4         0.2
-## 6          5.4         3.9          1.7         0.4</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">dim</span>(X)    <span class="co"># gives n and p</span></a></code></pre></div>
-<pre><code>## [1] 6 4</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">dim</span>(iris) <span class="co"># for the full dataset</span></a></code></pre></div>
-<pre><code>## [1] 150   5</code></pre>
-<p><span class="math inline">\(x_{i,j}\in\mathbb{R}\)</span>
+<p>For example, let’s consider the Wine Quality dataset
+(see Appendix <a href="appendix-datasets.html#appendix:datasets">F</a>, that stores information on
+11 physicochemical features (amongst others – see below)
+of ca. 6500 Portuguese wines
+from different wineries.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">wine_quality &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/wine_quality_all.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb1-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
+<a class="sourceLine" id="cb1-3" title="3">X &lt;-<span class="st"> </span>wine_quality[, <span class="dv">1</span><span class="op">:</span><span class="dv">11</span>] <span class="co"># extract the first 11 columns</span></a>
+<a class="sourceLine" id="cb1-4" title="4">X &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(X) <span class="co"># convert to numeric matrix</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="kw">head</span>(X) <span class="co"># display the first 6 rows, i.e., X[1:6,]</span></a></code></pre></div>
+<pre><code>##      fixed.acidity volatile.acidity citric.acid ... alcohol
+## [1,]           7.4             0.70        0.00 ...     9.4
+## [2,]           7.8             0.88        0.00 ...     9.8
+## [3,]           7.8             0.76        0.04 ...     9.8
+## [4,]          11.2             0.28        0.56 ...     9.8
+## [5,]           7.4             0.70        0.00 ...     9.4
+## [6,]           7.4             0.66        0.00 ...     9.4</code></pre>
+<p>We can get to now the dimensionality (shape) of <span class="math inline">\(\mathbf{X}\)</span> by calling:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">dim</span>(X)    <span class="co"># gives n and p, respectively</span></a></code></pre></div>
+<pre><code>## [1] 6497   11</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">nrow</span>(X)   <span class="co"># dim(X)[1] – 1st dimension – n</span></a></code></pre></div>
+<pre><code>## [1] 6497</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">ncol</span>(X)   <span class="co"># dim(X)[2] – 2nd dimension – p</span></a></code></pre></div>
+<pre><code>## [1] 11</code></pre>
+<p>Therefore, <span class="math inline">\(\mathbf{X}\in\mathbb{R}^{6497\times 11}\)</span>,
+i.e., <span class="math inline">\(n=6497\)</span> and <span class="math inline">\(p=11\)</span>.</p>
+<dl>
+<dt>Remark.</dt>
+<dd><p>Obviously, displaying <span class="math inline">\(\mathbf{X}\)</span> in its entirety would take up a lot of
+pages. Not only there are so many rows, also the number of columns makes
+the matrix too “wide” – mainly because
+of the presence of the descriptive feature labels (column names).
+Therefore, when printed out on the console, R will “wrap” the columns to
+fit the page width.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">head</span>(X, <span class="dv">2</span>) <span class="co"># the first 2 rows</span></a></code></pre></div>
+<pre><code>##      fixed.acidity volatile.acidity citric.acid residual.sugar
+## [1,]           7.4             0.70           0            1.9
+## [2,]           7.8             0.88           0            2.6
+##      chlorides free.sulfur.dioxide total.sulfur.dioxide density   pH
+## [1,]     0.076                  11                   34  0.9978 3.51
+## [2,]     0.098                  25                   67  0.9968 3.20
+##      sulphates alcohol
+## [1,]      0.56     9.4
+## [2,]      0.68     9.8</code></pre>
+</dd>
+</dl>
+<p>Let’s forget about the column labels for the time being, as they
+might be distracting use from fully appreciating the abstract
+nature of the setting we’re trying to develop.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">dimnames</span>(X) &lt;-<span class="st"> </span><span class="ot">NULL</span> <span class="co"># drop row and column names</span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="kw">head</span>(X) <span class="co"># show the first 6 rows</span></a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]  [,5] [,6] [,7]   [,8] [,9] [,10] [,11]
+## [1,]  7.4 0.70 0.00  1.9 0.076   11   34 0.9978 3.51  0.56   9.4
+## [2,]  7.8 0.88 0.00  2.6 0.098   25   67 0.9968 3.20  0.68   9.8
+## [3,]  7.8 0.76 0.04  2.3 0.092   15   54 0.9970 3.26  0.65   9.8
+## [4,] 11.2 0.28 0.56  1.9 0.075   17   60 0.9980 3.16  0.58   9.8
+## [5,]  7.4 0.70 0.00  1.9 0.076   11   34 0.9978 3.51  0.56   9.4
+## [6,]  7.4 0.66 0.00  1.8 0.075   13   40 0.9978 3.51  0.56   9.4</code></pre>
+<p>An element of <span class="math inline">\(\mathbf{X}\)</span> located in the <span class="math inline">\(i\)</span>-th row and the <span class="math inline">\(j\)</span>-th column,
+denoted <span class="math inline">\(x_{i,j}\in\mathbb{R}\)</span>,
 represents the <span class="math inline">\(j\)</span>-th feature of the <span class="math inline">\(i\)</span>-th observation,
-<span class="math inline">\(j=1,\dots,p\)</span>, <span class="math inline">\(i=1,\dots,n\)</span>.</p>
-<p>For instance:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">X[<span class="dv">3</span>, <span class="dv">2</span>] <span class="co"># 3rd row, 2nd column</span></a></code></pre></div>
-<pre><code>## [1] 3.2</code></pre>
+<span class="math inline">\(i=1,\dots,n\)</span>, <span class="math inline">\(j=1,\dots,p\)</span>.
+For instance:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">X[<span class="dv">3</span>, <span class="dv">2</span>] <span class="co"># 3rd row, 2nd column</span></a></code></pre></div>
+<pre><code>## [1] 0.76</code></pre>
 <p>The third observation (data point, row in <span class="math inline">\(\mathbf{X}\)</span>)
 consists of items <span class="math inline">\((x_{3,1}, \dots, x_{3,p})\)</span> that can be extracted by calling:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">X[<span class="dv">3</span>,]</a></code></pre></div>
-<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width
-## 3          4.7         3.2          1.3         0.2</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">as.numeric</span>(X[<span class="dv">3</span>,]) <span class="co"># drops names</span></a></code></pre></div>
-<pre><code>## [1] 4.7 3.2 1.3 0.2</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">length</span>(X[<span class="dv">3</span>,])</a></code></pre></div>
-<pre><code>## [1] 4</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">X[<span class="dv">3</span>,]</a></code></pre></div>
+<pre><code>##  [1]  7.800  0.760  0.040  2.300  0.092 15.000 54.000  0.997  3.260
+## [10]  0.650  9.800</code></pre>
 <p>Moreover, the second feature/variable/column
 is comprised of
 <span class="math inline">\((x_{1,2}, x_{2,2}, \dots, x_{n,2})\)</span>:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">X[,<span class="dv">2</span>]</a></code></pre></div>
-<pre><code>## [1] 3.5 3.0 3.2 3.1 3.6 3.9</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">length</span>(X[,<span class="dv">2</span>])</a></code></pre></div>
-<pre><code>## [1] 6</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">X[,<span class="dv">2</span>]</a></code></pre></div>
+<pre><code>##  [1] 0.700 0.880 0.760 0.280 0.700 0.660 0.600 0.650 0.580 0.500 0.580
+## [12] 0.500 0.615 0.610 0.620 0.620 0.280 0.560 0.590 0.320 0.220 0.390
+## [23] 0.430 0.490 0.400 0.390 0.410 0.430 0.710 0.645 0.675 0.685 0.655
+## [34] 0.605 0.320 0.645 0.600 0.380 1.130 0.450 0.450 0.610 0.490 0.660
+## [45] 0.670 0.520 0.935 0.290 0.400 0.310 0.660 0.520 0.500 0.380 0.510
+## [56] 0.620 0.420 0.630 0.590 0.390 0.400 0.690 0.520 0.735 0.725 0.725
+## [67] 0.520 0.705 0.320 0.705 0.630 0.670 0.690 0.675 0.320 0.410 0.410
+## [78] 0.785 0.750 0.625 0.450 0.430 0.500 0.670 0.300 0.550 0.490 0.490
+## [89] 0.390 0.620 0.520 0.490 0.490 0.490 1.020 0.600 0.775 0.500 0.900
+##  [ reached getOption(&quot;max.print&quot;) -- omitted 6398 entries ]</code></pre>
 <p>We will sometimes use the following notation to emphasise that
 the <span class="math inline">\(\mathbf{X}\)</span> matrix consists of <span class="math inline">\(n\)</span> rows
 or <span class="math inline">\(p\)</span> columns:</p>
@@ -825,6 +917,14 @@ x_{n,j} \\
 <p>where <span class="math inline">\(\cdot^T\)</span> denotes the <em>transpose</em> of a given matrix –
 think of this as a kind of rotation; it allows us to introduce a set of
 “vertically stacked” objects using a single inline formula.</p>
+<dl>
+<dt>Remark.</dt>
+<dd><p>A comprehensive introduction to vector and matrix algebra in R
+as well as basic data frame wrangling is provided
+in the Appendices. From now on, we assume that the reader is familiar
+with this material.</p>
+</dd>
+</dl>
 </div>
 <div id="unsupervised-learning" class="section level2">
 <h2><span class="header-section-number">1.3</span> Unsupervised Learning</h2>
@@ -842,14 +942,16 @@ Exercise: implement MDS with optim?
 
 -->
 <p>In <strong>unsupervised learning</strong> (learning without a teacher),
-the input data points <span class="math inline">\(\mathbf{x}_{1,\cdot},\dots,\mathbf{x}_{n,\cdot}\)</span>
-are not assigned any reference labels (compare Figure <a href="introduction.html#fig:unsupervised">1</a>).</p>
+the input data vectors <span class="math inline">\(\mathbf{x}_{1,\cdot},\dots,\mathbf{x}_{n,\cdot}\)</span>
+(rows in <span class="math inline">\(\mathbf{X}\)</span>) are all we have.
+Our aim now is to discover the <strong>underlying structure in the data</strong>,
+whatever that means.
+For instance, Figure <a href="introduction.html#fig:unsupervised">1</a> depicts a scatter plot
+of two selected wine features.</p>
 <div class="figure">
 <img src="01-introduction-figures/unsupervised-1.svg" alt="Figure 1: Unsupervised learning: “But what it is exactly that I have to do here?”" id="fig:unsupervised" />
 <p class="caption">Figure 1: Unsupervised learning: “But what it is exactly that I have to do here?”</p>
 </div>
-<p>Our aim now is to discover the <strong>underlying structure in the data</strong>,
-whatever that means.</p>
 <div id="main-types-of-unsupervised-learning-problems" class="section level3">
 <h3><span class="header-section-number">1.3.1</span> Main Types of Unsupervised Learning Problems</h3>
 <p>It turns out, however, that certain classes of unsupervised learning
@@ -903,8 +1005,8 @@ For example, these may be customers having different shopping patterns
 </div>
 <div id="supervised-learning" class="section level2">
 <h2><span class="header-section-number">1.4</span> Supervised Learning</h2>
-<div id="desired-outputs" class="section level3">
-<h3><span class="header-section-number">1.4.1</span> Desired Outputs</h3>
+<div id="desired-outputs-mathbfy" class="section level3">
+<h3><span class="header-section-number">1.4.1</span> Desired Outputs, <span class="math inline">\(\mathbf{y}\)</span></h3>
 <p>In supervised learning,
 apart from the inputs we are also given the corresponding
 reference/desired outputs.</p>
@@ -994,9 +1096,7 @@ with <span class="math inline">\(\mathbf{x}_{i,\cdot}=\)</span> ratings of <span
 </div>
 <p>A single dataset can become an instance of many different ML problems.</p>
 <p>Examples – the <code>wine_quality</code> dataset:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">wine_quality &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/wine_quality_all.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb21-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
-<a class="sourceLine" id="cb21-3" title="3">wine_quality[<span class="dv">1</span>,]</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">wine_quality[<span class="dv">1</span>,]</a></code></pre></div>
 <pre><code>##   fixed.acidity volatile.acidity citric.acid residual.sugar chlorides
 ## 1           7.4              0.7           0            1.9     0.076
 ##   free.sulfur.dioxide total.sulfur.dioxide density   pH sulphates

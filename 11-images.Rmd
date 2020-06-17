@@ -1,4 +1,4 @@
-# Shallow and Deep Neural Networks
+# Shallow and Deep Neural Networks {#chap:images}
 
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 
