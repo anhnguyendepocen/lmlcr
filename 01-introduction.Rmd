@@ -199,8 +199,8 @@ Remark.
     *a point in a $p$-dimensional real space*,
     or *an element of a real $p$-space* etc.
 
-    Note that we explain the basics of notation convention
-    in Appendix \@ref(appendix:convention).
+    We explain the basics of notation convention used throughout this book
+    (and in most math works in general) in Appendix \@ref(appendix:convention).
 
 
 
@@ -328,7 +328,7 @@ Remark.
     fit the page width.
 
     ```{r wines_print3}
-    head(X, 2) # the first 2 rows
+    head(X, 3) # the first 3 rows
     ```
 
 
@@ -347,7 +347,8 @@ An element of $\mathbf{X}$ located in the $i$-th row and the $j$-th column,
 denoted $x_{i,j}\in\mathbb{R}$,
 represents the $j$-th feature of the $i$-th observation,
 $i=1,\dots,n$, $j=1,\dots,p$.
-For instance:
+
+For instance, the 3rd wine's volatile acidity (expressed in grams of acetic acid per dm³), $x_{3,2}$, is:
 
 ```{r show_iris_elem}
 X[3, 2] # 3rd row, 2nd column
@@ -357,7 +358,8 @@ X[3, 2] # 3rd row, 2nd column
 
 
 
-The third observation (data point, row in $\mathbf{X}$)
+The third observation (data point, row in $\mathbf{X}$, i.e.,
+the 3rd wine in the dataset)
 consists of items $(x_{3,1}, \dots, x_{3,p})$ that can be extracted by calling:
 
 ```{r show_iris_row}
@@ -366,7 +368,7 @@ X[3,]
 
 
 
-Moreover, the second feature/variable/column
+Moreover, the second feature/variable/column (in our case: volatile acidity)
 is comprised of
 $(x_{1,2}, x_{2,2}, \dots, x_{n,2})$:
 
@@ -375,7 +377,10 @@ X[,2]
 ```
 
 
-
+{ BEGIN exercise }
+Identify the precise location of the value `r X[3,2]` in all the above
+examples.
+{ END exercise }
 
 
 We will sometimes use the following notation to emphasise that
@@ -464,19 +469,20 @@ From now on, we assume that we are all familiar with this material.
 
 
 
-In **unsupervised learning** (learning without a teacher),
+In *unsupervised learning* (learning without a teacher),
 the input data vectors $\mathbf{x}_{1,\cdot},\dots,\mathbf{x}_{n,\cdot}$
 (rows in $\mathbf{X}$) are all we have.
-Our aim now is to discover the **underlying structure in the data**,
+Our aim now is to discover the *underlying structure in the data*,
 whatever that means.
 For instance, Figure {@fig:unsupervised} depicts a scatter plot
 of two selected wine features.
-
-
+What interesting information can we extract from this figure?
+Perhaps not much, this is exactly why we need data mining methods!
 
 
 ```{r unsupervised,echo=FALSE,fig.cap="Unsupervised learning: \"But what it is exactly that I have to do here?\""}
-plot(wine_quality[, "citric.acid"], wine_quality[, "residual.sugar"])
+plot(wine_quality[, "chlorides"], wine_quality[, "fixed.acidity"], col="#00000011", pch=16)
+#plot(wine_quality[sam, "chlorides"], wine_quality[sam, "fixed.acidity"], col=wc[sam], pch=wp[sam])
 ```
 
 
@@ -484,65 +490,80 @@ plot(wine_quality[, "citric.acid"], wine_quality[, "residual.sugar"])
 
 
 
-### Main Types of Unsupervised Learning Problems
+### Dimensionality Reduction
 
 
-It turns out, however, that certain classes of unsupervised learning
+Certain classes of unsupervised learning
 problems are not only intellectually stimulating,
 but practically useful at the same time.
 
 
 
 
-In particular, in **dimensionality reduction** we seek a meaningful
-*projection* of a high dimensional
-space (think: many variables/columns).
+In particular, in *dimensionality reduction* we seek a meaningful
+*projection* of a high dimensional space (think: a matrix with many columns)
+to a space of lower dimension.
+For instance, if the output number of features is 2 (or maybe 3 as well),
+we will be able to visualise a complex dataset on a standard scatter plot.
 
-```{r princomp,echo=FALSE,fig.cap="Principal component analysis (a dimensionality reduction technique) applied on three features of red wines (`wine_quality`) dataset",fig.height=6}
-wine_quality <- read.csv("datasets/wine_quality_all.csv",
-    comment.char="#")
-red_wines <- wine_quality[wine_quality$color=='red',]
-p <- princomp(red_wines[,c(11, 4, 12)])
-biplot(p, col=c("#ff000033",1), pch=1, xlim=c(-0.05, 0.23), main=NA)
+
+```{r princomp,echo=FALSE,fig.cap="Principal component analysis (a dimensionality reduction technique) applied on 5 columns of the `wine_quality` dataset."}
+p <- princomp(scale(X[,c(1, 2, 4, 5, 11)]))
+wc <- c("#44444422", "#ff000022")[as.numeric(factor(wine_quality$color, levels=c("white", "red")))]
+wp <- c(17, 16)[as.numeric(factor(wine_quality$color, levels=c("white", "red")))]
+set.seed(123)
+sam <- sample(rev(1:nrow(X)))
+plot(p$scores[sam,1], p$scores[sam,2], col=wc[sam], pch=wp[sam], xlab="First principal component", ylab="Second principal component")
+legend("topright", c("white wine", "red wine"), pch=c(17,16), col=c("black", "red"), bg="white")
 ```
 
-For instance, Figure {@fig:princomp} reveals that the
-"alcohol", "response" and "residual.sugar" dimensions of the Wine Quality
-dataset that we have studied earlier on can actually be nicely depicted (with
-no much loss of information) on a two-dimensional plot.
-It turns out that the wine experts' opinion on a wine's quality is highly
-correlated with the amount of... alcohol in a bottle.
-On the other hand, sugar is orthogonal (unrelated) to these two.
+For instance, Figure {@fig:princomp} depicts the two dimensions "revealed"
+by the PCA method (Principal Component Analysis) -- a technique proposed
+by the mathematician Karl Pearson (the Father of mathematical statistics)
+at the beginning of the 20th century.
+
+It's actually nice to see that the wines of different colours
+(see `wine_quality[,"color"]`) form two quite distinct "blobs".
+By analysing the results returned by PCA in more detail, we could
+better understand the differences in physicochemical features of wines
+of different colours (amongst others).
 
 Amongst example dimensionality reduction methods we find:
 
-- Multidimensional scaling (MDS)
-- Principal component analysis (PCA)
-- Kernel PCA
-- t-SNE
-- Autoencoders (deep learning)
+- multidimensional scaling (MDS),
+- kernel PCA,
+- t-SNE,
+- autoencoders (deep learning).
 
 See, for example, [@esl] for more details.
 
-. . .
 
 
 
-Furthermore, in **anomaly detection**, our task is to identify rare, suspicious, ab-normal
-or out-standing items.
+### Anomaly Detection
+
+Furthermore, in *anomaly detection*, our task is to identify rare,
+suspicious, ab-normal or out-standing items.
 For example, these can be cars on walkways in a park's security camera footage.
+
+Figure {@fig:anomaly_detection} .......
 
 
 ```{r anomaly_detection,echo=FALSE,fig.cap="Outliers can be thought of anomalies of some sort"}
-plot(iris[,3], iris[,2], ann=FALSE)
-idx <- c(61, 42, 16, 118, 132)
-points(iris[idx,3], iris[idx,2], cex=3, pch=4, col=2)
+plot(wine_quality[sam, "chlorides"], wine_quality[sam, "fixed.acidity"], col=wc[sam], pch=wp[sam])
+wh <- wine_quality[, "chlorides"]>0.6 | wine_quality[, "fixed.acidity"]>15.5
+points(wine_quality[wh, "chlorides"], wine_quality[wh, "fixed.acidity"], col=4, cex=3, pch=4)
+legend("topright", c("white wine", "red wine", "outlier"), pch=c(17,16,4), col=c(1,2,4), bg="white")
 ```
 
 
-. . .
+methods, e.g., sample quantiles or hdbscan...
 
-Finally, the aim of **clustering** is to automatically discover some *naturally occurring*
+
+### Clustering
+
+Moreover, the aim of *clustering* is to automatically discover
+some *naturally occurring*
 subgroups in the data set, compare Figure {@fig:clustering_illustration}.
 For example, these may be customers having different shopping patterns
 (such as "young parents", "students", "boomers").
@@ -556,7 +577,9 @@ plot(iris[,3], iris[,2], ann=FALSE,
 ```
 
 
-
+We discuss the most seminal clustering techniques
+in Chapters \@ref(chap:hclust) (hierarchical agglomerative algorithms)
+and \@ref(chap:kmean) (K-means method).
 
 
 
@@ -670,6 +693,7 @@ classified as:
 
 
 
+provide links to chapters....
 
 
 { BEGIN exercise }
