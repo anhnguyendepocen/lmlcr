@@ -9,6 +9,12 @@ Add K-NN Regression
 
 Add K-nearest centroids
 
+
+add CHAMELEON and (H)DBSCAN(*) ???
+-- beyond supervised learning
+
+Karypis, G., EH. Han, V. Kumar (1999): CHAMELEON: A Hierarchical Clustering Algorithm Using Dynamic Modeling, IEEE Computer, 32(8): 68–75.
+
 -->
 
 

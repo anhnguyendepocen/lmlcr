@@ -49,7 +49,7 @@ and, for instance, [@Rintro; @rprogdatascience; @r4ds].
 These pages contain solid underpinnings for further studies
 related to statistical learning, machine learning
 data science, data analytics and artificial intelligence,
-including [@islr; @esl; @bishop].
+including [@esl; @bishop; @casi].
 We will also appreciate the vital role of mathematics as a universal
 language for formalising data-intense problems and communicating their
 solutions. The book is aimed at readers who are yet to be fluent with
