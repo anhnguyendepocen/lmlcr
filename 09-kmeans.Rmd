@@ -19,7 +19,9 @@
 
 ### Example in R
 
-
+..hierarchical clustering is nice, because it outputs a whole
+hierarchy of nested partitions and it works in arbitrary spaces
+equipped with a distance, but most algorithms are slow for large datasets
 
 
 Let's begin our clustering adventure
@@ -27,7 +29,7 @@ by applying the $K$-means clustering method to find $K=3$ groups
 in the famous Fisher's `iris` data set (variables `Sepal.Width`
 and `Petal.Length` variables only):
 
-```{r kmeans1,echo=-1}
+```{r kmeans1b,echo=-1}
 set.seed(123)
 X <- as.matrix(iris[,c(3,2)])
 # never forget to set nstart>>1!
@@ -1427,6 +1429,34 @@ and the true wine colours? Discuss.
 ## Outro
 
 ### Remarks
+
+
+
+In K-means, we need to specify the number of clusters, $K$, in advance.
+What if we don't have any idea how to choose this parameter (which is often
+the case)?
+
+Also, the problem with K-means is that there is no guarantee that a
+$K$-partition is any "similar" to the $K'$-one for $K\neq K'$,
+see Figure {@fig:kmeans_different_K}.
+
+
+
+```{r kmeans1,echo=-1}
+set.seed(123)
+X <- as.matrix(iris[,c(3,2)])
+# never forget to set nstart>>1!
+km <- kmeans(X, centers=3, nstart=10)
+km$cluster # labels assigned to each of 150 points:
+```
+
+
+
+```{r kmeans_different_K,fig.cap="3-means (colours) vs. 4-means (symbols) on example data; the \"circle\" cluster cannot decide if it likes the green or the black one more"}
+km1 <- kmeans(X, 3, nstart=10)
+km2 <- kmeans(X, 4, nstart=10)
+plot(X, col=km1$cluster, pch=km2$cluster, asp=1)
+```
 
 
 

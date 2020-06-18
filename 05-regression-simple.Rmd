@@ -257,10 +257,6 @@ Top choice: sum of squared residuals:
 \]
 
 
-Remark.
-
-: Read "$\sum_{i=1}^n z_i$" as "the sum of $z_i$ for $i$ from $1$ to $n$";
-this is just a shorthand for $z_1+z_2+\dots+z_n$.
 
 
 

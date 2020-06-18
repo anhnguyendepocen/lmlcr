@@ -591,7 +591,8 @@ Moreover, the aim of *clustering* (grouping or segmentation) is to automatically
 some *naturally occurring*
 subgroups in the data set.
 For example, these may be customers having different shopping patterns
-(such as "young parents", "students" and "elders").
+(such as "young parents", "students" and "elders")
+or protein sequences that are to be grouped by their function.
 
 
 
@@ -849,13 +850,14 @@ being the observation "in the middle of the sample";
 
 . . .
 
-On the other hand, `color` is a quantitative variable
-with two possible outcomes (see Figure {@fig:wines_binary} for a bar plot).
+On the other hand, `color` is a qualitative variable
+with two possible outcomes (i.e., binary; see Figure {@fig:wines_binary}
+for a bar plot).
 Therefore, it can constitute a classification task.
 
 Quantitative data can be summarised with a contingency table:
 
-```{r wines_binary,fig.cap="Quantitative outputs lead to classification tasks"}
+```{r wines_binary,fig.cap="Qualitative (here: binary) outputs lead to classification tasks"}
 barplot(table(wine_quality[,"color"]), col="white", ylim=c(0, 6000))
 table(wine_quality[,"color"])
 ```
@@ -869,7 +871,8 @@ a wine's rating as assigned by a wine expert
 Note that although the ranks are represented with numbers,
 we they are not continuous variables per se. However,
 these ranks are "something more" than just labels -- they are linearly
-ordered, we know what's the smallest rank and what's the greatest one.
+ordered, we know what's the smallest rank and what's the greatest one,
+ranks 3 and 7 and not just different: they are very different, etc.
 
 ```{r wines_ordinal,fig.cap="Ordinal variables constitute ordinal regression tasks"}
 barplot(table(wine_quality[,"response"]), col="white", ylim=c(0, 3000))
