@@ -1,0 +1,2071 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>11 Shallow and Deep Neural Networks | Machine Learning Classics with R</title>
+  <meta name="description" content="Explore some of the most fundamental algorithms which have stood the test of time and provide the basis for innovative solutions in data-driven AI. Learn how to use the R language for implementing various stages of data processing and modelling activities. Appreciate mathematics as the universal language for formalising data-intense problems and communicating their solutions. The book is for you if you’re yet to be fluent with university-level linear algebra, calculus and probability theory or you’ve forgotten all the maths you’ve ever learned, and are seeking a gentle, yet thorough, introduction to the topic." />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="11 Shallow and Deep Neural Networks | Machine Learning Classics with R" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://lmlcr.gagolewski.com" />
+  
+  <meta property="og:description" content="Explore some of the most fundamental algorithms which have stood the test of time and provide the basis for innovative solutions in data-driven AI. Learn how to use the R language for implementing various stages of data processing and modelling activities. Appreciate mathematics as the universal language for formalising data-intense problems and communicating their solutions. The book is for you if you’re yet to be fluent with university-level linear algebra, calculus and probability theory or you’ve forgotten all the maths you’ve ever learned, and are seeking a gentle, yet thorough, introduction to the topic." />
+  <meta name="github-repo" content="gagolews/lmlcr" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="11 Shallow and Deep Neural Networks | Machine Learning Classics with R" />
+  
+  <meta name="twitter:description" content="Explore some of the most fundamental algorithms which have stood the test of time and provide the basis for innovative solutions in data-driven AI. Learn how to use the R language for implementing various stages of data processing and modelling activities. Appreciate mathematics as the universal language for formalising data-intense problems and communicating their solutions. The book is for you if you’re yet to be fluent with university-level linear algebra, calculus and probability theory or you’ve forgotten all the maths you’ve ever learned, and are seeking a gentle, yet thorough, introduction to the topic." />
+  
+
+<meta name="author" content="Marek Gagolewski" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="chap-optimisation-discrete.html"/>
+<link rel="next" href="chap-recommenders.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.exercise {
+    font-style: italic;
+    border-left: 2px solid gray;
+    padding-left: 1em;
+}
+
+details.solution {
+    border-left: 2px solid #ff8888;
+    padding-left: 1em;
+    margin-bottom: 2em;
+}
+
+div.remark {
+    border-left: 2px solid gray;
+    padding-left: 1em;
+}
+
+div.definition {
+    font-style: italic;
+    border-left: 2px solid #550000;
+    padding-left: 1em;
+}
+
+</style>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li style='font-style: italic' ><a href="./">LMLCR</a></li>
+<li style='font-size: smaller' ><a href="https://www.gagolewski.com">Marek Gagolewski</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="chap-introduction.html"><a href="chap-introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="chap-introduction.html"><a href="chap-introduction.html#what-is-machine-learning"><i class="fa fa-check"></i><b>1.1</b> What is Machine Learning?</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="chap-introduction.html"><a href="chap-introduction.html#data-sources"><i class="fa fa-check"></i><b>1.1.1</b> Data Sources</a></li>
+<li class="chapter" data-level="1.1.2" data-path="chap-introduction.html"><a href="chap-introduction.html#main-types-of-machine-learning-problems"><i class="fa fa-check"></i><b>1.1.2</b> Main Types of Machine Learning Problems</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="chap-introduction.html"><a href="chap-introduction.html#input-data-x"><i class="fa fa-check"></i><b>1.2</b> Input Data, <strong>X</strong></a><ul>
+<li class="chapter" data-level="1.2.1" data-path="chap-introduction.html"><a href="chap-introduction.html#abstract-formalism"><i class="fa fa-check"></i><b>1.2.1</b> Abstract Formalism</a></li>
+<li class="chapter" data-level="1.2.2" data-path="chap-introduction.html"><a href="chap-introduction.html#concrete-example"><i class="fa fa-check"></i><b>1.2.2</b> Concrete Example</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="chap-introduction.html"><a href="chap-introduction.html#unsupervised-learning"><i class="fa fa-check"></i><b>1.3</b> Unsupervised Learning</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="chap-introduction.html"><a href="chap-introduction.html#dimensionality-reduction"><i class="fa fa-check"></i><b>1.3.1</b> Dimensionality Reduction</a></li>
+<li class="chapter" data-level="1.3.2" data-path="chap-introduction.html"><a href="chap-introduction.html#anomaly-detection"><i class="fa fa-check"></i><b>1.3.2</b> Anomaly Detection</a></li>
+<li class="chapter" data-level="1.3.3" data-path="chap-introduction.html"><a href="chap-introduction.html#clustering"><i class="fa fa-check"></i><b>1.3.3</b> Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="chap-introduction.html"><a href="chap-introduction.html#supervised-learning"><i class="fa fa-check"></i><b>1.4</b> Supervised Learning</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="chap-introduction.html"><a href="chap-introduction.html#desired-outputs-y"><i class="fa fa-check"></i><b>1.4.1</b> Desired Outputs, <strong>y</strong></a></li>
+<li class="chapter" data-level="1.4.2" data-path="chap-introduction.html"><a href="chap-introduction.html#types-of-supervised-learning-problems"><i class="fa fa-check"></i><b>1.4.2</b> Types of Supervised Learning Problems</a></li>
+<li class="chapter" data-level="1.4.3" data-path="chap-introduction.html"><a href="chap-introduction.html#one-dataset-many-problems"><i class="fa fa-check"></i><b>1.4.3</b> One Dataset – Many Problems</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="chap-hclust.html"><a href="chap-hclust.html"><i class="fa fa-check"></i><b>2</b> Agglomerative Hierarchical Clustering</a><ul>
+<li class="chapter" data-level="2.1" data-path="chap-hclust.html"><a href="chap-hclust.html#dataset-partitions"><i class="fa fa-check"></i><b>2.1</b> Dataset Partitions</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="chap-hclust.html"><a href="chap-hclust.html#label-vectors"><i class="fa fa-check"></i><b>2.1.1</b> Label Vectors</a></li>
+<li class="chapter" data-level="2.1.2" data-path="chap-hclust.html"><a href="chap-hclust.html#k-partitions"><i class="fa fa-check"></i><b>2.1.2</b> K-Partitions (*)</a></li>
+<li class="chapter" data-level="2.1.3" data-path="chap-hclust.html"><a href="chap-hclust.html#interesting-partitions"><i class="fa fa-check"></i><b>2.1.3</b> “Interesting” Partitions</a></li>
+<li class="chapter" data-level="2.1.4" data-path="chap-hclust.html"><a href="chap-hclust.html#introduction"><i class="fa fa-check"></i><b>2.1.4</b> Introduction</a></li>
+<li class="chapter" data-level="2.1.5" data-path="chap-hclust.html"><a href="chap-hclust.html#example-in-r"><i class="fa fa-check"></i><b>2.1.5</b> Example in R</a></li>
+<li class="chapter" data-level="2.1.6" data-path="chap-hclust.html"><a href="chap-hclust.html#linkage-functions"><i class="fa fa-check"></i><b>2.1.6</b> Linkage Functions</a></li>
+<li class="chapter" data-level="2.1.7" data-path="chap-hclust.html"><a href="chap-hclust.html#cluster-dendrograms"><i class="fa fa-check"></i><b>2.1.7</b> Cluster Dendrograms</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="chap-hclust.html"><a href="chap-hclust.html#exercises"><i class="fa fa-check"></i><b>2.2</b> Exercises</a></li>
+<li class="chapter" data-level="2.3" data-path="chap-hclust.html"><a href="chap-hclust.html#outro"><i class="fa fa-check"></i><b>2.3</b> Outro</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="chap-hclust.html"><a href="chap-hclust.html#remarks"><i class="fa fa-check"></i><b>2.3.1</b> Remarks</a></li>
+<li class="chapter" data-level="2.3.2" data-path="chap-hclust.html"><a href="chap-hclust.html#further-reading"><i class="fa fa-check"></i><b>2.3.2</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="chap-knn.html"><a href="chap-knn.html"><i class="fa fa-check"></i><b>3</b> Classification and Regression with K-Nearest Neighbours</a><ul>
+<li class="chapter" data-level="3.1" data-path="chap-knn.html"><a href="chap-knn.html#introduction-1"><i class="fa fa-check"></i><b>3.1</b> Introduction</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="chap-knn.html"><a href="chap-knn.html#classification-task"><i class="fa fa-check"></i><b>3.1.1</b> Classification Task</a></li>
+<li class="chapter" data-level="3.1.2" data-path="chap-knn.html"><a href="chap-knn.html#data"><i class="fa fa-check"></i><b>3.1.2</b> Data</a></li>
+<li class="chapter" data-level="3.1.3" data-path="chap-knn.html"><a href="chap-knn.html#training-and-test-sets"><i class="fa fa-check"></i><b>3.1.3</b> Training and Test Sets</a></li>
+<li class="chapter" data-level="3.1.4" data-path="chap-knn.html"><a href="chap-knn.html#discussed-methods"><i class="fa fa-check"></i><b>3.1.4</b> Discussed Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="chap-knn.html"><a href="chap-knn.html#k-nearest-neighbour-classifier"><i class="fa fa-check"></i><b>3.2</b> K-nearest Neighbour Classifier</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="chap-knn.html"><a href="chap-knn.html#introduction-2"><i class="fa fa-check"></i><b>3.2.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2.2" data-path="chap-knn.html"><a href="chap-knn.html#example-in-r-1"><i class="fa fa-check"></i><b>3.2.2</b> Example in R</a></li>
+<li class="chapter" data-level="3.2.3" data-path="chap-knn.html"><a href="chap-knn.html#feature-engineering"><i class="fa fa-check"></i><b>3.2.3</b> Feature Engineering</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="chap-knn.html"><a href="chap-knn.html#model-assessment-and-selection"><i class="fa fa-check"></i><b>3.3</b> Model Assessment and Selection</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="chap-knn.html"><a href="chap-knn.html#performance-metrics"><i class="fa fa-check"></i><b>3.3.1</b> Performance Metrics</a></li>
+<li class="chapter" data-level="3.3.2" data-path="chap-knn.html"><a href="chap-knn.html#how-to-choose-k-for-k-nn-classification"><i class="fa fa-check"></i><b>3.3.2</b> How to Choose K for K-NN Classification?</a></li>
+<li class="chapter" data-level="3.3.3" data-path="chap-knn.html"><a href="chap-knn.html#training-validation-and-test-sets"><i class="fa fa-check"></i><b>3.3.3</b> Training, Validation and Test sets</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="chap-knn.html"><a href="chap-knn.html#implementing-a-k-nn-classifier"><i class="fa fa-check"></i><b>3.4</b> Implementing a K-NN Classifier (*)</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="chap-knn.html"><a href="chap-knn.html#factor-data-type"><i class="fa fa-check"></i><b>3.4.1</b> Factor Data Type</a></li>
+<li class="chapter" data-level="3.4.2" data-path="chap-knn.html"><a href="chap-knn.html#main-routine"><i class="fa fa-check"></i><b>3.4.2</b> Main Routine (*)</a></li>
+<li class="chapter" data-level="3.4.3" data-path="chap-knn.html"><a href="chap-knn.html#mode"><i class="fa fa-check"></i><b>3.4.3</b> Mode</a></li>
+<li class="chapter" data-level="3.4.4" data-path="chap-knn.html"><a href="chap-knn.html#nn-search-routines"><i class="fa fa-check"></i><b>3.4.4</b> NN Search Routines (*)</a></li>
+<li class="chapter" data-level="3.4.5" data-path="chap-knn.html"><a href="chap-knn.html#different-metrics"><i class="fa fa-check"></i><b>3.4.5</b> Different Metrics (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="chap-knn.html"><a href="chap-knn.html#exercises-1"><i class="fa fa-check"></i><b>3.5</b> Exercises</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="chap-knn.html"><a href="chap-knn.html#wine-quality-best-k-nn-parameters-via-cross-validation"><i class="fa fa-check"></i><b>3.5.1</b> Wine Quality – Best K-NN Parameters via Cross-Validation (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="chap-knn.html"><a href="chap-knn.html#outro-1"><i class="fa fa-check"></i><b>3.6</b> Outro</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="chap-knn.html"><a href="chap-knn.html#remarks-1"><i class="fa fa-check"></i><b>3.6.1</b> Remarks</a></li>
+<li class="chapter" data-level="3.6.2" data-path="chap-knn.html"><a href="chap-knn.html#side-note-k-nn-regression"><i class="fa fa-check"></i><b>3.6.2</b> Side Note: K-NN Regression</a></li>
+<li class="chapter" data-level="3.6.3" data-path="chap-knn.html"><a href="chap-knn.html#further-reading-1"><i class="fa fa-check"></i><b>3.6.3</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="chap-trees.html"><a href="chap-trees.html"><i class="fa fa-check"></i><b>4</b> Decision and Regression Trees</a><ul>
+<li class="chapter" data-level="4.1" data-path="chap-trees.html"><a href="chap-trees.html#introduction-3"><i class="fa fa-check"></i><b>4.1</b> Introduction</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="chap-trees.html"><a href="chap-trees.html#classification-task-1"><i class="fa fa-check"></i><b>4.1.1</b> Classification Task</a></li>
+<li class="chapter" data-level="4.1.2" data-path="chap-trees.html"><a href="chap-trees.html#data-1"><i class="fa fa-check"></i><b>4.1.2</b> Data</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="chap-trees.html"><a href="chap-trees.html#decision-trees"><i class="fa fa-check"></i><b>4.2</b> Decision Trees</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="chap-trees.html"><a href="chap-trees.html#introduction-4"><i class="fa fa-check"></i><b>4.2.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2.2" data-path="chap-trees.html"><a href="chap-trees.html#example-in-r-2"><i class="fa fa-check"></i><b>4.2.2</b> Example in R</a></li>
+<li class="chapter" data-level="4.2.3" data-path="chap-trees.html"><a href="chap-trees.html#a-note-on-decision-tree-learning"><i class="fa fa-check"></i><b>4.2.3</b> A Note on Decision Tree Learning</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="chap-trees.html"><a href="chap-trees.html#exercises-2"><i class="fa fa-check"></i><b>4.3</b> Exercises</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="chap-trees.html"><a href="chap-trees.html#edstats-where-girls-are-better-at-maths-than-boys"><i class="fa fa-check"></i><b>4.3.1</b> EdStats – Where Girls Are Better at Maths Than Boys?</a></li>
+<li class="chapter" data-level="4.3.2" data-path="chap-trees.html"><a href="chap-trees.html#edstats-and-world-factbook-joining-forces"><i class="fa fa-check"></i><b>4.3.2</b> EdStats and World Factbook – Joining Forces</a></li>
+<li class="chapter" data-level="4.3.3" data-path="chap-trees.html"><a href="chap-trees.html#wine-quality-random-forest-and-xgboost"><i class="fa fa-check"></i><b>4.3.3</b> Wine Quality – Random Forest and XGBoost (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="chap-trees.html"><a href="chap-trees.html#outro-2"><i class="fa fa-check"></i><b>4.4</b> Outro</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="chap-trees.html"><a href="chap-trees.html#remarks-2"><i class="fa fa-check"></i><b>4.4.1</b> Remarks</a></li>
+<li class="chapter" data-level="4.4.2" data-path="chap-trees.html"><a href="chap-trees.html#further-reading-2"><i class="fa fa-check"></i><b>4.4.2</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html"><i class="fa fa-check"></i><b>5</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="5.1" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#simple-regression"><i class="fa fa-check"></i><b>5.1</b> Simple Regression</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#introduction-5"><i class="fa fa-check"></i><b>5.1.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.1.2" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#search-space-and-objective"><i class="fa fa-check"></i><b>5.1.2</b> Search Space and Objective</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#simple-linear-regression"><i class="fa fa-check"></i><b>5.2</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#introduction-6"><i class="fa fa-check"></i><b>5.2.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2.2" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#solution-in-r"><i class="fa fa-check"></i><b>5.2.2</b> Solution in R</a></li>
+<li class="chapter" data-level="5.2.3" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#analytic-solution"><i class="fa fa-check"></i><b>5.2.3</b> Analytic Solution</a></li>
+<li class="chapter" data-level="5.2.4" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#derivation-of-the-solution"><i class="fa fa-check"></i><b>5.2.4</b> Derivation of the Solution (**)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#exercises-3"><i class="fa fa-check"></i><b>5.3</b> Exercises</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#the-anscombe-quartet"><i class="fa fa-check"></i><b>5.3.1</b> The Anscombe Quartet</a></li>
+<li class="chapter" data-level="5.3.2" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#median-house-value-in-boston"><i class="fa fa-check"></i><b>5.3.2</b> Median House Value in Boston</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#outro-3"><i class="fa fa-check"></i><b>5.4</b> Outro</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#remarks-3"><i class="fa fa-check"></i><b>5.4.1</b> Remarks</a></li>
+<li class="chapter" data-level="5.4.2" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#further-reading-3"><i class="fa fa-check"></i><b>5.4.2</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html"><i class="fa fa-check"></i><b>6</b> Multiple Regression</a><ul>
+<li class="chapter" data-level="6.1" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#introduction-7"><i class="fa fa-check"></i><b>6.1</b> Introduction</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#formalism"><i class="fa fa-check"></i><b>6.1.1</b> Formalism</a></li>
+<li class="chapter" data-level="6.1.2" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#simple-linear-regression---recap"><i class="fa fa-check"></i><b>6.1.2</b> Simple Linear Regression - Recap</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#multiple-linear-regression"><i class="fa fa-check"></i><b>6.2</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#problem-formulation"><i class="fa fa-check"></i><b>6.2.1</b> Problem Formulation</a></li>
+<li class="chapter" data-level="6.2.2" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#fitting-a-linear-model-in-r"><i class="fa fa-check"></i><b>6.2.2</b> Fitting a Linear Model in R</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#finding-the-best-model"><i class="fa fa-check"></i><b>6.3</b> Finding the Best Model</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#model-diagnostics"><i class="fa fa-check"></i><b>6.3.1</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="6.3.2" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#variable-selection"><i class="fa fa-check"></i><b>6.3.2</b> Variable Selection</a></li>
+<li class="chapter" data-level="6.3.3" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#variable-transformation"><i class="fa fa-check"></i><b>6.3.3</b> Variable Transformation</a></li>
+<li class="chapter" data-level="6.3.4" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#predictive-vs.-descriptive-power"><i class="fa fa-check"></i><b>6.3.4</b> Predictive vs. Descriptive Power</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#exercises-4"><i class="fa fa-check"></i><b>6.4</b> Exercises</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#anscombes-quartet-revisited"><i class="fa fa-check"></i><b>6.4.1</b> Anscombe’s Quartet Revisited</a></li>
+<li class="chapter" data-level="6.4.2" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#countries-of-the-world-simple-models-involving-the-gdp-per-capita"><i class="fa fa-check"></i><b>6.4.2</b> Countries of the World – Simple models involving the GDP per capita</a></li>
+<li class="chapter" data-level="6.4.3" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#countries-of-the-world-most-correlated-variables"><i class="fa fa-check"></i><b>6.4.3</b> Countries of the World – Most correlated variables (*)</a></li>
+<li class="chapter" data-level="6.4.4" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#countries-of-the-world-a-non-linear-model-based-on-the-gdp-per-capita"><i class="fa fa-check"></i><b>6.4.4</b> Countries of the World – A non-linear model based on the GDP per capita</a></li>
+<li class="chapter" data-level="6.4.5" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#countries-of-the-world-a-multiple-regression-model-for-the-per-capita-gdp"><i class="fa fa-check"></i><b>6.4.5</b> Countries of the World – A multiple regression model for the per capita GDP</a></li>
+<li class="chapter" data-level="6.4.6" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#median-house-value-in-boston-continued"><i class="fa fa-check"></i><b>6.4.6</b> Median House Value in Boston (Continued)</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#outro-4"><i class="fa fa-check"></i><b>6.5</b> Outro</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#remarks-4"><i class="fa fa-check"></i><b>6.5.1</b> Remarks</a></li>
+<li class="chapter" data-level="6.5.2" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#other-methods-for-regression"><i class="fa fa-check"></i><b>6.5.2</b> Other Methods for Regression</a></li>
+<li class="chapter" data-level="6.5.3" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#derivation-of-the-solution-1"><i class="fa fa-check"></i><b>6.5.3</b> Derivation of the Solution (**)</a></li>
+<li class="chapter" data-level="6.5.4" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#solution-in-matrix-form"><i class="fa fa-check"></i><b>6.5.4</b> Solution in Matrix Form (***)</a></li>
+<li class="chapter" data-level="6.5.5" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#pearsons-r-in-matrix-form"><i class="fa fa-check"></i><b>6.5.5</b> Pearson’s r in Matrix Form (**)</a></li>
+<li class="chapter" data-level="6.5.6" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#further-reading-4"><i class="fa fa-check"></i><b>6.5.6</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="chap-logistic.html"><a href="chap-logistic.html"><i class="fa fa-check"></i><b>7</b> Classification with Linear Models</a><ul>
+<li class="chapter" data-level="7.1" data-path="chap-logistic.html"><a href="chap-logistic.html#introduction-8"><i class="fa fa-check"></i><b>7.1</b> Introduction</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="chap-logistic.html"><a href="chap-logistic.html#classification-task-2"><i class="fa fa-check"></i><b>7.1.1</b> Classification Task</a></li>
+<li class="chapter" data-level="7.1.2" data-path="chap-logistic.html"><a href="chap-logistic.html#data-2"><i class="fa fa-check"></i><b>7.1.2</b> Data</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="chap-logistic.html"><a href="chap-logistic.html#binary-logistic-regression"><i class="fa fa-check"></i><b>7.2</b> Binary Logistic Regression</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="chap-logistic.html"><a href="chap-logistic.html#motivation"><i class="fa fa-check"></i><b>7.2.1</b> Motivation</a></li>
+<li class="chapter" data-level="7.2.2" data-path="chap-logistic.html"><a href="chap-logistic.html#logistic-model"><i class="fa fa-check"></i><b>7.2.2</b> Logistic Model</a></li>
+<li class="chapter" data-level="7.2.3" data-path="chap-logistic.html"><a href="chap-logistic.html#example-in-r-3"><i class="fa fa-check"></i><b>7.2.3</b> Example in R</a></li>
+<li class="chapter" data-level="7.2.4" data-path="chap-logistic.html"><a href="chap-logistic.html#loss-function-cross-entropy"><i class="fa fa-check"></i><b>7.2.4</b> Loss Function: Cross-entropy</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="chap-logistic.html"><a href="chap-logistic.html#exercises-5"><i class="fa fa-check"></i><b>7.3</b> Exercises</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="chap-logistic.html"><a href="chap-logistic.html#edstats-fitting-of-binary-logistic-regression-models"><i class="fa fa-check"></i><b>7.3.1</b> EdStats – Fitting of Binary Logistic Regression Models</a></li>
+<li class="chapter" data-level="7.3.2" data-path="chap-logistic.html"><a href="chap-logistic.html#edstats-variable-selection-in-binary-logistic-regression"><i class="fa fa-check"></i><b>7.3.2</b> EdStats – Variable Selection in Binary Logistic Regression (*)</a></li>
+<li class="chapter" data-level="7.3.3" data-path="chap-logistic.html"><a href="chap-logistic.html#currency-exchange-rates-growthfall"><i class="fa fa-check"></i><b>7.3.3</b> Currency Exchange Rates Growth/Fall</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="chap-logistic.html"><a href="chap-logistic.html#outro-5"><i class="fa fa-check"></i><b>7.4</b> Outro</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="chap-logistic.html"><a href="chap-logistic.html#remarks-5"><i class="fa fa-check"></i><b>7.4.1</b> Remarks</a></li>
+<li class="chapter" data-level="7.4.2" data-path="chap-logistic.html"><a href="chap-logistic.html#further-reading-5"><i class="fa fa-check"></i><b>7.4.2</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html"><i class="fa fa-check"></i><b>8</b> Continuous Optimisation with Iterative Algorithms</a><ul>
+<li class="chapter" data-level="8.1" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#introduction-9"><i class="fa fa-check"></i><b>8.1</b> Introduction</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#optimisation-problems"><i class="fa fa-check"></i><b>8.1.1</b> Optimisation Problems</a></li>
+<li class="chapter" data-level="8.1.2" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#types-of-minima-and-maxima"><i class="fa fa-check"></i><b>8.1.2</b> Types of Minima and Maxima</a></li>
+<li class="chapter" data-level="8.1.3" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#example-objective-over-a-2d-domain"><i class="fa fa-check"></i><b>8.1.3</b> Example Objective over a 2D Domain</a></li>
+<li class="chapter" data-level="8.1.4" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#example-optimisation-problems-in-machine-learning"><i class="fa fa-check"></i><b>8.1.4</b> Example Optimisation Problems in Machine Learning</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#iterative-methods"><i class="fa fa-check"></i><b>8.2</b> Iterative Methods</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#introduction-10"><i class="fa fa-check"></i><b>8.2.1</b> Introduction</a></li>
+<li class="chapter" data-level="8.2.2" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#example-in-r-4"><i class="fa fa-check"></i><b>8.2.2</b> Example in R</a></li>
+<li class="chapter" data-level="8.2.3" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#convergence-to-local-optima"><i class="fa fa-check"></i><b>8.2.3</b> Convergence to Local Optima</a></li>
+<li class="chapter" data-level="8.2.4" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#random-restarts"><i class="fa fa-check"></i><b>8.2.4</b> Random Restarts</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#gradient-descent"><i class="fa fa-check"></i><b>8.3</b> Gradient Descent</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#function-gradient"><i class="fa fa-check"></i><b>8.3.1</b> Function Gradient (*)</a></li>
+<li class="chapter" data-level="8.3.2" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#three-facts-on-the-gradient"><i class="fa fa-check"></i><b>8.3.2</b> Three Facts on the Gradient</a></li>
+<li class="chapter" data-level="8.3.3" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#gradient-descent-algorithm-gd"><i class="fa fa-check"></i><b>8.3.3</b> Gradient Descent Algorithm (GD)</a></li>
+<li class="chapter" data-level="8.3.4" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#example-mnist"><i class="fa fa-check"></i><b>8.3.4</b> Example: MNIST (*)</a></li>
+<li class="chapter" data-level="8.3.5" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#stochastic-gradient-descent-sgd"><i class="fa fa-check"></i><b>8.3.5</b> Stochastic Gradient Descent (SGD) (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#a-note-on-convex-optimisation"><i class="fa fa-check"></i><b>8.4</b> A Note on Convex Optimisation (*)</a></li>
+<li class="chapter" data-level="8.5" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#outro-6"><i class="fa fa-check"></i><b>8.5</b> Outro</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#remarks-6"><i class="fa fa-check"></i><b>8.5.1</b> Remarks</a></li>
+<li class="chapter" data-level="8.5.2" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#further-reading-6"><i class="fa fa-check"></i><b>8.5.2</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="chap-kmeans.html"><a href="chap-kmeans.html"><i class="fa fa-check"></i><b>9</b> Clustering with K-Means</a><ul>
+<li class="chapter" data-level="9.1" data-path="chap-kmeans.html"><a href="chap-kmeans.html#k-means-clustering"><i class="fa fa-check"></i><b>9.1</b> K-means Clustering</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="chap-kmeans.html"><a href="chap-kmeans.html#example-in-r-5"><i class="fa fa-check"></i><b>9.1.1</b> Example in R</a></li>
+<li class="chapter" data-level="9.1.2" data-path="chap-kmeans.html"><a href="chap-kmeans.html#problem-statement"><i class="fa fa-check"></i><b>9.1.2</b> Problem Statement</a></li>
+<li class="chapter" data-level="9.1.3" data-path="chap-kmeans.html"><a href="chap-kmeans.html#algorithms-for-the-k-means-problem"><i class="fa fa-check"></i><b>9.1.3</b> Algorithms for the K-means Problem</a></li>
+<li class="chapter" data-level="9.1.4" data-path="chap-kmeans.html"><a href="chap-kmeans.html#k-means-revisited"><i class="fa fa-check"></i><b>9.1.4</b> K-means Revisited</a></li>
+<li class="chapter" data-level="9.1.5" data-path="chap-kmeans.html"><a href="chap-kmeans.html#optim-vs.-kmeans"><i class="fa fa-check"></i><b>9.1.5</b> optim() vs. kmeans()</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="chap-kmeans.html"><a href="chap-kmeans.html#exercises-6"><i class="fa fa-check"></i><b>9.2</b> Exercises</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="chap-kmeans.html"><a href="chap-kmeans.html#clustering-of-the-world-factbook"><i class="fa fa-check"></i><b>9.2.1</b> Clustering of the World Factbook</a></li>
+<li class="chapter" data-level="9.2.2" data-path="chap-kmeans.html"><a href="chap-kmeans.html#unbalance-dataset-k-means-needs-multiple-starts"><i class="fa fa-check"></i><b>9.2.2</b> Unbalance Dataset – K-Means Needs Multiple Starts</a></li>
+<li class="chapter" data-level="9.2.3" data-path="chap-kmeans.html"><a href="chap-kmeans.html#clustering-of-typical-2d-benchmark-datasets"><i class="fa fa-check"></i><b>9.2.3</b> Clustering of Typical 2D Benchmark Datasets</a></li>
+<li class="chapter" data-level="9.2.4" data-path="chap-kmeans.html"><a href="chap-kmeans.html#wine-quality-volatile.acidity-and-sulphates"><i class="fa fa-check"></i><b>9.2.4</b> Wine Quality – <code>volatile.acidity</code> and <code>sulphates</code></a></li>
+<li class="chapter" data-level="9.2.5" data-path="chap-kmeans.html"><a href="chap-kmeans.html#wine-quality-chlorides-and-total.sulfur.dioxide"><i class="fa fa-check"></i><b>9.2.5</b> Wine Quality – <code>chlorides</code> and <code>total.sulfur.dioxide</code></a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="chap-kmeans.html"><a href="chap-kmeans.html#outro-7"><i class="fa fa-check"></i><b>9.3</b> Outro</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="chap-kmeans.html"><a href="chap-kmeans.html#remarks-7"><i class="fa fa-check"></i><b>9.3.1</b> Remarks</a></li>
+<li class="chapter" data-level="9.3.2" data-path="chap-kmeans.html"><a href="chap-kmeans.html#further-reading-7"><i class="fa fa-check"></i><b>9.3.2</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="chap-optimisation-discrete.html"><a href="chap-optimisation-discrete.html"><i class="fa fa-check"></i><b>10</b> Discrete Optimisation</a><ul>
+<li class="chapter" data-level="10.1" data-path="chap-optimisation-discrete.html"><a href="chap-optimisation-discrete.html#introduction-11"><i class="fa fa-check"></i><b>10.1</b> Introduction</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="chap-optimisation-discrete.html"><a href="chap-optimisation-discrete.html#recap"><i class="fa fa-check"></i><b>10.1.1</b> Recap</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="chap-optimisation-discrete.html"><a href="chap-optimisation-discrete.html#outro-8"><i class="fa fa-check"></i><b>10.2</b> Outro</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="chap-optimisation-discrete.html"><a href="chap-optimisation-discrete.html#remarks-8"><i class="fa fa-check"></i><b>10.2.1</b> Remarks</a></li>
+<li class="chapter" data-level="10.2.2" data-path="chap-optimisation-discrete.html"><a href="chap-optimisation-discrete.html#further-reading-8"><i class="fa fa-check"></i><b>10.2.2</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="chap-images.html"><a href="chap-images.html"><i class="fa fa-check"></i><b>11</b> Shallow and Deep Neural Networks</a><ul>
+<li class="chapter" data-level="11.1" data-path="chap-images.html"><a href="chap-images.html#introduction-12"><i class="fa fa-check"></i><b>11.1</b> Introduction</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="chap-images.html"><a href="chap-images.html#binary-logistic-regression-recap"><i class="fa fa-check"></i><b>11.1.1</b> Binary Logistic Regression: Recap</a></li>
+<li class="chapter" data-level="11.1.2" data-path="chap-images.html"><a href="chap-images.html#data-3"><i class="fa fa-check"></i><b>11.1.2</b> Data</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="chap-images.html"><a href="chap-images.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>11.2</b> Multinomial Logistic Regression</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="chap-images.html"><a href="chap-images.html#a-note-on-data-representation"><i class="fa fa-check"></i><b>11.2.1</b> A Note on Data Representation</a></li>
+<li class="chapter" data-level="11.2.2" data-path="chap-images.html"><a href="chap-images.html#extending-logistic-regression"><i class="fa fa-check"></i><b>11.2.2</b> Extending Logistic Regression</a></li>
+<li class="chapter" data-level="11.2.3" data-path="chap-images.html"><a href="chap-images.html#softmax-function"><i class="fa fa-check"></i><b>11.2.3</b> Softmax Function</a></li>
+<li class="chapter" data-level="11.2.4" data-path="chap-images.html"><a href="chap-images.html#one-hot-encoding-and-decoding"><i class="fa fa-check"></i><b>11.2.4</b> One-Hot Encoding and Decoding</a></li>
+<li class="chapter" data-level="11.2.5" data-path="chap-images.html"><a href="chap-images.html#cross-entropy-revisited"><i class="fa fa-check"></i><b>11.2.5</b> Cross-entropy Revisited</a></li>
+<li class="chapter" data-level="11.2.6" data-path="chap-images.html"><a href="chap-images.html#problem-formulation-in-matrix-form"><i class="fa fa-check"></i><b>11.2.6</b> Problem Formulation in Matrix Form (**)</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="chap-images.html"><a href="chap-images.html#artificial-neural-networks"><i class="fa fa-check"></i><b>11.3</b> Artificial Neural Networks</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="chap-images.html"><a href="chap-images.html#artificial-neuron"><i class="fa fa-check"></i><b>11.3.1</b> Artificial Neuron</a></li>
+<li class="chapter" data-level="11.3.2" data-path="chap-images.html"><a href="chap-images.html#logistic-regression-as-a-neural-network"><i class="fa fa-check"></i><b>11.3.2</b> Logistic Regression as a Neural Network</a></li>
+<li class="chapter" data-level="11.3.3" data-path="chap-images.html"><a href="chap-images.html#example-in-r-6"><i class="fa fa-check"></i><b>11.3.3</b> Example in R</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="chap-images.html"><a href="chap-images.html#deep-neural-networks"><i class="fa fa-check"></i><b>11.4</b> Deep Neural Networks</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="chap-images.html"><a href="chap-images.html#introduction-13"><i class="fa fa-check"></i><b>11.4.1</b> Introduction</a></li>
+<li class="chapter" data-level="11.4.2" data-path="chap-images.html"><a href="chap-images.html#activation-functions"><i class="fa fa-check"></i><b>11.4.2</b> Activation Functions</a></li>
+<li class="chapter" data-level="11.4.3" data-path="chap-images.html"><a href="chap-images.html#example-in-r---2-layers"><i class="fa fa-check"></i><b>11.4.3</b> Example in R - 2 Layers</a></li>
+<li class="chapter" data-level="11.4.4" data-path="chap-images.html"><a href="chap-images.html#example-in-r---6-layers"><i class="fa fa-check"></i><b>11.4.4</b> Example in R - 6 Layers</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="chap-images.html"><a href="chap-images.html#preprocessing-of-data"><i class="fa fa-check"></i><b>11.5</b> Preprocessing of Data</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="chap-images.html"><a href="chap-images.html#introduction-14"><i class="fa fa-check"></i><b>11.5.1</b> Introduction</a></li>
+<li class="chapter" data-level="11.5.2" data-path="chap-images.html"><a href="chap-images.html#image-deskewing"><i class="fa fa-check"></i><b>11.5.2</b> Image Deskewing</a></li>
+<li class="chapter" data-level="11.5.3" data-path="chap-images.html"><a href="chap-images.html#summary-of-all-the-models-considered"><i class="fa fa-check"></i><b>11.5.3</b> Summary of All the Models Considered</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="chap-images.html"><a href="chap-images.html#outro-9"><i class="fa fa-check"></i><b>11.6</b> Outro</a><ul>
+<li class="chapter" data-level="11.6.1" data-path="chap-images.html"><a href="chap-images.html#remarks-9"><i class="fa fa-check"></i><b>11.6.1</b> Remarks</a></li>
+<li class="chapter" data-level="11.6.2" data-path="chap-images.html"><a href="chap-images.html#beyond-mnist"><i class="fa fa-check"></i><b>11.6.2</b> Beyond MNIST</a></li>
+<li class="chapter" data-level="11.6.3" data-path="chap-images.html"><a href="chap-images.html#further-reading-9"><i class="fa fa-check"></i><b>11.6.3</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="chap-recommenders.html"><a href="chap-recommenders.html"><i class="fa fa-check"></i><b>12</b> Recommender Systems</a><ul>
+<li class="chapter" data-level="12.1" data-path="chap-recommenders.html"><a href="chap-recommenders.html#introduction-15"><i class="fa fa-check"></i><b>12.1</b> Introduction</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="chap-recommenders.html"><a href="chap-recommenders.html#the-netflix-prize"><i class="fa fa-check"></i><b>12.1.1</b> The Netflix Prize</a></li>
+<li class="chapter" data-level="12.1.2" data-path="chap-recommenders.html"><a href="chap-recommenders.html#main-approaches"><i class="fa fa-check"></i><b>12.1.2</b> Main Approaches</a></li>
+<li class="chapter" data-level="12.1.3" data-path="chap-recommenders.html"><a href="chap-recommenders.html#formalism-1"><i class="fa fa-check"></i><b>12.1.3</b> Formalism</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="chap-recommenders.html"><a href="chap-recommenders.html#collaborative-filtering"><i class="fa fa-check"></i><b>12.2</b> Collaborative Filtering</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="chap-recommenders.html"><a href="chap-recommenders.html#example"><i class="fa fa-check"></i><b>12.2.1</b> Example</a></li>
+<li class="chapter" data-level="12.2.2" data-path="chap-recommenders.html"><a href="chap-recommenders.html#similarity-measures"><i class="fa fa-check"></i><b>12.2.2</b> Similarity Measures</a></li>
+<li class="chapter" data-level="12.2.3" data-path="chap-recommenders.html"><a href="chap-recommenders.html#user-based-collaborative-filtering"><i class="fa fa-check"></i><b>12.2.3</b> User-Based Collaborative Filtering</a></li>
+<li class="chapter" data-level="12.2.4" data-path="chap-recommenders.html"><a href="chap-recommenders.html#item-based-collaborative-filtering"><i class="fa fa-check"></i><b>12.2.4</b> Item-Based Collaborative Filtering</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="chap-recommenders.html"><a href="chap-recommenders.html#exercise-the-movielens-dataset"><i class="fa fa-check"></i><b>12.3</b> Exercise: The MovieLens Dataset (*)</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="chap-recommenders.html"><a href="chap-recommenders.html#dataset"><i class="fa fa-check"></i><b>12.3.1</b> Dataset</a></li>
+<li class="chapter" data-level="12.3.2" data-path="chap-recommenders.html"><a href="chap-recommenders.html#data-cleansing"><i class="fa fa-check"></i><b>12.3.2</b> Data Cleansing</a></li>
+<li class="chapter" data-level="12.3.3" data-path="chap-recommenders.html"><a href="chap-recommenders.html#item-item-similarities"><i class="fa fa-check"></i><b>12.3.3</b> Item-Item Similarities</a></li>
+<li class="chapter" data-level="12.3.4" data-path="chap-recommenders.html"><a href="chap-recommenders.html#example-recommendations"><i class="fa fa-check"></i><b>12.3.4</b> Example Recommendations</a></li>
+<li class="chapter" data-level="12.3.5" data-path="chap-recommenders.html"><a href="chap-recommenders.html#clustering-1"><i class="fa fa-check"></i><b>12.3.5</b> Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="chap-recommenders.html"><a href="chap-recommenders.html#outro-10"><i class="fa fa-check"></i><b>12.4</b> Outro</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="chap-recommenders.html"><a href="chap-recommenders.html#remarks-10"><i class="fa fa-check"></i><b>12.4.1</b> Remarks</a></li>
+<li class="chapter" data-level="12.4.2" data-path="chap-recommenders.html"><a href="chap-recommenders.html#further-reading-10"><i class="fa fa-check"></i><b>12.4.2</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="chap-text.html"><a href="chap-text.html"><i class="fa fa-check"></i><b>13</b> Natural Language Processing</a><ul>
+<li class="chapter" data-level="13.1" data-path="chap-text.html"><a href="chap-text.html#to-do"><i class="fa fa-check"></i><b>13.1</b> TO DO</a></li>
+<li class="chapter" data-level="13.2" data-path="chap-text.html"><a href="chap-text.html#further-reading-11"><i class="fa fa-check"></i><b>13.2</b> Further Reading</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="appendix-convention.html"><a href="appendix-convention.html"><i class="fa fa-check"></i><b>A</b> Notation Convention</a></li>
+<li class="chapter" data-level="B" data-path="appendix-rintro.html"><a href="appendix-rintro.html"><i class="fa fa-check"></i><b>B</b> Setting Up the R Environment</a><ul>
+<li class="chapter" data-level="B.1" data-path="appendix-rintro.html"><a href="appendix-rintro.html#installing-r"><i class="fa fa-check"></i><b>B.1</b> Installing R</a></li>
+<li class="chapter" data-level="B.2" data-path="appendix-rintro.html"><a href="appendix-rintro.html#installing-an-ide"><i class="fa fa-check"></i><b>B.2</b> Installing an IDE</a></li>
+<li class="chapter" data-level="B.3" data-path="appendix-rintro.html"><a href="appendix-rintro.html#installing-recommended-packages"><i class="fa fa-check"></i><b>B.3</b> Installing Recommended Packages</a></li>
+<li class="chapter" data-level="B.4" data-path="appendix-rintro.html"><a href="appendix-rintro.html#first-r-script-in-rstudio"><i class="fa fa-check"></i><b>B.4</b> First R Script in RStudio</a></li>
+<li class="chapter" data-level="B.5" data-path="appendix-rintro.html"><a href="appendix-rintro.html#exercises-7"><i class="fa fa-check"></i><b>B.5</b> Exercises</a><ul>
+<li class="chapter" data-level="B.5.1" data-path="appendix-rintro.html"><a href="appendix-rintro.html#first-steps-with-vectors"><i class="fa fa-check"></i><b>B.5.1</b> First Steps with Vectors</a></li>
+<li class="chapter" data-level="B.5.2" data-path="appendix-rintro.html"><a href="appendix-rintro.html#basic-plotting"><i class="fa fa-check"></i><b>B.5.2</b> Basic Plotting</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="appendix-rvector.html"><a href="appendix-rvector.html"><i class="fa fa-check"></i><b>C</b> Vector Algebra in R</a><ul>
+<li class="chapter" data-level="C.1" data-path="appendix-rvector.html"><a href="appendix-rvector.html#motivation-1"><i class="fa fa-check"></i><b>C.1</b> Motivation</a></li>
+<li class="chapter" data-level="C.2" data-path="appendix-rvector.html"><a href="appendix-rvector.html#numeric-vectors"><i class="fa fa-check"></i><b>C.2</b> Numeric Vectors</a><ul>
+<li class="chapter" data-level="C.2.1" data-path="appendix-rvector.html"><a href="appendix-rvector.html#creating-numeric-vectors"><i class="fa fa-check"></i><b>C.2.1</b> Creating Numeric Vectors</a></li>
+<li class="chapter" data-level="C.2.2" data-path="appendix-rvector.html"><a href="appendix-rvector.html#vector-scalar-operations"><i class="fa fa-check"></i><b>C.2.2</b> Vector-Scalar Operations</a></li>
+<li class="chapter" data-level="C.2.3" data-path="appendix-rvector.html"><a href="appendix-rvector.html#vector-vector-operations"><i class="fa fa-check"></i><b>C.2.3</b> Vector-Vector Operations</a></li>
+<li class="chapter" data-level="C.2.4" data-path="appendix-rvector.html"><a href="appendix-rvector.html#aggregation-functions"><i class="fa fa-check"></i><b>C.2.4</b> Aggregation Functions</a></li>
+<li class="chapter" data-level="C.2.5" data-path="appendix-rvector.html"><a href="appendix-rvector.html#special-functions"><i class="fa fa-check"></i><b>C.2.5</b> Special Functions</a></li>
+<li class="chapter" data-level="C.2.6" data-path="appendix-rvector.html"><a href="appendix-rvector.html#norms-and-distances"><i class="fa fa-check"></i><b>C.2.6</b> Norms and Distances</a></li>
+<li class="chapter" data-level="C.2.7" data-path="appendix-rvector.html"><a href="appendix-rvector.html#dot-product"><i class="fa fa-check"></i><b>C.2.7</b> Dot Product (*)</a></li>
+<li class="chapter" data-level="C.2.8" data-path="appendix-rvector.html"><a href="appendix-rvector.html#missing-and-other-special-values"><i class="fa fa-check"></i><b>C.2.8</b> Missing and Other Special Values</a></li>
+</ul></li>
+<li class="chapter" data-level="C.3" data-path="appendix-rvector.html"><a href="appendix-rvector.html#logical-vectors"><i class="fa fa-check"></i><b>C.3</b> Logical Vectors</a><ul>
+<li class="chapter" data-level="C.3.1" data-path="appendix-rvector.html"><a href="appendix-rvector.html#creating-logical-vectors"><i class="fa fa-check"></i><b>C.3.1</b> Creating Logical Vectors</a></li>
+<li class="chapter" data-level="C.3.2" data-path="appendix-rvector.html"><a href="appendix-rvector.html#logical-operations"><i class="fa fa-check"></i><b>C.3.2</b> Logical Operations</a></li>
+<li class="chapter" data-level="C.3.3" data-path="appendix-rvector.html"><a href="appendix-rvector.html#comparison-operations"><i class="fa fa-check"></i><b>C.3.3</b> Comparison Operations</a></li>
+<li class="chapter" data-level="C.3.4" data-path="appendix-rvector.html"><a href="appendix-rvector.html#aggregation-functions-1"><i class="fa fa-check"></i><b>C.3.4</b> Aggregation Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="C.4" data-path="appendix-rvector.html"><a href="appendix-rvector.html#character-vectors"><i class="fa fa-check"></i><b>C.4</b> Character Vectors</a><ul>
+<li class="chapter" data-level="C.4.1" data-path="appendix-rvector.html"><a href="appendix-rvector.html#creating-character-vectors"><i class="fa fa-check"></i><b>C.4.1</b> Creating Character Vectors</a></li>
+<li class="chapter" data-level="C.4.2" data-path="appendix-rvector.html"><a href="appendix-rvector.html#concatenating-character-vectors"><i class="fa fa-check"></i><b>C.4.2</b> Concatenating Character Vectors</a></li>
+<li class="chapter" data-level="C.4.3" data-path="appendix-rvector.html"><a href="appendix-rvector.html#collapsing-character-vectors"><i class="fa fa-check"></i><b>C.4.3</b> Collapsing Character Vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="C.5" data-path="appendix-rvector.html"><a href="appendix-rvector.html#vector-subsetting"><i class="fa fa-check"></i><b>C.5</b> Vector Subsetting</a><ul>
+<li class="chapter" data-level="C.5.1" data-path="appendix-rvector.html"><a href="appendix-rvector.html#subsetting-with-positive-indices"><i class="fa fa-check"></i><b>C.5.1</b> Subsetting with Positive Indices</a></li>
+<li class="chapter" data-level="C.5.2" data-path="appendix-rvector.html"><a href="appendix-rvector.html#subsetting-with-negative-indices"><i class="fa fa-check"></i><b>C.5.2</b> Subsetting with Negative Indices</a></li>
+<li class="chapter" data-level="C.5.3" data-path="appendix-rvector.html"><a href="appendix-rvector.html#subsetting-with-logical-vectors"><i class="fa fa-check"></i><b>C.5.3</b> Subsetting with Logical Vectors</a></li>
+<li class="chapter" data-level="C.5.4" data-path="appendix-rvector.html"><a href="appendix-rvector.html#replacing-elements"><i class="fa fa-check"></i><b>C.5.4</b> Replacing Elements</a></li>
+<li class="chapter" data-level="C.5.5" data-path="appendix-rvector.html"><a href="appendix-rvector.html#other-functions"><i class="fa fa-check"></i><b>C.5.5</b> Other Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="C.6" data-path="appendix-rvector.html"><a href="appendix-rvector.html#named-vectors"><i class="fa fa-check"></i><b>C.6</b> Named Vectors</a><ul>
+<li class="chapter" data-level="C.6.1" data-path="appendix-rvector.html"><a href="appendix-rvector.html#creating-named-vectors"><i class="fa fa-check"></i><b>C.6.1</b> Creating Named Vectors</a></li>
+<li class="chapter" data-level="C.6.2" data-path="appendix-rvector.html"><a href="appendix-rvector.html#subsetting-named-vectors-with-character-string-indices"><i class="fa fa-check"></i><b>C.6.2</b> Subsetting Named Vectors with Character String Indices</a></li>
+</ul></li>
+<li class="chapter" data-level="C.7" data-path="appendix-rvector.html"><a href="appendix-rvector.html#factors"><i class="fa fa-check"></i><b>C.7</b> Factors</a><ul>
+<li class="chapter" data-level="C.7.1" data-path="appendix-rvector.html"><a href="appendix-rvector.html#creating-factors"><i class="fa fa-check"></i><b>C.7.1</b> Creating Factors</a></li>
+<li class="chapter" data-level="C.7.2" data-path="appendix-rvector.html"><a href="appendix-rvector.html#levels"><i class="fa fa-check"></i><b>C.7.2</b> Levels</a></li>
+<li class="chapter" data-level="C.7.3" data-path="appendix-rvector.html"><a href="appendix-rvector.html#internal-representation"><i class="fa fa-check"></i><b>C.7.3</b> Internal Representation (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="C.8" data-path="appendix-rvector.html"><a href="appendix-rvector.html#lists"><i class="fa fa-check"></i><b>C.8</b> Lists</a><ul>
+<li class="chapter" data-level="C.8.1" data-path="appendix-rvector.html"><a href="appendix-rvector.html#creating-lists"><i class="fa fa-check"></i><b>C.8.1</b> Creating Lists</a></li>
+<li class="chapter" data-level="C.8.2" data-path="appendix-rvector.html"><a href="appendix-rvector.html#named-lists"><i class="fa fa-check"></i><b>C.8.2</b> Named Lists</a></li>
+<li class="chapter" data-level="C.8.3" data-path="appendix-rvector.html"><a href="appendix-rvector.html#subsetting-and-extracting-from-lists"><i class="fa fa-check"></i><b>C.8.3</b> Subsetting and Extracting From Lists</a></li>
+<li class="chapter" data-level="C.8.4" data-path="appendix-rvector.html"><a href="appendix-rvector.html#common-operations"><i class="fa fa-check"></i><b>C.8.4</b> Common Operations</a></li>
+</ul></li>
+<li class="chapter" data-level="C.9" data-path="appendix-rvector.html"><a href="appendix-rvector.html#exercises-8"><i class="fa fa-check"></i><b>C.9</b> Exercises</a><ul>
+<li class="chapter" data-level="C.9.1" data-path="appendix-rvector.html"><a href="appendix-rvector.html#audeur-exchange-rates"><i class="fa fa-check"></i><b>C.9.1</b> AUD/EUR Exchange Rates</a></li>
+</ul></li>
+<li class="chapter" data-level="C.10" data-path="appendix-rvector.html"><a href="appendix-rvector.html#further-reading-12"><i class="fa fa-check"></i><b>C.10</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="D" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html"><i class="fa fa-check"></i><b>D</b> Matrix Algebra in R</a><ul>
+<li class="chapter" data-level="D.1" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#creating-matrices"><i class="fa fa-check"></i><b>D.1</b> Creating Matrices</a><ul>
+<li class="chapter" data-level="D.1.1" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#matrix"><i class="fa fa-check"></i><b>D.1.1</b> <code>matrix()</code></a></li>
+<li class="chapter" data-level="D.1.2" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#stacking-vectors"><i class="fa fa-check"></i><b>D.1.2</b> Stacking Vectors</a></li>
+<li class="chapter" data-level="D.1.3" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#beyond-numeric-matrices"><i class="fa fa-check"></i><b>D.1.3</b> Beyond Numeric Matrices</a></li>
+<li class="chapter" data-level="D.1.4" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#naming-rows-and-columns"><i class="fa fa-check"></i><b>D.1.4</b> Naming Rows and Columns</a></li>
+<li class="chapter" data-level="D.1.5" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#other-methods"><i class="fa fa-check"></i><b>D.1.5</b> Other Methods</a></li>
+<li class="chapter" data-level="D.1.6" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#internal-representation-1"><i class="fa fa-check"></i><b>D.1.6</b> Internal Representation (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="D.2" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#common-operations-1"><i class="fa fa-check"></i><b>D.2</b> Common Operations</a><ul>
+<li class="chapter" data-level="D.2.1" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#matrix-transpose"><i class="fa fa-check"></i><b>D.2.1</b> Matrix Transpose</a></li>
+<li class="chapter" data-level="D.2.2" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#matrix-scalar-operations"><i class="fa fa-check"></i><b>D.2.2</b> Matrix-Scalar Operations</a></li>
+<li class="chapter" data-level="D.2.3" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#matrix-matrix-operations"><i class="fa fa-check"></i><b>D.2.3</b> Matrix-Matrix Operations</a></li>
+<li class="chapter" data-level="D.2.4" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#matrix-multiplication"><i class="fa fa-check"></i><b>D.2.4</b> Matrix Multiplication (*)</a></li>
+<li class="chapter" data-level="D.2.5" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#aggregation-of-rows-and-columns"><i class="fa fa-check"></i><b>D.2.5</b> Aggregation of Rows and Columns</a></li>
+<li class="chapter" data-level="D.2.6" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#vectorised-special-functions"><i class="fa fa-check"></i><b>D.2.6</b> Vectorised Special Functions</a></li>
+<li class="chapter" data-level="D.2.7" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#matrix-vector-operations"><i class="fa fa-check"></i><b>D.2.7</b> Matrix-Vector Operations</a></li>
+</ul></li>
+<li class="chapter" data-level="D.3" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#matrix-subsetting"><i class="fa fa-check"></i><b>D.3</b> Matrix Subsetting</a><ul>
+<li class="chapter" data-level="D.3.1" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#selecting-individual-elements"><i class="fa fa-check"></i><b>D.3.1</b> Selecting Individual Elements</a></li>
+<li class="chapter" data-level="D.3.2" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#selecting-rows-and-columns"><i class="fa fa-check"></i><b>D.3.2</b> Selecting Rows and Columns</a></li>
+<li class="chapter" data-level="D.3.3" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#selecting-submatrices"><i class="fa fa-check"></i><b>D.3.3</b> Selecting Submatrices</a></li>
+<li class="chapter" data-level="D.3.4" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#selecting-based-on-logical-vectors-and-matrices"><i class="fa fa-check"></i><b>D.3.4</b> Selecting Based on Logical Vectors and Matrices</a></li>
+<li class="chapter" data-level="D.3.5" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#selecting-based-on-two-column-matrices"><i class="fa fa-check"></i><b>D.3.5</b> Selecting Based on Two-Column Matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="D.4" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#exercises-9"><i class="fa fa-check"></i><b>D.4</b> Exercises</a><ul>
+<li class="chapter" data-level="D.4.1" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#currency-exchange-rates"><i class="fa fa-check"></i><b>D.4.1</b> Currency Exchange Rates</a></li>
+<li class="chapter" data-level="D.4.2" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#currency-exchange-rates-relative-to-1999"><i class="fa fa-check"></i><b>D.4.2</b> Currency Exchange Rates Relative to 1999</a></li>
+</ul></li>
+<li class="chapter" data-level="D.5" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#further-reading-13"><i class="fa fa-check"></i><b>D.5</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="E" data-path="appendix-rdf.html"><a href="appendix-rdf.html"><i class="fa fa-check"></i><b>E</b> Data Frame Wrangling in R</a><ul>
+<li class="chapter" data-level="E.1" data-path="appendix-rdf.html"><a href="appendix-rdf.html#creating-data-frames"><i class="fa fa-check"></i><b>E.1</b> Creating Data Frames</a></li>
+<li class="chapter" data-level="E.2" data-path="appendix-rdf.html"><a href="appendix-rdf.html#importing-data-frames"><i class="fa fa-check"></i><b>E.2</b> Importing Data Frames</a></li>
+<li class="chapter" data-level="E.3" data-path="appendix-rdf.html"><a href="appendix-rdf.html#data-frame-subsetting"><i class="fa fa-check"></i><b>E.3</b> Data Frame Subsetting</a><ul>
+<li class="chapter" data-level="E.3.1" data-path="appendix-rdf.html"><a href="appendix-rdf.html#each-data-frame-is-a-list"><i class="fa fa-check"></i><b>E.3.1</b> Each Data Frame is a List</a></li>
+<li class="chapter" data-level="E.3.2" data-path="appendix-rdf.html"><a href="appendix-rdf.html#each-data-frame-is-matrix-like"><i class="fa fa-check"></i><b>E.3.2</b> Each Data Frame is Matrix-like</a></li>
+</ul></li>
+<li class="chapter" data-level="E.4" data-path="appendix-rdf.html"><a href="appendix-rdf.html#common-operations-2"><i class="fa fa-check"></i><b>E.4</b> Common Operations</a></li>
+<li class="chapter" data-level="E.5" data-path="appendix-rdf.html"><a href="appendix-rdf.html#metaprogramming-and-formulas"><i class="fa fa-check"></i><b>E.5</b> Metaprogramming and Formulas (*)</a></li>
+<li class="chapter" data-level="E.6" data-path="appendix-rdf.html"><a href="appendix-rdf.html#exercises-10"><i class="fa fa-check"></i><b>E.6</b> Exercises</a><ul>
+<li class="chapter" data-level="E.6.1" data-path="appendix-rdf.html"><a href="appendix-rdf.html#urban-forest"><i class="fa fa-check"></i><b>E.6.1</b> Urban Forest</a></li>
+</ul></li>
+<li class="chapter" data-level="E.7" data-path="appendix-rdf.html"><a href="appendix-rdf.html#air-quality"><i class="fa fa-check"></i><b>E.7</b> Air Quality</a></li>
+<li class="chapter" data-level="E.8" data-path="appendix-rdf.html"><a href="appendix-rdf.html#further-reading-14"><i class="fa fa-check"></i><b>E.8</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="F" data-path="appendix-datasets.html"><a href="appendix-datasets.html"><i class="fa fa-check"></i><b>F</b> Datasets</a><ul>
+<li class="chapter" data-level="F.1" data-path="appendix-datasets.html"><a href="appendix-datasets.html#sustainable-society-indices"><i class="fa fa-check"></i><b>F.1</b> Sustainable Society Indices</a></li>
+<li class="chapter" data-level="F.2" data-path="appendix-datasets.html"><a href="appendix-datasets.html#air-quality-1"><i class="fa fa-check"></i><b>F.2</b> Air Quality</a></li>
+<li class="chapter" data-level="F.3" data-path="appendix-datasets.html"><a href="appendix-datasets.html#currency-exchange-rates-1"><i class="fa fa-check"></i><b>F.3</b> Currency Exchange Rates</a></li>
+<li class="chapter" data-level="F.4" data-path="appendix-datasets.html"><a href="appendix-datasets.html#urban-forest-1"><i class="fa fa-check"></i><b>F.4</b> Urban Forest</a></li>
+<li class="chapter" data-level="F.5" data-path="appendix-datasets.html"><a href="appendix-datasets.html#wine-quality"><i class="fa fa-check"></i><b>F.5</b> Wine Quality</a></li>
+<li class="chapter" data-level="F.6" data-path="appendix-datasets.html"><a href="appendix-datasets.html#the-world-factbook-countries-of-the-world"><i class="fa fa-check"></i><b>F.6</b> The World Factbook (Countries of the World)</a></li>
+<li class="chapter" data-level="F.7" data-path="appendix-datasets.html"><a href="appendix-datasets.html#edstats-country-level-education-statistics"><i class="fa fa-check"></i><b>F.7</b> EdStats (Country-Level Education Statistics)</a></li>
+<li class="chapter" data-level="F.8" data-path="appendix-datasets.html"><a href="appendix-datasets.html#food-and-nutrient-database-for-dietary-studies-fndds"><i class="fa fa-check"></i><b>F.8</b> Food and Nutrient Database for Dietary Studies (FNDDS)</a></li>
+<li class="chapter" data-level="F.9" data-path="appendix-datasets.html"><a href="appendix-datasets.html#clustering-benchmarks"><i class="fa fa-check"></i><b>F.9</b> Clustering Benchmarks</a></li>
+<li class="chapter" data-level="F.10" data-path="appendix-datasets.html"><a href="appendix-datasets.html#movie-lens-todo"><i class="fa fa-check"></i><b>F.10</b> Movie Lens (TODO)</a></li>
+<li class="chapter" data-level="F.11" data-path="appendix-datasets.html"><a href="appendix-datasets.html#other-todo"><i class="fa fa-check"></i><b>F.11</b> Other (TODO)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li style='font-size: smaller' ><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Licensed under CC BY-NC-ND 4.0</a></li>
+<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-06-18 14:43 (a2fddd4)</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Machine Learning Classics with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chap:images" class="section level1">
+<h1><span class="header-section-number">11</span> Shallow and Deep Neural Networks</h1>
+<!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
+<!-- TODO: citations
+
+
+-->
+<!-- TODO: exercises: fashion MNIST -->
+<div id="introduction-12" class="section level2">
+<h2><span class="header-section-number">11.1</span> Introduction</h2>
+<div id="binary-logistic-regression-recap" class="section level3">
+<h3><span class="header-section-number">11.1.1</span> Binary Logistic Regression: Recap</h3>
+<p>Let <span class="math inline">\(\mathbf{X}\in\mathbb{R}^{n\times p}\)</span> be an input matrix
+that consists of <span class="math inline">\(n\)</span> points in a <span class="math inline">\(p\)</span>-dimensional space.</p>
+<p><span class="math display">\[
+\mathbf{X}=
+\left[
+\begin{array}{cccc}
+x_{1,1} &amp; x_{1,2} &amp; \cdots &amp; x_{1,p} \\
+x_{2,1} &amp; x_{2,2} &amp; \cdots &amp; x_{2,p} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+x_{n,1} &amp; x_{n,2} &amp; \cdots &amp; x_{n,p} \\
+\end{array}
+\right]
+\]</span></p>
+<p>In other words, we have a database on <span class="math inline">\(n\)</span> objects.
+Each object is described by means of <span class="math inline">\(p\)</span> numerical features.</p>
+<p>With each input <span class="math inline">\(\mathbf{x}_{i,\cdot}\)</span> we associate the desired output
+<span class="math inline">\(y_i\)</span> which is a categorical label – hence we
+will be dealing with <strong>classification</strong> tasks again.</p>
+<p>To recall, in <strong>binary logistic regression</strong> we model
+the probabilities that
+a given input belongs to either of the two classes:</p>
+<p><span class="math display">\[
+\begin{array}{lr}
+\Pr(Y=1|\mathbf{X},\boldsymbol\beta)=&amp; \phi(\beta_0 + \beta_1 X_1 +  \dots + \beta_p X_p)\\
+\Pr(Y=0|\mathbf{X},\boldsymbol\beta)=&amp; 1-\phi(\beta_0 + \beta_1 X_1 + \dots + \beta_p X_p)\\
+\end{array}
+\]</span>
+where <span class="math inline">\(\phi(t) = \frac{1}{1+e^{-t}}=\frac{e^t}{1+e^t}\)</span> is the logistic sigmoid function.</p>
+<p>It holds:
+<span class="math display">\[
+\begin{array}{ll}
+\Pr(Y=1|\mathbf{X},\boldsymbol\beta)=&amp;\displaystyle\frac{1}{1+e^{-(\beta_0 + \beta_1 X_1 +  \dots + \beta_p X_p)}},\\
+\Pr(Y=0|\mathbf{X},\boldsymbol\beta)=&amp;
+\displaystyle\frac{1}{1+e^{+(\beta_0 + \beta_1 X_1 +  \dots + \beta_p X_p)}}=\displaystyle\frac{e^{-(\beta_0 + \beta_1 X_1 +  \dots + \beta_p X_p)}}{1+e^{-(\beta_0 + \beta_1 X_1 +  \dots + \beta_p X_p)}}.\\
+\end{array}
+\]</span></p>
+<p>The fitting of the model was performed by minimising the cross-entropy (log-loss):
+<span class="math display">\[
+\min_{\boldsymbol\beta\in\mathbb{R}^{p+1}}
+-\frac{1}{n} \sum_{i=1}^n
+\Bigg(y_i\log \hat{y}_i + (1-y_i)\log (1-\hat{y}_i)\Bigg).
+\]</span>
+where <span class="math inline">\(\hat{y}_i=\Pr(Y=1|\mathbf{x}_{i,\cdot},\boldsymbol\beta)\)</span>.</p>
+<p>This is equivalent to:
+<span class="math display">\[
+\min_{\boldsymbol\beta\in\mathbb{R}^{p+1}}
+-\frac{1}{n} \sum_{i=1}^n
+\Bigg(y_i\log \Pr(Y=1|\mathbf{x}_{i,\cdot},\boldsymbol\beta) + (1-y_i)\log \Pr(Y=0|\mathbf{x}_{i,\cdot},\boldsymbol\beta)\Bigg).
+\]</span></p>
+<p>Note that for each <span class="math inline">\(i\)</span>,
+either the left or the right term (in the bracketed expression) vanishes.</p>
+<p>Hence, we may also write the above as:
+<span class="math display">\[
+\min_{\boldsymbol\beta\in\mathbb{R}^{p+1}}
+-\frac{1}{n} \sum_{i=1}^n
+\log \Pr(Y=y_i|\mathbf{x}_{i,\cdot},\boldsymbol\beta).
+\]</span></p>
+<!--Taking into account the fact that
+$\log \frac{a}{b} = \log{a}-\log{b}$,
+$\log e^{a} = a$ and $\log 1 = 0$, we can rewrite the above as:-->
+<!--\[
+-\frac{1}{n} \sum_{i=1}^n \left(
+    y_i\log \Pr(Y=1|\mathbf{x}_{i,\cdot},\boldsymbol\beta) +
+    \log \Pr(Y=0|\mathbf{x}_{i,\cdot},\boldsymbol\beta)
+    - y_i \log \Pr(Y=0|\mathbf{x}_{i,\cdot},\boldsymbol\beta)
+\right)
+\]-->
+<!--\[
+-\frac{1}{n} \sum_{i=1}^n \left(
+    y_i\log \frac{1}{1+e^{-(\beta_0 + \beta_1 X_1 +  \dots + \beta_p X_p)}} +
+    \log \frac{e^{-(\beta_0 + \beta_1 X_1 +  \dots + \beta_p X_p)}}{1+e^{-(\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p)}}
+    - y_i \log \frac{e^{-(\beta_0 + \beta_1 X_1 +  \dots + \beta_p X_p)}}{1+e^{-(\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p)}}
+\right)
+\]-->
+<!--\[
+-\frac{1}{n} \sum_{i=1}^n \left(
+    -y_i\log \left({1+e^{-(\beta_0 + \beta_1 X_1 +  \dots + \beta_p X_p)}}\right)
+    +       \log \left({e^{-(\beta_0 + \beta_1 X_1 +  \dots + \beta_p X_p)}}\right)
+    -       \log \left({1+e^{-(\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p)}}\right)
+    -y_i\log \left({e^{-(\beta_0 + \beta_1 X_1 +  \dots + \beta_p X_p)}}\right)
+    +y_i\log \left({1+e^{-(\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p)}}\right)
+\right)
+\]-->
+<!--\[
+\frac{1}{n} \sum_{i=1}^n \left(
+    (1-y_i)    \left(\beta_0 + \beta_1 x_{i,1} +  \dots + \beta_p x_{i,p})\right)
+    +       \log \left({1+e^{-(\beta_0 + \beta_1 x_{i,1}+ \dots + \beta_p x_{i,p})}}\right)
+\right)
+\]-->
+<p>In this chapter we will generalise the binary logistic regression model:</p>
+<ul>
+<li><p>First we will consider the case of many classes
+(multiclass classification).
+This will lead to the multinomial logistic regression model.</p></li>
+<li><p>Then we will note that the multinomial logistic regression is a special
+case of a feed-forward neural network.</p></li>
+</ul>
+</div>
+<div id="data-3" class="section level3">
+<h3><span class="header-section-number">11.1.2</span> Data</h3>
+<p>We will study the famous classic – the MNIST image classification dataset
+(Modified National Institute of Standards and Technology database),
+see <a href="http://yann.lecun.com/exdb/mnist/" class="uri">http://yann.lecun.com/exdb/mnist/</a></p>
+<p>It consists of 28×28 pixel images of handwritten digits:</p>
+<ul>
+<li><code>train</code>: 60,000 training images,</li>
+<li><code>t10k</code>: 10,000 testing images.</li>
+</ul>
+<p>A few image instances from each class are depicted in
+Figure <a href="chap-images.html#fig:mnist_demo">1</a>.</p>
+<div class="figure">
+<img src="11-images-figures/mnist_demo-1.svg" alt="Figure 1: Example images in the MNIST database" id="fig:mnist_demo" />
+<p class="caption">Figure 1: Example images in the MNIST database</p>
+</div>
+<p>There are 10 unique digits, so this is a multiclass classification problem.</p>
+<dl>
+<dt>Remark.</dt>
+<dd><p>The dataset is already “too easy” for testing of the state-of-the-art
+classifiers (see the notes below), but it’s a great educational example.</p>
+</dd>
+</dl>
+<p>Accessing MNIST via the <code>keras</code> package
+(which we will use throughout this chapter anyway) is easy:</p>
+<div class="sourceCode" id="cb694"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb694-1" title="1"><span class="kw">library</span>(<span class="st">&quot;keras&quot;</span>)</a>
+<a class="sourceLine" id="cb694-2" title="2">mnist &lt;-<span class="st"> </span><span class="kw">dataset_mnist</span>()</a>
+<a class="sourceLine" id="cb694-3" title="3">X_train &lt;-<span class="st"> </span>mnist<span class="op">$</span>train<span class="op">$</span>x</a>
+<a class="sourceLine" id="cb694-4" title="4">Y_train &lt;-<span class="st"> </span>mnist<span class="op">$</span>train<span class="op">$</span>y</a>
+<a class="sourceLine" id="cb694-5" title="5">X_test  &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span class="op">$</span>x</a>
+<a class="sourceLine" id="cb694-6" title="6">Y_test  &lt;-<span class="st"> </span>mnist<span class="op">$</span>test<span class="op">$</span>y</a></code></pre></div>
+<!--
+
+
+```{cache=TRUE,mnist_download,warning=FALSE}
+dir.create("mnist")
+files <- c("train-images-idx3-ubyte.gz",
+           "train-labels-idx1-ubyte.gz",
+           "t10k-images-idx3-ubyte.gz",
+           "t10k-labels-idx1-ubyte.gz")
+for (file in files) {
+    cat(sprintf("downloading %s...\n", file))
+    download.file(sprintf("http://yann.lecun.com/exdb/mnist/%s", file),
+              sprintf("mnist/%s", file))
+}
+```
+-->
+<p><code>X_train</code> and <code>X_test</code> consist of 28×28 pixel images.</p>
+<div class="sourceCode" id="cb695"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb695-1" title="1"><span class="kw">dim</span>(X_train)</a></code></pre></div>
+<pre><code>## [1] 60000    28    28</code></pre>
+<div class="sourceCode" id="cb697"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb697-1" title="1"><span class="kw">dim</span>(X_test)</a></code></pre></div>
+<pre><code>## [1] 10000    28    28</code></pre>
+<p><code>X_train</code> and <code>X_test</code> are 3-dimensional arrays, think
+of them as vectors of 60000 and 10000 matrices of size 28×28, respectively.</p>
+<p>These are grey-scale images, with 0 = black, …, 255 = white:</p>
+<div class="sourceCode" id="cb699"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb699-1" title="1"><span class="kw">range</span>(X_train)</a></code></pre></div>
+<pre><code>## [1]   0 255</code></pre>
+<p>Numerically, it’s more convenient to work with colour values
+converted to 0.0 = black, …, 1.0 = white:</p>
+<div class="sourceCode" id="cb701"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb701-1" title="1">X_train &lt;-<span class="st"> </span>X_train<span class="op">/</span><span class="dv">255</span></a>
+<a class="sourceLine" id="cb701-2" title="2">X_test  &lt;-<span class="st"> </span>X_test<span class="op">/</span><span class="dv">255</span></a></code></pre></div>
+<p><code>Y_train</code> and <code>Y_test</code> are the corresponding integer labels:</p>
+<div class="sourceCode" id="cb702"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb702-1" title="1"><span class="kw">length</span>(Y_train)</a></code></pre></div>
+<pre><code>## [1] 60000</code></pre>
+<div class="sourceCode" id="cb704"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb704-1" title="1"><span class="kw">length</span>(Y_test)</a></code></pre></div>
+<pre><code>## [1] 10000</code></pre>
+<div class="sourceCode" id="cb706"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb706-1" title="1"><span class="kw">table</span>(Y_train) <span class="co"># label distribution in the training sample</span></a></code></pre></div>
+<pre><code>## Y_train
+##    0    1    2    3    4    5    6    7    8    9 
+## 5923 6742 5958 6131 5842 5421 5918 6265 5851 5949</code></pre>
+<div class="sourceCode" id="cb708"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb708-1" title="1"><span class="kw">table</span>(Y_test)  <span class="co"># label distribution in the test sample</span></a></code></pre></div>
+<pre><code>## Y_test
+##    0    1    2    3    4    5    6    7    8    9 
+##  980 1135 1032 1010  982  892  958 1028  974 1009</code></pre>
+<p>Here is how we can plot one of the digits (see Figure <a href="chap-images.html#fig:mnist_info2b">2</a>):</p>
+<div class="sourceCode" id="cb710"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb710-1" title="1">id &lt;-<span class="st"> </span><span class="dv">123</span> <span class="co"># image ID to show</span></a>
+<a class="sourceLine" id="cb710-2" title="2"><span class="kw">image</span>(<span class="dt">z=</span><span class="kw">t</span>(X_train[id,,]), <span class="dt">col=</span><span class="kw">grey.colors</span>(<span class="dv">256</span>, <span class="dv">0</span>, <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb710-3" title="3">    <span class="dt">axes=</span><span class="ot">FALSE</span>, <span class="dt">asp=</span><span class="dv">1</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb710-4" title="4"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">bg=</span><span class="st">&quot;white&quot;</span>,</a>
+<a class="sourceLine" id="cb710-5" title="5">    <span class="dt">legend=</span><span class="kw">sprintf</span>(<span class="st">&quot;True label=%d&quot;</span>, Y_train[id]))</a></code></pre></div>
+<div class="figure">
+<img src="11-images-figures/mnist_info2b-1.svg" alt="Figure 2: Example image from the MNIST dataset" id="fig:mnist_info2b" />
+<p class="caption">Figure 2: Example image from the MNIST dataset</p>
+</div>
+</div>
+</div>
+<div id="multinomial-logistic-regression" class="section level2">
+<h2><span class="header-section-number">11.2</span> Multinomial Logistic Regression</h2>
+<div id="a-note-on-data-representation" class="section level3">
+<h3><span class="header-section-number">11.2.1</span> A Note on Data Representation</h3>
+<p>So… you may now be wondering “how do we construct an image classifier,
+this seems so complicated!”.</p>
+<p>For a computer, (almost) everything is just numbers.</p>
+<p>Instead of playing with <span class="math inline">\(n\)</span> matrices, each of size 28×28,
+we may “flatten” the images so as to get
+<span class="math inline">\(n\)</span> “long” vectors of length <span class="math inline">\(p=784\)</span>.</p>
+<div class="sourceCode" id="cb711"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb711-1" title="1">X_train2 &lt;-<span class="st"> </span><span class="kw">matrix</span>(X_train, <span class="dt">ncol=</span><span class="dv">28</span><span class="op">*</span><span class="dv">28</span>)</a>
+<a class="sourceLine" id="cb711-2" title="2">X_test2  &lt;-<span class="st"> </span><span class="kw">matrix</span>(X_test, <span class="dt">ncol=</span><span class="dv">28</span><span class="op">*</span><span class="dv">28</span>)</a></code></pre></div>
+<p>The classifiers studied here do not take the “spatial” positioning of
+the pixels into account anyway. Hence, now we’re back to our “comfort zone”.</p>
+<dl>
+<dt>Remark.</dt>
+<dd><p>(*) See, however, convolutional neural networks (CNNs),
+e.g., in <span class="citation">(Goodfellow et al. <a href="references.html#ref-deeplearn">2016</a>)</span>.</p>
+</dd>
+</dl>
+</div>
+<div id="extending-logistic-regression" class="section level3">
+<h3><span class="header-section-number">11.2.2</span> Extending Logistic Regression</h3>
+<p>Let us generalise the binary logistic regression model
+to a 10-class one (or, more generally, <span class="math inline">\(K\)</span>-class one).</p>
+<p>This time we will be modelling ten probabilities,
+with
+<span class="math inline">\(\Pr(Y=k|\mathbf{X},\mathbf{B})\)</span> denoting the <em>confidence</em> that a given image <span class="math inline">\(\mathbf{X}\)</span>
+is in fact the <span class="math inline">\(k\)</span>-th digit:</p>
+<p><span class="math display">\[
+\begin{array}{lcl}
+\Pr(Y=0|\mathbf{X},\mathbf{B})&amp;=&amp;\dots\\
+\Pr(Y=1|\mathbf{X},\mathbf{B})&amp;=&amp;\dots\\
+&amp;\vdots&amp;\\
+\Pr(Y=9|\mathbf{X},\mathbf{B})&amp;=&amp;\dots\\
+\end{array}
+\]</span></p>
+<p>where <span class="math inline">\(\mathbf{B}\)</span> is the set of underlying model parameters
+(to be determined soon).</p>
+<p>In binary logistic regression,
+the class probabilities are obtained by “cleverly normalising” (by means of the logistic sigmoid)
+the outputs of a linear model (so that we obtain a value in <span class="math inline">\([0,1]\)</span>).</p>
+<p><span class="math display">\[
+\Pr(Y=1|\mathbf{X},\boldsymbol\beta)=\phi(\beta_0 + \beta_1 X_1 +  \dots + \beta_p X_p)=\displaystyle\frac{1}{1+e^{-(\beta_0 + \beta_1 X_1 +  \dots + \beta_p X_p)}}
+\]</span></p>
+<p>In the multinomial case, we can use a separate linear model for each digit
+so that each <span class="math inline">\(\Pr(Y=k|\mathbf{X},\mathbf{B})\)</span>, <span class="math inline">\(k=0,1,\dots,9\)</span>,
+is given as a function of:
+<span class="math display">\[\beta_{0,k} + \beta_{1,k} X_{1} +  \dots + \beta_{p,k} X_{p}.\]</span></p>
+<p>Therefore, instead of a parameter vector of length <span class="math inline">\((p+1)\)</span>,
+we will need a parameter matrix of size <span class="math inline">\((p+1)\times 10\)</span>
+representing the model’s definition.</p>
+<dl>
+<dt>Side note.</dt>
+<dd><p>The upper case of <span class="math inline">\(\beta\)</span> is <span class="math inline">\(B\)</span>.</p>
+</dd>
+</dl>
+<p>Then, these 10 numbers will have to be normalised
+so as to they are all greater than <span class="math inline">\(0\)</span> and sum to <span class="math inline">\(1\)</span>.</p>
+<p>To maintain the spirit of the original model,
+we can apply <span class="math inline">\(e^{-(\beta_{0,k} + \beta_{1,k} X_{1} + \dots + \beta_{p,k} X_{p})}\)</span>
+to get a positive value,
+because the co-domain of the exponential function <span class="math inline">\(t\mapsto e^t\)</span>
+is <span class="math inline">\((0,\infty)\)</span>.</p>
+<p>Then, dividing each output by the sum of all the outputs will guarantee that
+the total sum equals 1.</p>
+<p>This leads to:
+<span class="math display">\[
+\begin{array}{lcl}
+\Pr(Y=0|\mathbf{X},\mathbf{B})&amp;=&amp;\displaystyle\frac{e^{-(\beta_{0,0} + \beta_{1,0} X_{1} +  \dots + \beta_{p,0} X_{p})}}{\sum_{k=0}^9 e^{-(\beta_{0,k} + \beta_{1,k} X_{1} +  \dots + \beta_{p,k} X_p)}},\\
+\Pr(Y=1|\mathbf{X},\mathbf{B})&amp;=&amp;\displaystyle\frac{e^{-(\beta_{0,1} + \beta_{1,1} X_{1} +  \dots + \beta_{p,1} X_{p})}}{\sum_{k=0}^9 e^{-(\beta_{0,k} + \beta_{1,k} X_{1} +  \dots + \beta_{p,k} X_{p})}},\\
+&amp;\vdots&amp;\\
+\Pr(Y=9|\mathbf{X},\mathbf{B})&amp;=&amp;\displaystyle\frac{e^{-(\beta_{0,9} + \beta_{1,9} X_{1} +  \dots + \beta_{p,9} X_{p})}}{\sum_{k=0}^9 e^{-(\beta_{0,k} + \beta_{1,k} X_{1} +  \dots + \beta_{p,k} X_{p})}}.\\
+\end{array}
+\]</span></p>
+<p>This reduces to the binary logistic regression
+if we consider only the classes <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span> and
+fix <span class="math inline">\(\beta_{0,0}=\beta_{1,0}=\dots=\beta_{p,0}=0\)</span> (as <span class="math inline">\(e^0=1\)</span>).</p>
+</div>
+<div id="softmax-function" class="section level3">
+<h3><span class="header-section-number">11.2.3</span> Softmax Function</h3>
+<p>The above transformation (that maps 10 arbitrary real numbers
+to positive ones that sum to 1)
+is called the <strong>softmax</strong> function (or <em>softargmax</em>).</p>
+<div class="sourceCode" id="cb712"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb712-1" title="1">softmax &lt;-<span class="st"> </span><span class="cf">function</span>(T) {</a>
+<a class="sourceLine" id="cb712-2" title="2">    T2 &lt;-<span class="st"> </span><span class="kw">exp</span>(T) <span class="co"># ignore the minus sign above</span></a>
+<a class="sourceLine" id="cb712-3" title="3">    T2<span class="op">/</span><span class="kw">sum</span>(T2)</a>
+<a class="sourceLine" id="cb712-4" title="4">}</a>
+<a class="sourceLine" id="cb712-5" title="5"><span class="kw">round</span>(<span class="kw">rbind</span>(</a>
+<a class="sourceLine" id="cb712-6" title="6">    <span class="kw">softmax</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,  <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)),</a>
+<a class="sourceLine" id="cb712-7" title="7">    <span class="kw">softmax</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)),</a>
+<a class="sourceLine" id="cb712-8" title="8">    <span class="kw">softmax</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">9</span>,  <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)),</a>
+<a class="sourceLine" id="cb712-9" title="9">    <span class="kw">softmax</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">9</span>,  <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">8</span>))), <span class="dv">2</span>)</a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+## [1,]    0    0 1.00    0    0    0 0.00    0    0  0.00
+## [2,]    0    0 0.50    0    0    0 0.50    0    0  0.00
+## [3,]    0    0 0.73    0    0    0 0.27    0    0  0.00
+## [4,]    0    0 0.67    0    0    0 0.24    0    0  0.09</code></pre>
+</div>
+<div id="one-hot-encoding-and-decoding" class="section level3">
+<h3><span class="header-section-number">11.2.4</span> One-Hot Encoding and Decoding</h3>
+<p>The ten class-belongingness-degrees can be decoded
+to obtain a single label by simply choosing
+the class that is assigned the highest probability.</p>
+<div class="sourceCode" id="cb714"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb714-1" title="1">y_pred &lt;-<span class="st"> </span><span class="kw">softmax</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">9</span>,  <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">8</span>))</a>
+<a class="sourceLine" id="cb714-2" title="2"><span class="kw">round</span>(y_pred, <span class="dv">2</span>) <span class="co"># probabilities of Y=0, 1, 2, ..., 9</span></a></code></pre></div>
+<pre><code>##  [1] 0.00 0.00 0.67 0.00 0.00 0.00 0.24 0.00 0.00 0.09</code></pre>
+<div class="sourceCode" id="cb716"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb716-1" title="1"><span class="kw">which.max</span>(y_pred)<span class="op">-</span><span class="dv">1</span> <span class="co"># 1..10 -&gt; 0..9</span></a></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<dl>
+<dt>Remark.</dt>
+<dd><p><code>which.max(y)</code> returns an index <code>k</code> such that
+<code>y[k]==max(y)</code> (recall that in R the first element in
+a vector is at index <code>1</code>).
+Mathematically, we denote this operation
+as <span class="math inline">\(\mathrm{arg}\max_{k=1,\dots,K} y_k\)</span>.</p>
+</dd>
+</dl>
+<p>To make processing the outputs of a logistic regression model more convenient,
+we will apply the so-called <strong>one-hot-encoding</strong> of the labels.</p>
+<p>Here, each label will be represented as a 0-1 vector
+of 10 probabilities – with probability 1 corresponding
+to the true class only.</p>
+<p>For instance:</p>
+<div class="sourceCode" id="cb718"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb718-1" title="1">y &lt;-<span class="st"> </span><span class="dv">2</span> <span class="co"># true class (this is just an example)</span></a>
+<a class="sourceLine" id="cb718-2" title="2">y2 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb718-3" title="3">y2[y<span class="op">+</span><span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">1</span> <span class="co"># +1 because we need 0..9 -&gt; 1..10</span></a>
+<a class="sourceLine" id="cb718-4" title="4">y2  <span class="co"># one-hot-encoded y</span></a></code></pre></div>
+<pre><code>##  [1] 0 0 1 0 0 0 0 0 0 0</code></pre>
+<p>To one-hot encode <em>all</em> the reference outputs in R,
+we start with a matrix of size <span class="math inline">\(n\times 10\)</span> populated with “0”s:</p>
+<div class="sourceCode" id="cb720"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb720-1" title="1">Y_train2 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow=</span><span class="kw">length</span>(Y_train), <span class="dt">ncol=</span><span class="dv">10</span>)</a></code></pre></div>
+<p>Next, for every <span class="math inline">\(i\)</span>, we insert a “1” in the <span class="math inline">\(i\)</span>-th row
+and the (<code>Y_train[</code><span class="math inline">\(i\)</span><code>]+1</code>)-th column:</p>
+<div class="sourceCode" id="cb721"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb721-1" title="1"><span class="co"># Note the &quot;+1&quot; 0..9 -&gt; 1..10</span></a>
+<a class="sourceLine" id="cb721-2" title="2">Y_train2[<span class="kw">cbind</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(Y_train), Y_train<span class="op">+</span><span class="dv">1</span>)] &lt;-<span class="st"> </span><span class="dv">1</span></a></code></pre></div>
+<dl>
+<dt>Remark.</dt>
+<dd><p>In R, indexing a matrix <code>A</code> with a 2-column matrix <code>B</code>, i.e., <code>A[B]</code>,
+allows for an easy access to
+<code>A[B[1,1], B[1,2]]</code>, <code>A[B[2,1], B[2,2]]</code>, <code>A[B[3,1], B[3,2]]</code>, …</p>
+</dd>
+</dl>
+<p>Sanity check:</p>
+<div class="sourceCode" id="cb722"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb722-1" title="1"><span class="kw">head</span>(Y_train)</a></code></pre></div>
+<pre><code>## [1] 5 0 4 1 9 2</code></pre>
+<div class="sourceCode" id="cb724"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb724-1" title="1"><span class="kw">head</span>(Y_train2)</a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+## [1,]    0    0    0    0    0    1    0    0    0     0
+## [2,]    1    0    0    0    0    0    0    0    0     0
+## [3,]    0    0    0    0    1    0    0    0    0     0
+## [4,]    0    1    0    0    0    0    0    0    0     0
+## [5,]    0    0    0    0    0    0    0    0    0     1
+## [6,]    0    0    1    0    0    0    0    0    0     0</code></pre>
+<p>Let us generalise the above idea and write a function
+that can one-hot-encode any vector of integer labels:</p>
+<div class="sourceCode" id="cb726"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb726-1" title="1">one_hot_encode &lt;-<span class="st"> </span><span class="cf">function</span>(Y) {</a>
+<a class="sourceLine" id="cb726-2" title="2">    <span class="kw">stopifnot</span>(<span class="kw">is.numeric</span>(Y))</a>
+<a class="sourceLine" id="cb726-3" title="3">    c1 &lt;-<span class="st"> </span><span class="kw">min</span>(Y) <span class="co"># first class label</span></a>
+<a class="sourceLine" id="cb726-4" title="4">    cK &lt;-<span class="st"> </span><span class="kw">max</span>(Y) <span class="co"># last class label</span></a>
+<a class="sourceLine" id="cb726-5" title="5">    K &lt;-<span class="st"> </span>cK<span class="op">-</span>c1<span class="op">+</span><span class="dv">1</span> <span class="co"># number of classes</span></a>
+<a class="sourceLine" id="cb726-6" title="6"></a>
+<a class="sourceLine" id="cb726-7" title="7">    Y2 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow=</span><span class="kw">length</span>(Y), <span class="dt">ncol=</span>K)</a>
+<a class="sourceLine" id="cb726-8" title="8">    Y2[<span class="kw">cbind</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(Y), Y<span class="op">-</span>c1<span class="op">+</span><span class="dv">1</span>)] &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb726-9" title="9">    Y2</a>
+<a class="sourceLine" id="cb726-10" title="10">}</a></code></pre></div>
+<p>Encode <code>Y_train</code> and <code>Y_test</code>:</p>
+<div class="sourceCode" id="cb727"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb727-1" title="1">Y_train2 &lt;-<span class="st"> </span><span class="kw">one_hot_encode</span>(Y_train)</a>
+<a class="sourceLine" id="cb727-2" title="2">Y_test2 &lt;-<span class="st"> </span><span class="kw">one_hot_encode</span>(Y_test)</a></code></pre></div>
+</div>
+<div id="cross-entropy-revisited" class="section level3">
+<h3><span class="header-section-number">11.2.5</span> Cross-entropy Revisited</h3>
+<p>Our classifier will be outputting <span class="math inline">\(K=10\)</span> probabilities.</p>
+<p>The true class labels are not one-hot-encoded so that they
+are represented as vectors of <span class="math inline">\(K-1\)</span> zeros and a single one.</p>
+<p>How to measure the “agreement” between these two?</p>
+<div style="margin-top: 1em">
+
+</div>
+<p>In essence, we will be comparing
+the probability vectors as generated by a classifier, <span class="math inline">\(\hat{Y}\)</span>:</p>
+<div class="sourceCode" id="cb728"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb728-1" title="1"><span class="kw">round</span>(y_pred, <span class="dv">2</span>)</a></code></pre></div>
+<pre><code>##  [1] 0.00 0.00 0.67 0.00 0.00 0.00 0.24 0.00 0.00 0.09</code></pre>
+<p>with the one-hot-encoded true probabilities, <span class="math inline">\(Y\)</span>:</p>
+<div class="sourceCode" id="cb730"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb730-1" title="1">y2</a></code></pre></div>
+<pre><code>##  [1] 0 0 1 0 0 0 0 0 0 0</code></pre>
+<p>It turns out that one of the definitions of cross-entropy introduced above
+already handles the case of multiclass classification:
+<span class="math display">\[
+E(\mathbf{B}) =
+-\frac{1}{n} \sum_{i=1}^n
+\log \Pr(Y=y_i|\mathbf{x}_{i,\cdot},\mathbf{B}).
+\]</span>
+The smaller the probability corresponding to the ground-truth class
+outputted by the classifier, the higher the penalty, see
+Figure <a href="chap-images.html#fig:cross_entropy_revisited_example3">3</a>.</p>
+<div class="figure">
+<img src="11-images-figures/cross_entropy_revisited_example3-1.svg" alt="Figure 3: The less the classifier is confident about the prediction of the actually true label, the greater the penalty" id="fig:cross_entropy_revisited_example3" />
+<p class="caption">Figure 3: The less the classifier is confident about the prediction of the actually true label, the greater the penalty</p>
+</div>
+<p>To sum up, we will be solving the optimisation problem:
+<span class="math display">\[
+\min_{\mathbf{B}\in\mathbb{R}^{(p+1)\times 10}}
+-\frac{1}{n} \sum_{i=1}^n
+\log \Pr(Y=y_i|\mathbf{x}_{i,\cdot},\mathbf{B}).
+\]</span>
+This has no analytical solution,
+but can be solved using iterative methods
+(see the chapter on optimisation).</p>
+<p>(*) Side note: A single term in the above formula,
+<span class="math display">\[
+\log \Pr(Y=y_i|\mathbf{x}_{i,\cdot},\mathbf{B})
+\]</span>
+given:</p>
+<ul>
+<li><code>y_pred</code> – a vector of 10 probabilities
+generated by the model:
+<span class="math display">\[
+\left[\Pr(Y=0|\mathbf{x}_{i,\cdot},\mathbf{B})\  \Pr(Y=1|\mathbf{x}_{i,\cdot},\mathbf{B})\ \cdots\ \Pr(Y=9|\mathbf{x}_{i,\cdot},\mathbf{B})\right]
+\]</span></li>
+<li><code>y2</code> – a one-hot-encoded version of the true label, <span class="math inline">\(y_i\)</span>, of the form:
+<span class="math display">\[
+\left[0\ 0\ \cdots\ 0\ 1\ 0\ \cdots\ 0\right]
+\]</span></li>
+</ul>
+<p>can be computed as:</p>
+<div class="sourceCode" id="cb732"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb732-1" title="1"><span class="kw">sum</span>(y2<span class="op">*</span><span class="kw">log</span>(y_pred))</a></code></pre></div>
+<pre><code>## [1] -0.40782</code></pre>
+</div>
+<div id="problem-formulation-in-matrix-form" class="section level3">
+<h3><span class="header-section-number">11.2.6</span> Problem Formulation in Matrix Form (**)</h3>
+<p>The definition of a multinomial logistic regression
+model for a multiclass classification task involving
+classes <span class="math inline">\(\{1,2,\dots,K\}\)</span>
+is slightly bloated.</p>
+<p>Assuming that <span class="math inline">\(\mathbf{X}\in\mathbb{R}^{n\times p}\)</span> is the input matrix,
+to compute the <span class="math inline">\(K\)</span> predicted probabilities for the <span class="math inline">\(i\)</span>-th input,
+<span class="math display">\[
+\left[
+\hat{y}_{i,1}\ \hat{y}_{i,2}\ \cdots\ \hat{y}_{i,K}
+\right],
+\]</span>
+given a parameter matrix <span class="math inline">\(\mathbf{B}^{(p+1)\times K}\)</span>, we apply:
+<span class="math display">\[
+\begin{array}{lcl}
+\hat{y}_{i,1}=\Pr(Y=1|\mathbf{x}_{i,\cdot},\mathbf{B})&amp;=&amp;\displaystyle\frac{e^{\beta_{0,1} + \beta_{1,1} x_{i,1} +  \dots + \beta_{p,1} x_{i,p}}}{\sum_{k=1}^K e^{\beta_{0,k} + \beta_{1,k} x_{i,1} +  \dots + \beta_{p,k} x_{i,p}}},\\
+&amp;\vdots&amp;\\
+\hat{y}_{i,K}=\Pr(Y=K|\mathbf{x}_{i,\cdot},\mathbf{B})&amp;=&amp;\displaystyle\frac{e^{\beta_{0,K} + \beta_{1,K} x_{i,1} +  \dots + \beta_{p,K} x_{i,p}}}{\sum_{k=1}^K e^{\beta_{0,k} + \beta_{1,k} x_{i,1} +  \dots + \beta_{p,k} x_{i,p}}}.\\
+\end{array}
+\]</span></p>
+<dl>
+<dt>Remark.</dt>
+<dd><p>We have dropped the minus sign in the exponentiation for
+brevity of notation.
+Note that we can always map <span class="math inline">\(b_{j,k}&#39;=-b_{j,k}\)</span>.</p>
+</dd>
+</dl>
+<p>It turns out we can make use of matrix notation
+to tidy the above formulas.</p>
+<p>Denote the linear combinations prior to computing the softmax function with:
+<span class="math display">\[
+\begin{array}{lcl}
+t_{i,1}&amp;=&amp;\beta_{0,1} + \beta_{1,1} x_{i,1} +  \dots + \beta_{p,1} x_{i,p},\\
+&amp;\vdots&amp;\\
+t_{i,K}&amp;=&amp;\beta_{0,K} + \beta_{1,K} x_{i,1} +  \dots + \beta_{p,K} x_{i,p}.\\
+\end{array}
+\]</span></p>
+<p>We have:</p>
+<ul>
+<li><span class="math inline">\(x_{i,j}\)</span> – the <span class="math inline">\(i\)</span>-th observation, the <span class="math inline">\(j\)</span>-th feature;</li>
+<li><span class="math inline">\(\hat{y}_{i,k}\)</span> – the <span class="math inline">\(i\)</span>-th observation, the <span class="math inline">\(k\)</span>-th class probability;</li>
+<li><span class="math inline">\(\beta_{j,k}\)</span> – the coefficient for the <span class="math inline">\(j\)</span>-th feature when computing the <span class="math inline">\(k\)</span>-th class.</li>
+</ul>
+<p>Note that by augmenting <span class="math inline">\(\dot{\mathbf{X}}=[\boldsymbol{1}\ \mathbf{X}]\in\mathbb{R}^{n\times (p+1)}\)</span> by adding a column of 1s, i.e.,
+where <span class="math inline">\(\dot{x}_{i,0}=1\)</span> and <span class="math inline">\(\dot{x}_{i,j}=x_{i,j}\)</span> for all <span class="math inline">\(j\ge 1\)</span> and all <span class="math inline">\(i\)</span>, we can write the above as:
+<span class="math display">\[
+\begin{array}{lclcl}
+t_{i,1}&amp;=&amp;\sum_{j=0}^p \dot{x}_{i,j}\, \beta_{j,1} &amp;=&amp; \dot{\mathbf{x}}_{i,\cdot}\, \boldsymbol\beta_{\cdot,1},\\
+&amp;\vdots&amp;\\
+t_{i,K}&amp;=&amp;\sum_{j=0}^p \dot{x}_{i,j}\, \beta_{j,K} &amp;=&amp; \dot{\mathbf{x}}_{i,\cdot}\, \boldsymbol\beta_{\cdot,K}.\\
+\end{array}
+\]</span></p>
+<p>We can get the <span class="math inline">\(K\)</span> linear combinations all at once
+in the form of a row vector by writing:
+<span class="math display">\[
+\left[
+t_{i,1}\ t_{i,2}\ \cdots\ t_{i,K}
+\right]
+=
+{\mathbf{x}_{i,\cdot}}\, \mathbf{B}.
+\]</span></p>
+<p>Moreover, we can do that for all the <span class="math inline">\(n\)</span> inputs by writing:
+<span class="math display">\[
+\mathbf{T}=\dot{\mathbf{X}}\,\mathbf{B}.
+\]</span>
+Yes yes yes! This is a single matrix multiplication,
+we have <span class="math inline">\(\mathbf{T}\in\mathbb{R}^{n\times K}\)</span>.</p>
+<p>To obtain <span class="math inline">\(\hat{\mathbf{Y}}\)</span>, we have to apply the softmax function
+on every row of <span class="math inline">\(\mathbf{T}\)</span>:
+<span class="math display">\[
+\hat{\mathbf{Y}}=\mathrm{softmax}\left(
+\dot{\mathbf{X}}\,\mathbf{B}
+\right).
+\]</span></p>
+<p>That’s it. Take some time to appreciate the elegance of this notation.</p>
+<p>Methods for minimising cross-entropy expressed in matrix form
+will be discussed in the next chapter.</p>
+</div>
+</div>
+<div id="artificial-neural-networks" class="section level2">
+<h2><span class="header-section-number">11.3</span> Artificial Neural Networks</h2>
+<div id="artificial-neuron" class="section level3">
+<h3><span class="header-section-number">11.3.1</span> Artificial Neuron</h3>
+<p>A neuron can be thought of as a mathematical function,
+see Figure <a href="chap-images.html#fig:neuron">4</a>, which has its specific inputs
+and an output.</p>
+<div class="figure">
+<img src="figures/neuron.svg" alt="Figure 4: Neuron as a mathematical (black box) function; image based on: https://en.wikipedia.org/wiki/File:Neuron3.png by Egm4313.s12 at English Wikipedia, licensed under the Creative Commons Attribution-Share Alike 3.0 Unported license" id="fig:neuron" />
+<p class="caption">Figure 4: Neuron as a mathematical (black box) function; image based on: <a href="https://en.wikipedia.org/wiki/File:Neuron3.png" class="uri">https://en.wikipedia.org/wiki/File:Neuron3.png</a> by Egm4313.s12 at English Wikipedia, licensed under the Creative Commons Attribution-Share Alike 3.0 Unported license</p>
+</div>
+<p>The Linear Threshold Unit (McCulloch and Pitts, 1940s),
+the Perceptron (Rosenblatt, 1958) and the Adaptive Linear Neuron
+(Widrow and Hoff, 1960) were amongst the first
+models of an artificial neuron that could be used
+for the purpose of pattern recognition, see Figure <a href="chap-images.html#fig:perceptron">5</a>.
+They can be thought of as processing units that compute
+a weighted sum of the inputs,
+which is then transformed by means of a nonlinear “activation” function.</p>
+<div class="figure">
+<img src="figures/perceptron.svg" alt="Figure 5: A simple model of an artificial neuron" id="fig:perceptron" />
+<p class="caption">Figure 5: A simple model of an artificial neuron</p>
+</div>
+</div>
+<div id="logistic-regression-as-a-neural-network" class="section level3">
+<h3><span class="header-section-number">11.3.2</span> Logistic Regression as a Neural Network</h3>
+<p>The above resembles our binary logistic regression model,
+where we determine a linear combination (a weighted sum) of <span class="math inline">\(p\)</span> inputs
+and then transform it using the logistic sigmoid “activation” function.
+We can easily depict it in the Figure <a href="chap-images.html#fig:neuron">4</a>-style,
+see Figure <a href="chap-images.html#fig:logistic_regression_binary">6</a>.</p>
+<div class="figure">
+<img src="figures/logistic_regression_binary.svg" alt="Figure 6: Binary logistic regression" id="fig:logistic_regression_binary" />
+<p class="caption">Figure 6: Binary logistic regression</p>
+</div>
+<p>On the other hand, a multiclass logistic regression can be depicted as
+in Figure <a href="chap-images.html#fig:logistic_regression_multiclass">7</a>.
+In fact, we can consider it as an instance of a:</p>
+<ul>
+<li><strong>single layer</strong> (there is only one processing step that consists of 10 units),</li>
+<li><strong>densely connected</strong> (all the inputs are connected to all the components below),</li>
+<li><strong>feed-forward</strong> (the outputs are generated by processing the inputs from “top” to “bottom”, there are no loops in the graph etc.)</li>
+</ul>
+<p><em>artificial</em> <strong>neural network</strong>
+that uses the softmax as the activation function.</p>
+<div class="figure">
+<img src="figures/logistic_regression_multiclass.svg" alt="Figure 7: Multinomial logistic regression" id="fig:logistic_regression_multiclass" />
+<p class="caption">Figure 7: Multinomial logistic regression</p>
+</div>
+</div>
+<div id="example-in-r-6" class="section level3">
+<h3><span class="header-section-number">11.3.3</span> Example in R</h3>
+<p>To train such a neural network (i.e., fit a multinomial
+logistic regression model),
+we will use the <code>keras</code> package,
+a wrapper around the (GPU-enabled) TensorFlow library.</p>
+<p>The training of the model takes a few minutes (for more complex
+models and bigger datasets – it could take hours/days).
+Thus, it is wise to store the computed model (the <span class="math inline">\(\mathbf{B}\)</span>
+coefficient matrix and the accompanying <code>keras</code>’s auxiliary data)
+for further reference:</p>
+<div class="sourceCode" id="cb734"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb734-1" title="1">file_name &lt;-<span class="st"> &quot;datasets/mnist_keras_model1.h5&quot;</span></a>
+<a class="sourceLine" id="cb734-2" title="2"><span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(file_name)) { <span class="co"># File doesn&#39;t exist -&gt; compute</span></a>
+<a class="sourceLine" id="cb734-3" title="3">    <span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb734-4" title="4">    <span class="co"># Start with an empty model</span></a>
+<a class="sourceLine" id="cb734-5" title="5">    model1 &lt;-<span class="st"> </span><span class="kw">keras_model_sequential</span>()</a>
+<a class="sourceLine" id="cb734-6" title="6">    <span class="co"># Add a single layer with 10 units and softmax activation</span></a>
+<a class="sourceLine" id="cb734-7" title="7">    <span class="kw">layer_dense</span>(model1, <span class="dt">units=</span><span class="dv">10</span>, <span class="dt">activation=</span><span class="st">&quot;softmax&quot;</span>)</a>
+<a class="sourceLine" id="cb734-8" title="8">    <span class="co"># We will be minimising the cross-entropy,</span></a>
+<a class="sourceLine" id="cb734-9" title="9">    <span class="co"># sgd == stochastic gradient descent, see the next chapter</span></a>
+<a class="sourceLine" id="cb734-10" title="10">    <span class="kw">compile</span>(model1, <span class="dt">optimizer=</span><span class="st">&quot;sgd&quot;</span>,</a>
+<a class="sourceLine" id="cb734-11" title="11">            <span class="dt">loss=</span><span class="st">&quot;categorical_crossentropy&quot;</span>)</a>
+<a class="sourceLine" id="cb734-12" title="12">    <span class="co"># Fit the model (slooooow!)</span></a>
+<a class="sourceLine" id="cb734-13" title="13">    <span class="kw">fit</span>(model1, X_train2, Y_train2, <span class="dt">epochs=</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb734-14" title="14">    <span class="co"># Save the model for future reference</span></a>
+<a class="sourceLine" id="cb734-15" title="15">    <span class="kw">save_model_hdf5</span>(model1, file_name)</a>
+<a class="sourceLine" id="cb734-16" title="16">} <span class="cf">else</span> { <span class="co"># File exists -&gt; reload the model</span></a>
+<a class="sourceLine" id="cb734-17" title="17">    model1 &lt;-<span class="st"> </span><span class="kw">load_model_hdf5</span>(file_name)</a>
+<a class="sourceLine" id="cb734-18" title="18">}</a></code></pre></div>
+<p>Let’s make predictions over the test set:</p>
+<div class="sourceCode" id="cb735"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb735-1" title="1">Y_pred2 &lt;-<span class="st"> </span><span class="kw">predict</span>(model1, X_test2)</a>
+<a class="sourceLine" id="cb735-2" title="2"><span class="kw">round</span>(<span class="kw">head</span>(Y_pred2), <span class="dv">2</span>) <span class="co"># predicted class probabilities</span></a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+## [1,] 0.00 0.00 0.00 0.00 0.00 0.00 0.00 1.00 0.00  0.00
+## [2,] 0.01 0.00 0.93 0.01 0.00 0.01 0.04 0.00 0.00  0.00
+## [3,] 0.00 0.96 0.02 0.00 0.00 0.00 0.00 0.00 0.01  0.00
+## [4,] 1.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00  0.00
+## [5,] 0.00 0.00 0.01 0.00 0.91 0.00 0.01 0.01 0.01  0.05
+## [6,] 0.00 0.98 0.00 0.00 0.00 0.00 0.00 0.00 0.01  0.00</code></pre>
+<p>Then, we can one-hot-decode the output probabilities:</p>
+<div class="sourceCode" id="cb737"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb737-1" title="1">Y_pred &lt;-<span class="st"> </span><span class="kw">apply</span>(Y_pred2, <span class="dv">1</span>, which.max)<span class="op">-</span><span class="dv">1</span> <span class="co"># 1..10 -&gt; 0..9</span></a>
+<a class="sourceLine" id="cb737-2" title="2"><span class="kw">head</span>(Y_pred, <span class="dv">20</span>) <span class="co"># predicted outputs</span></a></code></pre></div>
+<pre><code>##  [1] 7 2 1 0 4 1 4 9 6 9 0 6 9 0 1 5 9 7 3 4</code></pre>
+<div class="sourceCode" id="cb739"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb739-1" title="1"><span class="kw">head</span>(Y_test, <span class="dv">20</span>) <span class="co"># true outputs</span></a></code></pre></div>
+<pre><code>##  [1] 7 2 1 0 4 1 4 9 5 9 0 6 9 0 1 5 9 7 3 4</code></pre>
+<p>Accuracy on the test set:</p>
+<div class="sourceCode" id="cb741"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb741-1" title="1"><span class="kw">mean</span>(Y_test <span class="op">==</span><span class="st"> </span>Y_pred)</a></code></pre></div>
+<pre><code>## [1] 0.9169</code></pre>
+<p>Performance metrics for each digit separately (see also Figure <a href="chap-images.html#fig:logistic6">8</a>):</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">i</th>
+<th align="right">Acc</th>
+<th align="right">Prec</th>
+<th align="right">Rec</th>
+<th align="right">F</th>
+<th align="right">TN</th>
+<th align="right">FN</th>
+<th align="right">FP</th>
+<th align="right">TP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">0.9924</td>
+<td align="right">0.94664</td>
+<td align="right">0.97755</td>
+<td align="right">0.96185</td>
+<td align="right">8966</td>
+<td align="right">22</td>
+<td align="right">54</td>
+<td align="right">958</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">0.9923</td>
+<td align="right">0.95920</td>
+<td align="right">0.97357</td>
+<td align="right">0.96633</td>
+<td align="right">8818</td>
+<td align="right">30</td>
+<td align="right">47</td>
+<td align="right">1105</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="right">0.9803</td>
+<td align="right">0.92214</td>
+<td align="right">0.88372</td>
+<td align="right">0.90252</td>
+<td align="right">8891</td>
+<td align="right">120</td>
+<td align="right">77</td>
+<td align="right">912</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="right">0.9802</td>
+<td align="right">0.89417</td>
+<td align="right">0.91188</td>
+<td align="right">0.90294</td>
+<td align="right">8881</td>
+<td align="right">89</td>
+<td align="right">109</td>
+<td align="right">921</td>
+</tr>
+<tr class="odd">
+<td align="right">4</td>
+<td align="right">0.9833</td>
+<td align="right">0.90148</td>
+<td align="right">0.93177</td>
+<td align="right">0.91637</td>
+<td align="right">8918</td>
+<td align="right">67</td>
+<td align="right">100</td>
+<td align="right">915</td>
+</tr>
+<tr class="even">
+<td align="right">5</td>
+<td align="right">0.9793</td>
+<td align="right">0.91415</td>
+<td align="right">0.84753</td>
+<td align="right">0.87958</td>
+<td align="right">9037</td>
+<td align="right">136</td>
+<td align="right">71</td>
+<td align="right">756</td>
+</tr>
+<tr class="odd">
+<td align="right">6</td>
+<td align="right">0.9885</td>
+<td align="right">0.93142</td>
+<td align="right">0.94990</td>
+<td align="right">0.94057</td>
+<td align="right">8975</td>
+<td align="right">48</td>
+<td align="right">67</td>
+<td align="right">910</td>
+</tr>
+<tr class="even">
+<td align="right">7</td>
+<td align="right">0.9834</td>
+<td align="right">0.92843</td>
+<td align="right">0.90856</td>
+<td align="right">0.91839</td>
+<td align="right">8900</td>
+<td align="right">94</td>
+<td align="right">72</td>
+<td align="right">934</td>
+</tr>
+<tr class="odd">
+<td align="right">8</td>
+<td align="right">0.9754</td>
+<td align="right">0.86473</td>
+<td align="right">0.88604</td>
+<td align="right">0.87525</td>
+<td align="right">8891</td>
+<td align="right">111</td>
+<td align="right">135</td>
+<td align="right">863</td>
+</tr>
+<tr class="even">
+<td align="right">9</td>
+<td align="right">0.9787</td>
+<td align="right">0.90040</td>
+<td align="right">0.88702</td>
+<td align="right">0.89366</td>
+<td align="right">8892</td>
+<td align="right">114</td>
+<td align="right">99</td>
+<td align="right">895</td>
+</tr>
+</tbody>
+</table>
+<p>Note how misleading the individual accuracies are! Averaging over
+the above table’s columns gives:</p>
+<pre><code>##     Acc    Prec     Rec       F 
+## 0.98338 0.91628 0.91575 0.91575</code></pre>
+<div class="figure">
+<img src="11-images-figures/logistic6-1.svg" alt="Figure 8: Performance metrics for multinomial logistic regression on MNIST" id="fig:logistic6" />
+<p class="caption">Figure 8: Performance metrics for multinomial logistic regression on MNIST</p>
+</div>
+</div>
+</div>
+<div id="deep-neural-networks" class="section level2">
+<h2><span class="header-section-number">11.4</span> Deep Neural Networks</h2>
+<div id="introduction-13" class="section level3">
+<h3><span class="header-section-number">11.4.1</span> Introduction</h3>
+<p>In a brain, a neuron’s output is an input a bunch of other neurons.
+We could try aligning neurons into many interconnected layers.
+This leads to a structure like the one in Figure <a href="chap-images.html#fig:nnet">9</a>.</p>
+<div class="figure">
+<img src="figures/nnet.svg" alt="Figure 9: A multi-layer neural network" id="fig:nnet" />
+<p class="caption">Figure 9: A multi-layer neural network</p>
+</div>
+</div>
+<div id="activation-functions" class="section level3">
+<h3><span class="header-section-number">11.4.2</span> Activation Functions</h3>
+<p>Each layer’s outputs should be transformed by some non-linear
+activation function. Otherwise, we’d end up with linear combinations of linear combinations,
+which are linear combinations themselves.</p>
+<!-- Apart from `softmax` -->
+<!--linear
+Linear (i.e. identity) activation function.
+Not for hidden layers - use for the output layer in regression tasks-->
+<p>Example activation functions
+that can be used in hidden (inner) layers:</p>
+<ul>
+<li><code>relu</code> – The rectified linear unit:
+<span class="math display">\[\psi(t)=\max(t, 0),\]</span></li>
+<li><code>sigmoid</code> – The logistic sigmoid:
+<span class="math display">\[\phi(t)= \frac{1}{1 + \exp(-t)},\]</span></li>
+<li><code>tanh</code> – The hyperbolic function:
+<span class="math display">\[\mathrm{tanh}(t) = \frac{\exp(t) - \exp(-t)}{\exp(t) + \exp(-t)}.\]</span></li>
+</ul>
+<p>There is not much difference between them, but some might be more convenient
+to handle numerically than the others, depending on the implementation.</p>
+</div>
+<div id="example-in-r---2-layers" class="section level3">
+<h3><span class="header-section-number">11.4.3</span> Example in R - 2 Layers</h3>
+<p>Let’s construct a 2-layer Neural Network of the type 784-800-10:</p>
+<div class="sourceCode" id="cb744"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb744-1" title="1">file_name &lt;-<span class="st"> &quot;datasets/mnist_keras_model2.h5&quot;</span></a>
+<a class="sourceLine" id="cb744-2" title="2"><span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(file_name)) {</a>
+<a class="sourceLine" id="cb744-3" title="3">    <span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb744-4" title="4">    model2 &lt;-<span class="st"> </span><span class="kw">keras_model_sequential</span>()</a>
+<a class="sourceLine" id="cb744-5" title="5">    <span class="kw">layer_dense</span>(model2, <span class="dt">units=</span><span class="dv">800</span>, <span class="dt">activation=</span><span class="st">&quot;relu&quot;</span>)</a>
+<a class="sourceLine" id="cb744-6" title="6">    <span class="kw">layer_dense</span>(model2, <span class="dt">units=</span><span class="dv">10</span>,  <span class="dt">activation=</span><span class="st">&quot;softmax&quot;</span>)</a>
+<a class="sourceLine" id="cb744-7" title="7">    <span class="kw">compile</span>(model2, <span class="dt">optimizer=</span><span class="st">&quot;sgd&quot;</span>,</a>
+<a class="sourceLine" id="cb744-8" title="8">            <span class="dt">loss=</span><span class="st">&quot;categorical_crossentropy&quot;</span>)</a>
+<a class="sourceLine" id="cb744-9" title="9">    <span class="kw">fit</span>(model2, X_train2, Y_train2, <span class="dt">epochs=</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb744-10" title="10">    <span class="kw">save_model_hdf5</span>(model2, file_name)</a>
+<a class="sourceLine" id="cb744-11" title="11">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb744-12" title="12">    model2 &lt;-<span class="st"> </span><span class="kw">load_model_hdf5</span>(file_name)</a>
+<a class="sourceLine" id="cb744-13" title="13">}</a>
+<a class="sourceLine" id="cb744-14" title="14"></a>
+<a class="sourceLine" id="cb744-15" title="15">Y_pred2 &lt;-<span class="st"> </span><span class="kw">predict</span>(model2, X_test2)</a>
+<a class="sourceLine" id="cb744-16" title="16">Y_pred &lt;-<span class="st"> </span><span class="kw">apply</span>(Y_pred2, <span class="dv">1</span>, which.max)<span class="op">-</span><span class="dv">1</span> <span class="co"># 1..10 -&gt; 0..9</span></a>
+<a class="sourceLine" id="cb744-17" title="17"><span class="kw">mean</span>(Y_test <span class="op">==</span><span class="st"> </span>Y_pred) <span class="co"># accuracy on the test set</span></a></code></pre></div>
+<pre><code>## [1] 0.9583</code></pre>
+<p>Performance metrics for each digit separately,
+see also Figure <a href="chap-images.html#fig:deep23">10</a>:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">i</th>
+<th align="right">Acc</th>
+<th align="right">Prec</th>
+<th align="right">Rec</th>
+<th align="right">F</th>
+<th align="right">TN</th>
+<th align="right">FN</th>
+<th align="right">FP</th>
+<th align="right">TP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">0.9948</td>
+<td align="right">0.96215</td>
+<td align="right">0.98571</td>
+<td align="right">0.97379</td>
+<td align="right">8982</td>
+<td align="right">14</td>
+<td align="right">38</td>
+<td align="right">966</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">0.9962</td>
+<td align="right">0.98156</td>
+<td align="right">0.98502</td>
+<td align="right">0.98329</td>
+<td align="right">8844</td>
+<td align="right">17</td>
+<td align="right">21</td>
+<td align="right">1118</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="right">0.9911</td>
+<td align="right">0.96000</td>
+<td align="right">0.95349</td>
+<td align="right">0.95673</td>
+<td align="right">8927</td>
+<td align="right">48</td>
+<td align="right">41</td>
+<td align="right">984</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="right">0.9898</td>
+<td align="right">0.94773</td>
+<td align="right">0.95149</td>
+<td align="right">0.94960</td>
+<td align="right">8937</td>
+<td align="right">49</td>
+<td align="right">53</td>
+<td align="right">961</td>
+</tr>
+<tr class="odd">
+<td align="right">4</td>
+<td align="right">0.9919</td>
+<td align="right">0.95829</td>
+<td align="right">0.95927</td>
+<td align="right">0.95878</td>
+<td align="right">8977</td>
+<td align="right">40</td>
+<td align="right">41</td>
+<td align="right">942</td>
+</tr>
+<tr class="even">
+<td align="right">5</td>
+<td align="right">0.9911</td>
+<td align="right">0.95470</td>
+<td align="right">0.94507</td>
+<td align="right">0.94986</td>
+<td align="right">9068</td>
+<td align="right">49</td>
+<td align="right">40</td>
+<td align="right">843</td>
+</tr>
+<tr class="odd">
+<td align="right">6</td>
+<td align="right">0.9920</td>
+<td align="right">0.94888</td>
+<td align="right">0.96868</td>
+<td align="right">0.95868</td>
+<td align="right">8992</td>
+<td align="right">30</td>
+<td align="right">50</td>
+<td align="right">928</td>
+</tr>
+<tr class="even">
+<td align="right">7</td>
+<td align="right">0.9906</td>
+<td align="right">0.95517</td>
+<td align="right">0.95331</td>
+<td align="right">0.95424</td>
+<td align="right">8926</td>
+<td align="right">48</td>
+<td align="right">46</td>
+<td align="right">980</td>
+</tr>
+<tr class="odd">
+<td align="right">8</td>
+<td align="right">0.9899</td>
+<td align="right">0.95421</td>
+<td align="right">0.94148</td>
+<td align="right">0.94780</td>
+<td align="right">8982</td>
+<td align="right">57</td>
+<td align="right">44</td>
+<td align="right">917</td>
+</tr>
+<tr class="even">
+<td align="right">9</td>
+<td align="right">0.9892</td>
+<td align="right">0.95643</td>
+<td align="right">0.93558</td>
+<td align="right">0.94589</td>
+<td align="right">8948</td>
+<td align="right">65</td>
+<td align="right">43</td>
+<td align="right">944</td>
+</tr>
+</tbody>
+</table>
+<div class="figure">
+<img src="11-images-figures/deep23-1.svg" alt="Figure 10: Performance metrics for a 2-layer net 784-800-10 [relu] on MNIST" id="fig:deep23" />
+<p class="caption">Figure 10: Performance metrics for a 2-layer net 784-800-10 [relu] on MNIST</p>
+</div>
+</div>
+<div id="example-in-r---6-layers" class="section level3">
+<h3><span class="header-section-number">11.4.4</span> Example in R - 6 Layers</h3>
+<p>How about a 6-layer <em>Deep</em> Neural Network
+like 784-2500-2000-1500-1000-500-10? Here you are:</p>
+<div class="sourceCode" id="cb746"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb746-1" title="1">file_name &lt;-<span class="st"> &quot;datasets/mnist_keras_model3.h5&quot;</span></a>
+<a class="sourceLine" id="cb746-2" title="2"><span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(file_name)) {</a>
+<a class="sourceLine" id="cb746-3" title="3">    <span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb746-4" title="4">    model3 &lt;-<span class="st"> </span><span class="kw">keras_model_sequential</span>()</a>
+<a class="sourceLine" id="cb746-5" title="5">    <span class="kw">layer_dense</span>(model3, <span class="dt">units=</span><span class="dv">2500</span>, <span class="dt">activation=</span><span class="st">&quot;relu&quot;</span>)</a>
+<a class="sourceLine" id="cb746-6" title="6">    <span class="kw">layer_dense</span>(model3, <span class="dt">units=</span><span class="dv">2000</span>, <span class="dt">activation=</span><span class="st">&quot;relu&quot;</span>)</a>
+<a class="sourceLine" id="cb746-7" title="7">    <span class="kw">layer_dense</span>(model3, <span class="dt">units=</span><span class="dv">1500</span>, <span class="dt">activation=</span><span class="st">&quot;relu&quot;</span>)</a>
+<a class="sourceLine" id="cb746-8" title="8">    <span class="kw">layer_dense</span>(model3, <span class="dt">units=</span><span class="dv">1000</span>, <span class="dt">activation=</span><span class="st">&quot;relu&quot;</span>)</a>
+<a class="sourceLine" id="cb746-9" title="9">    <span class="kw">layer_dense</span>(model3, <span class="dt">units=</span><span class="dv">500</span>,  <span class="dt">activation=</span><span class="st">&quot;relu&quot;</span>)</a>
+<a class="sourceLine" id="cb746-10" title="10">    <span class="kw">layer_dense</span>(model3, <span class="dt">units=</span><span class="dv">10</span>,   <span class="dt">activation=</span><span class="st">&quot;softmax&quot;</span>)</a>
+<a class="sourceLine" id="cb746-11" title="11">    <span class="kw">compile</span>(model3, <span class="dt">optimizer=</span><span class="st">&quot;sgd&quot;</span>,</a>
+<a class="sourceLine" id="cb746-12" title="12">            <span class="dt">loss=</span><span class="st">&quot;categorical_crossentropy&quot;</span>)</a>
+<a class="sourceLine" id="cb746-13" title="13">    <span class="kw">fit</span>(model3, X_train2, Y_train2, <span class="dt">epochs=</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb746-14" title="14">    <span class="kw">save_model_hdf5</span>(model3, file_name)</a>
+<a class="sourceLine" id="cb746-15" title="15">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb746-16" title="16">    model3 &lt;-<span class="st"> </span><span class="kw">load_model_hdf5</span>(file_name)</a>
+<a class="sourceLine" id="cb746-17" title="17">}</a>
+<a class="sourceLine" id="cb746-18" title="18"></a>
+<a class="sourceLine" id="cb746-19" title="19">Y_pred2 &lt;-<span class="st"> </span><span class="kw">predict</span>(model3, X_test2)</a>
+<a class="sourceLine" id="cb746-20" title="20">Y_pred &lt;-<span class="st"> </span><span class="kw">apply</span>(Y_pred2, <span class="dv">1</span>, which.max)<span class="op">-</span><span class="dv">1</span> <span class="co"># 1..10 -&gt; 0..9</span></a>
+<a class="sourceLine" id="cb746-21" title="21"><span class="kw">mean</span>(Y_test <span class="op">==</span><span class="st"> </span>Y_pred) <span class="co"># accuracy on the test set</span></a></code></pre></div>
+<pre><code>## [1] 0.9797</code></pre>
+<p>Performance metrics for each digit separately,
+see also Figure <a href="chap-images.html#fig:deep63">11</a>.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">i</th>
+<th align="right">Acc</th>
+<th align="right">Prec</th>
+<th align="right">Rec</th>
+<th align="right">F</th>
+<th align="right">TN</th>
+<th align="right">FN</th>
+<th align="right">FP</th>
+<th align="right">TP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">0.9966</td>
+<td align="right">0.97395</td>
+<td align="right">0.99184</td>
+<td align="right">0.98281</td>
+<td align="right">8994</td>
+<td align="right">8</td>
+<td align="right">26</td>
+<td align="right">972</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">0.9975</td>
+<td align="right">0.98856</td>
+<td align="right">0.98943</td>
+<td align="right">0.98899</td>
+<td align="right">8852</td>
+<td align="right">12</td>
+<td align="right">13</td>
+<td align="right">1123</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="right">0.9951</td>
+<td align="right">0.98615</td>
+<td align="right">0.96609</td>
+<td align="right">0.97602</td>
+<td align="right">8954</td>
+<td align="right">35</td>
+<td align="right">14</td>
+<td align="right">997</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="right">0.9964</td>
+<td align="right">0.99093</td>
+<td align="right">0.97327</td>
+<td align="right">0.98202</td>
+<td align="right">8981</td>
+<td align="right">27</td>
+<td align="right">9</td>
+<td align="right">983</td>
+</tr>
+<tr class="odd">
+<td align="right">4</td>
+<td align="right">0.9960</td>
+<td align="right">0.97006</td>
+<td align="right">0.98982</td>
+<td align="right">0.97984</td>
+<td align="right">8988</td>
+<td align="right">10</td>
+<td align="right">30</td>
+<td align="right">972</td>
+</tr>
+<tr class="even">
+<td align="right">5</td>
+<td align="right">0.9962</td>
+<td align="right">0.98856</td>
+<td align="right">0.96861</td>
+<td align="right">0.97848</td>
+<td align="right">9098</td>
+<td align="right">28</td>
+<td align="right">10</td>
+<td align="right">864</td>
+</tr>
+<tr class="odd">
+<td align="right">6</td>
+<td align="right">0.9963</td>
+<td align="right">0.98019</td>
+<td align="right">0.98121</td>
+<td align="right">0.98070</td>
+<td align="right">9023</td>
+<td align="right">18</td>
+<td align="right">19</td>
+<td align="right">940</td>
+</tr>
+<tr class="even">
+<td align="right">7</td>
+<td align="right">0.9961</td>
+<td align="right">0.98338</td>
+<td align="right">0.97860</td>
+<td align="right">0.98098</td>
+<td align="right">8955</td>
+<td align="right">22</td>
+<td align="right">17</td>
+<td align="right">1006</td>
+</tr>
+<tr class="odd">
+<td align="right">8</td>
+<td align="right">0.9939</td>
+<td align="right">0.96065</td>
+<td align="right">0.97741</td>
+<td align="right">0.96896</td>
+<td align="right">8987</td>
+<td align="right">22</td>
+<td align="right">39</td>
+<td align="right">952</td>
+</tr>
+<tr class="even">
+<td align="right">9</td>
+<td align="right">0.9953</td>
+<td align="right">0.97436</td>
+<td align="right">0.97919</td>
+<td align="right">0.97677</td>
+<td align="right">8965</td>
+<td align="right">21</td>
+<td align="right">26</td>
+<td align="right">988</td>
+</tr>
+</tbody>
+</table>
+<div class="figure">
+<img src="11-images-figures/deep63-1.svg" alt="Figure 11: Performance metrics for a 6-layer net 784-2500-2000-1500-1000-500-10 [relu] on MNIST" id="fig:deep63" />
+<p class="caption">Figure 11: Performance metrics for a 6-layer net 784-2500-2000-1500-1000-500-10 [relu] on MNIST</p>
+</div>
+<div class="exercise"><strong>Exercise.</strong>
+<p>Test the performance of different neural network
+architectures (different number of layers, different number
+of neurons in each layer etc.). Yes, it’s more art than science!
+Many tried to come up with various “rules of thumb”,
+see, for example, the <code>comp.ai.neural-nets</code> FAQ <span class="citation">(Sarle &amp; others <a href="references.html#ref-aifaq">2002</a>)</span> at
+<a href="http://www.faqs.org/faqs/ai-faq/neural-nets/part3/preamble.html" class="uri">http://www.faqs.org/faqs/ai-faq/neural-nets/part3/preamble.html</a>,
+but what works well in one problem might not be generalisable
+to another one.</p>
+</div>
+</div>
+</div>
+<div id="preprocessing-of-data" class="section level2">
+<h2><span class="header-section-number">11.5</span> Preprocessing of Data</h2>
+<div id="introduction-14" class="section level3">
+<h3><span class="header-section-number">11.5.1</span> Introduction</h3>
+<p>Do not underestimate the power of appropriate data preprocessing —
+deep neural networks are not a universal replacement for a data engineer’s hard work!</p>
+<p>On top of that, they are not interpretable – these are merely black-boxes.</p>
+<p>Among the typical transformations of the input images we can find:</p>
+<ul>
+<li>normalisation of colours (setting brightness, stretching contrast, etc.),</li>
+<li>repositioning of the image (centring),</li>
+<li>deskewing (see below),</li>
+<li>denoising (e.g., by blurring).</li>
+</ul>
+<p>Another frequently applied technique concerns an expansion of the training data
+— we can add “artificially contaminated” images to the training
+set (e.g., slightly rotated digits) so as to be more ready to whatever
+will be provided in the test test.</p>
+</div>
+<div id="image-deskewing" class="section level3">
+<h3><span class="header-section-number">11.5.2</span> Image Deskewing</h3>
+<p>Deskewing of images (“straightening” of the digits)
+is amongst the most typical transformations
+that can be applied on MNIST.</p>
+<p>Unfortunately, we don’t have (yet) the necessary
+mathematical background to discuss this operation
+in very detail.</p>
+<p>Luckily, we can apply it on each image anyway.</p>
+<p>See the GitHub repository at <a href="https://github.com/gagolews/Playground.R" class="uri">https://github.com/gagolews/Playground.R</a>
+for an example notebook and the <code>deskew.R</code> script.</p>
+<div class="sourceCode" id="cb748"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb748-1" title="1"><span class="co"># See https://github.com/gagolews/Playground.R</span></a>
+<a class="sourceLine" id="cb748-2" title="2"><span class="kw">source</span>(<span class="st">&quot;~/R/Playground.R/deskew.R&quot;</span>)</a>
+<a class="sourceLine" id="cb748-3" title="3"><span class="co"># new_image &lt;- deskew(old_image)</span></a></code></pre></div>
+<div class="figure">
+<img src="11-images-figures/deskew2-1.svg" alt="Figure 12: Deskewing of the MNIST digits" id="fig:deskew2" />
+<p class="caption">Figure 12: Deskewing of the MNIST digits</p>
+</div>
+<p>Let’s take a look at Figure <a href="chap-images.html#fig:deskew2">12</a>.
+In each pair, the left image (black background) is the original one,
+and the right image (palette inverted for purely dramatic effects)
+is its deskewed version.</p>
+<p>Below we deskew each image in the training as well as in the test sample.
+This also takes a long time, so let’s store the resulting objects
+for further reference:</p>
+<div class="sourceCode" id="cb749"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb749-1" title="1">file_name &lt;-<span class="st"> &quot;datasets/mnist_deskewed_train.rds&quot;</span></a>
+<a class="sourceLine" id="cb749-2" title="2"><span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(file_name)) {</a>
+<a class="sourceLine" id="cb749-3" title="3">    Z_train &lt;-<span class="st"> </span>X_train</a>
+<a class="sourceLine" id="cb749-4" title="4">    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">dim</span>(Z_train)[<span class="dv">1</span>]) {</a>
+<a class="sourceLine" id="cb749-5" title="5">        Z_train[i,,] &lt;-<span class="st"> </span><span class="kw">deskew</span>(Z_train[i,,])</a>
+<a class="sourceLine" id="cb749-6" title="6">    }</a>
+<a class="sourceLine" id="cb749-7" title="7">    Z_train2 &lt;-<span class="st"> </span><span class="kw">matrix</span>(Z_train, <span class="dt">ncol=</span><span class="dv">28</span><span class="op">*</span><span class="dv">28</span>)</a>
+<a class="sourceLine" id="cb749-8" title="8">    <span class="kw">saveRDS</span>(Z_train2, file_name)</a>
+<a class="sourceLine" id="cb749-9" title="9">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb749-10" title="10">    Z_train2 &lt;-<span class="st"> </span><span class="kw">readRDS</span>(file_name)</a>
+<a class="sourceLine" id="cb749-11" title="11">}</a>
+<a class="sourceLine" id="cb749-12" title="12"></a>
+<a class="sourceLine" id="cb749-13" title="13">file_name &lt;-<span class="st"> &quot;datasets/mnist_deskewed_test.rds&quot;</span></a>
+<a class="sourceLine" id="cb749-14" title="14"><span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(file_name)) {</a>
+<a class="sourceLine" id="cb749-15" title="15">    Z_test &lt;-<span class="st"> </span>X_test</a>
+<a class="sourceLine" id="cb749-16" title="16">    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">dim</span>(Z_test)[<span class="dv">1</span>]) {</a>
+<a class="sourceLine" id="cb749-17" title="17">        Z_test[i,,] &lt;-<span class="st"> </span><span class="kw">deskew</span>(Z_test[i,,])</a>
+<a class="sourceLine" id="cb749-18" title="18">    }</a>
+<a class="sourceLine" id="cb749-19" title="19">    Z_test2 &lt;-<span class="st"> </span><span class="kw">matrix</span>(Z_test, <span class="dt">ncol=</span><span class="dv">28</span><span class="op">*</span><span class="dv">28</span>)</a>
+<a class="sourceLine" id="cb749-20" title="20">    <span class="kw">saveRDS</span>(Z_test2, file_name)</a>
+<a class="sourceLine" id="cb749-21" title="21">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb749-22" title="22">    Z_test2 &lt;-<span class="st"> </span><span class="kw">readRDS</span>(file_name)</a>
+<a class="sourceLine" id="cb749-23" title="23">}</a></code></pre></div>
+<dl>
+<dt>Remark.</dt>
+<dd><p>RDS in a compressed file format used by R for object serialisation
+(quickly storing its verbatim copies so that they can be reloaded
+at any time).</p>
+</dd>
+</dl>
+<p>Multinomial logistic regression model (1-layer NN):</p>
+<div class="sourceCode" id="cb750"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb750-1" title="1">file_name &lt;-<span class="st"> &quot;datasets/mnist_keras_model1d.h5&quot;</span></a>
+<a class="sourceLine" id="cb750-2" title="2"><span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(file_name)) {</a>
+<a class="sourceLine" id="cb750-3" title="3">    <span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb750-4" title="4">    model1d &lt;-<span class="st"> </span><span class="kw">keras_model_sequential</span>()</a>
+<a class="sourceLine" id="cb750-5" title="5">    <span class="kw">layer_dense</span>(model1d, <span class="dt">units=</span><span class="dv">10</span>, <span class="dt">activation=</span><span class="st">&quot;softmax&quot;</span>)</a>
+<a class="sourceLine" id="cb750-6" title="6">    <span class="kw">compile</span>(model1d, <span class="dt">optimizer=</span><span class="st">&quot;sgd&quot;</span>,</a>
+<a class="sourceLine" id="cb750-7" title="7">            <span class="dt">loss=</span><span class="st">&quot;categorical_crossentropy&quot;</span>)</a>
+<a class="sourceLine" id="cb750-8" title="8">    <span class="kw">fit</span>(model1d, Z_train2, Y_train2, <span class="dt">epochs=</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb750-9" title="9">    <span class="kw">save_model_hdf5</span>(model1d, file_name)</a>
+<a class="sourceLine" id="cb750-10" title="10">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb750-11" title="11">    model1d &lt;-<span class="st"> </span><span class="kw">load_model_hdf5</span>(file_name)</a>
+<a class="sourceLine" id="cb750-12" title="12">}</a>
+<a class="sourceLine" id="cb750-13" title="13"></a>
+<a class="sourceLine" id="cb750-14" title="14">Y_pred2 &lt;-<span class="st"> </span><span class="kw">predict</span>(model1d, Z_test2)</a>
+<a class="sourceLine" id="cb750-15" title="15">Y_pred &lt;-<span class="st"> </span><span class="kw">apply</span>(Y_pred2, <span class="dv">1</span>, which.max)<span class="op">-</span><span class="dv">1</span> <span class="co"># 1..10 -&gt; 0..9</span></a>
+<a class="sourceLine" id="cb750-16" title="16"><span class="kw">mean</span>(Y_test <span class="op">==</span><span class="st"> </span>Y_pred) <span class="co"># accuracy on the test set</span></a></code></pre></div>
+<pre><code>## [1] 0.9488</code></pre>
+<p>Performance metrics for each digit separately,
+see also Figure <a href="chap-images.html#fig:deskew6">13</a>.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">i</th>
+<th align="right">Acc</th>
+<th align="right">Prec</th>
+<th align="right">Rec</th>
+<th align="right">F</th>
+<th align="right">TN</th>
+<th align="right">FN</th>
+<th align="right">FP</th>
+<th align="right">TP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">0.9939</td>
+<td align="right">0.95450</td>
+<td align="right">0.98469</td>
+<td align="right">0.96936</td>
+<td align="right">8974</td>
+<td align="right">15</td>
+<td align="right">46</td>
+<td align="right">965</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">0.9959</td>
+<td align="right">0.98236</td>
+<td align="right">0.98150</td>
+<td align="right">0.98193</td>
+<td align="right">8845</td>
+<td align="right">21</td>
+<td align="right">20</td>
+<td align="right">1114</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="right">0.9878</td>
+<td align="right">0.95409</td>
+<td align="right">0.92636</td>
+<td align="right">0.94002</td>
+<td align="right">8922</td>
+<td align="right">76</td>
+<td align="right">46</td>
+<td align="right">956</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="right">0.9904</td>
+<td align="right">0.95069</td>
+<td align="right">0.95446</td>
+<td align="right">0.95257</td>
+<td align="right">8940</td>
+<td align="right">46</td>
+<td align="right">50</td>
+<td align="right">964</td>
+</tr>
+<tr class="odd">
+<td align="right">4</td>
+<td align="right">0.9888</td>
+<td align="right">0.94118</td>
+<td align="right">0.94501</td>
+<td align="right">0.94309</td>
+<td align="right">8960</td>
+<td align="right">54</td>
+<td align="right">58</td>
+<td align="right">928</td>
+</tr>
+<tr class="even">
+<td align="right">5</td>
+<td align="right">0.9905</td>
+<td align="right">0.94426</td>
+<td align="right">0.94955</td>
+<td align="right">0.94690</td>
+<td align="right">9058</td>
+<td align="right">45</td>
+<td align="right">50</td>
+<td align="right">847</td>
+</tr>
+<tr class="odd">
+<td align="right">6</td>
+<td align="right">0.9905</td>
+<td align="right">0.95565</td>
+<td align="right">0.94468</td>
+<td align="right">0.95013</td>
+<td align="right">9000</td>
+<td align="right">53</td>
+<td align="right">42</td>
+<td align="right">905</td>
+</tr>
+<tr class="even">
+<td align="right">7</td>
+<td align="right">0.9892</td>
+<td align="right">0.96000</td>
+<td align="right">0.93385</td>
+<td align="right">0.94675</td>
+<td align="right">8932</td>
+<td align="right">68</td>
+<td align="right">40</td>
+<td align="right">960</td>
+</tr>
+<tr class="odd">
+<td align="right">8</td>
+<td align="right">0.9855</td>
+<td align="right">0.91162</td>
+<td align="right">0.94251</td>
+<td align="right">0.92680</td>
+<td align="right">8937</td>
+<td align="right">56</td>
+<td align="right">89</td>
+<td align="right">918</td>
+</tr>
+<tr class="even">
+<td align="right">9</td>
+<td align="right">0.9851</td>
+<td align="right">0.92914</td>
+<td align="right">0.92270</td>
+<td align="right">0.92591</td>
+<td align="right">8920</td>
+<td align="right">78</td>
+<td align="right">71</td>
+<td align="right">931</td>
+</tr>
+</tbody>
+</table>
+<div class="figure">
+<img src="11-images-figures/deskew6-1.svg" alt="Figure 13: Performance of Multinomial Logistic Regression on the deskewed MNIST" id="fig:deskew6" />
+<p class="caption">Figure 13: Performance of Multinomial Logistic Regression on the deskewed MNIST</p>
+</div>
+</div>
+<div id="summary-of-all-the-models-considered" class="section level3">
+<h3><span class="header-section-number">11.5.3</span> Summary of All the Models Considered</h3>
+<p>Let’s summarise the quality of all the considered classifiers.
+Figure <a href="chap-images.html#fig:globalsum">14</a> gives the F-measures, for each digit
+separately.</p>
+<div class="figure">
+<img src="11-images-figures/globalsum-1.svg" alt="Figure 14: Summary of F-measures for each classified digit and every method" id="fig:globalsum" />
+<p class="caption">Figure 14: Summary of F-measures for each classified digit and every method</p>
+</div>
+<p>Note that the applied preprocessing of data increased
+the prediction accuracy.</p>
+<p>The same information can also be included on a heat map
+which is depicted in Figure <a href="chap-images.html#fig:globalsum2">15</a>
+(see the <code>image()</code> function in R).</p>
+<div class="figure">
+<img src="11-images-figures/globalsum2-1.svg" alt="Figure 15: A heat map of F-measures for each classified digit and each method" id="fig:globalsum2" />
+<p class="caption">Figure 15: A heat map of F-measures for each classified digit and each method</p>
+</div>
+</div>
+</div>
+<div id="outro-9" class="section level2">
+<h2><span class="header-section-number">11.6</span> Outro</h2>
+<div id="remarks-9" class="section level3">
+<h3><span class="header-section-number">11.6.1</span> Remarks</h3>
+<p>We have discussed a multinomial logistic regression model
+as a generalisation of the binary one.</p>
+<p>This in turn is a special case of feed-forward neural networks.</p>
+<p>There’s a lot of hype (again…) for deep neural networks in many applications,
+including vision, self-driving cars, natural language processing,
+speech recognition etc.</p>
+<p>Many different architectures of neural networks and types of units
+are being considered in theory and in practice, e.g.:</p>
+<ul>
+<li>convolutional neural networks apply a series of signal (e.g., image)
+transformations in first layers, they might actually “discover”
+deskewing automatically etc.;</li>
+<li>recurrent neural networks can imitate long/short-term memory
+that can be used for speech synthesis and time series prediction.</li>
+</ul>
+<p>Main drawbacks of deep neural networks:</p>
+<ul>
+<li>learning is very slow, especially with very deep architectures (days, weeks);</li>
+<li>models are not explainable (black boxes) and hard to debug;</li>
+<li>finding good architectures is more art than science
+(maybe: more of a craftsmanship even);</li>
+<li>sometimes using deep neural network is just an excuse for being too lazy
+to do proper data cleansing and pre-processing.</li>
+</ul>
+<p>There are many issues and challenges that are tackled in more advanced
+AI/ML courses and books, such as <span class="citation">(Goodfellow et al. <a href="references.html#ref-deeplearn">2016</a>)</span>.</p>
+</div>
+<div id="beyond-mnist" class="section level3">
+<h3><span class="header-section-number">11.6.2</span> Beyond MNIST</h3>
+<p>The MNIST dataset is a classic, although its use in deep learning
+research is nowadays discouraged
+– the dataset is not considered challenging anymore – state of the art classifiers
+can reach <span class="math inline">\(99.8\%\)</span> accuracy.</p>
+<p>See Zalando’s Fashion-MNIST (by Kashif Rasul &amp; Han Xiao) at
+<a href="https://github.com/zalandoresearch/fashion-mnist" class="uri">https://github.com/zalandoresearch/fashion-mnist</a> for a modern replacement.</p>
+<p>Alternatively, take a look at CIFAR-10 and CIFAR-100 (<a href="https://www.cs.toronto.edu/~kriz/cifar.html" class="uri">https://www.cs.toronto.edu/~kriz/cifar.html</a>)
+by A. Krizhevsky et al.
+or at ImageNet (<a href="http://image-net.org/index" class="uri">http://image-net.org/index</a>) for an even greater challenge.</p>
+<!--
+
+Common tricks with NNets: ...
+
+This is kind of "disgusting" --
+let engineer do whatever it takes to increase some performance metric;
+You only optimise wrt a single criterion, are you controlling other ones?
+
+
+Some people tend to attack every problem with NNets,
+but actually their scope is very limited (computer vision and
+signal processing, ...)
+
+
+-->
+<!-- https://github.com/afshinea/stanford-cs-230-deep-learning/blob/master/en/cheatsheet-deep-learning-tips-tricks.pdf -->
+</div>
+<div id="further-reading-9" class="section level3">
+<h3><span class="header-section-number">11.6.3</span> Further Reading</h3>
+<p>Recommended further reading: <span class="citation">(James et al. <a href="references.html#ref-islr">2017</a>: Chapter 11)</span>, <span class="citation">(Sarle &amp; others <a href="references.html#ref-aifaq">2002</a>)</span> and <span class="citation">(Goodfellow et al. <a href="references.html#ref-deeplearn">2016</a>)</span></p>
+<p>See also the <code>keras</code> package tutorials available at:
+<a href="https://cran.r-project.org/web/packages/keras/index.html" class="uri">https://cran.r-project.org/web/packages/keras/index.html</a>
+and <a href="https://keras.rstudio.com" class="uri">https://keras.rstudio.com</a>.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="chap-optimisation-discrete.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chap-recommenders.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "serif",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": "lmlcr.pdf",
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

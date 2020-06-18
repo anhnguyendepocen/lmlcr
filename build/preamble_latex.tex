@@ -28,11 +28,12 @@
 % }
 
 
-\newtheorem{theorem}{Theorem}
+\newtheorem{theorem}{Theorem}[chapter]
 \newtheorem{exercise}{Exercise}[chapter]
-\newtheorem{example}{Example}
-\newtheorem{definition}{Definition}
-\newtheorem{proof}{Proof}
+\newtheorem{example}{Example}[chapter]
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{remark}{Remark}[chapter]
+%\newtheorem{proof}{Proof}
 \usepackage[australian]{babel}
 
 
@@ -129,4 +130,33 @@
 
 \renewcommand{\mathbf}[1]{\mathbfup{#1}}
 \renewcommand{\boldsymbol}[1]{\mathbfit{#1}}
+
+
+
+
+%% pandoc-tablenos: required package
+\usepackage{caption}
+
+%% pandoc-tablenos: environment to disable table caption prefixes
+\makeatletter
+\newcounter{tableno}
+\newenvironment{tablenos:no-prefix-table-caption}{
+    \caption@ifcompatibility{}{
+    \let\oldthetable\thetable
+    \let\oldtheHtable\theHtable
+    \renewcommand{\thetable}{tableno:\thetableno}
+    \renewcommand{\theHtable}{tableno:\thetableno}
+    \stepcounter{tableno}
+    \captionsetup{labelformat=empty}
+    }
+}{
+    \caption@ifcompatibility{}{
+    \captionsetup{labelformat=default}
+    \let\thetable\oldthetable
+    \let\theHtable\oldtheHtable
+    \addtocounter{table}{-1}
+    }
+}
+\makeatother
+
 

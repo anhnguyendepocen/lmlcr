@@ -13,10 +13,6 @@
 
 -->
 
-
-
-## What is Machine Learning?
-
 An *algorithm* is a well-defined sequence of instructions that,
 for a given sequence of input arguments,
 yields some desired output.
@@ -33,8 +29,12 @@ to make of whether should we consider a particular area suspicious,
 how does it relate to the neighbouring cells, etc.
 
 
+
+## What is Machine Learning?
+
+
 In *machine learning* (ML), we build and study computer algorithms
-that make *predictions* or *decisions* but which are not
+that make *predictions* or *decisions* but whose *all tiny bits* are not
 manually programmed. Moreover, some algorithms might also be able
 to *discover* new interesting facts about a problem instance at hand.
 
@@ -172,9 +172,9 @@ learning, as these are the most common  instances.
 
 
 
-## Input Data, **X** -- Formalism
+## Input Data, **X**
 
-
+### Abstract Formalism
 
 
 Let $\mathcal{X}=\{\boldsymbol{x}^{(1)},\dots,\boldsymbol{x}^{(n)}\}$
@@ -187,35 +187,37 @@ We denote this fact as $\boldsymbol{x}^{(i)}\in \mathbb{R}^p$.
 
 
 
-Remark.
+{ BEGIN remark }
+Here, the "$\in$" symbol  stand for "*is in*" or "*is a member of*",
+$\mathbb{R}$ denotes the set of real numbers (the one that features,
+$0$, $-358745.2394$, $42$ and $\pi$, amongst uncountably many others)
+and $\mathbb{R}^p$ is the set of real-valued sequences of length $p$
+(i.e., $p$ such numbers considered at a time).
+For instance, $\mathbb{R}^2$ includes pairs such as
+$(1, 2)$, $(-6.4,0)$ and $(1/3, 10^{3})$.
+More generally, we write $(x_1,\dots,x_p)\in\mathbb{R}^p$,
+where $x_j\in\mathbb{R}$ is the $j$-th component of the sequence,
+for any $j=1,\dots,p$.
+{ END remark }
 
-:   Here, the "$\in$" symbol  stand for "*is in*" or "*is a member of*",
-    $\mathbb{R}$ denotes the set of real numbers (the one that features,
-    $0$, $-358745.2394$, $42$ and $\pi$, amongst uncountably many others)
-    and $\mathbb{R}^p$ is the set of real-valued sequences of length $p$
-    (i.e., $p$ such numbers considered at a time).
-    For instance, $\mathbb{R}^2$ includes pairs such as
-    $(1, 2)$, $(-6.4,0)$ and $(1/3, 10^{3})$.
-    More generally, we write $(x_1,\dots,x_p)\in\mathbb{R}^p$,
-    where $x_j\in\mathbb{R}$ is the $j$-th component of the sequence,
-    for any $j=1,\dots,p$.
+{ BEGIN remark }
+To put emphasis on the fact that $(x_1,\dots,x_p)$ is not an "atomic"
+entity, but a one that a collection of many *scalar* components,
+we will use bold fonts for denoting whole sequences, e.g.,
+write $\boldsymbol{x}=(x_1,\dots,x_p)$.
+{ END remark }
 
-    To emphasise on the fact that $(x_1,\dots,x_p)$ is not an "atomic"
-    entity, but a one that a collection of many *scalar* components,
-    we will use bold fonts for denoting whole sequences, e.g.,
-    write $\boldsymbol{x}=(x_1,\dots,x_p)$.
-
-    If $\mathbf{x}\in \mathbb{R}^p$, then we often say
-    that $\mathbf{x}$ is
-    *a sequence of $p$ numbers*,
-    *a (numeric) $p$-tuple*,
-    *a $p$-dimensional real vector*,
-    *a point in a $p$-dimensional real space*,
-    or *an element of a real $p$-space* etc.
-
-    We explain the basics of notation convention used throughout this book
-    (and in most math works in general) in Appendix \@ref(appendix:convention).
-
+{ BEGIN remark }
+If $\boldsymbol{x}\in \mathbb{R}^p$, then we often say
+that $\boldsymbol{x}$ is
+*a sequence of $p$ numbers*,
+*a (numeric) $p$-tuple*,
+*a $p$-dimensional real vector*,
+*a point in a $p$-dimensional real space*,
+or *an element of a real $p$-space* etc.
+We explain the basics of notation convention used throughout this book
+(and in most math works in general) in Appendix \@ref(appendix:convention).
+{ END remark }
 
 
 At a first glance, such a representation might seem overly simplistic,
@@ -257,7 +259,7 @@ This is exactly what maths is for -- creating *abstractions* or *models*
 of complex entities/phenomena so that they can be much more easily manipulated
 or understood.
 
-<!--  -->
+
 
 This is very powerful -- spend a moment
 contemplating how many real-world situations fit into our framework.
@@ -287,13 +289,15 @@ Mathematically, we denote this as $\mathbf{X}\in\mathbb{R}^{n\times p}$
 (read "$\mathbf{X}$ is a real-valued matrix with $n$ rows and $p$ columns").
 
 
-Remark.
-
-: A *matrix* is an array of rectangular shape, with items
+{ BEGIN remark }
+A *matrix* is an array of rectangular shape, with items
 arranged in rows and columns.
 In cases such as this we say that we deal with *structured (tabular) data*
 (think: Excel/Calc spreadsheets, SQL tables etc.).
+{ END remark }
 
+
+### Concrete Example
 
 For example, let's consider the Wine Quality dataset
 (see Appendix \@ref(appendix:datasets) for more details),
@@ -332,19 +336,18 @@ Therefore, $\mathbf{X}\in\mathbb{R}^{`r nrow(X)`\times `r ncol(X)`}$,
 i.e., $n=`r nrow(X)`$ and $p=`r ncol(X)`$.
 
 
-Remark.
+{ BEGIN remark }
+Obviously, displaying $\mathbf{X}$ in its entirety would take up a lot of
+pages. Not only there are so many rows, also the number of columns makes
+the matrix too "wide" -- mainly because
+of the presence of the descriptive feature labels (column names).
+Therefore, when printed out on the console, R will "wrap" the columns to
+fit the page width.
 
-:   Obviously, displaying $\mathbf{X}$ in its entirety would take up a lot of
-    pages. Not only there are so many rows, also the number of columns makes
-    the matrix too "wide" -- mainly because
-    of the presence of the descriptive feature labels (column names).
-    Therefore, when printed out on the console, R will "wrap" the columns to
-    fit the page width.
-
-    ```{r wines_print3}
-    head(X, 3) # the first 3 rows
-    ```
-
+```{r wines_print3}
+head(X, 3) # the first 3 rows
+```
+{ END remark }
 
 Let's forget about the column labels for the time being, as they
 might be distracting use from fully appreciating the abstract
@@ -465,16 +468,15 @@ think of this as a kind of rotation; it allows us to introduce a set of
 
 
 
-Remark.
-
-: Details on how to get started with the R environment are provided
+{ BEGIN remark }
+Details on how to get started with the R environment are provided
 in Appendix \@ref(appendix:rintro).
 A comprehensive introduction to vector and matrix algebra in R
 as well as basic data frame wrangling is given
 in Appendices \@ref(appendix:rvector), \@ref(appendix:rmatrix)
 and \@ref(appendix:rdf).
 From now on, we assume that we are all familiar with this material.
-
+{ END remark }
 
 
 
@@ -613,7 +615,8 @@ during the method's operation.
 
 We discuss the most seminal clustering techniques
 in Chapters \@ref(chap:hclust) (hierarchical agglomerative algorithms)
-and \@ref(chap:kmeans) (K-means method).
+and \@ref(chap:kmeans) (K-means method),
+see also, e.g., [@jainsurvey], [@wierzchon_klopotek], [@esl].
 
 
 
@@ -629,7 +632,7 @@ and \@ref(chap:kmeans) (K-means method).
 In supervised learning, there is a teacher;
 apart from the inputs (in the form of a matrix $\mathbf{X}$),
 we are also given the corresponding reference/desired outputs
-(a vector $\mathbf{y})$, which
+(a vector $\boldsymbol{y})$, which
 are are usually encoded as individual  numbers (scalars)
 or textual labels.
 
@@ -723,16 +726,16 @@ Depending on the type of the elements in $\mathbf{y}$
 supervised learning problems are usually
 pigeonholed as:
 
-* **regression** -- each $y_i$ is a real number,
+* *regression* -- each $y_i$ is a real number,
     e.g., $y_i=$ future market stock price
     with $\mathbf{x}_{i,\cdot}=$ prices from $p$ previous days;
 
-* **classification** -- each $y_i$ is a discrete label,
+* *classification* -- each $y_i$ is a discrete label,
     e.g., $y_i=$ healthy (0) or ill (1)
     with $\mathbf{x}_{i,\cdot}=$ a patient's health record;
 
 
-* **ordinal regression** (a.k.a. ordinal classification) -- each $y_i$ is
+* *ordinal regression* (a.k.a. ordinal classification) -- each $y_i$ is
     a rank, e.g., $y_i=$ rating of a TV series on the scale 1--5
     with $\mathbf{x}_{i,\cdot}=$ ratings of $p$ most similar productions.
 
@@ -800,8 +803,8 @@ of many different ML problems, we should be pretty pretty excited.
 
 For example, in the `wine_quality` dataset we have the following columns:
 
-```{r wines_load2}
-head(wine_quality)
+```{r wines_colnames}
+names(wine_quality) # names of the columns
 ```
 
 

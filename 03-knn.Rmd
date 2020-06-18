@@ -231,10 +231,9 @@ on a random **train-test split** of the original dataset:
 
 
 
-Remark.
-
-: **Test sample must not be used in the training phase!** (No cheating!)
-
+{ BEGIN remark }
+**Test sample must not be used in the training phase!** (No cheating!)
+{ END remark }
 
 
 
@@ -350,11 +349,10 @@ plot_knn(1)
 ```
 
 
-Remark.
-
-: (\*) 1-NN classification is essentially based
+{ BEGIN remark }
+(\*) 1-NN classification is essentially based
 on a dataset's so-called Voronoi diagram.
-
+{ END remark }
 
 
 
@@ -457,13 +455,12 @@ Z-scores are easy to interpret, e.g., 0.5 denotes an observation
 that is 0.5 standard deviations above the mean
 and -3 informs us that a value is 3 standard deviations below the mean.
 
-Remark.
-
-: (\*) If data are normally distributed (bell-shaped histogram),
+{ BEGIN remark }
+(\*) If data are normally distributed (bell-shaped histogram),
 with very high probability, most (expected value is 99.74%) observations
 should have Z-scores between -3 and 3. Those that don't, are
 "suspicious", maybe they are outliers? We should inspect them manually.
-
+{ END remark }
 
 
 
@@ -506,11 +503,12 @@ hist(X_train[,"fixed.acidity"], col="white", main=NA, xlim=c(-11,11)); box()
 hist(Z_train[,"fixed.acidity"], col="white", main=NA, xlim=c(-11,11)); box()
 ```
 
-Remark.
 
-: Of course, standardisation is only about shifting and scaling, it
+{ BEGIN remark }
+Of course, standardisation is only about shifting and scaling, it
 preserves the shape of the distribution. If the original variable
 is right skewed or bimodal, its standardised version will remain as such.
+{ END remark }
 
 
 Let's compute the accuracy of K-NN classifiers acting on standardised data.
@@ -653,21 +651,17 @@ In many applications we are dealing with **unbalanced problems**, where
 the case $y_i=1$ is relatively rare,
 yet predicting it  correctly is much more important than being
 accurate with respect to class $0$.
-
-
-Remark.
-
-: Think of medical applications, e.g., HIV testing
+Think of medical applications, e.g., HIV testing
 or tumour diagnosis.
 
 In such a case, *accuracy* as a metric fails to quantify what we are aiming for.
 
 
-Remark.
-
-: If only 1% of the cases have true $y_i=1$,
+{ BEGIN remark }
+If only 1% of the cases have true $y_i=1$,
 then a dummy classifier that always
 outputs $\hat{y}_i=0$ has 99% accuracy.
+{ END remark }
 
 Metrics such as precision and recall (and their aggregated version, F-measure)
 aim to address this problem.
@@ -717,12 +711,11 @@ C[2,2]/(C[2,2]+C[1,2]) # Recall
 
 
 
-Remark.
-
-: Precision or recall? It depends on an application.
+{ BEGIN exercise }
+Precision or recall? It depends on an application.
 Think of medical diagnosis, medical screening, plagiarism detection,
 etc. --- which measure is more important in each of the settings listed?
-
+{ END exercise }
 
 
 
@@ -844,23 +837,21 @@ Ps <- as.data.frame(t(
 
 
 
-Remark.
-
-: Note that `sapply(X, f, arg1, arg2, ...)`
+{ BEGIN remark }
+Note that `sapply(X, f, arg1, arg2, ...)`
 outputs a list `Y` such that
 `Y[[i]] = f(X[i], arg1, arg2, ...)`
 which is then simplified to a matrix.
+{ END remark }
 
 
 
-
-Remark.
-
-: We transpose this result, `t()`, in order to get each metric
+{ BEGIN remark }
+We transpose this result, `t()`, in order to get each metric
 corresponding to different columns in the result.
 As usual, if you keep wondering, e.g.,  why `t()`, play with
 the code yourself -- it's fun fun fun.
-
+{ END remark }
 
 
 
@@ -941,13 +932,12 @@ In the $K$-NN classification task, there are many hyperparameters to tune up:
 
 
 
-Remark.
-
-: **If we select the best hyperparameter set based on test
+{ BEGIN remark }
+**If we select the best hyperparameter set based on test
 sample error, we will run into the trap of overfitting again**.
 This time we'll be overfitting to the test set --- the model that is optimal
 for a given test sample doesn't have to generalise well to other test samples (!).
-
+{ END remark }
 
 
 
@@ -995,13 +985,12 @@ on the test set.
 
 
 
-Remark.
-
-: (\*) If our dataset is too small,
+{ BEGIN remark }
+(\*) If our dataset is too small,
 we can use various *cross-validation* techniques
 instead of a train-validate-test split.
 <!-- TODO: see exercise.... -->
-
+{ END remark }
 
 
 
@@ -1128,10 +1117,9 @@ $\mathtt{Y\_train}\in\{1,\dots,M\}^{\mathtt{n\_train}}$
 
 
 
-Remark.
-
-: Recall that R `factor` objects are internally encoded as integer vectors.
-
+{ BEGIN remark }
+Recall that R `factor` objects are internally encoded as integer vectors.
+{ END remark }
 
 
 
@@ -1345,11 +1333,10 @@ Let's substitute our naive implementation with the equivalent one,
 but written in C++ (available in the `FNN` package).
 
 
-Remark.
-
-: (\*) Note that we can write a C++ implementation ourselves,
+{ BEGIN remark }
+(\*) Note that we can write a C++ implementation ourselves,
 see the Rcpp package for seamless R and C++ integration.
-
+{ END remark }
 
 
 
@@ -1381,11 +1368,10 @@ It turns out that there are special **spatial data structures**
 neighbours in *low-dimensional spaces* (for small $p$).
 
 
-Remark.
-
-: (\*) Searching in high-dimensional spaces is hard due to the so-called
+{ BEGIN remark }
+(\*) Searching in high-dimensional spaces is hard due to the so-called
 curse of dimensionality.
-
+{ END remark }
 
 For example, `FNN::get.knnx()` also implements the so-called
 kd-trees.
@@ -1447,10 +1433,10 @@ it is a function $d:X\times X\to [0,\infty]$ such that for all $x,x',x''\in X$:
 
 
 
-Remark.
-
-: (*) Not all the properties are required in all the applications;
+{ BEGIN remark }
+(*) Not all the properties are required in all the applications;
 sometimes we might need a few additional ones.
+{ END remark }
 
 We can easily generalise the way we introduced the K-NN method
 to have a classifier that is based on a point's neighbourhood
@@ -1593,11 +1579,9 @@ Robust standardisation.
 
 
 
-Remark.
-
-: Note that the $L_1$ metric-based K-nearest neighbour method
-    is not available     in the `FNN` package. You need to implement
-    it yourself.
+Note that the $L_1$ metric-based K-nearest neighbour method
+is not available     in the `FNN` package. You need to implement
+it yourself.
 
 
 Cross-validation.

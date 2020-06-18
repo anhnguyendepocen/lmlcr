@@ -65,10 +65,10 @@ $\exists$ -- exists
 
 
 $A\cup B$ -- union (sum) of two sets,
-$x\in A\cup B$ iff $x\in A$ or $x\in B$
+$x\in A\cup B$ iff $x\in A$ or $x\in B$ ($\cup$ = cup)
 
 $A\cap B$ -- intersection (sum) of two sets,
-$x\in A\cap B$ iff $x\in A$ and $x\in B$
+$x\in A\cap B$ iff $x\in A$ and $x\in B$ ($\cup$ = cap)
 
 $A\setminus B$ -- difference of two sets,
 $x\in A\setminus B$ iff $x\in A$ and $x\not\in B$
@@ -77,6 +77,16 @@ $A\times B$ -- Cartesian product of two sets,
 $A\times B = \{ (a,b): a\in A, b\in B \}$
 
 $A^p = A\times A \times \dots\times A$ ($p$ times) for any $p$
+
+
+$\bigcup_{i=1}^n C_i = C_1\cup C_2\cup \dots \cup C_n$ -- the union
+of $n$ indexed sets
+
+
+$\bigcap_{i=1}^n C_i = C_1\cap C_2\cap \dots \cap C_n$ -- the intersection
+of $n$ indexed sets
+
+
 
 
 #### Notation Convention -- Symbols {.unnumbered}
@@ -104,11 +114,11 @@ $\Lambda$ | $M  $ | $N  $ | $\Xi$ | $O$ | $\Pi$ | $P      $ | $\Sigma$ | $T   $ 
 
 -->
 
-$X, x, \mathbf{X}, \mathbf{x}$ -- inputs (usually)
+$X, x, \mathbf{X}, \boldsymbol{x}$ -- inputs (usually)
 
-$Y, y, \mathbf{Y}, \mathbf{y}$ -- outputs
+$Y, y, \mathbf{Y}, \boldsymbol{y}$ -- outputs
 
-$\hat{Y}, \hat{y}, \hat{\mathbf{Y}}, \hat{\mathbf{y}}$ --  predicted outputs (usually)
+$\hat{Y}, \hat{y}, \hat{\mathbf{Y}}, \hat{\boldsymbol{y}}$ --  predicted outputs (usually)
 
 
 - $X$ -- independent/explanatory/predictor variable
@@ -290,7 +300,9 @@ note display (stand-alone) $\displaystyle\sum_{i=1}^n x_i$ vs text (in-line) $\t
 $\prod_{i=1}^n x_i = x_1 x_2 \dots x_n$
 
 
-
+For example, n-factorial, $n!$
+is given by $n! = \prod_{i=1}^n i = 1\cdot 2 \cdot 3\cdot \dots\cdot n$
+(with the convention that $0!=1$.
 
 
 <!--

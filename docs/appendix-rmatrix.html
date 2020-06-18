@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>D Matrix Algebra in R | Machine Learning Classics with R</title>
+  <meta name="description" content="Explore some of the most fundamental algorithms which have stood the test of time and provide the basis for innovative solutions in data-driven AI. Learn how to use the R language for implementing various stages of data processing and modelling activities. Appreciate mathematics as the universal language for formalising data-intense problems and communicating their solutions. The book is for you if you’re yet to be fluent with university-level linear algebra, calculus and probability theory or you’ve forgotten all the maths you’ve ever learned, and are seeking a gentle, yet thorough, introduction to the topic." />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="D Matrix Algebra in R | Machine Learning Classics with R" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://lmlcr.gagolewski.com" />
+  
+  <meta property="og:description" content="Explore some of the most fundamental algorithms which have stood the test of time and provide the basis for innovative solutions in data-driven AI. Learn how to use the R language for implementing various stages of data processing and modelling activities. Appreciate mathematics as the universal language for formalising data-intense problems and communicating their solutions. The book is for you if you’re yet to be fluent with university-level linear algebra, calculus and probability theory or you’ve forgotten all the maths you’ve ever learned, and are seeking a gentle, yet thorough, introduction to the topic." />
+  <meta name="github-repo" content="gagolews/lmlcr" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="D Matrix Algebra in R | Machine Learning Classics with R" />
+  
+  <meta name="twitter:description" content="Explore some of the most fundamental algorithms which have stood the test of time and provide the basis for innovative solutions in data-driven AI. Learn how to use the R language for implementing various stages of data processing and modelling activities. Appreciate mathematics as the universal language for formalising data-intense problems and communicating their solutions. The book is for you if you’re yet to be fluent with university-level linear algebra, calculus and probability theory or you’ve forgotten all the maths you’ve ever learned, and are seeking a gentle, yet thorough, introduction to the topic." />
+  
+
+<meta name="author" content="Marek Gagolewski" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="appendix-rvector.html"/>
+<link rel="next" href="appendix-rdf.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.exercise {
+    font-style: italic;
+    border-left: 2px solid gray;
+    padding-left: 1em;
+}
+
+details.solution {
+    border-left: 2px solid #ff8888;
+    padding-left: 1em;
+    margin-bottom: 2em;
+}
+
+div.remark {
+    border-left: 2px solid gray;
+    padding-left: 1em;
+}
+
+div.definition {
+    font-style: italic;
+    border-left: 2px solid #550000;
+    padding-left: 1em;
+}
+
+</style>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li style='font-style: italic' ><a href="./">LMLCR</a></li>
+<li style='font-size: smaller' ><a href="https://www.gagolewski.com">Marek Gagolewski</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="chap-introduction.html"><a href="chap-introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="chap-introduction.html"><a href="chap-introduction.html#what-is-machine-learning"><i class="fa fa-check"></i><b>1.1</b> What is Machine Learning?</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="chap-introduction.html"><a href="chap-introduction.html#data-sources"><i class="fa fa-check"></i><b>1.1.1</b> Data Sources</a></li>
+<li class="chapter" data-level="1.1.2" data-path="chap-introduction.html"><a href="chap-introduction.html#main-types-of-machine-learning-problems"><i class="fa fa-check"></i><b>1.1.2</b> Main Types of Machine Learning Problems</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="chap-introduction.html"><a href="chap-introduction.html#input-data-x"><i class="fa fa-check"></i><b>1.2</b> Input Data, <strong>X</strong></a><ul>
+<li class="chapter" data-level="1.2.1" data-path="chap-introduction.html"><a href="chap-introduction.html#abstract-formalism"><i class="fa fa-check"></i><b>1.2.1</b> Abstract Formalism</a></li>
+<li class="chapter" data-level="1.2.2" data-path="chap-introduction.html"><a href="chap-introduction.html#concrete-example"><i class="fa fa-check"></i><b>1.2.2</b> Concrete Example</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="chap-introduction.html"><a href="chap-introduction.html#unsupervised-learning"><i class="fa fa-check"></i><b>1.3</b> Unsupervised Learning</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="chap-introduction.html"><a href="chap-introduction.html#dimensionality-reduction"><i class="fa fa-check"></i><b>1.3.1</b> Dimensionality Reduction</a></li>
+<li class="chapter" data-level="1.3.2" data-path="chap-introduction.html"><a href="chap-introduction.html#anomaly-detection"><i class="fa fa-check"></i><b>1.3.2</b> Anomaly Detection</a></li>
+<li class="chapter" data-level="1.3.3" data-path="chap-introduction.html"><a href="chap-introduction.html#clustering"><i class="fa fa-check"></i><b>1.3.3</b> Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="chap-introduction.html"><a href="chap-introduction.html#supervised-learning"><i class="fa fa-check"></i><b>1.4</b> Supervised Learning</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="chap-introduction.html"><a href="chap-introduction.html#desired-outputs-y"><i class="fa fa-check"></i><b>1.4.1</b> Desired Outputs, <strong>y</strong></a></li>
+<li class="chapter" data-level="1.4.2" data-path="chap-introduction.html"><a href="chap-introduction.html#types-of-supervised-learning-problems"><i class="fa fa-check"></i><b>1.4.2</b> Types of Supervised Learning Problems</a></li>
+<li class="chapter" data-level="1.4.3" data-path="chap-introduction.html"><a href="chap-introduction.html#one-dataset-many-problems"><i class="fa fa-check"></i><b>1.4.3</b> One Dataset – Many Problems</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="chap-hclust.html"><a href="chap-hclust.html"><i class="fa fa-check"></i><b>2</b> Agglomerative Hierarchical Clustering</a><ul>
+<li class="chapter" data-level="2.1" data-path="chap-hclust.html"><a href="chap-hclust.html#dataset-partitions"><i class="fa fa-check"></i><b>2.1</b> Dataset Partitions</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="chap-hclust.html"><a href="chap-hclust.html#label-vectors"><i class="fa fa-check"></i><b>2.1.1</b> Label Vectors</a></li>
+<li class="chapter" data-level="2.1.2" data-path="chap-hclust.html"><a href="chap-hclust.html#k-partitions"><i class="fa fa-check"></i><b>2.1.2</b> K-Partitions (*)</a></li>
+<li class="chapter" data-level="2.1.3" data-path="chap-hclust.html"><a href="chap-hclust.html#interesting-partitions"><i class="fa fa-check"></i><b>2.1.3</b> “Interesting” Partitions</a></li>
+<li class="chapter" data-level="2.1.4" data-path="chap-hclust.html"><a href="chap-hclust.html#introduction"><i class="fa fa-check"></i><b>2.1.4</b> Introduction</a></li>
+<li class="chapter" data-level="2.1.5" data-path="chap-hclust.html"><a href="chap-hclust.html#example-in-r"><i class="fa fa-check"></i><b>2.1.5</b> Example in R</a></li>
+<li class="chapter" data-level="2.1.6" data-path="chap-hclust.html"><a href="chap-hclust.html#linkage-functions"><i class="fa fa-check"></i><b>2.1.6</b> Linkage Functions</a></li>
+<li class="chapter" data-level="2.1.7" data-path="chap-hclust.html"><a href="chap-hclust.html#cluster-dendrograms"><i class="fa fa-check"></i><b>2.1.7</b> Cluster Dendrograms</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="chap-hclust.html"><a href="chap-hclust.html#exercises"><i class="fa fa-check"></i><b>2.2</b> Exercises</a></li>
+<li class="chapter" data-level="2.3" data-path="chap-hclust.html"><a href="chap-hclust.html#outro"><i class="fa fa-check"></i><b>2.3</b> Outro</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="chap-hclust.html"><a href="chap-hclust.html#remarks"><i class="fa fa-check"></i><b>2.3.1</b> Remarks</a></li>
+<li class="chapter" data-level="2.3.2" data-path="chap-hclust.html"><a href="chap-hclust.html#further-reading"><i class="fa fa-check"></i><b>2.3.2</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="chap-knn.html"><a href="chap-knn.html"><i class="fa fa-check"></i><b>3</b> Classification and Regression with K-Nearest Neighbours</a><ul>
+<li class="chapter" data-level="3.1" data-path="chap-knn.html"><a href="chap-knn.html#introduction-1"><i class="fa fa-check"></i><b>3.1</b> Introduction</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="chap-knn.html"><a href="chap-knn.html#classification-task"><i class="fa fa-check"></i><b>3.1.1</b> Classification Task</a></li>
+<li class="chapter" data-level="3.1.2" data-path="chap-knn.html"><a href="chap-knn.html#data"><i class="fa fa-check"></i><b>3.1.2</b> Data</a></li>
+<li class="chapter" data-level="3.1.3" data-path="chap-knn.html"><a href="chap-knn.html#training-and-test-sets"><i class="fa fa-check"></i><b>3.1.3</b> Training and Test Sets</a></li>
+<li class="chapter" data-level="3.1.4" data-path="chap-knn.html"><a href="chap-knn.html#discussed-methods"><i class="fa fa-check"></i><b>3.1.4</b> Discussed Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="chap-knn.html"><a href="chap-knn.html#k-nearest-neighbour-classifier"><i class="fa fa-check"></i><b>3.2</b> K-nearest Neighbour Classifier</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="chap-knn.html"><a href="chap-knn.html#introduction-2"><i class="fa fa-check"></i><b>3.2.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2.2" data-path="chap-knn.html"><a href="chap-knn.html#example-in-r-1"><i class="fa fa-check"></i><b>3.2.2</b> Example in R</a></li>
+<li class="chapter" data-level="3.2.3" data-path="chap-knn.html"><a href="chap-knn.html#feature-engineering"><i class="fa fa-check"></i><b>3.2.3</b> Feature Engineering</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="chap-knn.html"><a href="chap-knn.html#model-assessment-and-selection"><i class="fa fa-check"></i><b>3.3</b> Model Assessment and Selection</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="chap-knn.html"><a href="chap-knn.html#performance-metrics"><i class="fa fa-check"></i><b>3.3.1</b> Performance Metrics</a></li>
+<li class="chapter" data-level="3.3.2" data-path="chap-knn.html"><a href="chap-knn.html#how-to-choose-k-for-k-nn-classification"><i class="fa fa-check"></i><b>3.3.2</b> How to Choose K for K-NN Classification?</a></li>
+<li class="chapter" data-level="3.3.3" data-path="chap-knn.html"><a href="chap-knn.html#training-validation-and-test-sets"><i class="fa fa-check"></i><b>3.3.3</b> Training, Validation and Test sets</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="chap-knn.html"><a href="chap-knn.html#implementing-a-k-nn-classifier"><i class="fa fa-check"></i><b>3.4</b> Implementing a K-NN Classifier (*)</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="chap-knn.html"><a href="chap-knn.html#factor-data-type"><i class="fa fa-check"></i><b>3.4.1</b> Factor Data Type</a></li>
+<li class="chapter" data-level="3.4.2" data-path="chap-knn.html"><a href="chap-knn.html#main-routine"><i class="fa fa-check"></i><b>3.4.2</b> Main Routine (*)</a></li>
+<li class="chapter" data-level="3.4.3" data-path="chap-knn.html"><a href="chap-knn.html#mode"><i class="fa fa-check"></i><b>3.4.3</b> Mode</a></li>
+<li class="chapter" data-level="3.4.4" data-path="chap-knn.html"><a href="chap-knn.html#nn-search-routines"><i class="fa fa-check"></i><b>3.4.4</b> NN Search Routines (*)</a></li>
+<li class="chapter" data-level="3.4.5" data-path="chap-knn.html"><a href="chap-knn.html#different-metrics"><i class="fa fa-check"></i><b>3.4.5</b> Different Metrics (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="chap-knn.html"><a href="chap-knn.html#exercises-1"><i class="fa fa-check"></i><b>3.5</b> Exercises</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="chap-knn.html"><a href="chap-knn.html#wine-quality-best-k-nn-parameters-via-cross-validation"><i class="fa fa-check"></i><b>3.5.1</b> Wine Quality – Best K-NN Parameters via Cross-Validation (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="chap-knn.html"><a href="chap-knn.html#outro-1"><i class="fa fa-check"></i><b>3.6</b> Outro</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="chap-knn.html"><a href="chap-knn.html#remarks-1"><i class="fa fa-check"></i><b>3.6.1</b> Remarks</a></li>
+<li class="chapter" data-level="3.6.2" data-path="chap-knn.html"><a href="chap-knn.html#side-note-k-nn-regression"><i class="fa fa-check"></i><b>3.6.2</b> Side Note: K-NN Regression</a></li>
+<li class="chapter" data-level="3.6.3" data-path="chap-knn.html"><a href="chap-knn.html#further-reading-1"><i class="fa fa-check"></i><b>3.6.3</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="chap-trees.html"><a href="chap-trees.html"><i class="fa fa-check"></i><b>4</b> Decision and Regression Trees</a><ul>
+<li class="chapter" data-level="4.1" data-path="chap-trees.html"><a href="chap-trees.html#introduction-3"><i class="fa fa-check"></i><b>4.1</b> Introduction</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="chap-trees.html"><a href="chap-trees.html#classification-task-1"><i class="fa fa-check"></i><b>4.1.1</b> Classification Task</a></li>
+<li class="chapter" data-level="4.1.2" data-path="chap-trees.html"><a href="chap-trees.html#data-1"><i class="fa fa-check"></i><b>4.1.2</b> Data</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="chap-trees.html"><a href="chap-trees.html#decision-trees"><i class="fa fa-check"></i><b>4.2</b> Decision Trees</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="chap-trees.html"><a href="chap-trees.html#introduction-4"><i class="fa fa-check"></i><b>4.2.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2.2" data-path="chap-trees.html"><a href="chap-trees.html#example-in-r-2"><i class="fa fa-check"></i><b>4.2.2</b> Example in R</a></li>
+<li class="chapter" data-level="4.2.3" data-path="chap-trees.html"><a href="chap-trees.html#a-note-on-decision-tree-learning"><i class="fa fa-check"></i><b>4.2.3</b> A Note on Decision Tree Learning</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="chap-trees.html"><a href="chap-trees.html#exercises-2"><i class="fa fa-check"></i><b>4.3</b> Exercises</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="chap-trees.html"><a href="chap-trees.html#edstats-where-girls-are-better-at-maths-than-boys"><i class="fa fa-check"></i><b>4.3.1</b> EdStats – Where Girls Are Better at Maths Than Boys?</a></li>
+<li class="chapter" data-level="4.3.2" data-path="chap-trees.html"><a href="chap-trees.html#edstats-and-world-factbook-joining-forces"><i class="fa fa-check"></i><b>4.3.2</b> EdStats and World Factbook – Joining Forces</a></li>
+<li class="chapter" data-level="4.3.3" data-path="chap-trees.html"><a href="chap-trees.html#wine-quality-random-forest-and-xgboost"><i class="fa fa-check"></i><b>4.3.3</b> Wine Quality – Random Forest and XGBoost (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="chap-trees.html"><a href="chap-trees.html#outro-2"><i class="fa fa-check"></i><b>4.4</b> Outro</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="chap-trees.html"><a href="chap-trees.html#remarks-2"><i class="fa fa-check"></i><b>4.4.1</b> Remarks</a></li>
+<li class="chapter" data-level="4.4.2" data-path="chap-trees.html"><a href="chap-trees.html#further-reading-2"><i class="fa fa-check"></i><b>4.4.2</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html"><i class="fa fa-check"></i><b>5</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="5.1" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#simple-regression"><i class="fa fa-check"></i><b>5.1</b> Simple Regression</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#introduction-5"><i class="fa fa-check"></i><b>5.1.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.1.2" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#search-space-and-objective"><i class="fa fa-check"></i><b>5.1.2</b> Search Space and Objective</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#simple-linear-regression"><i class="fa fa-check"></i><b>5.2</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#introduction-6"><i class="fa fa-check"></i><b>5.2.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2.2" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#solution-in-r"><i class="fa fa-check"></i><b>5.2.2</b> Solution in R</a></li>
+<li class="chapter" data-level="5.2.3" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#analytic-solution"><i class="fa fa-check"></i><b>5.2.3</b> Analytic Solution</a></li>
+<li class="chapter" data-level="5.2.4" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#derivation-of-the-solution"><i class="fa fa-check"></i><b>5.2.4</b> Derivation of the Solution (**)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#exercises-3"><i class="fa fa-check"></i><b>5.3</b> Exercises</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#the-anscombe-quartet"><i class="fa fa-check"></i><b>5.3.1</b> The Anscombe Quartet</a></li>
+<li class="chapter" data-level="5.3.2" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#median-house-value-in-boston"><i class="fa fa-check"></i><b>5.3.2</b> Median House Value in Boston</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#outro-3"><i class="fa fa-check"></i><b>5.4</b> Outro</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#remarks-3"><i class="fa fa-check"></i><b>5.4.1</b> Remarks</a></li>
+<li class="chapter" data-level="5.4.2" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#further-reading-3"><i class="fa fa-check"></i><b>5.4.2</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html"><i class="fa fa-check"></i><b>6</b> Multiple Regression</a><ul>
+<li class="chapter" data-level="6.1" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#introduction-7"><i class="fa fa-check"></i><b>6.1</b> Introduction</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#formalism"><i class="fa fa-check"></i><b>6.1.1</b> Formalism</a></li>
+<li class="chapter" data-level="6.1.2" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#simple-linear-regression---recap"><i class="fa fa-check"></i><b>6.1.2</b> Simple Linear Regression - Recap</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#multiple-linear-regression"><i class="fa fa-check"></i><b>6.2</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#problem-formulation"><i class="fa fa-check"></i><b>6.2.1</b> Problem Formulation</a></li>
+<li class="chapter" data-level="6.2.2" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#fitting-a-linear-model-in-r"><i class="fa fa-check"></i><b>6.2.2</b> Fitting a Linear Model in R</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#finding-the-best-model"><i class="fa fa-check"></i><b>6.3</b> Finding the Best Model</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#model-diagnostics"><i class="fa fa-check"></i><b>6.3.1</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="6.3.2" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#variable-selection"><i class="fa fa-check"></i><b>6.3.2</b> Variable Selection</a></li>
+<li class="chapter" data-level="6.3.3" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#variable-transformation"><i class="fa fa-check"></i><b>6.3.3</b> Variable Transformation</a></li>
+<li class="chapter" data-level="6.3.4" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#predictive-vs.-descriptive-power"><i class="fa fa-check"></i><b>6.3.4</b> Predictive vs. Descriptive Power</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#exercises-4"><i class="fa fa-check"></i><b>6.4</b> Exercises</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#anscombes-quartet-revisited"><i class="fa fa-check"></i><b>6.4.1</b> Anscombe’s Quartet Revisited</a></li>
+<li class="chapter" data-level="6.4.2" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#countries-of-the-world-simple-models-involving-the-gdp-per-capita"><i class="fa fa-check"></i><b>6.4.2</b> Countries of the World – Simple models involving the GDP per capita</a></li>
+<li class="chapter" data-level="6.4.3" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#countries-of-the-world-most-correlated-variables"><i class="fa fa-check"></i><b>6.4.3</b> Countries of the World – Most correlated variables (*)</a></li>
+<li class="chapter" data-level="6.4.4" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#countries-of-the-world-a-non-linear-model-based-on-the-gdp-per-capita"><i class="fa fa-check"></i><b>6.4.4</b> Countries of the World – A non-linear model based on the GDP per capita</a></li>
+<li class="chapter" data-level="6.4.5" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#countries-of-the-world-a-multiple-regression-model-for-the-per-capita-gdp"><i class="fa fa-check"></i><b>6.4.5</b> Countries of the World – A multiple regression model for the per capita GDP</a></li>
+<li class="chapter" data-level="6.4.6" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#median-house-value-in-boston-continued"><i class="fa fa-check"></i><b>6.4.6</b> Median House Value in Boston (Continued)</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#outro-4"><i class="fa fa-check"></i><b>6.5</b> Outro</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#remarks-4"><i class="fa fa-check"></i><b>6.5.1</b> Remarks</a></li>
+<li class="chapter" data-level="6.5.2" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#other-methods-for-regression"><i class="fa fa-check"></i><b>6.5.2</b> Other Methods for Regression</a></li>
+<li class="chapter" data-level="6.5.3" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#derivation-of-the-solution-1"><i class="fa fa-check"></i><b>6.5.3</b> Derivation of the Solution (**)</a></li>
+<li class="chapter" data-level="6.5.4" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#solution-in-matrix-form"><i class="fa fa-check"></i><b>6.5.4</b> Solution in Matrix Form (***)</a></li>
+<li class="chapter" data-level="6.5.5" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#pearsons-r-in-matrix-form"><i class="fa fa-check"></i><b>6.5.5</b> Pearson’s r in Matrix Form (**)</a></li>
+<li class="chapter" data-level="6.5.6" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#further-reading-4"><i class="fa fa-check"></i><b>6.5.6</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="chap-logistic.html"><a href="chap-logistic.html"><i class="fa fa-check"></i><b>7</b> Classification with Linear Models</a><ul>
+<li class="chapter" data-level="7.1" data-path="chap-logistic.html"><a href="chap-logistic.html#introduction-8"><i class="fa fa-check"></i><b>7.1</b> Introduction</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="chap-logistic.html"><a href="chap-logistic.html#classification-task-2"><i class="fa fa-check"></i><b>7.1.1</b> Classification Task</a></li>
+<li class="chapter" data-level="7.1.2" data-path="chap-logistic.html"><a href="chap-logistic.html#data-2"><i class="fa fa-check"></i><b>7.1.2</b> Data</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="chap-logistic.html"><a href="chap-logistic.html#binary-logistic-regression"><i class="fa fa-check"></i><b>7.2</b> Binary Logistic Regression</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="chap-logistic.html"><a href="chap-logistic.html#motivation"><i class="fa fa-check"></i><b>7.2.1</b> Motivation</a></li>
+<li class="chapter" data-level="7.2.2" data-path="chap-logistic.html"><a href="chap-logistic.html#logistic-model"><i class="fa fa-check"></i><b>7.2.2</b> Logistic Model</a></li>
+<li class="chapter" data-level="7.2.3" data-path="chap-logistic.html"><a href="chap-logistic.html#example-in-r-3"><i class="fa fa-check"></i><b>7.2.3</b> Example in R</a></li>
+<li class="chapter" data-level="7.2.4" data-path="chap-logistic.html"><a href="chap-logistic.html#loss-function-cross-entropy"><i class="fa fa-check"></i><b>7.2.4</b> Loss Function: Cross-entropy</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="chap-logistic.html"><a href="chap-logistic.html#exercises-5"><i class="fa fa-check"></i><b>7.3</b> Exercises</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="chap-logistic.html"><a href="chap-logistic.html#edstats-fitting-of-binary-logistic-regression-models"><i class="fa fa-check"></i><b>7.3.1</b> EdStats – Fitting of Binary Logistic Regression Models</a></li>
+<li class="chapter" data-level="7.3.2" data-path="chap-logistic.html"><a href="chap-logistic.html#edstats-variable-selection-in-binary-logistic-regression"><i class="fa fa-check"></i><b>7.3.2</b> EdStats – Variable Selection in Binary Logistic Regression (*)</a></li>
+<li class="chapter" data-level="7.3.3" data-path="chap-logistic.html"><a href="chap-logistic.html#currency-exchange-rates-growthfall"><i class="fa fa-check"></i><b>7.3.3</b> Currency Exchange Rates Growth/Fall</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="chap-logistic.html"><a href="chap-logistic.html#outro-5"><i class="fa fa-check"></i><b>7.4</b> Outro</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="chap-logistic.html"><a href="chap-logistic.html#remarks-5"><i class="fa fa-check"></i><b>7.4.1</b> Remarks</a></li>
+<li class="chapter" data-level="7.4.2" data-path="chap-logistic.html"><a href="chap-logistic.html#further-reading-5"><i class="fa fa-check"></i><b>7.4.2</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html"><i class="fa fa-check"></i><b>8</b> Continuous Optimisation with Iterative Algorithms</a><ul>
+<li class="chapter" data-level="8.1" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#introduction-9"><i class="fa fa-check"></i><b>8.1</b> Introduction</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#optimisation-problems"><i class="fa fa-check"></i><b>8.1.1</b> Optimisation Problems</a></li>
+<li class="chapter" data-level="8.1.2" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#types-of-minima-and-maxima"><i class="fa fa-check"></i><b>8.1.2</b> Types of Minima and Maxima</a></li>
+<li class="chapter" data-level="8.1.3" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#example-objective-over-a-2d-domain"><i class="fa fa-check"></i><b>8.1.3</b> Example Objective over a 2D Domain</a></li>
+<li class="chapter" data-level="8.1.4" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#example-optimisation-problems-in-machine-learning"><i class="fa fa-check"></i><b>8.1.4</b> Example Optimisation Problems in Machine Learning</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#iterative-methods"><i class="fa fa-check"></i><b>8.2</b> Iterative Methods</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#introduction-10"><i class="fa fa-check"></i><b>8.2.1</b> Introduction</a></li>
+<li class="chapter" data-level="8.2.2" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#example-in-r-4"><i class="fa fa-check"></i><b>8.2.2</b> Example in R</a></li>
+<li class="chapter" data-level="8.2.3" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#convergence-to-local-optima"><i class="fa fa-check"></i><b>8.2.3</b> Convergence to Local Optima</a></li>
+<li class="chapter" data-level="8.2.4" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#random-restarts"><i class="fa fa-check"></i><b>8.2.4</b> Random Restarts</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#gradient-descent"><i class="fa fa-check"></i><b>8.3</b> Gradient Descent</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#function-gradient"><i class="fa fa-check"></i><b>8.3.1</b> Function Gradient (*)</a></li>
+<li class="chapter" data-level="8.3.2" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#three-facts-on-the-gradient"><i class="fa fa-check"></i><b>8.3.2</b> Three Facts on the Gradient</a></li>
+<li class="chapter" data-level="8.3.3" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#gradient-descent-algorithm-gd"><i class="fa fa-check"></i><b>8.3.3</b> Gradient Descent Algorithm (GD)</a></li>
+<li class="chapter" data-level="8.3.4" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#example-mnist"><i class="fa fa-check"></i><b>8.3.4</b> Example: MNIST (*)</a></li>
+<li class="chapter" data-level="8.3.5" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#stochastic-gradient-descent-sgd"><i class="fa fa-check"></i><b>8.3.5</b> Stochastic Gradient Descent (SGD) (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#a-note-on-convex-optimisation"><i class="fa fa-check"></i><b>8.4</b> A Note on Convex Optimisation (*)</a></li>
+<li class="chapter" data-level="8.5" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#outro-6"><i class="fa fa-check"></i><b>8.5</b> Outro</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#remarks-6"><i class="fa fa-check"></i><b>8.5.1</b> Remarks</a></li>
+<li class="chapter" data-level="8.5.2" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#further-reading-6"><i class="fa fa-check"></i><b>8.5.2</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="chap-kmeans.html"><a href="chap-kmeans.html"><i class="fa fa-check"></i><b>9</b> Clustering with K-Means</a><ul>
+<li class="chapter" data-level="9.1" data-path="chap-kmeans.html"><a href="chap-kmeans.html#k-means-clustering"><i class="fa fa-check"></i><b>9.1</b> K-means Clustering</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="chap-kmeans.html"><a href="chap-kmeans.html#example-in-r-5"><i class="fa fa-check"></i><b>9.1.1</b> Example in R</a></li>
+<li class="chapter" data-level="9.1.2" data-path="chap-kmeans.html"><a href="chap-kmeans.html#problem-statement"><i class="fa fa-check"></i><b>9.1.2</b> Problem Statement</a></li>
+<li class="chapter" data-level="9.1.3" data-path="chap-kmeans.html"><a href="chap-kmeans.html#algorithms-for-the-k-means-problem"><i class="fa fa-check"></i><b>9.1.3</b> Algorithms for the K-means Problem</a></li>
+<li class="chapter" data-level="9.1.4" data-path="chap-kmeans.html"><a href="chap-kmeans.html#k-means-revisited"><i class="fa fa-check"></i><b>9.1.4</b> K-means Revisited</a></li>
+<li class="chapter" data-level="9.1.5" data-path="chap-kmeans.html"><a href="chap-kmeans.html#optim-vs.-kmeans"><i class="fa fa-check"></i><b>9.1.5</b> optim() vs. kmeans()</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="chap-kmeans.html"><a href="chap-kmeans.html#exercises-6"><i class="fa fa-check"></i><b>9.2</b> Exercises</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="chap-kmeans.html"><a href="chap-kmeans.html#clustering-of-the-world-factbook"><i class="fa fa-check"></i><b>9.2.1</b> Clustering of the World Factbook</a></li>
+<li class="chapter" data-level="9.2.2" data-path="chap-kmeans.html"><a href="chap-kmeans.html#unbalance-dataset-k-means-needs-multiple-starts"><i class="fa fa-check"></i><b>9.2.2</b> Unbalance Dataset – K-Means Needs Multiple Starts</a></li>
+<li class="chapter" data-level="9.2.3" data-path="chap-kmeans.html"><a href="chap-kmeans.html#clustering-of-typical-2d-benchmark-datasets"><i class="fa fa-check"></i><b>9.2.3</b> Clustering of Typical 2D Benchmark Datasets</a></li>
+<li class="chapter" data-level="9.2.4" data-path="chap-kmeans.html"><a href="chap-kmeans.html#wine-quality-volatile.acidity-and-sulphates"><i class="fa fa-check"></i><b>9.2.4</b> Wine Quality – <code>volatile.acidity</code> and <code>sulphates</code></a></li>
+<li class="chapter" data-level="9.2.5" data-path="chap-kmeans.html"><a href="chap-kmeans.html#wine-quality-chlorides-and-total.sulfur.dioxide"><i class="fa fa-check"></i><b>9.2.5</b> Wine Quality – <code>chlorides</code> and <code>total.sulfur.dioxide</code></a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="chap-kmeans.html"><a href="chap-kmeans.html#outro-7"><i class="fa fa-check"></i><b>9.3</b> Outro</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="chap-kmeans.html"><a href="chap-kmeans.html#remarks-7"><i class="fa fa-check"></i><b>9.3.1</b> Remarks</a></li>
+<li class="chapter" data-level="9.3.2" data-path="chap-kmeans.html"><a href="chap-kmeans.html#further-reading-7"><i class="fa fa-check"></i><b>9.3.2</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="chap-optimisation-discrete.html"><a href="chap-optimisation-discrete.html"><i class="fa fa-check"></i><b>10</b> Discrete Optimisation</a><ul>
+<li class="chapter" data-level="10.1" data-path="chap-optimisation-discrete.html"><a href="chap-optimisation-discrete.html#introduction-11"><i class="fa fa-check"></i><b>10.1</b> Introduction</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="chap-optimisation-discrete.html"><a href="chap-optimisation-discrete.html#recap"><i class="fa fa-check"></i><b>10.1.1</b> Recap</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="chap-optimisation-discrete.html"><a href="chap-optimisation-discrete.html#outro-8"><i class="fa fa-check"></i><b>10.2</b> Outro</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="chap-optimisation-discrete.html"><a href="chap-optimisation-discrete.html#remarks-8"><i class="fa fa-check"></i><b>10.2.1</b> Remarks</a></li>
+<li class="chapter" data-level="10.2.2" data-path="chap-optimisation-discrete.html"><a href="chap-optimisation-discrete.html#further-reading-8"><i class="fa fa-check"></i><b>10.2.2</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="chap-images.html"><a href="chap-images.html"><i class="fa fa-check"></i><b>11</b> Shallow and Deep Neural Networks</a><ul>
+<li class="chapter" data-level="11.1" data-path="chap-images.html"><a href="chap-images.html#introduction-12"><i class="fa fa-check"></i><b>11.1</b> Introduction</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="chap-images.html"><a href="chap-images.html#binary-logistic-regression-recap"><i class="fa fa-check"></i><b>11.1.1</b> Binary Logistic Regression: Recap</a></li>
+<li class="chapter" data-level="11.1.2" data-path="chap-images.html"><a href="chap-images.html#data-3"><i class="fa fa-check"></i><b>11.1.2</b> Data</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="chap-images.html"><a href="chap-images.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>11.2</b> Multinomial Logistic Regression</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="chap-images.html"><a href="chap-images.html#a-note-on-data-representation"><i class="fa fa-check"></i><b>11.2.1</b> A Note on Data Representation</a></li>
+<li class="chapter" data-level="11.2.2" data-path="chap-images.html"><a href="chap-images.html#extending-logistic-regression"><i class="fa fa-check"></i><b>11.2.2</b> Extending Logistic Regression</a></li>
+<li class="chapter" data-level="11.2.3" data-path="chap-images.html"><a href="chap-images.html#softmax-function"><i class="fa fa-check"></i><b>11.2.3</b> Softmax Function</a></li>
+<li class="chapter" data-level="11.2.4" data-path="chap-images.html"><a href="chap-images.html#one-hot-encoding-and-decoding"><i class="fa fa-check"></i><b>11.2.4</b> One-Hot Encoding and Decoding</a></li>
+<li class="chapter" data-level="11.2.5" data-path="chap-images.html"><a href="chap-images.html#cross-entropy-revisited"><i class="fa fa-check"></i><b>11.2.5</b> Cross-entropy Revisited</a></li>
+<li class="chapter" data-level="11.2.6" data-path="chap-images.html"><a href="chap-images.html#problem-formulation-in-matrix-form"><i class="fa fa-check"></i><b>11.2.6</b> Problem Formulation in Matrix Form (**)</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="chap-images.html"><a href="chap-images.html#artificial-neural-networks"><i class="fa fa-check"></i><b>11.3</b> Artificial Neural Networks</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="chap-images.html"><a href="chap-images.html#artificial-neuron"><i class="fa fa-check"></i><b>11.3.1</b> Artificial Neuron</a></li>
+<li class="chapter" data-level="11.3.2" data-path="chap-images.html"><a href="chap-images.html#logistic-regression-as-a-neural-network"><i class="fa fa-check"></i><b>11.3.2</b> Logistic Regression as a Neural Network</a></li>
+<li class="chapter" data-level="11.3.3" data-path="chap-images.html"><a href="chap-images.html#example-in-r-6"><i class="fa fa-check"></i><b>11.3.3</b> Example in R</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="chap-images.html"><a href="chap-images.html#deep-neural-networks"><i class="fa fa-check"></i><b>11.4</b> Deep Neural Networks</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="chap-images.html"><a href="chap-images.html#introduction-13"><i class="fa fa-check"></i><b>11.4.1</b> Introduction</a></li>
+<li class="chapter" data-level="11.4.2" data-path="chap-images.html"><a href="chap-images.html#activation-functions"><i class="fa fa-check"></i><b>11.4.2</b> Activation Functions</a></li>
+<li class="chapter" data-level="11.4.3" data-path="chap-images.html"><a href="chap-images.html#example-in-r---2-layers"><i class="fa fa-check"></i><b>11.4.3</b> Example in R - 2 Layers</a></li>
+<li class="chapter" data-level="11.4.4" data-path="chap-images.html"><a href="chap-images.html#example-in-r---6-layers"><i class="fa fa-check"></i><b>11.4.4</b> Example in R - 6 Layers</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="chap-images.html"><a href="chap-images.html#preprocessing-of-data"><i class="fa fa-check"></i><b>11.5</b> Preprocessing of Data</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="chap-images.html"><a href="chap-images.html#introduction-14"><i class="fa fa-check"></i><b>11.5.1</b> Introduction</a></li>
+<li class="chapter" data-level="11.5.2" data-path="chap-images.html"><a href="chap-images.html#image-deskewing"><i class="fa fa-check"></i><b>11.5.2</b> Image Deskewing</a></li>
+<li class="chapter" data-level="11.5.3" data-path="chap-images.html"><a href="chap-images.html#summary-of-all-the-models-considered"><i class="fa fa-check"></i><b>11.5.3</b> Summary of All the Models Considered</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="chap-images.html"><a href="chap-images.html#outro-9"><i class="fa fa-check"></i><b>11.6</b> Outro</a><ul>
+<li class="chapter" data-level="11.6.1" data-path="chap-images.html"><a href="chap-images.html#remarks-9"><i class="fa fa-check"></i><b>11.6.1</b> Remarks</a></li>
+<li class="chapter" data-level="11.6.2" data-path="chap-images.html"><a href="chap-images.html#beyond-mnist"><i class="fa fa-check"></i><b>11.6.2</b> Beyond MNIST</a></li>
+<li class="chapter" data-level="11.6.3" data-path="chap-images.html"><a href="chap-images.html#further-reading-9"><i class="fa fa-check"></i><b>11.6.3</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="chap-recommenders.html"><a href="chap-recommenders.html"><i class="fa fa-check"></i><b>12</b> Recommender Systems</a><ul>
+<li class="chapter" data-level="12.1" data-path="chap-recommenders.html"><a href="chap-recommenders.html#introduction-15"><i class="fa fa-check"></i><b>12.1</b> Introduction</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="chap-recommenders.html"><a href="chap-recommenders.html#the-netflix-prize"><i class="fa fa-check"></i><b>12.1.1</b> The Netflix Prize</a></li>
+<li class="chapter" data-level="12.1.2" data-path="chap-recommenders.html"><a href="chap-recommenders.html#main-approaches"><i class="fa fa-check"></i><b>12.1.2</b> Main Approaches</a></li>
+<li class="chapter" data-level="12.1.3" data-path="chap-recommenders.html"><a href="chap-recommenders.html#formalism-1"><i class="fa fa-check"></i><b>12.1.3</b> Formalism</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="chap-recommenders.html"><a href="chap-recommenders.html#collaborative-filtering"><i class="fa fa-check"></i><b>12.2</b> Collaborative Filtering</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="chap-recommenders.html"><a href="chap-recommenders.html#example"><i class="fa fa-check"></i><b>12.2.1</b> Example</a></li>
+<li class="chapter" data-level="12.2.2" data-path="chap-recommenders.html"><a href="chap-recommenders.html#similarity-measures"><i class="fa fa-check"></i><b>12.2.2</b> Similarity Measures</a></li>
+<li class="chapter" data-level="12.2.3" data-path="chap-recommenders.html"><a href="chap-recommenders.html#user-based-collaborative-filtering"><i class="fa fa-check"></i><b>12.2.3</b> User-Based Collaborative Filtering</a></li>
+<li class="chapter" data-level="12.2.4" data-path="chap-recommenders.html"><a href="chap-recommenders.html#item-based-collaborative-filtering"><i class="fa fa-check"></i><b>12.2.4</b> Item-Based Collaborative Filtering</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="chap-recommenders.html"><a href="chap-recommenders.html#exercise-the-movielens-dataset"><i class="fa fa-check"></i><b>12.3</b> Exercise: The MovieLens Dataset (*)</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="chap-recommenders.html"><a href="chap-recommenders.html#dataset"><i class="fa fa-check"></i><b>12.3.1</b> Dataset</a></li>
+<li class="chapter" data-level="12.3.2" data-path="chap-recommenders.html"><a href="chap-recommenders.html#data-cleansing"><i class="fa fa-check"></i><b>12.3.2</b> Data Cleansing</a></li>
+<li class="chapter" data-level="12.3.3" data-path="chap-recommenders.html"><a href="chap-recommenders.html#item-item-similarities"><i class="fa fa-check"></i><b>12.3.3</b> Item-Item Similarities</a></li>
+<li class="chapter" data-level="12.3.4" data-path="chap-recommenders.html"><a href="chap-recommenders.html#example-recommendations"><i class="fa fa-check"></i><b>12.3.4</b> Example Recommendations</a></li>
+<li class="chapter" data-level="12.3.5" data-path="chap-recommenders.html"><a href="chap-recommenders.html#clustering-1"><i class="fa fa-check"></i><b>12.3.5</b> Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="chap-recommenders.html"><a href="chap-recommenders.html#outro-10"><i class="fa fa-check"></i><b>12.4</b> Outro</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="chap-recommenders.html"><a href="chap-recommenders.html#remarks-10"><i class="fa fa-check"></i><b>12.4.1</b> Remarks</a></li>
+<li class="chapter" data-level="12.4.2" data-path="chap-recommenders.html"><a href="chap-recommenders.html#further-reading-10"><i class="fa fa-check"></i><b>12.4.2</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="chap-text.html"><a href="chap-text.html"><i class="fa fa-check"></i><b>13</b> Natural Language Processing</a><ul>
+<li class="chapter" data-level="13.1" data-path="chap-text.html"><a href="chap-text.html#to-do"><i class="fa fa-check"></i><b>13.1</b> TO DO</a></li>
+<li class="chapter" data-level="13.2" data-path="chap-text.html"><a href="chap-text.html#further-reading-11"><i class="fa fa-check"></i><b>13.2</b> Further Reading</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="appendix-convention.html"><a href="appendix-convention.html"><i class="fa fa-check"></i><b>A</b> Notation Convention</a></li>
+<li class="chapter" data-level="B" data-path="appendix-rintro.html"><a href="appendix-rintro.html"><i class="fa fa-check"></i><b>B</b> Setting Up the R Environment</a><ul>
+<li class="chapter" data-level="B.1" data-path="appendix-rintro.html"><a href="appendix-rintro.html#installing-r"><i class="fa fa-check"></i><b>B.1</b> Installing R</a></li>
+<li class="chapter" data-level="B.2" data-path="appendix-rintro.html"><a href="appendix-rintro.html#installing-an-ide"><i class="fa fa-check"></i><b>B.2</b> Installing an IDE</a></li>
+<li class="chapter" data-level="B.3" data-path="appendix-rintro.html"><a href="appendix-rintro.html#installing-recommended-packages"><i class="fa fa-check"></i><b>B.3</b> Installing Recommended Packages</a></li>
+<li class="chapter" data-level="B.4" data-path="appendix-rintro.html"><a href="appendix-rintro.html#first-r-script-in-rstudio"><i class="fa fa-check"></i><b>B.4</b> First R Script in RStudio</a></li>
+<li class="chapter" data-level="B.5" data-path="appendix-rintro.html"><a href="appendix-rintro.html#exercises-7"><i class="fa fa-check"></i><b>B.5</b> Exercises</a><ul>
+<li class="chapter" data-level="B.5.1" data-path="appendix-rintro.html"><a href="appendix-rintro.html#first-steps-with-vectors"><i class="fa fa-check"></i><b>B.5.1</b> First Steps with Vectors</a></li>
+<li class="chapter" data-level="B.5.2" data-path="appendix-rintro.html"><a href="appendix-rintro.html#basic-plotting"><i class="fa fa-check"></i><b>B.5.2</b> Basic Plotting</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="appendix-rvector.html"><a href="appendix-rvector.html"><i class="fa fa-check"></i><b>C</b> Vector Algebra in R</a><ul>
+<li class="chapter" data-level="C.1" data-path="appendix-rvector.html"><a href="appendix-rvector.html#motivation-1"><i class="fa fa-check"></i><b>C.1</b> Motivation</a></li>
+<li class="chapter" data-level="C.2" data-path="appendix-rvector.html"><a href="appendix-rvector.html#numeric-vectors"><i class="fa fa-check"></i><b>C.2</b> Numeric Vectors</a><ul>
+<li class="chapter" data-level="C.2.1" data-path="appendix-rvector.html"><a href="appendix-rvector.html#creating-numeric-vectors"><i class="fa fa-check"></i><b>C.2.1</b> Creating Numeric Vectors</a></li>
+<li class="chapter" data-level="C.2.2" data-path="appendix-rvector.html"><a href="appendix-rvector.html#vector-scalar-operations"><i class="fa fa-check"></i><b>C.2.2</b> Vector-Scalar Operations</a></li>
+<li class="chapter" data-level="C.2.3" data-path="appendix-rvector.html"><a href="appendix-rvector.html#vector-vector-operations"><i class="fa fa-check"></i><b>C.2.3</b> Vector-Vector Operations</a></li>
+<li class="chapter" data-level="C.2.4" data-path="appendix-rvector.html"><a href="appendix-rvector.html#aggregation-functions"><i class="fa fa-check"></i><b>C.2.4</b> Aggregation Functions</a></li>
+<li class="chapter" data-level="C.2.5" data-path="appendix-rvector.html"><a href="appendix-rvector.html#special-functions"><i class="fa fa-check"></i><b>C.2.5</b> Special Functions</a></li>
+<li class="chapter" data-level="C.2.6" data-path="appendix-rvector.html"><a href="appendix-rvector.html#norms-and-distances"><i class="fa fa-check"></i><b>C.2.6</b> Norms and Distances</a></li>
+<li class="chapter" data-level="C.2.7" data-path="appendix-rvector.html"><a href="appendix-rvector.html#dot-product"><i class="fa fa-check"></i><b>C.2.7</b> Dot Product (*)</a></li>
+<li class="chapter" data-level="C.2.8" data-path="appendix-rvector.html"><a href="appendix-rvector.html#missing-and-other-special-values"><i class="fa fa-check"></i><b>C.2.8</b> Missing and Other Special Values</a></li>
+</ul></li>
+<li class="chapter" data-level="C.3" data-path="appendix-rvector.html"><a href="appendix-rvector.html#logical-vectors"><i class="fa fa-check"></i><b>C.3</b> Logical Vectors</a><ul>
+<li class="chapter" data-level="C.3.1" data-path="appendix-rvector.html"><a href="appendix-rvector.html#creating-logical-vectors"><i class="fa fa-check"></i><b>C.3.1</b> Creating Logical Vectors</a></li>
+<li class="chapter" data-level="C.3.2" data-path="appendix-rvector.html"><a href="appendix-rvector.html#logical-operations"><i class="fa fa-check"></i><b>C.3.2</b> Logical Operations</a></li>
+<li class="chapter" data-level="C.3.3" data-path="appendix-rvector.html"><a href="appendix-rvector.html#comparison-operations"><i class="fa fa-check"></i><b>C.3.3</b> Comparison Operations</a></li>
+<li class="chapter" data-level="C.3.4" data-path="appendix-rvector.html"><a href="appendix-rvector.html#aggregation-functions-1"><i class="fa fa-check"></i><b>C.3.4</b> Aggregation Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="C.4" data-path="appendix-rvector.html"><a href="appendix-rvector.html#character-vectors"><i class="fa fa-check"></i><b>C.4</b> Character Vectors</a><ul>
+<li class="chapter" data-level="C.4.1" data-path="appendix-rvector.html"><a href="appendix-rvector.html#creating-character-vectors"><i class="fa fa-check"></i><b>C.4.1</b> Creating Character Vectors</a></li>
+<li class="chapter" data-level="C.4.2" data-path="appendix-rvector.html"><a href="appendix-rvector.html#concatenating-character-vectors"><i class="fa fa-check"></i><b>C.4.2</b> Concatenating Character Vectors</a></li>
+<li class="chapter" data-level="C.4.3" data-path="appendix-rvector.html"><a href="appendix-rvector.html#collapsing-character-vectors"><i class="fa fa-check"></i><b>C.4.3</b> Collapsing Character Vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="C.5" data-path="appendix-rvector.html"><a href="appendix-rvector.html#vector-subsetting"><i class="fa fa-check"></i><b>C.5</b> Vector Subsetting</a><ul>
+<li class="chapter" data-level="C.5.1" data-path="appendix-rvector.html"><a href="appendix-rvector.html#subsetting-with-positive-indices"><i class="fa fa-check"></i><b>C.5.1</b> Subsetting with Positive Indices</a></li>
+<li class="chapter" data-level="C.5.2" data-path="appendix-rvector.html"><a href="appendix-rvector.html#subsetting-with-negative-indices"><i class="fa fa-check"></i><b>C.5.2</b> Subsetting with Negative Indices</a></li>
+<li class="chapter" data-level="C.5.3" data-path="appendix-rvector.html"><a href="appendix-rvector.html#subsetting-with-logical-vectors"><i class="fa fa-check"></i><b>C.5.3</b> Subsetting with Logical Vectors</a></li>
+<li class="chapter" data-level="C.5.4" data-path="appendix-rvector.html"><a href="appendix-rvector.html#replacing-elements"><i class="fa fa-check"></i><b>C.5.4</b> Replacing Elements</a></li>
+<li class="chapter" data-level="C.5.5" data-path="appendix-rvector.html"><a href="appendix-rvector.html#other-functions"><i class="fa fa-check"></i><b>C.5.5</b> Other Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="C.6" data-path="appendix-rvector.html"><a href="appendix-rvector.html#named-vectors"><i class="fa fa-check"></i><b>C.6</b> Named Vectors</a><ul>
+<li class="chapter" data-level="C.6.1" data-path="appendix-rvector.html"><a href="appendix-rvector.html#creating-named-vectors"><i class="fa fa-check"></i><b>C.6.1</b> Creating Named Vectors</a></li>
+<li class="chapter" data-level="C.6.2" data-path="appendix-rvector.html"><a href="appendix-rvector.html#subsetting-named-vectors-with-character-string-indices"><i class="fa fa-check"></i><b>C.6.2</b> Subsetting Named Vectors with Character String Indices</a></li>
+</ul></li>
+<li class="chapter" data-level="C.7" data-path="appendix-rvector.html"><a href="appendix-rvector.html#factors"><i class="fa fa-check"></i><b>C.7</b> Factors</a><ul>
+<li class="chapter" data-level="C.7.1" data-path="appendix-rvector.html"><a href="appendix-rvector.html#creating-factors"><i class="fa fa-check"></i><b>C.7.1</b> Creating Factors</a></li>
+<li class="chapter" data-level="C.7.2" data-path="appendix-rvector.html"><a href="appendix-rvector.html#levels"><i class="fa fa-check"></i><b>C.7.2</b> Levels</a></li>
+<li class="chapter" data-level="C.7.3" data-path="appendix-rvector.html"><a href="appendix-rvector.html#internal-representation"><i class="fa fa-check"></i><b>C.7.3</b> Internal Representation (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="C.8" data-path="appendix-rvector.html"><a href="appendix-rvector.html#lists"><i class="fa fa-check"></i><b>C.8</b> Lists</a><ul>
+<li class="chapter" data-level="C.8.1" data-path="appendix-rvector.html"><a href="appendix-rvector.html#creating-lists"><i class="fa fa-check"></i><b>C.8.1</b> Creating Lists</a></li>
+<li class="chapter" data-level="C.8.2" data-path="appendix-rvector.html"><a href="appendix-rvector.html#named-lists"><i class="fa fa-check"></i><b>C.8.2</b> Named Lists</a></li>
+<li class="chapter" data-level="C.8.3" data-path="appendix-rvector.html"><a href="appendix-rvector.html#subsetting-and-extracting-from-lists"><i class="fa fa-check"></i><b>C.8.3</b> Subsetting and Extracting From Lists</a></li>
+<li class="chapter" data-level="C.8.4" data-path="appendix-rvector.html"><a href="appendix-rvector.html#common-operations"><i class="fa fa-check"></i><b>C.8.4</b> Common Operations</a></li>
+</ul></li>
+<li class="chapter" data-level="C.9" data-path="appendix-rvector.html"><a href="appendix-rvector.html#exercises-8"><i class="fa fa-check"></i><b>C.9</b> Exercises</a><ul>
+<li class="chapter" data-level="C.9.1" data-path="appendix-rvector.html"><a href="appendix-rvector.html#audeur-exchange-rates"><i class="fa fa-check"></i><b>C.9.1</b> AUD/EUR Exchange Rates</a></li>
+</ul></li>
+<li class="chapter" data-level="C.10" data-path="appendix-rvector.html"><a href="appendix-rvector.html#further-reading-12"><i class="fa fa-check"></i><b>C.10</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="D" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html"><i class="fa fa-check"></i><b>D</b> Matrix Algebra in R</a><ul>
+<li class="chapter" data-level="D.1" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#creating-matrices"><i class="fa fa-check"></i><b>D.1</b> Creating Matrices</a><ul>
+<li class="chapter" data-level="D.1.1" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#matrix"><i class="fa fa-check"></i><b>D.1.1</b> <code>matrix()</code></a></li>
+<li class="chapter" data-level="D.1.2" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#stacking-vectors"><i class="fa fa-check"></i><b>D.1.2</b> Stacking Vectors</a></li>
+<li class="chapter" data-level="D.1.3" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#beyond-numeric-matrices"><i class="fa fa-check"></i><b>D.1.3</b> Beyond Numeric Matrices</a></li>
+<li class="chapter" data-level="D.1.4" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#naming-rows-and-columns"><i class="fa fa-check"></i><b>D.1.4</b> Naming Rows and Columns</a></li>
+<li class="chapter" data-level="D.1.5" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#other-methods"><i class="fa fa-check"></i><b>D.1.5</b> Other Methods</a></li>
+<li class="chapter" data-level="D.1.6" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#internal-representation-1"><i class="fa fa-check"></i><b>D.1.6</b> Internal Representation (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="D.2" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#common-operations-1"><i class="fa fa-check"></i><b>D.2</b> Common Operations</a><ul>
+<li class="chapter" data-level="D.2.1" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#matrix-transpose"><i class="fa fa-check"></i><b>D.2.1</b> Matrix Transpose</a></li>
+<li class="chapter" data-level="D.2.2" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#matrix-scalar-operations"><i class="fa fa-check"></i><b>D.2.2</b> Matrix-Scalar Operations</a></li>
+<li class="chapter" data-level="D.2.3" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#matrix-matrix-operations"><i class="fa fa-check"></i><b>D.2.3</b> Matrix-Matrix Operations</a></li>
+<li class="chapter" data-level="D.2.4" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#matrix-multiplication"><i class="fa fa-check"></i><b>D.2.4</b> Matrix Multiplication (*)</a></li>
+<li class="chapter" data-level="D.2.5" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#aggregation-of-rows-and-columns"><i class="fa fa-check"></i><b>D.2.5</b> Aggregation of Rows and Columns</a></li>
+<li class="chapter" data-level="D.2.6" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#vectorised-special-functions"><i class="fa fa-check"></i><b>D.2.6</b> Vectorised Special Functions</a></li>
+<li class="chapter" data-level="D.2.7" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#matrix-vector-operations"><i class="fa fa-check"></i><b>D.2.7</b> Matrix-Vector Operations</a></li>
+</ul></li>
+<li class="chapter" data-level="D.3" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#matrix-subsetting"><i class="fa fa-check"></i><b>D.3</b> Matrix Subsetting</a><ul>
+<li class="chapter" data-level="D.3.1" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#selecting-individual-elements"><i class="fa fa-check"></i><b>D.3.1</b> Selecting Individual Elements</a></li>
+<li class="chapter" data-level="D.3.2" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#selecting-rows-and-columns"><i class="fa fa-check"></i><b>D.3.2</b> Selecting Rows and Columns</a></li>
+<li class="chapter" data-level="D.3.3" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#selecting-submatrices"><i class="fa fa-check"></i><b>D.3.3</b> Selecting Submatrices</a></li>
+<li class="chapter" data-level="D.3.4" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#selecting-based-on-logical-vectors-and-matrices"><i class="fa fa-check"></i><b>D.3.4</b> Selecting Based on Logical Vectors and Matrices</a></li>
+<li class="chapter" data-level="D.3.5" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#selecting-based-on-two-column-matrices"><i class="fa fa-check"></i><b>D.3.5</b> Selecting Based on Two-Column Matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="D.4" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#exercises-9"><i class="fa fa-check"></i><b>D.4</b> Exercises</a><ul>
+<li class="chapter" data-level="D.4.1" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#currency-exchange-rates"><i class="fa fa-check"></i><b>D.4.1</b> Currency Exchange Rates</a></li>
+<li class="chapter" data-level="D.4.2" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#currency-exchange-rates-relative-to-1999"><i class="fa fa-check"></i><b>D.4.2</b> Currency Exchange Rates Relative to 1999</a></li>
+</ul></li>
+<li class="chapter" data-level="D.5" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#further-reading-13"><i class="fa fa-check"></i><b>D.5</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="E" data-path="appendix-rdf.html"><a href="appendix-rdf.html"><i class="fa fa-check"></i><b>E</b> Data Frame Wrangling in R</a><ul>
+<li class="chapter" data-level="E.1" data-path="appendix-rdf.html"><a href="appendix-rdf.html#creating-data-frames"><i class="fa fa-check"></i><b>E.1</b> Creating Data Frames</a></li>
+<li class="chapter" data-level="E.2" data-path="appendix-rdf.html"><a href="appendix-rdf.html#importing-data-frames"><i class="fa fa-check"></i><b>E.2</b> Importing Data Frames</a></li>
+<li class="chapter" data-level="E.3" data-path="appendix-rdf.html"><a href="appendix-rdf.html#data-frame-subsetting"><i class="fa fa-check"></i><b>E.3</b> Data Frame Subsetting</a><ul>
+<li class="chapter" data-level="E.3.1" data-path="appendix-rdf.html"><a href="appendix-rdf.html#each-data-frame-is-a-list"><i class="fa fa-check"></i><b>E.3.1</b> Each Data Frame is a List</a></li>
+<li class="chapter" data-level="E.3.2" data-path="appendix-rdf.html"><a href="appendix-rdf.html#each-data-frame-is-matrix-like"><i class="fa fa-check"></i><b>E.3.2</b> Each Data Frame is Matrix-like</a></li>
+</ul></li>
+<li class="chapter" data-level="E.4" data-path="appendix-rdf.html"><a href="appendix-rdf.html#common-operations-2"><i class="fa fa-check"></i><b>E.4</b> Common Operations</a></li>
+<li class="chapter" data-level="E.5" data-path="appendix-rdf.html"><a href="appendix-rdf.html#metaprogramming-and-formulas"><i class="fa fa-check"></i><b>E.5</b> Metaprogramming and Formulas (*)</a></li>
+<li class="chapter" data-level="E.6" data-path="appendix-rdf.html"><a href="appendix-rdf.html#exercises-10"><i class="fa fa-check"></i><b>E.6</b> Exercises</a><ul>
+<li class="chapter" data-level="E.6.1" data-path="appendix-rdf.html"><a href="appendix-rdf.html#urban-forest"><i class="fa fa-check"></i><b>E.6.1</b> Urban Forest</a></li>
+</ul></li>
+<li class="chapter" data-level="E.7" data-path="appendix-rdf.html"><a href="appendix-rdf.html#air-quality"><i class="fa fa-check"></i><b>E.7</b> Air Quality</a></li>
+<li class="chapter" data-level="E.8" data-path="appendix-rdf.html"><a href="appendix-rdf.html#further-reading-14"><i class="fa fa-check"></i><b>E.8</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="F" data-path="appendix-datasets.html"><a href="appendix-datasets.html"><i class="fa fa-check"></i><b>F</b> Datasets</a><ul>
+<li class="chapter" data-level="F.1" data-path="appendix-datasets.html"><a href="appendix-datasets.html#sustainable-society-indices"><i class="fa fa-check"></i><b>F.1</b> Sustainable Society Indices</a></li>
+<li class="chapter" data-level="F.2" data-path="appendix-datasets.html"><a href="appendix-datasets.html#air-quality-1"><i class="fa fa-check"></i><b>F.2</b> Air Quality</a></li>
+<li class="chapter" data-level="F.3" data-path="appendix-datasets.html"><a href="appendix-datasets.html#currency-exchange-rates-1"><i class="fa fa-check"></i><b>F.3</b> Currency Exchange Rates</a></li>
+<li class="chapter" data-level="F.4" data-path="appendix-datasets.html"><a href="appendix-datasets.html#urban-forest-1"><i class="fa fa-check"></i><b>F.4</b> Urban Forest</a></li>
+<li class="chapter" data-level="F.5" data-path="appendix-datasets.html"><a href="appendix-datasets.html#wine-quality"><i class="fa fa-check"></i><b>F.5</b> Wine Quality</a></li>
+<li class="chapter" data-level="F.6" data-path="appendix-datasets.html"><a href="appendix-datasets.html#the-world-factbook-countries-of-the-world"><i class="fa fa-check"></i><b>F.6</b> The World Factbook (Countries of the World)</a></li>
+<li class="chapter" data-level="F.7" data-path="appendix-datasets.html"><a href="appendix-datasets.html#edstats-country-level-education-statistics"><i class="fa fa-check"></i><b>F.7</b> EdStats (Country-Level Education Statistics)</a></li>
+<li class="chapter" data-level="F.8" data-path="appendix-datasets.html"><a href="appendix-datasets.html#food-and-nutrient-database-for-dietary-studies-fndds"><i class="fa fa-check"></i><b>F.8</b> Food and Nutrient Database for Dietary Studies (FNDDS)</a></li>
+<li class="chapter" data-level="F.9" data-path="appendix-datasets.html"><a href="appendix-datasets.html#clustering-benchmarks"><i class="fa fa-check"></i><b>F.9</b> Clustering Benchmarks</a></li>
+<li class="chapter" data-level="F.10" data-path="appendix-datasets.html"><a href="appendix-datasets.html#movie-lens-todo"><i class="fa fa-check"></i><b>F.10</b> Movie Lens (TODO)</a></li>
+<li class="chapter" data-level="F.11" data-path="appendix-datasets.html"><a href="appendix-datasets.html#other-todo"><i class="fa fa-check"></i><b>F.11</b> Other (TODO)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li style='font-size: smaller' ><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Licensed under CC BY-NC-ND 4.0</a></li>
+<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-06-18 14:43 (a2fddd4)</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Machine Learning Classics with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="appendix:rmatrix" class="section level1">
+<h1><span class="header-section-number">D</span> Matrix Algebra in R</h1>
+<!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
+<p>Vectors are one-dimensional objects – they represent “flat” sequences of values.
+Matrices, on the other hand, are two-dimensional – they represent tabular data,
+where values aligned into rows and columns. Matrices (and their extensions –
+data frames, which we’ll cover in the next chapter) are predominant
+in data science, where objects are typically represented by means
+of feature vectors.</p>
+<p>Below are some examples of structured datasets in matrix forms.</p>
+<div class="sourceCode" id="cb1195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1195-1" title="1"><span class="kw">head</span>(<span class="kw">as.matrix</span>(iris[,<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]))</a></code></pre></div>
+<pre><code>##      Sepal.Length Sepal.Width Petal.Length Petal.Width
+## [1,]          5.1         3.5          1.4         0.2
+## [2,]          4.9         3.0          1.4         0.2
+## [3,]          4.7         3.2          1.3         0.2
+## [4,]          4.6         3.1          1.5         0.2
+## [5,]          5.0         3.6          1.4         0.2
+## [6,]          5.4         3.9          1.7         0.4</code></pre>
+<div class="sourceCode" id="cb1197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1197-1" title="1">WorldPhones</a></code></pre></div>
+<pre><code>##      N.Amer Europe Asia S.Amer Oceania Africa Mid.Amer
+## 1951  45939  21574 2876   1815    1646     89      555
+## 1956  60423  29990 4708   2568    2366   1411      733
+## 1957  64721  32510 5230   2695    2526   1546      773
+## 1958  68484  35218 6662   2845    2691   1663      836
+## 1959  71799  37598 6856   3000    2868   1769      911
+## 1960  76036  40341 8220   3145    3054   1905     1008
+## 1961  79831  43173 9053   3338    3224   2005     1076</code></pre>
+<p>The aim of this chapter is to cover the most essential matrix operations,
+both from the computational perspective and the mathematical one.</p>
+<div id="creating-matrices" class="section level2">
+<h2><span class="header-section-number">D.1</span> Creating Matrices</h2>
+<div id="matrix" class="section level3">
+<h3><span class="header-section-number">D.1.1</span> <code>matrix()</code></h3>
+<p>A matrix can be created – amongst others – with a call to the <code>matrix()</code>
+function.</p>
+<div class="sourceCode" id="cb1199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1199-1" title="1">(A &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>), <span class="dt">byrow=</span><span class="ot">TRUE</span>, <span class="dt">nrow=</span><span class="dv">2</span>))</a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    2    3
+## [2,]    4    5    6</code></pre>
+<div class="sourceCode" id="cb1201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1201-1" title="1"><span class="kw">class</span>(A)</a></code></pre></div>
+<pre><code>## [1] &quot;matrix&quot; &quot;array&quot;</code></pre>
+<p>Given a numeric vector of length 6, we’ve asked R to convert to
+a numeric matrix with 2 rows (the <code>nrow</code> argument).
+The number of columns has been deduced automatically
+(otherwise, we would additionally have to pass <code>ncol=3</code> to the function).</p>
+<p>Using mathematical notation,
+above we have defined <span class="math inline">\(\mathbf{A}\in\mathbb{R}^{2\times 3}\)</span>:</p>
+<p><span class="math display">\[
+\mathbf{A}=
+\left[
+\begin{array}{ccc}
+a_{1,1} &amp; a_{1,2} &amp; a_{1,3} \\
+a_{2,1} &amp; a_{2,2} &amp; a_{2,3} \\
+\end{array}
+\right]
+=
+\left[
+\begin{array}{ccc}
+1 &amp; 2 &amp; 3 \\
+4 &amp; 5 &amp; 6 \\
+\end{array}
+\right]
+\]</span></p>
+<p>We can fetch the size of the matrix by calling:</p>
+<div class="sourceCode" id="cb1203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1203-1" title="1"><span class="kw">dim</span>(A) <span class="co"># number of rows, number of columns</span></a></code></pre></div>
+<pre><code>## [1] 2 3</code></pre>
+<p>We can also “promote” a “flat” vector to a column vector, i.e.,
+a matrix with one column by calling:</p>
+<div class="sourceCode" id="cb1205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1205-1" title="1"><span class="kw">as.matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a></code></pre></div>
+<pre><code>##      [,1]
+## [1,]    1
+## [2,]    2
+## [3,]    3</code></pre>
+</div>
+<div id="stacking-vectors" class="section level3">
+<h3><span class="header-section-number">D.1.2</span> Stacking Vectors</h3>
+<p>Other ways to create a matrix involve stacking a couple of vectors
+of equal lengths along each other:</p>
+<div class="sourceCode" id="cb1207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1207-1" title="1"><span class="kw">rbind</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">6</span>, <span class="dv">7</span><span class="op">:</span><span class="dv">9</span>) <span class="co"># row bind</span></a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    2    3
+## [2,]    4    5    6
+## [3,]    7    8    9</code></pre>
+<div class="sourceCode" id="cb1209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1209-1" title="1"><span class="kw">cbind</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">6</span>, <span class="dv">7</span><span class="op">:</span><span class="dv">9</span>) <span class="co"># column bind</span></a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9</code></pre>
+<p>These functions also allow for adding new rows/columns to existing matrices:</p>
+<div class="sourceCode" id="cb1211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1211-1" title="1"><span class="kw">rbind</span>(A, <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">-2</span>, <span class="dv">-3</span>))</a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    2    3
+## [2,]    4    5    6
+## [3,]   -1   -2   -3</code></pre>
+<div class="sourceCode" id="cb1213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1213-1" title="1"><span class="kw">cbind</span>(A, <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">-2</span>))</a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    2    3   -1
+## [2,]    4    5    6   -2</code></pre>
+<!--
+Not here: Reading Data
+
+read csv
+
+scan
+
+json
+
+xml
+-->
+</div>
+<div id="beyond-numeric-matrices" class="section level3">
+<h3><span class="header-section-number">D.1.3</span> Beyond Numeric Matrices</h3>
+<p>Note that logical matrices are possible as well.
+For instance, knowing that comparison such as <code>&lt;</code> and <code>==</code>
+are performed elementwise also in the case of matrices, we can obtain:</p>
+<div class="sourceCode" id="cb1215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1215-1" title="1">A <span class="op">&gt;=</span><span class="st"> </span><span class="dv">3</span></a></code></pre></div>
+<pre><code>##       [,1]  [,2] [,3]
+## [1,] FALSE FALSE TRUE
+## [2,]  TRUE  TRUE TRUE</code></pre>
+<p>Moreover, although much more rarely used, we can define character
+matrices:</p>
+<div class="sourceCode" id="cb1217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1217-1" title="1"><span class="kw">matrix</span>(LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>], <span class="dt">ncol=</span><span class="dv">6</span>)</a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6]
+## [1,] &quot;A&quot;  &quot;C&quot;  &quot;E&quot;  &quot;G&quot;  &quot;I&quot;  &quot;K&quot; 
+## [2,] &quot;B&quot;  &quot;D&quot;  &quot;F&quot;  &quot;H&quot;  &quot;J&quot;  &quot;L&quot;</code></pre>
+</div>
+<div id="naming-rows-and-columns" class="section level3">
+<h3><span class="header-section-number">D.1.4</span> Naming Rows and Columns</h3>
+<p>Just like vectors could be equipped with <code>names</code> attribute:</p>
+<div class="sourceCode" id="cb1219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1219-1" title="1"><span class="kw">c</span>(<span class="dt">a=</span><span class="dv">1</span>, <span class="dt">b=</span><span class="dv">2</span>, <span class="dt">c=</span><span class="dv">3</span>)</a></code></pre></div>
+<pre><code>## a b c 
+## 1 2 3</code></pre>
+<p>matrices can be assigned row and column labels
+in the form of a list of two character vectors:</p>
+<div class="sourceCode" id="cb1221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1221-1" title="1"><span class="kw">dimnames</span>(A) &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb1221-2" title="2">    <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>),     <span class="co"># row labels</span></a>
+<a class="sourceLine" id="cb1221-3" title="3">    <span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>, <span class="st">&quot;z&quot;</span>) <span class="co"># column labels</span></a>
+<a class="sourceLine" id="cb1221-4" title="4">)</a>
+<a class="sourceLine" id="cb1221-5" title="5">A</a></code></pre></div>
+<pre><code>##   x y z
+## a 1 2 3
+## b 4 5 6</code></pre>
+</div>
+<div id="other-methods" class="section level3">
+<h3><span class="header-section-number">D.1.5</span> Other Methods</h3>
+<p>The <code>read.table()</code> (and its special case, <code>read.csv()</code>),
+can be used to read a matrix from a text file.
+We will cover it in the next chapter, because technically
+it returns a data frame object (which we can convert to a matrix with a call
+to <code>as.matrix()</code>).</p>
+<p><code>outer()</code> applies a given (vectorised) function
+on each pair of elements from two vectors, forming a two-dimensional “grid”.
+More precisely <code>outer(x, y, f, ...)</code> returns a matrix <span class="math inline">\(\mathbf{Z}\)</span> with
+<code>length(x)</code>
+rows and <code>length(y)</code> columns such that <span class="math inline">\(z_{i,j}=f(x_i, y_j, ...)\)</span>,
+where <code>...</code> are optional further arguments to <code>f</code>.</p>
+<div class="sourceCode" id="cb1223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1223-1" title="1"><span class="kw">outer</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">100</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="st">&quot;*&quot;</span>) <span class="co"># apply the multiplication operator</span></a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    2    3    4    5
+## [2,]   10   20   30   40   50
+## [3,]  100  200  300  400  500</code></pre>
+<div class="sourceCode" id="cb1225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1225-1" title="1"><span class="kw">outer</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), <span class="dv">1</span><span class="op">:</span><span class="dv">8</span>, paste, <span class="dt">sep=</span><span class="st">&quot;-&quot;</span>) <span class="co"># concatenate strings</span></a></code></pre></div>
+<pre><code>##      [,1]  [,2]  [,3]  [,4]  [,5]  [,6]  [,7]  [,8] 
+## [1,] &quot;A-1&quot; &quot;A-2&quot; &quot;A-3&quot; &quot;A-4&quot; &quot;A-5&quot; &quot;A-6&quot; &quot;A-7&quot; &quot;A-8&quot;
+## [2,] &quot;B-1&quot; &quot;B-2&quot; &quot;B-3&quot; &quot;B-4&quot; &quot;B-5&quot; &quot;B-6&quot; &quot;B-7&quot; &quot;B-8&quot;</code></pre>
+<p><code>simplify2array()</code> is an extension of the <code>unlist()</code> function.
+Given a list of vectors, each of length one, it will return an “unlisted” vector.
+However, if a list of equisized vectors of greater lengths is given,
+these will be converted to a matrix.</p>
+<div class="sourceCode" id="cb1227"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1227-1" title="1"><span class="kw">simplify2array</span>(<span class="kw">list</span>(<span class="dv">1</span>, <span class="dv">11</span>, <span class="dv">21</span>))</a></code></pre></div>
+<pre><code>## [1]  1 11 21</code></pre>
+<div class="sourceCode" id="cb1229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1229-1" title="1"><span class="kw">simplify2array</span>(<span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">11</span><span class="op">:</span><span class="dv">13</span>, <span class="dv">21</span><span class="op">:</span><span class="dv">23</span>))</a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1   11   21
+## [2,]    2   12   22
+## [3,]    3   13   23</code></pre>
+<div class="sourceCode" id="cb1231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1231-1" title="1"><span class="kw">simplify2array</span>(<span class="kw">list</span>(<span class="dv">1</span>, <span class="dv">11</span><span class="op">:</span><span class="dv">12</span>, <span class="dv">21</span><span class="op">:</span><span class="dv">23</span>)) <span class="co"># no can do</span></a></code></pre></div>
+<pre><code>## [[1]]
+## [1] 1
+## 
+## [[2]]
+## [1] 11 12
+## 
+## [[3]]
+## [1] 21 22 23</code></pre>
+<p><code>sapply(...)</code> is a nice application of the above, meaning <code>simplify2array(lapply(...))</code>.</p>
+<div class="sourceCode" id="cb1233"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1233-1" title="1"><span class="kw">sapply</span>(<span class="kw">split</span>(iris<span class="op">$</span>Sepal.Length, iris<span class="op">$</span>Species), mean)</a></code></pre></div>
+<pre><code>##     setosa versicolor  virginica 
+##      5.006      5.936      6.588</code></pre>
+<div class="sourceCode" id="cb1235"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1235-1" title="1"><span class="kw">sapply</span>(<span class="kw">split</span>(iris<span class="op">$</span>Sepal.Length, iris<span class="op">$</span>Species), summary)</a></code></pre></div>
+<pre><code>##         setosa versicolor virginica
+## Min.     4.300      4.900     4.900
+## 1st Qu.  4.800      5.600     6.225
+## Median   5.000      5.900     6.500
+## Mean     5.006      5.936     6.588
+## 3rd Qu.  5.200      6.300     6.900
+## Max.     5.800      7.000     7.900</code></pre>
+<p>Of course, custom functions can also be applied:</p>
+<div class="sourceCode" id="cb1237"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1237-1" title="1">min_mean_max &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb1237-2" title="2">    <span class="co"># returns a named vector with three elements</span></a>
+<a class="sourceLine" id="cb1237-3" title="3">    <span class="co"># (note that the last expression in a function&#39;s body</span></a>
+<a class="sourceLine" id="cb1237-4" title="4">    <span class="co">#  is its return value)</span></a>
+<a class="sourceLine" id="cb1237-5" title="5">    <span class="kw">c</span>(<span class="dt">min=</span><span class="kw">min</span>(x), <span class="dt">mean=</span><span class="kw">mean</span>(x), <span class="dt">max=</span><span class="kw">max</span>(x))</a>
+<a class="sourceLine" id="cb1237-6" title="6">}</a>
+<a class="sourceLine" id="cb1237-7" title="7"><span class="kw">sapply</span>(<span class="kw">split</span>(iris<span class="op">$</span>Sepal.Length, iris<span class="op">$</span>Species), min_mean_max)</a></code></pre></div>
+<pre><code>##      setosa versicolor virginica
+## min   4.300      4.900     4.900
+## mean  5.006      5.936     6.588
+## max   5.800      7.000     7.900</code></pre>
+<p>Lastly, <code>table(x, y)</code> creates a contingency matrix that
+counts the number of unique pairs of corresponding elements
+from two vectors of equal lengths.</p>
+<div class="sourceCode" id="cb1239"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1239-1" title="1"><span class="kw">library</span>(<span class="st">&quot;titanic&quot;</span>) <span class="co"># data on the passengers of the RMS Titanic</span></a>
+<a class="sourceLine" id="cb1239-2" title="2"><span class="kw">table</span>(titanic_train<span class="op">$</span>Survived)</a></code></pre></div>
+<pre><code>## 
+##   0   1 
+## 549 342</code></pre>
+<div class="sourceCode" id="cb1241"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1241-1" title="1"><span class="kw">table</span>(titanic_train<span class="op">$</span>Sex)</a></code></pre></div>
+<pre><code>## 
+## female   male 
+##    314    577</code></pre>
+<div class="sourceCode" id="cb1243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1243-1" title="1"><span class="kw">table</span>(titanic_train<span class="op">$</span>Survived, titanic_train<span class="op">$</span>Sex)</a></code></pre></div>
+<pre><code>##    
+##     female male
+##   0     81  468
+##   1    233  109</code></pre>
+</div>
+<div id="internal-representation-1" class="section level3">
+<h3><span class="header-section-number">D.1.6</span> Internal Representation (*)</h3>
+<p>Note that by setting <code>byrow=TRUE</code> in a call to the <code>matrix()</code> function above,
+we are reading the elements
+of the input vector in the row-wise (row-major) fashion.
+The default is the column-major order, which might be a little unintuitive
+for some of us.</p>
+<div class="sourceCode" id="cb1245"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1245-1" title="1">A &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>), <span class="dt">ncol=</span><span class="dv">3</span>, <span class="dt">byrow=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb1245-2" title="2">B &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>), <span class="dt">ncol=</span><span class="dv">3</span>) <span class="co"># byrow=FALSE</span></a></code></pre></div>
+<p>It turns out that is exactly the order in which the matrix is stored internally.
+Under the hood, it is an ordinary numeric vector:</p>
+<div class="sourceCode" id="cb1246"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1246-1" title="1"><span class="kw">mode</span>(B)    <span class="co"># == mode(A)</span></a></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode" id="cb1248"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1248-1" title="1"><span class="kw">length</span>(B)  <span class="co"># == length(A)</span></a></code></pre></div>
+<pre><code>## [1] 6</code></pre>
+<div class="sourceCode" id="cb1250"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1250-1" title="1"><span class="kw">as.numeric</span>(A)</a></code></pre></div>
+<pre><code>## [1] 1 4 2 5 3 6</code></pre>
+<div class="sourceCode" id="cb1252"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1252-1" title="1"><span class="kw">as.numeric</span>(B)</a></code></pre></div>
+<pre><code>## [1] 1 2 3 4 5 6</code></pre>
+<p>Also note that we can create a different <em>view</em> on the same underlying
+data vector:</p>
+<div class="sourceCode" id="cb1254"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1254-1" title="1"><span class="kw">dim</span>(A) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">2</span>) <span class="co"># 3 rows, 2 columns</span></a>
+<a class="sourceLine" id="cb1254-2" title="2">A</a></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    5
+## [2,]    4    3
+## [3,]    2    6</code></pre>
+<div class="sourceCode" id="cb1256"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1256-1" title="1"><span class="kw">dim</span>(B) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">2</span>) <span class="co"># 3 rows, 2 columns</span></a>
+<a class="sourceLine" id="cb1256-2" title="2">B</a></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    4
+## [2,]    2    5
+## [3,]    3    6</code></pre>
+</div>
+</div>
+<div id="common-operations-1" class="section level2">
+<h2><span class="header-section-number">D.2</span> Common Operations</h2>
+<div id="matrix-transpose" class="section level3">
+<h3><span class="header-section-number">D.2.1</span> Matrix Transpose</h3>
+<p>The matrix <em>transpose</em> is denoted with <span class="math inline">\(\mathbf{A}^T\)</span>:</p>
+<div class="sourceCode" id="cb1258"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1258-1" title="1"><span class="kw">t</span>(A)</a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    4    2
+## [2,]    5    3    6</code></pre>
+<p>Hence, <span class="math inline">\(\mathbf{B}=\mathbf{A}^T\)</span> is a matrix such that <span class="math inline">\(b_{i,j}=a_{j,i}\)</span>.</p>
+<p>In other words, in the transposed matrix, rows become columns and columns become rows.
+For example:</p>
+<p><span class="math display">\[
+\mathbf{A}=
+\left[
+\begin{array}{ccc}
+a_{1,1} &amp; a_{1,2} &amp; a_{1,3} \\
+a_{2,1} &amp; a_{2,2} &amp; a_{2,3} \\
+\end{array}
+\right]
+\qquad
+\mathbf{A}^T=
+\left[
+\begin{array}{cc}
+a_{1,1} &amp; a_{2,1} \\
+a_{1,2} &amp; a_{2,2} \\
+a_{1,3} &amp; a_{2,3} \\
+\end{array}
+\right]
+\]</span></p>
+</div>
+<div id="matrix-scalar-operations" class="section level3">
+<h3><span class="header-section-number">D.2.2</span> Matrix-Scalar Operations</h3>
+<p>Operations such as <span class="math inline">\(s\mathbf{A}\)</span> (multiplication of a matrix
+by a scalar), <span class="math inline">\(-\mathbf{A}\)</span>, <span class="math inline">\(s+\mathbf{A}\)</span> etc.
+are applied on each element of the input matrix:</p>
+<div class="sourceCode" id="cb1260"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1260-1" title="1">(A &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>), <span class="dt">byrow=</span><span class="ot">TRUE</span>, <span class="dt">nrow=</span><span class="dv">2</span>))</a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    2    3
+## [2,]    4    5    6</code></pre>
+<div class="sourceCode" id="cb1262"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1262-1" title="1">(<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span>A</a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]   -1   -2   -3
+## [2,]   -4   -5   -6</code></pre>
+<p>In R, the same rule holds when we compute other
+operations (despite the fact that, mathematically,
+e.g., <span class="math inline">\(\mathbf{A}^2\)</span> or <span class="math inline">\(\mathbf{A}\ge 0\)</span> might have a different meaning):</p>
+<div class="sourceCode" id="cb1264"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1264-1" title="1">A<span class="op">^</span><span class="dv">2</span> <span class="co"># this is not A-matrix-multiply-A, see below</span></a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    4    9
+## [2,]   16   25   36</code></pre>
+<div class="sourceCode" id="cb1266"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1266-1" title="1">A<span class="op">&gt;=</span><span class="dv">3</span></a></code></pre></div>
+<pre><code>##       [,1]  [,2] [,3]
+## [1,] FALSE FALSE TRUE
+## [2,]  TRUE  TRUE TRUE</code></pre>
+</div>
+<div id="matrix-matrix-operations" class="section level3">
+<h3><span class="header-section-number">D.2.3</span> Matrix-Matrix Operations</h3>
+<p>If <span class="math inline">\(\mathbf{A},\mathbf{B}\in\mathbb{R}^{n\times p}\)</span>
+are two matrices of identical sizes, then
+<span class="math inline">\(\mathbf{A}+\mathbf{B}\)</span> and
+<span class="math inline">\(\mathbf{A}-\mathbf{B}\)</span> are understood elementwise,
+i.e., they result in <span class="math inline">\(\mathbf{C}\in\mathbb{R}^{n\times p}\)</span>
+such that <span class="math inline">\(c_{i,j}=a_{i,j}\pm b_{i,j}\)</span>.</p>
+<div class="sourceCode" id="cb1268"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1268-1" title="1">A<span class="op">-</span>A</a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    0    0    0
+## [2,]    0    0    0</code></pre>
+<p>In R (but not when we use mathematical notation),
+all other arithmetic, logical and comparison operators are also
+applied in an elementwise fashion.</p>
+<div class="sourceCode" id="cb1270"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1270-1" title="1">A<span class="op">*</span>A</a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    4    9
+## [2,]   16   25   36</code></pre>
+<div class="sourceCode" id="cb1272"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1272-1" title="1">(A<span class="op">&gt;</span><span class="dv">2</span>) <span class="op">&amp;</span><span class="st"> </span>(A<span class="op">&lt;=</span><span class="dv">5</span>)</a></code></pre></div>
+<pre><code>##       [,1]  [,2]  [,3]
+## [1,] FALSE FALSE  TRUE
+## [2,]  TRUE  TRUE FALSE</code></pre>
+</div>
+<div id="matrix-multiplication" class="section level3">
+<h3><span class="header-section-number">D.2.4</span> Matrix Multiplication (*)</h3>
+<p>Mathematically, <span class="math inline">\(\mathbf{A}\mathbf{B}\)</span>
+denotes the <strong>matrix multiplication</strong>. It is a very different operation
+to the elementwise multiplication.</p>
+<div class="sourceCode" id="cb1274"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1274-1" title="1">(A &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>)))</a></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    2
+## [2,]    3    4</code></pre>
+<div class="sourceCode" id="cb1276"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1276-1" title="1">(I &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>), <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)))</a></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    0
+## [2,]    0    1</code></pre>
+<div class="sourceCode" id="cb1278"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1278-1" title="1">A <span class="op">%*%</span><span class="st"> </span>I <span class="co"># matrix multiplication</span></a></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    2
+## [2,]    3    4</code></pre>
+<p>This is not the same as the elementwise <code>A*I</code>.</p>
+<p>Matrix multiplication can only be performed on two matrices of
+<em>compatible sizes</em> – the number of columns in the left matrix must match
+the number of rows in the right operand.</p>
+<p>Given <span class="math inline">\(\mathbf{A}\in\mathbb{R}^{n\times p}\)</span>
+and <span class="math inline">\(\mathbf{B}\in\mathbb{R}^{p\times m}\)</span>, their multiply is a matrix
+<span class="math inline">\(\mathbf{C}=\mathbf{A}\mathbf{B}\in\mathbb{R}^{n\times m}\)</span>
+such that <span class="math inline">\(c_{i,j}\)</span> is the dot product of the <span class="math inline">\(i\)</span>-th row in <span class="math inline">\(\mathbf{A}\)</span>
+and the <span class="math inline">\(j\)</span>-th column in <span class="math inline">\(\mathbf{B}\)</span>:
+<span class="math display">\[
+c_{i,j} = \mathbf{a}_{i,\cdot} \cdot \mathbf{b}_{\cdot,j}
+= \sum_{k=1}^p a_{i,k} b_{k, j}
+\]</span>
+for <span class="math inline">\(i=1,\dots,n\)</span> and <span class="math inline">\(j=1,\dots,m\)</span>.</p>
+<div class="exercise"><strong>Exercise.</strong>
+<p>Multiply
+a few simple matrices of sizes <span class="math inline">\(2\times 2\)</span>, <span class="math inline">\(2\times 3\)</span>, <span class="math inline">\(3\times 2\)</span> etc.
+using pen and paper and checking the results in R.</p>
+</div>
+<!-- TODO: graphical interpretation -->
+<p>Also remember that, mathematically,
+<em>squaring</em> a matrix is done in terms of matrix multiplication,
+i.e., <span class="math inline">\(\mathbf{A}^2 = \mathbf{A}\mathbf{A}\)</span>.
+It can only be performed on <em>square</em> matrices, i.e., ones with the same number
+of rows and columns.
+This is again different than R’s elementwise <code>A^2</code>.</p>
+<p>Note that <span class="math inline">\(\mathbf{A}^T \mathbf{A}\)</span>
+gives the matrix that consists of the dot products of all the pairs
+of columns in <span class="math inline">\(\mathbf{A}\)</span>.</p>
+<div class="sourceCode" id="cb1280"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1280-1" title="1"><span class="kw">crossprod</span>(A) <span class="co"># same as t(A) %*% A</span></a></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]   10   14
+## [2,]   14   20</code></pre>
+<p>In one of the chapters on Regression, we note
+that the Pearson linear correlation coefficient
+can be beautifully expressed this way.</p>
+<!-- TODO? Matrix inverse?? Do we need it? we might for linear regression, but it's already too much -->
+</div>
+<div id="aggregation-of-rows-and-columns" class="section level3">
+<h3><span class="header-section-number">D.2.5</span> Aggregation of Rows and Columns</h3>
+<p>The <code>apply()</code> function may be used to transform or summarise
+individual rows or columns in a matrix. More precisely:</p>
+<ul>
+<li><code>apply(A, 1, f)</code> applies a given function <span class="math inline">\(f\)</span> on each <em>row</em> of <span class="math inline">\(\mathbf{A}\)</span>.</li>
+<li><code>apply(A, 2, f)</code> applies a given function <span class="math inline">\(f\)</span> on each <em>column</em> of <span class="math inline">\(\mathbf{A}\)</span>.</li>
+</ul>
+<p>Usually, either <span class="math inline">\(f\)</span> returns a single value (when we wish to aggregate
+all the elements in a row/column) or returns the same number of values
+(when we wish to transform a row/column). The latter case is covered in the next
+subsection.</p>
+<p>Let’s compute the mean of each row and column in A:</p>
+<div class="sourceCode" id="cb1282"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1282-1" title="1">(A &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">18</span>, <span class="dt">byrow=</span><span class="ot">TRUE</span>, <span class="dt">nrow=</span><span class="dv">3</span>))</a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6]
+## [1,]    1    2    3    4    5    6
+## [2,]    7    8    9   10   11   12
+## [3,]   13   14   15   16   17   18</code></pre>
+<div class="sourceCode" id="cb1284"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1284-1" title="1"><span class="kw">apply</span>(A, <span class="dv">1</span>, mean) <span class="co"># synonym: rowMeans(A)</span></a></code></pre></div>
+<pre><code>## [1]  3.5  9.5 15.5</code></pre>
+<div class="sourceCode" id="cb1286"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1286-1" title="1"><span class="kw">apply</span>(A, <span class="dv">2</span>, mean) <span class="co"># synonym: colMeans(A)</span></a></code></pre></div>
+<pre><code>## [1]  7  8  9 10 11 12</code></pre>
+<p>We can also fetch the minimal and maximal value by means of the <code>range()</code> function:</p>
+<div class="sourceCode" id="cb1288"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1288-1" title="1"><span class="kw">apply</span>(A, <span class="dv">1</span>, range)</a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    7   13
+## [2,]    6   12   18</code></pre>
+<div class="sourceCode" id="cb1290"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1290-1" title="1"><span class="kw">apply</span>(A, <span class="dv">2</span>, range)</a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6]
+## [1,]    1    2    3    4    5    6
+## [2,]   13   14   15   16   17   18</code></pre>
+<p>Of course, a custom function can be provided as well.
+Here we compute the minimum, average and maximum of each row:</p>
+<div class="sourceCode" id="cb1292"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1292-1" title="1"><span class="kw">apply</span>(A, <span class="dv">1</span>, <span class="cf">function</span>(row) <span class="kw">c</span>(<span class="kw">min</span>(row), <span class="kw">mean</span>(row), <span class="kw">max</span>(row)))</a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]  1.0  7.0 13.0
+## [2,]  3.5  9.5 15.5
+## [3,]  6.0 12.0 18.0</code></pre>
+</div>
+<div id="vectorised-special-functions" class="section level3">
+<h3><span class="header-section-number">D.2.6</span> Vectorised Special Functions</h3>
+<p>The special functions mentioned in the previous chapter, e.g.,
+<code>sqrt()</code>, <code>abs()</code>, <code>round()</code>, <code>log()</code>, <code>exp()</code>, <code>cos()</code>, <code>sin()</code>,
+are also performed in an elementwise manner when applied on a matrix object.</p>
+<div class="sourceCode" id="cb1294"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1294-1" title="1"><span class="kw">round</span>(<span class="dv">1</span><span class="op">/</span>A, <span class="dv">2</span>) <span class="co"># rounds every element in 1/A</span></a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6]
+## [1,] 1.00 0.50 0.33 0.25 0.20 0.17
+## [2,] 0.14 0.12 0.11 0.10 0.09 0.08
+## [3,] 0.08 0.07 0.07 0.06 0.06 0.06</code></pre>
+<p>An example plot of the absolute values of sine and cosine functions
+depicted using the <code>matplot()</code> function (see Figure <a href="appendix-rmatrix.html#fig:matplot_sincos">1</a>).</p>
+<div class="sourceCode" id="cb1296"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1296-1" title="1">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">2</span><span class="op">*</span>pi, <span class="dv">6</span><span class="op">*</span>pi, <span class="dt">by=</span>pi<span class="op">/</span><span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb1296-2" title="2">Y &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">sin</span>(x), <span class="kw">cos</span>(x)) <span class="co"># a matrix with two columns</span></a>
+<a class="sourceLine" id="cb1296-3" title="3">Y &lt;-<span class="st"> </span><span class="kw">abs</span>(Y) <span class="co"># take the absolute value of every element in Y</span></a>
+<a class="sourceLine" id="cb1296-4" title="4"><span class="kw">matplot</span>(x, Y, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>)</a></code></pre></div>
+<div class="figure">
+<img src="93-R-matrices-figures/matplot_sincos-1.svg" alt="Figure 1: Example plot with matplot()" id="fig:matplot_sincos" />
+<p class="caption">Figure 1: Example plot with <code>matplot()</code></p>
+</div>
+</div>
+<div id="matrix-vector-operations" class="section level3">
+<h3><span class="header-section-number">D.2.7</span> Matrix-Vector Operations</h3>
+<p>Mathematically, there is no generally agreed upon
+convention defining arithmetic operations between matrices and vectors.</p>
+<blockquote>
+<p>(*) The only exception is the matrix – vector multiplication in the case
+where an argument is a column or a row vector, i.e., in fact, a matrix.
+Hence, given <span class="math inline">\(\mathbf{A}\in\mathbb{R}^{n\times p}\)</span> we may write
+<span class="math inline">\(\mathbf{A}\mathbf{x}\)</span>
+only if <span class="math inline">\(\mathbf{x}\in\mathbb{R}^{p\times 1}\)</span> is a column vector.
+Similarly, <span class="math inline">\(\mathbf{y}\mathbf{A}\)</span> makes only sense
+whenever <span class="math inline">\(\mathbf{y}\in\mathbb{R}^{1\times n}\)</span> is a row vector.</p>
+</blockquote>
+<dl>
+<dt>Remark.</dt>
+<dd><p>Please take notice of the fact that we consistently
+discriminate between different bold math fonts and letter cases:
+<span class="math inline">\(\mathbf{X}\)</span> is a matrix, <span class="math inline">\(\mathbf{x}\)</span> is a row or column vector
+(still a matrix, but a sequence-like one)
+and <span class="math inline">\(\boldsymbol{x}\)</span> is an ordinary vector (one-dimensional sequence).</p>
+</dd>
+</dl>
+<!--
+> This is why, e.g., the $i$-th row of $\mathbf{X}$ is denoted
+with $\mathbf{x}_{i,\cdot}$ -- to emphasise that it is a row vector.
+-->
+<!-- in R an object of type vector gets promoted to a column vector, i.e., a matrix with 1 column -->
+<p>However, in R, we might sometimes wish to vectorise
+an arithmetic operation between a matrix and a vector in a row- or column-wise
+fashion.
+For example, if <span class="math inline">\(\mathbf{A}\in\mathbb{R}^{n\times p}\)</span> is a matrix
+and <span class="math inline">\(\mathbf{m}\in\mathbb{R}^{1\times p}\)</span> is a row vector,
+we might want to subtract <span class="math inline">\(m_i\)</span> from each element in the <span class="math inline">\(i\)</span>-th column.
+Here, the <code>apply()</code> function comes in handy again.</p>
+<p>Example: to create a <em>centred</em> version of a given matrix,
+we need to subtract from each element the arithmetic mean of its column.</p>
+<div class="sourceCode" id="cb1297"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1297-1" title="1">(A &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>), <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">8</span>)))</a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    2    5
+## [2,]    2    4    8</code></pre>
+<div class="sourceCode" id="cb1299"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1299-1" title="1">(m &lt;-<span class="st"> </span><span class="kw">apply</span>(A, <span class="dv">2</span>, mean)) <span class="co"># same as colMeans(A)</span></a></code></pre></div>
+<pre><code>## [1] 1.5 3.0 6.5</code></pre>
+<div class="sourceCode" id="cb1301"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1301-1" title="1"><span class="kw">t</span>(<span class="kw">apply</span>(A, <span class="dv">1</span>, <span class="cf">function</span>(r) r<span class="op">-</span>m)) <span class="co"># note the transpose here</span></a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,] -0.5   -1 -1.5
+## [2,]  0.5    1  1.5</code></pre>
+<p>The above is equivalent to:</p>
+<div class="sourceCode" id="cb1303"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1303-1" title="1"><span class="kw">apply</span>(A, <span class="dv">2</span>, <span class="cf">function</span>(c) c<span class="op">-</span><span class="kw">mean</span>(c))</a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,] -0.5   -1 -1.5
+## [2,]  0.5    1  1.5</code></pre>
+</div>
+</div>
+<div id="matrix-subsetting" class="section level2">
+<h2><span class="header-section-number">D.3</span> Matrix Subsetting</h2>
+<p>Example matrices:</p>
+<div class="sourceCode" id="cb1305"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1305-1" title="1">(A &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="dt">byrow=</span><span class="ot">TRUE</span>, <span class="dt">nrow=</span><span class="dv">3</span>))</a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    2    3    4
+## [2,]    5    6    7    8
+## [3,]    9   10   11   12</code></pre>
+<div class="sourceCode" id="cb1307"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1307-1" title="1">B &lt;-<span class="st"> </span>A</a>
+<a class="sourceLine" id="cb1307-2" title="2"><span class="kw">dimnames</span>(B) &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb1307-3" title="3">    <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>),     <span class="co"># row labels</span></a>
+<a class="sourceLine" id="cb1307-4" title="4">    <span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>, <span class="st">&quot;z&quot;</span>, <span class="st">&quot;w&quot;</span>) <span class="co"># column labels</span></a>
+<a class="sourceLine" id="cb1307-5" title="5">)</a>
+<a class="sourceLine" id="cb1307-6" title="6">B</a></code></pre></div>
+<pre><code>##   x  y  z  w
+## a 1  2  3  4
+## b 5  6  7  8
+## c 9 10 11 12</code></pre>
+<div id="selecting-individual-elements" class="section level3">
+<h3><span class="header-section-number">D.3.1</span> Selecting Individual Elements</h3>
+<p>Matrices are two-dimensional structures: items are aligned in rows and columns.
+Hence, to extract an element from a matrix, we will need two indices.
+Mathematically, given a matrix <span class="math inline">\(\mathbf{A}\)</span>, <span class="math inline">\(a_{i,j}\)</span> stands for the element
+in the <span class="math inline">\(i\)</span>-th row and the <span class="math inline">\(j\)</span>-th column. The same in R:</p>
+<div class="sourceCode" id="cb1309"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1309-1" title="1">A[<span class="dv">1</span>, <span class="dv">2</span>] <span class="co"># 1st row, 2nd columns</span></a></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<div class="sourceCode" id="cb1311"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1311-1" title="1">B[<span class="st">&quot;a&quot;</span>, <span class="st">&quot;y&quot;</span>] <span class="co"># using dimnames == B[1,2]</span></a></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+</div>
+<div id="selecting-rows-and-columns" class="section level3">
+<h3><span class="header-section-number">D.3.2</span> Selecting Rows and Columns</h3>
+<p>We will sometimes use the following notation to emphasise that
+a matrix <span class="math inline">\(\mathbf{A}\)</span> consists of <span class="math inline">\(n\)</span> rows
+or <span class="math inline">\(p\)</span> columns:</p>
+<p><span class="math display">\[
+\mathbf{A}=\left[
+\begin{array}{c}
+\mathbf{a}_{1,\cdot} \\
+\mathbf{a}_{2,\cdot} \\
+\vdots\\
+\mathbf{a}_{n,\cdot} \\
+\end{array}
+\right]
+=
+\left[
+\begin{array}{cccc}
+\mathbf{a}_{\cdot,1} &amp;
+\mathbf{a}_{\cdot,2} &amp;
+\cdots &amp;
+\mathbf{a}_{\cdot,p} \\
+\end{array}
+\right].
+\]</span></p>
+<p>Here, <span class="math inline">\(\mathbf{a}_{i,\cdot}\)</span> is a <em>row vector</em> of length <span class="math inline">\(p\)</span>,
+i.e., a <span class="math inline">\((1\times p)\)</span>-matrix:</p>
+<p><span class="math display">\[
+\mathbf{a}_{i,\cdot} = \left[
+\begin{array}{cccc}
+a_{i,1} &amp;
+a_{i,2} &amp;
+\cdots &amp;
+a_{i,p} \\
+\end{array}
+\right].
+\]</span></p>
+<p>Moreover, <span class="math inline">\(\mathbf{a}_{\cdot,j}\)</span> is a <em>column vector</em> of length <span class="math inline">\(n\)</span>,
+i.e., an <span class="math inline">\((n\times 1)\)</span>-matrix:</p>
+<p><span class="math display">\[
+\mathbf{a}_{\cdot,j} = \left[
+\begin{array}{cccc}
+a_{1,j} &amp;
+a_{2,j} &amp;
+\cdots &amp;
+a_{n,j} \\
+\end{array}
+\right]^T=\left[
+\begin{array}{c}
+{a}_{1,j} \\
+{a}_{2,j} \\
+\vdots\\
+{a}_{n,j} \\
+\end{array}
+\right],
+\]</span></p>
+<p>We can extract individual rows and columns from a matrix by using
+the following notation:</p>
+<div class="sourceCode" id="cb1313"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1313-1" title="1">A[<span class="dv">1</span>,] <span class="co"># 1st row</span></a></code></pre></div>
+<pre><code>## [1] 1 2 3 4</code></pre>
+<div class="sourceCode" id="cb1315"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1315-1" title="1">A[,<span class="dv">2</span>] <span class="co"># 2nd column</span></a></code></pre></div>
+<pre><code>## [1]  2  6 10</code></pre>
+<div class="sourceCode" id="cb1317"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1317-1" title="1">B[<span class="st">&quot;a&quot;</span>,] <span class="co"># of course, B[1,] is still legal</span></a></code></pre></div>
+<pre><code>## x y z w 
+## 1 2 3 4</code></pre>
+<div class="sourceCode" id="cb1319"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1319-1" title="1">B[,<span class="st">&quot;y&quot;</span>]</a></code></pre></div>
+<pre><code>##  a  b  c 
+##  2  6 10</code></pre>
+<p>Note that by extracting a single row/column, we get an atomic (one-dimensional)
+vector. However, we can preserve the dimensionality of the output object
+by passing <code>drop=FALSE</code>:</p>
+<div class="sourceCode" id="cb1321"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1321-1" title="1">A[  <span class="dv">1</span>,    , drop=<span class="ot">FALSE</span>] <span class="co"># 1st row</span></a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    2    3    4</code></pre>
+<div class="sourceCode" id="cb1323"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1323-1" title="1">A[   ,   <span class="dv">2</span>, drop=<span class="ot">FALSE</span>] <span class="co"># 2nd column</span></a></code></pre></div>
+<pre><code>##      [,1]
+## [1,]    2
+## [2,]    6
+## [3,]   10</code></pre>
+<div class="sourceCode" id="cb1325"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1325-1" title="1">B[<span class="st">&quot;a&quot;</span>,    , drop=<span class="ot">FALSE</span>]</a></code></pre></div>
+<pre><code>##   x y z w
+## a 1 2 3 4</code></pre>
+<div class="sourceCode" id="cb1327"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1327-1" title="1">B[   , <span class="st">&quot;y&quot;</span>, drop=<span class="ot">FALSE</span>]</a></code></pre></div>
+<pre><code>##    y
+## a  2
+## b  6
+## c 10</code></pre>
+<p>Now this is what we call proper row and column vectors!</p>
+</div>
+<div id="selecting-submatrices" class="section level3">
+<h3><span class="header-section-number">D.3.3</span> Selecting Submatrices</h3>
+<p>To create a sub-block of a given matrix we pass two indexers,
+possibly of length greater than one:</p>
+<div class="sourceCode" id="cb1329"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1329-1" title="1">A[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>)] <span class="co"># rows 1,2 columns 1,2,4</span></a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    2    4
+## [2,]    5    6    8</code></pre>
+<div class="sourceCode" id="cb1331"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1331-1" title="1">B[<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>), <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>)]</a></code></pre></div>
+<pre><code>##   x y w
+## a 1 2 4
+## b 5 6 8</code></pre>
+<div class="sourceCode" id="cb1333"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1333-1" title="1">A[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>), <span class="dv">3</span>]</a></code></pre></div>
+<pre><code>## [1]  3 11</code></pre>
+<div class="sourceCode" id="cb1335"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1335-1" title="1">A[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>), <span class="dv">3</span>, drop=<span class="ot">FALSE</span>]</a></code></pre></div>
+<pre><code>##      [,1]
+## [1,]    3
+## [2,]   11</code></pre>
+</div>
+<div id="selecting-based-on-logical-vectors-and-matrices" class="section level3">
+<h3><span class="header-section-number">D.3.4</span> Selecting Based on Logical Vectors and Matrices</h3>
+<p>We can also subset a matrix with a logical matrix of the same size.
+This always yields a (flat) vector in return.</p>
+<div class="sourceCode" id="cb1337"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1337-1" title="1">A[A<span class="op">&gt;</span><span class="dv">8</span>]</a></code></pre></div>
+<pre><code>## [1]  9 10 11 12</code></pre>
+<p>Logical vectors can also be used as indexers:</p>
+<div class="sourceCode" id="cb1339"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1339-1" title="1">A[<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>),] <span class="co"># select 1st and 3rd row</span></a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    2    3    4
+## [2,]    9   10   11   12</code></pre>
+<div class="sourceCode" id="cb1341"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1341-1" title="1">A[,<span class="kw">colMeans</span>(A)<span class="op">&gt;</span><span class="dv">6</span>] <span class="co"># columns with means &gt; 6</span></a></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    3    4
+## [2,]    7    8
+## [3,]   11   12</code></pre>
+<div class="sourceCode" id="cb1343"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1343-1" title="1">B[B[,<span class="st">&quot;x&quot;</span>]<span class="op">&gt;</span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>B[,<span class="st">&quot;x&quot;</span>]<span class="op">&lt;=</span><span class="dv">9</span>,] <span class="co"># All rows where x is in (1, 9]</span></a></code></pre></div>
+<pre><code>##   x  y  z  w
+## b 5  6  7  8
+## c 9 10 11 12</code></pre>
+</div>
+<div id="selecting-based-on-two-column-matrices" class="section level3">
+<h3><span class="header-section-number">D.3.5</span> Selecting Based on Two-Column Matrices</h3>
+<p>Lastly, note that we can also index a matrix <code>A</code>
+with a 2-column matrix <code>I</code>, i.e., <code>A[I]</code>.
+This allows for an easy access to
+<code>A[I[1,1], I[1,2]]</code>, <code>A[I[2,1], I[2,2]]</code>, <code>A[I[3,1], I[3,2]]</code>, …</p>
+<div class="sourceCode" id="cb1345"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1345-1" title="1">I &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb1345-2" title="2">           <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb1345-3" title="3">)</a>
+<a class="sourceLine" id="cb1345-4" title="4">A[I]</a></code></pre></div>
+<pre><code>## [1]  2 11  6  1  8</code></pre>
+<p>This is exactly
+<code>A[1, 2], A[3, 3], A[2, 2], A[1, 1], A[2, 4]</code>.</p>
+</div>
+</div>
+<div id="exercises-9" class="section level2">
+<h2><span class="header-section-number">D.4</span> Exercises</h2>
+<div id="currency-exchange-rates" class="section level3">
+<h3><span class="header-section-number">D.4.1</span> Currency Exchange Rates</h3>
+<p>Let’s load the dataset on historical daily EUR to AUD/NZD/GBP/PLN/etc.
+currency exchange rates:</p>
+<div class="sourceCode" id="cb1347"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1347-1" title="1">currency_exchange &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/currency_exchange_all.csv.gz&quot;</span>,</a>
+<a class="sourceLine" id="cb1347-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
+<a class="sourceLine" id="cb1347-3" title="3"><span class="co"># Convert Day to numeric:</span></a>
+<a class="sourceLine" id="cb1347-4" title="4">currency_exchange<span class="op">$</span>Day &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">as.Date</span>(currency_exchange<span class="op">$</span>Day))</a>
+<a class="sourceLine" id="cb1347-5" title="5">rates &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(currency_exchange)</a>
+<a class="sourceLine" id="cb1347-6" title="6"><span class="kw">head</span>(rates, <span class="dv">3</span>)</a></code></pre></div>
+<pre><code>##        Day    AUD    BGN    BRL    CAD    CHF    CNY    CZK    DKK
+## [1,] 18401 1.6751 1.9558 6.2357 1.5251 1.0633 7.7816 27.490 7.4562
+## [2,] 18400 1.6736 1.9558 6.2701 1.5202 1.0521 7.7068 27.610 7.4548
+## [3,] 18397 1.6805 1.9558 6.3172 1.5231 1.0513 7.6759 27.589 7.4576
+##          GBP    HKD    HRK    HUF   IDR    ILS    INR   ISK    JPY
+## [1,] 0.89535 8.4870 7.5713 350.35 16178 3.8601 82.853 156.5 118.00
+## [2,] 0.89153 8.3964 7.5580 353.39 16077 3.8321 82.144 157.1 116.31
+## [3,] 0.88738 8.3693 7.5693 354.70 16128 3.8178 81.989 157.5 115.53
+##         KRW    MXN    MYR    NOK    NZD    PHP    PLN    RON    RUB
+## [1,] 1341.2 25.857 4.7583 10.915 1.8004 55.567 4.5510 4.8428 79.384
+## [2,] 1332.4 25.634 4.7320 10.966 1.8096 55.102 4.5596 4.8388 78.908
+## [3,] 1332.6 25.897 4.6982 11.057 1.8145 54.778 4.5650 4.8400 79.621
+##         SEK    SGD    THB    TRY    USD    ZAR
+## [1,] 10.569 1.5513 34.947 7.4448 1.0950 19.965
+## [2,] 10.610 1.5426 34.684 7.4276 1.0832 19.891
+## [3,] 10.669 1.5397 34.656 7.4689 1.0798 20.076</code></pre>
+<p>The dataset originally has columns of mixed types, therefore, in order
+to represent it as a matrix, we converted <code>Day</code> to numeric.
+Here, 10595 means
+1999-01-04
+and
+18401 denotes
+2020-05-19 —
+this is the so-called UNIX date, the number of days since 1970-01-01.</p>
+<dl>
+<dt>Remark.</dt>
+<dd><p>We will discuss how to deal with tabular data of possibly mixed column types
+in the next chapter.</p>
+</dd>
+</dl>
+<div class="exercise"><strong>Exercise.</strong>
+<p>Draw a plot (see <code>?plot</code>) of EUR/AUD
+exchange rates between 2020-01-01 and 2020-05-10,
+i.e., between days 18262
+and 18392, respectively.
+Use the <code>Day</code> column on the x-axis.</p>
+</div>
+<dl>
+<dt>Remark.</dt>
+<dd><p>Note that the most recent exchange rate is listed in the first row of <code>rates</code>.</p>
+</dd>
+</dl>
+<div class="exercise"><strong>Exercise.</strong>
+<p>Draw a plot of the NZD/AUD exchange rates
+(by appropriately transforming EUR/AUD and EUD/NZD columns).</p>
+</div>
+<div class="exercise"><strong>Exercise.</strong>
+<p>Compute the minimal, average and maximal exchange rates
+for all the 32 currencies in the dataset.</p>
+</div>
+</div>
+<div id="currency-exchange-rates-relative-to-1999" class="section level3">
+<h3><span class="header-section-number">D.4.2</span> Currency Exchange Rates Relative to 1999</h3>
+<p>Let’s get back to the dataset from the previous exercise:</p>
+<div class="sourceCode" id="cb1349"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1349-1" title="1"><span class="kw">head</span>(rates, <span class="dv">3</span>)</a></code></pre></div>
+<pre><code>##        Day    AUD    BGN    BRL    CAD    CHF    CNY    CZK    DKK
+## [1,] 18401 1.6751 1.9558 6.2357 1.5251 1.0633 7.7816 27.490 7.4562
+## [2,] 18400 1.6736 1.9558 6.2701 1.5202 1.0521 7.7068 27.610 7.4548
+## [3,] 18397 1.6805 1.9558 6.3172 1.5231 1.0513 7.6759 27.589 7.4576
+##          GBP    HKD    HRK    HUF   IDR    ILS    INR   ISK    JPY
+## [1,] 0.89535 8.4870 7.5713 350.35 16178 3.8601 82.853 156.5 118.00
+## [2,] 0.89153 8.3964 7.5580 353.39 16077 3.8321 82.144 157.1 116.31
+## [3,] 0.88738 8.3693 7.5693 354.70 16128 3.8178 81.989 157.5 115.53
+##         KRW    MXN    MYR    NOK    NZD    PHP    PLN    RON    RUB
+## [1,] 1341.2 25.857 4.7583 10.915 1.8004 55.567 4.5510 4.8428 79.384
+## [2,] 1332.4 25.634 4.7320 10.966 1.8096 55.102 4.5596 4.8388 78.908
+## [3,] 1332.6 25.897 4.6982 11.057 1.8145 54.778 4.5650 4.8400 79.621
+##         SEK    SGD    THB    TRY    USD    ZAR
+## [1,] 10.569 1.5513 34.947 7.4448 1.0950 19.965
+## [2,] 10.610 1.5426 34.684 7.4276 1.0832 19.891
+## [3,] 10.669 1.5397 34.656 7.4689 1.0798 20.076</code></pre>
+<div class="exercise"><strong>Exercise.</strong>
+<p>From now on, we will be only interested in the following currencies:
+AUD, CHF, GBP and USD. Remove the irrelevant columns from <code>rates</code>.
+Also, reverse the order of rows in the dataframe so that the oldest
+record is listed first.</p>
+</div>
+<div class="exercise"><strong>Exercise.</strong>
+<p>Create a matrix <code>Y</code> with exchange rates relative to 1999-01-04 (the first record).</p>
+</div>
+<dl>
+<dt>Remark.</dt>
+<dd><p>To do the above, for each currency separately, divide
+every exchange rate by the rate found the first row.
+For example, relative rate of EUR/GBP equal to
+ca. 1.26
+on the last day means that you could buy, with the same amount of EUR,
+26% more of pounds
+on 2020-05-19
+(where 1 EUR = 0.89535 GBP)
+than on 1999-01-04
+(where 1 EUR = 0.7111 GBP).</p>
+<p>After the transformation, the first and the last two rows in <code>Y</code> should look like:</p>
+<div class="sourceCode" id="cb1351"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1351-1" title="1"><span class="co"># Y &lt;- ... # to do</span></a>
+<a class="sourceLine" id="cb1351-2" title="2"><span class="kw">head</span>(<span class="kw">round</span>(Y, <span class="dv">4</span>), <span class="dv">2</span>) <span class="co"># rounded to 4 fractional digits</span></a></code></pre></div>
+<pre><code>##         AUD    CHF    GBP    USD
+## [1,] 1.0000 1.0000 1.0000 1.0000
+## [2,] 0.9918 0.9972 1.0015 1.0001</code></pre>
+<div class="sourceCode" id="cb1353"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1353-1" title="1"><span class="kw">tail</span>(<span class="kw">round</span>(Y, <span class="dv">4</span>), <span class="dv">2</span>)</a></code></pre></div>
+<pre><code>##            AUD    CHF    GBP    USD
+## [5532,] 0.8762 0.6507 1.2537 0.9188
+## [5533,] 0.8770 0.6577 1.2591 0.9288</code></pre>
+</dd>
+</dl>
+<div class="exercise"><strong>Exercise.</strong>
+<p>Explain in your own words (consider different scenarios):</p>
+<ul>
+<li>If you were a German investor in Scotland
+would it be better to have the relative EUR/GBP exchange rates going up or down?</li>
+<li>What if you were a Welsh tourist in Estonia?</li>
+<li>What if you were a producer of goods made from imported as well as
+locally sourced parts/ingredients?</li>
+</ul>
+</div>
+<div class="exercise"><strong>Exercise.</strong>
+<p>Draw a single plot of the relative exchange rates, similar to the one
+in Figure <a href="appendix-rmatrix.html#fig:matrix_ex2d">2</a>.
+Use <code>legend()</code> to add a legend and <code>abline()</code> to draw a horizontal
+line at <span class="math inline">\(y=1\)</span>.</p>
+</div>
+<dl>
+<dt>Remark.</dt>
+<dd><p>You can either call <code>plot()</code> and then <code>lines()</code> to add
+new curves to the existing figure
+or call <code>matplot()</code> to draw all curves all at once.
+Note that you can set the range of values on the y-axis
+by setting the <code>ylim</code> argument in <code>plot()</code> or <code>matplot()</code>.</p>
+</dd>
+</dl>
+<div class="figure">
+<img src="93-R-matrices-figures/matrix_ex2d-1.svg" alt="Figure 2: Currency exchange rates relative to 1999-01-04 (with EUR as the base currency)" id="fig:matrix_ex2d" />
+<p class="caption">Figure 2: Currency exchange rates relative to 1999-01-04 (with EUR as the base currency)</p>
+</div>
+<div class="exercise"><strong>Exercise.</strong>
+<p>Imagine that you are asked to build a machine learning algorithm
+that predicts the exchange rate on the next day (which we in fact
+do in some other chapter).
+How would you use it to invest your money?</p>
+<p>What could happen if the algorithm was 100% accurate
+but everyone in the world had access to it?</p>
+<p>Do you think it is possible to predict the prices accurately
+based only on past exchange rates?</p>
+</div>
+</div>
+</div>
+<div id="further-reading-13" class="section level2">
+<h2><span class="header-section-number">D.5</span> Further Reading</h2>
+<p>Recommended further reading: <span class="citation">(Venables et al. <a href="references.html#ref-Rintro">2020</a>)</span></p>
+<p>Other: <span class="citation">(Deisenroth et al. <a href="references.html#ref-mml">2020</a>)</span>, <span class="citation">(Peng <a href="references.html#ref-rprogdatascience">2019</a>)</span>, <span class="citation">(Wickham &amp; Grolemund <a href="references.html#ref-r4ds">2017</a>)</span></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="appendix-rvector.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="appendix-rdf.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "serif",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": "lmlcr.pdf",
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

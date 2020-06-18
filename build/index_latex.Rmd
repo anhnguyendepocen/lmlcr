@@ -9,7 +9,8 @@ output:
             "--toc-depth=3",
             "--csl=bibstyle.csl",
             "--top-level-division=chapter",
-            "--filter=/usr/local/bin/pandoc-fignos"]
+            "--filter=/usr/local/bin/pandoc-fignos",
+            "--filter=/usr/local/bin/pandoc-tablenos"]
         includes:
             in_header: preamble.tex
             before_body: before_body.tex

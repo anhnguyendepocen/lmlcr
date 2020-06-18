@@ -2,10 +2,6 @@
 
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 
-
-
-
-
 <!--
 
 Exercise: dimensionality reduction with auto-encoders?
@@ -18,98 +14,243 @@ Exercise: implement MDS with optim?
 
 
 
+The aim of clustering (a.k.a. data segmentation or quantisation)
+is to split the input dataset into *interesting*
+subgroups in an unsupervised manner. Example applications of clustering include:
 
+* taxonomisation, e.g.,
+partition consumers to more "uniform"
+groups to better understand who they are and what do they need,
 
+* aggregation, e.g., to reduce the number of observations
+by substituting them by "group representatives" or "prototypes",
 
-## Agglomerative Hierarchical Clustering
+* object detection in images, e.g.,
+tumour tissues on PET/CT scans,
 
+* complex networks analysis,
+e.g., detecting communities in friendship,
+retweets and other networks,
 
+* spatial data analysis, e.g., identifying densely populated areas
+or traffic jams on maps,
 
-Formally, given $K\ge 2$, **clustering** aims is to find a *special kind*
-of a **$K$-partition** of the input data set $\mathbf{X}$.
+* text analysis, e.g., for grouping documents into automatically
+detected topics,
 
-Definition.
-
-:   We say that $\mathcal{C}=\{C_1,\dots,C_K\}$ is a **$K$-partition**
-    of  $\mathbf{X}$ of size $n$,
-    whenever:
-
-    - $C_k\neq\emptyset$ for all $k$ (each set is nonempty),
-    - $C_k\cap C_l=\emptyset$ for all $k\neq l$ (sets are pairwise disjoint),
-    - $\bigcup_{k=1}^K C_k=\mathbf{X}$ (no point is neglected).
-
-
-This can also be thought of as assigning each point a unique label $\{1,\dots,K\}$
-(think: colouring of the points, where each number has a colour).
-We will consider the point $\mathbf{x}_{i,\cdot}$ as labelled $j$
-if and only if it belongs to cluster $C_j$, i.e., $\mathbf{x}_{i,\cdot}\in C_j$.
-
-
-
-
-
-
-Example applications of clustering:
-
-
-- *taxonomisation*: e.g.,
- partition the consumers to more "uniform"
- groups to better understand who they are and what do they need,
-- *image processing*:
- e.g., object detection, like tumour tissues on medical images,
-- *complex networks analysis*:
- e.g., detecting communities in friendship,
- retweets and other networks,
-- *fine-tuning supervised learning algorithms*:
-  e.g., recommender systems indicating content
-  that was rated highly by users from the same group
-  or learning multiple manifolds in a dimension reduction task.
+* fine-tuning of supervised learning algorithms,
+e.g., recommender systems indicating content
+that was rated highly by users from the same group
+or learning multiple manifolds in a dimension reduction task.
 
 
 
 
 
+## Dataset Partitions
+
+### Label Vectors
+
+Let's assume that the input data set $\mathbf{X}\in\mathbb{R}^{n\times p}$
+consists of $n$ observations and that we wish to identify
+$K$ clusters, for some $K\ge 2$ which gives the number of subgroups.
+Such a clustering of $\mathbf{X}$ will be represented
+by a vector $\boldsymbol{y}\in\{1, 2, \dots, K\}^n$
+such that $y_i$ gives the *cluster ID* (cluster identifier or number,
+an integer between
+1 and K) of the $i$-th observation, $i=1,2,\dots,n$.
+Thus, we can think of clustering as of the process of labelling
+or assigning colours to each data point (for example, 1 = black, 2 = red,
+3 = green, 4 = blue etc.).
+The only restriction we impose on each such *label* vector is that
+*each of the $K$ labels must occur at least once*.
+This will guarantee that we have indeed a division of $\mathbf{X}$
+into $K$ subgroups, and not less.
+
+
+{ BEGIN remark }
+Given an integer $K$
+and a vector $\boldsymbol{y}$ with elements $\{1, 2, \dots, K\}$,
+for instance:
+
+```{r label_vector_check1}
+y <- c(3, 1, 1, 2, 2, 1, 2, 3, 1, 1, 1)
+K <- 3 # by the way, it's max(y)
+```
+
+we can check whether it represents a proper label vector by
+computing the number of occurrences of each label:
+
+```{r label_vector_check2}
+tabulate(y, K) # how many 1s, ..., Ks are there in y, respectively
+all(tabulate(y, K) > 0) # do we have at least 1 occurrence of each label?
+```
+
+or, for example, determining the set of all unique
+values in $\boldsymbol{y}$:
+
+```{r label_vector_check3}
+unique(y)
+length(unique(y)) == K # do we have K unique values in y?
+```
+{ END remark }
+
+
+Each such label vector  yields a $K$-partition
+of the input data set, that is, its grouping into
+$K$ disjoint subsets -- every element in $\mathbf{X}$
+belongs to one (and only one) cluster.
 
 
 
-The number of possible $K$-partitions of a set with $n$ elements is given by
+
+### K-Partitions (\*)
+
+As it is beneficial for us to be *gently* exposed to as many
+mathematical formalisms as possible, let us use some set-theoretic notation
+to come up with a rigorous definition of a dataset grouping.
+Formally, *clustering* aims to find a *special kind*
+of a *$K$-partition* of the input dataset,
+which -- without loss of generality -- we can identify
+with the set $\{1, 2, \dots, n\}$ of indexes of observations (rows)
+in $\mathbf{X}$.
+
+
+
+
+{ BEGIN definition }
+We say that $\mathcal{C}=\{C_1,C_2,\dots,C_K\}$ forms
+a *$K$-partition* of the set $\{1, 2, \dots, n\}$,
+whenever:
+
+* $\bigcup_{k=1}^K C_k=C_1\cup C_2\cup\dots\cup C_K=\{1, 2, \dots, n\}$
+(the union of all clusters
+is the whole set; every point is assigned to some cluster;
+no point is neglected),
+
+* $C_k\cap C_l=\emptyset$ for all $k\neq l$ (clusters are pairwise disjoint;
+their intersection is empty; they share no common elements),
+
+* $C_k\neq\emptyset$ for all $k$ (each cluster is nonempty).
+
+<!-- * $C_k\subseteq\{1, 2, \dots, n\}$ for all $k$, -->
+{ END definition }
+
+
+<!--(\*) There is a one-to-one correspondence between partitions
+and equivalence relations-->
+
+In the label vector representation,
+we assume that $y_i = k$ iff $i\in C_k$, i.e.,
+the $i$-th point is assigned the $k$-th label if and only if
+it belongs to the $k$-th cluster.
+It is easily seen that each label vector yields
+a grouping of $\{1, 2, \dots, n\}$ that obviously fulfil
+the first two conditions in the above condition
+and that the third property is fulfilled by assuming
+that $(\forall k\in\{1,2,\dots,K\})$ $(\exists i\in\{1,2,\dots,n\})$
+$y_i = k$ (read: *for every $k$ there exists $i$ such that...*),
+i.e., each label occurs at least once in $\boldsymbol{y}$.
+
+
+
+
+
+{ BEGIN remark }
+The benefits of using mathematical notation is that we are super-precise,
+efficient and universal. Natural tongue is vague and leaves much room
+for interpretation. We used so many *words* to explain the above concepts.
+Once we build greater skill of *speaking* the language of mathematics
+(note that we've started with basic phrases such as *Good Afternoon*,
+*I am Sorry* and *Thank You*), it'll be more natural for
+us to just write:
+
+"Let $\mathcal{C}=\{ C_1,\dots, C_K \}$ s.t.
+$\textstyle\bigcup_{k=1}^K C_k = \{1,\dots, n\}$,
+$(\forall k\neq l)$ $C_k\cap C_l = \emptyset$, $C_k\neq \emptyset$"
+
+without all the talking. This is what more advanced book related
+to machine learning and statistics do. We'll get to that.
+By the way, thanks to this it's relatively easy to read maths
+papers (especially those from the 1950s) written in other languages
+(such as Russian, German or French).
+{ END remark }
+
+
+
+In theory, the number of possible $K$-partitions of a set
+with $n$ elements is given by
 *the Stirling number of the second kind*:
-
 \[
-\left\{{n \atop K}\right\}={\frac  {1}{K!}}\sum _{{j=0}}^{{K}}(-1)^{{K-j}}{\binom  {K}{j}}j^{n};
+\left\{{n \atop K}\right\}=\sum_{{j=0}}^{{K}} \frac{(-1)^{{j}}
+(K-j)^{n}}{j! (K-j)!} = \frac{K^n}{K!}
+- \frac{(K-1)^n}{(K-1)!}
++ \frac{(K-2)^n}{2 (K-2)!}
+- \frac{(K-3)^n}{6 (K-3)!}
++ \dots,
 \]
+where $n!=1\cdot 2 \cdot 3\cdot \dots\cdot n$ with $0!=1$ ($n$-factorial).
+In particular, already $\left\{{n \atop 2}\right\}=2^{n-1}-1$
+and $\left\{{n \atop K}\right\}\simeq K^n/K!$ for large $n$ -- that is a lot.
 
-e.g., already $\left\{{n \atop 2}\right\}=2^{n-1}-1$
-and $\left\{{n \atop 3}\right\}=O(3^n)$ -- that is a lot.
-Certainly, we are not just interested in "any" partition -- some of them
-will be more meaningful or valuable than others.
+
+
+$n$ | $\left\{{n \atop 2}\right\}$ | $\left\{{n \atop 3}\right\}$ | $\left\{{n \atop 4}\right\}$ | $\left\{{n \atop 5}\right\}$ | $\left\{{n \atop 6}\right\}$ | $\left\{{n \atop 7}\right\}$ | $\left\{{n \atop 8}\right\}$ | $\left\{{n \atop 9}\right\}$ | $\left\{{n \atop 10}\right\}$
+---:|-----------------------------:|-----------------------------:|-----------------------------:|-----------------------------:|-----------------------------:|-----------------------------:|-----------------------------:|-----------------------------:|-----------------------------:|
+2   | 1                            |                              |                              |                              |                              |                              |                              |                              |                              |
+3   | 3                            |                              | 1                            |                              |                              |                              |                              |                              |                              |
+4   | 7                            |                              | 6                            | 1                            |                              |                              |                              |                              |                              |
+5   | 15                           | 25                           | 10                           | 1                            |                              |                              |                              |                              |                              |
+6   | 31                           | 90                           | 65                           | 15                           | 1                            |                              |                              |                              |                              |
+7   | 63                           | 301                          | 350                          | 140                          | 21                           | 1                            |                              |                              |                              |
+8   | 127                          | 966                          | 1701                         | 1050                         | 266                          | 28                           | 1                            |                              |                              |
+9   | 255                          | 3025                         | 7770                         | 6951                         | 2646                         | 462                          | 36                           | 1                            |                              |
+10  | 511                          | 9330                         | 34105                        | 42525                        | 22827                        | 5880                         | 750                          | 45                           | 1                            |
+
+Table: The number of possible partitions of a dataset with $n$ elements to $K$ clusters, denoted $\left\{{n \atop K}\right\}$, grows rapidly as $n$ increases {#tbl:stirling}
+
+
+
+
+### "Interesting" Partitions
+
+
+
+
+We are not just interested in "any" partition, because
+there are simply way too plentiful (compare Table {@tbl:stirling}); some of them
+will certainly be more meaningful or valuable than others.
 However, even one of the most famous ML textbooks provides us with only
 a vague hint of what we might be looking for:
 
 
 
-"Definition".
-
-: Clustering concerns "segmenting a collection of objects into subsets
+{ BEGIN definition }
+(or, rather, a "definition").
+Clustering concerns "segmenting a collection of objects into subsets
 so that those within each cluster are more **closely related**
 to one another than objects assigned to different clusters" [@esl].
+{ END definition }
+
 
 It is not uncommon <!-- TODO: cite -->
 to equate the general definition of data clustering problems with... the
-particular outputs yield by specific clustering algorithms. It some sense,
+particular outputs generated by specific clustering algorithms. It some sense,
 that sounds fair. From this perspective, we might be interested in
 identifying the two main types of clustering algorithms:
 
 
-- **parametric** (model-based):
-    - find clusters of specific shapes or following specific multidimensional
-    probability distributions,
-    - e.g., $K$-means, expectation-maximisation for Gaussian mixtures (EM),
-    average linkage agglomerative clustering;
-- **nonparametric** (model-free):
-    - identify high-density or well-separable regions,
-    perhaps in the presence of noise points,
-    - e.g., single linkage agglomerative clustering, Genie, (H)DBSCAN, BIRCH.
+* *parametric* (model-based) --
+find clusters of specific shapes or following specific multidimensional
+probability distributions,
+e.g., $K$-means (see Chapter \@ref(chap:kmeans)),
+expectation-maximisation for Gaussian mixtures (EM),
+average linkage agglomerative clustering;
+
+* *nonparametric* (model-free) -- identify high-density or
+well-separable regions, perhaps in the presence of noise points,
+e.g., single linkage agglomerative clustering, Genie, (H)DBSCAN, BIRCH.
+
 
 
 
@@ -194,14 +335,14 @@ print(h)
 ```
 
 
-Remark.
-
-: There are $n(n-1)/2$ unique pairwise distances between $n$ points.
+{ BEGIN remark }
+There are $n(n-1)/2$ unique pairwise distances between $n$ points.
 Don't try calling `dist()` on large data matrices.
 Already $n=100{,}000$ points consumes 40 GB of available memory
 (assuming that each distance is stored as an 8-byte double-precision floating
 point number); packages `fastcluster` and `genie`, among other,
 aim to solve this problem.
+{ END remark }
 
 <!--
 #n <- 100000
@@ -467,3 +608,9 @@ TODO: reuse from the K-means chapter
 ### Further Reading
 
 ...
+
+
+Note that we have studied "crisp" (disjoint) partitions only.
+
+[@jainsurvey]
+[@wierzchon_klopotek]

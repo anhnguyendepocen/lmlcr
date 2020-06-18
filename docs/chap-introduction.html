@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1 Introduction | Machine Learning Classics with R</title>
+  <meta name="description" content="Explore some of the most fundamental algorithms which have stood the test of time and provide the basis for innovative solutions in data-driven AI. Learn how to use the R language for implementing various stages of data processing and modelling activities. Appreciate mathematics as the universal language for formalising data-intense problems and communicating their solutions. The book is for you if you’re yet to be fluent with university-level linear algebra, calculus and probability theory or you’ve forgotten all the maths you’ve ever learned, and are seeking a gentle, yet thorough, introduction to the topic." />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1 Introduction | Machine Learning Classics with R" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://lmlcr.gagolewski.com" />
+  
+  <meta property="og:description" content="Explore some of the most fundamental algorithms which have stood the test of time and provide the basis for innovative solutions in data-driven AI. Learn how to use the R language for implementing various stages of data processing and modelling activities. Appreciate mathematics as the universal language for formalising data-intense problems and communicating their solutions. The book is for you if you’re yet to be fluent with university-level linear algebra, calculus and probability theory or you’ve forgotten all the maths you’ve ever learned, and are seeking a gentle, yet thorough, introduction to the topic." />
+  <meta name="github-repo" content="gagolews/lmlcr" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1 Introduction | Machine Learning Classics with R" />
+  
+  <meta name="twitter:description" content="Explore some of the most fundamental algorithms which have stood the test of time and provide the basis for innovative solutions in data-driven AI. Learn how to use the R language for implementing various stages of data processing and modelling activities. Appreciate mathematics as the universal language for formalising data-intense problems and communicating their solutions. The book is for you if you’re yet to be fluent with university-level linear algebra, calculus and probability theory or you’ve forgotten all the maths you’ve ever learned, and are seeking a gentle, yet thorough, introduction to the topic." />
+  
+
+<meta name="author" content="Marek Gagolewski" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="chap-hclust.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.exercise {
+    font-style: italic;
+    border-left: 2px solid gray;
+    padding-left: 1em;
+}
+
+details.solution {
+    border-left: 2px solid #ff8888;
+    padding-left: 1em;
+    margin-bottom: 2em;
+}
+
+div.remark {
+    border-left: 2px solid gray;
+    padding-left: 1em;
+}
+
+div.definition {
+    font-style: italic;
+    border-left: 2px solid #550000;
+    padding-left: 1em;
+}
+
+</style>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li style='font-style: italic' ><a href="./">LMLCR</a></li>
+<li style='font-size: smaller' ><a href="https://www.gagolewski.com">Marek Gagolewski</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="chap-introduction.html"><a href="chap-introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="chap-introduction.html"><a href="chap-introduction.html#what-is-machine-learning"><i class="fa fa-check"></i><b>1.1</b> What is Machine Learning?</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="chap-introduction.html"><a href="chap-introduction.html#data-sources"><i class="fa fa-check"></i><b>1.1.1</b> Data Sources</a></li>
+<li class="chapter" data-level="1.1.2" data-path="chap-introduction.html"><a href="chap-introduction.html#main-types-of-machine-learning-problems"><i class="fa fa-check"></i><b>1.1.2</b> Main Types of Machine Learning Problems</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="chap-introduction.html"><a href="chap-introduction.html#input-data-x"><i class="fa fa-check"></i><b>1.2</b> Input Data, <strong>X</strong></a><ul>
+<li class="chapter" data-level="1.2.1" data-path="chap-introduction.html"><a href="chap-introduction.html#abstract-formalism"><i class="fa fa-check"></i><b>1.2.1</b> Abstract Formalism</a></li>
+<li class="chapter" data-level="1.2.2" data-path="chap-introduction.html"><a href="chap-introduction.html#concrete-example"><i class="fa fa-check"></i><b>1.2.2</b> Concrete Example</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="chap-introduction.html"><a href="chap-introduction.html#unsupervised-learning"><i class="fa fa-check"></i><b>1.3</b> Unsupervised Learning</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="chap-introduction.html"><a href="chap-introduction.html#dimensionality-reduction"><i class="fa fa-check"></i><b>1.3.1</b> Dimensionality Reduction</a></li>
+<li class="chapter" data-level="1.3.2" data-path="chap-introduction.html"><a href="chap-introduction.html#anomaly-detection"><i class="fa fa-check"></i><b>1.3.2</b> Anomaly Detection</a></li>
+<li class="chapter" data-level="1.3.3" data-path="chap-introduction.html"><a href="chap-introduction.html#clustering"><i class="fa fa-check"></i><b>1.3.3</b> Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="chap-introduction.html"><a href="chap-introduction.html#supervised-learning"><i class="fa fa-check"></i><b>1.4</b> Supervised Learning</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="chap-introduction.html"><a href="chap-introduction.html#desired-outputs-y"><i class="fa fa-check"></i><b>1.4.1</b> Desired Outputs, <strong>y</strong></a></li>
+<li class="chapter" data-level="1.4.2" data-path="chap-introduction.html"><a href="chap-introduction.html#types-of-supervised-learning-problems"><i class="fa fa-check"></i><b>1.4.2</b> Types of Supervised Learning Problems</a></li>
+<li class="chapter" data-level="1.4.3" data-path="chap-introduction.html"><a href="chap-introduction.html#one-dataset-many-problems"><i class="fa fa-check"></i><b>1.4.3</b> One Dataset – Many Problems</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="chap-hclust.html"><a href="chap-hclust.html"><i class="fa fa-check"></i><b>2</b> Agglomerative Hierarchical Clustering</a><ul>
+<li class="chapter" data-level="2.1" data-path="chap-hclust.html"><a href="chap-hclust.html#dataset-partitions"><i class="fa fa-check"></i><b>2.1</b> Dataset Partitions</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="chap-hclust.html"><a href="chap-hclust.html#label-vectors"><i class="fa fa-check"></i><b>2.1.1</b> Label Vectors</a></li>
+<li class="chapter" data-level="2.1.2" data-path="chap-hclust.html"><a href="chap-hclust.html#k-partitions"><i class="fa fa-check"></i><b>2.1.2</b> K-Partitions (*)</a></li>
+<li class="chapter" data-level="2.1.3" data-path="chap-hclust.html"><a href="chap-hclust.html#interesting-partitions"><i class="fa fa-check"></i><b>2.1.3</b> “Interesting” Partitions</a></li>
+<li class="chapter" data-level="2.1.4" data-path="chap-hclust.html"><a href="chap-hclust.html#introduction"><i class="fa fa-check"></i><b>2.1.4</b> Introduction</a></li>
+<li class="chapter" data-level="2.1.5" data-path="chap-hclust.html"><a href="chap-hclust.html#example-in-r"><i class="fa fa-check"></i><b>2.1.5</b> Example in R</a></li>
+<li class="chapter" data-level="2.1.6" data-path="chap-hclust.html"><a href="chap-hclust.html#linkage-functions"><i class="fa fa-check"></i><b>2.1.6</b> Linkage Functions</a></li>
+<li class="chapter" data-level="2.1.7" data-path="chap-hclust.html"><a href="chap-hclust.html#cluster-dendrograms"><i class="fa fa-check"></i><b>2.1.7</b> Cluster Dendrograms</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="chap-hclust.html"><a href="chap-hclust.html#exercises"><i class="fa fa-check"></i><b>2.2</b> Exercises</a></li>
+<li class="chapter" data-level="2.3" data-path="chap-hclust.html"><a href="chap-hclust.html#outro"><i class="fa fa-check"></i><b>2.3</b> Outro</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="chap-hclust.html"><a href="chap-hclust.html#remarks"><i class="fa fa-check"></i><b>2.3.1</b> Remarks</a></li>
+<li class="chapter" data-level="2.3.2" data-path="chap-hclust.html"><a href="chap-hclust.html#further-reading"><i class="fa fa-check"></i><b>2.3.2</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="chap-knn.html"><a href="chap-knn.html"><i class="fa fa-check"></i><b>3</b> Classification and Regression with K-Nearest Neighbours</a><ul>
+<li class="chapter" data-level="3.1" data-path="chap-knn.html"><a href="chap-knn.html#introduction-1"><i class="fa fa-check"></i><b>3.1</b> Introduction</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="chap-knn.html"><a href="chap-knn.html#classification-task"><i class="fa fa-check"></i><b>3.1.1</b> Classification Task</a></li>
+<li class="chapter" data-level="3.1.2" data-path="chap-knn.html"><a href="chap-knn.html#data"><i class="fa fa-check"></i><b>3.1.2</b> Data</a></li>
+<li class="chapter" data-level="3.1.3" data-path="chap-knn.html"><a href="chap-knn.html#training-and-test-sets"><i class="fa fa-check"></i><b>3.1.3</b> Training and Test Sets</a></li>
+<li class="chapter" data-level="3.1.4" data-path="chap-knn.html"><a href="chap-knn.html#discussed-methods"><i class="fa fa-check"></i><b>3.1.4</b> Discussed Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="chap-knn.html"><a href="chap-knn.html#k-nearest-neighbour-classifier"><i class="fa fa-check"></i><b>3.2</b> K-nearest Neighbour Classifier</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="chap-knn.html"><a href="chap-knn.html#introduction-2"><i class="fa fa-check"></i><b>3.2.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2.2" data-path="chap-knn.html"><a href="chap-knn.html#example-in-r-1"><i class="fa fa-check"></i><b>3.2.2</b> Example in R</a></li>
+<li class="chapter" data-level="3.2.3" data-path="chap-knn.html"><a href="chap-knn.html#feature-engineering"><i class="fa fa-check"></i><b>3.2.3</b> Feature Engineering</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="chap-knn.html"><a href="chap-knn.html#model-assessment-and-selection"><i class="fa fa-check"></i><b>3.3</b> Model Assessment and Selection</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="chap-knn.html"><a href="chap-knn.html#performance-metrics"><i class="fa fa-check"></i><b>3.3.1</b> Performance Metrics</a></li>
+<li class="chapter" data-level="3.3.2" data-path="chap-knn.html"><a href="chap-knn.html#how-to-choose-k-for-k-nn-classification"><i class="fa fa-check"></i><b>3.3.2</b> How to Choose K for K-NN Classification?</a></li>
+<li class="chapter" data-level="3.3.3" data-path="chap-knn.html"><a href="chap-knn.html#training-validation-and-test-sets"><i class="fa fa-check"></i><b>3.3.3</b> Training, Validation and Test sets</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="chap-knn.html"><a href="chap-knn.html#implementing-a-k-nn-classifier"><i class="fa fa-check"></i><b>3.4</b> Implementing a K-NN Classifier (*)</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="chap-knn.html"><a href="chap-knn.html#factor-data-type"><i class="fa fa-check"></i><b>3.4.1</b> Factor Data Type</a></li>
+<li class="chapter" data-level="3.4.2" data-path="chap-knn.html"><a href="chap-knn.html#main-routine"><i class="fa fa-check"></i><b>3.4.2</b> Main Routine (*)</a></li>
+<li class="chapter" data-level="3.4.3" data-path="chap-knn.html"><a href="chap-knn.html#mode"><i class="fa fa-check"></i><b>3.4.3</b> Mode</a></li>
+<li class="chapter" data-level="3.4.4" data-path="chap-knn.html"><a href="chap-knn.html#nn-search-routines"><i class="fa fa-check"></i><b>3.4.4</b> NN Search Routines (*)</a></li>
+<li class="chapter" data-level="3.4.5" data-path="chap-knn.html"><a href="chap-knn.html#different-metrics"><i class="fa fa-check"></i><b>3.4.5</b> Different Metrics (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="chap-knn.html"><a href="chap-knn.html#exercises-1"><i class="fa fa-check"></i><b>3.5</b> Exercises</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="chap-knn.html"><a href="chap-knn.html#wine-quality-best-k-nn-parameters-via-cross-validation"><i class="fa fa-check"></i><b>3.5.1</b> Wine Quality – Best K-NN Parameters via Cross-Validation (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="chap-knn.html"><a href="chap-knn.html#outro-1"><i class="fa fa-check"></i><b>3.6</b> Outro</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="chap-knn.html"><a href="chap-knn.html#remarks-1"><i class="fa fa-check"></i><b>3.6.1</b> Remarks</a></li>
+<li class="chapter" data-level="3.6.2" data-path="chap-knn.html"><a href="chap-knn.html#side-note-k-nn-regression"><i class="fa fa-check"></i><b>3.6.2</b> Side Note: K-NN Regression</a></li>
+<li class="chapter" data-level="3.6.3" data-path="chap-knn.html"><a href="chap-knn.html#further-reading-1"><i class="fa fa-check"></i><b>3.6.3</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="chap-trees.html"><a href="chap-trees.html"><i class="fa fa-check"></i><b>4</b> Decision and Regression Trees</a><ul>
+<li class="chapter" data-level="4.1" data-path="chap-trees.html"><a href="chap-trees.html#introduction-3"><i class="fa fa-check"></i><b>4.1</b> Introduction</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="chap-trees.html"><a href="chap-trees.html#classification-task-1"><i class="fa fa-check"></i><b>4.1.1</b> Classification Task</a></li>
+<li class="chapter" data-level="4.1.2" data-path="chap-trees.html"><a href="chap-trees.html#data-1"><i class="fa fa-check"></i><b>4.1.2</b> Data</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="chap-trees.html"><a href="chap-trees.html#decision-trees"><i class="fa fa-check"></i><b>4.2</b> Decision Trees</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="chap-trees.html"><a href="chap-trees.html#introduction-4"><i class="fa fa-check"></i><b>4.2.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2.2" data-path="chap-trees.html"><a href="chap-trees.html#example-in-r-2"><i class="fa fa-check"></i><b>4.2.2</b> Example in R</a></li>
+<li class="chapter" data-level="4.2.3" data-path="chap-trees.html"><a href="chap-trees.html#a-note-on-decision-tree-learning"><i class="fa fa-check"></i><b>4.2.3</b> A Note on Decision Tree Learning</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="chap-trees.html"><a href="chap-trees.html#exercises-2"><i class="fa fa-check"></i><b>4.3</b> Exercises</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="chap-trees.html"><a href="chap-trees.html#edstats-where-girls-are-better-at-maths-than-boys"><i class="fa fa-check"></i><b>4.3.1</b> EdStats – Where Girls Are Better at Maths Than Boys?</a></li>
+<li class="chapter" data-level="4.3.2" data-path="chap-trees.html"><a href="chap-trees.html#edstats-and-world-factbook-joining-forces"><i class="fa fa-check"></i><b>4.3.2</b> EdStats and World Factbook – Joining Forces</a></li>
+<li class="chapter" data-level="4.3.3" data-path="chap-trees.html"><a href="chap-trees.html#wine-quality-random-forest-and-xgboost"><i class="fa fa-check"></i><b>4.3.3</b> Wine Quality – Random Forest and XGBoost (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="chap-trees.html"><a href="chap-trees.html#outro-2"><i class="fa fa-check"></i><b>4.4</b> Outro</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="chap-trees.html"><a href="chap-trees.html#remarks-2"><i class="fa fa-check"></i><b>4.4.1</b> Remarks</a></li>
+<li class="chapter" data-level="4.4.2" data-path="chap-trees.html"><a href="chap-trees.html#further-reading-2"><i class="fa fa-check"></i><b>4.4.2</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html"><i class="fa fa-check"></i><b>5</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="5.1" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#simple-regression"><i class="fa fa-check"></i><b>5.1</b> Simple Regression</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#introduction-5"><i class="fa fa-check"></i><b>5.1.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.1.2" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#search-space-and-objective"><i class="fa fa-check"></i><b>5.1.2</b> Search Space and Objective</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#simple-linear-regression"><i class="fa fa-check"></i><b>5.2</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#introduction-6"><i class="fa fa-check"></i><b>5.2.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2.2" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#solution-in-r"><i class="fa fa-check"></i><b>5.2.2</b> Solution in R</a></li>
+<li class="chapter" data-level="5.2.3" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#analytic-solution"><i class="fa fa-check"></i><b>5.2.3</b> Analytic Solution</a></li>
+<li class="chapter" data-level="5.2.4" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#derivation-of-the-solution"><i class="fa fa-check"></i><b>5.2.4</b> Derivation of the Solution (**)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#exercises-3"><i class="fa fa-check"></i><b>5.3</b> Exercises</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#the-anscombe-quartet"><i class="fa fa-check"></i><b>5.3.1</b> The Anscombe Quartet</a></li>
+<li class="chapter" data-level="5.3.2" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#median-house-value-in-boston"><i class="fa fa-check"></i><b>5.3.2</b> Median House Value in Boston</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#outro-3"><i class="fa fa-check"></i><b>5.4</b> Outro</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#remarks-3"><i class="fa fa-check"></i><b>5.4.1</b> Remarks</a></li>
+<li class="chapter" data-level="5.4.2" data-path="chap-regression-simple.html"><a href="chap-regression-simple.html#further-reading-3"><i class="fa fa-check"></i><b>5.4.2</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html"><i class="fa fa-check"></i><b>6</b> Multiple Regression</a><ul>
+<li class="chapter" data-level="6.1" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#introduction-7"><i class="fa fa-check"></i><b>6.1</b> Introduction</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#formalism"><i class="fa fa-check"></i><b>6.1.1</b> Formalism</a></li>
+<li class="chapter" data-level="6.1.2" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#simple-linear-regression---recap"><i class="fa fa-check"></i><b>6.1.2</b> Simple Linear Regression - Recap</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#multiple-linear-regression"><i class="fa fa-check"></i><b>6.2</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#problem-formulation"><i class="fa fa-check"></i><b>6.2.1</b> Problem Formulation</a></li>
+<li class="chapter" data-level="6.2.2" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#fitting-a-linear-model-in-r"><i class="fa fa-check"></i><b>6.2.2</b> Fitting a Linear Model in R</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#finding-the-best-model"><i class="fa fa-check"></i><b>6.3</b> Finding the Best Model</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#model-diagnostics"><i class="fa fa-check"></i><b>6.3.1</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="6.3.2" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#variable-selection"><i class="fa fa-check"></i><b>6.3.2</b> Variable Selection</a></li>
+<li class="chapter" data-level="6.3.3" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#variable-transformation"><i class="fa fa-check"></i><b>6.3.3</b> Variable Transformation</a></li>
+<li class="chapter" data-level="6.3.4" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#predictive-vs.-descriptive-power"><i class="fa fa-check"></i><b>6.3.4</b> Predictive vs. Descriptive Power</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#exercises-4"><i class="fa fa-check"></i><b>6.4</b> Exercises</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#anscombes-quartet-revisited"><i class="fa fa-check"></i><b>6.4.1</b> Anscombe’s Quartet Revisited</a></li>
+<li class="chapter" data-level="6.4.2" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#countries-of-the-world-simple-models-involving-the-gdp-per-capita"><i class="fa fa-check"></i><b>6.4.2</b> Countries of the World – Simple models involving the GDP per capita</a></li>
+<li class="chapter" data-level="6.4.3" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#countries-of-the-world-most-correlated-variables"><i class="fa fa-check"></i><b>6.4.3</b> Countries of the World – Most correlated variables (*)</a></li>
+<li class="chapter" data-level="6.4.4" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#countries-of-the-world-a-non-linear-model-based-on-the-gdp-per-capita"><i class="fa fa-check"></i><b>6.4.4</b> Countries of the World – A non-linear model based on the GDP per capita</a></li>
+<li class="chapter" data-level="6.4.5" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#countries-of-the-world-a-multiple-regression-model-for-the-per-capita-gdp"><i class="fa fa-check"></i><b>6.4.5</b> Countries of the World – A multiple regression model for the per capita GDP</a></li>
+<li class="chapter" data-level="6.4.6" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#median-house-value-in-boston-continued"><i class="fa fa-check"></i><b>6.4.6</b> Median House Value in Boston (Continued)</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#outro-4"><i class="fa fa-check"></i><b>6.5</b> Outro</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#remarks-4"><i class="fa fa-check"></i><b>6.5.1</b> Remarks</a></li>
+<li class="chapter" data-level="6.5.2" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#other-methods-for-regression"><i class="fa fa-check"></i><b>6.5.2</b> Other Methods for Regression</a></li>
+<li class="chapter" data-level="6.5.3" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#derivation-of-the-solution-1"><i class="fa fa-check"></i><b>6.5.3</b> Derivation of the Solution (**)</a></li>
+<li class="chapter" data-level="6.5.4" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#solution-in-matrix-form"><i class="fa fa-check"></i><b>6.5.4</b> Solution in Matrix Form (***)</a></li>
+<li class="chapter" data-level="6.5.5" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#pearsons-r-in-matrix-form"><i class="fa fa-check"></i><b>6.5.5</b> Pearson’s r in Matrix Form (**)</a></li>
+<li class="chapter" data-level="6.5.6" data-path="chap-regression-multiple.html"><a href="chap-regression-multiple.html#further-reading-4"><i class="fa fa-check"></i><b>6.5.6</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="chap-logistic.html"><a href="chap-logistic.html"><i class="fa fa-check"></i><b>7</b> Classification with Linear Models</a><ul>
+<li class="chapter" data-level="7.1" data-path="chap-logistic.html"><a href="chap-logistic.html#introduction-8"><i class="fa fa-check"></i><b>7.1</b> Introduction</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="chap-logistic.html"><a href="chap-logistic.html#classification-task-2"><i class="fa fa-check"></i><b>7.1.1</b> Classification Task</a></li>
+<li class="chapter" data-level="7.1.2" data-path="chap-logistic.html"><a href="chap-logistic.html#data-2"><i class="fa fa-check"></i><b>7.1.2</b> Data</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="chap-logistic.html"><a href="chap-logistic.html#binary-logistic-regression"><i class="fa fa-check"></i><b>7.2</b> Binary Logistic Regression</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="chap-logistic.html"><a href="chap-logistic.html#motivation"><i class="fa fa-check"></i><b>7.2.1</b> Motivation</a></li>
+<li class="chapter" data-level="7.2.2" data-path="chap-logistic.html"><a href="chap-logistic.html#logistic-model"><i class="fa fa-check"></i><b>7.2.2</b> Logistic Model</a></li>
+<li class="chapter" data-level="7.2.3" data-path="chap-logistic.html"><a href="chap-logistic.html#example-in-r-3"><i class="fa fa-check"></i><b>7.2.3</b> Example in R</a></li>
+<li class="chapter" data-level="7.2.4" data-path="chap-logistic.html"><a href="chap-logistic.html#loss-function-cross-entropy"><i class="fa fa-check"></i><b>7.2.4</b> Loss Function: Cross-entropy</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="chap-logistic.html"><a href="chap-logistic.html#exercises-5"><i class="fa fa-check"></i><b>7.3</b> Exercises</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="chap-logistic.html"><a href="chap-logistic.html#edstats-fitting-of-binary-logistic-regression-models"><i class="fa fa-check"></i><b>7.3.1</b> EdStats – Fitting of Binary Logistic Regression Models</a></li>
+<li class="chapter" data-level="7.3.2" data-path="chap-logistic.html"><a href="chap-logistic.html#edstats-variable-selection-in-binary-logistic-regression"><i class="fa fa-check"></i><b>7.3.2</b> EdStats – Variable Selection in Binary Logistic Regression (*)</a></li>
+<li class="chapter" data-level="7.3.3" data-path="chap-logistic.html"><a href="chap-logistic.html#currency-exchange-rates-growthfall"><i class="fa fa-check"></i><b>7.3.3</b> Currency Exchange Rates Growth/Fall</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="chap-logistic.html"><a href="chap-logistic.html#outro-5"><i class="fa fa-check"></i><b>7.4</b> Outro</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="chap-logistic.html"><a href="chap-logistic.html#remarks-5"><i class="fa fa-check"></i><b>7.4.1</b> Remarks</a></li>
+<li class="chapter" data-level="7.4.2" data-path="chap-logistic.html"><a href="chap-logistic.html#further-reading-5"><i class="fa fa-check"></i><b>7.4.2</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html"><i class="fa fa-check"></i><b>8</b> Continuous Optimisation with Iterative Algorithms</a><ul>
+<li class="chapter" data-level="8.1" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#introduction-9"><i class="fa fa-check"></i><b>8.1</b> Introduction</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#optimisation-problems"><i class="fa fa-check"></i><b>8.1.1</b> Optimisation Problems</a></li>
+<li class="chapter" data-level="8.1.2" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#types-of-minima-and-maxima"><i class="fa fa-check"></i><b>8.1.2</b> Types of Minima and Maxima</a></li>
+<li class="chapter" data-level="8.1.3" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#example-objective-over-a-2d-domain"><i class="fa fa-check"></i><b>8.1.3</b> Example Objective over a 2D Domain</a></li>
+<li class="chapter" data-level="8.1.4" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#example-optimisation-problems-in-machine-learning"><i class="fa fa-check"></i><b>8.1.4</b> Example Optimisation Problems in Machine Learning</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#iterative-methods"><i class="fa fa-check"></i><b>8.2</b> Iterative Methods</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#introduction-10"><i class="fa fa-check"></i><b>8.2.1</b> Introduction</a></li>
+<li class="chapter" data-level="8.2.2" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#example-in-r-4"><i class="fa fa-check"></i><b>8.2.2</b> Example in R</a></li>
+<li class="chapter" data-level="8.2.3" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#convergence-to-local-optima"><i class="fa fa-check"></i><b>8.2.3</b> Convergence to Local Optima</a></li>
+<li class="chapter" data-level="8.2.4" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#random-restarts"><i class="fa fa-check"></i><b>8.2.4</b> Random Restarts</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#gradient-descent"><i class="fa fa-check"></i><b>8.3</b> Gradient Descent</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#function-gradient"><i class="fa fa-check"></i><b>8.3.1</b> Function Gradient (*)</a></li>
+<li class="chapter" data-level="8.3.2" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#three-facts-on-the-gradient"><i class="fa fa-check"></i><b>8.3.2</b> Three Facts on the Gradient</a></li>
+<li class="chapter" data-level="8.3.3" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#gradient-descent-algorithm-gd"><i class="fa fa-check"></i><b>8.3.3</b> Gradient Descent Algorithm (GD)</a></li>
+<li class="chapter" data-level="8.3.4" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#example-mnist"><i class="fa fa-check"></i><b>8.3.4</b> Example: MNIST (*)</a></li>
+<li class="chapter" data-level="8.3.5" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#stochastic-gradient-descent-sgd"><i class="fa fa-check"></i><b>8.3.5</b> Stochastic Gradient Descent (SGD) (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#a-note-on-convex-optimisation"><i class="fa fa-check"></i><b>8.4</b> A Note on Convex Optimisation (*)</a></li>
+<li class="chapter" data-level="8.5" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#outro-6"><i class="fa fa-check"></i><b>8.5</b> Outro</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#remarks-6"><i class="fa fa-check"></i><b>8.5.1</b> Remarks</a></li>
+<li class="chapter" data-level="8.5.2" data-path="chap-optimisation-continuous.html"><a href="chap-optimisation-continuous.html#further-reading-6"><i class="fa fa-check"></i><b>8.5.2</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="chap-kmeans.html"><a href="chap-kmeans.html"><i class="fa fa-check"></i><b>9</b> Clustering with K-Means</a><ul>
+<li class="chapter" data-level="9.1" data-path="chap-kmeans.html"><a href="chap-kmeans.html#k-means-clustering"><i class="fa fa-check"></i><b>9.1</b> K-means Clustering</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="chap-kmeans.html"><a href="chap-kmeans.html#example-in-r-5"><i class="fa fa-check"></i><b>9.1.1</b> Example in R</a></li>
+<li class="chapter" data-level="9.1.2" data-path="chap-kmeans.html"><a href="chap-kmeans.html#problem-statement"><i class="fa fa-check"></i><b>9.1.2</b> Problem Statement</a></li>
+<li class="chapter" data-level="9.1.3" data-path="chap-kmeans.html"><a href="chap-kmeans.html#algorithms-for-the-k-means-problem"><i class="fa fa-check"></i><b>9.1.3</b> Algorithms for the K-means Problem</a></li>
+<li class="chapter" data-level="9.1.4" data-path="chap-kmeans.html"><a href="chap-kmeans.html#k-means-revisited"><i class="fa fa-check"></i><b>9.1.4</b> K-means Revisited</a></li>
+<li class="chapter" data-level="9.1.5" data-path="chap-kmeans.html"><a href="chap-kmeans.html#optim-vs.-kmeans"><i class="fa fa-check"></i><b>9.1.5</b> optim() vs. kmeans()</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="chap-kmeans.html"><a href="chap-kmeans.html#exercises-6"><i class="fa fa-check"></i><b>9.2</b> Exercises</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="chap-kmeans.html"><a href="chap-kmeans.html#clustering-of-the-world-factbook"><i class="fa fa-check"></i><b>9.2.1</b> Clustering of the World Factbook</a></li>
+<li class="chapter" data-level="9.2.2" data-path="chap-kmeans.html"><a href="chap-kmeans.html#unbalance-dataset-k-means-needs-multiple-starts"><i class="fa fa-check"></i><b>9.2.2</b> Unbalance Dataset – K-Means Needs Multiple Starts</a></li>
+<li class="chapter" data-level="9.2.3" data-path="chap-kmeans.html"><a href="chap-kmeans.html#clustering-of-typical-2d-benchmark-datasets"><i class="fa fa-check"></i><b>9.2.3</b> Clustering of Typical 2D Benchmark Datasets</a></li>
+<li class="chapter" data-level="9.2.4" data-path="chap-kmeans.html"><a href="chap-kmeans.html#wine-quality-volatile.acidity-and-sulphates"><i class="fa fa-check"></i><b>9.2.4</b> Wine Quality – <code>volatile.acidity</code> and <code>sulphates</code></a></li>
+<li class="chapter" data-level="9.2.5" data-path="chap-kmeans.html"><a href="chap-kmeans.html#wine-quality-chlorides-and-total.sulfur.dioxide"><i class="fa fa-check"></i><b>9.2.5</b> Wine Quality – <code>chlorides</code> and <code>total.sulfur.dioxide</code></a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="chap-kmeans.html"><a href="chap-kmeans.html#outro-7"><i class="fa fa-check"></i><b>9.3</b> Outro</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="chap-kmeans.html"><a href="chap-kmeans.html#remarks-7"><i class="fa fa-check"></i><b>9.3.1</b> Remarks</a></li>
+<li class="chapter" data-level="9.3.2" data-path="chap-kmeans.html"><a href="chap-kmeans.html#further-reading-7"><i class="fa fa-check"></i><b>9.3.2</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="chap-optimisation-discrete.html"><a href="chap-optimisation-discrete.html"><i class="fa fa-check"></i><b>10</b> Discrete Optimisation</a><ul>
+<li class="chapter" data-level="10.1" data-path="chap-optimisation-discrete.html"><a href="chap-optimisation-discrete.html#introduction-11"><i class="fa fa-check"></i><b>10.1</b> Introduction</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="chap-optimisation-discrete.html"><a href="chap-optimisation-discrete.html#recap"><i class="fa fa-check"></i><b>10.1.1</b> Recap</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="chap-optimisation-discrete.html"><a href="chap-optimisation-discrete.html#outro-8"><i class="fa fa-check"></i><b>10.2</b> Outro</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="chap-optimisation-discrete.html"><a href="chap-optimisation-discrete.html#remarks-8"><i class="fa fa-check"></i><b>10.2.1</b> Remarks</a></li>
+<li class="chapter" data-level="10.2.2" data-path="chap-optimisation-discrete.html"><a href="chap-optimisation-discrete.html#further-reading-8"><i class="fa fa-check"></i><b>10.2.2</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="chap-images.html"><a href="chap-images.html"><i class="fa fa-check"></i><b>11</b> Shallow and Deep Neural Networks</a><ul>
+<li class="chapter" data-level="11.1" data-path="chap-images.html"><a href="chap-images.html#introduction-12"><i class="fa fa-check"></i><b>11.1</b> Introduction</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="chap-images.html"><a href="chap-images.html#binary-logistic-regression-recap"><i class="fa fa-check"></i><b>11.1.1</b> Binary Logistic Regression: Recap</a></li>
+<li class="chapter" data-level="11.1.2" data-path="chap-images.html"><a href="chap-images.html#data-3"><i class="fa fa-check"></i><b>11.1.2</b> Data</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="chap-images.html"><a href="chap-images.html#multinomial-logistic-regression"><i class="fa fa-check"></i><b>11.2</b> Multinomial Logistic Regression</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="chap-images.html"><a href="chap-images.html#a-note-on-data-representation"><i class="fa fa-check"></i><b>11.2.1</b> A Note on Data Representation</a></li>
+<li class="chapter" data-level="11.2.2" data-path="chap-images.html"><a href="chap-images.html#extending-logistic-regression"><i class="fa fa-check"></i><b>11.2.2</b> Extending Logistic Regression</a></li>
+<li class="chapter" data-level="11.2.3" data-path="chap-images.html"><a href="chap-images.html#softmax-function"><i class="fa fa-check"></i><b>11.2.3</b> Softmax Function</a></li>
+<li class="chapter" data-level="11.2.4" data-path="chap-images.html"><a href="chap-images.html#one-hot-encoding-and-decoding"><i class="fa fa-check"></i><b>11.2.4</b> One-Hot Encoding and Decoding</a></li>
+<li class="chapter" data-level="11.2.5" data-path="chap-images.html"><a href="chap-images.html#cross-entropy-revisited"><i class="fa fa-check"></i><b>11.2.5</b> Cross-entropy Revisited</a></li>
+<li class="chapter" data-level="11.2.6" data-path="chap-images.html"><a href="chap-images.html#problem-formulation-in-matrix-form"><i class="fa fa-check"></i><b>11.2.6</b> Problem Formulation in Matrix Form (**)</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="chap-images.html"><a href="chap-images.html#artificial-neural-networks"><i class="fa fa-check"></i><b>11.3</b> Artificial Neural Networks</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="chap-images.html"><a href="chap-images.html#artificial-neuron"><i class="fa fa-check"></i><b>11.3.1</b> Artificial Neuron</a></li>
+<li class="chapter" data-level="11.3.2" data-path="chap-images.html"><a href="chap-images.html#logistic-regression-as-a-neural-network"><i class="fa fa-check"></i><b>11.3.2</b> Logistic Regression as a Neural Network</a></li>
+<li class="chapter" data-level="11.3.3" data-path="chap-images.html"><a href="chap-images.html#example-in-r-6"><i class="fa fa-check"></i><b>11.3.3</b> Example in R</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="chap-images.html"><a href="chap-images.html#deep-neural-networks"><i class="fa fa-check"></i><b>11.4</b> Deep Neural Networks</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="chap-images.html"><a href="chap-images.html#introduction-13"><i class="fa fa-check"></i><b>11.4.1</b> Introduction</a></li>
+<li class="chapter" data-level="11.4.2" data-path="chap-images.html"><a href="chap-images.html#activation-functions"><i class="fa fa-check"></i><b>11.4.2</b> Activation Functions</a></li>
+<li class="chapter" data-level="11.4.3" data-path="chap-images.html"><a href="chap-images.html#example-in-r---2-layers"><i class="fa fa-check"></i><b>11.4.3</b> Example in R - 2 Layers</a></li>
+<li class="chapter" data-level="11.4.4" data-path="chap-images.html"><a href="chap-images.html#example-in-r---6-layers"><i class="fa fa-check"></i><b>11.4.4</b> Example in R - 6 Layers</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="chap-images.html"><a href="chap-images.html#preprocessing-of-data"><i class="fa fa-check"></i><b>11.5</b> Preprocessing of Data</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="chap-images.html"><a href="chap-images.html#introduction-14"><i class="fa fa-check"></i><b>11.5.1</b> Introduction</a></li>
+<li class="chapter" data-level="11.5.2" data-path="chap-images.html"><a href="chap-images.html#image-deskewing"><i class="fa fa-check"></i><b>11.5.2</b> Image Deskewing</a></li>
+<li class="chapter" data-level="11.5.3" data-path="chap-images.html"><a href="chap-images.html#summary-of-all-the-models-considered"><i class="fa fa-check"></i><b>11.5.3</b> Summary of All the Models Considered</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="chap-images.html"><a href="chap-images.html#outro-9"><i class="fa fa-check"></i><b>11.6</b> Outro</a><ul>
+<li class="chapter" data-level="11.6.1" data-path="chap-images.html"><a href="chap-images.html#remarks-9"><i class="fa fa-check"></i><b>11.6.1</b> Remarks</a></li>
+<li class="chapter" data-level="11.6.2" data-path="chap-images.html"><a href="chap-images.html#beyond-mnist"><i class="fa fa-check"></i><b>11.6.2</b> Beyond MNIST</a></li>
+<li class="chapter" data-level="11.6.3" data-path="chap-images.html"><a href="chap-images.html#further-reading-9"><i class="fa fa-check"></i><b>11.6.3</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="chap-recommenders.html"><a href="chap-recommenders.html"><i class="fa fa-check"></i><b>12</b> Recommender Systems</a><ul>
+<li class="chapter" data-level="12.1" data-path="chap-recommenders.html"><a href="chap-recommenders.html#introduction-15"><i class="fa fa-check"></i><b>12.1</b> Introduction</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="chap-recommenders.html"><a href="chap-recommenders.html#the-netflix-prize"><i class="fa fa-check"></i><b>12.1.1</b> The Netflix Prize</a></li>
+<li class="chapter" data-level="12.1.2" data-path="chap-recommenders.html"><a href="chap-recommenders.html#main-approaches"><i class="fa fa-check"></i><b>12.1.2</b> Main Approaches</a></li>
+<li class="chapter" data-level="12.1.3" data-path="chap-recommenders.html"><a href="chap-recommenders.html#formalism-1"><i class="fa fa-check"></i><b>12.1.3</b> Formalism</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="chap-recommenders.html"><a href="chap-recommenders.html#collaborative-filtering"><i class="fa fa-check"></i><b>12.2</b> Collaborative Filtering</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="chap-recommenders.html"><a href="chap-recommenders.html#example"><i class="fa fa-check"></i><b>12.2.1</b> Example</a></li>
+<li class="chapter" data-level="12.2.2" data-path="chap-recommenders.html"><a href="chap-recommenders.html#similarity-measures"><i class="fa fa-check"></i><b>12.2.2</b> Similarity Measures</a></li>
+<li class="chapter" data-level="12.2.3" data-path="chap-recommenders.html"><a href="chap-recommenders.html#user-based-collaborative-filtering"><i class="fa fa-check"></i><b>12.2.3</b> User-Based Collaborative Filtering</a></li>
+<li class="chapter" data-level="12.2.4" data-path="chap-recommenders.html"><a href="chap-recommenders.html#item-based-collaborative-filtering"><i class="fa fa-check"></i><b>12.2.4</b> Item-Based Collaborative Filtering</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="chap-recommenders.html"><a href="chap-recommenders.html#exercise-the-movielens-dataset"><i class="fa fa-check"></i><b>12.3</b> Exercise: The MovieLens Dataset (*)</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="chap-recommenders.html"><a href="chap-recommenders.html#dataset"><i class="fa fa-check"></i><b>12.3.1</b> Dataset</a></li>
+<li class="chapter" data-level="12.3.2" data-path="chap-recommenders.html"><a href="chap-recommenders.html#data-cleansing"><i class="fa fa-check"></i><b>12.3.2</b> Data Cleansing</a></li>
+<li class="chapter" data-level="12.3.3" data-path="chap-recommenders.html"><a href="chap-recommenders.html#item-item-similarities"><i class="fa fa-check"></i><b>12.3.3</b> Item-Item Similarities</a></li>
+<li class="chapter" data-level="12.3.4" data-path="chap-recommenders.html"><a href="chap-recommenders.html#example-recommendations"><i class="fa fa-check"></i><b>12.3.4</b> Example Recommendations</a></li>
+<li class="chapter" data-level="12.3.5" data-path="chap-recommenders.html"><a href="chap-recommenders.html#clustering-1"><i class="fa fa-check"></i><b>12.3.5</b> Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="chap-recommenders.html"><a href="chap-recommenders.html#outro-10"><i class="fa fa-check"></i><b>12.4</b> Outro</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="chap-recommenders.html"><a href="chap-recommenders.html#remarks-10"><i class="fa fa-check"></i><b>12.4.1</b> Remarks</a></li>
+<li class="chapter" data-level="12.4.2" data-path="chap-recommenders.html"><a href="chap-recommenders.html#further-reading-10"><i class="fa fa-check"></i><b>12.4.2</b> Further Reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="chap-text.html"><a href="chap-text.html"><i class="fa fa-check"></i><b>13</b> Natural Language Processing</a><ul>
+<li class="chapter" data-level="13.1" data-path="chap-text.html"><a href="chap-text.html#to-do"><i class="fa fa-check"></i><b>13.1</b> TO DO</a></li>
+<li class="chapter" data-level="13.2" data-path="chap-text.html"><a href="chap-text.html#further-reading-11"><i class="fa fa-check"></i><b>13.2</b> Further Reading</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="appendix-convention.html"><a href="appendix-convention.html"><i class="fa fa-check"></i><b>A</b> Notation Convention</a></li>
+<li class="chapter" data-level="B" data-path="appendix-rintro.html"><a href="appendix-rintro.html"><i class="fa fa-check"></i><b>B</b> Setting Up the R Environment</a><ul>
+<li class="chapter" data-level="B.1" data-path="appendix-rintro.html"><a href="appendix-rintro.html#installing-r"><i class="fa fa-check"></i><b>B.1</b> Installing R</a></li>
+<li class="chapter" data-level="B.2" data-path="appendix-rintro.html"><a href="appendix-rintro.html#installing-an-ide"><i class="fa fa-check"></i><b>B.2</b> Installing an IDE</a></li>
+<li class="chapter" data-level="B.3" data-path="appendix-rintro.html"><a href="appendix-rintro.html#installing-recommended-packages"><i class="fa fa-check"></i><b>B.3</b> Installing Recommended Packages</a></li>
+<li class="chapter" data-level="B.4" data-path="appendix-rintro.html"><a href="appendix-rintro.html#first-r-script-in-rstudio"><i class="fa fa-check"></i><b>B.4</b> First R Script in RStudio</a></li>
+<li class="chapter" data-level="B.5" data-path="appendix-rintro.html"><a href="appendix-rintro.html#exercises-7"><i class="fa fa-check"></i><b>B.5</b> Exercises</a><ul>
+<li class="chapter" data-level="B.5.1" data-path="appendix-rintro.html"><a href="appendix-rintro.html#first-steps-with-vectors"><i class="fa fa-check"></i><b>B.5.1</b> First Steps with Vectors</a></li>
+<li class="chapter" data-level="B.5.2" data-path="appendix-rintro.html"><a href="appendix-rintro.html#basic-plotting"><i class="fa fa-check"></i><b>B.5.2</b> Basic Plotting</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="appendix-rvector.html"><a href="appendix-rvector.html"><i class="fa fa-check"></i><b>C</b> Vector Algebra in R</a><ul>
+<li class="chapter" data-level="C.1" data-path="appendix-rvector.html"><a href="appendix-rvector.html#motivation-1"><i class="fa fa-check"></i><b>C.1</b> Motivation</a></li>
+<li class="chapter" data-level="C.2" data-path="appendix-rvector.html"><a href="appendix-rvector.html#numeric-vectors"><i class="fa fa-check"></i><b>C.2</b> Numeric Vectors</a><ul>
+<li class="chapter" data-level="C.2.1" data-path="appendix-rvector.html"><a href="appendix-rvector.html#creating-numeric-vectors"><i class="fa fa-check"></i><b>C.2.1</b> Creating Numeric Vectors</a></li>
+<li class="chapter" data-level="C.2.2" data-path="appendix-rvector.html"><a href="appendix-rvector.html#vector-scalar-operations"><i class="fa fa-check"></i><b>C.2.2</b> Vector-Scalar Operations</a></li>
+<li class="chapter" data-level="C.2.3" data-path="appendix-rvector.html"><a href="appendix-rvector.html#vector-vector-operations"><i class="fa fa-check"></i><b>C.2.3</b> Vector-Vector Operations</a></li>
+<li class="chapter" data-level="C.2.4" data-path="appendix-rvector.html"><a href="appendix-rvector.html#aggregation-functions"><i class="fa fa-check"></i><b>C.2.4</b> Aggregation Functions</a></li>
+<li class="chapter" data-level="C.2.5" data-path="appendix-rvector.html"><a href="appendix-rvector.html#special-functions"><i class="fa fa-check"></i><b>C.2.5</b> Special Functions</a></li>
+<li class="chapter" data-level="C.2.6" data-path="appendix-rvector.html"><a href="appendix-rvector.html#norms-and-distances"><i class="fa fa-check"></i><b>C.2.6</b> Norms and Distances</a></li>
+<li class="chapter" data-level="C.2.7" data-path="appendix-rvector.html"><a href="appendix-rvector.html#dot-product"><i class="fa fa-check"></i><b>C.2.7</b> Dot Product (*)</a></li>
+<li class="chapter" data-level="C.2.8" data-path="appendix-rvector.html"><a href="appendix-rvector.html#missing-and-other-special-values"><i class="fa fa-check"></i><b>C.2.8</b> Missing and Other Special Values</a></li>
+</ul></li>
+<li class="chapter" data-level="C.3" data-path="appendix-rvector.html"><a href="appendix-rvector.html#logical-vectors"><i class="fa fa-check"></i><b>C.3</b> Logical Vectors</a><ul>
+<li class="chapter" data-level="C.3.1" data-path="appendix-rvector.html"><a href="appendix-rvector.html#creating-logical-vectors"><i class="fa fa-check"></i><b>C.3.1</b> Creating Logical Vectors</a></li>
+<li class="chapter" data-level="C.3.2" data-path="appendix-rvector.html"><a href="appendix-rvector.html#logical-operations"><i class="fa fa-check"></i><b>C.3.2</b> Logical Operations</a></li>
+<li class="chapter" data-level="C.3.3" data-path="appendix-rvector.html"><a href="appendix-rvector.html#comparison-operations"><i class="fa fa-check"></i><b>C.3.3</b> Comparison Operations</a></li>
+<li class="chapter" data-level="C.3.4" data-path="appendix-rvector.html"><a href="appendix-rvector.html#aggregation-functions-1"><i class="fa fa-check"></i><b>C.3.4</b> Aggregation Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="C.4" data-path="appendix-rvector.html"><a href="appendix-rvector.html#character-vectors"><i class="fa fa-check"></i><b>C.4</b> Character Vectors</a><ul>
+<li class="chapter" data-level="C.4.1" data-path="appendix-rvector.html"><a href="appendix-rvector.html#creating-character-vectors"><i class="fa fa-check"></i><b>C.4.1</b> Creating Character Vectors</a></li>
+<li class="chapter" data-level="C.4.2" data-path="appendix-rvector.html"><a href="appendix-rvector.html#concatenating-character-vectors"><i class="fa fa-check"></i><b>C.4.2</b> Concatenating Character Vectors</a></li>
+<li class="chapter" data-level="C.4.3" data-path="appendix-rvector.html"><a href="appendix-rvector.html#collapsing-character-vectors"><i class="fa fa-check"></i><b>C.4.3</b> Collapsing Character Vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="C.5" data-path="appendix-rvector.html"><a href="appendix-rvector.html#vector-subsetting"><i class="fa fa-check"></i><b>C.5</b> Vector Subsetting</a><ul>
+<li class="chapter" data-level="C.5.1" data-path="appendix-rvector.html"><a href="appendix-rvector.html#subsetting-with-positive-indices"><i class="fa fa-check"></i><b>C.5.1</b> Subsetting with Positive Indices</a></li>
+<li class="chapter" data-level="C.5.2" data-path="appendix-rvector.html"><a href="appendix-rvector.html#subsetting-with-negative-indices"><i class="fa fa-check"></i><b>C.5.2</b> Subsetting with Negative Indices</a></li>
+<li class="chapter" data-level="C.5.3" data-path="appendix-rvector.html"><a href="appendix-rvector.html#subsetting-with-logical-vectors"><i class="fa fa-check"></i><b>C.5.3</b> Subsetting with Logical Vectors</a></li>
+<li class="chapter" data-level="C.5.4" data-path="appendix-rvector.html"><a href="appendix-rvector.html#replacing-elements"><i class="fa fa-check"></i><b>C.5.4</b> Replacing Elements</a></li>
+<li class="chapter" data-level="C.5.5" data-path="appendix-rvector.html"><a href="appendix-rvector.html#other-functions"><i class="fa fa-check"></i><b>C.5.5</b> Other Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="C.6" data-path="appendix-rvector.html"><a href="appendix-rvector.html#named-vectors"><i class="fa fa-check"></i><b>C.6</b> Named Vectors</a><ul>
+<li class="chapter" data-level="C.6.1" data-path="appendix-rvector.html"><a href="appendix-rvector.html#creating-named-vectors"><i class="fa fa-check"></i><b>C.6.1</b> Creating Named Vectors</a></li>
+<li class="chapter" data-level="C.6.2" data-path="appendix-rvector.html"><a href="appendix-rvector.html#subsetting-named-vectors-with-character-string-indices"><i class="fa fa-check"></i><b>C.6.2</b> Subsetting Named Vectors with Character String Indices</a></li>
+</ul></li>
+<li class="chapter" data-level="C.7" data-path="appendix-rvector.html"><a href="appendix-rvector.html#factors"><i class="fa fa-check"></i><b>C.7</b> Factors</a><ul>
+<li class="chapter" data-level="C.7.1" data-path="appendix-rvector.html"><a href="appendix-rvector.html#creating-factors"><i class="fa fa-check"></i><b>C.7.1</b> Creating Factors</a></li>
+<li class="chapter" data-level="C.7.2" data-path="appendix-rvector.html"><a href="appendix-rvector.html#levels"><i class="fa fa-check"></i><b>C.7.2</b> Levels</a></li>
+<li class="chapter" data-level="C.7.3" data-path="appendix-rvector.html"><a href="appendix-rvector.html#internal-representation"><i class="fa fa-check"></i><b>C.7.3</b> Internal Representation (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="C.8" data-path="appendix-rvector.html"><a href="appendix-rvector.html#lists"><i class="fa fa-check"></i><b>C.8</b> Lists</a><ul>
+<li class="chapter" data-level="C.8.1" data-path="appendix-rvector.html"><a href="appendix-rvector.html#creating-lists"><i class="fa fa-check"></i><b>C.8.1</b> Creating Lists</a></li>
+<li class="chapter" data-level="C.8.2" data-path="appendix-rvector.html"><a href="appendix-rvector.html#named-lists"><i class="fa fa-check"></i><b>C.8.2</b> Named Lists</a></li>
+<li class="chapter" data-level="C.8.3" data-path="appendix-rvector.html"><a href="appendix-rvector.html#subsetting-and-extracting-from-lists"><i class="fa fa-check"></i><b>C.8.3</b> Subsetting and Extracting From Lists</a></li>
+<li class="chapter" data-level="C.8.4" data-path="appendix-rvector.html"><a href="appendix-rvector.html#common-operations"><i class="fa fa-check"></i><b>C.8.4</b> Common Operations</a></li>
+</ul></li>
+<li class="chapter" data-level="C.9" data-path="appendix-rvector.html"><a href="appendix-rvector.html#exercises-8"><i class="fa fa-check"></i><b>C.9</b> Exercises</a><ul>
+<li class="chapter" data-level="C.9.1" data-path="appendix-rvector.html"><a href="appendix-rvector.html#audeur-exchange-rates"><i class="fa fa-check"></i><b>C.9.1</b> AUD/EUR Exchange Rates</a></li>
+</ul></li>
+<li class="chapter" data-level="C.10" data-path="appendix-rvector.html"><a href="appendix-rvector.html#further-reading-12"><i class="fa fa-check"></i><b>C.10</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="D" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html"><i class="fa fa-check"></i><b>D</b> Matrix Algebra in R</a><ul>
+<li class="chapter" data-level="D.1" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#creating-matrices"><i class="fa fa-check"></i><b>D.1</b> Creating Matrices</a><ul>
+<li class="chapter" data-level="D.1.1" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#matrix"><i class="fa fa-check"></i><b>D.1.1</b> <code>matrix()</code></a></li>
+<li class="chapter" data-level="D.1.2" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#stacking-vectors"><i class="fa fa-check"></i><b>D.1.2</b> Stacking Vectors</a></li>
+<li class="chapter" data-level="D.1.3" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#beyond-numeric-matrices"><i class="fa fa-check"></i><b>D.1.3</b> Beyond Numeric Matrices</a></li>
+<li class="chapter" data-level="D.1.4" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#naming-rows-and-columns"><i class="fa fa-check"></i><b>D.1.4</b> Naming Rows and Columns</a></li>
+<li class="chapter" data-level="D.1.5" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#other-methods"><i class="fa fa-check"></i><b>D.1.5</b> Other Methods</a></li>
+<li class="chapter" data-level="D.1.6" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#internal-representation-1"><i class="fa fa-check"></i><b>D.1.6</b> Internal Representation (*)</a></li>
+</ul></li>
+<li class="chapter" data-level="D.2" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#common-operations-1"><i class="fa fa-check"></i><b>D.2</b> Common Operations</a><ul>
+<li class="chapter" data-level="D.2.1" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#matrix-transpose"><i class="fa fa-check"></i><b>D.2.1</b> Matrix Transpose</a></li>
+<li class="chapter" data-level="D.2.2" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#matrix-scalar-operations"><i class="fa fa-check"></i><b>D.2.2</b> Matrix-Scalar Operations</a></li>
+<li class="chapter" data-level="D.2.3" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#matrix-matrix-operations"><i class="fa fa-check"></i><b>D.2.3</b> Matrix-Matrix Operations</a></li>
+<li class="chapter" data-level="D.2.4" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#matrix-multiplication"><i class="fa fa-check"></i><b>D.2.4</b> Matrix Multiplication (*)</a></li>
+<li class="chapter" data-level="D.2.5" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#aggregation-of-rows-and-columns"><i class="fa fa-check"></i><b>D.2.5</b> Aggregation of Rows and Columns</a></li>
+<li class="chapter" data-level="D.2.6" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#vectorised-special-functions"><i class="fa fa-check"></i><b>D.2.6</b> Vectorised Special Functions</a></li>
+<li class="chapter" data-level="D.2.7" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#matrix-vector-operations"><i class="fa fa-check"></i><b>D.2.7</b> Matrix-Vector Operations</a></li>
+</ul></li>
+<li class="chapter" data-level="D.3" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#matrix-subsetting"><i class="fa fa-check"></i><b>D.3</b> Matrix Subsetting</a><ul>
+<li class="chapter" data-level="D.3.1" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#selecting-individual-elements"><i class="fa fa-check"></i><b>D.3.1</b> Selecting Individual Elements</a></li>
+<li class="chapter" data-level="D.3.2" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#selecting-rows-and-columns"><i class="fa fa-check"></i><b>D.3.2</b> Selecting Rows and Columns</a></li>
+<li class="chapter" data-level="D.3.3" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#selecting-submatrices"><i class="fa fa-check"></i><b>D.3.3</b> Selecting Submatrices</a></li>
+<li class="chapter" data-level="D.3.4" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#selecting-based-on-logical-vectors-and-matrices"><i class="fa fa-check"></i><b>D.3.4</b> Selecting Based on Logical Vectors and Matrices</a></li>
+<li class="chapter" data-level="D.3.5" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#selecting-based-on-two-column-matrices"><i class="fa fa-check"></i><b>D.3.5</b> Selecting Based on Two-Column Matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="D.4" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#exercises-9"><i class="fa fa-check"></i><b>D.4</b> Exercises</a><ul>
+<li class="chapter" data-level="D.4.1" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#currency-exchange-rates"><i class="fa fa-check"></i><b>D.4.1</b> Currency Exchange Rates</a></li>
+<li class="chapter" data-level="D.4.2" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#currency-exchange-rates-relative-to-1999"><i class="fa fa-check"></i><b>D.4.2</b> Currency Exchange Rates Relative to 1999</a></li>
+</ul></li>
+<li class="chapter" data-level="D.5" data-path="appendix-rmatrix.html"><a href="appendix-rmatrix.html#further-reading-13"><i class="fa fa-check"></i><b>D.5</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="E" data-path="appendix-rdf.html"><a href="appendix-rdf.html"><i class="fa fa-check"></i><b>E</b> Data Frame Wrangling in R</a><ul>
+<li class="chapter" data-level="E.1" data-path="appendix-rdf.html"><a href="appendix-rdf.html#creating-data-frames"><i class="fa fa-check"></i><b>E.1</b> Creating Data Frames</a></li>
+<li class="chapter" data-level="E.2" data-path="appendix-rdf.html"><a href="appendix-rdf.html#importing-data-frames"><i class="fa fa-check"></i><b>E.2</b> Importing Data Frames</a></li>
+<li class="chapter" data-level="E.3" data-path="appendix-rdf.html"><a href="appendix-rdf.html#data-frame-subsetting"><i class="fa fa-check"></i><b>E.3</b> Data Frame Subsetting</a><ul>
+<li class="chapter" data-level="E.3.1" data-path="appendix-rdf.html"><a href="appendix-rdf.html#each-data-frame-is-a-list"><i class="fa fa-check"></i><b>E.3.1</b> Each Data Frame is a List</a></li>
+<li class="chapter" data-level="E.3.2" data-path="appendix-rdf.html"><a href="appendix-rdf.html#each-data-frame-is-matrix-like"><i class="fa fa-check"></i><b>E.3.2</b> Each Data Frame is Matrix-like</a></li>
+</ul></li>
+<li class="chapter" data-level="E.4" data-path="appendix-rdf.html"><a href="appendix-rdf.html#common-operations-2"><i class="fa fa-check"></i><b>E.4</b> Common Operations</a></li>
+<li class="chapter" data-level="E.5" data-path="appendix-rdf.html"><a href="appendix-rdf.html#metaprogramming-and-formulas"><i class="fa fa-check"></i><b>E.5</b> Metaprogramming and Formulas (*)</a></li>
+<li class="chapter" data-level="E.6" data-path="appendix-rdf.html"><a href="appendix-rdf.html#exercises-10"><i class="fa fa-check"></i><b>E.6</b> Exercises</a><ul>
+<li class="chapter" data-level="E.6.1" data-path="appendix-rdf.html"><a href="appendix-rdf.html#urban-forest"><i class="fa fa-check"></i><b>E.6.1</b> Urban Forest</a></li>
+</ul></li>
+<li class="chapter" data-level="E.7" data-path="appendix-rdf.html"><a href="appendix-rdf.html#air-quality"><i class="fa fa-check"></i><b>E.7</b> Air Quality</a></li>
+<li class="chapter" data-level="E.8" data-path="appendix-rdf.html"><a href="appendix-rdf.html#further-reading-14"><i class="fa fa-check"></i><b>E.8</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="F" data-path="appendix-datasets.html"><a href="appendix-datasets.html"><i class="fa fa-check"></i><b>F</b> Datasets</a><ul>
+<li class="chapter" data-level="F.1" data-path="appendix-datasets.html"><a href="appendix-datasets.html#sustainable-society-indices"><i class="fa fa-check"></i><b>F.1</b> Sustainable Society Indices</a></li>
+<li class="chapter" data-level="F.2" data-path="appendix-datasets.html"><a href="appendix-datasets.html#air-quality-1"><i class="fa fa-check"></i><b>F.2</b> Air Quality</a></li>
+<li class="chapter" data-level="F.3" data-path="appendix-datasets.html"><a href="appendix-datasets.html#currency-exchange-rates-1"><i class="fa fa-check"></i><b>F.3</b> Currency Exchange Rates</a></li>
+<li class="chapter" data-level="F.4" data-path="appendix-datasets.html"><a href="appendix-datasets.html#urban-forest-1"><i class="fa fa-check"></i><b>F.4</b> Urban Forest</a></li>
+<li class="chapter" data-level="F.5" data-path="appendix-datasets.html"><a href="appendix-datasets.html#wine-quality"><i class="fa fa-check"></i><b>F.5</b> Wine Quality</a></li>
+<li class="chapter" data-level="F.6" data-path="appendix-datasets.html"><a href="appendix-datasets.html#the-world-factbook-countries-of-the-world"><i class="fa fa-check"></i><b>F.6</b> The World Factbook (Countries of the World)</a></li>
+<li class="chapter" data-level="F.7" data-path="appendix-datasets.html"><a href="appendix-datasets.html#edstats-country-level-education-statistics"><i class="fa fa-check"></i><b>F.7</b> EdStats (Country-Level Education Statistics)</a></li>
+<li class="chapter" data-level="F.8" data-path="appendix-datasets.html"><a href="appendix-datasets.html#food-and-nutrient-database-for-dietary-studies-fndds"><i class="fa fa-check"></i><b>F.8</b> Food and Nutrient Database for Dietary Studies (FNDDS)</a></li>
+<li class="chapter" data-level="F.9" data-path="appendix-datasets.html"><a href="appendix-datasets.html#clustering-benchmarks"><i class="fa fa-check"></i><b>F.9</b> Clustering Benchmarks</a></li>
+<li class="chapter" data-level="F.10" data-path="appendix-datasets.html"><a href="appendix-datasets.html#movie-lens-todo"><i class="fa fa-check"></i><b>F.10</b> Movie Lens (TODO)</a></li>
+<li class="chapter" data-level="F.11" data-path="appendix-datasets.html"><a href="appendix-datasets.html#other-todo"><i class="fa fa-check"></i><b>F.11</b> Other (TODO)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li style='font-size: smaller' ><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Licensed under CC BY-NC-ND 4.0</a></li>
+<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-06-18 14:43 (a2fddd4)</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Machine Learning Classics with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chap:introduction" class="section level1">
+<h1><span class="header-section-number">1</span> Introduction</h1>
+<!-- I have no idea why setting this in the preamble is ignored: -->
+<!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
+<!-- TODO: citations
+
+
+-->
+<p>An <em>algorithm</em> is a well-defined sequence of instructions that,
+for a given sequence of input arguments,
+yields some desired output.
+In other words, it is a specific recipe for what we call
+a <em>function</em> in mathematics.
+Unfortunately, algorithm development is a tedious task. We need to be
+super-precise about covering all the possible scenarios and modelling them
+accurately. When we are to build a self-driving vehicle, we need to be
+ready for an infinite
+number of situations that can arise on the road.
+When we are to build a system for diagnosing tumour on medical images,
+there are so many decisions
+to make of whether should we consider a particular area suspicious,
+how does it relate to the neighbouring cells, etc.</p>
+<div id="what-is-machine-learning" class="section level2">
+<h2><span class="header-section-number">1.1</span> What is Machine Learning?</h2>
+<p>In <em>machine learning</em> (ML), we build and study computer algorithms
+that make <em>predictions</em> or <em>decisions</em> but whose <em>all tiny bits</em> are not
+manually programmed. Moreover, some algorithms might also be able
+to <em>discover</em> new interesting facts about a problem instance at hand.</p>
+<p><em>Learning</em>, however, needs some material based upon which
+new knowledge is to be developed.
+In other words, we need <em>data</em>.</p>
+<div id="data-sources" class="section level3">
+<h3><span class="header-section-number">1.1.1</span> Data Sources</h3>
+<p>Information can come from various sources, e.g., physical sensors,
+files, databases, (pseudo)random number generators
+and it can be of different forms, e.g., vectors, matrices
+and other tensors, graphs, audio/video streams, text etc.
+With the advent of the internet era, data have become ubiquitous.</p>
+<div class="exercise"><strong>Exercise.</strong>
+<p>Think of how much information you consume and generate when you
+interact with your social media or news feeds every day.</p>
+</div>
+<p>Here are some application domains where machine learning has already proven
+itself very useful:</p>
+<ul>
+<li><p>Financial services (banking, insurance, investment funds)</p></li>
+<li><p>Oil and gas and other energy (solar, mining)</p></li>
+<li><p>Real estate</p></li>
+<li><p>Pharmaceuticals</p></li>
+<li><p>Advertising</p></li>
+<li><p>Transportation</p></li>
+<li><p>Retail</p></li>
+<li><p>Healthcare</p></li>
+<li><p>Food production</p></li>
+</ul>
+<div class="exercise"><strong>Exercise.</strong>
+<p>Think of different ways in which
+these sectors could benefit from ML solutions.</p>
+</div>
+<p>To be frank, the above list was generated by duckduckgoing
+the “biggest industries” query. That was a very easy task;
+ML is already everywhere.
+Basically, wherever we have data and there is a need to improve
+some processes or discover new aspects about a problem domain,
+there is a place for ML solutions.</p>
+<p>Of course, it’s not all about business revenue (luckily).
+We can do a lot of great work for greater good;
+with the increased availability of open data,
+everyone can be a reporter, an engaged citizen that seeks for truth.
+There are NGOs.
+Finally, there are researchers (remember that the main role of most
+universities is still to spread the advancement of knowledge and not to make money!)
+that need these methods to make new discoveries, e.g., in psychology,
+sociology, agriculture, engineering, biotechnology, pharmacy, medicine, genetics,
+you name it.</p>
+<!-- * Life science and medical data analysis -->
+<!-- * Scientific simulations -->
+<!-- * Genomics -->
+</div>
+<div id="main-types-of-machine-learning-problems" class="section level3">
+<h3><span class="header-section-number">1.1.2</span> Main Types of Machine Learning Problems</h3>
+<p>Machine Learning problems include, but are not limited to:</p>
+<ul>
+<li><p><em>Supervised learning</em> – for every input point (e.g., a photo)
+there is an associated desired output (e.g., whether it depicts a crosswalk
+or how many cars can be seen on it);
+in other words, there is a “teacher” ready to instruct us
+about what is the expected behaviour in a given context.</p></li>
+<li><p><em>Semi-supervised learning</em> – some inputs are labelled, other ones
+are not (definitely a less laborious/cheaper scenario).</p></li>
+<li><p><em>Unsupervised learning</em> – inputs are unlabelled; the aim is to discover
+the underlying structure in the data (e.g., automatically group customers
+w.r.t. common behavioural patterns);
+think about how much you learnt by just interacting with your
+environment by wandering here and there.</p></li>
+<li><p><em>Reinforcement learning</em> – learn to act based on a
+feedback given after the actual decision was made
+such as “that was nice! well done! look at you go!”
+(e.g., learn to play some video game by testing different hypotheses
+what to do in order to prosper/survive as long as possible).</p></li>
+</ul>
+<p>In the course of this book, we’re going to take a deep dive into
+the machine learning algorithms that stood the test of time
+and that still are used – with modifications – by researchers
+and practitioners.
+We will learn about how we can use them for improving different processes.
+Importantly, we will also get to know their limitations.</p>
+<p>Arranging the material so as to maximise its usefulness
+(we’d like to empower ourselves with a set of tools that can get some work done),
+lay solid groundwork for further studies and
+develop the adjoining skills (the practice of data analysis certainly
+requires us to learn programming and be able to read and understand mathematical
+notation) is a multi-objective optimisation problem.
+A problem involving many constraints though;
+as this is an introductory course, we obviously cannot cover everything,
+not yet. In particular, we will be learning maths and programming “from scratch”,
+our space-time is limited etc. We also want to enjoy our journey – to have
+some fun knowing that big projects never come into being in a day or seven.</p>
+<p>Therefore, this time we will limit ourselves “just” to supervised and unsupervised
+learning, as these are the most common instances.</p>
+</div>
+</div>
+<div id="input-data-x" class="section level2">
+<h2><span class="header-section-number">1.2</span> Input Data, <strong>X</strong></h2>
+<div id="abstract-formalism" class="section level3">
+<h3><span class="header-section-number">1.2.1</span> Abstract Formalism</h3>
+<p>Let <span class="math inline">\(\mathcal{X}=\{\boldsymbol{x}^{(1)},\dots,\boldsymbol{x}^{(n)}\}\)</span>
+be an input sample (“a database”)
+that contains information on <span class="math inline">\(n\)</span> entities or phenomena (in their entirety
+or at different points in time or space).
+Most often we assume that each object in <span class="math inline">\(\mathcal{X}\)</span>, say <span class="math inline">\(\boldsymbol{x}^{(i)}\)</span>,
+is represented by means of a sequence of <span class="math inline">\(p\)</span> real numbers (for some <span class="math inline">\(p\)</span>).
+We denote this fact as <span class="math inline">\(\boldsymbol{x}^{(i)}\in \mathbb{R}^p\)</span>.</p>
+<div class="remark"><strong>Remark.</strong>
+<p>Here, the “<span class="math inline">\(\in\)</span>” symbol stand for “<em>is in</em>” or “<em>is a member of</em>”,
+<span class="math inline">\(\mathbb{R}\)</span> denotes the set of real numbers (the one that features,
+<span class="math inline">\(0\)</span>, <span class="math inline">\(-358745.2394\)</span>, <span class="math inline">\(42\)</span> and <span class="math inline">\(\pi\)</span>, amongst uncountably many others)
+and <span class="math inline">\(\mathbb{R}^p\)</span> is the set of real-valued sequences of length <span class="math inline">\(p\)</span>
+(i.e., <span class="math inline">\(p\)</span> such numbers considered at a time).
+For instance, <span class="math inline">\(\mathbb{R}^2\)</span> includes pairs such as
+<span class="math inline">\((1, 2)\)</span>, <span class="math inline">\((-6.4,0)\)</span> and <span class="math inline">\((1/3, 10^{3})\)</span>.
+More generally, we write <span class="math inline">\((x_1,\dots,x_p)\in\mathbb{R}^p\)</span>,
+where <span class="math inline">\(x_j\in\mathbb{R}\)</span> is the <span class="math inline">\(j\)</span>-th component of the sequence,
+for any <span class="math inline">\(j=1,\dots,p\)</span>.</p>
+</div>
+<div class="remark"><strong>Remark.</strong>
+<p>To put emphasis on the fact that <span class="math inline">\((x_1,\dots,x_p)\)</span> is not an “atomic”
+entity, but a one that a collection of many <em>scalar</em> components,
+we will use bold fonts for denoting whole sequences, e.g.,
+write <span class="math inline">\(\boldsymbol{x}=(x_1,\dots,x_p)\)</span>.</p>
+</div>
+<div class="remark"><strong>Remark.</strong>
+<p>If <span class="math inline">\(\boldsymbol{x}\in \mathbb{R}^p\)</span>, then we often say
+that <span class="math inline">\(\boldsymbol{x}\)</span> is
+<em>a sequence of <span class="math inline">\(p\)</span> numbers</em>,
+<em>a (numeric) <span class="math inline">\(p\)</span>-tuple</em>,
+<em>a <span class="math inline">\(p\)</span>-dimensional real vector</em>,
+<em>a point in a <span class="math inline">\(p\)</span>-dimensional real space</em>,
+or <em>an element of a real <span class="math inline">\(p\)</span>-space</em> etc.
+We explain the basics of notation convention used throughout this book
+(and in most math works in general) in Appendix <a href="appendix-convention.html#appendix:convention">A</a>.</p>
+</div>
+<p>At a first glance, such a representation might seem overly simplistic,
+especially if we’d wish to store information on “very complex” objects.
+However, it turns out that in most cases expressing them as
+<em>feature vectors</em> (i.e., establishing a set of numeric attributes
+that best describe them in a task at hand) is not only natural
+but also perfectly sufficient for achieving whatever we aim at.</p>
+<!--(\*) There are some algorithms such as Multidimensional Scaling,
+Locally Linear Embedding, IsoMap etc.
+that can do that automagically.-->
+<div class="exercise"><strong>Exercise.</strong>
+<p>Consider the following problems:</p>
+<ul>
+<li><p>How would you represent a patient in a clinic
+(for the purpose of conducting research in cardiology)?</p></li>
+<li><p>How would you represent a car in an insurance company’s database
+(for the purpose of determining how much a driver should pay annually
+for the mandatory policy)?</p></li>
+<li><p>How would you represent a student in an university (for the purpose
+of granting them scholarships)?</p></li>
+</ul>
+<p>In each case, list a few numeric features that best describe the reality
+of concern. Note that descriptive labels can always be <em>encoded</em> as numbers,
+e.g., female = 1, male = 2.</p>
+</div>
+<p>The setting we’ve established is <em>abstract</em> in the sense that
+there might be different realities <em>hidden</em> behind the symbols we use.
+This is exactly what maths is for – creating <em>abstractions</em> or <em>models</em>
+of complex entities/phenomena so that they can be much more easily manipulated
+or understood.</p>
+<p>This is very powerful – spend a moment
+contemplating how many real-world situations fit into our framework.
+In particular the last chapters are devoted to the less-obvious data domains,
+for instance text or image/video data, e.g., a 1920×1080 pixel image
+can be “unwound” to a “flat” sequence of length 2,073,600.</p>
+<div style="margin-top: 1em">
+
+</div>
+<p>The whole dataset consisting of <span class="math inline">\(n\)</span> <em>observations</em> (samples, cases, records)
+and <span class="math inline">\(p\)</span> <em>features</em> (variables, attributes, characteristics)
+can be written as an (<span class="math inline">\(n\times p\)</span>)-matrix:
+<span class="math display">\[
+\mathbf{X}=
+\left[
+\begin{array}{cccc}
+x_{1,1} &amp; x_{1,2} &amp; \cdots &amp; x_{1,p} \\
+x_{2,1} &amp; x_{2,2} &amp; \cdots &amp; x_{2,p} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+x_{n,1} &amp; x_{n,2} &amp; \cdots &amp; x_{n,p} \\
+\end{array}
+\right]
+\]</span>
+Mathematically, we denote this as <span class="math inline">\(\mathbf{X}\in\mathbb{R}^{n\times p}\)</span>
+(read “<span class="math inline">\(\mathbf{X}\)</span> is a real-valued matrix with <span class="math inline">\(n\)</span> rows and <span class="math inline">\(p\)</span> columns”).</p>
+<div class="remark"><strong>Remark.</strong>
+<p>A <em>matrix</em> is an array of rectangular shape, with items
+arranged in rows and columns.
+In cases such as this we say that we deal with <em>structured (tabular) data</em>
+(think: Excel/Calc spreadsheets, SQL tables etc.).</p>
+</div>
+</div>
+<div id="concrete-example" class="section level3">
+<h3><span class="header-section-number">1.2.2</span> Concrete Example</h3>
+<p>For example, let’s consider the Wine Quality dataset
+(see Appendix <a href="appendix-datasets.html#appendix:datasets">F</a> for more details),
+that stores information on
+11 physicochemical features (amongst others – see below)
+of ca. 6500 Portuguese wines
+from different wineries.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">wine_quality &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/wine_quality_all.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb1-2" title="2">    <span class="dt">comment.char=</span><span class="st">&quot;#&quot;</span>)</a>
+<a class="sourceLine" id="cb1-3" title="3">X &lt;-<span class="st"> </span>wine_quality[, <span class="dv">1</span><span class="op">:</span><span class="dv">11</span>] <span class="co"># extract the first 11 columns</span></a>
+<a class="sourceLine" id="cb1-4" title="4">X &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(X) <span class="co"># convert to numeric matrix</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="kw">head</span>(X) <span class="co"># display the first 6 rows, i.e., X[1:6,]</span></a></code></pre></div>
+<pre><code>##      fixed.acidity volatile.acidity citric.acid ... alcohol
+## [1,]           7.4             0.70        0.00 ...     9.4
+## [2,]           7.8             0.88        0.00 ...     9.8
+## [3,]           7.8             0.76        0.04 ...     9.8
+## [4,]          11.2             0.28        0.56 ...     9.8
+## [5,]           7.4             0.70        0.00 ...     9.4
+## [6,]           7.4             0.66        0.00 ...     9.4</code></pre>
+<p>We can get to now the dimensionality (shape) of <span class="math inline">\(\mathbf{X}\)</span> by calling:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">dim</span>(X)    <span class="co"># gives n and p, respectively</span></a></code></pre></div>
+<pre><code>## [1] 6497   11</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">nrow</span>(X)   <span class="co"># dim(X)[1] – 1st dimension – n</span></a></code></pre></div>
+<pre><code>## [1] 6497</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">ncol</span>(X)   <span class="co"># dim(X)[2] – 2nd dimension – p</span></a></code></pre></div>
+<pre><code>## [1] 11</code></pre>
+<p>Therefore, <span class="math inline">\(\mathbf{X}\in\mathbb{R}^{6497\times 11}\)</span>,
+i.e., <span class="math inline">\(n=6497\)</span> and <span class="math inline">\(p=11\)</span>.</p>
+<div class="remark"><strong>Remark.</strong>
+<p>Obviously, displaying <span class="math inline">\(\mathbf{X}\)</span> in its entirety would take up a lot of
+pages. Not only there are so many rows, also the number of columns makes
+the matrix too “wide” – mainly because
+of the presence of the descriptive feature labels (column names).
+Therefore, when printed out on the console, R will “wrap” the columns to
+fit the page width.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">head</span>(X, <span class="dv">3</span>) <span class="co"># the first 3 rows</span></a></code></pre></div>
+<pre><code>##      fixed.acidity volatile.acidity citric.acid residual.sugar
+## [1,]           7.4             0.70        0.00            1.9
+## [2,]           7.8             0.88        0.00            2.6
+## [3,]           7.8             0.76        0.04            2.3
+##      chlorides free.sulfur.dioxide total.sulfur.dioxide density   pH
+## [1,]     0.076                  11                   34  0.9978 3.51
+## [2,]     0.098                  25                   67  0.9968 3.20
+## [3,]     0.092                  15                   54  0.9970 3.26
+##      sulphates alcohol
+## [1,]      0.56     9.4
+## [2,]      0.68     9.8
+## [3,]      0.65     9.8</code></pre>
+</div>
+<p>Let’s forget about the column labels for the time being, as they
+might be distracting use from fully appreciating the abstract
+nature of the setting we’re trying to develop.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">dimnames</span>(X) &lt;-<span class="st"> </span><span class="ot">NULL</span> <span class="co"># drop row and column names</span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="kw">head</span>(X) <span class="co"># show the first 6 rows</span></a></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]  [,5] [,6] [,7]   [,8] [,9] [,10] [,11]
+## [1,]  7.4 0.70 0.00  1.9 0.076   11   34 0.9978 3.51  0.56   9.4
+## [2,]  7.8 0.88 0.00  2.6 0.098   25   67 0.9968 3.20  0.68   9.8
+## [3,]  7.8 0.76 0.04  2.3 0.092   15   54 0.9970 3.26  0.65   9.8
+## [4,] 11.2 0.28 0.56  1.9 0.075   17   60 0.9980 3.16  0.58   9.8
+## [5,]  7.4 0.70 0.00  1.9 0.076   11   34 0.9978 3.51  0.56   9.4
+## [6,]  7.4 0.66 0.00  1.8 0.075   13   40 0.9978 3.51  0.56   9.4</code></pre>
+<p>An element of <span class="math inline">\(\mathbf{X}\)</span> located in the <span class="math inline">\(i\)</span>-th row and the <span class="math inline">\(j\)</span>-th column,
+denoted <span class="math inline">\(x_{i,j}\in\mathbb{R}\)</span>,
+represents the <span class="math inline">\(j\)</span>-th feature of the <span class="math inline">\(i\)</span>-th observation,
+<span class="math inline">\(i=1,\dots,n\)</span>, <span class="math inline">\(j=1,\dots,p\)</span>.</p>
+<p>For instance, the 3rd wine’s volatile acidity (expressed in grams of acetic acid per dm³), <span class="math inline">\(x_{3,2}\)</span>, is:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">X[<span class="dv">3</span>, <span class="dv">2</span>] <span class="co"># 3rd row, 2nd column</span></a></code></pre></div>
+<pre><code>## [1] 0.76</code></pre>
+<p>The third observation (data point, row in <span class="math inline">\(\mathbf{X}\)</span>, i.e.,
+the 3rd wine in the dataset)
+consists of items <span class="math inline">\((x_{3,1}, \dots, x_{3,p})\)</span> that can be extracted by calling:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">X[<span class="dv">3</span>,]</a></code></pre></div>
+<pre><code>##  [1]  7.800  0.760  0.040  2.300  0.092 15.000 54.000  0.997  3.260
+## [10]  0.650  9.800</code></pre>
+<p>Moreover, the second feature/variable/column (in our case: volatile acidity)
+is comprised of
+<span class="math inline">\((x_{1,2}, x_{2,2}, \dots, x_{n,2})\)</span>:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">X[,<span class="dv">2</span>]</a></code></pre></div>
+<pre><code>##  [1] 0.700 0.880 0.760 0.280 0.700 0.660 0.600 0.650 0.580 0.500 0.580
+## [12] 0.500 0.615 0.610 0.620 0.620 0.280 0.560 0.590 0.320 0.220 0.390
+## [23] 0.430 0.490 0.400 0.390 0.410 0.430 0.710 0.645 0.675 0.685 0.655
+## [34] 0.605 0.320 0.645 0.600 0.380 1.130 0.450 0.450 0.610 0.490 0.660
+## [45] 0.670 0.520 0.935 0.290 0.400 0.310 0.660 0.520 0.500 0.380 0.510
+## [56] 0.620 0.420 0.630 0.590 0.390 0.400 0.690 0.520 0.735 0.725 0.725
+## [67] 0.520 0.705 0.320 0.705 0.630 0.670 0.690 0.675 0.320 0.410 0.410
+## [78] 0.785 0.750 0.625 0.450 0.430 0.500 0.670 0.300 0.550 0.490 0.490
+## [89] 0.390 0.620 0.520 0.490 0.490 0.490 1.020 0.600 0.775 0.500 0.900
+##  [ reached getOption(&quot;max.print&quot;) -- omitted 6398 entries ]</code></pre>
+<div class="exercise"><strong>Exercise.</strong>
+<p>Identify the precise location of the value 0.76 in all the above
+examples.</p>
+</div>
+<p>We will sometimes use the following notation to emphasise that
+the <span class="math inline">\(\mathbf{X}\)</span> matrix consists of <span class="math inline">\(n\)</span> rows
+or <span class="math inline">\(p\)</span> columns:</p>
+<p><span class="math display">\[
+\mathbf{X}=\left[
+\begin{array}{c}
+\mathbf{x}_{1,\cdot} \\
+\mathbf{x}_{2,\cdot} \\
+\vdots\\
+\mathbf{x}_{n,\cdot} \\
+\end{array}
+\right]
+=
+\left[
+\begin{array}{cccc}
+\mathbf{x}_{\cdot,1} &amp;
+\mathbf{x}_{\cdot,2} &amp;
+\cdots &amp;
+\mathbf{x}_{\cdot,p} \\
+\end{array}
+\right].
+\]</span></p>
+<p>Here, <span class="math inline">\(\mathbf{x}_{i,\cdot}\)</span> is a <em>row vector</em> of length <span class="math inline">\(p\)</span>,
+i.e., a <span class="math inline">\((1\times p)\)</span>-matrix:</p>
+<p><span class="math display">\[
+\mathbf{x}_{i,\cdot} = \left[
+\begin{array}{cccc}
+x_{i,1} &amp;
+x_{i,2} &amp;
+\cdots &amp;
+x_{i,p} \\
+\end{array}
+\right].
+\]</span></p>
+<p>Moreover, <span class="math inline">\(\mathbf{x}_{\cdot,j}\)</span> is a <em>column vector</em> of length <span class="math inline">\(n\)</span>,
+i.e., an <span class="math inline">\((n\times 1)\)</span>-matrix:</p>
+<p><span class="math display">\[
+\mathbf{x}_{\cdot,j} = \left[
+\begin{array}{cccc}
+x_{1,j} &amp;
+x_{2,j} &amp;
+\cdots &amp;
+x_{n,j} \\
+\end{array}
+\right]^T=\left[
+\begin{array}{c}
+{x}_{1,j} \\
+{x}_{2,j} \\
+\vdots\\
+{x}_{n,j} \\
+\end{array}
+\right],
+\]</span></p>
+<p>where <span class="math inline">\(\cdot^T\)</span> denotes the <em>transpose</em> of a given matrix –
+think of this as a kind of rotation; it allows us to introduce a set of
+“vertically stacked” objects using a single inline formula.</p>
+<div class="remark"><strong>Remark.</strong>
+<p>Details on how to get started with the R environment are provided
+in Appendix <a href="appendix-rintro.html#appendix:rintro">B</a>.
+A comprehensive introduction to vector and matrix algebra in R
+as well as basic data frame wrangling is given
+in Appendices <a href="appendix-rvector.html#appendix:rvector">C</a>, <a href="appendix-rmatrix.html#appendix:rmatrix">D</a>
+and <a href="appendix-rdf.html#appendix:rdf">E</a>.
+From now on, we assume that we are all familiar with this material.</p>
+</div>
+</div>
+</div>
+<div id="unsupervised-learning" class="section level2">
+<h2><span class="header-section-number">1.3</span> Unsupervised Learning</h2>
+<p>In <em>unsupervised learning</em> (learning without a teacher),
+the input data vectors <span class="math inline">\(\mathbf{x}_{1,\cdot},\dots,\mathbf{x}_{n,\cdot}\)</span>
+(rows in <span class="math inline">\(\mathbf{X}\)</span>) are all we have.
+Our aim now is to discover the <em>underlying structure in the data</em>,
+whatever that means.
+For instance, Figure <a href="chap-introduction.html#fig:unsupervised">1</a> depicts a scatter plot
+of two selected wine features.
+What interesting information can we extract from this figure?
+Perhaps not much, this is exactly why we need data mining methods!</p>
+<div class="figure">
+<img src="01-introduction-figures/unsupervised-1.svg" alt="Figure 1: Unsupervised learning: “But what it is exactly that I have to do here?”" id="fig:unsupervised" />
+<p class="caption">Figure 1: Unsupervised learning: “But what it is exactly that I have to do here?”</p>
+</div>
+<div id="dimensionality-reduction" class="section level3">
+<h3><span class="header-section-number">1.3.1</span> Dimensionality Reduction</h3>
+<p>Certain classes of unsupervised learning
+problems are not only intellectually stimulating,
+but practically useful at the same time.</p>
+<p>In particular, in <em>dimensionality reduction</em> we seek a meaningful
+<em>projection</em> of a high dimensional space (think: a matrix with many columns)
+to a space of lower dimension.
+For instance, if the output number of features is 2 (or maybe 3 as well),
+we will be able to visualise a complex dataset on a standard scatter plot.</p>
+<div class="figure">
+<img src="01-introduction-figures/princomp-1.svg" alt="Figure 2: Principal component analysis (a dimensionality reduction technique) applied on 5 columns of the wine_quality dataset." id="fig:princomp" />
+<p class="caption">Figure 2: Principal component analysis (a dimensionality reduction technique) applied on 5 columns of the <code>wine_quality</code> dataset.</p>
+</div>
+<p>For instance, Figure <a href="chap-introduction.html#fig:princomp">2</a> depicts the two dimensions “revealed”
+by the PCA method (Principal Component Analysis) – a technique proposed
+by the mathematician Karl Pearson (the Father of mathematical statistics)
+at the beginning of the 20th century.</p>
+<p>It’s actually nice to see that the wines of different colours
+(see <code>wine_quality[,"color"]</code>) form two quite distinct “blobs”.
+By analysing the results returned by PCA in more detail, we could
+better understand the differences in physicochemical features of wines
+of different colours (amongst others).</p>
+<p>Once we go through this course,
+we will be perfectly equipped for studying
+such dimensionality reduction methods as:
+multidimensional scaling (MDS), kernel PCA,
+t-SNE, autoencoders (deep learning).
+See, for example, <span class="citation">(Hastie et al. <a href="references.html#ref-esl">2017</a>)</span> for more details.</p>
+</div>
+<div id="anomaly-detection" class="section level3">
+<h3><span class="header-section-number">1.3.2</span> Anomaly Detection</h3>
+<p>Another family of unsupervised learning methods deals with
+<em>anomaly detection</em>, where our task is to identify rare,
+suspicious, ab-normal, novel or out-standing items.
+For example, these can be cars driving on walkways in a park’s security camera footage or fraudulent transactions identified in some financial service.</p>
+<div class="figure">
+<img src="01-introduction-figures/anomaly_detection-1.svg" alt="Figure 3: Outliers can be thought of as anomalies of some sort" id="fig:anomaly_detection" />
+<p class="caption">Figure 3: Outliers can be thought of as anomalies of some sort</p>
+</div>
+<p>Figure <a href="chap-introduction.html#fig:anomaly_detection">3</a> highlights a few <em>outliers</em> – observations
+that differ (in the sense the are much farther away) significantly from
+the rest of the points. They might be due to some measurement or data input
+error or just be an inherent part of the dataset. Hence, it might be
+interesting to inspect them in more detail.
+Section <a href="chap-regression-multiple.html#sec:graphicalsummaryresidual">6.3.1.2</a> includes one of the
+simplest (and most popular) definition of an outlier for unidimensional data.
+More advanced methods, see, e.g., <span class="citation">(Chandola et al. <a href="references.html#ref-anomalydetection_survey">2009</a>)</span>,
+are based upon the algorithms that we describe also in this book.
+<!-- TODO: HDBSCAN? --></p>
+</div>
+<div id="clustering" class="section level3">
+<h3><span class="header-section-number">1.3.3</span> Clustering</h3>
+<p>Moreover, the aim of <em>clustering</em> (grouping or segmentation) is to automatically discover
+some <em>naturally occurring</em>
+subgroups in the data set.
+For example, these may be customers having different shopping patterns
+(such as “young parents”, “students” and “elders”).</p>
+<div class="figure">
+<img src="01-introduction-figures/clustering_illustration-1.svg" alt="Figure 4: Two clusters identified by the K-means algorithm (K=2)" id="fig:clustering_illustration" />
+<p class="caption">Figure 4: Two clusters identified by the K-means algorithm (<span class="math inline">\(K=2\)</span>)</p>
+</div>
+<p>Figure <a href="chap-introduction.html#fig:clustering_illustration">4</a> gives the results of running the K-means
+algorithm (see Chapter <a href="chap-kmeans.html#chap:kmeans">9</a>) on the discussed dataset.
+The two identified clusters are quite similar to
+the wine colours, despite the fact that this information has not been used
+during the method’s operation.</p>
+<p>We discuss the most seminal clustering techniques
+in Chapters <a href="chap-hclust.html#chap:hclust">2</a> (hierarchical agglomerative algorithms)
+and <a href="chap-kmeans.html#chap:kmeans">9</a> (K-means method).</p>
+</div>
+</div>
+<div id="supervised-learning" class="section level2">
+<h2><span class="header-section-number">1.4</span> Supervised Learning</h2>
+<div id="desired-outputs-y" class="section level3">
+<h3><span class="header-section-number">1.4.1</span> Desired Outputs, <strong>y</strong></h3>
+<p>In supervised learning, there is a teacher;
+apart from the inputs (in the form of a matrix <span class="math inline">\(\mathbf{X}\)</span>),
+we are also given the corresponding reference/desired outputs
+(a vector <span class="math inline">\(\boldsymbol{y})\)</span>, which
+are are usually encoded as individual numbers (scalars)
+or textual labels.</p>
+<p>For instance, in the <code>wine_quality</code> dataset,
+this can be the <code>response</code> column, which gives the wine rating on
+the scale 0 (bad) to 10 (excellent).</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">y &lt;-<span class="st"> </span>wine_quality[, <span class="st">&quot;response&quot;</span>] <span class="co"># extract the `response` column</span></a>
+<a class="sourceLine" id="cb19-2" title="2">Xy &lt;-<span class="st"> </span><span class="kw">cbind</span>(X, y) <span class="co"># join X and y (column-bind) - for printing</span></a>
+<a class="sourceLine" id="cb19-3" title="3"><span class="kw">head</span>(Xy)</a></code></pre></div>
+<pre><code>##      fixed.acidity volatile.acidity citric.acid ... alcohol response
+## [1,]           7.4             0.70        0.00 ...     9.4        5
+## [2,]           7.8             0.88        0.00 ...     9.8        5
+## [3,]           7.8             0.76        0.04 ...     9.8        5
+## [4,]          11.2             0.28        0.56 ...     9.8        6
+## [5,]           7.4             0.70        0.00 ...     9.4        5
+## [6,]           7.4             0.66        0.00 ...     9.4        5</code></pre>
+<p>More formally, with each input <span class="math inline">\(\mathbf{x}_{i,\cdot}\)</span> we associate
+the desired output <span class="math inline">\(y_i\)</span>.
+Hence, our dataset is <span class="math inline">\([\mathbf{X}\ \mathbf{y}]\)</span> –
+each object is represented as a row vector
+<span class="math inline">\([\mathbf{x}_{i,\cdot}\ y_i]\)</span>, <span class="math inline">\(i=1,\dots,n\)</span>:</p>
+<p><span class="math display">\[
+[\mathbf{X}\ \mathbf{y}]=
+\left[
+\begin{array}{ccccc}
+x_{1,1} &amp; x_{1,2} &amp; \cdots &amp; x_{1,p} &amp; y_1\\
+x_{2,1} &amp; x_{2,2} &amp; \cdots &amp; x_{2,p} &amp; y_2\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots    &amp; \vdots\\
+x_{n,1} &amp; x_{n,2} &amp; \cdots &amp; x_{n,p} &amp; y_n\\
+\end{array}
+\right],
+\]</span></p>
+<p>where:</p>
+<p><span class="math display">\[
+\mathbf{y} = \left[
+\begin{array}{cccc}
+y_{1} &amp;
+y_{2} &amp;
+\cdots &amp;
+y_{n} \\
+\end{array}
+\right]^T=\left[
+\begin{array}{c}
+{y}_{1} \\
+{y}_{2} \\
+\vdots\\
+{y}_{n} \\
+\end{array}
+\right].
+\]</span></p>
+<p>Where do we get the reference outputs from? Sometimes they are
+the part of the dataset gathering process themselves.
+In other cases, they require a lot of work and money – in particular,
+in order to judge the wine quality, someone had to engage a couple of experts
+and ask them to drink 6500 wine bottles! This decent piece of research
+certainly required a lot of sacrifices.</p>
+<p>Amazon’s Mechanical Turk or Google’s image reCAPTCHA
+(identify images with pedestrian crossings) are examples of services for
+crowdsourcing of such <span class="math inline">\(\mathbf{y}\)</span>s.</p>
+</div>
+<div id="types-of-supervised-learning-problems" class="section level3">
+<h3><span class="header-section-number">1.4.2</span> Types of Supervised Learning Problems</h3>
+<p>The aim of supervised learning is to try to create an “algorithm” that,
+given an input point, generates an output that is as <em>close</em> (with respect to
+some useful metrics) as possible to the desired one.
+The given data sample will be used to “train” this “model”.</p>
+<p>Depending on the type of the elements in <span class="math inline">\(\mathbf{y}\)</span>
+(the domain of <span class="math inline">\(\mathbf{y}\)</span>),
+supervised learning problems are usually
+pigeonholed as:</p>
+<ul>
+<li><p><em>regression</em> – each <span class="math inline">\(y_i\)</span> is a real number,
+e.g., <span class="math inline">\(y_i=\)</span> future market stock price
+with <span class="math inline">\(\mathbf{x}_{i,\cdot}=\)</span> prices from <span class="math inline">\(p\)</span> previous days;</p></li>
+<li><p><em>classification</em> – each <span class="math inline">\(y_i\)</span> is a discrete label,
+e.g., <span class="math inline">\(y_i=\)</span> healthy (0) or ill (1)
+with <span class="math inline">\(\mathbf{x}_{i,\cdot}=\)</span> a patient’s health record;</p></li>
+<li><p><em>ordinal regression</em> (a.k.a. ordinal classification) – each <span class="math inline">\(y_i\)</span> is
+a rank, e.g., <span class="math inline">\(y_i=\)</span> rating of a TV series on the scale 1–5
+with <span class="math inline">\(\mathbf{x}_{i,\cdot}=\)</span> ratings of <span class="math inline">\(p\)</span> most similar productions.</p></li>
+</ul>
+<div class="exercise"><strong>Exercise.</strong>
+<p>Which of the following are instances of classification problems? Which of them are regression tasks?</p>
+<ul>
+<li><p>Detect email spam</p></li>
+<li><p>Predict a market stock price</p></li>
+<li><p>Predict the likeability of a new ad</p></li>
+<li><p>Assess credit risk</p></li>
+<li><p>Detect tumour tissues in medical images</p></li>
+<li><p>Predict time-to-recovery of cancer patients</p></li>
+<li><p>Recognise smiling faces on photographs</p></li>
+<li><p>Detect unattended luggage in airport security camera footage</p></li>
+<li><p>Turn on emergency braking to avoid a collision with pedestrians</p></li>
+</ul>
+<p>What kind of data should you gather in order to tackle them?</p>
+</div>
+<p>Once we build a supervised learning algorithm, its
+outputs can be interpreted by a human being and used (critically)
+for whatever purpose (e.g., a GP can utilise it for diagnosing illnesses).
+Their outputs can be also provided to other algorithms to take
+immediate actions (e.g., buy those market shares asap!).</p>
+<p>We are going to cover quite a decent number of classical approaches
+to data classification and regression, respectively:</p>
+<ul>
+<li><p>K-nearest neighbour classifiers (Chapter <a href="chap-knn.html#chap:knn">3</a>),
+decision trees (Chapter <a href="chap-trees.html#chap:trees">4</a>),
+logistic regression (Chapter <a href="chap-logistic.html#chap:logistic">7</a>)
+and its generalisation in form of feed-forward deep neural networks
+(Chapter <a href="chap-images.html#chap:images">11</a>);</p></li>
+<li><p>K-nearest neighbour regression (Chapter <a href="chap-knn.html#chap:knn">3</a>),
+regression trees (Chapter <a href="chap-trees.html#chap:trees">4</a>) and
+linear models for regression (Chapter <a href="chap-regression-simple.html#chap:regression-simple">5</a>).</p></li>
+</ul>
+</div>
+<div id="one-dataset-many-problems" class="section level3">
+<h3><span class="header-section-number">1.4.3</span> One Dataset – Many Problems</h3>
+<p>The title of this subsection might sound worrying, but
+we need to be clear about one thing: in mathematics (and all
+fields that use maths as a universal language),
+we yearn for problems. If we have a problem, an interesting problem
+in particular, it means we can occupy ourselves for a long time doing
+something exciting and challenging. We just love what we do. It’s not
+merely our work, it’s our hobby and passion as well.</p>
+<p>Therefore, by saying that a single dataset can become an instance
+of many different ML problems, we should be pretty pretty excited.</p>
+<p>For example, in the <code>wine_quality</code> dataset we have the following columns:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="kw">names</span>(wine_quality) <span class="co"># names of the columns</span></a></code></pre></div>
+<pre><code>##  [1] &quot;fixed.acidity&quot;        &quot;volatile.acidity&quot;    
+##  [3] &quot;citric.acid&quot;          &quot;residual.sugar&quot;      
+##  [5] &quot;chlorides&quot;            &quot;free.sulfur.dioxide&quot; 
+##  [7] &quot;total.sulfur.dioxide&quot; &quot;density&quot;             
+##  [9] &quot;pH&quot;                   &quot;sulphates&quot;           
+## [11] &quot;alcohol&quot;              &quot;response&quot;            
+## [13] &quot;color&quot;</code></pre>
+<div style="margin-top: 1em">
+
+</div>
+<p>Any of the 11 physicochemical features can become the source of a
+regression task (with <span class="math inline">\(\mathbf{X}\)</span> being all the remaining 10 – or less),
+because they are numeric (quantitative) variables.
+For instance, Figure <a href="chap-introduction.html#fig:wines_regression">5</a> depicts
+the empirical distribution (density) of the <code>alcohol</code> variable in form
+of a histogram. We could be curious if, for example, any other
+chemical component predicts high alcohol content.</p>
+<p>Here are some basic summary statistics of this variable:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">hist</span>(wine_quality[,<span class="st">&quot;alcohol&quot;</span>], <span class="dt">main=</span><span class="st">&quot;&quot;</span>, <span class="dt">col=</span><span class="st">&quot;white&quot;</span>); <span class="kw">box</span>()</a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="kw">summary</span>(wine_quality[,<span class="st">&quot;alcohol&quot;</span>])</a></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     8.0     9.5    10.3    10.5    11.3    14.9</code></pre>
+<div class="figure">
+<img src="01-introduction-figures/wines_regression-1.svg" alt="Figure 5: Quantitative (numeric) outputs lead to regression problems" id="fig:wines_regression" />
+<p class="caption">Figure 5: Quantitative (numeric) outputs lead to regression problems</p>
+</div>
+<p>The outputs generated by <code>summary()</code> include:</p>
+<ul>
+<li><p><code>Min.</code> – sample minimum (the smallest value in the sample);</p></li>
+<li><p><code>1st Qu.</code> – 1st quartile (25th percentile, quantile of order 0.25),
+being the observation <span class="math inline">\(q\)</span> such that 25% values are not greater than <span class="math inline">\(q\)</span>
+and 75% values are not smaller than <span class="math inline">\(q\)</span>, see <code>?quantile</code> in R;</p></li>
+<li><p><code>Median</code> – median (50th percentile, quantile of order 0.5),
+being the observation “in the middle of the sample”;</p></li>
+<li><p><code>Mean</code> – arithmetic mean;</p></li>
+<li><p><code>3rd Qu.</code> – 3rd quartile (75th percentile, quantile of order 0.75);</p></li>
+<li><p><code>Max.</code> – sample maximum.</p></li>
+</ul>
+<div style="margin-top: 1em">
+
+</div>
+<p>On the other hand, <code>color</code> is a quantitative variable
+with two possible outcomes (see Figure <a href="chap-introduction.html#fig:wines_binary">6</a> for a bar plot).
+Therefore, it can constitute a classification task.</p>
+<p>Quantitative data can be summarised with a contingency table:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">barplot</span>(<span class="kw">table</span>(wine_quality[,<span class="st">&quot;color&quot;</span>]), <span class="dt">col=</span><span class="st">&quot;white&quot;</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">6000</span>))</a>
+<a class="sourceLine" id="cb25-2" title="2"><span class="kw">table</span>(wine_quality[,<span class="st">&quot;color&quot;</span>])</a></code></pre></div>
+<pre><code>## 
+##   red white 
+##  1599  4898</code></pre>
+<div class="figure">
+<img src="01-introduction-figures/wines_binary-1.svg" alt="Figure 6: Quantitative outputs lead to classification tasks" id="fig:wines_binary" />
+<p class="caption">Figure 6: Quantitative outputs lead to classification tasks</p>
+</div>
+<div style="margin-top: 1em">
+
+</div>
+<p>Moreover, <code>response</code> is an ordinal variable, representing
+a wine’s rating as assigned by a wine expert
+(see Figure <a href="chap-introduction.html#fig:wines_ordinal">7</a> for a barplot).
+Note that although the ranks are represented with numbers,
+we they are not continuous variables per se. However,
+these ranks are “something more” than just labels – they are linearly
+ordered, we know what’s the smallest rank and what’s the greatest one.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="kw">barplot</span>(<span class="kw">table</span>(wine_quality[,<span class="st">&quot;response&quot;</span>]), <span class="dt">col=</span><span class="st">&quot;white&quot;</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3000</span>))</a>
+<a class="sourceLine" id="cb27-2" title="2"><span class="kw">table</span>(wine_quality[,<span class="st">&quot;response&quot;</span>])</a></code></pre></div>
+<pre><code>## 
+##    3    4    5    6    7    8    9 
+##   30  216 2138 2836 1079  193    5</code></pre>
+<div class="figure">
+<img src="01-introduction-figures/wines_ordinal-1.svg" alt="Figure 7: Ordinal variables constitute ordinal regression tasks" id="fig:wines_ordinal" />
+<p class="caption">Figure 7: Ordinal variables constitute ordinal regression tasks</p>
+</div>
+<div style="margin-top: 1em">
+
+</div>
+<p>In the next chapter we will discuss our first family of clustering algorithms.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chap-hclust.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "serif",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": "lmlcr.pdf",
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
