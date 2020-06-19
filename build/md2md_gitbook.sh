@@ -44,6 +44,13 @@ mkdir -p "${dir_fig_out}"
 rm -f "${dir_fig_out}/*"
 if [ -d "${dir_fig_in}" ]; then
     cp ${dir_fig_in}/*.svg "${dir_fig_out}/"
+
+#     cd "${dir_fig_out}"
+#     for f in *.svg; do gzip "$f"; done
+#     rename.ul ".svg.gz" ".svgz" *.svg.gz
+#     cd ..
 fi
+
+
 
 echo "Compiling ${1} → ${outfile} succeeded."

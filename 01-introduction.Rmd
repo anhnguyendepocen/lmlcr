@@ -283,7 +283,7 @@ x_{2,1} & x_{2,2} & \cdots & x_{2,p} \\
 \vdots & \vdots & \ddots & \vdots \\
 x_{n,1} & x_{n,2} & \cdots & x_{n,p} \\
 \end{array}
-\right]
+\right].
 \]
 Mathematically, we denote this as $\mathbf{X}\in\mathbb{R}^{n\times p}$
 (read "$\mathbf{X}$ is a real-valued matrix with $n$ rows and $p$ columns").
@@ -307,7 +307,7 @@ of ca. 6500 Portuguese wines
 from different wineries.
 
 
-```{r wines_load,results='hide'}
+```{r wines-load,results='hide'}
 wine_quality <- read.csv("datasets/wine_quality_all.csv",
     comment.char="#")
 X <- wine_quality[, 1:11] # extract the first 11 columns
@@ -315,7 +315,7 @@ X <- as.matrix(X) # convert to numeric matrix
 head(X) # display the first 6 rows, i.e., X[1:6,]
 ```
 
-```{r wines_print1,echo=FALSE}
+```{r wines-print1,echo=FALSE}
 .X <- wine_quality[, 1:11]
 .X <- .X[c(1,2,3,4,11)]
 names(.X)[4] <- "..."
@@ -326,7 +326,7 @@ print(head(.X))
 
 We can get to now the dimensionality (shape) of $\mathbf{X}$ by calling:
 
-```{r wines_print2}
+```{r wines-print2}
 dim(X)    # gives n and p, respectively
 nrow(X)   # dim(X)[1] – 1st dimension – n
 ncol(X)   # dim(X)[2] – 2nd dimension – p
@@ -344,7 +344,7 @@ of the presence of the descriptive feature labels (column names).
 Therefore, when printed out on the console, R will "wrap" the columns to
 fit the page width.
 
-```{r wines_print3}
+```{r wines-print3}
 head(X, 3) # the first 3 rows
 ```
 { END remark }
@@ -354,7 +354,7 @@ might be distracting use from fully appreciating the abstract
 nature of the setting we're trying to develop.
 
 
-```{r wines_print5}
+```{r wines-print5}
 dimnames(X) <- NULL # drop row and column names
 head(X) # show the first 6 rows
 ```
@@ -367,7 +367,7 @@ $i=1,\dots,n$, $j=1,\dots,p$.
 
 For instance, the 3rd wine's volatile acidity (expressed in grams of acetic acid per dm³), $x_{3,2}$, is:
 
-```{r show_iris_elem}
+```{r show-wines-elem}
 X[3, 2] # 3rd row, 2nd column
 ```
 
@@ -379,7 +379,7 @@ The third observation (data point, row in $\mathbf{X}$, i.e.,
 the 3rd wine in the dataset)
 consists of items $(x_{3,1}, \dots, x_{3,p})$ that can be extracted by calling:
 
-```{r show_iris_row}
+```{r show-wines-row}
 X[3,]
 ```
 
@@ -389,7 +389,7 @@ Moreover, the second feature/variable/column (in our case: volatile acidity)
 is comprised of
 $(x_{1,2}, x_{2,2}, \dots, x_{n,2})$:
 
-```{r show_iris_col}
+```{r show-wines-col}
 X[,2]
 ```
 
@@ -490,7 +490,7 @@ the input data vectors $\mathbf{x}_{1,\cdot},\dots,\mathbf{x}_{n,\cdot}$
 (rows in $\mathbf{X}$) are all we have.
 Our aim now is to discover the *underlying structure in the data*,
 whatever that means.
-For instance, Figure {@fig:unsupervised} depicts a scatter plot
+For instance, Figure \@ref(fig:unsupervised) depicts a scatter plot
 of two selected wine features.
 What interesting information can we extract from this figure?
 Perhaps not much, this is exactly why we need data mining methods!
@@ -533,7 +533,7 @@ plot(p$scores[sam,1], p$scores[sam,2], col=wc[sam], pch=wp[sam], xlab="First pri
 legend("topright", c("white wine", "red wine"), pch=c(17,16), col=c("black", "red"), bg="white")
 ```
 
-For instance, Figure {@fig:princomp} depicts the two dimensions "revealed"
+For instance, Figure \@ref(fig:princomp) depicts the two dimensions "revealed"
 by the PCA method (Principal Component Analysis) -- a technique proposed
 by the mathematician Karl Pearson (the Father of mathematical statistics)
 at the beginning of the 20th century.
@@ -563,7 +563,7 @@ For example, these can be cars driving on walkways in a park's security camera f
 
 
 
-```{r anomaly_detection,echo=FALSE,fig.cap="Outliers can be thought of as anomalies of some sort"}
+```{r anomaly-detection,echo=FALSE,fig.cap="Outliers can be thought of as anomalies of some sort"}
 plot(p$scores[sam,1], p$scores[sam,2], col="#00000011", xlab="First principal component", ylab="Second principal component")
 wh <- p$scores[,1]>10 | p$scores[,2]>4 # a "visual" outlier detector ;)
 points(p$scores[wh,1], p$scores[wh,2],
@@ -571,7 +571,7 @@ points(p$scores[wh,1], p$scores[wh,2],
 legend("topright", c("outlier"), pch=c(4), col=c(4), bg="white")
 ```
 
-Figure {@fig:anomaly_detection} highlights a few *outliers* -- observations
+Figure \@ref(fig:anomaly-detection) highlights a few *outliers* -- observations
 that differ (in the sense the are much farther away) significantly from
 the rest of the points. They might be due to some measurement or data input
 error or just be an inherent part of the dataset. Hence, it might be
@@ -596,7 +596,7 @@ or protein sequences that are to be grouped by their function.
 
 
 
-```{r clustering_illustration,echo=FALSE,cache=TRUE,fig.cap="Two clusters identified by the K-means algorithm ($K=2$)"}
+```{r clustering-illustration,echo=FALSE,cache=TRUE,fig.cap="Two clusters identified by the K-means algorithm ($K=2$)"}
 Y <- wine_quality[, c("chlorides", "fixed.acidity")]
 km <- kmeans(p$scores[,1:2], centers=2, nstart=10)
 wc <- c("#61D04F77", "#2297E677")[km$cluster]
@@ -608,7 +608,7 @@ col=c("#61D04F", "#2297E6"), pch=c(17,16), bg="white")
 ```
 
 
-Figure {@fig:clustering_illustration} gives the results of running the K-means
+Figure \@ref(fig:clustering-illustration) gives the results of running the K-means
 algorithm (see Chapter \@ref(chap:kmeans)) on the discussed dataset.
 The two identified clusters are quite similar to
 the wine colours, despite the fact that this information has not been used
@@ -641,13 +641,13 @@ For instance, in the `wine_quality` dataset,
 this can be the `response` column, which gives the wine rating on
 the scale 0 (bad) to 10 (excellent).
 
-```{r show_wines_Xy,results="hide"}
+```{r show-wines-Xy,results="hide"}
 y <- wine_quality[, "response"] # extract the `response` column
 Xy <- cbind(X, y) # join X and y (column-bind) - for printing
 head(Xy)
 ```
 
-```{r show_wines_Xy2,echo=FALSE}
+```{r show-wines-Xy2,echo=FALSE}
 .Xy <- wine_quality[,c(1,2,3,4,11,12)]
 names(.Xy)[4] <- "..."
 row.names(.Xy) <- sprintf("[%d,]", seq_len(nrow(.X)))
@@ -804,7 +804,7 @@ of many different ML problems, we should be pretty pretty excited.
 
 For example, in the `wine_quality` dataset we have the following columns:
 
-```{r wines_colnames}
+```{r wines-colnames}
 names(wine_quality) # names of the columns
 ```
 
@@ -814,7 +814,7 @@ names(wine_quality) # names of the columns
 Any  of the 11 physicochemical features can become the source of a
 regression task (with $\mathbf{X}$ being all the remaining 10 -- or less),
 because they are numeric (quantitative) variables.
-For instance, Figure {@fig:wines_regression} depicts
+For instance, Figure \@ref(fig:wines-regression) depicts
 the empirical distribution (density) of the `alcohol` variable in form
 of a histogram. We could be curious if, for example, any other
 chemical component predicts high alcohol content.
@@ -822,7 +822,7 @@ chemical component predicts high alcohol content.
 Here are some basic summary statistics of this variable:
 
 
-```{r wines_regression,fig.cap="Quantitative (numeric) outputs lead to regression problems"}
+```{r wines-regression,fig.cap="Quantitative (numeric) outputs lead to regression problems"}
 hist(wine_quality[,"alcohol"], main="", col="white"); box()
 summary(wine_quality[,"alcohol"])
 ```
@@ -851,13 +851,13 @@ being the observation "in the middle of the sample";
 . . .
 
 On the other hand, `color` is a qualitative variable
-with two possible outcomes (i.e., binary; see Figure {@fig:wines_binary}
+with two possible outcomes (i.e., binary; see Figure \@ref(fig:wines-binary)
 for a bar plot).
 Therefore, it can constitute a classification task.
 
 Quantitative data can be summarised with a contingency table:
 
-```{r wines_binary,fig.cap="Qualitative (here: binary) outputs lead to classification tasks"}
+```{r wines-binary,fig.cap="Qualitative (here: binary) outputs lead to classification tasks"}
 barplot(table(wine_quality[,"color"]), col="white", ylim=c(0, 6000))
 table(wine_quality[,"color"])
 ```
@@ -867,14 +867,14 @@ table(wine_quality[,"color"])
 
 Moreover, `response` is an ordinal variable, representing
 a wine's rating as assigned by a wine expert
-(see  Figure {@fig:wines_ordinal} for a barplot).
+(see  Figure \@ref(fig:wines-ordinal) for a barplot).
 Note that although the ranks are represented with numbers,
 we they are not continuous variables per se. However,
 these ranks are "something more" than just labels -- they are linearly
 ordered, we know what's the smallest rank and what's the greatest one,
 ranks 3 and 7 and not just different: they are very different, etc.
 
-```{r wines_ordinal,fig.cap="Ordinal variables constitute ordinal regression tasks"}
+```{r wines-ordinal,fig.cap="Ordinal variables constitute ordinal regression tasks"}
 barplot(table(wine_quality[,"response"]), col="white", ylim=c(0, 3000))
 table(wine_quality[,"response"])
 ```

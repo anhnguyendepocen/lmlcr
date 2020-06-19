@@ -53,13 +53,13 @@ Let's draw a scatter plot that depicts the detected clusters:
 plot(X, col=km$cluster)
 ```
 
-The colours in Figure {@fig:kmeans12} indicate the detected clusters.
+The colours in Figure \@ref(fig:kmeans12) indicate the detected clusters.
 The left group is clearly well-separated from the other two.
 
 
 What can we do with this information? Well, if we were experts on plants
 (in the 1930s), that'd definitely be something ground-breaking.
-Figure {@fig:kmeans123} is a version of the aforementioned scatter plot
+Figure \@ref(fig:kmeans123) is a version of the aforementioned scatter plot
 now with the true iris species added.
 
 ```{r kmeans123, fig.cap="3-means clustering (colours) vs true Iris species (shapes)"}
@@ -148,7 +148,7 @@ $k$ that minimises the given expression.
 
 
 In the previous example, the three identified cluster centres in $\mathbb{R}^2$
-are given by (see Figure {@fig:kmeans_problem1} for illustration):
+are given by (see Figure \@ref(fig:kmeans_problem1) for illustration):
 
 ```{r kmeans_problem1,fig.cap="Cluster centres (blue dots) identified by the 3-means algorithm"}
 km$centers
@@ -160,7 +160,7 @@ points(km$centers, cex=2, col=4, pch=16)
 
 
 
-Figure {@fig:kmeans_problem2} depicts the partition
+Figure \@ref(fig:kmeans_problem2) depicts the partition
 of the whole $\mathbb{R}^2$ space
 into clusters based on the closeness to the three cluster centres.
 
@@ -431,7 +431,7 @@ repeat {
 
 On a side note, our algorithm needed ```r {it}```
 iterations to identify the (locally optimal) cluster centres.
-Figure {@fig:kmeanimpl_plot} depicts its quest for the clustering grail.
+Figure \@ref(fig:kmeanimpl_plot) depicts its quest for the clustering grail.
 
 
 <!--
@@ -946,7 +946,7 @@ h <- hclust(d, method="complete")
 
 
 A "nice" number of clusters to divide our dataset into
-can be read from the dendrogram, see Figure {@fig:clustering_factbook7}.
+can be read from the dendrogram, see Figure \@ref(fig:clustering_factbook7).
 
 
 ```{r clustering_factbook7,fig.cap="Cluster dendrogram for the World Factbook dataset -- Complete linkage"}
@@ -986,7 +986,7 @@ d <- dist(factbook[-1])
 g <- hclust2(d)
 ```
 
-The cluster dendrogram in Figure {@fig:clustering_factbook10}
+The cluster dendrogram in Figure \@ref(fig:clustering_factbook10)
 reveals  3 evident clusters.
 
 ```{r clustering_factbook10,fig.cap="Cluster dendrogram for the World Factbook dataset -- Genie algorithm"}
@@ -1010,7 +1010,7 @@ sapply(split(factbook$countr, y), sample, 6)
 
 We can draw the countries in each cluster
 on a map by using the `rworldmap` package (see its documentation for more details),
-see Figure {@fig:clustering_factbook12}.
+see Figure \@ref(fig:clustering_factbook12).
 
 ```{r clustering_factbook12,fig.cap="3 clusters discovered by the Genie algorithm",cache=TRUE,message=FALSE,warnings=FALSE,echo=-1}
 par(ann=FALSE)
@@ -1083,7 +1083,7 @@ Apply the K-means algorithm with $K=8$.
 
 Of course, here by "the" K-means we mean the default method
 available in the `kmeans()` function.
-The clustering results are depicted in Figure {@fig:sipu_unbalance3a}.
+The clustering results are depicted in Figure \@ref(fig:sipu_unbalance3a).
 
 ```{r sipu_unbalance3a,echo=-1,fig.cap="Results of K-means on the `sipu_unbalance` dataset",cache=TRUE}
 set.seed(123)
@@ -1101,7 +1101,7 @@ km$tot.withinss
 
 Increasing the number of restarts even further improves the solution,
 but the local minimum is still far from the global one,
-compare Figure {@fig:sipu_unbalance3b}.
+compare Figure \@ref(fig:sipu_unbalance3b).
 
 ```{r sipu_unbalance3b,echo=-1,fig.cap="Results of K-means on the `sipu_unbalance` dataset -- many more restarts",cache=TRUE}
 set.seed(1234)
@@ -1144,7 +1144,7 @@ cntr <- matrix(ncol=2, byrow=TRUE, c(
     25,   10))
 ```
 
-Running `kmeans()` yields the clustering depicted in Figure {@fig:sipu_unbalance6}.
+Running `kmeans()` yields the clustering depicted in Figure \@ref(fig:sipu_unbalance6).
 
 ```{r sipu_unbalance6,echo=-1,fig.cap="Results of K-means on the `sipu_unbalance` dataset -- an educated guess on the cluster centres' locations",cache=TRUE}
 set.seed(123)
@@ -1259,7 +1259,7 @@ clusterise <- function(file, K) {
 
 
 Applying the above as `clusterise(files[i], Ks[i])` yields
-Figures {@fig:clustering_benchmarks_plot1}-{@fig:clustering_benchmarks_plot6}.
+Figures \@ref(fig:clustering_benchmarks_plot1)-\@ref(fig:clustering_benchmarks_plot6).
 
 ```{r clustering_benchmarks_plot1,dependson="clustering_benchmarks2",cache=TRUE,echo=FALSE,fig.height=4,fig.cap="Clustering of the `wut_isolation` dataset"}
 suppressWarnings(clusterise(files[1], Ks[1]))
@@ -1438,7 +1438,7 @@ the case)?
 
 Also, the problem with K-means is that there is no guarantee that a
 $K$-partition is any "similar" to the $K'$-one for $K\neq K'$,
-see Figure {@fig:kmeans_different_K}.
+see Figure \@ref(fig:kmeans_different_K).
 
 
 

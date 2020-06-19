@@ -76,7 +76,7 @@ healthy | ill
 
 
 Let's recall the synthetic 2D dataset from the previous chapter
-(true decision boundary is at $X_1=0$), see Figure {@fig:synthetic2}.
+(true decision boundary is at $X_1=0$), see Figure \@ref(fig:synthetic2).
 
 
 ```{r synthetic2,echo=FALSE,fig.cap="A synthetic 2D dataset with the true decision boundary at $X_1=0$"}
@@ -266,7 +266,7 @@ Remark.
 
 : (\*) The threshold $T=0.5$  could even be treated as a free parameter
 we optimise for (w.r.t. different metrics over the validation sample),
-see Figure {@fig:lm3b}.
+see Figure \@ref(fig:lm3b).
 
 ```{r lm3b,echo=FALSE,cache=TRUE,dependson='lm3',cache=TRUE,fig.cap="Quality metrics for a binary classifier \"Classify X as 1 if $f(X)>T$ and as 0 if $f(X)\\le T$\""}
 set.seed(123)
@@ -324,7 +324,7 @@ and $\boldsymbol\beta$".
 
 
 A popular choice is the **logistic sigmoid function**,
-see Figure {@fig:sigmoid}:
+see Figure \@ref(fig:sigmoid):
 
 \[
 \phi(t) = \frac{1}{1+e^{-t}} = \frac{e^t}{1+e^t}.
@@ -375,7 +375,7 @@ The fitted coefficients are equal to:
 f$coefficients
 ```
 
-Figure {@fig:glm2} depicts the obtained model, which can be written
+Figure \@ref(fig:glm2) depicts the obtained model, which can be written
 as:
 \[
 \Pr(Y=1|x)=\displaystyle\frac{1}{1+e^{-\left(

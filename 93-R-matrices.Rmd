@@ -477,9 +477,9 @@ round(1/A, 2) # rounds every element in 1/A
 
 
 An example plot of the absolute values of sine and cosine functions
-depicted using the `matplot()` function (see Figure {@fig:matplot_sincos}).
+depicted using the `matplot()` function (see Figure \@ref(fig:matplot-sincos)).
 
-```{r matplot_sincos,fig.cap="Example plot with `matplot()`"}
+```{r matplot-sincos,fig.cap="Example plot with `matplot()`"}
 x <- seq(-2*pi, 6*pi, by=pi/100)
 Y <- cbind(sin(x), cos(x)) # a matrix with two columns
 Y <- abs(Y) # take the absolute value of every element in Y
@@ -836,7 +836,7 @@ locally sourced parts/ingredients?
 
 { BEGIN exercise }
 Draw a single plot of the relative exchange rates, similar to the one
-in Figure {@fig:matrix_ex2d}.
+in Figure \@ref(fig:matrix-ex2d).
 Use `legend()` to add a legend and `abline()` to draw a horizontal
 line at $y=1$.
 { END exercise }
@@ -849,7 +849,7 @@ or call `matplot()` to draw all curves all at once.
 Note that you can set the range of values on the y-axis
 by setting the `ylim` argument in `plot()` or `matplot()`.
 
-```{r matrix_ex2d,echo=FALSE,fig.height=5,fig.cap="Currency exchange rates relative to 1999-01-04 (with EUR as the base currency)"}
+```{r matrix-ex2d,echo=FALSE,fig.height=5,fig.cap="Currency exchange rates relative to 1999-01-04 (with EUR as the base currency)"}
 matplot(rev(rates[,1]), Y, xlab="Day", ylab="Relative Exchange Rate",
     type="l")
 legend("topleft", legend=paste0("EUR/", dimnames(Y)[[2]]), col=1:(ncol(Y)), lty=1:(ncol(Y)),

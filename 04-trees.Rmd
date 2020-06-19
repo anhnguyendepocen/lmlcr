@@ -73,7 +73,7 @@ healthy | ill
 
 
 Let's recall the synthetic 2D dataset from the previous chapter
-(true decision boundary is at $X_1=0$), see Figure {@fig:synthetic}.
+(true decision boundary is at $X_1=0$), see Figure \@ref(fig:synthetic).
 
 
 ```{r synthetic,echo=FALSE,fig.cap="A synthetic 2D dataset with the true decision boundary at $X_1=0$"}
@@ -274,7 +274,7 @@ rpart.plot(ts)
 ```
 
 
-Figure {@fig:plot_rpart2} depicts a very simple decision tree
+Figure \@ref(fig:plot_rpart2) depicts a very simple decision tree
 for the aforementioned synthetic dataset.
 There is only one decision boundary (based on $X_1$) that splits
 data into the "left" and "right" sides.
@@ -287,7 +287,7 @@ Each tree node reports 3 pieces of information:
 
 
 
-Figures {@fig:plot_rpart2} and {@fig:plot_rpart3} depict
+Figures \@ref(fig:plot_rpart2) and \@ref(fig:plot_rpart3) depict
 trees with more decision rules.
 Take a moment to contemplate how the corresponding decision boundaries
 changed with the introduction of new decision rules.
@@ -350,7 +350,7 @@ XY_test <- cbind(as.data.frame(X_test), Y=Y_test)
 
 
 
-Fit and plot a decision tree, see Figure {@fig:plot_rpart1}.
+Fit and plot a decision tree, see Figure \@ref(fig:plot_rpart1).
 
 ```{r plot_rpart1,fig.height=5,echo=-(1:2),fig.cap="A decision tree for the `white_wines` dataset"}
 par(mar=c(0,0,0,0))
@@ -361,8 +361,8 @@ rpart.plot(t1, tweak=1.1, fallen.leaves=FALSE, digits=3)
 
 
 We can build  less or more complex trees by playing
-with the `cp` parameter, see Figures {@fig:plot_rpart222}
-and {@fig:tree333}.
+with the `cp` parameter, see Figures \@ref(fig:plot_rpart222)
+and \@ref(fig:tree333).
 
 ```{r plot_rpart222,echo=-(1:2),fig.cap="A (simpler) decision tree for the `white_wines` dataset"}
 par(mar=c(0,0,0,0))
@@ -575,7 +575,7 @@ edstats_subset <- edstats[!(names(edstats) %in%
     c("CountryName", "LO.PISA.MAT.FE", "LO.PISA.MAT.MA"))]
 ```
 
-Fitting and plotting (see Figure {@fig:girlsboys7tree})
+Fitting and plotting (see Figure \@ref(fig:girlsboys7tree))
 of the tree can be performed as follows:
 
 ```{r girlsboys7tree,echo=-(1:2),fig.cap="A decision tree explaining the `girls_rule_maths` variable"}
@@ -650,7 +650,7 @@ edstats_subset <- edstats[!(names(edstats) %in%
 On a side note, this could be done more easily by calling, e.g.,
 `stri_startswith_fixed(names(edstats), "LO.PISA")` from the `stringi` package.
 
-Fitting and plotting (see Figure {@fig:girlsboys11tree}) of the tree:
+Fitting and plotting (see Figure \@ref(fig:girlsboys11tree)) of the tree:
 
 ```{r girlsboys11tree,echo=-1,fig.cap="Another decision tree explaining the `girls_rule_maths` variable"}
 par(ann=FALSE)
@@ -815,7 +815,7 @@ edbook_subset <- edbook[!(names(edbook) %in%
     c("CountryName", "LO.PISA.MAT.FE", "LO.PISA.MAT.MA"))]
 ```
 
-Fitting and plotting (see Figure {@fig:joinedstats9}):
+Fitting and plotting (see Figure \@ref(fig:joinedstats9)):
 
 ```{r joinedstats9,echo=-1,fig.cap="Yet another decision tree explaining the `girls_rule_maths` variable"}
 par(ann=FALSE)

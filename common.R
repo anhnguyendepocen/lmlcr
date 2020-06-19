@@ -17,10 +17,11 @@ hook_plot_md_pandoc_new <- function (x, options)
     if (options$fig.show == "animate")
         return(hook_plot_html(x, options))
     file <- stri_replace_first_regex(x, "\\.(pdf|png|jpg|svg)", "")
-    base = opts_knit$get("base.url") %n% ""
-    cap = .img.cap(options)
-    at = paste(c(
-        sprintf("#fig:%s", options[["label"]]),  # Marek's hack
+    base <- opts_knit$get("base.url") %n% ""
+    cap <- .img.cap(options)
+    cap <- sprintf("(\\#fig:%s) %s", options[["label"]], cap)
+    at <- paste(c(
+        #sprintf("#fig:%s", options[["label"]]),  # Marek's hack
         sprintf("width=%s", options[["out.width"]]),
         sprintf("height=%s", options[["out.height"]]), options[["out.extra"]]),
         collapse = " ")

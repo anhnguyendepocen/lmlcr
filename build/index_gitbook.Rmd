@@ -7,13 +7,19 @@ output:
     bookdown::gitbook:
         pandoc_args: ["--default-image-extension=.svg",
             "--highlight-style=tango", "--email-obfuscation=none",
-            "--section-divs", "--csl=bibstyle.csl",
-            "--filter=/usr/local/bin/pandoc-fignos",
-            "--filter=/usr/local/bin/pandoc-tablenos"]
-        fig_caption: false
+            "--section-divs", "--csl=bibstyle.csl"]
+        fig_caption: true
         includes:
             in_header: preamble.html
         config:
+            sharing:
+                facebook: no
+                github: yes
+                twitter: no
+                linkedin: no
+                weibo: no
+                instapaper: no
+                vk: no
             download: ["lmlcr.pdf"]
             fontsettings:
                 family: serif

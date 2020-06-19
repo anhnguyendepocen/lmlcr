@@ -248,13 +248,13 @@ to write programs that manipulate unevaluated R expressions.
 
 For instance, take a close look at the following plot:
 
-```{r plotz_metaprogramming,fig.cap="Metaprogramming in action: Take a look at the Y axis label"}
+```{r plotz-metaprogramming,fig.cap="Metaprogramming in action: Take a look at the Y axis label"}
 z <- seq(-2*pi, 2*pi, length.out=101)
 plot(z, sin(z), type="l")
 ```
 
 How did the `plot()` function know that we are plotting `sin` of `z`
-(see Figure {@fig:plotz_metaprogramming})?
+(see Figure \@ref(fig:plotz-metaprogramming))?
 It turns out that, at any time, we not only have access to the value
 of an object (such as the result of evaluating `sin(z)`, which is
 a vector of 101 reals) but also to the expression that was passed as
@@ -315,12 +315,12 @@ uses formulas to specify the output and input variables:
 lm(Sepal.Length~Petal.Length+Sepal.Width, data=iris)
 ```
 
-On the other hand, `boxplot()` (see Figure {@fig:boxplot_metaprogramming})
+On the other hand, `boxplot()` (see Figure \@ref(fig:boxplot-metaprogramming))
 allows for creating
 separate box-and-whisker plots for each subgroup given by a combination
 of factors.
 
-```{r boxplot_metaprogramming,fig.cap="Example box plot created via the formula interface"}
+```{r boxplot-metaprogramming,fig.cap="Example box plot created via the formula interface"}
 boxplot(len~supp+dose, data=ToothGrowth,
     horizontal=TRUE, col="white")
 ```
@@ -399,10 +399,10 @@ head(yearly_trees)
 
 { BEGIN exercise }
 Depict the post-2003 tree count data on a plot
-similar to the one in Figure {@fig:df_ex1d}.
+similar to the one in Figure \@ref(fig:df-ex1d).
 Is there any tendency in the data?
 
-```{r df_ex1d,echo=FALSE,fig.cap="The number of trees planted in the City of Melbourne each year"}
+```{r df-ex1d,echo=FALSE,fig.cap="The number of trees planted in the City of Melbourne each year"}
 yearly_trees[[1]] <- as.numeric(as.character(yearly_trees[[1]]))
 plot(yearly_trees[[1]][yearly_trees[[1]]>=2003],
      yearly_trees[[2]][yearly_trees[[1]]>=2003],
@@ -508,7 +508,7 @@ by `strptime()` to represent date-time information, see `?POSIXlt`.
 Below we extract month numbers from each date and add them as a new column
 in `gee_wide` (see `?strftime`):
 
-```{r df_ex2f}
+```{r df-ex2f}
 gee_wide$month <- strftime(gee_wide$sample_datetime, "%m")
 ```
 
@@ -517,7 +517,7 @@ Compute the monthly averages
 of the `r length(params)` parameters.
 
 
-```{r df_ex2g,echo=-c(2,3)}
+```{r df-ex2g,echo=-c(2,3)}
 gee_ave <- ..
 options(digits=3) ###### HIDDEN
 gee_ave <- aggregate(gee_wide[2:8], gee_wide[9], mean, na.rm=TRUE) ###### HIDDEN
@@ -531,9 +531,9 @@ gee_ave
 { BEGIN exercise }
 Draw a plot of the monthly averages of
 `r paste(colz, collapse=', ')`. Add a legend by calling `legend()`,
-compare Figure {@fig:df_ex2h}.
+compare Figure \@ref(fig:df-ex2h).
 
-```{r df_ex2h,echo=FALSE,fig.cap="Monthly averages of the air quality parameters in Geelong, VIC, Australia"}
+```{r df-ex2h,echo=FALSE,fig.cap="Monthly averages of the air quality parameters in Geelong, VIC, Australia"}
 matplot(gee_ave$month, as.matrix(gee_ave[c(colz)]), type="l",
 xlab="Month", ylab="Measurement", ylim=c(0,25))
 legend("bottom", ncol=4, lty=seq_along(colz), bg="white",

@@ -114,7 +114,7 @@ we assume that each $y_i$ takes more than two possible values.
 
 
 Example plot of a synthetic dataset
-with the reference binary $y$s is given in Figure {@fig:classify_intro}.
+with the reference binary $y$s is given in Figure \@ref(fig:classify_intro).
 The "true" decision boundary is at $X_1=0$ but the classes
 slightly overlap (the dataset is a bit noisy).
 
@@ -319,7 +319,7 @@ denoted $\mathbf{x}_{i_1,\cdot}, \dots, \mathbf{x}_{i_K,\cdot}$:
 
 
 Here is how $K$-NN classifier works on a synthetic 2D dataset.
-Firstly let's consider $K=1$, see Figure {@fig:fig_plot_knn1}.
+Firstly let's consider $K=1$, see Figure \@ref(fig:fig_plot_knn1).
 Gray and pink regions depict how new points would be classified.
 In particular 1-NN is "greedy" in the sense that we just
 locate the nearest point.
@@ -358,7 +358,7 @@ on a dataset's so-called Voronoi diagram.
 
 Increasing $K$ somehow smoothens the decision boundary (this makes it
 less "local" and more "global").
-Figure {@fig:fig_plot_knn3} depicts the $K=3$ case.
+Figure \@ref(fig:fig_plot_knn3) depicts the $K=3$ case.
 
 ```{r fig_plot_knn3,echo=FALSE,cache=TRUE,dependson='plot_knn',fig.cap="3-NN class bounds for our 2D synthetic dataset"}
 plot_knn(3)
@@ -371,7 +371,7 @@ plot_knn(25)
 ```
 
 Recall that the "true" decision boundary for this synthetic dataset
-is at $X_1=0$. The 25-NN classifier did quite a good job, see  Figure {@fig:fig_plot_knn25}.
+is at $X_1=0$. The 25-NN classifier did quite a good job, see  Figure \@ref(fig:fig_plot_knn25).
 
 
 
@@ -491,7 +491,7 @@ Z_train <- t(apply(X_train, 1, function(r) (r-means)/sds))
 Z_test  <- t(apply(X_test,  1, function(r) (r-means)/sds))
 ```
 
-See Figure {@fig:standardise_depict_hist} for an illustration.
+See Figure \@ref(fig:standardise_depict_hist) for an illustration.
 Note that the righthand figures (histograms of standardised variables)
 are on the same scale now.
 
@@ -863,7 +863,7 @@ Example results:
 round(cbind(K=Ks, Ps), 2)
 ```
 
-Figure {@fig:whichK5} is worth a thousand tables though (see `?matplot` in R). The reader is kindly asked to draw conclusions themself.
+Figure \@ref(fig:whichK5) is worth a thousand tables though (see `?matplot` in R). The reader is kindly asked to draw conclusions themself.
 
 
 
@@ -1687,7 +1687,7 @@ y25 <- knn.reg(Xc, x, Yc, k=25)$pred
 ```
 
 
-The three models are depicted in Figure {@fig:knnreg3}.
+The three models are depicted in Figure \@ref(fig:knnreg3).
 Again, the higher the $K$, the smoother the curve. On the other hand, for
 small $K$ we adapt better to what's in a point's neighbourhood.
 

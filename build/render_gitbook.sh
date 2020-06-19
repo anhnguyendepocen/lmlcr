@@ -14,6 +14,11 @@ cp -f ../bibliography.bib .
 mkdir -p figures/
 cp -f ../figures/*.svg figures
 
+# cd figures
+# for f in *.svg; do gzip "$f"; done
+# rename.ul ".svg.gz" ".svgz" *.svg.gz
+# cd ..
+
 rm -f _main.Rmd
 
 cp -f ../build/index_gitbook.Rmd index.Rmd

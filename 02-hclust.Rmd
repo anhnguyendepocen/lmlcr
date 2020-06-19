@@ -73,7 +73,7 @@ Given an integer $K$
 and a vector $\boldsymbol{y}$ with elements $\{1, 2, \dots, K\}$,
 for instance:
 
-```{r label_vector_check1}
+```{r label-vector-check1}
 y <- c(3, 1, 1, 2, 2, 1, 2, 3, 1, 1, 1)
 K <- 3 # by the way, it's max(y)
 ```
@@ -81,7 +81,7 @@ K <- 3 # by the way, it's max(y)
 we can check whether it represents a proper label vector by
 computing the number of occurrences of each label:
 
-```{r label_vector_check2}
+```{r label-vector-check2}
 tabulate(y, K) # how many 1s, ..., Ks are there in y, respectively
 all(tabulate(y, K) > 0) # do we have at least 1 occurrence of each label?
 ```
@@ -89,7 +89,7 @@ all(tabulate(y, K) > 0) # do we have at least 1 occurrence of each label?
 or, for example, determining the set of all unique
 values in $\boldsymbol{y}$:
 
-```{r label_vector_check3}
+```{r label-vector-check3}
 unique(y)
 length(unique(y)) == K # do we have K unique values in y?
 ```
@@ -195,6 +195,9 @@ and $\left\{{n \atop K}\right\}\simeq K^n/K!$ for large $n$ -- that is a lot.
 
 
 
+
+Table: (\#tab:stirling) The number of possible partitions of a dataset with $n$ elements to $K$ clusters, denoted $\left\{{n \atop K}\right\}$, grows rapidly as $n$ increases
+
 $n$ | $\left\{{n \atop 2}\right\}$ | $\left\{{n \atop 3}\right\}$ | $\left\{{n \atop 4}\right\}$ | $\left\{{n \atop 5}\right\}$ | $\left\{{n \atop 6}\right\}$ | $\left\{{n \atop 7}\right\}$ | $\left\{{n \atop 8}\right\}$ | $\left\{{n \atop 9}\right\}$ | $\left\{{n \atop 10}\right\}$
 ---:|-----------------------------:|-----------------------------:|-----------------------------:|-----------------------------:|-----------------------------:|-----------------------------:|-----------------------------:|-----------------------------:|-----------------------------:|
 2   | 1                            |                              |                              |                              |                              |                              |                              |                              |                              |
@@ -207,7 +210,6 @@ $n$ | $\left\{{n \atop 2}\right\}$ | $\left\{{n \atop 3}\right\}$ | $\left\{{n \
 9   | 255                          | 3025                         | 7770                         | 6951                         | 2646                         | 462                          | 36                           | 1                            |                              |
 10  | 511                          | 9330                         | 34105                        | 42525                        | 22827                        | 5880                         | 750                          | 45                           | 1                            |
 
-Table: The number of possible partitions of a dataset with $n$ elements to $K$ clusters, denoted $\left\{{n \atop K}\right\}$, grows rapidly as $n$ increases {#tbl:stirling}
 
 
 
@@ -218,8 +220,8 @@ Table: The number of possible partitions of a dataset with $n$ elements to $K$ c
 
 
 We are not just interested in "any" partition, because
-there are simply way too plentiful (compare Table {@tbl:stirling}); some of them
-will certainly be more meaningful or valuable than others.
+there are simply way too plentiful (compare Table \@ref(tab:stirling);
+some of them will certainly be more meaningful or valuable than others.
 However, even one of the most famous ML textbooks provides us with only
 a vague hint of what we might be looking for:
 
@@ -301,8 +303,8 @@ $\|\boldsymbol{u}-\boldsymbol{v}\|$.
 
 { BEGIN remark }
 $\sum$ (Greek capital letter Sigma) denotes summation.
-Read "$\sum_{i=1}^n z_i$" as "the sum of $z_i$ for $i$ from $1$ to $n$";
-this is just a convenient shorthand for $z_1+z_2+\dots+z_n$.
+Read "$\sum_{i=1}^p z_i$" as "the sum of $z_i$ for $i$ from $1$ to $p$";
+this is just a convenient shorthand for $z_1+z_2+\dots+z_p$.
 { END remark }
 
 
@@ -328,9 +330,9 @@ $d(\mathbf{x}_{2,\cdot}, \mathbf{x}_{1,\cdot})$.
 
 In order to compute all pairwise distances between the rows in a
 matrix with R, we can call the `dist()` function
-(see also Figure {@fig:euclidean_distance_fig} for a graphical illustration):
+(see also Figure \@ref(fig:euclidean-distance-fig) for a graphical illustration):
 
-```{r euclidean_distance}
+```{r euclidean-distance}
 X <- rbind(
     c(0,    0),
     c(1,    0),
@@ -343,7 +345,7 @@ dist(X)
 
 
 
-```{r euclidean_distance_fig,echo=FALSE,fig.cap="Example points and Euclidean distances between them"}
+```{r euclidean-distance-fig,echo=FALSE,fig.cap="Example points and Euclidean distances between them"}
 plot(X[,1], X[,2], asp=1)
 text(X[1,1], X[1,2], sprintf("(%g,%g)", X[1,1], X[1,2]), pos=2)
 text(X[2,1], X[2,2], sprintf("(%g,%g)", X[2,1], X[2,2]), pos=4)
@@ -368,7 +370,7 @@ we have $d(\boldsymbol{u},\boldsymbol{v})=d(\boldsymbol{v},\boldsymbol{u})$
 
 If we want the full distance matrix, we can call:
 
-```{r euclidean_distance_matrix}
+```{r euclidean-distance-matrix}
 as.matrix(dist(X))
 ```
 
@@ -421,7 +423,7 @@ that measures the Human,
 Environmental  and Economic Wellbeing
 in each country on the scale $[0,10]$.
 
-```{r ssi_load}
+```{r ssi-load}
 ssi <- read.csv("datasets/ssi_2016_dimensions.csv",
     comment.char="#")
 head(ssi)
@@ -431,7 +433,7 @@ In other to better understand how the algorithms of interest work,
 we'll restrict ourselves a smaller sample of countries, say,
 to 37 members of the OECD:
 
-```{r ssi_oecd}
+```{r ssi-oecd}
 oecd <- c("Australia", "Austria", "Belgium", "Canada", "Chile", "Colombia",
 "Czech Republic", "Denmark", "Estonia", "Finland", "France", "Germany",
 "Greece", "Hungary", "Iceland", "Ireland", "Israel", "Italy", "Japan",
@@ -462,7 +464,7 @@ By default, the methods computes the so-called *complete* linkage.
 We'll explain what that means later, let's just simply use it in
 a "black-box" fashion now, i.e., without going into details:
 
-```{r dist_hclust_complete}
+```{r dist-hclust-complete}
 # Euclidean distances between all pairs of points:
 D <- dist(X)
 h <- hclust(D) # method="complete"
@@ -478,9 +480,9 @@ y <- cutree(h, K) # extract the 3-partition
 ```
 
 A picture is worth a thousand words, therefore
-let's generate a map with the `rworldmap` package (see Figure {@fig:ssi_map}):
+let's generate a map with the `rworldmap` package (see Figure \@ref(fig:ssi-map)):
 
-```{r ssi_map,echo=-c(1,2),results="hide",cache=TRUE,message=FALSE,fig.cap="OECD countries grouped w.r.t. the SSI dimensions (complete linkage, $K=3$)"}
+```{r ssi-map,echo=-c(1,2),results="hide",cache=TRUE,message=FALSE,fig.cap="OECD countries grouped w.r.t. the SSI dimensions (complete linkage, $K=3$)"}
 par(ann=FALSE) # no axes
 par(mar=c(0, 0, 0, 0)) # no figure margins
 library("rworldmap") # see the package's manual for details
@@ -502,7 +504,7 @@ A better question is: what characterises the countries in each cluster?
 To explore possible answers to this question, we can compute, e.g.,
 the average indicators in each group:
 
-```{r ssi_colmeans}
+```{r ssi-colmeans}
 aggregate(as.data.frame(X), list(Cluster=y), mean)
 ```
 
@@ -516,14 +518,14 @@ the countries in each cluster are score similarly on each scale
 
 Luckily, we have only 3 dimensions, therefore we can visualise
 different two-dimensional projections of this dataset.
-Figure {@fig:ssi_complete_pairs}
+Figure \@ref(fig:ssi-complete-pairs)
 depicts a slightly "tuned up" (we've added the ISO 3-letter country codes)
 version of a scatter plot matrix
 that we would normally obtain by calling `pairs(X, col=y, pch=y)`.
 
 
 
-```{r ssi_complete_pairs,echo=FALSE,fig.height=6,fig.cap="Scatterplot matrix for the SSI dimensions with the 3-partition generated by complete linkage"}
+```{r ssi-complete-pairs,echo=FALSE,fig.height=6,fig.cap="Scatterplot matrix for the SSI dimensions with the 3-partition generated by complete linkage"}
 #pairs(X, col=y, pch=y)
 par(mfcol=c(2,2))
 
@@ -565,7 +567,9 @@ of the agglomerative procedure.
 This can provide us with some insight into the underlying data structure
 as well as with hits about at which level the tree could be cut.
 
-Figure {@fig:dendrograms} depicts the three dendrograms
+Figure \@ref(fig:ssi-dendrogram-complete)..................
+
+Figure \@ref(fig:dendrograms) depicts the three dendrograms
 that correspond to the clusterings  obtained by applying different linkages.
 Each tree has 150 leaves (at the bottom) that represent the 150 points
 in our example dataset. Each "edge" (joint) represents a group of points
@@ -575,9 +579,10 @@ maximal pairwise distance (complete linkage) between the points
 in the last two last clusters.
 
 
-```{r dendrogram,fig.cap="Cluster dendrogram generated by complete linkage",echo=-1}
+```{r ssi-dendrogram-complete,fig.cap="Cluster dendrogram generated by complete linkage",echo=-1}
 par(mar=c(0.5, 2, 0.5, 0.5))
-plot(h, xlab=NA, main=NA); box()
+plot(h, xlab=NA, main=NA);
+box()
 ```
 
 
@@ -678,7 +683,7 @@ choices of $d^*$ (which in the context of hierarchical clustering we call
 
 
 An illustration of the way different linkages are computed
-is given in Figure {@fig:linkages}.
+is given in Figure \@ref(fig:linkages).
 
 ```{r linkages,echo=FALSE,fig.cap="In single linkage, we find the closest pair of points; in complete linkage, we seek the pair furthest away from each other; in average linkage, we determine the arithmetic mean of all pairwise distances"}
 set.seed(123)
@@ -746,17 +751,17 @@ respectively
 
 
 
-```{r linkages_hier527658932}
+```{r linkages-hier527658932}
 hs <- hclust(D, method="single")
 hc <- hclust(D, method="complete")
 ha <- hclust(D, method="average")
 ```
 
-Figure {@fig:linkages_hier52} compares the 5-, 4- and 3-partitions
+Figure \@ref(fig:linkages-hier52) compares the 5-, 4- and 3-partitions
 obtained by applying the 3 above linkages. Note that it's in very nature of
 the single linkage algorithm that it's highly sensitive to outliers.
 
-```{r linkages_hier52,fig.height=6,fig.cap="3 cuts of 3 different hierarchies",echo=FALSE}
+```{r linkages-hier52,fig.height=6,fig.cap="3 cuts of 3 different hierarchies",echo=FALSE}
 #par(c(1,1,0.5,0.5))
 par(mfrow=c(3,3))
 for (k in 5:3) {
