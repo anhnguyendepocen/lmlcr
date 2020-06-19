@@ -959,14 +959,24 @@ Sustainable Society Indices.
 
 ## Remarks
 
-there are other linkages - e.g., the Ward linkage to minimise the variance
-of within-cluster distances, together with the linkages presented in this
-chapter they are generalised by the Lance--Williams formula [@lancewilliams],
+Complete linkage dates back to Denmark in the year 1948;
+a similar idea (for different dissimilarity measures)
+was used in [@completelinkage] to "establish groups of equal
+amplitude in plant sociology based on similarity of species content".
+Single linkage has been proposed by Polish mathematicians
+as "Wrocław taxonomy" (or the dendrite method) in 1951
+[@singlelinkage].
+Average linkage, also known as UPGMA (unweighted pair group method with arithmetic mean),
+has been proposed in [@averagelinkage].
+
+There are many other linkages, e.g., the Ward linkage minimises the variance
+of within-cluster distances. Together with the linkages presented in this
+chapter it is generalised by the Lance--Williams formula [@lancewilliams],
 see also [@muellner].
 
+. . .
 
-
-Hierarchical clustering algorithms are great, because they
+Hierarchical clustering algorithms are fantastic, because they
 output a whole hierarchy of *nested* partitions -- it's not that
 when we cut it at the $k$-th level we'll obtain something totally unrelated
 to what can we find at the $l$-th one ($k\neq l$).
@@ -986,18 +996,26 @@ of small dimensionality (e.g., when analysing spatial data), as it
 can be computed based on a minimum spanning tree of the pairwise
 distance graph.
 
+```{r fastcluster_showoff,eval=FALSE,echo=FALSE}
+library("fastcluster")
+```
+
+Moreover, as we've said, there are $n(n-1)/2$ unique pairwise distances
+between $n$ points.
+Don't try calling `dist(hclust(X))` on large data matrices.
+`fastcluster::hclust.vector()` implements single and Ward
+(but not complete and average) linkages without the need of precomputing
+the whole distance
+matrix.
+
 For a comprehensive overview of the efficient algorithms to compute
 the aforementioned linkages, see [@muellner].
 
 
 
+. . .
 
-
-```{r fastcluster_showoff,eval=FALSE,echo=FALSE}
-library("fastcluster")
-```
-
-some history -- bibliography
+**TODO** .....
 
 Note that all the indicators were on the same scale.
 We'll deal with different datasets in the next chapter
@@ -1005,6 +1023,11 @@ We'll deal with different datasets in the next chapter
 otherwise, we need to perform some feature weighting or calibration;
 e.g., standardisation
 
+TODO: chapter 3 ????
+
+
+
+. . .
 
 Agglomerative clustering algorithms utilise the "bottom-up" approach
 
@@ -1023,19 +1046,9 @@ clusters at higher levels of the hierarchy.
 
 
 
-Note that we have studied "crisp" (disjoint) partitions only.
+. . .
 
-[@jainsurvey]
-[@wierzchon_klopotek]
 
-As we've said, there are $n(n-1)/2$ unique pairwise distances between $n$ points.
-Don't try calling `dist(hclust(X))` on large data matrices;
-packages `fastcluster` and , among others,
-aim to solve this problem.
-
-`fastcluster::hclust.vector()` implements single and Ward (but not complete
-and average) linkages without the need of precomputing the whole distance
-matrix.
 
 is the obtained clustering a good one?
 well, if it leads to interesting "discoveries" or something useful,
@@ -1045,3 +1058,7 @@ more discussion in Chapter \@ref(chap:kmeans)
 we mention genieclust and centroid-based linkages later
 
 will we play with HDBSCAN*?
+
+[@jainsurvey]
+[@wierzchon_klopotek]
+

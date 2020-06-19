@@ -12,6 +12,13 @@ k-nearest centroids
 
 exercise: Ward linkage
 
+
+
+
+Note that we have studied "crisp" (disjoint) partitions only.
+
+
+
 -->
 
 
