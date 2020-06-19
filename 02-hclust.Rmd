@@ -157,10 +157,11 @@ i.e., each label occurs at least once in $\boldsymbol{y}$.
 
 
 { BEGIN remark }
-The benefits of using mathematical notation is that we are super-precise,
+The benefit of using mathematical notation is that we are super-precise,
 efficient and universal. Natural tongue is vague and leaves much room
 for interpretation. We used so many *words* to explain the above concepts.
-Once we build greater skill of *speaking* the language of mathematics
+As soon as we further develop our skills of *speaking* the language
+of mathematics
 (note that we've started with basic phrases such as *Good Afternoon*,
 *I am Sorry* and *Thank You*), it'll be more natural for
 us to just write:
@@ -169,7 +170,7 @@ us to just write:
 $\textstyle\bigcup_{k=1}^K C_k = \{1,\dots, n\}$,
 $(\forall k\neq l)$ $C_k\cap C_l = \emptyset$, $C_k\neq \emptyset$"
 
-without all the talking. This is what more advanced book related
+without all the talking. This is what more advanced books related
 to machine learning and statistics do. We'll get to that.
 By the way, thanks to this it's relatively easy to read maths
 papers (especially those from the 1950s) written in other languages
@@ -455,7 +456,7 @@ for greater readability.
 
 The most basic implementation of a few
 agglomerative hierarchical clustering algorithms
-is provided by the `hclust()` function, which works on a pairwise
+is provided by the `stats::hclust()` function, which works on a pairwise
 distance matrix.
 By default, the method computes the so-called *complete* linkage.
 We'll explain what that means later, let's just simply use it in
@@ -467,6 +468,15 @@ D <- dist(X)
 h <- hclust(D) # method="complete"
 print(h)
 ```
+
+
+{ BEGIN remark }
+`stats::hclust()` refers to the `hclust()` function
+in the `stats` package. This is a package that comes with R, therefore
+there should be no need to load it explicitly. Otherwise, we would
+have to use the complete descriptor (with the `stats::` prefix)
+or call `library("stats")` to attach the package's namespace.
+{ END remark }
 
 The obtained hierarchy can be *cut* at an arbitrary level
 by applying the `cutree()` function. Let's use $K=3$:
@@ -949,6 +959,44 @@ Sustainable Society Indices.
 
 ## Remarks
 
+there are other linkages - e.g., the Ward linkage to minimise the variance
+of within-cluster distances, together with the linkages presented in this
+chapter they are generalised by the Lance--Williams formula [@lancewilliams],
+see also [@muellner].
+
+
+
+Hierarchical clustering algorithms are great, because they
+output a whole hierarchy of *nested* partitions -- it's not that
+when we cut it at the $k$-th level we'll obtain something totally unrelated
+to what can we find at the $l$-th one ($k\neq l$).
+However, this comes at a price -- these algorithms are quite slow
+for large datasets.
+In particular, the implementations included in the `stats::hclust()` function
+(which we have used above) have $O(n^3)$ time complexity.
+Therefore, in practice it's better to use
+function `fastcluster::hclust()` [@fastcluster],
+which provides a drop-in replacement
+for the original routine.
+
+Single linkage is the fastest -- even though it has $O(n^2)$
+worst-case time complexity in generic metric spaces,
+however, it can run much faster in real spaces
+of small dimensionality (e.g., when analysing spatial data), as it
+can be computed based on a minimum spanning tree of the pairwise
+distance graph.
+
+For a comprehensive overview of the efficient algorithms to compute
+the aforementioned linkages, see [@muellner].
+
+
+
+
+
+```{r fastcluster_showoff,eval=FALSE,echo=FALSE}
+library("fastcluster")
+```
+
 some history -- bibliography
 
 Note that all the indicators were on the same scale.
@@ -966,6 +1014,14 @@ intensive, see, Mueller's ITM, however
 
 what we did above, we call a greedy strategy btw
 
+There are modification to this scheme, e.g., the Genie algorithm
+(see package `genieclust`) [@genie] merges clusters based
+on the closest pairs of points (just as single linkage), however
+under the constraint that the inequality of the cluster size distribution
+cannot go beyond some threshold -- this prevents leaving out very small
+clusters at higher levels of the hierarchy.
+
+
 
 Note that we have studied "crisp" (disjoint) partitions only.
 
@@ -974,15 +1030,18 @@ Note that we have studied "crisp" (disjoint) partitions only.
 
 As we've said, there are $n(n-1)/2$ unique pairwise distances between $n$ points.
 Don't try calling `dist(hclust(X))` on large data matrices;
-packages `fastcluster` and `genieclust`, among others,
+packages `fastcluster` and , among others,
 aim to solve this problem.
 
+`fastcluster::hclust.vector()` implements single and Ward (but not complete
+and average) linkages without the need of precomputing the whole distance
+matrix.
 
 is the obtained clustering a good one?
 well, if it leads to interesting "discoveries" or something useful,
 it is;
 more discussion in Chapter \@ref(chap:kmeans)
 
-we mention genieclust later
+we mention genieclust and centroid-based linkages later
 
 will we play with HDBSCAN*?

@@ -6,6 +6,12 @@
 <!-- TODO: citations
 
 
+centroid linkage
+
+k-nearest centroids
+
+exercise: Ward linkage
+
 -->
 
 

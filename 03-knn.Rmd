@@ -9,7 +9,6 @@
 
 Add K-NN Regression
 
-Add K-nearest centroids
 
 
 add CHAMELEON and (H)DBSCAN(*) ???
