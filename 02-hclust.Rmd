@@ -927,7 +927,113 @@ the single linkage algorithm that it's highly sensitive to outliers.
 
 
 
-## Exercises in R
+## Exercises
+
+
+{ BEGIN exercise }
+Calculate the complete linkage agglomerative clustering algorithm
+by hand on the space of the 3 SSI dimensions for
+France, Ireland, Spain, Colombia, Austria and Germany.
+For each iteration of the algorithm, print the members of the
+current partition and the distances between each pair of clusters.
+{ END exercise }
+
+{ BEGIN solution }
+The pairwise distance matrix is:
+
+```{r ex-hclust-byhand-1}
+X2 <- X[c("France", "Ireland", "Spain", "Colombia", "Austria", "Germany"),]
+D2 <- dist(X2)
+as.matrix(D2)
+```
+
+```{r ex-hclust-byhand-2, results='asis', echo=FALSE}
+hclust_byhand <- function(X2, method, agfun, istart=1) {
+    n <- nrow(X2)
+
+    country_iso3 <- as.character(mapdata@data$ISO3[match(dimnames(X2)[[1]], mapdata@data$Country)])
+    dimnames(X2)[[1]] <- country_iso3
+
+    D2 <- dist(X2)
+    h <- hclust(D2, method=method)
+    DM <- as.matrix(D2)
+    for (i in istart:n) {
+        K <- n-i+1
+        cc <- cutree(h, K)
+        part <- sapply(split(dimnames(X2)[[1]], cc), function(memb) {
+            sprintf("\\{%s\\}", paste(memb, collapse=","))
+        })
+        cat(sprintf("$\\mathcal{C}^{(%d)} = \\left\\{ %s \\right\\}$\n\n",
+            i-1, paste(part, collapse=",")))
+
+
+        if (i == n) break
+
+        cat(sprintf("Inter-cluster distances (%s linkage):\n\n", method))
+        DT <- matrix(0, nrow=K, ncol=K, dimnames=list(part,part))
+
+        for (i in 1:(K-1)) {
+            for (j in (i+1):K) {
+                DT[i,j] <- DT[j,i] <-
+                    agfun(DM[as.matrix(expand.grid(which(cc==i), which(cc==j)))])
+            }
+        }
+
+        #cat("\\[")
+        #print(xtable::xtable(DT), floating=FALSE,
+        #    tabular.environment="array",
+        #    sanitize.rownames.function=NULL,
+        #    sanitize.colnames.function=NULL)
+        #cat("\\]")
+
+        print(knitr::kable(DT, digits=2))
+
+        w <- which(DT==min(DT[upper.tri(DT)]), arr.ind=TRUE)
+        cat(sprintf("\nMerging %s and %s (distance=%.2f)\n\n",
+            dimnames(DT)[[1]][w[1,1]], dimnames(DT)[[2]][w[1,2]],
+            DT[w[1,,drop=FALSE]]))
+    }
+}
+
+
+hclust_byhand(X2, "complete", max)
+```
+
+{ END solution }
+
+
+
+
+{ BEGIN exercise }
+As in the previous exercise, but apply the average linkage.
+{ END exercise }
+
+{ BEGIN solution }
+$\mathcal{C}^{(0)}$ is identical to the one in the previous exercise
+and the first merge decision is the same.
+
+```{r ex-hclust-byhand-3, results='asis', echo=FALSE}
+hclust_byhand(X2, "average", mean, 2)
+```
+{ END solution }
+
+
+
+
+{ BEGIN exercise }
+As in the previous exercise, but apply the single linkage.
+{ END exercise }
+
+
+{ BEGIN solution }
+
+$\mathcal{C}^{(0)}$ is identical to the one in the previous exercise
+and the first merge decision is the same.
+
+```{r ex-hclust-byhand-4, results='asis', echo=FALSE}
+hclust_byhand(X2, "single", min, 2)
+```
+{ END solution }
 
 
 
@@ -1015,6 +1121,9 @@ the aforementioned linkages, see [@muellner].
 
 . . .
 
+
+{ LATEX \color{gray} }
+
 **TODO** .....
 
 Note that all the indicators were on the same scale.
@@ -1061,4 +1170,9 @@ will we play with HDBSCAN*?
 
 [@jainsurvey]
 [@wierzchon_klopotek]
+
+
+{ LATEX \normalcolor }
+
+
 
