@@ -985,18 +985,19 @@ therefore we'll not be exploring it any further.
 
 
 { BEGIN exercise }
-Apply the Genie  clustering algorithm.
+Apply the Genie  clustering algorithm (package `genieclust`).
 { END exercise }
 
 { BEGIN solution }
 
 The Genie algorithm [@genie] is a hierarchical clustering algorithm
-implemented in R package `genie`. It's interface is compatible with `hclust()`.
+implemented in R package `genieclust`.
+Its interface is compatible with `hclust()`.
 
 ```{r clustering_factbook9}
-library("genie")
+library("genieclust")
 d <- dist(factbook[-1])
-g <- hclust2(d)
+g <- gclust(d)
 ```
 
 The cluster dendrogram in Figure \@ref(fig:clustering_factbook10)
@@ -1015,7 +1016,7 @@ y <- cutree(g, 3)
 Here are few countries in each cluster:
 
 ```{r clustering_factbook11b,echo=-1}
-set.seed(126)
+set.seed(123)
 y <- cutree(g, 3)
 sapply(split(factbook$countr, y), sample, 6)
 ```
@@ -1224,14 +1225,16 @@ the obtained results and assess the sensibility of the obtained clusterings.
 
 { BEGIN exercise }
 Apply the K-means, the single, average and complete linkage
-and the Genie algorithm on the aforementioned datasets and discuss the results.
+and the Genie algorithm (from package `genieclust`)
+on the aforementioned datasets and discuss the results.
 { END exercise }
 
 { BEGIN solution }
 
 Apart from a call to the Genie algorithm with the default parameters,
-we will also look at the results it generates when we set
-`giniThreshold` of `0.5`.
+we will also look at the results it generates when we set the
+`gini_threshold` parameter to 0.5 (default is 0.3; smaller thresholds
+lead to clusters of more balanced sizes as measured by the Gini index).
 
 The following function is our workhorse that will perform all the computations
 and will draw all the figures for a single dataset:
@@ -1260,11 +1263,11 @@ clusterise <- function(file, K) {
     plot(X, asp=1, col=y, ann=FALSE, axes=FALSE)
     mtext("Single Linkage", line=0.5)
 
-    y <- cutree(genie::hclust2(d), K) # thresholdGini=0.3
+    y <- genie(d, K) # gini_threshold=0.3
     plot(X, asp=1, col=y, ann=FALSE, axes=FALSE)
     mtext("Genie (default)", line=0.5)
 
-    y <- cutree(genie::hclust2(d, thresholdGini=0.5), K)
+    y <- genie(d, K, gini_threshold=0.5)
     plot(X, asp=1, col=y, ann=FALSE, axes=FALSE)
     mtext("Genie (g=0.5)", line=0.5)
 }
@@ -1539,13 +1542,14 @@ Remark.
 : Note that the `fastcluster` package provides a more efficient
 and memory-saving
 implementation of some methods available via a call to `hclust()`.
-See also the `genie` package for a super-robust version of the single linkage
+See also the `genieclust` package for a super-robust version
+of the single linkage
 algorithm based on the datasets's Euclidean minimum spanning tree,
 which can be computed quite quickly.
 
 ```{r eval=FALSE,echo=FALSE}
 library("fastcluster")
-library("genie")
+library("genieclust")
 ```
 
 
@@ -1571,7 +1575,7 @@ Other: [@esl: Section 14.3]
 
 Additionally, check out other noteworthy clustering approaches:
 
-- Genie (see R package `genie`) [@genie; @genieowa]
+- Genie (see R package `genieclust`) [@genie]
 - ITM [@itm]
 - DBSCAN, HDBSCAN* [@pre_dbscan; @dbscan; @hdbscan]
 - K-medoids, K-medians

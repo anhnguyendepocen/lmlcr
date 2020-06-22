@@ -857,12 +857,14 @@ We can perform agglomerative clustering of our dataset with respect
 to different linkages by setting the `method` argument in the `hclust()`
 function:
 
-```{r linkages-hier527658932}
+```{r ssi-linkages}
 D <- dist(X)
 hs <- hclust(D, method="single")
 hc <- hclust(D, method="complete") # the default
 ha <- hclust(D, method="average")
 ```
+
+
 
 Figure \@ref(fig:ssi-dendrograms) depicts the dendrograms
 corresponding to single and average linkages,
@@ -925,6 +927,15 @@ the single linkage algorithm that it's highly sensitive to outliers.
 ```
 -->
 
+
+
+
+<!--
+```{r ssi-linkages-genieclust}
+#library("genieclust")
+#plot(genieclust::gclust(D))
+```
+-->
 
 
 ## Exercises
