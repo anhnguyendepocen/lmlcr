@@ -1,4 +1,4 @@
-# Decision and Regression Trees {#chap:trees}
+# Classification with Decision Trees {#chap:trees}
 
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 

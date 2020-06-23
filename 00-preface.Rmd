@@ -32,9 +32,9 @@ You can access this book at:
 
 Machine learning has numerous exciting real-world applications,
 including stock market prediction, speech recognition,
-computer-aided medical diagnosis, content and product recommendation,
+computer-aided medical diagnosis, content, and product recommendation,
 anomaly detection in security camera footages, game playing,
-autonomous vehicle operation and many others.
+autonomous vehicle operation, and many others.
 
 In this book we will take an unpretentious glance at the most fundamental
 algorithms that have stood the test of time and which  form
@@ -48,12 +48,12 @@ and, for instance, [@Rintro; @rprogdatascience; @r4ds].
 
 These pages contain solid underpinnings for further studies
 related to statistical learning, machine learning
-data science, data analytics and artificial intelligence,
+data science, data analytics, and artificial intelligence,
 including [@esl; @bishop; @casi].
 We will also appreciate the vital role of mathematics as a universal
 language for formalising data-intense problems and communicating their
 solutions. The book is aimed at readers who are yet to be fluent with
-university-level linear algebra, calculus and probability theory,
+university-level linear algebra, calculus as well as probability theory,
 such as 1st year undergrads or those who have forgotten
 all the maths they have learned and need a gentle, non-invasive,
 yet rigorous introduction to the topic.
@@ -177,12 +177,12 @@ observations as well
 I, Marek Gagolewski, am currently a Senior Lecturer (equivalent to Associate Professor in the US)
 in Applied AI at Deakin University in Melbourne, VIC, Australia
 and an Associate Professor in Data Science at Warsaw University of Technology,
-Poland. My main passion is in research -- my primary interests include
+Poland. My main passion is in research -- my primary interests currently include
 machine learning and optimisation algorithms, data aggregation and clustering,
-statistical modelling and scientific computing.
+statistical modelling, and scientific computing.
 *Explaining* of things matters to me more than merely tuning the knobs
 so as to increase a chosen performance metric (with uncontrollable consequences
-to other ones); the latter belongs to technology and wizardry,
+to other ones); the latter rather belongs to technology and wizardry,
 not science.
 
 I'm an author of more than 70 publications.
@@ -192,7 +192,7 @@ which is among the most often downloaded R extensions.
 
 On top of that, I teach various courses related to
 R and Python programming, algorithms,
-data science and machine learning -- and I'm good at it.
+data science, and machine learning -- and I'm good at it.
 This book was also influenced by my teaching experience at
 [Data Science Retreat](https://datascienceretreat.com) in Berlin, Germany.
 
@@ -203,9 +203,9 @@ This book was also influenced by my teaching experience at
 #### Acknowledgements  {.unnumbered}
 
 This book has been prepared with `r R.Version()$version.string`
-as well as pandoc, Markdown and GitBook.
+as well as pandoc, Markdown, and GitBook.
 R code chunks have been processed with knitr.
-A little help of bookdown, good ol' Makefiles and shell scripts
+A little help of bookdown, good ol' Makefiles, and shell scripts
 did the trick.
 
 
@@ -224,7 +224,7 @@ The following R packages are used or referred to in the text:
 
 During the writing of this book, I've been listening to the music
 featuring John Coltrane, Krzysztof Komeda,
-Henry Threadgill, Albert Ayler, Paco de Lucia and Tomatito.
+Henry Threadgill, Albert Ayler, Paco de Lucia, and Tomatito.
 
 
 

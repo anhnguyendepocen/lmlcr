@@ -1,4 +1,4 @@
-# Classification and Regression with K-Nearest Neighbours {#chap:knn}
+# Classification with K-Nearest Neighbours {#chap:knn}
 
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 
@@ -50,15 +50,13 @@ regression - consider the epsilon-neighbourhood????
 
 ## Introduction
 
-### Classification Task
+In the previous chapter, we were only given an input matrix
+$\mathbf{X}\in\mathbb{R}^{n\times p}$ representing
+$n$ objects described by means of $p$ numerical features.
 
-
-Let $\mathbf{X}\in\mathbb{R}^{n\times p}$ be an input matrix
-that consists of $n$ points in a $p$-dimensional space (each of the $n$ objects
-is described by means of $p$ numerical features).
-
-Recall that in supervised learning, with each
-$\mathbf{x}_{i,\cdot}$ we associate the desired output $y_i$.
+In this chapter we are going to be interested in  *supervised learning* tasks;
+we assume that each $\mathbf{x}_{i,\cdot}$ ($i=1,\dots,n$)
+is associated with the desired output $y_i$:
 
 \[
 \mathbf{X}=
@@ -82,19 +80,47 @@ x_{n,1} & x_{n,2} & \cdots & x_{n,p} \\
 \]
 
 
-. . .
+More precisely, we'd now like to focus on *classification* -- we assume that
+each $y_i$ is of qualitative type (e.g., a label, a category, a colour).
 
 
-
-In this chapter we are  interested in  **classification** tasks;
-we assume that each $y_i$ is a *label*  (e.g., a character string) --
-it is of quantitative/categorical type.
-
+The classes are usually *encoded* with consecutive integers,
+say, $1, 2, \dots, K$, where $K$ is the total number of classes.
+Mathematically, we'll write that $y_i\in\{1,\dots,K\}$.
 
 
+{ BEGIN remark }
+`factor` datatype in R (see Section \@ref(sec:factor) for more details)
+gives a very convenient means to encode categorical data
+(such as $\mathbf{y}$):
 
-Most commonly, we are faced with **binary classification** tasks
-where there are only two possible distinct labels.
+```{r factor1}
+y <- c("black", "green", "black", "red", "green", "green", "blue", "red")
+y <- factor(y, levels=c("black", "red", "green", "blue"))
+y
+table(y) # every label and the number of occurrences
+```
+
+
+Internally, objects of type `factor` are represented as integer vectors
+with elements in $\{1,\dots,K\}$, where $K$ is the number of possible levels.
+Labels, used to "decipher" the numeric codes, are stored separately
+and can always be replaced with other ones.
+
+```{r factor2}
+as.numeric(y) # 1st label, 3rd label, 1st label, and so forth
+length(levels(y)) # K = number of levels
+levels(y)
+levels(y) <- c("k", "r", "g", "b") # re-encode
+y
+```
+{ END remark }
+
+
+In this chapter we assume $K=2$, i.e., that each $y_i$ takes
+only two possible values. Such a case is
+quite common in practice; it has been even given a special name:
+*binary classification*.
 
 We traditionally denote them with $0$s and $1$s.
 
@@ -108,8 +134,6 @@ failure | success
 healthy | ill
 
 
-On the other hand, in **multiclass classification**,
-we assume that each $y_i$ takes more than two possible values.
 
 
 
@@ -142,6 +166,11 @@ abline(v=0, lty=3, col="blue")
 
 
 
+Our main aim will be to "build" an algorithm
+that takes an input sequence $\boldsymbol{x}$ and which generates
+a prediction, $\hat{y}$ (hopefully being equal to the true $y$).
+
+
 
 For illustration, let's consider the Wine Quality dataset [@wines]
 that can be downloaded from the UCI Machine Learning Repository
@@ -150,10 +179,8 @@ white wines only.
 
 
 ```{r input1,cache=TRUE}
-wine_quality <- read.csv("datasets/wine_quality_all.csv",
-    comment.char="#")
-white_wines <- wine_quality[wine_quality$color == "white",]
-(n <- nrow(white_wines)) # number of samples
+wine_train <- read.csv("datasets/wine_train.csv")
+(n <- nrow(wine_train)) # number of samples
 ```
 
 These are Vinho Verde wine samples from the north of Portugal,
@@ -173,27 +200,15 @@ The input matrix $\mathbf{X}\in\mathbb{R}^{n\times p}$
 consists of the first 10 numeric variables:
 
 ```{r input2,dependson='input1',cache=TRUE}
-X <- as.matrix(white_wines[,1:10])
+X <- as.matrix(wine_train[,-6]) # all except the last column
 dim(X)
 head(X, 2) # first two rows
 ```
 
 
-
-
-
-
-
-The 11th variable measures the amount of alcohol (in %).
-
-We will convert this dependent variable to a binary one:
-
-- 0 == (`alcohol  < 12`) == lower-alcohol wines,
-- 1 == (`alcohol >= 12`) == higher-alcohol wines
-
 ```{r input3,dependson='input2',cache=TRUE}
 # recall that TRUE == 1
-Y <- factor(as.character(as.numeric(white_wines$alcohol >= 12)))
+Y <- factor(wine_train[,6])
 table(Y)
 ```
 
@@ -385,7 +400,7 @@ is at $X_1=0$. The 25-NN classifier did quite a good job, see  Figure \@ref(fig:
 
 We shall be calling the `knn()` function from package `FNN`
 to classify the points from the test sample
-extracted from the `white_wines` dataset:
+extracted from the `wine_train` dataset:
 
 ```{r libFNN,message=FALSE}
 library("FNN")
@@ -496,12 +511,12 @@ See Figure \@ref(fig:standardise_depict_hist) for an illustration.
 Note that the righthand figures (histograms of standardised variables)
 are on the same scale now.
 
-```{r standardise_depict_hist,echo=FALSE,fi.height=6,fig.cap="Empirical distribution of two variables (pH on the top, fixed.acidity on the bottom) before (left) and after (right) standardising"}
+```{r standardise_depict_hist,echo=FALSE,fi.height=6,fig.cap="Empirical distribution of two variables (alcohol on the top, volatile.acidity on the bottom) before (left) and after (right) standardising"}
 par(mfrow=c(2,2))
-hist(X_train[,"pH"], col="white", main=NA, xlim=c(-11,11)); box()
-hist(Z_train[,"pH"], col="white", main=NA, xlim=c(-11,11)); box()
-hist(X_train[,"fixed.acidity"], col="white", main=NA, xlim=c(-11,11)); box()
-hist(Z_train[,"fixed.acidity"], col="white", main=NA, xlim=c(-11,11)); box()
+hist(X_train[,"alcohol"], col="white", main=NA, xlim=c(-11,11)); box()
+hist(Z_train[,"alcohol"], col="white", main=NA, xlim=c(-11,11)); box()
+hist(X_train[,"volatile.acidity"], col="white", main=NA, xlim=c(-11,11)); box()
+hist(Z_train[,"volatile.acidity"], col="white", main=NA, xlim=c(-11,11)); box()
 ```
 
 
@@ -554,7 +569,7 @@ when dealing with real-world problems.
 Feature selection -- example (manually selected columns):
 
 ```{r standardise4,message=FALSE}
-features <- c("density", "residual.sugar")
+features <- c("chlorides", "volatile.acidity")
 Y_knn5s <- knn(Z_train[,features], Z_test[,features],
     Y_train, k=5)
 mean(Y_test == Y_knn5s) # accuracy
@@ -999,38 +1014,6 @@ instead of a train-validate-test split.
 ## Implementing a K-NN Classifier (\*)
 
 
-### Factor Data Type
-
-
-
-
-Recall that (see Appendix B for more details)
-`factor` type in R is a very convenient means to encode categorical data
-(such as $\mathbf{y}$):
-
-```{r factor1}
-x <- c("yes", "no", "no", "yes", "no")
-f <- factor(x, levels=c("no", "yes"))
-f
-table(f) # counts
-```
-
-
-
-
-Internally, objects of type `factor` are represented as integer vectors
-with elements in $\{1,\dots,M\}$, where $M$ is the number of possible levels.
-
-
-Labels, used to "decipher" the numeric codes, are stored separately.
-
-```{r factor2}
-as.numeric(f) # 2nd label, 1st label, 1st label etc.
-levels(f)
-levels(f) <- c("failure", "success") # re-encode
-f
-```
-
 
 
 ### Main Routine (\*)
@@ -1064,9 +1047,9 @@ Load an example dataset on which we will test our algorithm:
 ```{r our_knn2}
 wine_quality <- read.csv("datasets/wine_quality_all.csv",
     comment.char="#")
-white_wines <- wine_quality[wine_quality$color == "white",]
-X <- as.matrix(white_wines[,1:10])
-Y <- factor(as.character(as.numeric(white_wines$alcohol >= 12)))
+wine_train <- wine_quality[wine_quality$color == "white",]
+X <- as.matrix(wine_train[,1:10])
+Y <- factor(as.character(as.numeric(wine_train$alcohol >= 12)))
 ```
 
 

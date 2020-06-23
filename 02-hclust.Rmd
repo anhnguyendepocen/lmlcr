@@ -30,7 +30,7 @@ tumour tissues on PET/CT scans,
 
 * complex networks analysis,
 e.g., detecting communities in friendship,
-retweets and other networks,
+retweets, and other networks,
 
 * spatial data analysis, e.g., identifying densely populated areas
 or traffic jams on maps,
@@ -146,7 +146,7 @@ the $i$-th point is assigned the $k$-th label if and only if
 it belongs to the $k$-th cluster.
 It is easily seen that each label vector yields
 a grouping of $\{1, 2, \dots, n\}$ that obviously fulfil
-the first two conditions in the above condition
+the first two conditions in the above definition,
 and that the third property is fulfilled by assuming
 that $(\forall k\in\{1,2,\dots,K\})$ $(\exists i\in\{1,2,\dots,n\})$
 $y_i = k$ (read: *for every $k$ there exists $i$ such that...*),
@@ -158,12 +158,12 @@ i.e., each label occurs at least once in $\boldsymbol{y}$.
 
 { BEGIN remark }
 The benefit of using mathematical notation is that we are super-precise,
-efficient and universal. Natural tongue is vague and leaves much room
+efficient, and universal. Natural tongue is vague and leaves much room
 for interpretation. We used so many *words* to explain the above concepts.
 As soon as we further develop our skills of *speaking* the language
 of mathematics
 (note that we've started with basic phrases such as *Good Afternoon*,
-*I am Sorry* and *Thank You*), it'll be more natural for
+*I am Sorry*, and *Thank You*), it'll be more natural for
 us to just write:
 
 "Let $\mathcal{C}=\{ C_1,\dots, C_K \}$ s.t.
@@ -320,7 +320,7 @@ Calculate (by hand)
 $d(\mathbf{x}_{1,\cdot}, \mathbf{x}_{2,\cdot})$,
 $d(\mathbf{x}_{1,\cdot}, \mathbf{x}_{3,\cdot})$,
 $d(\mathbf{x}_{2,\cdot}, \mathbf{x}_{3,\cdot})$,
-$d(\mathbf{x}_{1,\cdot}, \mathbf{x}_{1,\cdot})$ and
+$d(\mathbf{x}_{1,\cdot}, \mathbf{x}_{1,\cdot})$, and
 $d(\mathbf{x}_{2,\cdot}, \mathbf{x}_{1,\cdot})$.
 { END exercise }
 
@@ -416,9 +416,9 @@ we select (somehow; see below) a pair of clusters to be merged.
 
 
 Let's consider the  Sustainable Society Indices Dataset
-(see Appendix \@ref(appendix:datasets))
+(see Section \@ref(sec:ssi))
 that measures the Human,
-Environmental  and Economic Wellbeing
+Environmental,  and Economic Wellbeing
 in each country on the scale $[0,10]$.
 
 ```{r ssi-load}
@@ -898,7 +898,7 @@ Both complete and average linkages give us nicely "balanced" cluster hierarchy
 The obtained groupings are similar to some extent, yet, they are not
 identical -- both algorithms are based on different heuristics.
 However, single linkage tends to produce somehow "ugly" trees -- it's
-often be the case that it'll produce few large clusters and lots of small ones.
+often be the case that it'll produce few large clusters and a lot of small ones.
 
 The reader is encouraged to perform a similar "debugging" of the obtained
 clusterings (say, for the 3- and 4-partitions) as we performed above
@@ -944,7 +944,7 @@ the single linkage algorithm that it's highly sensitive to outliers.
 { BEGIN exercise }
 Calculate the complete linkage agglomerative clustering algorithm
 by hand on the space of the 3 SSI dimensions for
-France, Ireland, Spain, Colombia, Austria and Germany.
+France, Ireland, Spain, Colombia, Austria, and Germany.
 For each iteration of the algorithm, print the members of the
 current partition and the distances between each pair of clusters.
 { END exercise }
@@ -1038,8 +1038,7 @@ As in the previous exercise, but apply the single linkage.
 
 { BEGIN solution }
 
-$\mathcal{C}^{(0)}$ is identical to the one in the previous exercise
-and the first merge decision is the same.
+The first is identical to the above one.
 
 ```{r ex-hclust-byhand-4, results='asis', echo=FALSE}
 hclust_byhand(X2, "single", min, 2)
@@ -1051,7 +1050,7 @@ hclust_byhand(X2, "single", min, 2)
 { BEGIN exercise }
 Perform cluster analysis of the OECD countries
 based on the 7 SSI categories `ssi_2016_categories.csv`.
-Apply single, complete and average linkage and draw the
+Apply single, complete, and average linkage. Draw the
 corresponding dengrograms. Compute the averages of all indicators
 in each point group for clusterings of different sizes.
 Draw scatter plots for different pairs of variables (e.g., by calling

@@ -1059,7 +1059,7 @@ sort, rank, unique
 
 
 
-## Factors
+## Factors {#sec:factor}
 
 Factors are *special* kinds of vectors that are frequently used to
 store qualitative data, e.g., species, groups, types.

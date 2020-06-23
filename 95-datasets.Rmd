@@ -50,7 +50,7 @@ Otherwise,
 
 
 
-## Sustainable Society Indices
+## Sustainable Society Indices {#sec:ssi}
 
 
 Van de Kerk and Manuel in [@ssi], by extending
@@ -163,7 +163,7 @@ head(ssi_dimensions, 3)
 
 
 
-## Air Quality
+## Air Quality {#sec:air-quality}
 
 Environment Protection Authority of the state of Victoria, Australia
 published the 2018 air quality data on its Open Data platform.
@@ -219,7 +219,7 @@ Column                         | Description
 
 
 
-## Currency Exchange Rates
+## Currency Exchange Rates {#sec:currency-exchange}
 
 Statistical Data Warehouse of the European Central Bank System
 publishes currency exchange rates (quoted against EUR)
@@ -368,7 +368,7 @@ From this dataset we derive two following ones.
 
 
 
-## Urban Forest
+## Urban Forest {#sec:urban-forest}
 
 The Urban Forest dataset gives location, species and lifespan of
 ca. 72,500 trees in Melbourne, VIC, Australia.
@@ -424,7 +424,7 @@ Column                         | Description
 
 
 
-## Wine Quality
+## Wine Quality {#sec:wine-quality}
 
 The Wine Quality dataset [@wines]
 describes 11 physicochemical features of Vinho Verde wine samples
@@ -449,7 +449,7 @@ Donated by Paulo Cortez to UCI, public domain
 
 
 
-```{r dataset_wine_quality}
+```{r dataset-wine-quality}
 wine_quality <- read.csv("datasets/wine_quality_all.csv",
     comment.char="#")
 head(wine_quality, 3)
@@ -475,16 +475,17 @@ Column                         | Description
 
 
 
-`wine_train`, `wine_test`.
+`wine_train`, `wine_validate`, `wine_test`.
 
 :   In the first chapters we want to set up a working classifier as
     fast as possible, without going into details on why and how to perform
-    a train-test split etc. Therefore, let's prepare a tailored subset
+    a train-test or train-validate-test split etc.
+    Therefore, let's prepare a tailored subset
     of the wine quality database.
 
     First, we select 500 white wines at random:
 
-    ```{r wine_train_test_split1}
+    ```{r wine-train-test-split1}
     set.seed(1234) # reproducibility matters
     wine_subset <- wine_quality[wine_quality$color=="white",]
     wine_subset <- wine_subset[sample(nrow(wine_subset), 500),]
@@ -494,28 +495,31 @@ Column                         | Description
     a given wine is bad (class 1, quality is not greater than 5)
     or not-bad:
 
-    ```{r wine_train_test_split2}
+    ```{r wine-train-test-split2}
     wine_subset$bad <- as.numeric(wine_subset$response <= 5)
     ```
 
     For simplicity, we are  only interested in 5 following physicochemical
     features:
 
-    ```{r wine_train_test_split3}
+    ```{r wine-train-test-split3}
     wine_subset <- wine_subset[, c(
         "alcohol", "volatile.acidity", "chlorides",
         "free.sulfur.dioxide", "total.sulfur.dioxide", "bad"
     )]
     ```
 
-    Then we perform a 60/40% split. The rows in the data frame
+    Then we perform a 60/20/20% split. The rows in the data frame
     are already randomised, therefore the first 300 can constitute
-    the training sample and the remaining 200  can define the test sample.
+    the training sample, the next 100 can define the validation sample,
+    and the 100 remaining ones -- the test one.
 
-    ```{r wine_train_test_split4,eval=FALSE}
+    ```{r wine-train-test-split4,eval=FALSE}
     write.csv(wine_subset[1:300, ],
         "datasets/wine_train.csv", row.names=FALSE)
-    write.csv(wine_subset[-(1:300), ],
+    write.csv(wine_subset[301:400, ],
+        "datasets/wine_validate.csv", row.names=FALSE)
+    write.csv(wine_subset[401:500, ],
         "datasets/wine_test.csv", row.names=FALSE)
     ```
 
