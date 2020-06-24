@@ -1,4 +1,4 @@
-# Classification with K-Nearest Neighbours {#chap:knn}
+# Classification with Nearest Neighbours {#chap:knn}
 
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 
@@ -21,9 +21,6 @@ best model selection
 train/test/validate (alternative: cross-validation, see exercise TODO)
 
 overfitting, generalisation
-
-models don't have to work well
-out of the box -- feature engineering: feature selection, standardisation
 
 * ...
 
@@ -79,7 +76,7 @@ x_{2,1} & x_{2,2} & \cdots & x_{2,p} \\
 \vdots & \vdots & \ddots & \vdots \\
 x_{n,1} & x_{n,2} & \cdots & x_{n,p} \\
 \end{array}
-\right]
+\right],
 \qquad
 \mathbf{y} = \left[
 \begin{array}{c}
@@ -108,10 +105,10 @@ gives a very convenient means to encode categorical data
 
 ```{r factor1}
 y <- c("black", "green", "black", "red", "green", "green", "blue", "red")
-y <- factor(y, levels=c("black", "red", "green", "blue"))
-y
-table(y) # every label and the number of occurrences
+(y <- factor(y, levels=c("black", "red", "green", "blue")))
 ```
+
+<!-- table(y) # every label and the number of occurrences -->
 
 
 Internally, objects of type `factor` are represented as integer vectors
@@ -128,6 +125,187 @@ y
 ```
 { END remark }
 
+
+In this chapter we'll assume $K=2$, i.e., that each $y_i$ can only take one of
+two possible values. Such a case is very common in practice;
+it has been even given a special name: *binary classification*.
+The two classes are traditionally denoted as $0$ and $1$,
+see Table \@ref(tab:binary-classification) for some examples.
+
+Table: (\#tab:binary-classification) Some examples of output labels in binary classification tasks
+
+0       | 1
+--------|------------
+no      | yes
+false   | true
+failure | success
+reject  | accept
+healthy | ill
+
+
+
+{ BEGIN remark }
+$0$s and $1$s are mathematically convenient, because
+instead of stating "if $y_i=1$, then let $z=a$ and otherwise take $z=b$",
+we can simply write "$z=y_i\, a + (1-y_i)\, b$"
+(see, e.g., the definition of cross-entropy in \@ref(chap:logistic)).
+Ah, those neat math tricks!
+{ END remark }
+
+
+Figure \@ref(fig:classify-intro) gives a scatter plot of an example synthetic
+two-dimensional dataset (i.e., $p=2$)
+with the reference binary $y$s depicted using different plotting symbols.
+We see that the two classes  overlap slightly -- they cannot be
+separated by means of any simple boundary (e.g., a line).
+<!-- The "true" decision boundary is at $X_1=0$ but the classes -->
+<!-- slightly overlap (the dataset is a bit noisy). -->
+
+
+
+```{r classify-intro,echo=FALSE,fig.cap="A synthetic 2D dataset where each point is assigned one of two distinct labels"}
+set.seed(123)
+n0 <- 50 # n0 points in class 0
+n1 <- 50 # n1 points in class 1
+Xs <- rbind(
+    cbind(rnorm(n0, -1, 1), rnorm(n0, 0, 1)), # N( (-1, 0), (1, 1) )
+    cbind(rnorm(n1, +1, 1), rnorm(n1, 0, 1))  # N( (+1, 0), (1, 1) )
+)
+Ys <- factor(rep(c("0", "1"), c(n0, n1)))
+
+plot(Xs[,1], Xs[,2], col=Ys, pch=c(1,2)[Ys], xlab="X1", ylab="X2", asp=1)
+legend("topleft", col=c(1,2), pch=c(1,2),
+    legend=c("Class 0", "Class 1"), bg="white")
+# abline(v=0, lty=3, col="blue")
+```
+
+
+
+
+
+## K-Nearest Neighbours Classifier
+
+Our main aim will be to "build" an algorithm
+that takes a previously unobserved input sequence
+$\boldsymbol{x}'$ and which  -- based what we
+know already, i.e., on $\mathbf{X}$ and $\mathbf{y}$
+generates a corresponding prediction, $\hat{y}'$
+(hopefully being equal to the true $y'$, whatever it is).
+
+
+For instance, we may have a set of medical records, where we
+store patient data regarding their measurable health-relate parameters
+like blood pressure, severity of different symptoms etc.
+Moreover, each patient is labelled -- we know if they have been diagnosed
+a disease or not. But wait, there comes a new patient! We measure their
+blood pressure, as some questions, input the data into our algorithm
+and -- based on the result -- advise them to stay in bed.
+
+
+. . .
+
+In this chapter we will consider a very simple classifier,
+based on an idea which dates back to at least 1950s (see [@knn1], [@knn2]).
+
+Rule.
+
+: "If you don't know what to do in a situation, just act like the people around you"
+
+
+
+For some integer $K\ge 1$, the *K-Nearest Neighbour  (K-NN) Classifier*
+proceeds as follows. To classify a new point $\boldsymbol{x}'$:
+
+1. Find the $K$ nearest neighbours of a given point $\boldsymbol{x}'$
+amongst the points in $\mathbf{X}$, i.e.,
+points $\mathbf{x}_{i_1,\cdot}, \dots, \mathbf{x}_{i_K,\cdot}$
+that are the closest to $\boldsymbol{x}'$ w.r.t. the Euclidean distance:
+    a. compute the Euclidean distances between each $\mathbf{x}_{i,\cdot}$ from the input set and $\boldsymbol{x}'$:
+    \[ d_i = d(\mathbf{x}_{i,\cdot}, \boldsymbol{x}'),\]
+    b. order $d_i$s in increasing order,
+    and fetch the indices $i_1,\dots,i_K$
+    which yield:
+    \[ d_{i_1} \le d_{i_2} \le \dots \le d_{i_K}.\]
+<!--     c. pick first $K$ indices (these are the *nearest* neighbours). -->
+
+2. Fetch the reference labels $y_{i_1}, \dots, y_{i_K}$
+corresponding to the $K$ nearest neighbours.
+
+3. Return their *mode* as a result, i.e., the most frequently occurring label (also called *majority vote*).
+
+<!-- > If a mode is not unique, return a randomly chosen mode (ties are broken at random). -->
+
+
+
+
+
+
+
+
+. . .
+
+Let's illustrate how a $K$-NN classifier works on the above 2D synthetic dataset.
+First we consider $K=1$, see Figure \@ref(fig:fig-plot-knn1).
+Dark and light regions depict how new points would be classified (class 0 and
+1, respectively).
+For instance, the point $(0, -2)$ lays in the "dark zone", therefore
+we'd assign it label 0.
+
+
+```{r plot-knn,echo=FALSE,cache=TRUE}
+plot_knn <- function(K) {
+    xx1 <- seq(-8.2, 8.2, length.out=500)
+    xx2 <- seq(-4.2, 4.2, length.out=500)
+    xx <- expand.grid(xx1, xx2)
+    yy <- FNN::knn(Xs, xx, Ys, k=K)
+    image(xx1, xx2, matrix(as.numeric(yy)-1,
+        nrow=length(xx1), ncol=length(xx2)),
+        col=c("#00000044", "#ffe0e044"),
+        xlab="X1", ylab="X2", asp=1,
+        xlim=c(-8,8), ylim=c(-4,4)
+        )
+    points(Xs[,1], Xs[,2], col=Ys, pch=c(1,2)[Ys])
+    legend("topleft", col=c(1,2), pch=c(1,2),
+        legend=c("Class 0", "Class 1"), bg="white")
+#     abline(v=0, lty=3, col="blue")
+}
+```
+
+
+
+```{r fig-plot-knn1,echo=FALSE,cache=TRUE,dependson='plot-knn',fig.cap="1-NN class bounds for the 2D synthetic dataset"}
+plot_knn(1)
+```
+
+
+
+We see that 1-NN is "greedy" or "lazy" in the sense that we just
+locate the nearest point.
+Increasing $K$ somehow smoothens the decision boundary (this makes it
+less "local" and more "global").
+Figure \@ref(fig:fig-plot-knn3) depicts the $K=3$ case.
+
+```{r fig-plot-knn3,echo=FALSE,cache=TRUE,dependson='plot-knn',fig.cap="3-NN class bounds the our 2D synthetic dataset"}
+plot_knn(3)
+```
+
+
+
+```{r fig-plot-knn25,echo=FALSE,cache=TRUE,dependson='plot-knn',fig.cap="25-NN class bounds the our 2D synthetic dataset"}
+plot_knn(25)
+```
+
+The 25-NN classifier, see  Figure \@ref(fig:fig-plot-knn25),
+does already a quite good job with identifying
+an almost-straight line boundary between the two classes
+at $X_1=0$.
+
+
+
+
+
+
+## Example in R
 
 { BEGIN remark }
 $\mathbf{X}$ and $\mathbf{y}$ can be stored together as a single
@@ -148,73 +326,13 @@ x_{n,1} & x_{n,2} & \cdots & x_{n,p} & y_n\\
 
 However, as $\mathbf{X}$ consists of real numbers,
 we might run into "type mismatch"
-error is $\mathbf{y}$ is not numeric.
-
-In R, we have a special data type for this..
-
-data frame --
-
+error if $\mathbf{y}$ is not numeric.
+In R, matrices (see Appendix \@ref(appendix:rmatrix))
+are used to store data of the same type.
+It is the `data.frame` class (see Appendix \@ref(appendix:rdf))
+that allows types to be mixed.
 { END remark }
 
-
-In this chapter we assume $K=2$, i.e., that each $y_i$ takes
-only two possible values. Such a case is
-quite common in practice; it has been even given a special name:
-*binary classification*.
-
-We traditionally denote them with $0$s and $1$s.
-
-For example:
-
-0       | 1
---------|------------
-no      | yes
-false   | true
-failure | success
-healthy | ill
-
-
-
-{ BEGIN remark }
-0/1 is mathematically convenient because
-instead of writing (where do we do that?)
-if $y_i=1$, then let $z=a$ and otherwise take $z=b$,
-we can write $z=y_i\, a + (1-y_i)\, b$.
-Ah, those neat math tricks!
-{ END remark }
-
-
-Example plot of a synthetic dataset
-with the reference binary $y$s is given in Figure \@ref(fig:classify-intro).
-The "true" decision boundary is at $X_1=0$ but the classes
-slightly overlap (the dataset is a bit noisy).
-
-
-
-```{r classify-intro,echo=FALSE,fig.cap="A synthetic 2D dataset where each point is assigned one of two distinct labels"}
-set.seed(123)
-n0 <- 50 # n0 points in class 0
-n1 <- 50 # n1 points in class 1
-Xs <- rbind(
-    cbind(rnorm(n0, -1, 1), rnorm(n0, 0, 1)), # N( (-1, 0), (1, 1) )
-    cbind(rnorm(n1, +1, 1), rnorm(n1, 0, 1))  # N( (+1, 0), (1, 1) )
-)
-Ys <- factor(rep(c("0", "1"), c(n0, n1)))
-
-plot(Xs[,1], Xs[,2], col=Ys, pch=c(1,2)[Ys], xlab="X1", ylab="X2", asp=1)
-legend("topleft", col=c(1,2), pch=c(1,2),
-    legend=c("Class 0", "Class 1"), bg="white")
-abline(v=0, lty=3, col="blue")
-```
-
-
-### Data
-
-
-
-Our main aim will be to "build" an algorithm
-that takes an input sequence $\boldsymbol{x}$ and which generates
-a prediction, $\hat{y}$ (hopefully being equal to the true $y$).
 
 
 
@@ -266,182 +384,6 @@ binary classification task.
 
 
 
-### Training and Test Sets
-
-
-
-
-Recall that we are genuinely  interested in the construction of supervised learning models for the two following purposes:
-
-- **description** -- to explain a given dataset in simpler terms,
-- **prediction** -- to forecast the values of the dependent variable
-for inputs that are yet to be observed.
-
-In the latter case:
-
-- we don't want our models to  *overfit* to current data,
-- we want our models to *generalise* well
-to new data.
-
-. . .
-
-One way to assess if a model has sufficient predictive power is based
-on a random **train-test split** of the original dataset:
-
-- *training sample*  (usually 60-80% of the observations) -- used to construct a model,
-- *test sample* (remaining 40-20%) -- used to assess the goodness of fit.
-
-
-
-{ BEGIN remark }
-**Test sample must not be used in the training phase!** (No cheating!)
-{ END remark }
-
-
-
-
-60/40% train-test split in R:
-
-```{r input4,dependson='input3',cache=TRUE}
-set.seed(123) # reproducibility matters
-random_indices <- sample(n)
-head(random_indices) # preview
-# first 60% of the indices (they are arranged randomly)
-# will constitute the train sample:
-train_indices <- random_indices[1:floor(n*0.6)]
-X_train <- X[train_indices,]
-Y_train <- Y[train_indices]
-# the remaining indices (40%) go to the test sample:
-X_test  <- X[-train_indices,]
-Y_test  <- Y[-train_indices]
-```
-
-
-
-
-
-### Discussed Methods
-
-
-
-
-Our aim is to build a classifier that takes 10 wine physicochemical
-features and determines whether it's a "strong" wine.
-
-
-We will discuss 3 simple and educational (yet practically useful)
-classification algorithms:
-
-- *K-nearest neighbour scheme* -- this chapter,
-- *Decision trees* -- the next chapter,
-- *Logistic regression* -- the next chapter.
-
-
-
-
-## K-nearest Neighbour Classifier
-
-### Introduction
-
-
-
-
-
-Rule.
-
-: "If you don't know what to do in a situation, just act like the people around you"
-
-
-This idea dates back to at least 1950s (see [@knn1], [@knn2]).
-For some integer $K\ge 1$, the **K-Nearest Neighbour  (*K-NN*) Classifier**
-proceeds as follows.
-
-To classify a new point $\mathbf{x}'$:
-
-1. find the $K$ nearest neighbours of a given point $\mathbf{x}'$ amongst the points in the train set,
-denoted $\mathbf{x}_{i_1,\cdot}, \dots, \mathbf{x}_{i_K,\cdot}$:
-    a. compute the Euclidean distances between $\mathbf{x}'$ and each $\mathbf{x}_{i,\cdot}$ from the train set,
-    \[d_i = \|\mathbf{x}'-\mathbf{x}_{i,\cdot}\|\]
-    b. order $d_i$s in increasing order,
-    $d_{i_1} \le d_{i_2} \le \dots \le d_{i_K}$
-    c. pick first $K$ indices (these are the *nearest* neighbours)
-2. fetch the corresponding reference labels $y_{i_1}, \dots, y_{i_K}$
-3. return their *mode* as a result, i.e., the most frequently occurring label (a.k.a. *majority vote*)
-
-<!-- > If a mode is not unique, return a randomly chosen mode (ties are broken at random). -->
-
-
-
-
-
-
-
-
-
-
-Here is how $K$-NN classifier works on a synthetic 2D dataset.
-Firstly let's consider $K=1$, see Figure \@ref(fig:fig-plot-knn1).
-Gray and pink regions depict how new points would be classified.
-In particular 1-NN is "greedy" in the sense that we just
-locate the nearest point.
-
-
-
-
-```{r plot-knn,echo=FALSE,cache=TRUE}
-plot_knn <- function(K) {
-    xx1 <- seq(-4, 4, length.out=250)
-    xx2 <- seq(-4, 4, length.out=250)
-    xx <- expand.grid(xx1, xx2)
-    yy <- FNN::knn(Xs, xx, Ys, k=K)
-    image(xx1, xx2, matrix(as.numeric(yy)-1, nrow=length(xx1), ncol=length(xx2)),
-          col=c("#00000044", "#ff000044"), xlab="X1", ylab="X2", asp=1)
-    points(Xs[,1], Xs[,2], col=Ys, pch=c(1,2)[Ys])
-    legend("topleft", col=c(1,2), pch=c(1,2),
-        legend=c("Class 0", "Class 1"), bg="white")
-    abline(v=0, lty=3, col="blue")
-}
-```
-
-
-
-```{r fig-plot-knn1,echo=FALSE,cache=TRUE,dependson='plot-knn',fig.cap="1-NN class bounds for our 2D synthetic dataset"}
-plot_knn(1)
-```
-
-
-{ BEGIN remark }
-(\*) 1-NN classification is essentially based
-on a dataset's so-called Voronoi diagram.
-{ END remark }
-
-
-
-Increasing $K$ somehow smoothens the decision boundary (this makes it
-less "local" and more "global").
-Figure \@ref(fig:fig-plot-knn3) depicts the $K=3$ case.
-
-```{r fig-plot-knn3,echo=FALSE,cache=TRUE,dependson='plot-knn',fig.cap="3-NN class bounds for our 2D synthetic dataset"}
-plot_knn(3)
-```
-
-
-
-```{r fig-plot-knn25,echo=FALSE,cache=TRUE,dependson='plot-knn',fig.cap="25-NN class bounds for our 2D synthetic dataset"}
-plot_knn(25)
-```
-
-Recall that the "true" decision boundary for this synthetic dataset
-is at $X_1=0$. The 25-NN classifier did quite a good job, see  Figure \@ref(fig:fig-plot-knn25).
-
-
-
-### Example in R
-
-
-
-
-
 
 We shall be calling the `knn()` function from package `FNN`
 to classify the points from the test sample
@@ -477,159 +419,6 @@ mean(Y_test == Y_knn9) # accuracy
 
 
 
-### Feature Engineering
-
-
-
-
-Note that the Euclidean distance that we used above
-implicitly assumes that every feature (independent variable)
-is on the same scale.
-
-However, when dealing with, e.g., physical quantities,
-we often perform conversions of units of measurement (kg → g, feet → m etc.).
-
-Transforming a single feature may drastically change the metric
-structure of the dataset
-and therefore highly affect the obtained predictions.
-
-
-
-
-To "bring data to the same scale", we often apply a trick called **standardisation**.
-
-Computing the so-called **Z-scores** of the $j$-th feature, $\mathbf{x}_{\cdot,j}$,
-is done by subtracting from each observation the sample mean and dividing the result by the sample
-standard deviation:
-
-\[z_{i,j} = \frac{x_{i,j}-\bar{x}_{\cdot,j}}{s_{x_{\cdot,j}}}\]
-
-This a new feature $\mathbf{z}_{\cdot,j}$ that always has mean 0 and standard deviation of 1.
-
-Moreover, it is *unit-less* (e.g., we divide a value in kgs by a value in kgs,
-the units are cancelled out).
-This, amongst others, prevents one of the features from dominating
-the other ones.
-
-
-Z-scores are easy to interpret, e.g., 0.5 denotes an observation
-that is 0.5 standard deviations above the mean
-and -3 informs us that a value is 3 standard deviations below the mean.
-
-{ BEGIN remark }
-(\*) If data are normally distributed (bell-shaped histogram),
-with very high probability, most (expected value is 99.74%) observations
-should have Z-scores between -3 and 3. Those that don't, are
-"suspicious", maybe they are outliers? We should inspect them manually.
-{ END remark }
-
-
-
-
-Let's compute `Z_train` and `Z_test`,
-being the standardised versions of `X_train`
-and `X_test`, respectively.
-
-```{r standardise1}
-means <- apply(X_train, 2, mean) # column means
-sds   <- apply(X_train, 2, sd)   # column standard deviations
-Z_train <- X_train # copy
-Z_test  <- X_test  # copy
-for (j in 1:ncol(X)) {
-    Z_train[,j] <- (Z_train[,j]-means[j])/sds[j]
-    Z_test[,j]  <- (Z_test[,j] -means[j])/sds[j]
-}
-```
-
-Note that we have transformed the training and test sample in the very same
-way. Computing means and standard deviations separately for these two datasets
-is a common error -- it is the training set that we use in the course of the
-learning process.
-The above can be re-written as:
-
-```{r standardise2}
-Z_train <- t(apply(X_train, 1, function(r) (r-means)/sds))
-Z_test  <- t(apply(X_test,  1, function(r) (r-means)/sds))
-```
-
-See Figure \@ref(fig:standardise-depict-hist) for an illustration.
-Note that the righthand figures (histograms of standardised variables)
-are on the same scale now.
-
-```{r standardise-depict-hist,echo=FALSE,fig.height=6,fig.cap="Empirical distribution of two variables (alcohol on the top, volatile.acidity on the bottom) before (left) and after (right) standardising"}
-par(mfrow=c(2,2))
-hist(X_train[,"alcohol"], col="white", main=NA, xlim=c(-11,11)); box()
-hist(Z_train[,"alcohol"], col="white", main=NA, xlim=c(-11,11)); box()
-hist(X_train[,"volatile.acidity"], col="white", main=NA, xlim=c(-11,11)); box()
-hist(Z_train[,"volatile.acidity"], col="white", main=NA, xlim=c(-11,11)); box()
-```
-
-
-{ BEGIN remark }
-Of course, standardisation is only about shifting and scaling, it
-preserves the shape of the distribution. If the original variable
-is right skewed or bimodal, its standardised version will remain as such.
-{ END remark }
-
-
-Let's compute the accuracy of K-NN classifiers acting on standardised data.
-
-```{r standardise3,message=FALSE}
-Y_knn5s <- knn(Z_train, Z_test, Y_train, k=5)
-mean(Y_test == Y_knn5s) # accuracy
-Y_knn9s <- knn(Z_train, Z_test, Y_train, k=9)
-mean(Y_test == Y_knn9s) # accuracy
-```
-
-The accuracy is much better.
-
-
-
-
-
-Standardisation is an example of *feature engineering*.
-
-Good models rarely work well "straight out of the box" -- if that was the case,
-we wouldn't need data scientists and machine learning engineers!
-
-To increase models' accuracy, we often spend a lot of time:
-
-* cleansing data (e.g., removing outliers)
-* extracting new features
-* transforming existing features
-* trying to find a set of features that are relevant
-
-This is the "more art than science" part of data science (sic!), and
-hence most textbooks are not really eager for discussing such topics
-(including this one).
-
-Sorry, this is sad but true. The solutions that work well in the case of dataset
-A may fail in the B case and vice versa. However, the more exercises you solve,
-the greater the arsenal of ideas/possible approaches you will have at hand
-when dealing with real-world problems.
-
-
-
-
-Feature selection -- example (manually selected columns):
-
-```{r standardise4,message=FALSE}
-features <- c("chlorides", "volatile.acidity")
-Y_knn5s <- knn(Z_train[,features], Z_test[,features],
-    Y_train, k=5)
-mean(Y_test == Y_knn5s) # accuracy
-Y_knn9s <- knn(Z_train[,features], Z_test[,features],
-    Y_train, k=9)
-mean(Y_test == Y_knn9s) # accuracy
-```
-
-{ BEGIN exercise }
-Try to find a combination of 2-4 features (by guessing or applying magic tricks)
-that increases the accuracy of a $K$-NN classifier on this dataset.
-{ END exercise }
-
-
-
 ## Model Assessment and Selection
 
 ### Performance Metrics
@@ -642,21 +431,23 @@ More metrics: https://scikit-learn.org/stable/modules/model_evaluation.html#clas
 
 
 
-Recall that $y_i$ denotes the true label associated with the $i$-th observation.
+Recall that $y_i'$ denotes the true label associated with the $i$-th observation
+in the test set.
 
-Let $\hat{y}_i$ denote the classifier's output for a given $\mathbf{x}_{i,\cdot}$.
+Let $\hat{y}_i'$ denote the classifier's output for
+a given $\mathbf{x}_{i,\cdot}'$.
 
-Ideally, we'd wish that $\hat{y}_i=y_i$.
+Ideally, we'd wish that $\hat{y}_i'=y_i'$.
 
 Sadly, in practice we will make errors.
 
 Here are the 4 possible situations (true vs. predicted label):
 
 
-.              | $y_i=0$                        | $y_i=1$
+.              | $y_i'=0$                       | $y_i'=1$
 ---------------|--------------------------------|-------------
-$\hat{y}_i=0$  | **True Negative**              | False Negative (Type II error)
-$\hat{y}_i=1$  | False Positive (Type I error)  | **True Positive**
+$\hat{y}_i'=0$ | **True Negative**              | False Negative (Type II error)
+$\hat{y}_i'=1$ | False Positive (Type I error)  | **True Positive**
 
 Note that the terms **positive** and **negative** refer to
 the classifier's output, i.e., occur when $\hat{y}_i$ is equal to $1$ and $0$, respectively.
@@ -670,7 +461,7 @@ the correctness of predictions for the whole sample:
 
 
 ```{r confusion1}
-Y_pred <- knn(Z_train, Z_test, Y_train, k=9)
+Y_pred <- knn(X_train, X_test, Y_train, k=9)
 (C <- table(Y_pred, Y_test))
 ```
 
@@ -719,9 +510,9 @@ In such a case, *accuracy* as a metric fails to quantify what we are aiming for.
 
 
 { BEGIN remark }
-If only 1% of the cases have true $y_i=1$,
+If only 1% of the cases have true $y_i'=1$,
 then a dummy classifier that always
-outputs $\hat{y}_i=0$ has 99% accuracy.
+outputs $\hat{y}_i'=0$ has 99% accuracy.
 { END remark }
 
 Metrics such as precision and recall (and their aggregated version, F-measure)
@@ -823,6 +614,9 @@ The following function can come in handy in the future:
 ```{r get_metrics}
 get_metrics <- function(Y_pred, Y_test)
 {
+    all_levels <- unique(c(Y_pred, Y_test)) # distinct labels
+    Y_pred <- factor(Y_pred, levels=all_levels)
+    Y_test <- factor(Y_test, levels=all_levels)
     C <- table(Y_pred, Y_test) # confusion matrix
     stopifnot(dim(C) == c(2, 2))
     c(Acc=(C[1,1]+C[2,2])/sum(C), # accuracy
@@ -849,7 +643,9 @@ get_metrics(Y_pred, Y_test)
 ### How to Choose K for K-NN Classification?
 
 
-
+- we don't want our models to  *overfit* to current data,
+- we want our models to *generalise* well
+to new data.
 
 We haven't yet considered the question which $K$ yields *the best*
 classifier.
@@ -877,7 +673,7 @@ knn_metrics <- function(k, X_train, X_test, Y_train, Y_test)
 For example:
 
 ```{r whichK2,cache=TRUE}
-knn_metrics(5, Z_train, Z_test, Y_train, Y_test)
+knn_metrics(5, X_train, X_test, Y_train, Y_test)
 ```
 
 
@@ -892,7 +688,7 @@ Ks <- seq(1, 19, by=2)
 Ps <- as.data.frame(t(
     sapply(Ks, # on each element in this vector
         knn_metrics,     # apply this function
-        Z_train, Z_test, Y_train, Y_test # aux args
+        X_train, X_test, Y_train, Y_test # aux args
     )))
 ```
 
@@ -932,25 +728,14 @@ Figure \@ref(fig:whichK5) is worth a thousand tables though (see `?matplot` in R
 
 
 
-```{r whichK5,echo=FALSE,cache=TRUE,fig.cap="Performance of $K$-nn classifiers as a function of $K$ for standardised and raw data"}
-par(mfrow=c(1,2))
-Ks <- seq(1, 51, by=2)
-Ps <- as.data.frame(t(sapply(Ks, # on each element in this vector
-  knn_metrics,     # apply this function
-  Z_train, Z_test, Y_train, Y_test # also passing these as args
-)))
-matplot(Ks, Ps[,1:4], xlab="K", ylab="Metric", type="l",
-    ylim=c(0,1), main="Standardised Data (Z_train, Z_test)")
-legend("bottom", legend=names(Ps[,1:4]),
-    col=1:4, lty=1:4, ncol=2, bg="white")
-
+```{r whichK5,echo=FALSE,cache=TRUE,fig.cap="Performance of $K$-nn classifiers as a function of $K$ "}
 Ks <- seq(1, 51, by=2)
 Ps <- as.data.frame(t(sapply(Ks, # on each element in this vector
   knn_metrics,     # apply this function
   X_train, X_test, Y_train, Y_test # also passing these as args
 )))
 matplot(Ks, Ps[,1:4], xlab="K", ylab="Metric", type="l",
-    ylim=c(0,1), main="Raw Data (X_train, X_test)")
+    ylim=c(0,1))
 # legend("top", legend=names(Ps[,1:4]),
 #     col=1:4, lty=1:4, ncol=4, bg="white")
 ```
@@ -1449,216 +1234,21 @@ test_speed(10000, 20, 5)
 
 
 
+## Exercises
 
+TODO
 
-
-
-
-### Different Metrics (\*)
-
-
-
-
-The Euclidean distance is just one particular example
-of many possible **metrics** (metric == a mathematical term,
-above we have used this term in a more relaxed fashion, when referring
-to accuracy etc.).
-
-Mathematically, we say that $d$ is a metric on a set $X$
-(e.g., $\mathbb{R}^p$), whenever
-it is a function $d:X\times X\to [0,\infty]$ such that for all $x,x',x''\in X$:
-
-- $d(x, x') = 0$ if and only if $x=x'$,
-- $d(x, x') = d(x', x)$ (it is symmetric)
-- $d(x, x'') \le d(x, x') + d(x', x'')$ (it fulfils the triangle inequality)
-
-
-
-{ BEGIN remark }
-(*) Not all the properties are required in all the applications;
-sometimes we might need a few additional ones.
-{ END remark }
-
-We can easily generalise the way we introduced the K-NN method
-to have a classifier that is based on a point's neighbourhood
-with respect to any metric.
-
-
-
-
-Example metrics on $\mathbb{R}^p$:
-
-- **Euclidean**
-\[
-d_2(\mathbf{x}, \mathbf{x}') = \| \mathbf{x}-\mathbf{x}' \| = \| \mathbf{x}-\mathbf{x}' \|_2 = \sqrt{ \sum_{i=1}^p (x_i-x_i')^2 }
-\]
-- **Manhattan** (taxicab)
-\[
-d_1(\mathbf{x}, \mathbf{x}') = \| \mathbf{x}-\mathbf{x}' \|_1 = { \sum_{i=1}^p |x_i-x_i'| }
-\]
-- **Chebyshev** (maximum)
-\[
-d_\infty(\mathbf{x}, \mathbf{x}') = \| \mathbf{x}-\mathbf{x}' \|_\infty = \max_{i=1,\dots,p} |x_i-x_i'|
-\]
 
 <!--
-These are all examples of $L_p$ metrics, $p\ge 1$:
-\[
-d_p(\mathbf{x}, \mathbf{x}') = \| \mathbf{x}-\mathbf{x}' \|_p = \left( \sum_{i=1}^p |x_i-x_i'|^p \right)^{1/p}
-\]
+
+TODO: exercise -- density, not NN-based classification
+regression - consider the epsilon-neighbourhood.
+
 -->
 
 
 
-
-We can define metrics on different spaces too.
-
-For example, the **Levenshtein distance** is a popular choice
-for comparing character strings (also DNA sequences etc.)
-
-It is an *edit distance* -- it measures the minimal number of
-single-character insertions, deletions or substitutions to change
-one string into another.
-
-
-For instance:
-
-```{r adist}
-adist("happy", "nap")
-```
-
-This is because we need 1 substitution and 2 deletions,
-
-happy → nappy → napp → nap.
-
-
-
-
-
-
-
-
-See also:
-
-- the Hamming distance for categorical vectors (or strings of equal lengths),
-- the Jaccard distance for sets,
-- the Kendall tau rank distance for rankings.
-
-Moreover, R package `stringdist` includes implementations
-of numerous string metrics.
-
-
-<!-- Mahalanobis distance -->
-
-
-
-
-## Exercises
-
-
-
-### Wine Quality -- Best K-NN Parameters via Cross-Validation (\*)
-
-
-Consider the Wine Quality dataset (see Appendix F<!-- TODO --> for details):
-
-```{r task_classification_4_1}
-wine_quality <- read.csv("datasets/wine_quality_all.csv",
-    comment.char="#")
-head(wine_quality, 3)
-```
-
-
-{ BEGIN exercise }
-Add a new column named `quality`. A wine should get a `quality` of `1`
-if its rating is greater than or equal to 7 (a good wine)
-and a quality of `0` otherwise.
-{ END exercise }
-
-
-```{r task_classification_4_2,echo=FALSE}
-wine_quality$quality <- 0
-wine_quality$quality[wine_quality$response>=7] <- 1
-# table(wine_quality$quality)
-```
-
-{ BEGIN exercise }
-Perform a random train-test split of size 60-40%:
-create the matrices `X_train` and `X_test` containing
-the 11 physicochemical wine features and
-the corresponding label vectors `Y_train` and `Y_test`
-that inform on the wines' `quality`.
-{ END exercise }
-
-{ BEGIN exercise }
-Determine the *best*  parameter setting
-for the K-nearest neighbour classification of the `quality` variable
-based on the 11 physicochemical features. Perform the so-called
-grid (exhaustive) search over all the possible combinations of the following
-parameters:
-
-1. $K$: 1, 3, 5, 7 or 9,
-2. preprocessing: none (raw input data),
-standardised variables or robustly standardised variables,
-3. metric: $L_2$ (Euclidean) or $L_1$ (Manhattan).
-
-In other words, there are $5\cdot 3\cdot 2=30$ combinations of parameters in total,
-and hence -- $30$ different scenarios to consider.
-By *the best classifier* we mean the one that maximises the $F$-measure
-obtained by the so-called 5-fold cross-validation (see below).
-{ END exercise }
-
-
-
-
-Robust standardisation.
-
-: To perform a *robust standardisation*, for each column individually,
-    subtract its median and then divide it by its median absolute deviation
-    (MAD, i.e., `median(abs(x-median(x)))`). This data preprocessing scheme
-    is less sensitive to outliers than the classic standardisation.
-
-
-
-Note that the $L_1$ metric-based K-nearest neighbour method
-is not available     in the `FNN` package. You need to implement
-it yourself.
-
-
-Cross-validation.
-
-:  We have discussed that it would not be fair to use the test
-    set for choosing of the optimal parameters (we would be overfitting to the
-    test set). We know that one possible
-    way to assure the transparent evaluation of a classifier
-    is to perform a train-validate-test split and use the validation set
-    for parameter tuning.
-
-    Here we will use a different technique -- one
-    that estimates the methods' "true" predictive
-    performance more accurately, yet at the cost of significantly increased
-    run-time. Namely, in *5-fold cross-validation*, we split the original
-    train set randomly into 5 disjoint parts: A, B, C, D, E
-    (more or less of the same number of observations). We use each
-    combination of 4 chunks as training sets and the remaining part
-    as the validation set, on which we compute the F-measure:
-
-
-    train set    | validation set | F-measure
-    -------------|----------------|----------
-    B, C, D, E   | A              | $F_A$
-    A, C, D, E   | B              | $F_B$
-    A, B, D, E   | C              | $F_C$
-    A, B, C, E   | D              | $F_D$
-    A, B, C, D   | E              | $F_E$
-
-    At the end we report the average $F$-measure, $(F_A+F_B+F_C+F_D+F_E)/5$.
-
-
 ## Outro
-
-### Remarks
-
 
 
 
@@ -1668,21 +1258,11 @@ However, in practice it's pretty slow for larger datasets -- to
 classify a single point we have to query the whole training set (which
 should be available at all times).
 
-In the next part we will discuss some other well-known classifiers:
-
-- *Decision trees*
-- *Logistic regression*
-
-<!--
-They are restricted to binary (0/1) outputs.
-They will have to be extended
-somehow to allow for more classes.
--->
-
-
 
 ### Side Note: K-NN Regression
 
+
+TODO: later
 
 
 
@@ -1742,13 +1322,6 @@ legend("topleft", legend=c("K=1", "K=5", "K=25"),
     col=c(2, 3, 4), lwd=3, bg="white")
 ```
 
-<!--
-
-TODO: exercise -- density, not NN-based classification
-regression - consider the epsilon-neighbourhood.
-
--->
-
 
 
 
@@ -1761,6 +1334,10 @@ regression - consider the epsilon-neighbourhood.
 
 . . .
 
+
+(\*) 1-NN classification is essentially based
+on a dataset's so-called Voronoi diagram.
+
 { LATEX \normalcolor }
 
 
@@ -1769,6 +1346,13 @@ regression - consider the epsilon-neighbourhood.
 Recommended further reading: [@esl: Section 13.3]
 
 Next Chapter....
+
+
+Further we will discuss some other well-known classifiers:
+
+- *Decision trees*
+- *Logistic regression*
+
 
 
 

@@ -23,8 +23,8 @@ rm -f _main.Rmd
 
 cp -f ../build/index_gitbook.Rmd index.Rmd
 cp -f ../build/preamble_gitbook.html preamble.html
-cat 00-preface.Rmd >> index.Rmd
-rm -f 00-preface.Rmd
+cat 000-preface.Rmd >> index.Rmd
+rm -f 000-preface.Rmd
 
 date="DRAFT v0.3 $(date '+%Y-%m-%d %H:%M') (`git rev-parse --short HEAD`)"
 sed -i -e "s/@DATE@/${date}/g" index.Rmd

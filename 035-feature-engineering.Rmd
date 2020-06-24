@@ -1,0 +1,459 @@
+# Feature Engineering {#chap:feature-engineering}
+
+<!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
+
+
+{ LATEX \color{gray} }
+
+**TODO** In this chapter, we will:
+
+* ...
+
+train-test-validate split manually?
+
+K-NN and back to hclust?
+
+models don't have to work well
+out of the box -- feature engineering: feature selection, standardisation
+
+
+normalisation -- how SSI is created?
+
+log-normal distribution, power law?
+
+normal distribution
+
+you can compare apples with oranges if you have apple and orange *counts*
+
+even if on the same scale, 1 kg of gold is not the same as 1 kg of citric acid
+
+{ LATEX \normalcolor }
+
+
+
+A random **train-test split** of the original dataset:
+
+- *training sample*  (usually 60-80% of the observations) -- used to construct a model,
+- *test sample* (remaining 40-20%) -- used to assess the goodness of fit.
+
+
+
+{ BEGIN remark }
+**Test sample must not be used in the training phase!** (No cheating!)
+{ END remark }
+
+
+
+
+60/40% train-test split in R:
+
+```{r input4,dependson='input3',cache=TRUE}
+# set.seed(123) # reproducibility matters
+# random_indices <- sample(n)
+# head(random_indices) # preview
+# # first 60% of the indices (they are arranged randomly)
+# # will constitute the train sample:
+# train_indices <- random_indices[1:floor(n*0.6)]
+# X_train <- X[train_indices,]
+# Y_train <- Y[train_indices]
+# # the remaining indices (40%) go to the test sample:
+# X_test  <- X[-train_indices,]
+# Y_test  <- Y[-train_indices]
+```
+
+
+
+
+
+
+### Feature Engineering
+
+
+
+
+Note that the Euclidean distance that we used above
+implicitly assumes that every feature (independent variable)
+is on the same scale.
+
+However, when dealing with, e.g., physical quantities,
+we often perform conversions of units of measurement (kg → g, feet → m etc.).
+
+Transforming a single feature may drastically change the metric
+structure of the dataset
+and therefore highly affect the obtained predictions.
+
+
+
+
+To "bring data to the same scale", we often apply a trick called **standardisation**.
+
+Computing the so-called **Z-scores** of the $j$-th feature, $\mathbf{x}_{\cdot,j}$,
+is done by subtracting from each observation the sample mean and dividing the result by the sample
+standard deviation:
+
+\[z_{i,j} = \frac{x_{i,j}-\bar{x}_{\cdot,j}}{s_{x_{\cdot,j}}}\]
+
+This a new feature $\mathbf{z}_{\cdot,j}$ that always has mean 0 and standard deviation of 1.
+
+Moreover, it is *unit-less* (e.g., we divide a value in kgs by a value in kgs,
+the units are cancelled out).
+This, amongst others, prevents one of the features from dominating
+the other ones.
+
+
+Z-scores are easy to interpret, e.g., 0.5 denotes an observation
+that is 0.5 standard deviations above the mean
+and -3 informs us that a value is 3 standard deviations below the mean.
+
+{ BEGIN remark }
+(\*) If data are normally distributed (bell-shaped histogram),
+with very high probability, most (expected value is 99.74%) observations
+should have Z-scores between -3 and 3. Those that don't, are
+"suspicious", maybe they are outliers? We should inspect them manually.
+{ END remark }
+
+
+
+
+Let's compute `Z_train` and `Z_test`,
+being the standardised versions of `X_train`
+and `X_test`, respectively.
+
+```{r standardise1}
+# means <- apply(X_train, 2, mean) # column means
+# sds   <- apply(X_train, 2, sd)   # column standard deviations
+# Z_train <- X_train # copy
+# Z_test  <- X_test  # copy
+# for (j in 1:ncol(X)) {
+#     Z_train[,j] <- (Z_train[,j]-means[j])/sds[j]
+#     Z_test[,j]  <- (Z_test[,j] -means[j])/sds[j]
+# }
+```
+
+Note that we have transformed the training and test sample in the very same
+way. Computing means and standard deviations separately for these two datasets
+is a common error -- it is the training set that we use in the course of the
+learning process.
+The above can be re-written as:
+
+```{r standardise2}
+# Z_train <- t(apply(X_train, 1, function(r) (r-means)/sds))
+# Z_test  <- t(apply(X_test,  1, function(r) (r-means)/sds))
+```
+
+See Figure \@ref(fig:standardise-depict-hist) for an illustration.
+Note that the righthand figures (histograms of standardised variables)
+are on the same scale now.
+
+```{r standardise-depict-hist,echo=FALSE,fig.height=6,fig.cap="Empirical distribution of two variables (alcohol on the top, volatile.acidity on the bottom) before (left) and after (right) standardising"}
+# par(mfrow=c(2,2))
+# hist(X_train[,"alcohol"], col="white", main=NA, xlim=c(-11,11)); box()
+# hist(Z_train[,"alcohol"], col="white", main=NA, xlim=c(-11,11)); box()
+# hist(X_train[,"volatile.acidity"], col="white", main=NA, xlim=c(-11,11)); box()
+# hist(Z_train[,"volatile.acidity"], col="white", main=NA, xlim=c(-11,11)); box()
+```
+
+
+{ BEGIN remark }
+Of course, standardisation is only about shifting and scaling, it
+preserves the shape of the distribution. If the original variable
+is right skewed or bimodal, its standardised version will remain as such.
+{ END remark }
+
+
+Let's compute the accuracy of K-NN classifiers acting on standardised data.
+
+```{r standardise3,message=FALSE}
+# Y_knn5s <- knn(Z_train, Z_test, Y_train, k=5)
+# mean(Y_test == Y_knn5s) # accuracy
+# Y_knn9s <- knn(Z_train, Z_test, Y_train, k=9)
+# mean(Y_test == Y_knn9s) # accuracy
+```
+
+The accuracy is much better.
+
+
+
+
+
+Standardisation is an example of *feature engineering*.
+
+Good models rarely work well "straight out of the box" -- if that was the case,
+we wouldn't need data scientists and machine learning engineers!
+
+To increase models' accuracy, we often spend a lot of time:
+
+* cleansing data (e.g., removing outliers)
+* extracting new features
+* transforming existing features
+* trying to find a set of features that are relevant
+
+This is the "more art than science" part of data science (sic!), and
+hence most textbooks are not really eager for discussing such topics
+(including this one).
+
+Sorry, this is sad but true. The solutions that work well in the case of dataset
+A may fail in the B case and vice versa. However, the more exercises you solve,
+the greater the arsenal of ideas/possible approaches you will have at hand
+when dealing with real-world problems.
+
+
+
+
+Feature selection -- example (manually selected columns):
+
+```{r standardise4,message=FALSE}
+# features <- c("chlorides", "volatile.acidity")
+# Y_knn5s <- knn(Z_train[,features], Z_test[,features],
+#     Y_train, k=5)
+# mean(Y_test == Y_knn5s) # accuracy
+# Y_knn9s <- knn(Z_train[,features], Z_test[,features],
+#     Y_train, k=9)
+# mean(Y_test == Y_knn9s) # accuracy
+```
+
+{ BEGIN exercise }
+Try to find a combination of 2-4 features (by guessing or applying magic tricks)
+that increases the accuracy of a $K$-NN classifier on this dataset.
+{ END exercise }
+
+
+
+
+### Different Metrics (\*)
+
+
+(this is like metric space engineering)
+
+
+
+The Euclidean distance is just one particular example
+of many possible **metrics** (metric == a mathematical term,
+above we have used this term in a more relaxed fashion, when referring
+to accuracy etc.).
+
+Mathematically, we say that $d$ is a metric on a set $X$
+(e.g., $\mathbb{R}^p$), whenever
+it is a function $d:X\times X\to [0,\infty]$ such that for all $x,x',x''\in X$:
+
+- $d(x, x') = 0$ if and only if $x=x'$,
+- $d(x, x') = d(x', x)$ (it is symmetric)
+- $d(x, x'') \le d(x, x') + d(x', x'')$ (it fulfils the triangle inequality)
+
+
+
+{ BEGIN remark }
+(*) Not all the properties are required in all the applications;
+sometimes we might need a few additional ones.
+{ END remark }
+
+We can easily generalise the way we introduced the K-NN method
+to have a classifier that is based on a point's neighbourhood
+with respect to any metric.
+
+
+
+
+Example metrics on $\mathbb{R}^p$:
+
+- **Euclidean**
+\[
+d_2(\mathbf{x}, \mathbf{x}') = \| \mathbf{x}-\mathbf{x}' \| = \| \mathbf{x}-\mathbf{x}' \|_2 = \sqrt{ \sum_{i=1}^p (x_i-x_i')^2 }
+\]
+- **Manhattan** (taxicab)
+\[
+d_1(\mathbf{x}, \mathbf{x}') = \| \mathbf{x}-\mathbf{x}' \|_1 = { \sum_{i=1}^p |x_i-x_i'| }
+\]
+- **Chebyshev** (maximum)
+\[
+d_\infty(\mathbf{x}, \mathbf{x}') = \| \mathbf{x}-\mathbf{x}' \|_\infty = \max_{i=1,\dots,p} |x_i-x_i'|
+\]
+
+<!--
+These are all examples of $L_p$ metrics, $p\ge 1$:
+\[
+d_p(\mathbf{x}, \mathbf{x}') = \| \mathbf{x}-\mathbf{x}' \|_p = \left( \sum_{i=1}^p |x_i-x_i'|^p \right)^{1/p}
+\]
+-->
+
+
+
+
+We can define metrics on different spaces too.
+
+For example, the **Levenshtein distance** is a popular choice
+for comparing character strings (also DNA sequences etc.)
+
+It is an *edit distance* -- it measures the minimal number of
+single-character insertions, deletions or substitutions to change
+one string into another.
+
+
+For instance:
+
+```{r adist}
+adist("happy", "nap")
+```
+
+This is because we need 1 substitution and 2 deletions,
+
+happy → nappy → napp → nap.
+
+
+
+
+
+
+
+
+See also:
+
+- the Hamming distance for categorical vectors (or strings of equal lengths),
+- the Jaccard distance for sets,
+- the Kendall tau rank distance for rankings.
+
+Moreover, R package `stringdist` includes implementations
+of numerous string metrics.
+
+
+<!-- Mahalanobis distance -->
+
+
+
+
+
+
+
+
+## Exercises
+
+
+
+### Wine Quality -- Best K-NN Parameters via Cross-Validation (\*)
+
+
+Consider the Wine Quality dataset (see Appendix F<!-- TODO --> for details):
+
+```{r task_classification_4_1}
+wine_quality <- read.csv("datasets/wine_quality_all.csv",
+    comment.char="#")
+head(wine_quality, 3)
+```
+
+
+{ BEGIN exercise }
+Add a new column named `quality`. A wine should get a `quality` of `1`
+if its rating is greater than or equal to 7 (a good wine)
+and a quality of `0` otherwise.
+{ END exercise }
+
+
+```{r task_classification_4_2,echo=FALSE}
+wine_quality$quality <- 0
+wine_quality$quality[wine_quality$response>=7] <- 1
+# table(wine_quality$quality)
+```
+
+{ BEGIN exercise }
+Perform a random train-test split of size 60-40%:
+create the matrices `X_train` and `X_test` containing
+the 11 physicochemical wine features and
+the corresponding label vectors `Y_train` and `Y_test`
+that inform on the wines' `quality`.
+{ END exercise }
+
+{ BEGIN exercise }
+Determine the *best*  parameter setting
+for the K-nearest neighbour classification of the `quality` variable
+based on the 11 physicochemical features. Perform the so-called
+grid (exhaustive) search over all the possible combinations of the following
+parameters:
+
+1. $K$: 1, 3, 5, 7 or 9,
+2. preprocessing: none (raw input data),
+standardised variables or robustly standardised variables,
+3. metric: $L_2$ (Euclidean) or $L_1$ (Manhattan).
+
+In other words, there are $5\cdot 3\cdot 2=30$ combinations of parameters in total,
+and hence -- $30$ different scenarios to consider.
+By *the best classifier* we mean the one that maximises the $F$-measure
+obtained by the so-called 5-fold cross-validation (see below).
+{ END exercise }
+
+
+
+
+Robust standardisation.
+
+: To perform a *robust standardisation*, for each column individually,
+    subtract its median and then divide it by its median absolute deviation
+    (MAD, i.e., `median(abs(x-median(x)))`). This data preprocessing scheme
+    is less sensitive to outliers than the classic standardisation.
+
+
+
+Note that the $L_1$ metric-based K-nearest neighbour method
+is not available     in the `FNN` package. You need to implement
+it yourself.
+
+
+Cross-validation.
+
+:  We have discussed that it would not be fair to use the test
+    set for choosing of the optimal parameters (we would be overfitting to the
+    test set). We know that one possible
+    way to assure the transparent evaluation of a classifier
+    is to perform a train-validate-test split and use the validation set
+    for parameter tuning.
+
+    Here we will use a different technique -- one
+    that estimates the methods' "true" predictive
+    performance more accurately, yet at the cost of significantly increased
+    run-time. Namely, in *5-fold cross-validation*, we split the original
+    train set randomly into 5 disjoint parts: A, B, C, D, E
+    (more or less of the same number of observations). We use each
+    combination of 4 chunks as training sets and the remaining part
+    as the validation set, on which we compute the F-measure:
+
+
+    train set    | validation set | F-measure
+    -------------|----------------|----------
+    B, C, D, E   | A              | $F_A$
+    A, C, D, E   | B              | $F_B$
+    A, B, D, E   | C              | $F_C$
+    A, B, C, E   | D              | $F_D$
+    A, B, C, D   | E              | $F_E$
+
+    At the end we report the average $F$-measure, $(F_A+F_B+F_C+F_D+F_E)/5$.
+
+
+
+
+## Remarks
+
+
+
+
+
+{ LATEX \color{gray} }
+
+. . .
+
+**TODO** .....
+
+
+. . .
+
+mention: kernels
+
+{ LATEX \normalcolor }
+
+
+
+
+Recommended further reading: [@esl: Section 13.3]
+
+Next Chapter....
+
+
+

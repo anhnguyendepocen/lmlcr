@@ -1,27 +1,29 @@
 # (C) 2020 Marek Gagolewski, https://www.gagolewski.com
 
 FILES_RMD = \
-	00-preface.Rmd                     \
-	01-introduction.Rmd                \
-	02-hclust.Rmd                      \
-	03-knn.Rmd                         \
-	04-trees.Rmd                       \
-	05-regression-simple.Rmd           \
-	06-regression-multiple.Rmd         \
-	07-logistic.Rmd                    \
-	08-optimisation-continuous.Rmd     \
-	09-kmeans.Rmd                      \
-	10-optimisation-discrete.Rmd       \
-	11-images.Rmd                      \
-	12-recommenders.Rmd                \
-	13-text.Rmd                        \
-	90-convention.Rmd                  \
-	91-R-setup.Rmd                     \
-	92-R-vectors.Rmd                   \
-	93-R-matrices.Rmd                  \
-	94-R-data-frames.Rmd               \
-	95-datasets.Rmd                    \
-	99-references.Rmd
+	000-preface.Rmd                     \
+	010-introduction.Rmd                \
+	020-hclust.Rmd                      \
+	030-knn.Rmd                         \
+	035-feature-engineering.Rmd         \
+	040-trees.Rmd                       \
+	050-regression-simple.Rmd           \
+	060-regression-multiple.Rmd         \
+	070-logistic.Rmd                    \
+	080-optimisation-continuous.Rmd     \
+	090-kmeans.Rmd                      \
+	100-optimisation-discrete.Rmd       \
+	110-feature-selection.Rmd           \
+	210-images.Rmd                      \
+	220-recommenders.Rmd                \
+	230-text.Rmd                        \
+	900-convention.Rmd                  \
+	910-R-setup.Rmd                     \
+	920-R-vectors.Rmd                   \
+	930-R-matrices.Rmd                  \
+	940-R-data-frames.Rmd               \
+	950-datasets.Rmd                    \
+	990-references.Rmd
 
 
 
