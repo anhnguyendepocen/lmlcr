@@ -17,7 +17,16 @@ why we need statistics or information theory (amongst others)
 vs. research with machine learning (citations! - asymptotics etc.)
 -- 2 normal distributions, non-separable illustration
 
-in [@probtheorypatrecog]....
+in [@probtheorypatrecog] presented are several interesting results
+of the asymptotic behaviour of the K-NN classifier when $K\to\infty$
+and $K/n\to\infty$ as $n\to\infty$ (e.g., both training sample size
+$n$ and $K$ grow
+but $n$ grows at least an order of magnitude faster than $K$)
+
+maths can be used to answer questions about the general behaviour of the method:
+"it is always true that", "with probability XX it holds", "if XXX, then the expected is YYY" etc.
+
+
 
 
 prediction vs. description

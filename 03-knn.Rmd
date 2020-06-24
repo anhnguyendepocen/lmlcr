@@ -48,16 +48,6 @@ Karypis, G., EH. Han, V. Kumar (1999): CHAMELEON: A Hierarchical Clustering Algo
 -->
 
 
-<!--
-
- curse of dimensionality [@foundds]
- https://minds.wisconsin.edu/bitstream/handle/1793/60174/TR1377.pdf?sequence=1
- etc.
-
- vp-trees, gnats, kd-trees, FANN
--->
-
-
 
 <!-- TODO:
 
@@ -77,8 +67,8 @@ $\mathbf{X}\in\mathbb{R}^{n\times p}$ representing
 $n$ objects described by means of $p$ numerical features.
 
 In this chapter we are going to be interested in  *supervised learning* tasks;
-we assume that each $\mathbf{x}_{i,\cdot}$ ($i=1,\dots,n$)
-is associated with the desired output $y_i$:
+we assume that with each $\mathbf{x}_{i,\cdot}$ ($i=1,\dots,n$)
+we associate the desired output $y_i$:
 
 \[
 \mathbf{X}=
@@ -132,10 +122,38 @@ and can always be replaced with other ones.
 ```{r factor2}
 as.numeric(y) # 1st label, 3rd label, 1st label, and so forth
 length(levels(y)) # K = number of levels
-levels(y)
+levels(y) # 1=black, 2=red, 3=green, 4=red
 levels(y) <- c("k", "r", "g", "b") # re-encode
 y
 ```
+{ END remark }
+
+
+{ BEGIN remark }
+$\mathbf{X}$ and $\mathbf{y}$ can be stored together as a single
+object, $[\mathbf{X}\ \mathbf{y}]$:
+
+
+\[
+[\mathbf{X}\ \mathbf{y}]=
+\left[
+\begin{array}{ccccc}
+x_{1,1} & x_{1,2} & \cdots & x_{1,p} & y_1\\
+x_{2,1} & x_{2,2} & \cdots & x_{2,p} & y_2\\
+\vdots & \vdots & \ddots & \vdots    & \vdots\\
+x_{n,1} & x_{n,2} & \cdots & x_{n,p} & y_n\\
+\end{array}
+\right],
+\]
+
+However, as $\mathbf{X}$ consists of real numbers,
+we might run into "type mismatch"
+error is $\mathbf{y}$ is not numeric.
+
+In R, we have a special data type for this..
+
+data frame --
+
 { END remark }
 
 
@@ -161,19 +179,19 @@ healthy | ill
 0/1 is mathematically convenient because
 instead of writing (where do we do that?)
 if $y_i=1$, then let $z=a$ and otherwise take $z=b$,
-we can write $z=y_i a + (1-y_i) b$.
+we can write $z=y_i\, a + (1-y_i)\, b$.
 Ah, those neat math tricks!
 { END remark }
 
 
 Example plot of a synthetic dataset
-with the reference binary $y$s is given in Figure \@ref(fig:classify_intro).
+with the reference binary $y$s is given in Figure \@ref(fig:classify-intro).
 The "true" decision boundary is at $X_1=0$ but the classes
 slightly overlap (the dataset is a bit noisy).
 
 
 
-```{r classify_intro,echo=FALSE,fig.cap="A synthetic 2D dataset with the true decision boundary at $X_1=0$"}
+```{r classify-intro,echo=FALSE,fig.cap="A synthetic 2D dataset where each point is assigned one of two distinct labels"}
 set.seed(123)
 n0 <- 50 # n0 points in class 0
 n1 <- 50 # n1 points in class 1
@@ -362,7 +380,7 @@ denoted $\mathbf{x}_{i_1,\cdot}, \dots, \mathbf{x}_{i_K,\cdot}$:
 
 
 Here is how $K$-NN classifier works on a synthetic 2D dataset.
-Firstly let's consider $K=1$, see Figure \@ref(fig:fig_plot_knn1).
+Firstly let's consider $K=1$, see Figure \@ref(fig:fig-plot-knn1).
 Gray and pink regions depict how new points would be classified.
 In particular 1-NN is "greedy" in the sense that we just
 locate the nearest point.
@@ -370,7 +388,7 @@ locate the nearest point.
 
 
 
-```{r plot_knn,echo=FALSE,cache=TRUE}
+```{r plot-knn,echo=FALSE,cache=TRUE}
 plot_knn <- function(K) {
     xx1 <- seq(-4, 4, length.out=250)
     xx2 <- seq(-4, 4, length.out=250)
@@ -387,7 +405,7 @@ plot_knn <- function(K) {
 
 
 
-```{r fig_plot_knn1,echo=FALSE,cache=TRUE,dependson='plot_knn',fig.cap="1-NN class bounds for our 2D synthetic dataset"}
+```{r fig-plot-knn1,echo=FALSE,cache=TRUE,dependson='plot-knn',fig.cap="1-NN class bounds for our 2D synthetic dataset"}
 plot_knn(1)
 ```
 
@@ -401,20 +419,20 @@ on a dataset's so-called Voronoi diagram.
 
 Increasing $K$ somehow smoothens the decision boundary (this makes it
 less "local" and more "global").
-Figure \@ref(fig:fig_plot_knn3) depicts the $K=3$ case.
+Figure \@ref(fig:fig-plot-knn3) depicts the $K=3$ case.
 
-```{r fig_plot_knn3,echo=FALSE,cache=TRUE,dependson='plot_knn',fig.cap="3-NN class bounds for our 2D synthetic dataset"}
+```{r fig-plot-knn3,echo=FALSE,cache=TRUE,dependson='plot-knn',fig.cap="3-NN class bounds for our 2D synthetic dataset"}
 plot_knn(3)
 ```
 
 
 
-```{r fig_plot_knn25,echo=FALSE,cache=TRUE,dependson='plot_knn',fig.cap="25-NN class bounds for our 2D synthetic dataset"}
+```{r fig-plot-knn25,echo=FALSE,cache=TRUE,dependson='plot-knn',fig.cap="25-NN class bounds for our 2D synthetic dataset"}
 plot_knn(25)
 ```
 
 Recall that the "true" decision boundary for this synthetic dataset
-is at $X_1=0$. The 25-NN classifier did quite a good job, see  Figure \@ref(fig:fig_plot_knn25).
+is at $X_1=0$. The 25-NN classifier did quite a good job, see  Figure \@ref(fig:fig-plot-knn25).
 
 
 
@@ -534,11 +552,11 @@ Z_train <- t(apply(X_train, 1, function(r) (r-means)/sds))
 Z_test  <- t(apply(X_test,  1, function(r) (r-means)/sds))
 ```
 
-See Figure \@ref(fig:standardise_depict_hist) for an illustration.
+See Figure \@ref(fig:standardise-depict-hist) for an illustration.
 Note that the righthand figures (histograms of standardised variables)
 are on the same scale now.
 
-```{r standardise_depict_hist,echo=FALSE,fi.height=6,fig.cap="Empirical distribution of two variables (alcohol on the top, volatile.acidity on the bottom) before (left) and after (right) standardising"}
+```{r standardise-depict-hist,echo=FALSE,fig.height=6,fig.cap="Empirical distribution of two variables (alcohol on the top, volatile.acidity on the bottom) before (left) and after (right) standardising"}
 par(mfrow=c(2,2))
 hist(X_train[,"alcohol"], col="white", main=NA, xlim=c(-11,11)); box()
 hist(Z_train[,"alcohol"], col="white", main=NA, xlim=c(-11,11)); box()
@@ -1386,6 +1404,18 @@ curse of dimensionality (see, e.g., [@foundds]).
 
 For example, `FNN::get.knnx()` also implements the so-called
 kd-trees.
+
+
+<!--
+
+ curse of dimensionality [@foundds]
+ https://minds.wisconsin.edu/bitstream/handle/1793/60174/TR1377.pdf?sequence=1
+ etc.
+
+ vp-trees, gnats, kd-trees, FANN
+-->
+
+
 
 
 

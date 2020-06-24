@@ -661,10 +661,10 @@ print(head(.Xy))
 
 
 More formally, with each input $\mathbf{x}_{i,\cdot}$ we associate
-the desired output $y_i$.
-Hence, our dataset is $[\mathbf{X}\ \mathbf{y}]$ --
-each object is represented as a row vector
-$[\mathbf{x}_{i,\cdot}\ y_i]$, $i=1,\dots,n$:
+the desired output $y_i$, $i=1,\dots,n$.
+Hence, our dataset is $[\mathbf{X}\ \mathbf{y}]$, with
+the $i$-th row being
+$[\mathbf{x}_{i,\cdot}\ y_i]$:
 
 \[
 [\mathbf{X}\ \mathbf{y}]=
