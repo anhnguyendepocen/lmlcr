@@ -3,6 +3,21 @@
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 
 
+{ LATEX \color{gray} }
+
+**TODO** In this chapter, we will:
+
+* ...
+
+* ...
+
+
+{ LATEX \normalcolor }
+
+
+
+
+
 <!-- TODO: citations
 
 
@@ -2534,8 +2549,25 @@ round(t(C_normalised) %*% C_normalised, 3)
 
 
 
-### Further Reading
+
+{ LATEX \color{gray} }
+
+. . .
+
+**TODO** .....
+
+
+. . .
+
+{ LATEX \normalcolor }
+
+
+
 
 Recommended further reading: [@islr: Chapters 1, 2 and 3]
 
 Other: [@esl: Chapter 1, Sections 3.2 and 3.3]
+
+Next chapter....
+
+

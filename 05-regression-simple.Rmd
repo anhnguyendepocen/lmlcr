@@ -3,6 +3,23 @@
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 
 
+
+{ LATEX \color{gray} }
+
+**TODO** In this chapter, we will:
+
+* ...
+
+* ...
+
+
+{ LATEX \normalcolor }
+
+
+
+
+
+
 <!-- TODO: citations
 
 
@@ -973,8 +990,6 @@ Which of the predictions seem trustworthy?
 
 ## Outro
 
-### Remarks
-
 
 In supervised learning, with each input point,
 there's an associated reference output value.
@@ -993,9 +1008,25 @@ of many variables, i.e., $p>1$, called multiple regression.
 
 
 
-### Further Reading
+
+{ LATEX \color{gray} }
+
+. . .
+
+**TODO** .....
+
+
+. . .
+
+{ LATEX \normalcolor }
+
+
 
 
 Recommended further reading:  [@islr: Chapters 1, 2 and 3]
 
 Other: [@esl: Chapter 1, Sections 3.2 and 3.3]
+
+Next Chapter....
+
+

@@ -1,8 +1,21 @@
 # Continuous Optimisation with Iterative Algorithms {#chap:optimisation-continuous}
 
-
-
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
+
+
+{ LATEX \color{gray} }
+
+**TODO** In this chapter, we will:
+
+* ...
+
+* ...
+
+
+{ LATEX \normalcolor }
+
+
+
 
 
 <!-- TODO: citations
@@ -2109,7 +2122,25 @@ problem can be:
 -->
 
 
-### Further Reading
+
+
+{ LATEX \color{gray} }
+
+. . .
+
+**TODO** .....
+
+
+. . .
+
+{ LATEX \normalcolor }
+
+
+
 
 Recommended further reading: [@nocedal_wright], [@boyd_vandenberghe],
 [@fletcher].
+
+
+
+Next chapter...

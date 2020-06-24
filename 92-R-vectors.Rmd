@@ -3,11 +3,35 @@
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 
 
-<!-- Not covered but mentioned:
+{ LATEX \color{gray} }
+
+**TODO** In this chapter, we will:
+
+* ...
+
+* ...
+
+
+{ LATEX \normalcolor }
+
+
+
+
+<!-- Not covered but mentioned: (should be?)
 
 diff, cumsum
 
 cut
+
+sweep
+
+scale
+
+tabulate
+
+slice.index()
+
+palette.pals()
 
 
 for, while, repeat, if
@@ -1453,9 +1477,28 @@ Perform a similar data analysis for the AUD/EUR rates.
 ## Further Reading
 
 
+
 Remember to read about all the functions mentioned in this chapter
 in their respective manual pages, e.g., `?seq`, `?c` etc.
 
 Recommended further reading: [@Rintro]
 
 Other: [@mml], [@rprogdatascience], [@r4ds]
+
+
+
+{ LATEX \color{gray} }
+
+. . .
+
+**TODO** .....
+
+
+. . .
+
+{ LATEX \normalcolor }
+
+
+Next chapter...
+
+

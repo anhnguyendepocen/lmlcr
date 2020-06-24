@@ -1,7 +1,21 @@
 # Natural Language Processing {#chap:text}
 
-
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
+
+
+
+{ LATEX \color{gray} }
+
+**TODO** In this chapter, we will:
+
+* ...
+
+* ...
+
+
+{ LATEX \normalcolor }
+
+
 
 
 <!-- TODO: citations
@@ -21,7 +35,21 @@
 TO DO
 
 
-## Further Reading
+..
 
 
-...
+{ LATEX \color{gray} }
+
+. . .
+
+**TODO** .....
+
+
+. . .
+
+{ LATEX \normalcolor }
+
+
+
+further reading...
+

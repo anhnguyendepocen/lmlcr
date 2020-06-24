@@ -3,6 +3,20 @@
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 
 
+{ LATEX \color{gray} }
+
+**TODO** In this chapter, we will:
+
+* ...
+
+* ...
+
+
+{ LATEX \normalcolor }
+
+
+
+
 
 Below we briefly describe the most noteworthy
 datasets considered in this book.

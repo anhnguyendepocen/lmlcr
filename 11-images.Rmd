@@ -3,6 +3,21 @@
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 
 
+{ LATEX \color{gray} }
+
+**TODO** In this chapter, we will:
+
+* ...
+
+* ...
+
+
+{ LATEX \normalcolor }
+
+
+
+
+
 <!-- TODO: citations
 
 
@@ -1472,7 +1487,20 @@ signal processing, ...)
 
 
 
-### Further Reading
+
+
+{ LATEX \color{gray} }
+
+. . .
+
+**TODO** .....
+
+
+. . .
+
+{ LATEX \normalcolor }
+
+
 
 
 ```{R load_tensorflow_nn,echo=FALSE}
@@ -1485,3 +1513,8 @@ Recommended further reading: [@islr: Chapter 11], [@aifaq] and [@deeplearn]
 See also the `keras` package tutorials available at:
 https://cran.r-project.org/web/packages/keras/index.html
 and https://keras.rstudio.com.
+
+
+next chapter...
+
+

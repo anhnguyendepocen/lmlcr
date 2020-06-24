@@ -3,6 +3,35 @@
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 
 
+{ LATEX \color{gray} }
+
+**TODO** In this chapter, we will:
+
+* ...
+
+prediction
+
+k-nearest neighbour scheme
+
+
+performance metrics for binary classification
+
+best model selection
+
+train/test/validate (alternative: cross-validation, see exercise TODO)
+
+overfitting, generalisation
+
+models don't have to work well
+out of the box -- feature engineering: feature selection, standardisation
+
+* ...
+
+
+{ LATEX \normalcolor }
+
+
+
 
 
 <!--
@@ -19,16 +48,9 @@ Karypis, G., EH. Han, V. Kumar (1999): CHAMELEON: A Hierarchical Clustering Algo
 -->
 
 
-<!-- TODO: citations
+<!--
 
-
-
-
- 10.1109/TIT.1967.1053964
- 10.1109/TIT.1968.1054155
-
-
- curse of dimensionality
+ curse of dimensionality [@foundds]
  https://minds.wisconsin.edu/bitstream/handle/1793/60174/TR1377.pdf?sequence=1
  etc.
 
@@ -135,7 +157,13 @@ healthy | ill
 
 
 
-
+{ BEGIN remark }
+0/1 is mathematically convenient because
+instead of writing (where do we do that?)
+if $y_i=1$, then let $z=a$ and otherwise take $z=b$,
+we can write $z=y_i a + (1-y_i) b$.
+Ah, those neat math tricks!
+{ END remark }
 
 
 Example plot of a synthetic dataset
@@ -306,8 +334,7 @@ Rule.
 : "If you don't know what to do in a situation, just act like the people around you"
 
 
-
-
+This idea dates back to at least 1950s (see [@knn1], [@knn2]).
 For some integer $K\ge 1$, the **K-Nearest Neighbour  (*K-NN*) Classifier**
 proceeds as follows.
 
@@ -1354,7 +1381,7 @@ neighbours in *low-dimensional spaces* (for small $p$).
 
 { BEGIN remark }
 (\*) Searching in high-dimensional spaces is hard due to the so-called
-curse of dimensionality.
+curse of dimensionality (see, e.g., [@foundds]).
 { END remark }
 
 For example, `FNN::get.knnx()` also implements the so-called
@@ -1695,6 +1722,23 @@ regression - consider the epsilon-neighbourhood.
 
 
 
-### Further Reading
+{ LATEX \color{gray} }
+
+. . .
+
+**TODO** .....
+
+
+. . .
+
+{ LATEX \normalcolor }
+
+
+
 
 Recommended further reading: [@esl: Section 13.3]
+
+Next Chapter....
+
+
+

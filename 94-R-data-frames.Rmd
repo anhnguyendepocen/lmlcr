@@ -3,6 +3,22 @@
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 
 
+{ LATEX \color{gray} }
+
+**TODO** In this chapter, we will:
+
+* ...
+
+* ...
+
+
+{ LATEX \normalcolor }
+
+
+
+
+
+
 R `data.frame`s are similar to matrices in the sense that
 we use them to store tabular data.
 However, in data frames each column can be of different type:
@@ -571,3 +587,20 @@ Moreover, they are very fast even for large data sets.
 Additionally, the magrittr package provides a pipe operator, `%>%`,
 that simplifies the writing of complex, nested function calls.
 Do note that not everyone is a big fan of these, however.
+
+
+
+{ LATEX \color{gray} }
+
+. . .
+
+**TODO** .....
+
+
+. . .
+
+{ LATEX \normalcolor }
+
+
+Next chapter...
+

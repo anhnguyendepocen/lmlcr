@@ -3,6 +3,21 @@
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 
 
+{ LATEX \color{gray} }
+
+**TODO** In this chapter, we will:
+
+* ...
+
+* ...
+
+
+{ LATEX \normalcolor }
+
+
+
+
+
 Vectors are one-dimensional objects -- they represent "flat" sequences of values.
 Matrices, on the other hand, are two-dimensional -- they represent tabular data,
 where values aligned into rows and columns. Matrices (and their extensions --
@@ -880,3 +895,21 @@ based only on past exchange rates?
 Recommended further reading: [@Rintro]
 
 Other: [@mml], [@rprogdatascience], [@r4ds]
+
+
+
+{ LATEX \color{gray} }
+
+. . .
+
+**TODO** .....
+
+
+. . .
+
+{ LATEX \normalcolor }
+
+
+Next chapter...
+
+

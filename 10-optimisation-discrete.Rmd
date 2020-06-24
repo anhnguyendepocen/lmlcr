@@ -3,6 +3,22 @@
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 
 
+{ LATEX \color{gray} }
+
+**TODO** In this chapter, we will:
+
+* ...
+
+* ...
+
+
+{ LATEX \normalcolor }
+
+
+
+
+
+
 <!--
 
 TODO : actually do some combinatorial optimisation
@@ -149,6 +165,20 @@ in multiple regression -- finding the subset of features optimising the AIC
 
 
 
-### Further Reading
 
-...
+{ LATEX \color{gray} }
+
+. . .
+
+**TODO** .....
+
+
+. . .
+
+{ LATEX \normalcolor }
+
+
+further reading ...
+
+next chapter ...
+

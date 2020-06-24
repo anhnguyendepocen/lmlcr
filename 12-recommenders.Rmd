@@ -3,6 +3,22 @@
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 
 
+{ LATEX \color{gray} }
+
+**TODO** In this chapter, we will:
+
+* ...
+
+* ...
+
+
+{ LATEX \normalcolor }
+
+
+
+
+
+
 <!-- TODO: citations
 
 
@@ -757,7 +773,21 @@ to promote or inhibit selected items.
 
 
 
-### Further Reading
+
+
+{ LATEX \color{gray} }
+
+. . .
+
+**TODO** .....
+
+
+. . .
+
+{ LATEX \normalcolor }
+
+
+
 
 ```{r recommenderlab,eval=FALSE,echo=FALSE}
 library("recommenderlab")
@@ -771,5 +801,9 @@ Recommended further reading:
 See also the Netflix prize winners: [@bellkor_netflix],
 [@bigchaos_netflix],
 [@pragmatictheory_netflix].
-Also don't forget to take a look at
+Also take a look at
 the R package `recommenderlab` (amongst others).
+
+
+next chapter....
+

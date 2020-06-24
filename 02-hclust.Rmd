@@ -2,6 +2,30 @@
 
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 
+
+
+
+{ LATEX \color{gray} }
+
+**TODO** In this chapter, we will:
+
+* concepts: clustering, data partition,
+
+* Euclidean distance as a means to measure the (dis)similarity
+between two objects (rows in a matrix)
+
+* algorithms: agglomerative hierarchical clustering with single, complete and
+average linkage
+
+this is not our last encounter with clustering, more in chapter TODO
+
+
+{ LATEX \normalcolor }
+
+
+
+
+
 <!--
 
 Exercise: dimensionality reduction with auto-encoders?
@@ -1136,6 +1160,9 @@ the aforementioned linkages, see [@muellner].
 
 **TODO** .....
 
+other distances/metrics
+
+
 Note that all the indicators were on the same scale.
 We'll deal with different datasets in the next chapter
 
@@ -1180,7 +1207,7 @@ will we play with HDBSCAN*?
 
 [@jainsurvey]
 [@wierzchon_klopotek]
-
+[@foundds]
 
 { LATEX \normalcolor }
 

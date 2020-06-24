@@ -893,6 +893,37 @@ table(wine_quality[,"response"])
 
 
 
+{ LATEX \color{gray} }
+
+. . .
+
+**TODO** .....
+
+Machine learning is not a cure for all our pains and itches!
+Don't get the false impression that everything is in the data
+and "will discover itself". We still need expert knowledge at various stages
+of working with data: collection, preprocessing, inference, prediction,
+communication etc.; e.g., which models/variables we choose, which constraint
+we add etc.
+
+Many "big" tasks are, and will be better of when modelled by human
+(e.g., using partial differential equations), such as prediction of weather.
+Machine learning could be a good addition to tune-up some of the
+underlying parameters or as a way to smartly aggregate multiple models
+into one forecast.
+
+
+
+. . .
+
+{ LATEX \normalcolor }
+
+
+
+
+
 . . .
 
 In the next chapter we will discuss our first family of clustering algorithms.
+
+

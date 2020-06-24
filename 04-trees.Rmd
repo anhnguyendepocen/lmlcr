@@ -3,6 +3,34 @@
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 
 
+{ LATEX \color{gray} }
+
+**TODO** In this chapter, we will:
+
+* ...
+
+* ...
+
+data generators -- why 100% accuracy might not be possible,
+why we need statistics or information theory (amongst others)
+[@probtheorypatrecog], [@foundds] -- research in machine learning
+vs. research with machine learning (citations! - asymptotics etc.)
+-- 2 normal distributions, non-separable illustration
+
+in [@probtheorypatrecog]....
+
+
+prediction vs. description
+
+decision trees -- towards models (explanation)
+
+{ LATEX \normalcolor }
+
+
+
+
+
+
 <!-- TODO: citations
 
 *Random Forests* and *XGBoost* (see also: *AdaBoost*)
@@ -998,9 +1026,6 @@ library("xgboost")
 
 ## Outro
 
-### Remarks
-
-
 
 
 The state-of-the art classifiers called
@@ -1012,8 +1037,26 @@ Trees can also be used for regression tasks, see R package `rpart`.
 
 
 
-### Further Reading
+
+{ LATEX \color{gray} }
+
+. . .
+
+**TODO** .....
+
+
+. . .
+
+{ LATEX \normalcolor }
+
+
+
 
 Recommended further reading: [@islr: Chapters 4 and 8]  <!-- TODO: update -->
 
 Other: [@esl: Chapters 4 and 7 as well as (\*) Chapters 9,  10,  13, 15]  <!-- TODO: update -->
+
+
+Next Chapter
+
+

@@ -47,8 +47,9 @@ For a more in-depth treatment of R, refer to this book's Appendices
 and, for instance, [@Rintro; @rprogdatascience; @r4ds].
 
 These pages contain solid underpinnings for further studies
-related to statistical learning, machine learning
-data science, data analytics, and artificial intelligence,
+related to statistical learning, machine learning,
+data science, data analytics,
+data mining, and artificial intelligence,
 including [@esl; @bishop; @casi].
 We will also appreciate the vital role of mathematics as a universal
 language for formalising data-intense problems and communicating their
@@ -166,6 +167,27 @@ with an ML system.
 Notably, some systems have an inherent ability to adapt based on forthcoming
 observations as well
 (learn to modify its behaviour *on-line*)
+
+
+Good introduction to probability and statistics:
+
+{R. Bartoszyński and M. Niewiadomska-Bugaj},
+{Probability and Statistical Inference},
+{Wiley},
+{2008}
+
+{J.E. Gentle},
+{Theory of Statistics}
+
+
+Information theory:
+
+{D.J.C. MacKay}
+{Information Theory, Inference, and Learning Algorithms}
+{Cambridge University Press}
+{2003}
+
+
 -->
 
 

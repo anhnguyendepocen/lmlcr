@@ -3,6 +3,20 @@
 <!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 
 
+{ LATEX \color{gray} }
+
+**TODO** In this chapter, we will:
+
+* ...
+
+* ...
+
+
+{ LATEX \normalcolor }
+
+
+
+
 <!--
 
 TODO: Mention knitr+markdown and add OnTrack exercises?
@@ -228,4 +242,20 @@ Remark.
     Check out the meaning of the `pch` and `cex` parameters.
 
 
+
+
+
+{ LATEX \color{gray} }
+
+. . .
+
+**TODO** .....
+
+
+. . .
+
+{ LATEX \normalcolor }
+
+
+Next chapter...
 
