@@ -13,6 +13,10 @@
 * ...
 
 
+overfitting, generalisation
+
+
+
 { LATEX \normalcolor }
 
 
@@ -55,6 +59,70 @@ different coefficients of correlation (Spearman, Kendall) → Chapter 2
 ## Simple Regression
 
 ### Introduction
+
+
+### Side Note: K-NN Regression
+
+
+TODO: later
+
+
+
+The K-Nearest Neighbour scheme is intuitively pleasing.
+
+No wonder it has inspired a similar approach for solving a regression task.
+
+In order to make a prediction for a new point $\mathbf{x}'$:
+
+1. find the K-nearest neighbours of  $\mathbf{x}'$ amongst the points in the train set,
+denoted $\mathbf{x}_{i_1,\cdot}, \dots, \mathbf{x}_{i_K,\cdot}$,
+2. fetch the corresponding reference outputs $y_{i_1}, \dots, y_{i_K}$,
+3. return their arithmetic mean as a result,
+\[\hat{y}=\frac{1}{K} \sum_{j=1}^K y_{i_j}.\]
+
+
+
+
+
+
+
+
+Recall our modelling of the Credit Rating ($Y$)
+as a function of the average Credit Card Balance ($X$)
+based on the `ISLR::Credit` dataset.
+
+
+
+```{r knnreg1}
+library("ISLR") # Credit dataset
+Xc <- as.matrix(as.numeric(Credit$Balance[Credit$Balance>0]))
+Yc <- as.matrix(as.numeric(Credit$Rating[Credit$Balance>0]))
+```
+
+
+
+```{r knnreg2,message=FALSE}
+library("FNN") # knn.reg function
+x <- as.matrix(seq(min(Xc), max(Xc), length.out=101))
+y1  <- knn.reg(Xc, x, Yc, k=1)$pred
+y5  <- knn.reg(Xc, x, Yc, k=5)$pred
+y25 <- knn.reg(Xc, x, Yc, k=25)$pred
+```
+
+
+The three models are depicted in Figure \@ref(fig:knnreg3).
+Again, the higher the $K$, the smoother the curve. On the other hand, for
+small $K$ we adapt better to what's in a point's neighbourhood.
+
+```{r knnreg3,message=FALSE,fig.cap="K-NN regression example"}
+plot(Xc, Yc, col="#666666c0",
+    xlab="Balance", ylab="Rating")
+lines(x, y1,  col=2, lwd=3)
+lines(x, y5,  col=3, lwd=3)
+lines(x, y25, col=4, lwd=3)
+legend("topleft", legend=c("K=1", "K=5", "K=25"),
+    col=c(2, 3, 4), lwd=3, bg="white")
+```
 
 
 

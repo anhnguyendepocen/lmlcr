@@ -7,23 +7,18 @@
 
 **TODO** In this chapter, we will:
 
-* ...
+* solve a prediction task with k-nearest neighbour classifier
 
-prediction
+* discuss performance metrics for binary classification: accuracy,
+precision, recall, and F-measure
 
-k-nearest neighbour scheme
+* introduce best practices of optimal classifier  selection -- in particular, explain the difference between training, validation,
+and test sets
 
 
-performance metrics for binary classification
+<!-- (alternative: cross-validation, see exercise TODO) -->
 
-best model selection
-
-train/test/validate (alternative: cross-validation, see exercise TODO)
-
-overfitting, generalisation
-
-* ...
-
+<!-- ROC curve? -->
 
 { LATEX \normalcolor }
 
@@ -94,8 +89,8 @@ each $y_i$ is of qualitative type (e.g., a label, a category, a colour).
 
 
 The classes are usually *encoded* with consecutive integers,
-say, $1, 2, \dots, K$, where $K$ is the total number of classes.
-Mathematically, we'll write that $y_i\in\{1,\dots,K\}$.
+say, $1, 2, \dots, L$, where $L$ is the total number of unique cases.
+Mathematically, we'll write that $y_i\in\{1,\dots,L\}$.
 
 
 { BEGIN remark }
@@ -112,13 +107,13 @@ y <- c("black", "green", "black", "red", "green", "green", "blue", "red")
 
 
 Internally, objects of type `factor` are represented as integer vectors
-with elements in $\{1,\dots,K\}$, where $K$ is the number of possible levels.
+with elements in $\{1,\dots,L\}$, where $L$ is the number of possible levels.
 Labels, used to "decipher" the numeric codes, are stored separately
 and can always be replaced with other ones.
 
 ```{r factor2}
 as.numeric(y) # 1st label, 3rd label, 1st label, and so forth
-length(levels(y)) # K = number of levels
+length(levels(y)) # L = number of levels
 levels(y) # 1=black, 2=red, 3=green, 4=red
 levels(y) <- c("k", "r", "g", "b") # re-encode
 y
@@ -126,7 +121,7 @@ y
 { END remark }
 
 
-In this chapter we'll assume $K=2$, i.e., that each $y_i$ can only take one of
+In this chapter we'll assume $L=2$, i.e., that each $y_i$ can only take one of
 two possible values. Such a case is very common in practice;
 it has been even given a special name: *binary classification*.
 The two classes are traditionally denoted as $0$ and $1$,
@@ -714,7 +709,7 @@ dim(X_validate)
 
 We will call it a *validation* (or development) set and use it
 for determining the optimal $K$. Then the *test* set will be recalled
-so as to perform the final model evaluation (it's going to mimic the wines
+so as to perform the final evaluation (it's going to mimic the wines
 to come).
 
 
@@ -783,14 +778,15 @@ round(cbind(K=Ks, Ps), 2)
 
 Figure \@ref(fig:whichK5) is worth a thousand tables though
 (see `?matplot` in R).
+It seems that precision tends to slightly increase, whereas recall -- decrease
+as $K$ increases (on this dataset, it's not a general rule).
 
 
 
 
 
 
-
-```{r whichK5,echo=TRUE,cache=TRUE,fig.cap="Performance of $K$-NN classifiers on the validation sets as a function of $K$ "}
+```{r whichK5,echo=TRUE,cache=TRUE,fig.cap="Performance of $K$-NN classifiers on the validation set as a function of $K$"}
 matplot(Ks, Ps[,1:4], xlab="K", ylab="Metric",
     col=1:4, lty=1:4, pch=1:4, type="b", ylim=c(0,1))
 legend("top", legend=names(Ps[,1:4]),
@@ -811,15 +807,39 @@ abline(a=0, b=1, lty=3)
 -->
 
 
-We get the best F-measure for $K=`r Ks[which.max(Ps[,"F"])]`$
+It's very interesting that precision and recall (and hence F-measure)
+are much lower on the validation set than on the test set.
+This might be due to the small dataset sizes. As both of them have been
+generated independently and at random, and they constitute a representative
+sample of the population of all wines, the truth perhaps lies somewhere
+"in-between" the reported metrics.
+
+Anyway, we get the best F-measure for $K=`r Ks[which.max(Ps[,"F"])]`$.
+Let's see how well it is likely to perform "in production",
+i.e., on the test set:
 
 
 ```{r whichK6,cache=TRUE}
-knn_metrics(5, X_train, X_test, y_train, y_test)
 knn_metrics(11, X_train, X_test, y_train, y_test)
 ```
 
 
+This classifier is actually worse than the 5-NN one on the test set,
+but there is nothing we can do about it.
+It is an example of best practice to stick to the parameter we have
+identified as the optimal one on the validation sample --
+we have promised to treat the test set as an independent
+judge in our case (unless new data and more evidence come and we will
+be in a position to reevaluate/reconstruct our algorithm).
+No worries, we will encounter dilemma and disappointments of this
+kind in our everyday data science activities (see the next Chapter for more).
+
+
+<!--
+```{r whichK7,cache=TRUE}
+#knn_metrics(5, X_train, X_test, y_train, y_test)
+```
+-->
 
 
 
@@ -1231,88 +1251,38 @@ regression - consider the epsilon-neighbourhood.
 
 
 
-## Outro
+## Remarks
 
 
-
-Note that K-NN is suitable for any kind of multiclass classification.
-
-However, in practice it's pretty slow for larger datasets -- to
-classify a single point we have to query the whole training set (which
-should be available at all times).
-
-
-### Side Note: K-NN Regression
-
-
-TODO: later
-
-
-
-The K-Nearest Neighbour scheme is intuitively pleasing.
-
-No wonder it has inspired a similar approach for solving a regression task.
-
-In order to make a prediction for a new point $\mathbf{x}'$:
-
-1. find the K-nearest neighbours of  $\mathbf{x}'$ amongst the points in the train set,
-denoted $\mathbf{x}_{i_1,\cdot}, \dots, \mathbf{x}_{i_K,\cdot}$,
-2. fetch the corresponding reference outputs $y_{i_1}, \dots, y_{i_K}$,
-3. return their arithmetic mean as a result,
-\[\hat{y}=\frac{1}{K} \sum_{j=1}^K y_{i_j}.\]
-
-
-
-
-
-
-
-
-Recall our modelling of the Credit Rating ($Y$)
-as a function of the average Credit Card Balance ($X$)
-based on the `ISLR::Credit` dataset.
-
-
-
-```{r knnreg1}
-library("ISLR") # Credit dataset
-Xc <- as.matrix(as.numeric(Credit$Balance[Credit$Balance>0]))
-Yc <- as.matrix(as.numeric(Credit$Rating[Credit$Balance>0]))
-```
-
-
-
-```{r knnreg2,message=FALSE}
-library("FNN") # knn.reg function
-x <- as.matrix(seq(min(Xc), max(Xc), length.out=101))
-y1  <- knn.reg(Xc, x, Yc, k=1)$pred
-y5  <- knn.reg(Xc, x, Yc, k=5)$pred
-y25 <- knn.reg(Xc, x, Yc, k=25)$pred
-```
-
-
-The three models are depicted in Figure \@ref(fig:knnreg3).
-Again, the higher the $K$, the smoother the curve. On the other hand, for
-small $K$ we adapt better to what's in a point's neighbourhood.
-
-```{r knnreg3,message=FALSE,fig.cap="K-NN regression example"}
-plot(Xc, Yc, col="#666666c0",
-    xlab="Balance", ylab="Rating")
-lines(x, y1,  col=2, lwd=3)
-lines(x, y5,  col=3, lwd=3)
-lines(x, y25, col=4, lwd=3)
-legend("topleft", legend=c("K=1", "K=5", "K=25"),
-    col=c(2, 3, 4), lwd=3, bg="white")
-```
 
 
 
 
 { LATEX \color{gray} }
 
-. . .
-
 **TODO** .....
+
+Note that the K-nearest neighbour method is suitable
+for any multiclass classification, i.e., for any number of levels $L$
+of $\mathbf{y}$. However, precision and recall can only be computed
+if $L=2$.
+
+In practice searching for nearest neighbours is time-consuming
+for larger datasets -- to
+classify a single point we have to query the whole training set
+(unless it's a space of low dimensionality).
+Moreover, the training set should be available at all times.
+Other algorithms discussed in this book will try to come up with
+a synthetic/compressed representation (a model) of the training set.
+
+However, the advantage of K-NN is that it naturally adapts to new training
+points -- we don't have to recompute any models to take them into account
+(hence, we can say, that K-NN can also work in an *online mode).
+
+
+
+
+
 
 
 . . .
@@ -1320,6 +1290,8 @@ legend("topleft", legend=c("K=1", "K=5", "K=25"),
 
 (\*) 1-NN classification is essentially based
 on a dataset's so-called Voronoi diagram.
+Interestingly, in single linkage clustering, we also seek 1-nearest neighbours
+(between clusters).
 
 { LATEX \normalcolor }
 
