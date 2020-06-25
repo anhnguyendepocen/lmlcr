@@ -451,7 +451,7 @@ it's actually decent and label it as "bad" when it's indeed horrible.
 
 
 { BEGIN remark }
-Recall from Appendix \@ref(appendix:rvect) that the `==` operator
+Recall from Appendix \@ref(appendix:rvector) that the `==` operator
 `in R works
 in an elementwise manner. It outputs a logical vector whose $i$-th
 element is `TRUE` whenever `y_test[i]` is equal to `y_pred[i]`.
@@ -847,70 +847,35 @@ kind in our everyday data science activities (see the next Chapter for more).
 
 
 
-
-### Main Routine (\*)
-
+### Main Routine
 
 
+To show that machine learning methods are not magical creatures who
+we should be terrified of, but rather the fruit of work of programmers
+just like us (have you ever thought of volunteering in an open source
+programming project for the good of the whole community?),
+let's implement a K-NN classifier ourselves, from scratch.
 
-Let's implement a K-NN classifier ourselves
-by using a top-bottom approach.
+We'll use a top-bottom approach,
+starting with a general description of the admissible inputs
+and the expected output. Then we'll arrange the workflow for processing
+of data into conveniently manageable chunks.
 
-We will start with a general description of the admissible inputs
-and the expected output.
-
-Then we will arrange the processing of data into
-conveniently manageable chunks.
-
-The function's declaration will look like:
+The function's "declaration" will look like:
 
 ```{r our_knn1,eval=FALSE}
 our_knn <- function(X_train, X_test, y_train, k=1) {
     # k=1 denotes a parameter with a default value
-    # ...
+    # ... (see below) ...
 }
 ```
 
 
 
 
-Load an example dataset on which we will test our algorithm:
-
-```{r our_knn2}
-wine_quality <- read.csv("datasets/wine_quality_all.csv",
-    comment.char="#")
-wine_train <- wine_quality[wine_quality$color == "white",]
-X <- as.matrix(wine_train[,1:10])
-Y <- factor(as.character(as.numeric(wine_train$alcohol >= 12)))
-```
-
-
-Note that `Y` is now a factor object.
-
-
-Train-test split:
-
-```{r our_knn3}
-set.seed(123)
-n <- nrow(X)
-random_indices <- sample(n)
-train_indices <- random_indices[1:floor(n*0.6)]
-X_train <- X[train_indices,]
-y_train <- Y[train_indices]
-X_test  <- X[-train_indices,]
-y_test  <- Y[-train_indices]
-```
-
-
-
-
-
-
-
-
-
-First, we should specify the type and form of the arguments
-we're expecting:
+It's advisable to specify the type and form of the arguments
+we're expecting on input. The `stopifnot()` function verifies if a given
+logical condition is true. If not, an error is raised.
 
 ```{r our_knn_paramchecks,eval=FALSE}
 # this is the body of our_knn() - part 1
@@ -919,28 +884,24 @@ stopifnot(is.numeric(X_test), is.matrix(X_test))
 stopifnot(is.factor(y_train))
 stopifnot(ncol(X_train) == ncol(X_test))
 stopifnot(nrow(X_train) == length(y_train))
-stopifnot(k >= 1)
+stopifnot(k >= 1, k <= length(y_train))
 n_train <- nrow(X_train)
 n_test  <- nrow(X_test)
 p <- ncol(X_train)
-M <- length(levels(y_train))
+L <- length(levels(y_train))
 ```
 
-Therefore,
-
+Therefore, we may assume from now on that
 $\mathtt{X\_train}\in\mathbb{R}^{\mathtt{n\_train}\times \mathtt{p}}$,
 $\mathtt{X\_test}\in\mathbb{R}^{\mathtt{n\_test}\times \mathtt{p}}$ and
-$\mathtt{Y\_train}\in\{1,\dots,M\}^{\mathtt{n\_train}}$
-
-
-
-{ BEGIN remark }
+$\mathtt{y\_train}\in\{1,\dots,L\}^{\mathtt{n\_train}}$.
 Recall that R `factor` objects are internally encoded as integer vectors.
-{ END remark }
 
 
 
-Next, we will call the (to-be-done) function `our_get_knnx()`,
+
+
+Next, we'll call the (to-be-done) function `our_get_knnx()`,
 which seeks nearest neighbours of all the points:
 
 ```{r our_knn_flow1,eval=FALSE}
@@ -952,12 +913,9 @@ nn_indices <- our_get_knnx(X_train, X_test, k)
 ```
 
 
-
-
-
 Then, for each point in `X_test`,
 we fetch the labels corresponding to its nearest neighbours
-and compute their mode:
+and compute their mode (`our_mode()` function, wait for it):
 
 ```{r our_knn_flow2,eval=FALSE}
 y_pred <- numeric(n_test) # vector of length n_test
@@ -1024,7 +982,7 @@ To implement the mode, we can use the `tabulate()` function.
 
 
 { BEGIN exercise }
-Read the function's man page, see `?tabulate`.
+Read the function's documentation, see `?tabulate`.
 { END exercise }
 
 For example:
@@ -1034,16 +992,15 @@ tabulate(c(1, 2, 1, 1, 1, 5, 2))
 ```
 
 
-
-
-There might be multiple modes -- in such a case, we should pick one at random.
-
+We should keep in mind that there might be multiple modes --
+in such a case, it's best to pick one at random (to avoid any bias).
 For that, we can use the `sample()` function.
 
 
 { BEGIN exercise }
 Read the function's man page, see `?sample`.
-Note that its behaviour is different when it's first argument is a vector of length 1.
+Note that, dangerously, its behaviour is different when its first argument
+is a vector of length 1.
 { END exercise }
 
 
@@ -1055,15 +1012,15 @@ An example implementation:
 our_mode <- function(Y) {
     # tabulate() will take care of
     # checking the correctness of Y
-    t <- tabulate(Y)
+    t <- tabulate(Y) # factors == integer vectors here
+    # get indices corresponding to the maximal counts
     mode_candidates <- which(t == max(t))
     if (length(mode_candidates) == 1) return(mode_candidates)
     else return(sample(mode_candidates, 1))
 }
 ```
 
-
-
+Some tests:
 
 ```{r our_mode2,echo=-1}
 set.seed(7)
@@ -1074,20 +1031,17 @@ our_mode(c(1, 1, 3, 3, 2))
 our_mode(c(1, 1, 3, 3, 2))
 ```
 
+<!-- TODO: test-driven development, unit tests -- mention -->
 
 
 
-###  NN Search Routines (\*)
 
-
+###  NN Search Methods
 
 
 Last but not least, we should implement the `our_get_knnx()` function.
+It's the function responsible for seeking the indices of nearest neighbours.
 
-It is the function responsible for seeking the indices of nearest neighbours.
-
-It turns out this function will  actually constitute the K-NN classifier's performance
-bottleneck in case of big data samples.
 
 ```{r our_get_knnx}
 # our_get_knnx returns a matrix nn_indices of size n_test*k,
@@ -1100,11 +1054,8 @@ our_get_knnx <- function(X_train, X_test, k) {
 ```
 
 
-
-
-
-
-A naive approach to `our_get_knnx()` relies on computing all pairwise distances,
+A naive approach to `our_get_knnx()` relies on computing
+all pairwise distances,
 and sorting them.
 
 ```{r our_get_knnx2}
@@ -1118,7 +1069,7 @@ our_get_knnx <- function(X_train, X_test, k) {
         # between X_train[j,] and X_test[i,]
         nn_indices[i,] <- order(d)[1:k]
     }
-    nn_indices
+    return(nn_indices)
 }
 ```
 
@@ -1126,33 +1077,36 @@ our_get_knnx <- function(X_train, X_test, k) {
 
 
 
-A comparison with `FNN:knn()`:
+A comparison with `FNN::knn()` with regards to time needed to run
+the algorithms:
 
 ```{r fnn_knn,cache=TRUE}
-system.time(Ya <- knn(X_train, X_test, y_train, k=5))
-system.time(Yb <- our_knn(X_train, X_test, y_train, k=5))
-mean(Ya == Yb) # 1.0 on perfect match
+library("microbenchmark")
+summary(microbenchmark(
+    our={A<-our_knn(X_train, X_test, y_train, k=5)},
+    fnn={B<-FNN::knn(X_train, X_test, y_train, k=5)},
+    unit="ms" #  # milliseconds
+))
+mean(A == B) # 1.0 on perfect match
 ```
 
-Both functions return identical results but our implementation is "slightly" slower.
+Both functions return identical results but our implementation is 10x slower.
+It turns out that `our_get_knnx()` is the part that actually constitutes
+the K-NN classifier's performance bottleneck in case on big data samples.
+`FNN::knn()` is efficiently written in C++, which is a compiled programming language.
 
+R, on the other hand (just like Python and Matlab) is interpreted, therefore --
+as a rule of thumb -- we should consider it an order of magnitude slower
+(see, however, the Julia language).
 
-
-
-
-
-`FNN:knn()` is efficiently written in C++, which is a compiled programming language.
-
-R, on the other hand (just like Python and Matlab) is interpreted, therefore
-as a rule of thumb we should consider it an order of magnitude slower (see, however, the Julia language).
-
-Let's substitute our naive implementation with the equivalent one,
+Let's substitute our naive implementation of `our_get_knnx()`
+with the equivalent one,
 but written in C++ (available in the `FNN` package).
 
 
 { BEGIN remark }
-(\*) Note that we can write a C++ implementation ourselves,
-see the Rcpp package for seamless R and C++ integration.
+Note that we can write a C++ implementation ourselves,
+see the `Rcpp` package [@rcpp] for convenient R and C++ integration.
 { END remark }
 
 
@@ -1162,70 +1116,64 @@ our_get_knnx <- function(X_train, X_test, k) {
     # this is used by our_knn()
     FNN::get.knnx(X_train, X_test, k, algorithm="brute")$nn.index
 }
-system.time(Ya <- knn(X_train, X_test, y_train, k=5))
-system.time(Yb <- our_knn(X_train, X_test, y_train, k=5))
-mean(Ya == Yb) # 1.0 on perfect match
+
+summary(microbenchmark(
+    our ={A<-our_knn(X_train, X_test, y_train, k=5)},
+    fnn1={B<-FNN::knn(X_train, X_test, y_train, k=5)}, # kd_tree, see below
+    fnn2={C<-FNN::knn(X_train, X_test, y_train, k=5, algorithm="brute")},
+    unit="ms" # milliseconds
+))
+mean(A == B) # 1.0 on perfect match
 ```
 
+The timings are really interesting, taking into account
+that `FNN::knn()` uses `FNN::get.knnx()` as well
+(the R package ecosystem is comprised of open source software,
+we have the freedom to read the function's source code
+by calling `print(FNN::knn)`). Of course, before
+drawing conclusions about the quality of our implementation, we should
+test the aforementioned procedures on samples of different sizes and dimensionalities. This is left to the reader as an:
 
+{ BEGIN exercise }
+Test the run-times of the aforementioned procedures on samples
+of different sizes and dimensionalities, for example, on
+datasets generated randomly.
+{ END exercise }
 
-
-Note that our solution requires $c\cdot n_\text{test}\cdot n_\text{train}\cdot p$
-arithmetic operations for some $c>1$.
-The overall cost of sorting is at least $d\cdot n_\text{test}\cdot n_\text{train}\cdot\log n_\text{train}$
-for some $d>1$.
-
-This does not scale well with both $n_\text{test}$ and $n_\text{train}$
-(think -- big data).
 
 . . .
 
-It turns out that there are special **spatial data structures**
--- such as *metric trees* -- that aim to speed up searching for nearest
+Before we conclude, let us note that there are special
+*spatial search data structures*
+-- such as metric trees -- that aim to speed up searching for nearest
 neighbours in *low-dimensional spaces* (for small $p$).
-
-
-{ BEGIN remark }
-(\*) Searching in high-dimensional spaces is hard due to the so-called
-curse of dimensionality (see, e.g., [@foundds]).
-{ END remark }
-
 For example, `FNN::get.knnx()` also implements the so-called
 kd-trees.
 
-
 <!--
-
- curse of dimensionality [@foundds]
- https://minds.wisconsin.edu/bitstream/handle/1793/60174/TR1377.pdf?sequence=1
- etc.
-
  vp-trees, gnats, kd-trees, FANN
 -->
 
 
-
-
-
-
+Here is a function that generates `n` random points in a `p`
+dimensional hypercube. The function fill report time taken
+to look up `k` nearest neighbours based on a brute-force algorithm
+(all pairs of points considered) vs. on the kd-tree.
 
 ```{r test_speed,cache=TRUE}
-library("microbenchmark")
 test_speed <- function(n, p, k) {
     A <- matrix(runif(n*p), nrow=n, ncol=p)
     s <- summary(microbenchmark::microbenchmark(
-        brute=FNN::get.knnx(A, A, k, algorithm="brute"),
+        brute_force=FNN::get.knnx(A, A, k, algorithm="brute"),
         kd_tree=FNN::get.knnx(A, A, k, algorithm="kd_tree"),
         times=3
     ), unit="s")
-    # minima of 3 time measurements:
-    structure(s$min, names=as.character(s$expr))
+    # report minimum of each 3 time measurements:
+    return(structure(s$min, names=as.character(s$expr)))
 }
 ```
 
-
-
-
+Example timings:
 
 ```{r test_speed2cache=TRUE,dependson='test_speed'}
 test_speed(10000, 2, 5)
@@ -1234,18 +1182,25 @@ test_speed(10000, 10, 5)
 test_speed(10000, 20, 5)
 ```
 
+In spaces of higher dimensionality, the brute force algorithm
+is actually faster.
+It turns out that searching in high-dimensional spaces is hard due
+to the various phenomena collectively referred to as the
+*curse of dimensionality* (see, e.g., [@foundds]).
+Yet, is low-dimensional data boring? Well, our physical
+world is perceived as 3-dimensional, spatial data (on maps) is 2-dimensional,
+therefore, there are interesting use cases of kd-trees anyway.
 
 
+
+<!--
 
 ## Exercises
 
 TODO
 
+another pre-fabricated train/test split?
 
-<!--
-
-TODO: exercise -- density, not NN-based classification
-regression - consider the epsilon-neighbourhood.
 
 -->
 
@@ -1271,17 +1226,41 @@ In practice searching for nearest neighbours is time-consuming
 for larger datasets -- to
 classify a single point we have to query the whole training set
 (unless it's a space of low dimensionality).
+
+
+Note that our implementation
+requires $c\cdot n_\text{test}\cdot n_\text{train}\cdot p$
+arithmetic operations for some $c>1$.
+The overall cost of sorting is at least $d\cdot n_\text{test}\cdot n_\text{train}\cdot\log n_\text{train}$
+for some $d>1$.
+This does not scale well with both $n_\text{test}$ and $n_\text{train}$
+(think -- big data).
+
+
 Moreover, the training set should be available at all times.
 Other algorithms discussed in this book will try to come up with
 a synthetic/compressed representation (a model) of the training set.
+
 
 However, the advantage of K-NN is that it naturally adapts to new training
 points -- we don't have to recompute any models to take them into account
 (hence, we can say, that K-NN can also work in an *online mode).
 
 
+K-NN is an influential concept -- see Chapter \@ref(chap:recommenders)
+for how it is naturally employed in recommender systems.
 
+<!--TODO: exercise -- density, not NN-based classification
+regression - consider the epsilon-neighbourhood.-->
 
+Instead of nearest neighbours, we could be also considering so-called
+$\epsilon$-neighbourhoods -- all the points from $\mathbf{X}$
+whose distance to a given $\boldsymbol{x}'$ is not greater than
+$\epsilon$ (for example, DBSCAN [@pre_dbscan] [@dbscan]
+is a clustering method based on this concept).
+However, in classification task we should be aware of the fact that
+some test points might have empty $\epsilon$-neighbourhoods and that
+this issue should be resolved somehow.
 
 
 
