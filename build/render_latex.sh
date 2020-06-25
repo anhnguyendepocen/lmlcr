@@ -4,7 +4,20 @@
 
 set -e
 
-cd tmp-latex/
+if [[ -z "${LATEX_DRAFT}" ]]; then
+    # full build
+    cd tmp-latex/
+else
+    # draft build - fragments
+    mkdir -p tmp-latex-draft/
+    cd tmp-latex-draft/
+    cp -rf ../tmp-latex/00* .
+    cp -rf ../tmp-latex/01* .
+    cp -rf ../tmp-latex/02* .
+    cp -rf ../tmp-latex/03* .
+fi
+
+
 rm -r -f ../out-latex/
 mkdir -p ../out-latex/
 
@@ -23,7 +36,6 @@ cp -f ../build/after_body.tex after_body.tex
 cp -f ../build/upquote.sty upquote.sty
 
 echo "" > krantz.cls
-#echo "\PassOptionsToPackage{bold-style=TeX}{unicode-math}" >> krantz.cls
 echo "\RequirePackage{etex}" >> krantz.cls
 echo "\RequirePackage{etoolbox}" >> krantz.cls
 cat ../build/krantz.cls >> krantz.cls

@@ -41,6 +41,7 @@ sed -i -r 's/^\{ END definition \}$/```{=html}\n<\/div>\n```/g'  "${outfile}"
 sed -i -r 's/^\{ LATEX (.+) \}$//g'  "${outfile}"
 
 
+
 dir_fig_in="${1/%.md/}-figures"
 dir_fig_out="${outfile/%.Rmd/}-figures"
 mkdir -p "${dir_fig_out}"

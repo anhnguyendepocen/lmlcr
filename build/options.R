@@ -12,5 +12,6 @@ opts_chunk$set(
     fig.show="hold",
     fig.lp='fig:',
     autodep=TRUE,
+    cache=TRUE,
     dev.args=list(pointsize=11)
 )

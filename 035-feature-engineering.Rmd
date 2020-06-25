@@ -44,6 +44,49 @@ A random **train-test split** of the original dataset:
 - *test sample* (remaining 40-20%) -- used to assess the goodness of fit.
 
 
+In order to overcome this problem,
+we can perform a random **train-validation-test split** of the original dataset:
+
+- *training sample*  (e.g., 60%) -- used to construct the models
+- *validation sample* (e.g., 20%) -- used to tune the hyperparameters of the classifier
+- *test sample* (e.g., 20%) -- used to assess the goodness of fit
+
+<!--
+By the way, this is how most data mining competitions are assessed --
+you will never have access to the final test sample used
+to determine the winner. The best you can do is to "guess".
+-->
+
+
+
+
+In the $K$-NN classification task, there are many hyperparameters to tune up:
+
+- Which $K$ should we choose?
+
+- Should we standardise the dataset?
+
+- Which variables should be taken into account when computing the Euclidean distance?
+
+
+An example way to perform a 60/20/20% train-validation-test split:
+
+```{r train_val_test_split}
+# set.seed(123) # reproducibility matters
+# random_indices <- sample(n)
+# n1 <- floor(n*0.6)
+# n2 <- floor(n*0.8)
+# X2_train <- X[random_indices[1     :n1], ]
+# Y2_train <- Y[random_indices[1     :n1]  ]
+# X2_valid <- X[random_indices[(n1+1):n2], ]
+# Y2_valid <- Y[random_indices[(n1+1):n2]  ]
+# X2_test  <- X[random_indices[(n2+1):n ], ]
+# Y2_test  <- Y[random_indices[(n2+1):n ]  ]
+# stopifnot(nrow(X2_train)+nrow(X2_valid)+nrow(X2_test)
+#     == nrow(X))
+```
+
+
 
 { BEGIN remark }
 **Test sample must not be used in the training phase!** (No cheating!)
@@ -68,6 +111,14 @@ A random **train-test split** of the original dataset:
 # Y_test  <- Y[-train_indices]
 ```
 
+
+
+{ BEGIN remark }
+(\*) If our dataset is too small,
+we can use various *cross-validation* techniques
+instead of a train-validate-test split.
+<!-- TODO: see exercise.... -->
+{ END remark }
 
 
 
@@ -461,6 +512,7 @@ mention: kernels
 Recommended further reading: [@esl: Section 13.3]
 
 Next Chapter....
+
 
 
 
