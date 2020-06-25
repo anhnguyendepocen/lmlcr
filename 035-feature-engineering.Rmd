@@ -13,9 +13,16 @@ train-test-validate split manually?
 
 K-NN and back to hclust?
 
+doesn't answer why?
+
+Actually it's not that bad At least we can take a look at the most *similar*
+wines to the tested ones (neighbours) and inspect their characteristics
+
 models don't have to work well
 out of the box -- feature engineering: feature selection, standardisation
 
+
+in `wine_train` all variables used the same units
 
 normalisation -- how SSI is created?
 

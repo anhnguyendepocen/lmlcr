@@ -637,7 +637,7 @@ In supervised learning, there is a teacher;
 apart from the inputs (in the form of a matrix $\mathbf{X}$),
 we are also given the corresponding reference/desired outputs
 (a vector $\boldsymbol{y})$, which
-are are usually encoded as individual  numbers (scalars)
+are  usually encoded as individual  numbers (scalars)
 or textual labels.
 
 For instance, in the `wine_quality` dataset,

@@ -497,12 +497,12 @@ Column                         | Description
     Therefore, let's prepare a tailored subset
     of the wine quality database.
 
-    First, we select 500 white wines at random:
+    First, we select 600 white wines at random:
 
     ```{r wine-train-test-split1}
-    set.seed(1234) # reproducibility matters
+    set.seed(444) # reproducibility matters
     wine_subset <- wine_quality[wine_quality$color=="white",]
-    wine_subset <- wine_subset[sample(nrow(wine_subset), 500),]
+    wine_subset <- wine_subset[sample(nrow(wine_subset), 600),]
     ```
 
     Next we create a new column that tells us whether
@@ -510,31 +510,38 @@ Column                         | Description
     or not-bad:
 
     ```{r wine-train-test-split2}
-    wine_subset$bad <- as.numeric(wine_subset$response <= 5)
+    wine_subset[,"bad"] <- as.numeric(wine_subset$response <= 5)
     ```
 
-    For simplicity, we are  only interested in 5 following physicochemical
+    For simplicity, we are  only interested in 3 following physicochemical
     features:
 
     ```{r wine-train-test-split3}
     wine_subset <- wine_subset[, c(
-        "alcohol", "volatile.acidity", "chlorides",
-        "free.sulfur.dioxide", "total.sulfur.dioxide", "bad"
+        "chlorides", "density", "volatile.acidity", "bad"
     )]
     ```
 
-    Then we perform a 60/20/20% split. The rows in the data frame
+    Then we perform a 50/25/25% split. The rows in the data frame
     are already randomised, therefore the first 300 can constitute
-    the training sample, the next 100 can define the validation sample,
-    and the 100 remaining ones -- the test one.
+    the training sample, the next 150 can define the validation sample,
+    and the 150 remaining ones -- the test one.
 
     ```{r wine-train-test-split4,eval=FALSE}
     write.csv(wine_subset[1:300, ],
         "datasets/wine_train.csv", row.names=FALSE)
-    write.csv(wine_subset[301:400, ],
+    write.csv(wine_subset[301:450, ],
         "datasets/wine_validate.csv", row.names=FALSE)
-    write.csv(wine_subset[401:500, ],
+    write.csv(wine_subset[451:600, ],
         "datasets/wine_test.csv", row.names=FALSE)
+    write.csv(wine_subset[301:450, -4],
+        "datasets/wine_validate_X.csv", row.names=FALSE)
+    write.csv(wine_subset[451:600, -4],
+        "datasets/wine_test_X.csv", row.names=FALSE)
+    write.csv(wine_subset[301:450, 4, drop=FALSE],
+        "datasets/wine_validate_y.csv", row.names=FALSE)
+    write.csv(wine_subset[451:600, 4, drop=FALSE],
+        "datasets/wine_test_y.csv", row.names=FALSE)
     ```
 
 
