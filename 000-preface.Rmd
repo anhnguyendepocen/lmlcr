@@ -199,7 +199,7 @@ So which classifier is the best? No free lunch!
 #### About the Author  {.unnumbered}
 
 
-I, Marek Gagolewski, am currently a Senior Lecturer (equivalent to Associate Professor in the US)
+I, [Marek Gagolewski](http://www.gagolewski.com/), am currently a Senior Lecturer (equivalent to Associate Professor in the US)
 in Applied AI at Deakin University in Melbourne, VIC, Australia
 and an Associate Professor in Data Science at Warsaw University of Technology,
 Poland. My main passion is in research -- my primary interests currently include
@@ -212,7 +212,7 @@ not science.
 
 I'm an author of more than 70 publications.
 I've developed several open source R and Python packages, including
-[stringi](http://www.gagolewski.com/software/stringi/),
+[stringi](https://www.gagolewski.com/software/stringi/),
 which is among the most often downloaded R extensions.
 
 On top of that, I teach various courses related to

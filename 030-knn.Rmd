@@ -250,8 +250,8 @@ we'd assign it label 0.
 
 ```{r plot-knn,dependson="classify-intro",echo=FALSE,cache=TRUE}
 plot_knn <- function(K) {
-    xx1 <- seq(-8.2, 8.2, length.out=500)
-    xx2 <- seq(-4.2, 4.2, length.out=500)
+    xx1 <- seq(-8.2, 8.2, length.out=250)
+    xx2 <- seq(-4.2, 4.2, length.out=250)
     xx <- expand.grid(xx1, xx2)
     yy <- FNN::knn(Xs, xx, Ys, k=K)
     image(xx1, xx2, matrix(as.numeric(yy)-1,
@@ -831,6 +831,7 @@ identified as the optimal one on the validation sample --
 we have promised to treat the test set as an independent
 judge in our case (unless new data and more evidence come and we will
 be in a position to reevaluate/reconstruct our algorithm).
+We should treat this model with caution (actually, this is true for every model).
 No worries, we will encounter dilemma and disappointments of this
 kind in our everyday data science activities (see the next Chapter for more).
 
@@ -1039,7 +1040,7 @@ our_mode(c(1, 1, 3, 3, 2))
 ###  NN Search Methods
 
 
-Last but not least, we should implement the `our_get_knnx()` function.
+Last but not least, we get to implement the `our_get_knnx()` function.
 It's the function responsible for seeking the indices of nearest neighbours.
 
 
@@ -1263,6 +1264,8 @@ some test points might have empty $\epsilon$-neighbourhoods and that
 this issue should be resolved somehow.
 
 
+There are also approximate nearest neighbours, e.g., nmslib,
+faiss, etc., see also https://github.com/erikbern/ann-benchmarks
 
 . . .
 
