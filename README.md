@@ -16,16 +16,19 @@ or by [email](https://www.gagolewski.com). Thanks!**
 ## About the Author
 
 [Marek](https://www.gagolewski.com) is currently
-a Senior Lecturer (==US Associate Professor) in Applied AI at Deakin University
-in Melbourne, Australia. He's developed several R and Python packages,
-including [stringi](http://www.gagolewski.com/software/stringi/),
-which is among the top 20 most often downloaded R extensions.
+a Senior Lecturer in Applied AI at Deakin University
+in Melbourne, VIC, Australia.
 He's an author of more than 70 publications on
 machine learning and optimisation algorithms,
 data aggregation and clustering as well as statistical modelling.
+Marek is an author and maintainer of several open source R and Python packages,
+including [stringi](https://stringi.gagolewski.com/) -- one of the most often downloaded
+R extensions  that aims at text/natural language processing,
+and [genieclust](https://genieclust.gagolewski.com/) -- featuring a fast&robust
+implementation of the hierarchical clustering  algorithm named *Genie*.
 
 
-## About this Repo
+## About this Repository
 
 This repository hosts the source code of the book.
 You can read the book at:
@@ -38,5 +41,3 @@ Copyright (C) 2020, [Marek Gagolewski](https://www.gagolewski.com).
 This material is licensed under the Creative Commons
 [Attribution-NonCommercial-NoDerivatives 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 License (CC BY-NC-ND 4.0).
-
-

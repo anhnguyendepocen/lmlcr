@@ -3,6 +3,7 @@ set.seed(666)
 options(width=72)
 options(digits=5)
 options(stringsAsFactors=FALSE) # default in R 4.0
+options(useFancyQuotes=FALSE)
 options(max.print=99)
 reticulate::use_python("/opt/anaconda3/bin/python")
 
