@@ -2,9 +2,9 @@
 title: "Machine Learning Classics with R"
 author: "Marek Gagolewski"
 date: "@DATE@"
-site: bookdown::bookdown_site
+site: bookdown.marek.mods::bookdown_site
 output:
-    bookdown::pdf_book:
+    bookdown.marek.mods::pdf_book:
         pandoc_args: ["--default-image-extension=.pdf",
             "--toc-depth=3",
             "--csl=bibstyle.csl",

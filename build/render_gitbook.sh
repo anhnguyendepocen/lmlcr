@@ -29,5 +29,5 @@ rm -f 000-preface.Rmd
 date="DRAFT v0.3 $(date '+%Y-%m-%d %H:%M') (`git rev-parse --short HEAD`)"
 sed -i -e "s/@DATE@/${date}/g" index.Rmd
 
-Rscript -e 'bookdown::render_book("index.Rmd", "bookdown::gitbook",
+Rscript -e 'bookdown.marek.mods::render_book("index.Rmd", "bookdown.marek.mods::gitbook",
     output_dir="../out-gitbook")'

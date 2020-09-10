@@ -1,7 +1,7 @@
 # Marek's patches  for bookdown::pdf_book() --- do not call tinytex::latexmk
 # Don't try this at work/home/etc.
 
-library(bookdown)
+library(bookdown.marek.mods)
 
 just_tex <- function (toc = TRUE, number_sections = TRUE, fig_caption = TRUE,
     pandoc_args = NULL, ..., base_format = rmarkdown::pdf_document,
@@ -68,8 +68,6 @@ just_tex <- function (toc = TRUE, number_sections = TRUE, fig_caption = TRUE,
 }
 
 
-environment(just_tex) <- environment(bookdown:::pdf_book)
-unlockBinding("pdf_book", getNamespace("bookdown"))
-assign("pdf_book", just_tex, getNamespace("bookdown"))
-
-
+environment(just_tex) <- environment(bookdown.marek.mods:::pdf_book)
+unlockBinding("pdf_book", getNamespace("bookdown.marek.mods"))
+assign("pdf_book", just_tex, getNamespace("bookdown.marek.mods"))

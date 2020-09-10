@@ -41,7 +41,7 @@ FILES_SVGZ = \
 VPATH=.
 
 
-.PHONY: all docs md latex gitbook figures clean purge
+.PHONY: all docs md latex gitbook figures clean purge latex-draft
 
 all: docs
 
@@ -55,10 +55,10 @@ docs: latex gitbook
 
 
 clean:
-	rm -f -r tmp-gitbook tmp-latex  \
+	rm -f -r tmp-gitbook tmp-latex tmp-latex-draft \
 	         out-gitbook out-latex
 purge:
-	rm -f -r tmp-gitbook tmp-latex tmp-md \
+	rm -f -r tmp-gitbook tmp-latex tmp-latex-draft tmp-md \
 	         out-gitbook out-latex
 
 

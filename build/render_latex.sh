@@ -11,10 +11,8 @@ else
     # draft build - fragments
     mkdir -p tmp-latex-draft/
     cd tmp-latex-draft/
-    cp -rf ../tmp-latex/00* .
-    cp -rf ../tmp-latex/01* .
-    cp -rf ../tmp-latex/02* .
-    cp -rf ../tmp-latex/03* .
+    cp -rf ../tmp-latex/0* .
+    cp -rf ../tmp-latex/9* .
 fi
 
 
@@ -48,7 +46,7 @@ sed -i -e "s/@DATE@/${date}/g" index.Rmd
 
 if [[ -z "${LATEX_DRAFT}" ]]; then
     # full build
-    Rscript -e 'bookdown::render_book("index.Rmd", "bookdown::pdf_book",
+    Rscript -e 'bookdown.marek.mods::render_book("index.Rmd", "bookdown.marek.mods::pdf_book",
         output_dir="../out-latex")'
 
     cp -f ../out-latex/_main.pdf ../out-latex/lmlcr.pdf
@@ -58,7 +56,7 @@ else
     # draft build
     Rscript -e '
         source("../build/process_just_tex.R")
-        bookdown::render_book("index.Rmd", "bookdown::pdf_book",
+        bookdown.marek.mods::render_book("index.Rmd", "bookdown.marek.mods::pdf_book",
             output_dir="../out-latex", clean=FALSE)'
     xelatex -file-line-error -halt-on-error -interaction=errorstopmode _main.tex #> /dev/null
 fi
