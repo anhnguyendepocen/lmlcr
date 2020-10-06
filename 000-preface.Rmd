@@ -1,13 +1,17 @@
-# Preface {.unnumbered}
+<!--
+kate: indent-width 4; word-wrap-column 74; default-dictionary en_AU
+Copyright (C) 2020, Marek Gagolewski, https://www.gagolewski.com
+This material is licensed under the Creative Commons BY-NC-ND 4.0 License.
+-->
 
-<!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
+# Preface {.unnumbered}
 
 
 > **This is a draft version (distributed in the hope that it will be useful)
 of the book *Machine Learning Classics with R*
 by Marek Gagolewski.**
 
-> **Please submit any feature requests, remarks and bug fixes
+> **Please submit any feature requests, remarks, and bug fixes
 via the project site at [github](https://github.com/gagolews/lmlcr/issues). Thanks!**
 
 
@@ -33,14 +37,14 @@ You can access this book at:
 Machine learning has numerous exciting real-world applications,
 including stock market prediction, speech recognition,
 computer-aided medical diagnosis, content, and product recommendation,
-anomaly detection in security camera footages, game playing,
+anomaly detection in security camera footage, game playing,
 autonomous vehicle operation, and many others.
 
 In this book we will take an unpretentious glance at the most fundamental
 algorithms that have stood the test of time and which  form
 the basis for state-of-the-art solutions of modern AI,
 which is principally (big) data-driven.
-We will learn how to use the R language [@rpoject]
+We will learn how to use the R language [@rproject]
 for implementing various stages
 of data processing and modelling activities.
 For a more in-depth treatment of R, refer to this book's Appendices

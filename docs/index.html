@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Machine Learning Classics with R</title>
   <meta name="description" content="Explore some of the most fundamental algorithms which have stood the test of time and provide the basis for innovative solutions in data-driven AI. Learn how to use the R language for implementing various stages of data processing and modelling activities. Appreciate mathematics as the universal language for formalising data-intense problems and communicating their solutions. The book is for you if you’re yet to be fluent with university-level linear algebra, calculus and probability theory or you’ve forgotten all the maths you’ve ever learned, and are seeking a gentle, yet thorough, introduction to the topic." />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="pandoc, pandoc-citeproc, knitr, bookdown (custom), GitBook, and many more" />
 
   <meta property="og:title" content="Machine Learning Classics with R" />
   <meta property="og:type" content="book" />
@@ -15,13 +15,7 @@
   <meta property="og:description" content="Explore some of the most fundamental algorithms which have stood the test of time and provide the basis for innovative solutions in data-driven AI. Learn how to use the R language for implementing various stages of data processing and modelling activities. Appreciate mathematics as the universal language for formalising data-intense problems and communicating their solutions. The book is for you if you’re yet to be fluent with university-level linear algebra, calculus and probability theory or you’ve forgotten all the maths you’ve ever learned, and are seeking a gentle, yet thorough, introduction to the topic." />
   <meta name="github-repo" content="gagolews/lmlcr" />
 
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Machine Learning Classics with R" />
-  
-  <meta name="twitter:description" content="Explore some of the most fundamental algorithms which have stood the test of time and provide the basis for innovative solutions in data-driven AI. Learn how to use the R language for implementing various stages of data processing and modelling activities. Appreciate mathematics as the universal language for formalising data-intense problems and communicating their solutions. The book is for you if you’re yet to be fluent with university-level linear algebra, calculus and probability theory or you’ve forgotten all the maths you’ve ever learned, and are seeking a gentle, yet thorough, introduction to the topic." />
-  
-
-<meta name="author" content="Marek Gagolewski" />
+  <meta name="author" content="Marek Gagolewski" />
 
 
 
@@ -74,6 +68,10 @@ div.definition {
 }
 
 </style>
+
+
+
+
 
 
 <style type="text/css">
@@ -540,7 +538,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li style='font-size: smaller' ><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Licensed under CC BY-NC-ND 4.0</a></li>
-<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-09-10 19:32 (6ce8fa3)</a></li>
+<li style='font-size: smaller' ><a href="./">DRAFT v0.3 2020-10-06 19:00 (68bcb35)</a></li>
 
 </ul>
 
@@ -562,18 +560,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Machine Learning Classics with R</h1>
 <p class="author"><em>Marek Gagolewski</em></p>
-<p class="date"><em>DRAFT v0.3 2020-09-10 19:32 (6ce8fa3)</em></p>
+<p class="date"><em>DRAFT v0.3 2020-10-06 19:00 (68bcb35)</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered">
 <h1>Preface</h1>
-<!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
 <blockquote>
 <p><strong>This is a draft version (distributed in the hope that it will be useful)
 of the book <em>Machine Learning Classics with R</em>
 by Marek Gagolewski.</strong></p>
 </blockquote>
 <blockquote>
-<p><strong>Please submit any feature requests, remarks and bug fixes
+<p><strong>Please submit any feature requests, remarks, and bug fixes
 via the project site at <a href="https://github.com/gagolews/lmlcr/issues">github</a>. Thanks!</strong></p>
 </blockquote>
 <p>Copyright (C) 2020, <a href="https://www.gagolewski.com">Marek Gagolewski</a>.
@@ -592,13 +589,13 @@ License (CC BY-NC-ND 4.0).</p>
 <p>Machine learning has numerous exciting real-world applications,
 including stock market prediction, speech recognition,
 computer-aided medical diagnosis, content, and product recommendation,
-anomaly detection in security camera footages, game playing,
+anomaly detection in security camera footage, game playing,
 autonomous vehicle operation, and many others.</p>
 <p>In this book we will take an unpretentious glance at the most fundamental
 algorithms that have stood the test of time and which form
 the basis for state-of-the-art solutions of modern AI,
 which is principally (big) data-driven.
-We will learn how to use the R language <span class="citation">(R Development Core Team <a href="references.html#ref-rpoject">2020</a>)</span>
+We will learn how to use the R language <span class="citation">(R Development Core Team <a href="references.html#ref-rproject">2020</a>)</span>
 for implementing various stages
 of data processing and modelling activities.
 For a more in-depth treatment of R, refer to this book’s Appendices
@@ -784,6 +781,11 @@ bookdown, Cairo, DEoptim, fastcluster, FNN, genie, genieclust, glmnet, gsl, hydr
 featuring John Coltrane, Krzysztof Komeda,
 Henry Threadgill, Albert Ayler, Paco de Lucia, and Tomatito.</p>
 
+<!--
+kate: indent-width 4; word-wrap-column 74; default-dictionary en_AU
+Copyright (C) 2020, Marek Gagolewski, https://www.gagolewski.com
+This material is licensed under the Creative Commons BY-NC-ND 4.0 License.
+-->
 </div>
 </div>
             </section>
@@ -843,20 +845,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

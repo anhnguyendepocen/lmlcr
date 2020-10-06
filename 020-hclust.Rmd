@@ -1,6 +1,10 @@
-# Agglomerative Hierarchical Clustering {#chap:hclust}
+<!--
+kate: indent-width 4; word-wrap-column 74; default-dictionary en_AU
+Copyright (C) 2020, Marek Gagolewski, https://www.gagolewski.com
+This material is licensed under the Creative Commons BY-NC-ND 4.0 License.
+-->
 
-<!-- (C) 2020 Marek Gagolewski, https://www.gagolewski.com -->
+# Agglomerative Hierarchical Clustering {#chap:hclust}
 
 
 
