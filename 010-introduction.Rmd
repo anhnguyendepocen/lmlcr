@@ -562,6 +562,10 @@ See, for example, [@esl] for more details.
 
 
 
+TODO: discuss PCA -- iterative algorithm???
+
+
+
 ### Anomaly Detection
 
 Another family of unsupervised learning methods deals with

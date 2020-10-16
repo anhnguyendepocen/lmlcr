@@ -45,6 +45,73 @@ Note that we have studied "crisp" (disjoint) partitions only.
 
 
 
+## Within-Cluster Sum of Squares
+
+
+Prove that it holds:
+\[
+\begin{align}
+\mathrm{Var}(x_1,\dots,x_n)
+=&\frac{1}{n} \sum_{i=1}^{n} \left(x_{i}-\bar{x}\right)^{2} \\
+=&\frac{1}{n} \sum_{i=1}^{n} \left(x_{i}-\frac{1}{n}\sum_{j=1}^{n} x_j\right)^{2} \\
+=&\frac{1}{n} \sum_{i=1}^{n} x_{i}^{2}-\left(\frac{1}{n} \sum_{i=1}^{n} x_{i}^{2}\right)^{2} \\
+=&\frac{1}{2 n^{2}} \sum_{i=1}^{n}\sum_{j=1}^{n} (x_{i}-x_{j})^{2} \\
+=&\frac{1}{n^{2}} \sum_{i=1}^{n-1}\sum_{j=i+1}^{n} (x_{i}-x_{j})^{2} \\
+\end{align}
+\]
+In other words, the (biased) sample variance (average
+squared distance to the mean, $\bar{x}$)
+is equal to
+average of squared values minus square of the average
+which is equal to half of average distance between each pair of points
+(or just the average distance between each unique pair).
+Note that the former requires $\sim 2n$ arithmetic operations,
+while the latter $\sim n^2$
+
+```{r echo=FALSE}
+# x <- rnorm(10)
+# mean((x-mean(x))^2)
+# mean(outer(x, x, function(a, b) (a-b)^2))/2
+```
+
+
+
+within-cluster sum of squares:
+\[
+\begin{align}
+f(C_1,\dots,C_K)
+=& \sum_{k=1}^K \sum_{x_i\in C_K} \| x_i-\mu_k \|^2  \\
+=& \sum_{k=1}^K \sum_{x_i\in C_K} \sum_{u=1}^d \left(x_{i,u}-\mu_{k,u}\right)^2  \\
+=& \sum_{k=1}^K  \sum_{u=1}^d \sum_{x_i\in C_K} \left(x_{i,u}-\frac{1}{|C_k|} \sum_{x_j\in C_k} x_{j,u}\right)^2  \\
+=& \sum_{k=1}^K \frac{2}{|C_i|} \sum_{x_i\in C_K} \sum_{x_j\in C_K}  \sum_{u=1}^d
+ \left(
+    x_{i,u}-x_{j,u}
+ \right)^2 \\
+=& \sum_{k=1}^K \frac{2}{|C_i|} \sum_{x_i\in C_K} \sum_{x_j\in C_K} \| x_i-x_j \|^2
+\end{align}
+\]
+
+
+Ward (1963) - agglomerative strategy
+
+Edwards and Cavalli-Sforza (1965) - (greedy?=99% sure) divisive strategy
+A. W. F. Edwards and L. L. Cavalli-Sforza, A Method for Cluster Analysis, Biometrics Vol. 21, No. 2 (Jun., 1965), pp. 362-375 DOI: 10.2307/2528096
+
+Calinski and Harabasz - exhaustive divisive over MST - each (n - 1 \choose k-1) possible splits of an MST
+
+??? - agglomerative over MST
+
+??? - greedy divisive over MST
+
+k-means - fixed-point iteration algorithm
+
+
+
+
+TODO?? relation to Linear discriminant analysis and PCA??
+
+
+
 
 
 
@@ -327,6 +394,11 @@ Remark.
 
 . . .
 
+
+TODO: see Lloyd's (and Forgy's) original papers to verify these method defs
+
+
+
 Among the various heuristics to solve the K-means problem,
 Lloyd's algorithm (1957) is perhaps the simplest.
 This is probably the reason why it is sometimes referred
@@ -514,7 +586,32 @@ We need approximations. In the last chapter, we have
 discussed the iterative Lloyd's algorithm (1957),
 which is amongst a few procedures implemented in the `kmeans()` function.
 
+Lloyd, Stuart P. (1957). "Least square quantization in PCM".
+Bell Telephone Laboratories Paper.
+Published much later:
+Lloyd, Stuart P. (1982). "Least squares quantization in PCM" (PDF).
+IEEE Transactions on Information Theory. 28 (2): 129–137.
+doi:10.1109/TIT.1982.1056489.
 
+<!-- a simple fixed-point iteration that loops back and forth between the two above update equations until a change in ... becomes negligible.  -->
+
+<!-- Lloyd is  an expectation–maximization (EM)-type algorithm ??? relate/mention Gaussian mixtures ?? -->
+
+
+
+MacQueen, J. B. (1967). Some Methods for classification and Analysis
+of Multivariate Observations. Proceedings of 5th Berkeley Symposium
+on Mathematical Statistics and Probability. 1. University of California Press. pp. 281–297. --
+studies the "k-means process" (and its asymptotic behaviour)
+*Stated informally, the k-means procedure consists of simply starting with k
+groups each of which consists of a single random point,
+and thereafter adding each new point to the group whose
+mean the new point is nearest. After a point is added to a group,
+the mean of that group is adjusted in order to take account of the new
+point. Thus at each stage the k-means are, in fact, the means of the groups
+they represent (hence the term k-means).* (p.283)
+
+Hartigan-Wong == ??
 
 
 
