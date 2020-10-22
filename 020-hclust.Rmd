@@ -260,8 +260,7 @@ so that those within each cluster are more **closely related**
 to one another than objects assigned to different clusters" [@esl].
 
 **TODO** - change to:
-"that points within a cluster are close together, while the clusters themselves are far apart"*
- (Rao, 1964, p. 351).  Rao, C.R. (1964). The use and interpretation of principal component analysis in applied research. Sankhya A 26, 329-358.
+"that points within a cluster are close together, while the clusters themselves are far apart"* [@rao]
 { END definition }
 
 
@@ -1119,7 +1118,7 @@ has been proposed in [@averagelinkage].
 
 There are many other linkages, e.g., the Ward linkage minimises the variance
 of within-cluster distances (TODO: within cluster sum of squares,
-the same as k-means).
+the same as k-means, it will be noted further on).
 Together with the linkages presented in this
 chapter it is generalised by the Lance--Williams formula [@lancewilliams],
 see also [@muellner].

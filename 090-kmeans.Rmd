@@ -50,14 +50,14 @@ Note that we have studied "crisp" (disjoint) partitions only.
 
 Prove that it holds:
 \[
-\begin{align}
+\begin{array}{rcl}
 \mathrm{Var}(x_1,\dots,x_n)
 =&\frac{1}{n} \sum_{i=1}^{n} \left(x_{i}-\bar{x}\right)^{2} \\
 =&\frac{1}{n} \sum_{i=1}^{n} \left(x_{i}-\frac{1}{n}\sum_{j=1}^{n} x_j\right)^{2} \\
 =&\frac{1}{n} \sum_{i=1}^{n} x_{i}^{2}-\left(\frac{1}{n} \sum_{i=1}^{n} x_{i}^{2}\right)^{2} \\
 =&\frac{1}{2 n^{2}} \sum_{i=1}^{n}\sum_{j=1}^{n} (x_{i}-x_{j})^{2} \\
 =&\frac{1}{n^{2}} \sum_{i=1}^{n-1}\sum_{j=i+1}^{n} (x_{i}-x_{j})^{2} \\
-\end{align}
+\end{array}
 \]
 In other words, the (biased) sample variance (average
 squared distance to the mean, $\bar{x}$)
@@ -78,7 +78,7 @@ while the latter $\sim n^2$
 
 within-cluster sum of squares:
 \[
-\begin{align}
+\begin{array}{rcl}
 f(C_1,\dots,C_K)
 =& \sum_{k=1}^K \sum_{x_i\in C_K} \| x_i-\mu_k \|^2  \\
 =& \sum_{k=1}^K \sum_{x_i\in C_K} \sum_{u=1}^d \left(x_{i,u}-\mu_{k,u}\right)^2  \\
@@ -88,22 +88,24 @@ f(C_1,\dots,C_K)
     x_{i,u}-x_{j,u}
  \right)^2 \\
 =& \sum_{k=1}^K \frac{2}{|C_i|} \sum_{x_i\in C_K} \sum_{x_j\in C_K} \| x_i-x_j \|^2
-\end{align}
+\end{array}
 \]
 
 
-Ward (1963) - agglomerative strategy
+<!--
 
-Edwards and Cavalli-Sforza (1965) - (greedy?=99% sure) divisive strategy
-A. W. F. Edwards and L. L. Cavalli-Sforza, A Method for Cluster Analysis, Biometrics Vol. 21, No. 2 (Jun., 1965), pp. 362-375 DOI: 10.2307/2528096
 
-Calinski and Harabasz - exhaustive divisive over MST - each (n - 1 \choose k-1) possible splits of an MST
+agglomerative strategy [@ward]
+
+divisive strategy [@edwards_sforza]
+
+exhaustive search over MST - each ${n - 1 \choose k-1}$ possible splits of an MST [@calinski_harabasz]
 
 ??? - agglomerative over MST
 
-??? - greedy divisive over MST
+??? - divisive over MST
 
-k-means - fixed-point iteration algorithm
+k-means - fixed-point iteration algorithm ([@macqueen] LLoyd, 1957)
 
 
 
@@ -111,7 +113,7 @@ k-means - fixed-point iteration algorithm
 TODO?? relation to Linear discriminant analysis and PCA??
 
 
-
+-->
 
 
 
@@ -347,7 +349,7 @@ The above problem is *hard* to solve (\* more precisely,
 it is an NP-hard problem).
 Therefore, in practice we use various heuristics to solve it.
 The `kmeans()` function itself implements 3 of them:
-the Hartigan-Wong, Lloyd (a.k.a. Lloyd-Forgy) and MacQueen algorithms.
+the Hartigan-Wong, Lloyd (a.k.a. Lloyd-Forgy) and MacQueen [@macqueen] algorithms.
 
 
 
@@ -599,9 +601,7 @@ doi:10.1109/TIT.1982.1056489.
 
 
 
-MacQueen, J. B. (1967). Some Methods for classification and Analysis
-of Multivariate Observations. Proceedings of 5th Berkeley Symposium
-on Mathematical Statistics and Probability. 1. University of California Press. pp. 281–297. --
+MacQueen [@macqueen]
 studies the "k-means process" (and its asymptotic behaviour)
 *Stated informally, the k-means procedure consists of simply starting with k
 groups each of which consists of a single random point,
